@@ -3,7 +3,7 @@
 This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads.
 
 
-## License
+# License
 
 This library is licensed under the Apache 2.0 License.
 
