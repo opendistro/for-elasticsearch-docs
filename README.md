@@ -8,7 +8,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 This library is licensed under the Apache 2.0 License.
 
 
-# Build the docs
+# Build
 
 1. Clone this repository.
 
@@ -25,7 +25,7 @@ This library is licensed under the Apache 2.0 License.
 1. Open [http://localhost:4000](http://localhost:4000).
 
 
-# Contributing
+# Contribute
 
 1. Fork this repository.
 1. Edit the Markdown files in `/docs`.

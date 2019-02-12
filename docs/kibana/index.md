@@ -10,9 +10,10 @@ has_toc: false
 
 Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for Open Distro for Elasticsearch (ODE) [authentication and access control](/docs/security/) configuration.
 
+
 ## Get started with Kibana
 
-1. After starting ODE, you can access it at port 5601. For example, [http://0.0.0.0:5601](http://0.0.0.0:5601).
+1. After starting ODE, you can access Kibana at port 5601. For example, [http://0.0.0.0:5601](http://0.0.0.0:5601).
 1. **Try our sample data**.
 1. Add the sample flight data.
 1. **Discover**.
