@@ -7,7 +7,7 @@ has_children: true
 
 # SQL
 
-Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the Elasticsearch query domain-specific language (DSL). If you're already familiar with SQL and don't want to learn the query DSL, SQL is a great option.
+Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, SQL is a great option.
 
 To use the feature, direct requests to the `_sql` URI. You can use a request parameter or the request body (recommended).
 
@@ -51,7 +51,7 @@ The most common error is the dreaded null pointer exception, which can occur dur
 ```json
 POST _sql
 {
-  "query": "select * from my-index WHERE ['name.firstname']='james' LIMIT 5"
+  "query": "select * from my-index WHERE ['name.firstname']='saanvi' LIMIT 5"
 }
 ```
 

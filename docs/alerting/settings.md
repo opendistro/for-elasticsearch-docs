@@ -30,7 +30,7 @@ Setting | Default | Description
 `opendistro.alerting.enabled` | true | Whether the alerting plugin is enabled or not. If disabled, all monitors immediately stop running.
 `opendistro.alerting.input_timeout` | 30s | How long the monitor can take to issue the search request.
 `opendistro.alerting.bulk_timeout` | 120s | How long the monitor can write alerts to the alert index.
-`opendistro.alerting.alert_backoff_count` | 2 | Number of retries for writing alerts before the operation fails.
+`opendistro.alerting.alert_backoff_count` | 2 | The number of retries for writing alerts before the operation fails.
 `opendistro.alerting.alert_backoff_millis` | 50ms | The amount of time to wait between retries---increases exponentially after each failed retry.
 `opendistro.alerting.alert_history_rollover_period` | 12h | How often completed alerts are rolled over from the `.opendistro-alerts` index to `.opendistro-alert-history-<date>`.
 `opendistro.alerting.alert_history_max_age` | 24h | The oldest document the `.opendistro-alert-history-<date>` index should keep.

@@ -5,7 +5,7 @@ parent: SQL
 nav_order: 2
 ---
 
-# JDBC Driver
+# JDBC driver
 
 The JDBC driver lets you integrate Open Distro for Elasticsearch (ODE) with your favorite business intelligence (BI) applications.
 

@@ -19,20 +19,18 @@ has_children: false
 
 Term | Definition
 :--- | :---
-Monitor | Monitors run on defined schedules and check data from one or more Elasticsearch indices against one or more *triggers*.
-Trigger | Triggers are conditions that, if met, generate *alerts* in Kibana and perform some *action*.
+Monitor | A job that runs on a defined schedule and checks data from one or more Elasticsearch indices against one or more *triggers*.
+Trigger | Conditions that, if met, generate *alerts* in Kibana and perform some *action*.
 Alert | A notification that a monitor has been triggered. Alerts persist until you acknowledge them.
-Action | The action that you want the monitor to take after being triggered, such as sending an email, SMS, or HTTP request (webhook).
-Destination | A location for an action, such as an email server or URL.
+Action | The steps that you want the monitor to take after being triggered, such as sending an email, SMS, or HTTP request (webhook).
+Destination | A reusable location for an action, such as an email server or URL.
 
 
 ---
 
 ## Create destinations
 
-1. Choose **Alerting**.
-1. **Destinations**.
-1. **Add destination**.
+1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
 1. For **Type**, choose [Amazon Chime](https://aws.amazon.com/chime/), [Slack](https://slack.com/), or custom webhook.
 1. Specify the webhook URL. For more information about webhooks, see the documentation for [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html) and [Slack](https://api.slack.com/incoming-webhooks).
@@ -43,9 +41,7 @@ Destination | A location for an action, such as an email server or URL.
 
 ## Create monitors
 
-1. Choose **Alerting**.
-1. **Monitors**.
-1. **Create monitor**.
+1. Choose **Alerting**, **Monitors**, **Create monitor**.
 1. Specify a name and schedule for the monitor.
 1. Choose one or more indices, or specify `*` for all indices in your cluster.
 1. You can define monitors in two ways: visually or using a query.
@@ -67,7 +63,7 @@ Destination | A location for an action, such as an email server or URL.
 
 ## Create triggers
 
-The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose **Define using visual graph** or **Define using extraction query**.
+The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose **Define using visual graph** or **Define using extraction query** when you created the monitor.
 
 Either way, you begin by specifying a name and severity level for the trigger. Severity levels help you manage alerts. A trigger with a high severity level (e.g. 1) might page a specific individual, whereas a trigger with a low severity level might email a list.
 
@@ -147,7 +143,7 @@ If you don't want to receive notifications for alerts, you don't have to add act
 
    You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). You have access to `ctx.action.name`, the name of the current action, as well as all [trigger variables](#available-variables).
 
-1. **Create**.
+1. Choose **Create**.
 
 
 #### Sample message
@@ -192,7 +188,7 @@ For the purposes of the alerting feature, the key SNS terms are *topic* and *mes
 
 ## Work with alerts
 
-Alerts persist until you resolve the root cause and have the following states:
+Alerts persist until you resolve the root cause. Alerts have the following states:
 
 State | Description
 :--- | :---

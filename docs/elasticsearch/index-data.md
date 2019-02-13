@@ -5,7 +5,7 @@ parent: Elasticsearch
 nav_order: 2
 ---
 
-# Index Data
+# Index data
 
 You index data using the Elasticsearch REST API. Two APIs exist: the index API and the `_bulk` API.
 
@@ -70,5 +70,7 @@ PUT elasticsearch_domain/more-movies
 Elasticsearch indices have the following naming restrictions:
 
 - All letters must be lowercase.
-- Index names cannot begin with `_` or `-`.
-- Index names cannot contain spaces, commas, `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, or `<`.
+- Index names can't begin with `_` (underscore) or `-` (hyphen).
+- Index names can't contain spaces, commas, or the following characters:
+
+  `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, or `<`

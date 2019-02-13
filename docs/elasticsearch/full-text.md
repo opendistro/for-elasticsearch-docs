@@ -5,7 +5,7 @@ parent: Elasticsearch
 nav_order: 3
 ---
 
-# Full-Text Queries
+# Full-text queries
 
 Although you can use HTTP request parameters to perform simple searches, the Elasticsearch query domain-specific language (DSL) lets you specify the full range of search options. The query DSL uses the HTTP request body. Queries specified in this way have the added advantage of being more explicit in their intent and easier to tune over time.
 
@@ -65,7 +65,7 @@ GET _search
 ```
 
 
-## Multi Match
+## Multi match
 
 Like the [match](#match) query, but searches multiple fields.
 
@@ -112,7 +112,7 @@ GET _search
 ```
 
 
-## Match Phrase
+## Match phrase
 
 Creates a [phrase query](https://lucene.apache.org/core/7_5_0/core/org/apache/lucene/search/PhraseQuery.html) that matches a sequence of terms.
 
@@ -146,9 +146,9 @@ GET _search
 ```
 
 
-## Common Terms
+## Common terms
 
-The common terms query separates the query into high- and low-frequency terms based on number of occurrences on the shard. Low-frequency terms are weighed more heavily in the results, and high-frequency terms are only considered for documents that already matched one or more low-frequency terms. In that sense, you can think of this query as having a built-in, ever-changing list of stop words.
+The common terms query separates the query string into high- and low-frequency terms based on number of occurrences on the shard. Low-frequency terms are weighed more heavily in the results, and high-frequency terms are considered only for documents that already matched one or more low-frequency terms. In that sense, you can think of this query as having a built-in, ever-changing list of stop words.
 
 ```json
 GET _search
@@ -187,7 +187,7 @@ GET _search
 ```
 
 
-## Query String
+## Query string
 
 The query string query splits text based on operators and analyzes each individually.
 
@@ -239,9 +239,9 @@ GET _search
 ```
 
 
-## Simple Query String
+## Simple query string
 
-Like the query string query, but lets advanced users specify many arguments directly in the query string. The query discards any invalid portions of the query string.
+The simple query string query is like the query string query, but it lets advanced users specify many arguments directly in the query string. The query discards any invalid portions of the query string.
 
 ```json
 GET _search
@@ -291,7 +291,7 @@ GET _search
 ```
 
 
-## Match All
+## Match all
 
 Matches all documents. Can be useful for testing.
 
@@ -305,7 +305,7 @@ GET _search
 ```
 
 
-## Match None
+## Match none
 
 Matches no documents. Rarely useful.
 
@@ -321,7 +321,7 @@ GET _search
 
 ## Options
 
-Option | Valid Values | Description
+Option | Valid values | Description
 :--- | :--- | :---
 `fields` | String array | The list of fields to search (e.g. `"fields": ["title^4", "description"]`). If unspecified, defaults to the `index.query.default_field` setting, which defaults to `["*"]`.
 `fuzziness` | `AUTO`, `0`, or a positive integer | The number of character edits (insert, delete, substitute) that it takes to change one word to another when determining whether a term matched a value. For example, the distance between `wined` and `wind` is 1. The default, `AUTO`, chooses a value based on the length of each term and is a good choice for most use cases.

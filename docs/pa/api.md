@@ -22,13 +22,13 @@ Then you provide parameters for metrics, aggregations, dimensions, and nodes (op
 For a full list of metrics, see [Metrics Reference](../reference). Performance Analyzer updates its data every five seconds. If you create a custom client, we recommend using that same interval for calls to the API.
 
 
-#### Sample Request
+#### Sample request
 
 ```
 GET _performanceanalyzer/metrics?metrics=latency,cpu_utilization&agg=avg,max&dim=shardid&nodes=all
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {

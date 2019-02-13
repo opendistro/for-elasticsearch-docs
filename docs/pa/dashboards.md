@@ -5,7 +5,7 @@ parent: Performance Analyzer
 nav_order: 2
 ---
 
-# PerfTop Dashboards
+# PerfTop dashboards
 
 Dashboards are defined in JSON and composed of three main elements: tables, line graphs, and bar graphs. You define a grid of rows and columns and then place elements within that grid, with each element spanning as many rows and columns as you specify.
 

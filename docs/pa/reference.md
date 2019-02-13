@@ -5,9 +5,9 @@ parent: Performance Analyzer
 nav_order: 3
 ---
 
-# Metrics Reference
+# Metrics reference
 
-This page contains all Performance Analyzer metrics. All metrics support the `avg`, `sum`, `min`, and `max` aggregations, although certain metrics only measure one thing, making the choice of aggregation irrelevant.
+This page contains all Performance Analyzer metrics. All metrics support the `avg`, `sum`, `min`, and `max` aggregations, although certain metrics measure only one thing, making the choice of aggregation irrelevant.
 
 The list is extensive. We recommend Ctrl + F to find individual metrics.
 {: .tip }

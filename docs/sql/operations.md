@@ -5,7 +5,7 @@ parent: SQL
 nav_order: 1
 ---
 
-# Supported Operations
+# Supported operations
 
 Open Distro for Elasticsearch supports the following SQL operations.
 
@@ -39,11 +39,11 @@ Like | `SELECT * FROM my-index WHERE name LIKE 'j%'`
 And | `SELECT * FROM my-index WHERE name LIKE 'j%' and age > 21`
 Or | `SELECT * FROM my-index WHERE name LIKE 'j%' or age > 21`
 Count distinct | `SELECT count(distinct age) FROM my-index`
-In | `SELECT * FROM my-index WHERE name in ('Jim', 'Jack')`
+In | `SELECT * FROM my-index WHERE name in ('alejandro', 'carolina')`
 Between | `SELECT * FROM my-index WHERE age BETWEEN 20 and 30`
 Aliases | `SELECT avg(age) AS Average_Age FROM my-index`
 Date | `SELECT * FROM my-index WHERE birthday='1990-11-15'`
-Not | `SELECT * FROM my-index WHERE name NOT IN ('Andy')`
+Not | `SELECT * FROM my-index WHERE name NOT IN ('jane')`
 
 
 ## Aggregations
@@ -67,7 +67,7 @@ exclude() | `SELECT exclude('*name') FROM my-index`
 
 ## Functions
 
-Fielddata must be enabled in the document mapping for most string functions to work properly.
+You must enable fielddata in the document mapping for most string functions to work properly.
 
 Function | Example
 :--- | :---

@@ -5,14 +5,14 @@ parent: Elasticsearch
 nav_order: 1
 ---
 
-# Elasticsearch Configuration
+# Elasticsearch configuration
 
 Most Elasticsearch configuration can take place in the cluster settings API. Certain operations require you to modify `elasticsearch.yml` and restart the cluster.
 
 Whenever possible, use the cluster settings API instead; `elasticsearch.yml` is local to each node, whereas the API applies the setting to all nodes in the cluster.
 
 
-## The cluster settings API
+## Cluster settings API
 
 The first step in changing a setting is to view the current settings:
 
@@ -62,5 +62,5 @@ PUT /_cluster/settings
 ---
 
 {::comment}
-## The configuration file
+## Configuration file
 {:/comment}

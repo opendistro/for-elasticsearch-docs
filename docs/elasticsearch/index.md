@@ -8,8 +8,6 @@ has_toc: false
 
 # Introduction to Elasticsearch
 
-## Clusters and nodes
-
 Elasticsearch is a distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). Its distributed design means that you interact with Elasticsearch *clusters*. Each cluster is a collection of one or more *nodes*, servers that store your data and process search requests.
 
 
@@ -44,6 +42,9 @@ Indices also contain mappings and settings:
 - A *mapping* is the collection of *fields* that documents in the index have. In this case, those fields are `title` and `release_date`.
 - Settings include data like the index name, creation date, and number of shards.
 
+Older versions of Elasticsearch used arbitrary document *types*, but indices created in current versions of Elasticsearch should use a single type named `_doc`. If you have multiple document types, store them in different indices.
+{: .note }
+
 
 ## Primary and replica shards
 
@@ -54,7 +55,7 @@ By default, Elasticsearch creates a *replica* shard for each *primary* shard. If
 Despite being a piece of an Elasticsearch index, each shard is actually a full Lucene index---confusing, we know. This detail is important, though, because each instance of Lucene is a running process that consumes CPU and memory. Splitting a 400 GB index into 1,000 shards, for example, would place needless strain on your cluster. A good rule of thumb is to keep shard size between 10--50 GB.
 
 
-## The REST API
+## REST API
 
 You interact with Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can use clients like [curl](https://curl.haxx.se/) or any programming language that can send HTTP requests. To add a JSON document to an Elasticsearch index (i.e. index a document), you send an HTTP request:
 

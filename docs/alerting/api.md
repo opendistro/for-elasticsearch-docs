@@ -96,7 +96,7 @@ POST _alerting/monitors
 }
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -214,7 +214,7 @@ PUT _alerting/monitors/<monitor_id>?version=<number>
 }
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -234,7 +234,7 @@ PUT _alerting/monitors/<monitor_id>?version=<number>
 GET _alerting/monitors/<monitor_id>
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -299,7 +299,7 @@ GET _opendistro/_monitors/stats/job_sweeper_metrics
 GET _opendistro/_monitors/stats/jobs_info
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -317,7 +317,7 @@ GET _opendistro/_monitors/stats/jobs_info
 DELETE _alerting/monitors/<monitor_id>
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -355,7 +355,7 @@ GET _alerting/monitors/_search
 }
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -445,7 +445,7 @@ GET _alerting/monitors/_search
 POST _alerting/monitors/<monitor_id>/_execute
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -480,7 +480,7 @@ POST _alerting/monitors/<monitor-id>/_acknowledge/alerts
 }
 ```
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
