@@ -7,11 +7,13 @@ nav_order: 1
 
 # Docker image
 
-You can pull the ODE Docker image just like any other image:
+You can pull the Open Distro for Elasticsearch (ODE) Docker image just like any other image:
 
 ```bash
 docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
+
+ODE images use `centos:7` as the base image.
 
 
 ## Run the image
@@ -65,7 +67,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - node1-data:/usr/share/elasticsearch/data
+      - node1-data:/usr/share/opendistro/elasticsearch/data
     ports:
       - 9200:9200
       - 5601:5601
@@ -84,7 +86,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - node2-data:/usr/share/elasticsearch/data
+      - node2-data:/usr/share/opendistro/elasticsearch/data
     networks:
       - ode-net
 
@@ -104,32 +106,38 @@ You can pass a custom `elasticsearch.yml` file to the Docker container using the
 ```bash
 docker run \
 -p 9200:9200 -p 5601:5601 \
--e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version> \
--v ./custom_elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml
+-e "discovery.type=single-node" \
+-v /full/path/to/custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml \
+<registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
-You can perform the same operation in `docker-compose.yml`:
+You can perform the same operation in `docker-compose.yml` using a relative path:
 
 ```yml
 services:
   node1:
     volumes:
-      - node1-data:/usr/share/elasticsearch/data
+      - node1-data:/usr/share/opendistro/elasticsearch/data
       - ./custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml
   node2:
     volumes:
-      - node2-data:/usr/share/elasticsearch/data
+      - node2-data:/usr/share/opendistro/elasticsearch/data
       - ./custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml
 ```
 
 
 ## Run with custom plugins
 
-To run the image with a custom plugin:
+To run the image with a custom plugin, first create a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/):
+
+```
+FROM <registry>/<organization>/opendistroforelasticsearch:<image-version>
+RUN /home/opendistro/elasticsearch/bin/elasticsearch-plugin install --batch <plugin-name-or-url>
+```
+
+Then run the following commands:
 
 ```bash
-FROM <registry>/<organization>/opendistroforelasticsearch:<image-version>
-RUN /usr/share/opendistro/elasticsearch/bin/elasticsearch-plugin install --batch <plugin-name-or-url>
 docker build --tag=ode-custom-plugin .
-docker run -v /usr/share/opendistro/elasticsearch/data ode-custom-plugin
+docker run -p 9200:9200 -p 5601:5601 -v /usr/share/opendistro/elasticsearch/data ode-custom-plugin
 ```
