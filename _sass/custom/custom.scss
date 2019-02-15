@@ -4,6 +4,16 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.site-title {
+  padding: 0;
+  > img {
+    height: 58px;
+    margin: 0;
+    padding-top: 1px; // to compensate for the 1px border-bottom
+    padding-bottom: 0;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: 2.4rem;
 }
