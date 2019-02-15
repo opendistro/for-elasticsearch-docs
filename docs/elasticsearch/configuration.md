@@ -61,6 +61,6 @@ PUT /_cluster/settings
 
 ---
 
-{::comment}
 ## Configuration file
-{:/comment}
+
+You can find `elasticsearch.yml` in `<ode-install-directory>/elasticsearch/config/` on each node.

@@ -19,4 +19,4 @@ Open Distro for Elasticsearch includes a security plugin for authentication and 
 - Support for Active Directory, LDAP, Kerberos, and SAML
 - Cross-cluster search
 
-To get started, click **Security** in Kibana.
+To get started, choose **Security** in Kibana.

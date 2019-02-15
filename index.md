@@ -7,7 +7,7 @@ permalink: /
 
 # Open Distro for Elasticsearch
 
-This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com) (ODE), a full-featured, open source distribution of Elasticsearch for analytics workloads.
+This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com) (ODE), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 
 [Get started](#get-started){: .btn .btn-purple }
 
@@ -44,22 +44,14 @@ Kibana | Search frontend and visualizations
 
 ---
 
-## How is ODE distributed?
-
-1. Docker image
-1. RPM package
-
-
----
-
 ## Get started
 {: .d-inline-block :}
 Docker
 {: .label }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. `sudo docker pull org/image:version`
-1. `sudo docker run -p 0.0.0.0:9200:9200 -p 0.0.0.0:5601:5601 org/image:version`
+1. `docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>`
+1. `docker run -p 0.0.0.0:9200:9200 -p 0.0.0.0:5601:5601 docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>`
 1. `curl -XGET 0.0.0.0:9200`
 1. Navigate to [http://0.0.0.0:5601](http://0.0.0.0:5601) to access Kibana.
 
@@ -72,4 +64,4 @@ To learn more, see [Install](docs/install).
 
 [Open Distro for Elasticsearch](http://example.com) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html).
 
-The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](http://example.com/contribute) on the Open Distro for Elasticsearch website.
+The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](http://example.com/contribute) on the Open Distro for Elasticsearch project website.

@@ -32,7 +32,7 @@ indices:admin/shards/search_shards
 
 #### Sample configuration
 
-```yaml
+```yml
 sg_ humanresources:
   cluster:
     - CLUSTER_COMPOSITE_OPS_RO

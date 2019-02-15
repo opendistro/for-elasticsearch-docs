@@ -52,21 +52,21 @@ These default log settings work well for most use cases, but you can change sett
 
 To exclude categories, set:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.disabled_rest_categories: <disabled categories>
 security-plugin-placeholder.audit.config.disabled_transport_categories: <disabled categories>
 ```
 
 For example:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.disabled_rest_categories: AUTHENTICATED, SG_INDEX_ATTEMPT
 security-plugin-placeholder.audit.config.disabled_transport_categories: GRANTED_PRIVILEGES
 ```
 
 If you want to log events in all categories, use `NONE`:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.disabled_rest_categories: NONE
 security-plugin-placeholder.audit.config.disabled_transport_categories: NONE
 ```
@@ -76,7 +76,7 @@ security-plugin-placeholder.audit.config.disabled_transport_categories: NONE
 
 By default, the Security plugin logs events on both REST and the transport layer. You can disable either type:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.enable_rest: true
 security-plugin-placeholder.audit.enable_transport: false
 ```
@@ -86,7 +86,7 @@ security-plugin-placeholder.audit.enable_transport: false
 
 By default, the Security plugin includes the body of the request (if available) for both REST and the transport layer. If you do not want or need the request body, you can disable it:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.log_request_body: false
 ```
 
@@ -108,7 +108,7 @@ audit_trace_resolved_indices: [
 
 You can disable this feature by setting:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.resolve_indices: false
 ```
 
@@ -122,7 +122,7 @@ Bulk requests can contain many indexing operations. By default, the Security plu
 
 The Security plugin can be configured to log each indexing operation as a separate event:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.resolve_bulk_requests: true
 ```
 
@@ -133,7 +133,7 @@ This change can create a massive number of events in the audit logs, so we don't
 
 You can exclude certain requests from being logged completely, by either configuring actions (for transport requests) and/or HTTP request paths (REST):
 
-```yaml
+```yml
 security-plugin-placeholder.audit.ignore_requests: ["indices:data/read/*", "SearchRequest"]
 ```
 
@@ -142,7 +142,7 @@ security-plugin-placeholder.audit.ignore_requests: ["indices:data/read/*", "Sear
 
 By default, the Security plugin logs events from all users, but excludes the internal Kibana server user `kibanaserver`. You can exclude other users:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.ignore_users:
   - kibanaserver
   - admin
@@ -150,7 +150,7 @@ security-plugin-placeholder.audit.ignore_users:
 
 If requests from all users should be logged, use `NONE`:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.ignore_users: NONE
 ```
 
@@ -159,13 +159,13 @@ security-plugin-placeholder.audit.ignore_users: NONE
 
 By default, the Security plugin stores audit events in a daily rolling index named `sg6-auditlog-YYYY.MM.dd`. You can configure the name of the index in `elasticsearch.yml`:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.index: myauditlogindex
 ```
 
 Use a date pattern in the index name to configure daily, weekly, or monthly rolling indices:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.index: "'sg6-auditlog-'YYYY.MM.dd"
 ```
 
@@ -176,12 +176,12 @@ For a reference on the date pattern format, see the [Joda DateTimeFormat documen
 
 The Search plugin logs events asynchronously, which keeps performance impact on your cluster minimal. The plugin uses a fixed thread pool to log events. You can define the number of threads in the pool in `elasticsearch.yml`:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.threadpool.size: <integer>
 ```
 
 The default setting is `10`. Setting this value to `0` disables the thread pool, which means the plugin logs events synchronously. To set the maximum queue length per thread:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.threadpool.max_queue_len: 100000
 ```

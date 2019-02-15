@@ -30,7 +30,7 @@ security-plugin-placeholder.audit.type: <debug|internal_elasticsearch|external_e
 
 The `external_elasticsearch` storage type requires one or more Elasticsearch endpoints with a host/IP address and port. Optionally, provide the index name and a document type.
 
-```yaml
+```yml
 security-plugin-placeholder.audit.type: external_elasticsearch
 security-plugin-placeholder.audit.config.http_endpoints: [<endpoints>]
 security-plugin-placeholder.audit.config.index: <indexname>
@@ -66,7 +66,7 @@ Name | Data Type | Description
 
 If you enabled HTTP basic authentication on the receiving cluster, use these settings to specify the username and password:
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.username: <username>
 security-plugin-placeholder.audit.config.password: <password>
 ```
@@ -100,7 +100,7 @@ Format | Description
 
 The `log4j` storage type lets you specify the name of the logger and log level.
 
-```yaml
+```yml
 security-plugin-placeholder.audit.config.log4j.logger_name: sgaudit
 security-plugin-placeholder.audit.config.log4j.level: INFO
 ```

@@ -7,10 +7,10 @@ nav_order: 10
 
 # Disable security
 
-To disable the Security plugin (not recommended), add the following line in `elasticsearch.yml`:
+You might want to disable the Security plugin to make testing or internal usage more straightforward. To disable the plugin, add the following line in `elasticsearch.yml`:
 
 ```yml
-security.disabled: true
+security-plugin-placeholder.disabled: true
 ```
 
 To remove the Security plugin, delete the `plugins/security` folder on all nodes and delete the Security plugin configuration entries from `elasticsearch.yml`.
