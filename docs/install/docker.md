@@ -30,7 +30,7 @@ Then send a request to the server to verify that Elasticsearch is up and running
 curl -XGET localhost:9200
 ```
 
-To deploy the image across multiple nodes for a production workload, create a `docker-compose.yml` file appropriate for your environment and run:
+To deploy the image across multiple nodes for a production workload, create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
 
 ```bash
 docker-compose up
@@ -107,7 +107,7 @@ You can pass a custom `elasticsearch.yml` file to the Docker container using the
 docker run \
 -p 9200:9200 -p 5601:5601 \
 -e "discovery.type=single-node" \
--v /full/path/to/custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml \
+-v /<full-path-to>/custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml \
 <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 

@@ -32,7 +32,7 @@ kramdown:
 # Theme settings for just-the-docs
 search_enabled: true
 aux_links:
-  "Back to the main ODE site":
+  "Back to opendistro.github.io/for-elasticsearch":
     - "http://example.com/"
 color_scheme: ode
 
