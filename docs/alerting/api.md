@@ -110,7 +110,7 @@ POST _alerting/monitors
 
 ## Update monitor
 
-When you update a monitor, include the current version number as a parameter. ODE increments the version number automatically (see the sample response).
+When you update a monitor, include the current version number as a parameter. Open Distro for Elasticsearch increments the version number automatically (see the sample response).
 
 #### Request
 

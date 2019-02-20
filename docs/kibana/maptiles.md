@@ -7,7 +7,7 @@ nav_order: 1
 
 # Configure WMS map server
 
-Due to licensing restrictions, the default installation of Kibana does in Open Distro for Elasticsearch (ODE) doesn't include a map server for tile map visualizations. To configure Kibana to use a WMS map server:
+Due to licensing restrictions, the default installation of Kibana does in Open Distro for Elasticsearch doesn't include a map server for tile map visualizations. To configure Kibana to use a WMS map server:
 
 1. Open Kibana at `https://<host>:<port>/_plugin/kibana/`.
 1. **Management**.

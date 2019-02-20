@@ -7,7 +7,7 @@ permalink: /
 
 # Open Distro for Elasticsearch
 
-This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com) (ODE), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
+This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 
 [Get started](#get-started){: .btn .btn-purple }
 
@@ -21,16 +21,16 @@ This site contains the technical documentation for [Open Distro for Elasticsearc
 
 ---
 
-## Why use ODE?
+## Why use Open Distro for Elasticsearch?
 
-ODE is well-suited to several use cases:
+Open Distro for Elasticsearch is well-suited to several use cases:
 
 * Log analytics
 * Real-time application monitoring
 * Clickstream analytics
 * Search backend
 
-Compared to the open source distribution of Elasticsearch, ODE offers several extra features:
+Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers several extra features:
 
 Component | Purpose
 :--- | :---
@@ -60,7 +60,7 @@ To learn more, see [Install](docs/install).
 
 ---
 
-## About ODE
+## About Open Distro for Elasticsearch
 
 [Open Distro for Elasticsearch](http://example.com) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html).
 

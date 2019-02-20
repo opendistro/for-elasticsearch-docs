@@ -7,13 +7,13 @@ nav_order: 1
 
 # Docker image
 
-You can pull the Open Distro for Elasticsearch (ODE) Docker image just like any other image:
+You can pull the Open Distro for Elasticsearch Docker image just like any other image:
 
 ```bash
 docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
-ODE images use `centos:7` as the base image.
+Open Distro for Elasticsearch images use `centos:7` as the base image.
 
 
 ## Run the image
@@ -29,6 +29,21 @@ Then send a request to the server to verify that Elasticsearch is up and running
 ```bash
 curl -XGET localhost:9200
 ```
+
+To find the container ID:
+
+```bash
+docker ps
+```
+
+Then you can stop the container using:
+
+```bash
+docker stop <container-id>
+```
+
+
+## Start a cluster
 
 To deploy the image across multiple nodes for a production workload, create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
 

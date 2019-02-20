@@ -14,11 +14,17 @@ This library is licensed under the Apache 2.0 License.
 
 1. Navigate to the repository root.
 
-1. Install dependencies.
+1. Install [Ruby](https://www.ruby-lang.org/en/) if you don't already have it.
+
+1. Install [Jekyll](https://jekyllrb.com/) if you don't already have it:
+
+   `gem install bundler jekyll`
+
+1. Install dependencies:
 
    `bundle install`
 
-1. Build.
+1. Build:
 
    `bundle exec jekyll serve`
 
