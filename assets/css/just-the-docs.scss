@@ -20,8 +20,8 @@
 // Import custom color scheme scss
 //
 
-{% if site.color_scheme == "ode" %}
-@import "./color_schemes/ode.scss";
+{% if site.color_scheme == "odfe" %}
+@import "./color_schemes/odfe.scss";
 {% endif %}
 
 {% if site.color_scheme == "dark" %}

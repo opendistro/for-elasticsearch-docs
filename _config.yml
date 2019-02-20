@@ -34,15 +34,15 @@ search_enabled: true
 aux_links:
   "Back to the main Open Distro for Elasticsearch site":
     - "http://example.com/"
-color_scheme: ode
+color_scheme: odfe
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
-ga_tracking: nil
+ga_tracking:
 
 # Adds a Gitter chat room to the lower-right of all pages using https://sidecar.gitter.im/
 # e.g. org/room-name
-gitter_chat: nil
+gitter_chat:
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
