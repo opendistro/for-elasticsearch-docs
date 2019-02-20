@@ -49,3 +49,14 @@ h1, h2, h3, h4, h5, h6 {
   @extend %callout;
   border-left: 5px solid $red-000;
 }
+
+.gitter-open-chat-button {
+  background-color: $purple-100;
+  right: 3rem;
+  padding: 0.5rem 1rem;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: normal;
+  &:hover {
+    background-color: $purple-200;
+  }
+}

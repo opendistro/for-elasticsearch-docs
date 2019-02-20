@@ -21,6 +21,15 @@
     <script type="text/javascript" src="{{ "/assets/js/search-data.js" | absolute_url }}"></script>
     <script src="https://unpkg.com/lunr/lunr.js"></script>
   {% endif %}
+  {% if site.gitter_chat != nil %}
+    <script>
+      ((window.gitter = {}).chat = {}).options = {
+        room: '{{ site.gitter_chat }}'
+      };
+    </script>
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+  {% endif %}
+
   <script type="text/javascript" src="{{ "/assets/js/just-the-docs.js" | absolute_url }}"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">

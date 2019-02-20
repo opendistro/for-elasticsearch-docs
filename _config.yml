@@ -32,13 +32,17 @@ kramdown:
 # Theme settings for just-the-docs
 search_enabled: true
 aux_links:
-  "Back to opendistro.github.io/for-elasticsearch":
+  "Back to the main Open Distro for Elasticsearch site":
     - "http://example.com/"
 color_scheme: ode
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
 ga_tracking: nil
+
+# Adds a Gitter chat room to the lower-right of all pages using https://sidecar.gitter.im/
+# e.g. org/room-name
+gitter_chat: nil
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

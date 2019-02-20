@@ -14,7 +14,7 @@ To enable audit logging:
 1. Add the following line to `elasticsearch.yml` on each node:
 
    ```yml
-   security-plugin-placeholder.audit.type: internal_elasticsearch
+   opendistro_security.audit.type: internal_elasticsearch
    ```
 
    This setting stores audit logs on the current cluster. For other storage options, see [Audit Log Storage Types](../storage-types).
@@ -53,22 +53,22 @@ These default log settings work well for most use cases, but you can change sett
 To exclude categories, set:
 
 ```yml
-security-plugin-placeholder.audit.config.disabled_rest_categories: <disabled categories>
-security-plugin-placeholder.audit.config.disabled_transport_categories: <disabled categories>
+opendistro_security.audit.config.disabled_rest_categories: <disabled categories>
+opendistro_security.audit.config.disabled_transport_categories: <disabled categories>
 ```
 
 For example:
 
 ```yml
-security-plugin-placeholder.audit.config.disabled_rest_categories: AUTHENTICATED, SG_INDEX_ATTEMPT
-security-plugin-placeholder.audit.config.disabled_transport_categories: GRANTED_PRIVILEGES
+opendistro_security.audit.config.disabled_rest_categories: AUTHENTICATED, SG_INDEX_ATTEMPT
+opendistro_security.audit.config.disabled_transport_categories: GRANTED_PRIVILEGES
 ```
 
 If you want to log events in all categories, use `NONE`:
 
 ```yml
-security-plugin-placeholder.audit.config.disabled_rest_categories: NONE
-security-plugin-placeholder.audit.config.disabled_transport_categories: NONE
+opendistro_security.audit.config.disabled_rest_categories: NONE
+opendistro_security.audit.config.disabled_transport_categories: NONE
 ```
 
 
@@ -77,8 +77,8 @@ security-plugin-placeholder.audit.config.disabled_transport_categories: NONE
 By default, the Security plugin logs events on both REST and the transport layer. You can disable either type:
 
 ```yml
-security-plugin-placeholder.audit.enable_rest: true
-security-plugin-placeholder.audit.enable_transport: false
+opendistro_security.audit.enable_rest: true
+opendistro_security.audit.enable_transport: false
 ```
 
 
@@ -87,7 +87,7 @@ security-plugin-placeholder.audit.enable_transport: false
 By default, the Security plugin includes the body of the request (if available) for both REST and the transport layer. If you do not want or need the request body, you can disable it:
 
 ```yml
-security-plugin-placeholder.audit.log_request_body: false
+opendistro_security.audit.log_request_body: false
 ```
 
 
@@ -109,10 +109,10 @@ audit_trace_resolved_indices: [
 You can disable this feature by setting:
 
 ```yml
-security-plugin-placeholder.audit.resolve_indices: false
+opendistro_security.audit.resolve_indices: false
 ```
 
-Disabling this feature only takes effect if `security-plugin-placeholder.audit.log_request_body` is also set to `false`.
+Disabling this feature only takes effect if `opendistro_security.audit.log_request_body` is also set to `false`.
 {: .note }
 
 
@@ -123,7 +123,7 @@ Bulk requests can contain many indexing operations. By default, the Security plu
 The Security plugin can be configured to log each indexing operation as a separate event:
 
 ```yml
-security-plugin-placeholder.audit.resolve_bulk_requests: true
+opendistro_security.audit.resolve_bulk_requests: true
 ```
 
 This change can create a massive number of events in the audit logs, so we don't recommend enabling this setting if you make heavy use of the `_bulk` API.
@@ -134,7 +134,7 @@ This change can create a massive number of events in the audit logs, so we don't
 You can exclude certain requests from being logged completely, by either configuring actions (for transport requests) and/or HTTP request paths (REST):
 
 ```yml
-security-plugin-placeholder.audit.ignore_requests: ["indices:data/read/*", "SearchRequest"]
+opendistro_security.audit.ignore_requests: ["indices:data/read/*", "SearchRequest"]
 ```
 
 
@@ -143,7 +143,7 @@ security-plugin-placeholder.audit.ignore_requests: ["indices:data/read/*", "Sear
 By default, the Security plugin logs events from all users, but excludes the internal Kibana server user `kibanaserver`. You can exclude other users:
 
 ```yml
-security-plugin-placeholder.audit.ignore_users:
+opendistro_security.audit.ignore_users:
   - kibanaserver
   - admin
 ```
@@ -151,7 +151,7 @@ security-plugin-placeholder.audit.ignore_users:
 If requests from all users should be logged, use `NONE`:
 
 ```yml
-security-plugin-placeholder.audit.ignore_users: NONE
+opendistro_security.audit.ignore_users: NONE
 ```
 
 
@@ -160,13 +160,13 @@ security-plugin-placeholder.audit.ignore_users: NONE
 By default, the Security plugin stores audit events in a daily rolling index named `sg6-auditlog-YYYY.MM.dd`. You can configure the name of the index in `elasticsearch.yml`:
 
 ```yml
-security-plugin-placeholder.audit.config.index: myauditlogindex
+opendistro_security.audit.config.index: myauditlogindex
 ```
 
 Use a date pattern in the index name to configure daily, weekly, or monthly rolling indices:
 
 ```yml
-security-plugin-placeholder.audit.config.index: "'sg6-auditlog-'YYYY.MM.dd"
+opendistro_security.audit.config.index: "'sg6-auditlog-'YYYY.MM.dd"
 ```
 
 For a reference on the date pattern format, see the [Joda DateTimeFormat documentation](http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html).
@@ -177,11 +177,11 @@ For a reference on the date pattern format, see the [Joda DateTimeFormat documen
 The Search plugin logs events asynchronously, which keeps performance impact on your cluster minimal. The plugin uses a fixed thread pool to log events. You can define the number of threads in the pool in `elasticsearch.yml`:
 
 ```yml
-security-plugin-placeholder.audit.threadpool.size: <integer>
+opendistro_security.audit.threadpool.size: <integer>
 ```
 
 The default setting is `10`. Setting this value to `0` disables the thread pool, which means the plugin logs events synchronously. To set the maximum queue length per thread:
 
 ```yml
-security-plugin-placeholder.audit.threadpool.max_queue_len: 100000
+opendistro_security.audit.threadpool.max_queue_len: 100000
 ```
