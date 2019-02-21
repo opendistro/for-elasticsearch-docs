@@ -9,7 +9,7 @@ has_children: true
 
 Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, SQL is a great option.
 
-To use the feature, direct requests to the `_sql` URI. You can use a request parameter or the request body (recommended).
+To use the feature, send requests to the `_sql` URI. You can use a request parameter or the request body (recommended).
 
 ```sql
 GET https://<host>:<port>/_sql?sql=select * from my-index limit 50
@@ -18,7 +18,7 @@ GET https://<host>:<port>/_sql?sql=select * from my-index limit 50
 ```json
 POST https://<host>:<port>/_sql
 {
-  "query": "select * from my-index limit 50"
+  "query": "SELECT * FROM my-index LIMIT 50"
 }
 ```
 
@@ -27,7 +27,7 @@ By default, queries return JSON, but you can also return data in CSV format:
 ```json
 POST _sql?format=csv
 {
-  "query": "select * from my-index limit 50"
+  "query": "SELECT * FROM my-index LIMIT 50"
 }
 ```
 
@@ -51,7 +51,7 @@ The most common error is the dreaded null pointer exception, which can occur dur
 ```json
 POST _sql
 {
-  "query": "select * from my-index WHERE ['name.firstname']='saanvi' LIMIT 5"
+  "query": "SELECT * FROM my-index WHERE ['name.firstname']='saanvi' LIMIT 5"
 }
 ```
 
@@ -63,7 +63,7 @@ If a query isn't behaving the way you expect, use the `_explain` API to see the 
 ```json
 POST _sql/_explain
 {
-  "query": "select * from * limit 50"
+  "query": "SELECT * FROM * LIMIT  50"
 }
 ```
 
