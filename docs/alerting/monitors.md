@@ -196,4 +196,4 @@ Active | The alert is ongoing and unacknowledged.
 Acknowledged | Someone has acknowledged the alert, but not fixed the root cause.
 Completed | The alert is no longer ongoing.
 Error | An error occurred while executing the trigger---usually the result of an improper action configuration.
-Deleted | The monitor or trigger associated with this alert was deleted while the alert was ongoing.
+Deleted | Someone deleted the monitor or trigger associated with this alert while the alert was ongoing.
