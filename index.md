@@ -47,7 +47,7 @@ Kibana | Search frontend and visualizations
 ## Get started
 {: .d-inline-block :}
 Docker
-{: .label }
+{: .label .label-green }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
 1. `docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>`

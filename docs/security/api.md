@@ -80,6 +80,7 @@ Hidden resources are read-only by definition.
 
 To add or remove these flags, you need to use the `sgadmin` role.
 
+---
 
 ## Action groups
 
@@ -216,9 +217,11 @@ PATCH _opendistro/_security/api/actiongroups
 ```
 
 
+---
+
 ## Users
 
-This API lets you create, update, and delete internal users. If you use an external authentication backend, you probably don't need to worry about internal users.
+These calls let you create, update, and delete internal users. If you use an external authentication backend, you probably don't need to worry about internal users.
 
 
 ### Get user
@@ -373,6 +376,8 @@ PATCH _opendistro/_security/api/internalusers
 }
 ```
 
+
+---
 
 ## Roles
 
@@ -549,6 +554,8 @@ PATCH _opendistro/_security/api/roles
 ```
 
 
+---
+
 ## Role mappings
 
 ### Get role mapping
@@ -696,6 +703,8 @@ PATCH _opendistro/_security/api/rolesmapping
 ```
 
 
+---
+
 ## Authentication
 
 ### Get authentication details
@@ -705,6 +714,9 @@ PATCH _opendistro/_security/api/rolesmapping
 ```
 GET _opendistro/_security/api/config
 ```
+
+
+---
 
 ## Cache
 

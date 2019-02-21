@@ -29,6 +29,8 @@ Where | `SELECT * FROM my-index WHERE ['field']='value'`
 Order By | `SELECT * FROM my-index ORDER BY _id asc`
 Group By | `SELECT * FROM my-index GROUP BY range(age, 20,30,39)`
 Limit | `SELECT * FROM my-index LIMIT 50` (default is 200)
+Union | `SELECT * FROM my-index1 UNION SELECT * FROM my-index2`
+Minus | `SELECT * FROM my-index1 MINUS SELECT * FROM my-index2`
 
 
 ## Conditions
@@ -39,11 +41,12 @@ Like | `SELECT * FROM my-index WHERE name LIKE 'j%'`
 And | `SELECT * FROM my-index WHERE name LIKE 'j%' and age > 21`
 Or | `SELECT * FROM my-index WHERE name LIKE 'j%' or age > 21`
 Count distinct | `SELECT count(distinct age) FROM my-index`
-In | `SELECT * FROM my-index WHERE name in ('alejandro', 'carolina')`
+In | `SELECT * FROM my-index WHERE name IN ('alejandro', 'carolina')`
+Not | `SELECT * FROM my-index WHERE name NOT IN ('jane')`
 Between | `SELECT * FROM my-index WHERE age BETWEEN 20 and 30`
 Aliases | `SELECT avg(age) AS Average_Age FROM my-index`
 Date | `SELECT * FROM my-index WHERE birthday='1990-11-15'`
-Not | `SELECT * FROM my-index WHERE name NOT IN ('jane')`
+Null | `SELECT * FROM my-index WHERE name IS NULL`
 
 
 ## Aggregations

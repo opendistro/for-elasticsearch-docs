@@ -12,16 +12,19 @@ Dashboards are defined in JSON and composed of three main elements: tables, line
 The best way to get started with building custom dashboards is to duplicate and modify one of the existing JSON files in the `dashboards` directory.
 {: .tip }
 
+---
 
 #### Table of contents
 1. TOC
 {:toc}
 
+---
+
 
 ## Summary of elements
 
 - Tables show metrics per dimension. For example, if your metric is `CPU_Utilization` and your dimension `ShardID`, a PerfTop table shows a row for each shard on each node.
-- Bar graphs are aggregated for the cluster, unless you add node name to the dashboard. See the [options for all elements](#all-elements).
+- Bar graphs are aggregated for the cluster, unless you add `nodeName` to the dashboard. See the [options for all elements](#all-elements).
 - Line graphs are aggregated for each node. Each line represents a node.
 
 

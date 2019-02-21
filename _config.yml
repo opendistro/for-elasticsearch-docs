@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Documentation
+title: Open Distro for Elasticsearch Documentation
 description: >- # this means to ignore newlines until "baseurl:"
-  Documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads.
+  Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
