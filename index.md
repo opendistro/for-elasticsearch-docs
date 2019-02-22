@@ -50,9 +50,14 @@ Docker
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
 1. `docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>`
-1. `docker run -p 9200:9200 -p 5601:5601 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>`
-1. `curl -XGET 0.0.0.0:9200`
-1. Navigate to [http://0.0.0.0:5601](http://0.0.0.0:5601) to access Kibana.
+1. `docker pull <registry>/<organization>/opendistroforelasticsearch-kibana:<image-version>`
+1. `docker run -p 9200:9200 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>`
+1. In a new terminal session, run:
+
+   `curl -XGET --insecure https://localhost:9200 -u admin:admin`
+
+1. `docker run -p 5601:5601 -e ELASTICSEARCH_URL='https://localhost:9200' <registry>/<organization>/opendistroforelasticsearch-kibana:<image-version>`
+1. Navigate to [http://localhost:5601](http://localhost:5601) to access Kibana.
 
 To learn more, see [Install](docs/install).
 
