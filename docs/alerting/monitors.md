@@ -135,7 +135,7 @@ Variable | Description
 The final step in creating a monitor is to add one or more actions. Actions send notifications when trigger conditions are met and support [Slack](https://slack.com/), [Amazon Chime](https://aws.amazon.com/chime/), and webhooks.
 
 If you don't want to receive notifications for alerts, you don't have to add actions to your triggers. Instead, you can periodically check Kibana.
-{: .note }
+{: .tip }
 
 1. Specify a name for the action.
 1. Choose a destination.
@@ -156,7 +156,8 @@ If you don't want to receive notifications for alerts, you don't have to add act
 - Period end: {{ctx.periodEnd}}{% endraw %}
 ```
 
-
+If you want to use the `ctx.results` variable in a message, use `{% raw %}{{ctx.results.0}}{% endraw %}` rather than `{% raw %}{{ctx.results[0]}}{% endraw %}`. This difference is due to how Mustache handles bracket notation.
+{: .note }
 
 
 

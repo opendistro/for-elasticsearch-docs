@@ -490,3 +490,97 @@ POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
   "failed": []
 }
 ```
+
+
+## Create destination
+
+#### Request
+
+```json
+POST _opendistro/_alerting/destinations
+{
+  "name": "my-destination",
+  "type": "slack",
+  "slack": {
+    "url": "http://www.example.com"
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "_id": "nO-yFmkB8NzS6aXjJdiI",
+  "_version": 1,
+  "destination": {
+    "type": "slack",
+    "name": "my-destination",
+    "last_update_time": 1550863967624,
+    "slack": {
+      "url": "http://www.example.com"
+    }
+  }
+}
+```
+
+## Update destination
+
+#### Request
+
+```json
+PUT _opendistro/_alerting/destinations/<destination-id>
+{
+  "name": "my-updated-destination",
+  "type": "slack",
+  "slack": {
+    "url": "http://www.example.com"
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "_id": "pe-1FmkB8NzS6aXjqvVY",
+  "_version": 4,
+  "destination": {
+    "type": "slack",
+    "name": "my-updated-destination",
+    "last_update_time": 1550864289375,
+    "slack": {
+      "url": "http://www.example.com"
+    }
+  }
+}
+```
+
+
+## Delete destination
+
+#### Request
+
+```
+_opendistro/_alerting/destinations/<destination-id>
+```
+
+#### Sample response
+
+```json
+{
+  "_index": ".opendistro-alerting-config",
+  "_type": "_doc",
+  "_id": "Zu-zFmkB8NzS6aXjLeBI",
+  "_version": 2,
+  "result": "deleted",
+  "forced_refresh": true,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "_seq_no": 8,
+  "_primary_term": 1
+}
+```
