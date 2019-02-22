@@ -24,7 +24,7 @@ Use the alerting API to programmatically manage monitors and alerts.
 #### Request
 
 ```json
-POST _alerting/monitors
+POST _opendistro/_alerting/monitors
 {
   "name": "test-monitor",
   "type": "monitor",
@@ -115,7 +115,7 @@ When you update a monitor, include the current version number as a parameter. Op
 #### Request
 
 ```json
-PUT _alerting/monitors/<monitor_id>?version=<number>
+PUT _opendistro/_alerting/monitors/<monitor_id>?version=<number>
 {
   "type": "monitor",
   "name": "test-test",
@@ -231,7 +231,7 @@ PUT _alerting/monitors/<monitor_id>?version=<number>
 #### Request
 
 ```
-GET _alerting/monitors/<monitor_id>
+GET _opendistro/_alerting/monitors/<monitor_id>
 ```
 
 #### Sample response
@@ -314,7 +314,7 @@ GET _opendistro/_monitors/stats/jobs_info
 #### Request
 
 ```
-DELETE _alerting/monitors/<monitor_id>
+DELETE _opendistro/_alerting/monitors/<monitor_id>
 ```
 
 #### Sample response
@@ -345,7 +345,7 @@ DELETE _alerting/monitors/<monitor_id>
 #### Request
 
 ```json
-GET _alerting/monitors/_search
+GET _opendistro/_alerting/monitors/_search
 {
   "query": {
     "match" : {
@@ -442,7 +442,7 @@ GET _alerting/monitors/_search
 #### Request
 
 ```json
-POST _alerting/monitors/<monitor_id>/_execute
+POST _opendistro/_alerting/monitors/<monitor_id>/_execute
 ```
 
 #### Sample response
@@ -474,7 +474,7 @@ To get the alert ID, query the `.opendistro-alerts` index. See [Alerting indices
 #### Request
 
 ```json
-POST _alerting/monitors/<monitor-id>/_acknowledge/alerts
+POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 {
   "alerts": ["bn0_PmgBoCvkhulGF2K8"]
 }
