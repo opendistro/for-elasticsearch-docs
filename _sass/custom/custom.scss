@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700');
 
 body {
   padding-bottom: 6rem;
+  font-family: 'Open Sans', sans-serif;
   @include mq(md) {
     padding-bottom: 0;
   }
