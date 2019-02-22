@@ -291,21 +291,190 @@ GET _opendistro/_alerting/monitors/<monitor_id>
 
 ## Monitor stats
 
+Returns statistics about the alerting feature. Use `_opendistro/_alerting/stats` to find node IDs and metrics. Then you can drill down using those values.
+
 #### Request
 
 ```json
-GET _opendistro/_monitors/stats
-GET _opendistro/_monitors/stats/job_sweeper_metrics
-GET _opendistro/_monitors/stats/jobs_info
+GET _opendistro/_alerting/stats
+GET _opendistro/_alerting/stats/<metric>
+GET _opendistro/_alerting/<node-id>/stats
+GET _opendistro/_alerting/<node-id>/stats/<metric>
 ```
 
 #### Sample response
 
 ```json
 {
-  "Something": "Useful"
+  "_nodes": {
+    "total": 9,
+    "successful": 9,
+    "failed": 0
+  },
+  "cluster_name": "475300751431:alerting65-dont-delete",
+  "opendistro.scheduled_jobs.enabled": true,
+  "scheduled_job_index_exists": true,
+  "scheduled_job_index_status": "green",
+  "nodes_on_schedule": 9,
+  "nodes_not_on_schedule": 0,
+  "nodes": {
+    "qWcbKbb-TVyyI-Q7VSeOqA": {
+      "name": "qWcbKbb",
+      "schedule_status": "green",
+      "roles": [
+        "MASTER"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 207017,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {}
+    },
+    "Do-DX9ZcS06Y9w1XbSJo1A": {
+      "name": "Do-DX9Z",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 230516,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {}
+    },
+    "n5phkBiYQfS5I0FDzcqjZQ": {
+      "name": "n5phkBi",
+      "schedule_status": "green",
+      "roles": [
+        "MASTER"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 228406,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {}
+    },
+    "Tazzo8cQSY-g3vOjgYYLzA": {
+      "name": "Tazzo8c",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 211722,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {
+        "i-wsFmkB8NzS6aXjQSk0": {
+          "last_execution_time": 1550864912882,
+          "running_on_time": true
+        }
+      }
+    },
+    "Nyf7F8brTOSJuFPXw6CnpA": {
+      "name": "Nyf7F8b",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 223300,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {
+        "NbpoFmkBeSe-hD59AKgE": {
+          "last_execution_time": 1550864928354,
+          "running_on_time": true
+        },
+        "-LlLFmkBeSe-hD59Ydtb": {
+          "last_execution_time": 1550864732727,
+          "running_on_time": true
+        },
+        "pBFxFmkBNXkgNmTBaFj1": {
+          "last_execution_time": 1550863325024,
+          "running_on_time": true
+        },
+        "hfasEmkBNXkgNmTBrvIW": {
+          "last_execution_time": 1550862000001,
+          "running_on_time": true
+        }
+      }
+    },
+    "oOdJDIBVT5qbbO3d8VLeEw": {
+      "name": "oOdJDIB",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 227570,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {
+        "4hKRFmkBNXkgNmTBKjYX": {
+          "last_execution_time": 1550864806101,
+          "running_on_time": true
+        }
+      }
+    },
+    "NRDG6JYgR8m0GOZYQ9QGjQ": {
+      "name": "NRDG6JY",
+      "schedule_status": "green",
+      "roles": [
+        "MASTER"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 227652,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {}
+    },
+    "URMrXRz3Tm-CB72hlsl93Q": {
+      "name": "URMrXRz",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 231048,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {
+        "m7uKFmkBeSe-hD59jplP": {
+          "running_on_time": true
+        }
+      }
+    },
+    "eXgt1k9oTRCLmx2HBGElUw": {
+      "name": "eXgt1k9",
+      "schedule_status": "green",
+      "roles": [
+        "DATA",
+        "INGEST"
+      ],
+      "job_scheduling_metrics": {
+        "last_full_sweep_time_millis": 229234,
+        "full_sweep_on_time": true
+      },
+      "jobs_info": {
+        "wWkFFmkBc2NG-PeLntxk": {
+          "running_on_time": true
+        },
+        "3usNFmkB8NzS6aXjO1Gs": {
+          "last_execution_time": 1550863959848,
+          "running_on_time": true
+        }
+      }
+    }
+  }
 }
 ```
+
 
 ---
 
@@ -492,6 +661,8 @@ POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 ```
 
 
+---
+
 ## Create destination
 
 #### Request
@@ -523,6 +694,9 @@ POST _opendistro/_alerting/destinations
   }
 }
 ```
+
+
+---
 
 ## Update destination
 
@@ -556,6 +730,8 @@ PUT _opendistro/_alerting/destinations/<destination-id>
 }
 ```
 
+
+---
 
 ## Delete destination
 

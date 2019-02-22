@@ -34,6 +34,8 @@ Setting | Default | Description
 `opendistro.alerting.alert_backoff_count` | 2 | The number of retries for writing alerts before the operation fails.
 `opendistro.alerting.alert_backoff_millis` | 50ms | The amount of time to wait between retries---increases exponentially after each failed retry.
 `opendistro.alerting.alert_history_rollover_period` | 12h | How often completed alerts are rolled over from the `.opendistro-alerts` index to `.opendistro-alert-history-<date>`.
+`opendistro.alerting.move_alerts_backoff_millis` | 250 | The amount of time to wait between retries---increases exponentially after each failed retry.
+`opendistro.alerting.move_alerts_backoff_count` | 3 | The number of retries for moving alerts to a deleted state after their monitor or trigger has been deleted.
 `opendistro.alerting.monitor.max_monitors` | 1000 | The maximum number of monitors users can create.
 `opendistro.alerting.alert_history_max_age` | 24h | The oldest document the `.opendistro-alert-history-<date>` index should keep.
 `opendistro.alerting.alert_history_max_docs` | 1000 | The maximum number of documents the `.opendistro-alert-history-<date>` index should keep.
