@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 6rem;
+  @include mq(md) {
+    padding-bottom: 0;
+  }
 }
 
 .site-title {
@@ -51,13 +54,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gitter-open-chat-button {
-  background-color: $purple-100;
+  display: none;
+  background-color: $blue-200;
   right: 3rem;
   padding: 0.5rem 1rem;
   font-family: 'Open Sans', sans-serif;
   letter-spacing: normal;
   &:hover {
-    background-color: $purple-200;
+    background-color: $blue-300;
+  }
+  @include mq(md) {
+    display: block;
   }
 }
 

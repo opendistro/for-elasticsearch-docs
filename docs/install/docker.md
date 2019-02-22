@@ -21,13 +21,13 @@ Open Distro for Elasticsearch images use `centos:7` as the base image.
 To run the image for local development:
 
 ```bash
-docker run -p 9200:9200 -p 5601:5601 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>
+docker run -p 9200:9200 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
 Then send a request to the server to verify that Elasticsearch is up and running:
 
 ```bash
-curl -XGET localhost:9200
+curl -XGET https://localhost:9200 -u admin:admin --insecure
 ```
 
 To find the container ID:
@@ -85,7 +85,6 @@ services:
       - node1-data:/usr/share/opendistro/elasticsearch/data
     ports:
       - 9200:9200
-      - 5601:5601
     networks:
       - ode-net
   node2:
@@ -120,9 +119,9 @@ You can pass a custom `elasticsearch.yml` file to the Docker container using the
 
 ```bash
 docker run \
--p 9200:9200 -p 5601:5601 \
+-p 9200:9200 \
 -e "discovery.type=single-node" \
--v /<full-path-to>/custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml \
+-v /<full-path-to>/custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
@@ -133,11 +132,11 @@ services:
   node1:
     volumes:
       - node1-data:/usr/share/opendistro/elasticsearch/data
-      - ./custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml
+      - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   node2:
     volumes:
       - node2-data:/usr/share/opendistro/elasticsearch/data
-      - ./custom-elasticsearch.yml:/home/opendistro/elasticsearch/config/elasticsearch.yml
+      - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 ```
 
 
@@ -154,5 +153,5 @@ Then run the following commands:
 
 ```bash
 docker build --tag=ode-custom-plugin .
-docker run -p 9200:9200 -p 5601:5601 -v /usr/share/opendistro/elasticsearch/data ode-custom-plugin
+docker run -p 9200:9200 -v /usr/share/opendistro/elasticsearch/data ode-custom-plugin
 ```

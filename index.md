@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: About
 nav_order: 1
 permalink: /
 ---
@@ -9,7 +9,7 @@ permalink: /
 
 This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 
-[Get started](#get-started){: .btn .btn-purple }
+[Get started](#get-started){: .btn .btn-blue }
 
 
 ---
