@@ -6,7 +6,6 @@ has_children: true
 ---
 
 # Alerting
-{: .d-inline-block :}
 Kibana
 {: .label .label-yellow :}
 

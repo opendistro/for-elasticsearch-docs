@@ -44,6 +44,9 @@ ga_tracking:
 # e.g. org/room-name
 gitter_chat:
 
+# Adds on-hover anchor links to h2-h6
+anchor_links: true
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

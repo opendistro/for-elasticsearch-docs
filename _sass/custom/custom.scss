@@ -60,3 +60,22 @@ h1, h2, h3, h4, h5, h6 {
     background-color: $purple-200;
   }
 }
+
+// Keeps labels high and tight next to headers
+
+h1 + p.label {
+  margin: -42px 0 0 0;
+}
+h2 + p.label {
+  margin: -28px 0 0 0;
+}
+h3 + p.label {
+  margin: -20px 0 0 0;
+}
+h4 + p.label,
+h6 + p.label {
+  margin: -14px 0 0 0;
+}
+h5 + p.label {
+  margin: -15px 0 0 0;
+}

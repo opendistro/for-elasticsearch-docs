@@ -45,7 +45,6 @@ Kibana | Search frontend and visualizations
 ---
 
 ## Get started
-{: .d-inline-block :}
 Docker
 {: .label .label-green }
 

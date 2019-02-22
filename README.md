@@ -55,7 +55,6 @@ This documentation uses a modified version of the [just-the-docs](https://github
 [Get started](#get-started){: .btn .btn-blue }
 
 ## Get started
-{: .d-inline-block :}
 New
 {: .label .label-green :}
 ```
