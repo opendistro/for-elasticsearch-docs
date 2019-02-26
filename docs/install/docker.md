@@ -24,10 +24,12 @@ To run the image for local development:
 docker run -p 9200:9200 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
-Then send a request to the server to verify that Elasticsearch is up and running:
+Then send requests to the server to verify that Elasticsearch is up and running:
 
 ```bash
 curl -XGET https://localhost:9200 -u admin:admin --insecure
+curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
 ```
 
 To find the container ID:
@@ -67,14 +69,13 @@ docker-compose down -v
 #### Sample Docker Compose file
 
 ```yml
-version: "3"
-
+version: '3'
 services:
-  node1:
+  odfe-node1:
     image: <registry>/<organization>/opendistroforelasticsearch:<image-version>
-    container_name: node1
+    container_name: odfe-node1
     environment:
-      - cluster.name=ode-cluster
+      - cluster.name=odfe-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -82,35 +83,49 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - node1-data:/usr/share/opendistro/elasticsearch/data
+      - odfe-data2:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
-      - ode-net
-  node2:
+      - odfe-net
+  odfe-node2:
     image: <registry>/<organization>/opendistroforelasticsearch:<image-version>
-    container_name: node2
+    container_name: odfe-node2
     environment:
-      - cluster.name=ode-cluster
+      - cluster.name=odfe-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=node1"
+      - discovery.zen.ping.unicast.hosts=odfe-node1
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - node2-data:/usr/share/opendistro/elasticsearch/data
+      - odfe-data2:/usr/share/elasticsearch/data
     networks:
-      - ode-net
+      - odfe-net
+  kibana:
+    image: <registry>/<organization>/opendistroforelasticsearch-kibana:<image-version>
+    container_name: odfe-kibana
+    ports:
+      - 5601:5601
+    expose:
+        - "5601"
+    environment:
+      ELASTICSEARCH_URL: https://odfe-node1:9200
+    networks:
+      - odfe-net
 
 volumes:
-  node1-data:
-  node2-data:
+  odfe-data1:
+  odfe-data2:
 
 networks:
-  ode-net:
+  odfe-net:
 ```
+
+If you override `kibana.yml` settings using environment variables, as seen above, use all uppercase letters and periods in place of underscores (e.g. to override `elasticsearch.url`, specify `ELASTICSEARCH_URL`).
+{: .note}
 
 
 ## Configure Elasticsearch
@@ -129,13 +144,13 @@ You can perform the same operation in `docker-compose.yml` using a relative path
 
 ```yml
 services:
-  node1:
+  odfe-node1:
     volumes:
-      - node1-data:/usr/share/opendistro/elasticsearch/data
+      - odfe-data1:/usr/share/opendistro/elasticsearch/data
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-  node2:
+  odfe-node2:
     volumes:
-      - node2-data:/usr/share/opendistro/elasticsearch/data
+      - odfe-data2:/usr/share/opendistro/elasticsearch/data
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 ```
 
@@ -152,6 +167,6 @@ RUN /home/opendistro/elasticsearch/bin/elasticsearch-plugin install --batch <plu
 Then run the following commands:
 
 ```bash
-docker build --tag=ode-custom-plugin .
-docker run -p 9200:9200 -v /usr/share/opendistro/elasticsearch/data ode-custom-plugin
+docker build --tag=odfe-custom-plugin .
+docker run -p 9200:9200 -v /usr/share/opendistro/elasticsearch/data odfe-custom-plugin
 ```

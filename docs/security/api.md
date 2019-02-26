@@ -181,7 +181,7 @@ PATCH _opendistro/_security/api/actiongroups/<action-group>
 
 #### Sample response
 
-```
+```json
 {
   "status":"OK",
   "message":"actiongroup SEARCH deleted."
@@ -325,7 +325,7 @@ Updates individual attributes of an internal user.
 
 #### Request
 
-```
+```json
 PATCH _opendistro/_security/api/internalusers/<username>
 [
   {
@@ -470,7 +470,7 @@ Creates or replaces the specified role.
 
 #### Request
 
-```
+```json
 PUT _opendistro/_security/api/roles/<role>
 {
   "cluster" : [ "*" ],
@@ -504,7 +504,7 @@ Updates individual attributes of a role.
 
 #### Request
 
-```
+```json
 PATCH _opendistro/_security/api/roles/<role>
 [
   {
@@ -532,7 +532,7 @@ Creates, updates, or deletes multiple roles in a single call.
 
 #### Request
 
-```
+```json
 PATCH _opendistro/_security/api/roles
 [
   {
@@ -628,7 +628,7 @@ Creates or replaces the specified role mapping.
 
 #### Request
 
-```
+```json
 PUT _opendistro/_security/api/rolesmapping/<role>
 {
   "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
@@ -653,7 +653,7 @@ Updates individual attributes of a role mapping.
 
 #### Request
 
-```
+```json
 PATCH _opendistro/_security/api/rolesmapping/<role>
 [
   {
@@ -681,7 +681,7 @@ Creates or updates multiple role mappings in a single call.
 
 #### Request
 
-```
+```json
 PATCH _opendistro/_security/api/rolesmapping
 [
   {
@@ -738,5 +738,32 @@ DELETE _opendistro/_security/api/cache
 {
   "status": "OK",
   "message": "Cache flushed successfully."
+}
+```
+
+
+---
+
+## Health
+
+### Health check
+
+Checks to see if the Security plugin is up and running.
+
+
+#### Request
+
+```
+GET _opendistro/_security/health
+```
+
+
+#### Sample response
+
+```json
+{
+  "message": null,
+  "mode": "strict",
+  "status": "UP"
 }
 ```

@@ -8,7 +8,7 @@ has_toc: false
 
 # Security
 
-Open Distro for Elasticsearch includes a security plugin for authentication and access control. This plugin provides features like:
+Open Distro for Elasticsearch includes the Security plugin for authentication and access control. This plugin provides features like:
 
 - Node-to-node encryption
 - Basic authentication
@@ -19,4 +19,4 @@ Open Distro for Elasticsearch includes a security plugin for authentication and 
 - Support for Active Directory, LDAP, Kerberos, and SAML
 - Cross-cluster search
 
-To get started, choose **Security** in Kibana.
+If you don't want to use the plugin, see [Disable security](disable).
