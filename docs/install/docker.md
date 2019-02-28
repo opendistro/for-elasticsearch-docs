@@ -21,7 +21,7 @@ Open Distro for Elasticsearch images use `centos:7` as the base image.
 To run the image for local development:
 
 ```bash
-docker run -p 9200:9200 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>
+docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>
 ```
 
 Then send requests to the server to verify that Elasticsearch is up and running:
@@ -76,8 +76,8 @@ services:
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # specifies the size of the Java heap
     ulimits:
       memlock:
         soft: -1
@@ -86,6 +86,7 @@ services:
       - odfe-data2:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
     networks:
       - odfe-net
   odfe-node2:
@@ -124,7 +125,7 @@ networks:
   odfe-net:
 ```
 
-If you override `kibana.yml` settings using environment variables, as seen above, use all uppercase letters and periods in place of underscores (e.g. to override `elasticsearch.url`, specify `ELASTICSEARCH_URL`).
+If you override `kibana.yml` settings using environment variables, as seen above, use all uppercase letters and periods in place of underscores (e.g. for `elasticsearch.url`, specify `ELASTICSEARCH_URL`).
 {: .note}
 
 
@@ -134,7 +135,7 @@ You can pass a custom `elasticsearch.yml` file to the Docker container using the
 
 ```bash
 docker run \
--p 9200:9200 \
+-p 9200:9200 -p 9600:9600 \
 -e "discovery.type=single-node" \
 -v /<full-path-to>/custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 <registry>/<organization>/opendistroforelasticsearch:<image-version>
@@ -152,6 +153,18 @@ services:
     volumes:
       - odfe-data2:/usr/share/opendistro/elasticsearch/data
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  kibana:
+    volumes:
+      - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
+```
+
+
+## Bash access to containers
+
+To create an interactive Bash session in a container, run `docker ps` to find the container ID. Then run:
+
+```bash
+docker exec -it <container-id> /bin/bash
 ```
 
 
@@ -168,5 +181,5 @@ Then run the following commands:
 
 ```bash
 docker build --tag=odfe-custom-plugin .
-docker run -p 9200:9200 -v /usr/share/opendistro/elasticsearch/data odfe-custom-plugin
+docker run -p 9200:9200 -p 9600:9600 -v /usr/share/opendistro/elasticsearch/data odfe-custom-plugin
 ```

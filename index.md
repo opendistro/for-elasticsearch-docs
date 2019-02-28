@@ -9,7 +9,7 @@ permalink: /
 
 This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 
-[Get started](#get-started){: .btn .btn-blue }
+[Get started](#get-started){: .btn .btn-purple }
 
 
 ---
@@ -51,7 +51,7 @@ Docker
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
 1. `docker pull <registry>/<organization>/opendistroforelasticsearch:<image-version>`
 1. `docker pull <registry>/<organization>/opendistroforelasticsearch-kibana:<image-version>`
-1. `docker run -p 9200:9200 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>`
+1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" <registry>/<organization>/opendistroforelasticsearch:<image-version>`
 1. In a new terminal session, run:
 
    `curl -XGET --insecure https://localhost:9200 -u admin:admin`
@@ -66,6 +66,6 @@ To learn more, see [Install](docs/install).
 
 ## About Open Distro for Elasticsearch
 
-[Open Distro for Elasticsearch](http://example.com) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html).
+[Open Distro for Elasticsearch](http://example.com) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/OpenDistro).
 
 The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](http://example.com/contribute) on the Open Distro for Elasticsearch project website.

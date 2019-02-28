@@ -7,7 +7,7 @@ has_children: true
 
 # SQL
 
-Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, SQL is a great option.
+Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, this feature is a great option.
 
 To use the feature, send requests to the `_opendistro/_sql` URI. You can use a request parameter or the request body (recommended).
 
@@ -20,6 +20,12 @@ POST https://<host>:<port>/_opendistro/_sql
 {
   "query": "SELECT * FROM my-index LIMIT 50"
 }
+```
+
+For a sample [curl](https://curl.haxx.se/) command, try:
+
+```bash
+curl -XPOST https://localhost:9200/_opendistro/_sql -u admin:admin -k -d '{"query": "SELECT * FROM kibana_sample_data_flights LIMIT 10"}' -H 'Content-Type: application/json'
 ```
 
 By default, queries return JSON, but you can also return data in CSV format:
@@ -41,7 +47,7 @@ SQL uses an improved version of the [elasticsearch-sql](https://github.com/NLPch
 
 ## User interfaces
 
-{::comment}The elasticsearch-sql plugin has a default user interface at `https://<host>:<port>/_plugin/sql`. {:/comment}You can test queries using **Dev Tools** in Kibana (`https://<host>:<port>/_plugin/kibana`).
+You can test queries using **Dev Tools** in Kibana (`https://<host>:5601`).
 
 
 ## Troubleshoot queries
@@ -55,7 +61,7 @@ POST _opendistro/_sql
 }
 ```
 
-If a query isn't behaving the way you expect, use the `_explain` API to see the translated query, which you can then troubleshoot.
+If a query isn't behaving the way you expect, use the `_explain` API to see the translated query, which you can then troubleshoot. For most operations, `_explain` returns Elasticsearch query DSL. For `UNION`, `MINUS`, and `JOIN`, it returns something more akin to a SQL execution plan.
 
 
 #### Sample request

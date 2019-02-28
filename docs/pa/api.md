@@ -10,10 +10,10 @@ nav_order: 1
 Performance Analyzer uses a single HTTP method and URI for all requests:
 
 ```
-GET <endpoint>/_performanceanalyzer/metrics
+GET <endpoint>:9600/_opendistro/_performanceanalyzer/metrics
 ```
 
-Then you provide parameters for metrics, aggregations, dimensions, and nodes (optional):
+Note the use of port 9600. Then you provide parameters for metrics, aggregations, dimensions, and nodes (optional):
 
 ```
 ?metrics=<metrics>&agg=<aggregations>&dim=<dimensions>&nodes=all"

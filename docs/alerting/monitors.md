@@ -163,10 +163,7 @@ If you want to use the `ctx.results` variable in a message, use `{% raw %}{{ctx.
 
 {::comment}
 
-Actions use Amazon Simple Notification Service (SNS) to send emails, text messages, HTTP requests, and even execute AWS Lambda functions.
-
-If you don't want to receive notifications for alerts, you don't have to add actions to your triggers. Instead, you can periodically check Kibana.
-{: .note }
+Actions can use Amazon Simple Notification Service (SNS) to send emails, text messages, HTTP requests, and even execute AWS Lambda functions.
 
 For the purposes of the alerting feature, the key SNS terms are *topic* and *message*. To learn the basics of SNS, see [the AWS documentation](https://docs.aws.amazon.com/sns/latest/dg/).
 
@@ -198,3 +195,12 @@ Acknowledged | Someone has acknowledged the alert, but not fixed the root cause.
 Completed | The alert is no longer ongoing.
 Error | An error occurred while executing the trigger---usually the result of an improper action configuration.
 Deleted | Someone deleted the monitor or trigger associated with this alert while the alert was ongoing.
+
+
+
+---
+
+## Notes
+
+- Monitors run as the `admin` user.
+- After an action sends a message, the content of that message has left the purview of the Security plugin. Securing access to that message (e.g. access to the Slack channel) is your responsibility.

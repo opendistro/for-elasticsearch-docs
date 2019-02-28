@@ -32,6 +32,8 @@ Limit | `SELECT * FROM my-index LIMIT 50` (default is 200)
 Union | `SELECT * FROM my-index1 UNION SELECT * FROM my-index2`
 Minus | `SELECT * FROM my-index1 MINUS SELECT * FROM my-index2`
 
+Like any complex query, large UNION and MINUS statements can strain or even crash your cluster.
+{: .warning }
 
 ## Conditions
 
@@ -89,7 +91,19 @@ date\_format | `SELECT date_format(date, 'Y') FROM my-index`
 
 ## Joins
 
+See [Joins](../joins) for constraints and limitations.
+
 Join | Example
 :--- | :---
-join | `SELECT /*! HASH_WITH_TERMS_FILTER */ p.firstname, p.lastname, p.gender, dogs.name FROM people p JOIN dogs d on d.holdersName = p.firstname WHERE p.age > 12 AND d.age > 1`
-left join | `SELECT /*! HASH_WITH_TERMS_FILTER */ p.firstname, p.lastname, p.gender, dogs.name FROM people p LEFT JOIN dogs d on d.holdersName = p.firstname`
+inner join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p JOIN dogs d ON d.holdersName = p.firstname WHERE p.age > 12 AND d.age > 1`
+left outer join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p LEFT JOIN dogs d ON d.holdersName = p.firstname`
+cross join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p CROSS JOIN dogs d`
+
+
+## Show
+
+Show commands, well, show you indices and mappings that match an index pattern. You can use `*` or `%` for wildcards.
+
+Show | Example
+:--- | :---
+show tables like | `SHOW TABLES LIKE logs-*`
