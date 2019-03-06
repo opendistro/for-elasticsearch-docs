@@ -1,0 +1,34 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  {% if page.description %}
+  <meta name="Description" content="{{ page.description }}">
+  {% endif %}
+
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ "/assets/css/just-the-docs.css" | absolute_url }}">
+  <link rel="shortcut icon" href="{{ "/assets/images/favicon.ico" | absolute_url }}">
+
+  {% if site.ga_tracking != nil %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.ga_tracking }}');
+    </script>
+  {% endif %}
+
+  {% if site.search_enabled != nil %}
+    <script type="text/javascript" src="{{ "/assets/js/search-data.js" | absolute_url }}"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+  {% endif %}
+
+  {% if site.anchor_links != nil %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+  {% endif %}
+
+  <script type="text/javascript" src="{{ "/assets/js/just-the-docs.js" | absolute_url }}"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
