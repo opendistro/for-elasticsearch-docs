@@ -92,7 +92,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - odfe-data2:/usr/share/elasticsearch/data
+      - odfe-data1:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
       - 9600:9600 # required for Performance Analyzer
@@ -156,16 +156,18 @@ You can perform the same operation in `docker-compose.yml` using a relative path
 services:
   odfe-node1:
     volumes:
-      - odfe-data1:/usr/share/opendistro/elasticsearch/data
+      - odfe-data1:/usr/share/elasticsearch/data
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   odfe-node2:
     volumes:
-      - odfe-data2:/usr/share/opendistro/elasticsearch/data
+      - odfe-data2:/usr/share/elasticsearch/data
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   kibana:
     volumes:
       - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
 ```
+
+You can use this same method to pass your own certificates for use with the [Security](../../security/) plugin.
 
 
 ## Bash access to containers
@@ -196,12 +198,22 @@ To run the image with a custom plugin, first create a [`Dockerfile`](https://doc
 
 ```
 FROM <registry>/<organization>/opendistroforelasticsearch:<image-version>
-RUN /home/opendistro/elasticsearch/bin/elasticsearch-plugin install --batch <plugin-name-or-url>
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch <plugin-name-or-url>
 ```
 
 Then run the following commands:
 
 ```bash
 docker build --tag=odfe-custom-plugin .
-docker run -p 9200:9200 -p 9600:9600 -v /usr/share/opendistro/elasticsearch/data odfe-custom-plugin
+docker run -p 9200:9200 -p 9600:9600 -v /usr/share/elasticsearch/data odfe-custom-plugin
+```
+
+You can also use a `Dockerfile` to pass your own certificates for use with the [Security](../../security/) plugin, similar to the `-v` argument in [Configure Elasticsearch](#configure-elasticsearch):
+
+```
+FROM <registry>/<organization>/opendistroforelasticsearch:<image-version>
+COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
+COPY --chown=elasticsearch:elasticsearch my-key-file.pem /usr/share/elasticsearch/config/
+COPY --chown=elasticsearch:elasticsearch my-certificate-chain.pem /usr/share/elasticsearch/config/
+COPY --chown=elasticsearch:elasticsearch my-root-cas.pem /usr/share/elasticsearch/config/
 ```
