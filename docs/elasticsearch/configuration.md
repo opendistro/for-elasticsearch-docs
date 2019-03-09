@@ -65,6 +65,7 @@ PUT /_cluster/settings
 
 You can find `elasticsearch.yml` in `/usr/share/elasticsearch/config/elasticsearch.yml` (Docker) or `/etc/elasticsearch/elasticsearch.yml` (RPM) on each node. Out of the box, it contains a number of default settings for the Security plugin that you should modify before using Open Distro for Elasticsearch for a production workload. To learn more, see [Security](../../security/).
 
+
 ### Sample configuration file
 
 ```yml
@@ -73,7 +74,6 @@ network.host: 0.0.0.0
 
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters
-# Details: https://github.com/elastic/elasticsearch/pull/17288
 discovery.zen.minimum_master_nodes: 1
 
 ######## Start OpenDistro for Elasticsearch Security Demo Configuration ########

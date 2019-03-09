@@ -55,6 +55,8 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 
 1. To start Open Distro for Elasticsearch, run `sudo systemctl start elasticsearch.service`.
 
+1. To check the status of the service, run `systemctl status elasticsearch.service`.
+
 1. Send requests to the server to verify that Elasticsearch is up and running:
 
    ```bash
@@ -77,4 +79,4 @@ sudo /bin/systemctl daemon-reload
 sudo /bin/systemctl enable elasticsearch.service
 ```
 
-You can also modify the values in `/etc/sysconfig/elasticsearch` (`JAVA_HOME`, most notably) and `/etc/elasticsearch/elasticsearch.yml`. To learn more, see [Elasticsearch configuration](../../elasticsearch/configuration/) and [Important Settings](../docker#important-settings) on the Docker page.
+You can also modify the values in `/etc/sysconfig/elasticsearch` (`JAVA_HOME`, most notably), `/etc/elasticsearch/elasticsearch.yml`, and `/etc/elasticsearch/jvm.options` (to set the heap size, most notably). To learn more, see [Elasticsearch configuration](../../elasticsearch/configuration/) and [Important Settings](../docker#important-settings) on the Docker page.

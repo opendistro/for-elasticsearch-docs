@@ -9,7 +9,7 @@ nav_order: 3
 
 TLS is configured in `elasticsearch.yml`. There are two main configuration sections: transport layer and REST layer. TLS is optional for the REST layer and mandatory for the transport layer.
 
-You can find an example configuration template with all options on [GitHub](https://www.github.com/opendistroforelasticsearch/security-ssl/blob/v0.0.7.0/opendistrosecurity-ssl-config-template.yml)
+You can find an example configuration template with all options on [GitHub](https://www.github.com/opendistro-for-elasticsearch/security-ssl/blob/master/opendistrosecurity-ssl-config-template.yml).
 {: .note }
 
 
