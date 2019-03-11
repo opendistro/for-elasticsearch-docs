@@ -19,7 +19,7 @@ Note the use of port 9600. Then you provide parameters for metrics, aggregations
 ?metrics=<metrics>&agg=<aggregations>&dim=<dimensions>&nodes=all"
 ```
 
-For a full list of metrics, see [Metrics Reference](../reference). Performance Analyzer updates its data every five seconds. If you create a custom client, we recommend using that same interval for calls to the API.
+For a full list of metrics, see [Metrics reference](../reference/). Performance Analyzer updates its data every five seconds. If you create a custom client, we recommend using that same interval for calls to the API.
 
 
 #### Sample request

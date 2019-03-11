@@ -34,7 +34,7 @@ Otherwise, just specify the Elasticsearch endpoint:
 ./perf-top-macos --dashboard dashboards/<dashboard>.json --endpoint my-cluster.my-domain.com
 ```
 
-PerfTop has four pre-built dashboards in the `dashboards` directory, but you can also [create your own](dashboards).
+PerfTop has four pre-built dashboards in the `dashboards` directory, but you can also [create your own](dashboards/).
 
 You can also load the pre-built dashboards (ClusterOverview, ClusterNetworkMemoryAnalysis, ClusterThreadAnalysis, or NodeAnalysis) without the JSON files, such as `--dashboard ClusterThreadAnalysis`.
 

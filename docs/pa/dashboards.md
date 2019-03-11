@@ -95,7 +95,7 @@ At this point, however, all the JSON does is define the size and position of thr
 
 ## Add queries
 
-Queries use the same elements as the REST [API](../api), just in JSON form:
+Queries use the same elements as the [REST API](../api/), just in JSON form:
 
 ```json
 {
@@ -108,7 +108,7 @@ Queries use the same elements as the REST [API](../api), just in JSON form:
 }
 ```
 
-For details on available metrics, see [Metrics Reference](../reference).
+For details on available metrics, see [Metrics reference](../reference/).
 
 
 ## Add options
