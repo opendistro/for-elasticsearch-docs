@@ -34,8 +34,8 @@ You *can* start Kibana using `docker run` after [creating a Docker network](http
 1. If you haven't already, add the `yum` repositories specified in steps 1--2 in [RPM](../install/rpm).
 1. `sudo yum install opendistroforelasticsearch-kibana`
 1. (Optional) Modify `/etc/kibana/kibana.yml`.
-1. `sudo sysmtectl start kibana.service`
-1. To stop Kibana, run `sudo sysmtectl stop kibana.service`.
+1. `sudo systemctl start kibana.service`
+1. To stop Kibana, run `sudo systemctl stop kibana.service`.
 
 
 ### Configuration
