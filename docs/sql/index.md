@@ -40,11 +40,6 @@ POST _opendistro/_sql?format=csv
 When you return data in CSV format, each row corresponds to a *document*, and each column corresponds to a *field*. Conceptually, you might find it useful to think of each Elasticsearch index as a database table.
 
 
-## About the elasticsearch-sql plugin
-
-SQL uses an enhanced version of the [elasticsearch-sql](https://github.com/NLPchina/elasticsearch-sql) plugin, which translates SQL to the Elasticsearch query DSL. For supported SQL features, see [Operations](operations).
-
-
 ## User interfaces
 
 You can test queries using **Dev Tools** in Kibana (`https://<host>:5601`).
