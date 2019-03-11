@@ -3,7 +3,7 @@
 This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads.
 
 
-# Build
+## Build
 
 1. Navigate to the repository root.
 
@@ -24,7 +24,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 1. Open [http://localhost:4000](http://localhost:4000).
 
 
-# Contribute
+## Contribute
 
 1. Fork this repository.
 1. Clone your fork.
@@ -33,7 +33,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 1. Push your changes, and submit a pull request.
 
 
-# Content guidelines
+## Content guidelines
 
 1. Try to stay consistent with existing content.
 1. Introduce acronyms before using them.
@@ -41,7 +41,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 1. Markdown file names should be all lowercase, use hyphens to separate words, and end in `.md`.
 
 
-# Markdown guidelines
+## Markdown guidelines
 
 This documentation uses a modified version of the [just-the-docs](https://github.com/pmarsceill/just-the-docs) Jekyll theme, which has some useful classes for labels and buttons:
 
