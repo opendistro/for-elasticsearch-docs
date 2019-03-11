@@ -36,10 +36,10 @@ Component | Purpose
 :--- | :---
 Elasticsearch | Data store and search engine
 Kibana | Search frontend and visualizations
-[Security](docs/security) | Authentication and access control for your cluster
-[Alerting](docs/alerting) | Receive alerts when your data meets certain conditions
-[SQL](docs/sql) | Use SQL to query your data
-[Performance Analyzer](docs/pa) | Monitor and optimize your cluster
+[Security](docs/security/) | Authentication and access control for your cluster
+[Alerting](docs/alerting/) | Receive alerts when your data meets certain conditions
+[SQL](docs/sql/) | Use SQL to query your data
+[Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
 
 
 ---
@@ -59,7 +59,7 @@ Docker
 1. `docker run -p 5601:5601 -e ELASTICSEARCH_URL='https://localhost:9200' docker/amazon/opendistro-for-elasticsearch-kibana:0.7.0`
 1. Navigate to [http://localhost:5601](http://localhost:5601) to access Kibana.
 
-To learn more, see [Install](docs/install).
+To learn more, see [Install](docs/install/).
 
 
 ---
