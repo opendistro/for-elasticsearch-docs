@@ -10,7 +10,7 @@ nav_order: 1
 You can pull the Open Distro for Elasticsearch Docker image just like any other image:
 
 ```bash
-docker pull docker/amazon/opendistro-for-elasticsearch:0.7.0
+docker pull amazon/opendistro-for-elasticsearch:0.7.0
 ```
 
 Open Distro for Elasticsearch images use `centos:7` as the base image.
@@ -30,7 +30,7 @@ Open Distro for Elasticsearch images use `centos:7` as the base image.
 To run the image for local development:
 
 ```bash
-docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" docker/amazon/opendistro-for-elasticsearch:0.7.0
+docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:0.7.0
 ```
 
 Then send requests to the server to verify that Elasticsearch is up and running:
@@ -81,7 +81,7 @@ docker-compose down -v
 version: '3'
 services:
   odfe-node1:
-    image: docker/amazon/opendistro-for-elasticsearch:0.7.0
+    image: amazon/opendistro-for-elasticsearch:0.7.0
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
@@ -99,7 +99,7 @@ services:
     networks:
       - odfe-net
   odfe-node2:
-    image: docker/amazon/opendistro-for-elasticsearch:0.7.0
+    image: amazon/opendistro-for-elasticsearch:0.7.0
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
@@ -115,7 +115,7 @@ services:
     networks:
       - odfe-net
   kibana:
-    image: docker/amazon/opendistro-for-elasticsearch-kibana:0.7.0
+    image: amazon/opendistro-for-elasticsearch-kibana:0.7.0
     container_name: odfe-kibana
     ports:
       - 5601:5601
@@ -147,7 +147,7 @@ docker run \
 -p 9200:9200 -p 9600:9600 \
 -e "discovery.type=single-node" \
 -v /<full-path-to>/custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
-docker/amazon/opendistro-for-elasticsearch:0.7.0
+amazon/opendistro-for-elasticsearch:0.7.0
 ```
 
 You can perform the same operation in `docker-compose.yml` using a relative path:
@@ -208,7 +208,7 @@ The `docker-compose.yml` file above also contains several key settings: `bootstr
 To run the image with a custom plugin, first create a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/):
 
 ```
-FROM docker/amazon/opendistro-for-elasticsearch:0.7.0
+FROM amazon/opendistro-for-elasticsearch:0.7.0
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch <plugin-name-or-url>
 ```
 
@@ -222,7 +222,7 @@ docker run -p 9200:9200 -p 9600:9600 -v /usr/share/elasticsearch/data odfe-custo
 You can also use a `Dockerfile` to pass your own certificates for use with the [Security](../../security/) plugin, similar to the `-v` argument in [Configure Elasticsearch](#configure-elasticsearch):
 
 ```
-FROM docker/amazon/opendistro-for-elasticsearch:0.7.0
+FROM amazon/opendistro-for-elasticsearch:0.7.0
 COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
 COPY --chown=elasticsearch:elasticsearch my-key-file.pem /usr/share/elasticsearch/config/
 COPY --chown=elasticsearch:elasticsearch my-certificate-chain.pem /usr/share/elasticsearch/config/
