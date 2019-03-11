@@ -7,7 +7,7 @@ nav_order: 2
 
 # Backend configuration
 
-One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
+One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
 
 The main configuration file for authentication and authorization modules  is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
 
@@ -85,7 +85,7 @@ Allowed values for `type` are:
 
 - basic: HTTP basic authentication. No additional configuration is needed.
 - kerberos: Kerberos authentication. Additional, [Kerberos-specific configuration](#kerberos) is needed.
-- jwt: JSON web token authentication. Additional, [JWT-specific configuration](#json-web-tokens) is needed.
+- jwt: JSON web token authentication. Additional, [JWT-specific configuration](#json-web-token) is needed.
 - clientcert: Authentication via a client TLS certificate. This certificate must be trusted by one of the root CAs in the truststore of your nodes.
 
 After setting an HTTP authenticator, you need to specify against which backend system you want to authenticate the user:
@@ -101,7 +101,7 @@ Possible vales for `type` are:
 
 - noop: This setting means that no further authentication against any backend system is performed. Use `noop` if the HTTP authenticator has already authenticated the user completely, as in the case of JWT, Kerberos, or client certificate authentication.
 - internal: Use the users and roles defined in `internal_users.yml` for authentication.
-- ldap: Authenticate users against an LDAP server. This setting requires [additional, LDAP-specific configuration settings](#ldap).
+- ldap: Authenticate users against an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
 
 
 ## Authorization
