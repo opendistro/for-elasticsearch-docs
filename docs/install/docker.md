@@ -120,7 +120,7 @@ services:
     ports:
       - 5601:5601
     expose:
-        - "5601"
+      - "5601"
     environment:
       ELASTICSEARCH_URL: https://odfe-node1:9200
     networks:

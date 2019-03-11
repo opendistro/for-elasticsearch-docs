@@ -82,3 +82,16 @@ sudo /bin/systemctl enable elasticsearch.service
 ```
 
 You can also modify the values in `/etc/sysconfig/elasticsearch` (`JAVA_HOME`, most notably), `/etc/elasticsearch/elasticsearch.yml`, and `/etc/elasticsearch/jvm.options` (to set the heap size, most notably). To learn more, see [Elasticsearch configuration](../../elasticsearch/configuration/) and [Important Settings](../docker#important-settings) on the Docker page.
+
+
+## Where are the files?
+
+The RPM package installs files to the following locations:
+
+File type | Location
+:--- | :---
+Elasticsearch home, management scripts, and plugins | `/usr/share/elasticsearch/`
+Configuration files | `/etc/elasticsearch`
+Environment variables | `/etc/sysconfig/elasticsearch`
+Logs | `/var/log/elasticsearch`
+Shard data | `/var/lib/elasticsearch`
