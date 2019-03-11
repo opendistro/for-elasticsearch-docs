@@ -45,6 +45,8 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
    sudo yum install java-1.8.0-openjdk-devel
    ```
 
+   If you're using Amazon Linux 2, you might need to use Java 8.
+
 1. `sudo yum install opendistroforelasticsearch`
 
 1. **If you installed Java 8**, run the following command:
