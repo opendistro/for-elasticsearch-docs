@@ -1,14 +1,9 @@
 # Open Distro for Elasticsearch Documentation
 
-This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads.
+This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads. You can find the rendered documentation at [opendistro.github.io/for-elasticsearch-docs/](https://opendistro.github.io/for-elasticsearch-docs/).
 
 
-# License
-
-This documentation is licensed under the Apache 2.0 License.
-
-
-# Build
+## Build
 
 1. Navigate to the repository root.
 
@@ -29,7 +24,7 @@ This documentation is licensed under the Apache 2.0 License.
 1. Open [http://localhost:4000](http://localhost:4000).
 
 
-# Contribute
+## Contribute
 
 1. Fork this repository.
 1. Clone your fork.
@@ -38,7 +33,7 @@ This documentation is licensed under the Apache 2.0 License.
 1. Push your changes, and submit a pull request.
 
 
-# Content guidelines
+## Content guidelines
 
 1. Try to stay consistent with existing content.
 1. Introduce acronyms before using them.
@@ -46,7 +41,7 @@ This documentation is licensed under the Apache 2.0 License.
 1. Markdown file names should be all lowercase, use hyphens to separate words, and end in `.md`.
 
 
-# Markdown guidelines
+## Markdown guidelines
 
 This documentation uses a modified version of the [just-the-docs](https://github.com/pmarsceill/just-the-docs) Jekyll theme, which has some useful classes for labels and buttons:
 
@@ -88,3 +83,23 @@ has_children: true
 has_toc: false
 ---
 ```
+
+
+## Code of Conduct
+
+This project has adopted an [Open Source Code of Conduct](https://opendistro.github.io/for-elasticsearch/codeofconduct.html).
+
+
+## Security issue notifications
+
+If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public GitHub issue.
+
+
+## Licensing
+
+See the [LICENSE](./LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+
+
+## Copyright
+
+Copyright 2019 Amazon.com, Inc. or its affiliates. All rights reserved.
