@@ -9,6 +9,8 @@ has_children: true
 
 Performance Analyzer is an agent and REST API that allows you to query numerous performance metrics for your cluster, including aggregations of those metrics, independent of the Java Virtual Machine (JVM). PerfTop is the default command line interface (CLI) for displaying those metrics.
 
+To download PerfTop, see [Download](https://opendistro.github.io/for-elasticsearch/downloads.html) on the Open Distro for Elasticsearch website.
+
 ![PerfTop screenshot](../images/perftop.png)
 
 
