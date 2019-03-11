@@ -7,7 +7,7 @@ permalink: /
 
 # Open Distro for Elasticsearch Documentation
 
-This site contains the technical documentation for [Open Distro for Elasticsearch](http://example.com), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
+This site contains the technical documentation for [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
 
 [Get started](#get-started){: .btn .btn-purple }
 
@@ -66,6 +66,6 @@ To learn more, see [Install](docs/install).
 
 ## About Open Distro for Elasticsearch
 
-[Open Distro for Elasticsearch](http://example.com) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
+[Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
 
-The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](http://example.com/contribute) on the Open Distro for Elasticsearch website.
+The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](https://opendistro.github.io/for-elasticsearch/contribute.html) on the Open Distro for Elasticsearch website.
