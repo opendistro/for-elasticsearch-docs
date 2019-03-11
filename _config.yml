@@ -16,8 +16,8 @@
 title: Open Distro for Elasticsearch Documentation
 description: >- # this means to ignore newlines until "baseurl:"
   Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/for-elasticsearch-docs" # the subpath of your site, e.g. /blog
+url: "https://opendistro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
 
 # Build settings
@@ -33,7 +33,7 @@ kramdown:
 search_enabled: true
 aux_links:
   "Back to the Open Distro for Elasticsearch home page":
-    - "http://example.com/"
+    - "https://opendistro.github.io/for-elasticsearch/"
 color_scheme: odfe
 
 # Google Analytics Tracking (optional)
