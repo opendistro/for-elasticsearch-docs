@@ -22,7 +22,7 @@ permalink: pretty
 
 # Build settings
 markdown: kramdown
-theme: just-the-docs
+# theme: just-the-docs
 
 # Kramdown settings
 
