@@ -2,7 +2,7 @@
 layout: default
 title: Permissions
 parent: Security
-nav_order: 7
+nav_order: 8
 ---
 
 # Permissions
