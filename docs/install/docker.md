@@ -77,6 +77,8 @@ docker-compose down -v
 
 #### Sample Docker Compose file
 
+This sample file starts two data nodes and Kibana. If you're running Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Advanced**.
+
 ```yml
 version: '3'
 services:

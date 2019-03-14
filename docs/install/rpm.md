@@ -57,8 +57,6 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 
 1. To start Open Distro for Elasticsearch, run `sudo systemctl start elasticsearch.service`.
 
-1. To check the status of the service, run `systemctl status elasticsearch.service`.
-
 1. Send requests to the server to verify that Elasticsearch is up and running:
 
    ```bash
@@ -68,6 +66,17 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
    ```
 
 1. For instructions on installing and running Kibana, see [Kibana](../../kibana).
+
+1. To check the status of the service, run `systemctl status elasticsearch.service`.
+
+   You might notice some errors if you are using Java 8. If the service is still `active (running)`, you can safely ignore them:
+
+   ```
+   elasticsearch[3969]: java.security.policy: error adding Entry:
+   elasticsearch[3969]: java.net.MalformedURLException: unknown protocol: jrt
+   elasticsearch[3969]: java.security.policy: error adding Entry:
+   elasticsearch[3969]: java.net.MalformedURLException: unknown protocol: jrt
+   ```
 
 1. To stop Open Distro for Elasticsearch, run `sudo systemctl stop elasticsearch.service`.
 
