@@ -128,7 +128,7 @@ $ docker exec <container-id> /bin/sh /usr/share/elasticsearch/plugins/opendistro
 
 The hash script returns a hashed password (e.g. `$2y$12$SFNvhLHf7MPCpRCq00o/BuU8GMdcD.7BymhT80YHNISBHsfJwhTou`), which you can then copy and paste into `internal_users.yml`. Repeat the process as necessary for all read-only users. Don't worry about the other user accounts; you can change (or delete) them in Kibana.
 
-When you're satisfied, restart the cluster using `docker-compose down -v` and `docker-compose up`.
+When you're satisfied, modify `custom-kibana.yml` to include the new `kibanaserver` password. Then restart the cluster using `docker-compose down -v` and `docker-compose up`.
 
 `internal_users.yml` looks like this:
 
