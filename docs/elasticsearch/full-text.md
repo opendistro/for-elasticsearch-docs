@@ -38,7 +38,9 @@ GET _search
 }
 ```
 
-### Curl
+## Curl
+
+
 ```bash
 curl --insecure -XGET -u admin:admin https://<host>:<port>/<index>/_search \
   -H "content-type: application/json" \
