@@ -38,6 +38,19 @@ GET _search
 }
 ```
 
+### Curl
+```bash
+curl --insecure -XGET -u admin:admin https://<host>:<port>/<index>/_search \
+  -H "content-type: application/json" \
+  -d'{
+    "query": {
+      "match": {
+        "title": "wind"
+      }
+    }
+  }'
+```
+
 The query accepts the following options. For descriptions of each, see [Options](#options).
 
 ```json
