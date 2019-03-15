@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Encryption at rest
+title: Encryption at Rest
 parent: Install and Configure
-nav_order: 3
+nav_order: 99
 ---
 
 # Encryption at rest
