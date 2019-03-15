@@ -120,7 +120,7 @@ If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has
 
 ## Change passwords for read-only users
 
-After the cluster starts, change the passwords for the read-only user accounts (`admin` and `kibanaserver`). Run `docker ps` to find the `odfe-node1` container ID. Then run:
+After the cluster starts, change the passwords for the [read-only user accounts](../../security/api/#read-only-and-hidden-resources) (`admin` and `kibanaserver`). Run `docker ps` to find the `odfe-node1` container ID. Then run:
 
 ```
 $ docker exec <container-id> /bin/sh /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p newpassword

@@ -238,7 +238,7 @@ GET _opendistro/_security/api/internalusers/<username>
 ```json
 {
   "kirk": {
-    "hash": "$2a$12$xZOcnwYPYQ3zIadnlQIJ0eNhX1ngwMkTN.oMwkKxoGvDVPn4/6XtO",
+    "hash": "",
     "roles": [ "captains", "starfleet" ],
     "attributes": {
        "attribute1": "value1",
@@ -262,7 +262,7 @@ GET _opendistro/_security/api/internalusers/
 ```json
 {
   "kirk": {
-    "hash": "$2a$12$xZOcnwYPYQ3zIadnlQIJ0eNhX1ngwMkTN.oMwkKxoGvDVPn4/6XtO",
+    "hash": "",
     "roles": [ "captains", "starfleet" ],
     "attributes": {
        "attribute1": "value1",
