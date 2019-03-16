@@ -21,7 +21,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 
    `bundle exec jekyll serve`
 
-1. Open [http://localhost:4000](http://localhost:4000).
+1. Open [http://localhost:4000/for-elasticsearch-docs/](http://localhost:4000/for-elasticsearch-docs/).
 
 
 ## Contribute
