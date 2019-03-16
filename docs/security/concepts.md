@@ -28,7 +28,7 @@ The Security plugin comes with a number of [predefined action groups](../default
 
 1. In order to identify the user who wants to access the cluster, the Security plugin needs the user's credentials.
 
-   These credentials differ depending on how you've configured the plugin. For example, if you use basic authentication, these credentials are a username and password. If you use a JSON web token, these credentials are stored within the token itself. If you use TSL certificates, the credentials are the distinguished name (DN) of the certificate.
+   These credentials differ depending on how you've configured the plugin. For example, if you use basic authentication, these credentials are a username and password. If you use a JSON web token, these credentials are stored within the token itself. If you use TLS certificates, the credentials are the distinguished name (DN) of the certificate.
 
 2. The Security plugin authenticates the user's credentials against a backend: the internal user database, Lightweight Directory Access Protocol (LDAP), Active Directory, Kerberos, or JSON web tokens.
 
