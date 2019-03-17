@@ -100,6 +100,7 @@ services:
       - 9600:9600 # required for Performance Analyzer
     networks:
       - odfe-net
+
   odfe-node2:
     image: amazon/opendistro-for-elasticsearch:0.7.0
     container_name: odfe-node2
@@ -114,8 +115,12 @@ services:
         hard: -1
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
+    ports:
+      - 9200
+      - 9600
     networks:
       - odfe-net
+
   kibana:
     image: amazon/opendistro-for-elasticsearch-kibana:0.7.0
     container_name: odfe-kibana
