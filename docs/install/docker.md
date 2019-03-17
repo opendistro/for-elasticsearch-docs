@@ -115,9 +115,6 @@ services:
         hard: -1
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
-    ports:
-      - 9200
-      - 9600
     networks:
       - odfe-net
 
