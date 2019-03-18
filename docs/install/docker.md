@@ -11,6 +11,7 @@ You can pull the Open Distro for Elasticsearch Docker image just like any other 
 
 ```bash
 docker pull amazon/opendistro-for-elasticsearch:0.7.0
+docker pull amazon/opendistro-for-elasticsearch-kibana:0.7.0
 ```
 
 Open Distro for Elasticsearch images use `centos:7` as the base image.
