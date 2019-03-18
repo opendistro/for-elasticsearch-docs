@@ -289,5 +289,5 @@ server.xsrf.whitelist: ["/_opendistro/_security/saml/acs"]
 If you use the logout POST binding, you also need to whitelist the logout endpoint:
 
 ```
-server.xsrf.whitelist: ["/_opendistro/_security/saml/acs", "/opendistro_security/saml/logout"]
+server.xsrf.whitelist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout"]
 ```
