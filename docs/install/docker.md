@@ -100,6 +100,7 @@ services:
       - 9600:9600 # required for Performance Analyzer
     networks:
       - odfe-net
+
   odfe-node2:
     image: amazon/opendistro-for-elasticsearch:0.7.0
     container_name: odfe-node2
@@ -116,6 +117,7 @@ services:
       - odfe-data2:/usr/share/elasticsearch/data
     networks:
       - odfe-net
+
   kibana:
     image: amazon/opendistro-for-elasticsearch-kibana:0.7.0
     container_name: odfe-kibana
@@ -183,7 +185,7 @@ docker exec -it <container-id> /bin/bash
 
 ## Important settings
 
-For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. On the Open Distro for Elasticsearch Docker image, this setting is the default. To verify, start a Bash session in the container and run:
+For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. This setting can be added to the host machine's `/etc/sysctl.conf` file, by adding the following line `vm.max_map_count=262144`, then running `sudo sysctl -p` to reload. On the Open Distro for Elasticsearch Docker image, this setting is the default. To verify, start a Bash session in the container and run:
 
 ```bash
 cat /proc/sys/vm/max_map_count
