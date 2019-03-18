@@ -114,7 +114,7 @@ opendistro_security.audit.config.disabled_transport_categories: NONE
 
 To start the cluster, run `docker-compose up`.
 
-If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has insecure file permissions (should be 0600)` messages, you can use `chmod` on your local machine to set file permissions before running `docker-compose up`. Docker Compose passes files to the container as-is.
+If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has insecure file permissions (should be 0600)` messages, you can use `chmod` to set file permissions before running `docker-compose up`. Docker Compose passes files to the container as-is.
 {: .note }
 
 
