@@ -38,8 +38,7 @@ GET _search
 }
 ```
 
-## Curl
-
+For an example that uses [curl](https://curl.haxx.se/), try:
 
 ```bash
 curl --insecure -XGET -u admin:admin https://<host>:<port>/<index>/_search \
