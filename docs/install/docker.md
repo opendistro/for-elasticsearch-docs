@@ -169,18 +169,7 @@ services:
       - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
 ```
 
-You can use this same method to pass your own certificates for use with the [Security](../../security/) plugin:
-
-```yml
-services:
-  odfe-node1:
-    volumes:
-      - odfe-data1:/usr/share/elasticsearch/data
-      - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./my-key-file.pem:/usr/share/elasticsearch/config/my-key-file.pem
-      - ./my-certificate-chain.pem:/usr/share/elasticsearch/config/my-certificate-chain.pem
-      - ./my-root-cas.pem:/usr/share/elasticsearch/config/my-root-cas.pem
-```
+You can use this same method to [pass your own certificates](../override-security) for use with the [Security](../../security/) plugin.
 
 
 ## Bash access to containers

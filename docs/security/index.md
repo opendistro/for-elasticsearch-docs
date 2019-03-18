@@ -20,6 +20,6 @@ Open Distro for Elasticsearch includes the Security plugin for authentication an
 - Cross-cluster search
 - Kibana multi-tenancy
 
-The plugin includes demo certificates so that you can get up and running quickly, but you should [replace the demo certificates](../install/docker/#configure-elasticsearch) and [reconfigure `elasticsearch.yml`](tls-configuration) before using Open Distro for Elasticsearch in a production environment.
+The plugin includes demo certificates so that you can get up and running quickly, but you should [replace the demo certificates](../install/docker-security), [reconfigure `elasticsearch.yml`](tls-configuration), and change passwords before using Open Distro for Elasticsearch in a production environment.
 
 If you don't want to use the plugin, see [Disable security](disable).
