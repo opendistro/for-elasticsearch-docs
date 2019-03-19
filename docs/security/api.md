@@ -26,7 +26,7 @@ Just like Elasticsearch permissions, you control access to the Security plugin R
 opendistro_security.restapi.roles_enabled: ["<role>", ...]
 ```
 
-To specify a subset of the APIs:
+These roles can now access all APIs. To prevent access to certain APIs:
 
 ```yml
 opendistro_security.restapi.endpoints_disabled.<role>.<endpoint>: ["<method>", ...]
