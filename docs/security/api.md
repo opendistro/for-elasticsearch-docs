@@ -78,7 +78,7 @@ kibana_user:
 
 Hidden resources are read-only by definition.
 
-To add or remove these flags, you need to use the `admin` role.
+To add or remove these flags, you need to modify `plugins/opendistro_security/securityconfig/internal_users.yml` and run `plugins/opendistro_security/tools/securityadmin.sh`.
 
 ---
 
