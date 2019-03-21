@@ -27,7 +27,7 @@ To use SAML for authentication, you need to configure a respective authenticatio
 
 ```yaml
 authc:
-  saml:
+  saml_auth_domain:
     enabled: true
     order: 1
     http_authenticator:
@@ -183,7 +183,7 @@ Example:
 
 ```yaml
 authc:
-  saml:
+  saml_auth_domain:
     enabled: true
     order: 1
     http_authenticator:
@@ -253,7 +253,7 @@ idp.enabled_ssl_protocols | Array of enabled TLS protocols. Only Java format is 
 
 ```yaml
 authc:
-  saml:
+  saml_auth_domain:
     enabled: true
     order: 1
     http_authenticator:
