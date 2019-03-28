@@ -13,7 +13,7 @@ The main configuration file for authentication and authorization modules  is `pl
 
 `config.yml` has three main parts:
 
-```yaml
+```yml
 opendistro_security:
   dynamic:
     http:
@@ -38,7 +38,7 @@ opendistro_security:
 
 The `http` section has the following format:
 
-```yaml
+```yml
 anonymous_auth_enabled: <true|false>
 xff: # optional section
   enabled: <true|false>
@@ -54,7 +54,7 @@ If you disable anonymous authentication, the Security plugin won't initialize if
 
 The `authc` section has the following format:
 
-```yaml
+```yml
 <name>:
   http_enabled: <true|false>
   transport_enabled: <true|false>
@@ -73,7 +73,7 @@ You can use more than one authentication domain. Each authentication domain has 
 
 The syntax for defining an authenticator on the HTTP layer is:
 
-```yaml
+```yml
 http_authenticator:
   type: <type>
   challenge: <true|false>
@@ -90,7 +90,7 @@ Allowed values for `type` are:
 
 After setting an HTTP authenticator, you need to specify against which backend system you want to authenticate the user:
 
-```yaml
+```yml
 authentication_backend:
   type: <type>
   config:
@@ -108,7 +108,7 @@ Possible vales for `type` are:
 
 After the user has been authenticated, the Security plugin can optionally collect additional user roles from backend systems. The authorization configuration has the following format:
 
-```yaml
+```yml
 authz:
   <name>:
     http_enabled: <true|false>
@@ -136,7 +136,7 @@ The default `plugins/opendistro_security/securityconfig/config.yml` that ships w
 
 In order to set up HTTP basic authentication, you just need to enable it in the `http_authenticator` section of the configuration:
 
-```yaml
+```yml
 http_authenticator:
   type: basic
   challenge: true
@@ -155,7 +155,7 @@ Due to the nature of Kerberos, you need to define some settings in `elasticsearc
 
 In `elasticsearch.yml`, you need to define:
 
-```yaml
+```yml
 opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
 opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 ```
@@ -176,7 +176,7 @@ Due to security restrictions, the keytab file must be placed in the `<open-distr
 
 A typical Kerberos authentication domain in `config.yml` looks like this:
 
-```yaml
+```yml
     authc:
       kerberos_auth_domain:
         enabled: true
@@ -285,7 +285,7 @@ Set up an authentication domain and choose `jwt` as HTTP authentication type. Si
 
 Example:
 
-```yaml
+```yml
 jwt_auth_domain:
   enabled: true
   order: 0
@@ -319,7 +319,7 @@ Since JSON web tokens are self-contained and the user is authenticated on HTTP l
 
 Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the Security plugin. It must be configured as a Base64-encoded value in the `signing_key` setting:
 
-```yaml
+```yml
 jwt_auth_domain:
   ...
     config:
@@ -336,7 +336,7 @@ Since you cannot issue new tokens with the public key---and because you can make
 
 In order to use RS256, you only need to configure the (non-Base64-encoded) public RSA key as `signing_key` in the JWT configuration:
 
-```yaml
+```yml
 jwt_auth_domain:
   ...
     config:
@@ -367,7 +367,7 @@ As with HTTP basic authentication, you should use HTTPS instead of HTTP when tra
 
 While the most common way to transmit JWTs in HTTP requests is to use a header field, the Security plugin also supports parameters. Configure the name of the GET parameter using the following key:
 
-```yaml
+```yml
     config:
       signing_key: ...
       jwt_url_parameter: "parameter_name"

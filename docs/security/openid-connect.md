@@ -39,7 +39,7 @@ To integrate with an OpenID IdP, set up an authentication domain and choose `ope
 
 Minimal configuration:
 
-```yaml
+```yml
 openid_auth_domain:
   http_enabled: true
   transport_enabled: true
@@ -154,7 +154,7 @@ In order to prevent man-in-the-middle attacks, you should secure the connection 
 
 Use the following parameters to enable TLS for connecting to your IdP:
 
-```yaml
+```yml
 config:
   enable_ssl: <true|false>
   verify_hostnames: <true|false>
@@ -170,12 +170,12 @@ verify_hostnames | Whether to verify the hostnames of the IdP's TLS certificate.
 
 To validate the TLS certificate of your IdP, configure either the path to the IdP's root CA or the root certificates content:
 
-```yaml
+```yml
 config:
   pemtrustedcas_filepath: /path/to/trusted_cas.pem
 ```
 
-```yaml
+```yml
 config:
   pemtrustedcas_content: |-
     MIID/jCCAuagAwIBAgIBATANBgkqhkiG9w0BAQUFADCBjzETMBEGCgmSJomT8ixk
@@ -195,14 +195,14 @@ pemtrustedcas_content | The root CA content of your IdP. Cannot be used if `pemt
 
 To use TLS client authentication, configure the PEM certificate and private key the Security plugin should send for TLS client authentication (or its content):
 
-```yaml
+```yml
 config:
   pemkey_filepath: /path/to/private.key.pem
   pemkey_password: private_key_password
   pemcert_filepath: /path/to/certificate.pem
 ```
 
-```yaml
+```yml
 config:
   pemkey_content: |-
     MIID2jCCAsKgAwIBAgIBBTANBgkqhkiG9w0BAQUFADCBlTETMBEGCgmSJomT8ixk

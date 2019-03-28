@@ -64,14 +64,14 @@ You can mark users, role, role mappings, and action groups as read-only in their
 
 To mark a resource readonly, add the following flag:
 
-```yaml
+```yml
 kibana_user:
   readonly: true
 ```
 
 Likewise, you can mark users, role, role mappings, and action groups as hidden. Resources that have this flag set to true are not returned by the REST API and cannot be changed nor deleted:
 
-```yaml
+```yml
 kibana_user:
   hidden: true
 ```

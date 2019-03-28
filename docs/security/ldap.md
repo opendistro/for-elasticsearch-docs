@@ -28,7 +28,7 @@ In most cases, you want to configure both authentication and authorization. You 
 
 To enable LDAP authentication and authorization, add the following lines to `plugins/opendistro_security/securityconfig/config.yml`:
 
-```yaml
+```yml
 authc:
   ldap:
     enabled: true
@@ -42,7 +42,7 @@ authc:
         ...
 ```
 
-```yaml
+```yml
 authz:
   ldap:
     enabled: true
@@ -59,7 +59,7 @@ The connection settings are identical for authentication and authorization and a
 
 To configure the hostname and port of your Active Directory server(s):
 
-```yaml
+```yml
 config:
   hosts:
     - primary.ldap.example.com:389
@@ -73,7 +73,7 @@ You can configure more than one server here. If the Security plugin cannot conne
 
 To configure the `bind_dn` and `password` that the Security plugin uses when issuing queries to your server:
 
-```yaml
+```yml
 config:
   bind_dn: cn=admin,dc=example,dc=com
   password: password
@@ -86,7 +86,7 @@ If your server supports anonymous authentication, both `bind_dn` and `password` 
 
 Use the following parameters to configure TLS for connecting to your server:
 
-```yaml
+```yml
 config:
   enable_ssl: <true|false>
   enable_start_tls: <true|false>
@@ -114,12 +114,12 @@ If your server uses a certificate signed by a different CA, import this CA into 
 
 You can also use a separate root CA in PEM format by setting one of the following configuration options:
 
-```yaml
+```yml
 config:
   pemtrustedcas_filepath: /full/path/to/trusted_cas.pem
 ```
 
-```yaml
+```yml
 config:
   pemtrustedcas_content: |-
     MIID/jCCAuagAwIBAgIBATANBgkqhkiG9w0BAQUFADCBjzETMBEGCgmSJomT8ixk
@@ -139,7 +139,7 @@ pemtrustedcas\_content | The root CA content of your Active Directory/LDAP serve
 
 If you use TLS client authentication, the Security plugin sends the PEM certificate of the node, as configured in `elasticsearch.yml`. Set one of the following configuration options:
 
-```yaml
+```yml
 config:
   pemkey_filepath: /full/path/to/private.key.pem
   pemkey_password: private_key_password
@@ -148,7 +148,7 @@ config:
 
 or
 
-```yaml
+```yml
 config:
   pemkey_content: |-
     MIID2jCCAsKgAwIBAgIBBTANBgkqhkiG9w0BAQUFADCBlTETMBEGCgmSJomT8ixk
@@ -176,7 +176,7 @@ pemcert_content | The content of the client certificate. Cannot be used when `pe
 
 You can limit the allowed ciphers and TLS protocols for the LDAP connection. For example, you can only allow strong ciphers and limit the TLS versions to the most recent ones:
 
-```yaml
+```yml
 ldap:
   enabled: true
   ...
@@ -203,7 +203,7 @@ enabled\_ssl\_protocols | Array, enabled TLS protocols. Only Java format is supp
 
 To use Active Directory/LDAP for authentication, first configure a respective authentication domain in the `authc` section of `plugins/opendistro_security/securityconfig/config.yml`:
 
-```yaml
+```yml
 authc:
   ldap:
     enabled: true
@@ -219,7 +219,7 @@ authc:
 
 Afterwards add the [connection settings](#connection-settings) for your Active Directory/LDAP server to the config section of the authentication domain:
 
-```yaml
+```yml
 config:
   enable_ssl: true
   enable_start_tls: false
@@ -235,19 +235,19 @@ Authentication works by issuing an LDAP query containing the username against th
 
 The Security plugin first takes the configured LDAP query and replaces the placeholder `{0}` with the username from the user's credentials.
 
-```yaml
+```yml
 usersearch: '(sAMAccountName={0})'
 ```
 
 Then it issues this query against the user subtree. Currently, the whole subtree beneath the configured `userbase` is searched:
 
-```yaml
+```yml
 userbase: 'ou=people,dc=example,dc=com'
 ```
 
 If the query was successful, the Security plugin retrieves the username from the LDAP entry. You can specify which attribute from the LDAP entry the Security plugin should use as the username:
 
-```yaml
+```yml
 username_attribute: uid
 ```
 
@@ -264,7 +264,7 @@ username_attribute | The Security plugin uses this attribute of the directory en
 
 ### Complete authentication example
 
-```yaml
+```yml
 ldap:
   enabled: false
   order: 1
@@ -294,7 +294,7 @@ ldap:
 
 To use Active Directory/LDAP for authorization, first configure a respective authorization domain in the `authz` section of `config.yml`:
 
-```yaml
+```yml
 authz:
   ldap:
     enabled: true
@@ -317,7 +317,7 @@ As an alternative, the Security plugin can also fetch roles that are defined as 
 
 The Security plugin first takes the LDAP query for fetching roles ("rolesearch") and substitutes any variables found in the query. For example, for a standard Active Directory installation, you would use the following role search:
 
-```yaml
+```yml
 rolesearch: '(member={0})'
 ```
 
@@ -329,25 +329,25 @@ You can use the following variables:
 
 The variable `{2}` refers to an attribute from the user's directory entry. The attribute you want to use is specified by the `userroleattribute` setting.
 
-```yaml
+```yml
 userroleattribute: myattribute
 ```
 
 The Security plugin then issues the substituted query against the configured role subtree. The whole subtree underneath `rolebase` is searched.
 
-```yaml
+```yml
 rolebase: 'ou=groups,dc=example,dc=com'
 ```
 
 If you use nested roles (roles that are members of other roles), you can configure the Security plugin to resolve them:
 
-```yaml
+```yml
 resolve_nested_roles: false
 ```
 
 After all roles have been fetched, the Security plugin extracts the final role names from a configurable attribute of the role entries:
 
-```yaml
+```yml
 rolename: cn
 ```
 
@@ -358,13 +358,13 @@ If this is not set, the DN of the role entry is used. You can now use this role 
 
 If you store the roles as a direct attribute of the user entries in the user subtree, you only need to configure the attribute name:
 
-```yaml
+```yml
 userrolename: roles
 ```
 
 You can configure multiple attribute names:
 
-```yaml
+```yml
 userrolename: roles, otherroles
 ```
 
@@ -372,7 +372,7 @@ This approach can be combined with querying the role subtree. The Security plugi
 
 If you don't use or have a role subtree, you can disable the role search completely:
 
-```yaml
+```yml
 rolesearch_enabled: false
 ```
 
@@ -388,7 +388,7 @@ custom\_attr\_maxval\_len  | Integer. Specifies the maximum allowed length of ea
 
 Example:
 
-```yaml
+```yml
 authz:
   ldap:
     enabled: true
@@ -415,7 +415,7 @@ However, you also have a Kibana server user. Kibana uses this user to manage sto
 
 In this case, it makes sense to exclude the Kibana server user from the LDAP authorization, since we already know that there is no corresponding entry. You can use the `skip_users` configuration setting to define which users should be skipped. Wildcards and regular expressions are supported.
 
-```yaml
+```yml
 skip_users:
   - kibanaserver
   - 'cn=Michael Jackson,ou*people,o=TEST'
@@ -430,7 +430,7 @@ In most cases, however, not all user roles are related to Elasticsearch and Kiba
 
 This only has an effect if `resolve_nested_roles` is `true`.
 
-```yaml
+```yml
 nested_role_filter: <true|false>
   - 'cn=Michael Jackson,ou*people,o=TEST'
   - ...
@@ -455,7 +455,7 @@ custom\_attr\_maxval\_len  | Integer. Specifies the maximum allowed length of ea
 
 ### Complete authorization example
 
-```yaml
+```yml
 authz:
   ldap:
     enabled: true

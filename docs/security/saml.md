@@ -25,7 +25,7 @@ This profile is meant for use with web browsers. It is not a general-purpose way
 
 To use SAML for authentication, you need to configure a respective authentication domain in the `authc` section of `plugins/opendistro_security/securityconfig/config.yml`. Since SAML works solely on the HTTP layer, you do not need any `authentication_backend` and can set it to `noop`. Place all SAML specific configuration options in this chapter in the `config` section of the SAML HTTP authenticator:
 
-```yaml
+```yml
 authc:
   saml_auth_domain:
     enabled: true
@@ -48,7 +48,7 @@ Once you have configured SAML in `config.yml`, you need to also [activate it in 
 
 We recommend adding at least one other authentication domain, such as LDAP or the internal user database, to support API access to Elasticsearch without SAML. For Kibana and the internal Kibana server user, you also need to add another authentication domain that supports basic authentication. This authentication domain should be placed first in the chain, and the `challenge` flag must be set to `false`:
 
-```yaml
+```yml
 authc:
   basic_internal_auth_domain:
     enabled: true
@@ -181,7 +181,7 @@ idp.verify\_hostnames | Whether to verify the hostnames of the server's TLS cert
 
 Example:
 
-```yaml
+```yml
 authc:
   saml_auth_domain:
     enabled: true
@@ -203,13 +203,13 @@ authc:
 
 Configure the root CA used for validating the IdP TLS certificate by setting **one of** the following configuration options:
 
-```yaml
+```yml
 config:
   idp:
     pemtrustedcas_filepath: path/to/trusted_cas.pem
 ```
 
-```yaml
+```yml
 config:
   idp:
     pemtrustedcas_content: |-
@@ -251,7 +251,7 @@ idp.enabled_ssl_protocols | Array of enabled TLS protocols. Only Java format is 
 
 ## Minimal configuration example
 
-```yaml
+```yml
 authc:
   saml_auth_domain:
     enabled: true

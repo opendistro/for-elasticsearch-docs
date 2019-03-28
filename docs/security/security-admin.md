@@ -18,7 +18,7 @@ If the `.opendistro_security` index is already initialized, you can also use Kib
 
 You can configure all certificates that should have admin privileges in `elasticsearch.yml` stating their respective Distinguished Names (DNs). If you use the demo certificates, for example, you can use the `kirk` certificate:
 
-```yaml
+```yml
 opendistro_security.authcz.admin_dn:
   - CN=kirk,OU=client,O=client,L=test,C=DE
 ```
@@ -69,11 +69,13 @@ Name | Description
 
 ## Sample commands
 
-Apply configuration in `securityconfig` with PEM certificates (RPM install):
+Apply configuration in `securityconfig` using PEM certificates:
 
 ```bash
 /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
 ```
+
+Apply configuration from a single file (`config.yml`) using PEM certificates:
 
 ```bash
 ./securityadmin.sh -f ../securityconfig/config.yml -icl -nhnv -cert /etc/elasticsearch/kirk.pem -cacert /etc/elasticsearch/root-ca.pem -h -key /etc/elasticsearch/kirk-key.pem -t config

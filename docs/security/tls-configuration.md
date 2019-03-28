@@ -76,7 +76,7 @@ opendistro_security.ssl.http.truststore_password | Truststore password. Default 
 
 The Security plugin needs to identify inter-cluster requests (i.e. requests between the nodes). The simplest way of configuring node certificates is to list the Distinguished Names (DNs) of these certificates in `elasticsearch.yml`. The Security plugin supports wildcards and regular expressions:
 
-```yaml
+```yml
 opendistro_security.nodes_dn:
   - 'CN=node.other.com,OU=SSL,O=Test,L=Test,C=DE'
   - 'CN=*.example.com,OU=SSL,O=Test,L=Test,C=DE'
@@ -91,7 +91,7 @@ If your node certificates have an OID identifier in the SAN section, you can omi
 
 Admin certificates are regular client certificates that have elevated rights to perform administrative tasks. You need an admin certificate to change the the Security plugin configuration using `plugins/opendistro_security/tools/securityadmin.sh` or the REST API. Admin certificates are configured in `elasticsearch.yml` by stating their DN(s):
 
-```yaml
+```yml
 opendistro_security.authcz.admin_dn:
   - CN=admin,OU=SSL,O=Test,L=Test,C=DE
 ```
@@ -172,7 +172,7 @@ opendistro_security.ssl.transport.enabled_protocols | Array, enabled TLS protoco
 
 ### Example settings
 
-```yaml
+```yml
 opendistro_security.ssl.http.enabled_ciphers:
   - "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"
   - "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256"
@@ -183,7 +183,7 @@ opendistro_security.ssl.http.enabled_protocols:
 
 Because it is insecure, the Security plugin disables `TLSv1` by default. If you need to use `TLSv1` and accept the risks, you can still enable it:
 
-```yaml
+```yml
 opendistro_security.ssl.http.enabled_protocols:
   - "TLSv1"
   - "TLSv1.1"
