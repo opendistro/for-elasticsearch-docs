@@ -33,13 +33,13 @@ Do not use node certificates as admin certificates. Best practice is to keep the
 
 Each node also includes the tool at `plugins/opendistro_security/tools/securityadmin.sh`. You might need to make the script executable before running it:
 
-```
+```bash
 chmod +x plugins/opendistro_security/tools/securityadmin.sh
 ```
 
 To print all available command line options, run the script with no arguments:
 
-```
+```bash
 ./plugins/opendistro_security/tools/securityadmin.sh
 ```
 
@@ -71,13 +71,17 @@ Name | Description
 
 Apply configuration in `securityconfig` with PEM certificates (RPM install):
 
-```
+```bash
 /usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+```
+
+```bash
+./securityadmin.sh -f ../securityconfig/config.yml -icl -nhnv -cert /etc/elasticsearch/kirk.pem -cacert /etc/elasticsearch/root-ca.pem -h -key /etc/elasticsearch/kirk-key.pem -t config
 ```
 
 Apply configuration in `securityconfig` with keystore and truststore files:
 
-```
+```bash
 ./sgadmin.sh \
    -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ \
    -ks /path/to/keystore.jks \
