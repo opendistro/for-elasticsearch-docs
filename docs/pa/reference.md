@@ -9,7 +9,7 @@ nav_order: 3
 
 This page contains all Performance Analyzer metrics. All metrics support the `avg`, `sum`, `min`, and `max` aggregations, although certain metrics measure only one thing, making the choice of aggregation irrelevant.
 
-The list is extensive. We recommend Ctrl + F to find individual metrics.
+This list is extensive. We recommend Ctrl + F to find individual metrics.
 {: .tip }
 
 <table>
@@ -24,7 +24,7 @@ The list is extensive. We recommend Ctrl + F to find individual metrics.
     <tr>
       <td>CPU_Utilization
       </td>
-      <td rowspan="16">ShardID, IndexName, Operation, ShardRole
+      <td rowspan="47">ShardID, IndexName, Operation, ShardRole
       </td>
       <td>CPU usage ratio. CPU time (in milliseconds) used by the associated thread(s) in the past five seconds, divided by 5000 milliseconds.
       </td>
@@ -122,7 +122,7 @@ The list is extensive. We recommend Ctrl + F to find individual metrics.
     <tr>
       <td>Indexing_ThrottleTime
       </td>
-      <td rowspan="29">ShardID, IndexName
+      <td>ShardID, IndexName
       </td>
       <td>Time (milliseconds) that the index has been under merge throttling control in the past five seconds.
       </td>
@@ -296,6 +296,18 @@ The list is extensive. We recommend Ctrl + F to find individual metrics.
       </td>
     </tr>
     <tr>
+      <td>ShardEvents
+      </td>
+      <td>The total number of events executed on a shard in the past five seconds.
+      </td>
+    </tr>
+    <tr>
+      <td>ShardBulkDocs
+      </td>
+      <td>The total number of documents indexed in the past five seconds.
+      </td>
+    </tr>
+    <tr>
       <td>Latency
       </td>
       <td>Operation, Exception, Indices, HTTPRespCode, ShardID, IndexName, ShardRole
@@ -366,7 +378,7 @@ The list is extensive. We recommend Ctrl + F to find individual metrics.
       </td>
       <td rowspan="6">DestAddr
       </td>
-      <td>Number of sample collected. Performance Analyzer collects one sample every five seconds.
+      <td>Number of samples collected. Performance Analyzer collects one sample every five seconds.
       </td>
     </tr>
     <tr>
@@ -501,3 +513,22 @@ The list is extensive. We recommend Ctrl + F to find individual metrics.
     </tr>
   </tbody>
 </table>
+
+
+## Dimensions reference
+
+Dimension | Return values
+:--- | :---
+ShardID | ID for the shard (e.g. `1`).
+IndexName | Name of the index (e.g. `my-index`).
+Operation | Type of operation (e.g. `shardbulk`).
+ShardRole | `primary`, `replica`
+Exception | Elasticsearch exceptions (e.g. `org.elasticsearch.index_not_found_exception`).
+Indices | The list of indices in the request URI.
+HTTPRespCode | Response code from Elasticsearch (e.g. `200`).
+MemType | `totYoungGC`, `totFullGC`, `Survivor`, `PermGen`, `OldGen`, `Eden`, `NonHeap`, `Heap`
+DiskName | Name of the disk (e.g. `sda1`).
+DestAddr | Destination address (e.g. `010015AC`).
+Direction | `in`, `out`
+ThreadPoolType | `generic`, `index`, `search`, `search_throttled`, `get`, `analyze`, `write`, `snapshot`, `warmer`, `refresh`, `listener`, `fetch_shard_store`, `flush`, `force_merge`, `management`, `opendistro_monitor_runner`, `sql-worker`
+CBType | `accounting`, `fielddata`, `in_flight_requests`, `parent`, `request`
