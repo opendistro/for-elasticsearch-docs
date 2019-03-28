@@ -16,7 +16,7 @@ Before deploying to a production environment, you should replace the demo securi
 version: '3'
 services:
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:0.7.0
+    image: amazon/opendistro-for-elasticsearch:0.7.1
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
@@ -42,7 +42,7 @@ services:
     networks:
       - odfe-net
   odfe-node2:
-    image: amazon/opendistro-for-elasticsearch:0.7.0
+    image: amazon/opendistro-for-elasticsearch:0.7.1
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
@@ -66,7 +66,7 @@ services:
     networks:
       - odfe-net
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:0.7.0
+    image: amazon/opendistro-for-elasticsearch-kibana:0.7.1
     container_name: odfe-kibana
     ports:
       - 5601:5601

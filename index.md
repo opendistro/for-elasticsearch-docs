@@ -49,14 +49,31 @@ Docker
 {: .label .label-green }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. `docker pull amazon/opendistro-for-elasticsearch:0.7.0`
-1. `docker pull amazon/opendistro-for-elasticsearch-kibana:0.7.0`
-1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:0.7.0`
+1. `docker pull amazon/opendistro-for-elasticsearch:0.7.1`
+1. `docker pull amazon/opendistro-for-elasticsearch-kibana:0.7.1`
+1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:0.7.1`
 1. In a new terminal session, run:
 
    `curl -XGET --insecure https://localhost:9200 -u admin:admin`
 
 To learn more, see [Install](docs/install/).
+
+
+---
+
+## Version history
+
+Open Distro for Elasticsearch version | Release highlights | Elasticsearch version
+:--- | :--- | :---
+0.7.1 | Fixes Kibana multitenancy. | 6.5.4
+0.7.0 | Initial release. | 6.5.4
+
+For detailed release notes, see these GitHub repositories:
+
+- [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
+- [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
+- [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
+- [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
 
 
 ---
