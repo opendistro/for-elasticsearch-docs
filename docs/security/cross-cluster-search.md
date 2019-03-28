@@ -2,7 +2,7 @@
 layout: default
 title: Cross-Cluster Search
 parent: Security
-nav_order: 10
+nav_order: 11
 ---
 
 # Cross-cluster search

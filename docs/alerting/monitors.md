@@ -66,14 +66,14 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose **Define using visual graph** or **Define using extraction query** when you created the monitor.
 
-Either way, you begin by specifying a name and severity level for the trigger. Severity levels help you manage alerts. A trigger with a high severity level (e.g. 1) might page a specific individual, whereas a trigger with a low severity level might email a list.
+Either way, you begin by specifying a name and severity level for the trigger. Severity levels help you manage alerts. A trigger with a high severity level (e.g. 1) might page a specific individual, whereas a trigger with a low severity level might message a chat room.
 
 
 ### Visual graph
 
 For **Trigger condition**, specify a threshold for the aggregation and timeframe you chose earlier, such as "is below 1,000" or "is exactly 10."
 
-The threshold line moves up and down as you increase and decrease the threshold. Once this line is breached, the trigger evaluates to true.
+The line moves up and down as you increase and decrease the threshold. Once this line is crossed, the trigger evaluates to true.
 
 
 ### Extraction query
@@ -165,33 +165,11 @@ If you want to use the `ctx.results` variable in a message, use `{% raw %}{{ctx.
 {: .note }
 
 
-
-{::comment}
-
-Actions can use Amazon Simple Notification Service (SNS) to send emails, text messages, HTTP requests, and even execute AWS Lambda functions.
-
-For the purposes of the alerting feature, the key SNS terms are *topic* and *message*. To learn the basics of SNS, see [the AWS documentation](https://docs.aws.amazon.com/sns/latest/dg/).
-
-1. Specify a name for the action.
-1. Specify the ARN for your SNS topic.
-1. Specify the ARN for an [AWS Identity and Access Management (IAM) role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that has privileges to publish to the SNS topic.
-1. Add a subject and body for the SNS message.
-
-   You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). You have access to `ctx.action`, the name of the current action, as well as all [trigger variables](#available-variables).
-
-1. (Optional) Set the maximum message frequency. For monitors that run frequently, this setting can reduce the number of repeated messages for the same issue.
-
-{:/comment}
-
-
-
-
-
 ---
 
 ## Work with alerts
 
-Alerts persist until you resolve the root cause. Alerts have the following states:
+Alerts persist until you resolve the root cause and have the following states:
 
 State | Description
 :--- | :---
