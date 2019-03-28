@@ -122,8 +122,6 @@ This list is extensive. We recommend Ctrl + F to find individual metrics.
     <tr>
       <td>Indexing_ThrottleTime
       </td>
-      <td>ShardID, IndexName
-      </td>
       <td>Time (milliseconds) that the index has been under merge throttling control in the past five seconds.
       </td>
     </tr>
