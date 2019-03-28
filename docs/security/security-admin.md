@@ -67,6 +67,28 @@ Name | Description
 -cacert | The location of the PEM file containing the root certificate. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`.
 
 
+## Sample commands
+
+Apply configuration in `securityconfig` with PEM certificates (RPM install):
+
+```
+/usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/
+```
+
+Apply configuration in `securityconfig` with keystore and truststore files:
+
+```
+./sgadmin.sh \
+   -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ \
+   -ks /path/to/keystore.jks \
+   -kspass changeit \
+   -ts /path/to/truststore.jks \
+   -tspass changeit
+   -nhnv
+   -icl
+```
+
+
 ## Using securityadmin with Keystore and Truststore files
 
 You can also use keystore files in JKS format in conjunction with `securityadmin.sh`:
