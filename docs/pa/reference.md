@@ -528,5 +528,5 @@ MemType | `totYoungGC`, `totFullGC`, `Survivor`, `PermGen`, `OldGen`, `Eden`, `N
 DiskName | Name of the disk (e.g. `sda1`).
 DestAddr | Destination address (e.g. `010015AC`).
 Direction | `in`, `out`
-ThreadPoolType | `generic`, `index`, `search`, `search_throttled`, `get`, `analyze`, `write`, `snapshot`, `warmer`, `refresh`, `listener`, `fetch_shard_store`, `flush`, `force_merge`, `management`, `opendistro_monitor_runner`, `sql-worker`
+ThreadPoolType | The Elasticsearch thread pools (e.g. `index`, `search`,`snapshot`).
 CBType | `accounting`, `fielddata`, `in_flight_requests`, `parent`, `request`
