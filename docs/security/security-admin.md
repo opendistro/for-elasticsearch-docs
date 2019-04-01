@@ -14,6 +14,15 @@ After changing any of the configuration files in `plugins/opendistro_security/se
 If the `.opendistro_security` index is already initialized, you can also use Kibana to change users, roles, and permissions. However, you need to run `securityadmin.sh` at least once to initialize the index and configure your authentication and authorization methods.
 
 
+---
+
+#### Table of contents
+1. TOC
+{:toc}
+
+
+---
+
 ## Configure the admin certificate
 
 You can configure all certificates that should have admin privileges in `elasticsearch.yml` stating their respective Distinguished Names (DNs). If you use the demo certificates, for example, you can use the `kirk` certificate:
