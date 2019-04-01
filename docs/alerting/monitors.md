@@ -32,8 +32,10 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose [Amazon Chime](https://aws.amazon.com/chime/), [Slack](https://slack.com/), or custom webhook.
-1. Specify the webhook URL. For more information about webhooks, see the documentation for [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html) and [Slack](https://api.slack.com/incoming-webhooks).
+1. For **Type**, choose Slack, Amazon Chime, or custom webhook.
+1. Specify the webhook URL. These requests use the HTTP POST method.
+
+   For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
    For custom webhooks, you must specify more information: parameters, authentication, and headers. This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, credentials might be visible to other Elasticsearch users.
 
