@@ -47,15 +47,15 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 1. Choose **Alerting**, **Monitors**, **Create monitor**.
 1. Specify a name and schedule for the monitor.
 1. Choose one or more indices. You can also use `*` as a wildcard to specify an index pattern.
-1. You can define monitors in two ways: visually or using a query.
+1. Define the monitor in one of two ways: visually or using a query.
 
    - Visual definition works well for monitors that you can define as "some value is above or below some threshold for some amount of time."
 
-   - Query definition gives you flexibility in terms of what you query for (using the Elasticsearch query DSL) and how you evaluate the results of that query (Painless scripting).
+   - Query definition gives you flexibility in terms of what you query for (using [the Elasticsearch query DSL](../../elasticsearch/full-text)) and how you evaluate the results of that query (Painless scripting).
 
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
 
-   To use a query, choose **Define using extraction query**, add your query (using the Elasticsearch query DSL), and test it using the **Run** button.
+   To use a query, choose **Define using extraction query**, add your query (using [the Elasticsearch query DSL](../../elasticsearch/full-text)), and test it using the **Run** button.
 
    The monitor makes this query to Elasticsearch as often as the schedule dictates; check the **Query Performance** section and make sure you're comfortable with the performance implications.
 
