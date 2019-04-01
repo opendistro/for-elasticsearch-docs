@@ -109,7 +109,7 @@ Apply configuration in `securityconfig` with keystore and truststore files:
 You can also use keystore files in JKS format in conjunction with `securityadmin.sh`:
 
 ```bash
-./securityadmin.sh -cd ../sgconfig -icl -nhnv
+./securityadmin.sh -cd ../securityconfig -icl -nhnv
   -ts <path/to/truststore> -tspass <truststore password>
   -ks <path/to/keystore> -kspass <keystore password>
 ```
@@ -167,13 +167,13 @@ Name | Description
 To upload all configuration files in a directory, use:
 
 ```bash
-./securityadmin.sh -cd ../sgconfig -ts ... -tspass ... -ks ... -kspass ...
+./securityadmin.sh -cd ../securityconfig -ts ... -tspass ... -ks ... -kspass ...
 ```
 
 If you want to push a single configuration file, use:
 
 ```bash
-./securityadmin.sh -f ../sgconfig/sg_internal_users.yml -t internalusers  \
+./securityadmin.sh -f ../securityconfig/sg_internal_users.yml -t internalusers  \
     -ts ... -tspass ... -ks ... -kspass ...
 ```
 
