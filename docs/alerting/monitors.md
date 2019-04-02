@@ -156,7 +156,7 @@ After an action sends a message, the content of that message has left the purvie
 #### Sample message
 
 ```mustache
-{% raw %}Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue.
+{% raw %}Monitor {{ctx.monitor.name}} just entered an alert state. Please investigate the issue.
 - Trigger: {{ctx.trigger.name}}
 - Severity: {{ctx.trigger.severity}}
 - Period start: {{ctx.periodStart}}
