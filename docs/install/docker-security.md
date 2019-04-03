@@ -120,15 +120,26 @@ If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has
 
 ## Change passwords for read-only users
 
-After the cluster starts, change the passwords for the [read-only user accounts](../../security/api/#read-only-and-hidden-resources) (`admin` and `kibanaserver`). Run `docker ps` to find the `odfe-node1` container ID. Then run:
+After the cluster starts, change the passwords for the [read-only user accounts](../../security/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
+
+- The `admin` user has full privileges on the cluster.
+- `kibanaserver` user has certain permissions to the `.kibana` index that let it perform management tasks like setting index patterns and retrieving visualizations. This user, or one just like it, is required for Kibana to work properly with the Security plugin. We recommend just using `kibanaserver`.
+
+  Regardless of the authentication method that you choose for other users (e.g. Open ID Connect), the Kibana server user always passes its credentials to Elasticsearch using HTTP basic authentication headers, as set in `kibana.yml`.
+  {: .note }
+
+To generate new passwords, run `docker ps` to find the `odfe-node1` container ID. Then run:
 
 ```
 $ docker exec <container-id> /bin/sh /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p newpassword
 ```
 
+If you encounter a permissions error, run `docker exec <container-id> chmod +x /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh`
+{: .tip }
+
 The hash script returns a hashed password (e.g. `$2y$12$SFNvhLHf7MPCpRCq00o/BuU8GMdcD.7BymhT80YHNISBHsfJwhTou`), which you can then copy and paste into `internal_users.yml`. Repeat the process as necessary for all read-only users. Don't worry about the other user accounts; you can change (or delete) them in Kibana.
 
-When you're satisfied, modify `custom-kibana.yml` to include the new `kibanaserver` password. Then restart the cluster using `docker-compose down -v` and `docker-compose up`. The `-v` is critical in this case.
+When you're satisfied, modify `elasticsearch.password` in `custom-kibana.yml` to include the new `kibanaserver` password. Then restart the cluster using `docker-compose down -v` and `docker-compose up`. The `-v` is critical in this case.
 
 `internal_users.yml` looks like this:
 
