@@ -8,7 +8,7 @@ has_children: false
 
 # Cron expression reference
 
-Monitors can run at a variety of fixed intervals (e.g. hourly, daily, etc.), but you can also define custom cron expressions for when they should run. Cron expressions in monitors support five fields:
+Monitors can run at a variety of fixed intervals (e.g. hourly, daily, etc.), but you can also define custom cron expressions for when they should run. Monitors use the Unix cron syntax and support five fields:
 
 Field | Valid values
 :--- | :---
