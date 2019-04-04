@@ -16,6 +16,13 @@ This page contains a list of issues and workarounds.
 If you're testing multiple users in Kibana and encounter unexpected changes in tenant, use Google Chrome in an Incognito window or Firefox in a Private window.
 
 
+## Beats
+
+If you encounter compatibility issues when attempting to connect Beats to Open Distro for Elasticsearch, make sure you're using the Apache 2.0 distribution of Beats, not the default distribution, which uses a proprietary license.
+
+As of version 6.7, the default distribution of Beats includes a license check and fails to connect to the Apache 2.0 distribution of Elasticsearch.
+
+
 ## Elasticsearch fails to start on Java 8 (RPM install)
 
 If Elasticsearch fails to start and you're using Java 8, verify that you set the symbolic link (symlink) correctly in [step 5](../install/rpm) of the RPM installation. If Java is installed to a non-standard path, try looking for `tools.jar` using the following command:
