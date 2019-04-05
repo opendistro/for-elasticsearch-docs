@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Snapshot and Restore
+title: Take and Restore Snapshots
 parent: Elasticsearch
 nav_order: 4
 ---
 
-# Snapshot and restore
+# Take and restore snapshots
 
 Snapshots are backups of a cluster's indices and state. State includes cluster settings, node information, index settings, and shard allocation.
 
@@ -40,7 +40,7 @@ In other words, taking hourly snapshots for a week (for a total of 168 snapshots
 
 ## Register repository
 
-Before you can take a snapshot, you have to register a snapshot repository. A snapshot repository is really just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, etc.
+Before you can take a snapshot, you have to "register" a snapshot repository. A snapshot repository is really just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, etc.
 
 
 ### Shared file system
@@ -105,6 +105,8 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
 
    ENV AWS_ACCESS_KEY_ID <access-key>
    ENV AWS_SECRET_ACCESS_KEY <secret-key>
+
+   # Optional
    ENV AWS_SESSION_TOKEN <optional-session-token>
 
    RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch repository-s3
@@ -112,10 +114,12 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
 
    RUN echo $AWS_ACCESS_KEY_ID | /usr/share/elasticsearch/bin/elasticsearch-keystore add --stdin s3.client.default.access_key
    RUN echo $AWS_SECRET_ACCESS_KEY | /usr/share/elasticsearch/bin/elasticsearch-keystore add --stdin s3.client.default.secret_key
+
+   # Optional
    RUN echo $AWS_SESSION_TOKEN | /usr/share/elasticsearch/bin/elasticsearch-keystore add --stdin s3.client.default.session_token
    ```
 
-   After the cluster starts, skip to step 7.
+   After the Docker cluster starts, skip to step 7.
 
 1. Add your AWS access and secret keys to the Elasticsearch keystore:
 
@@ -215,7 +219,7 @@ PUT _snapshot/my-repository/2
 
 Setting | Description
 :--- | :---
-indices | The indices that you want to include in the snapshot. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't add spaces between items. Default is all indices.
+indices | The indices that you want to include in the snapshot. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
 ignore_unavailable | If an index from the `indices` list doesn't exist, whether to ignore it rather than fail the snapshot. Default is false.
 include_global_state | Whether to include cluster state in the snapshot. Default is true.
 partial | Whether to allow partial snapshots. Default is false, which fails the entire snapshot if one or more shards fails to store.
@@ -255,7 +259,7 @@ SUCCESS | The snapshot successfully stored all shards.
 IN_PROGRESS | The snapshot is currently running.
 PARTIAL | At least one shard failed to store successfully. Can only occur if you set `partial` to `true` when taking the snapshot.
 FAILED | The snapshot encountered an error and stored no data.
-INCOMPATIBLE | The snapshot is incompatible with the version of Elasticsearch running on this cluster. The snapshot was likely taken on an old version of Elasticsearch (e.g. you can't restore 2.x snapshots on 6.x clusters).
+INCOMPATIBLE | The snapshot is incompatible with the version of Elasticsearch running on this cluster. See [Conflicts and compatibility](#conflicts-and-compatibility).
 
 
 ## Restore snapshots
@@ -295,7 +299,7 @@ POST _snapshot/my-repository/2/_restore
 
 Setting | Description
 :--- | :---
-indices | The indices that you want to restore. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't add spaces between items. Default is all indices.
+indices | The indices that you want to restore. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
 ignore_unavailable | If an index from the `indices` list doesn't exist, whether to ignore it rather than fail the restore operation. Default is false.
 include_global_state | Whether to restore the cluster state. Default is false.
 include_aliases | Whether to restore aliases alongside their associated indices. Default is true.
