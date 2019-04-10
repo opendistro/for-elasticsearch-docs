@@ -115,6 +115,20 @@ h1, h2, h3, h4, h5, h6 {
   @include btn-color($white, $green-300);
 }
 
+// Tables
+
+th,
+td {
+  border-bottom: $border rgba($table-border-color, 0.5);
+  border-left: $border $table-border-color;
+}
+
+thead {
+  th {
+    border-bottom: 1px solid $table-border-color;
+  }
+}
+
 // Keeps labels high and tight next to headers
 
 h1 + p.label {
