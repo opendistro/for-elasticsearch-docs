@@ -57,4 +57,4 @@ PerfTop has no interactivity. Start the application, monitor the dashboard, and 
 ### Other options
 
 - For NodeAnalysis and similar custom dashboards, you can add the `--nodename <node_name>` argument if you want your dashboard to display metrics for only a single node.
-- For troubleshooting, add the `--logfile <log_file>.txt` argument.
+- For troubleshooting, add the `--logfile <log-file>.txt` argument.
