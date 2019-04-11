@@ -11,6 +11,12 @@ Performance Analyzer is an agent and REST API that allows you to query numerous 
 
 To download PerfTop, see [Download](https://opendistro.github.io/for-elasticsearch/downloads.html) on the Open Distro for Elasticsearch website.
 
+You can also install it using npm:
+
+```
+npm install -g @aws/opendistro-for-elasticsearch-perftop
+```
+
 ![PerfTop screenshot](../images/perftop.png)
 
 
@@ -20,6 +26,12 @@ The basic syntax is:
 
 ```bash
 ./perf-top-<operating_system> --dashboard <dashboard>.json --endpoint <endpoint>
+```
+
+If you're using npm, the syntax is similar:
+
+```bash
+perf-top --dashboard <dashboard> --endpoint <endpoint>
 ```
 
 If you're running PerfTop from a node (i.e. locally), specify port 9600:
@@ -45,4 +57,4 @@ PerfTop has no interactivity. Start the application, monitor the dashboard, and 
 ### Other options
 
 - For NodeAnalysis and similar custom dashboards, you can add the `--nodename <node_name>` argument if you want your dashboard to display metrics for only a single node.
-- For troubleshooting, add the `--logfile <log_file>.txt` argument.
+- For troubleshooting, add the `--logfile <log-file>.txt` argument.
