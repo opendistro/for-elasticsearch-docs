@@ -548,5 +548,5 @@ ThreadPoolType | The Elasticsearch thread pools (e.g. `index`, `search`,`snapsho
 CBType | `accounting`, `fielddata`, `in_flight_requests`, `parent`, `request`
 MasterTaskInsertOrder | The order in which the task was inserted (e.g. `3691`).
 MasterTaskPriority | Priority of the task (e.g. `URGENT`). Elasticsearch executes higher priority tasks before lower priority ones, regardless of `insert_order`.
-MasterTaskType | The type of task (e.g. `delete-index`).
+MasterTaskType | `shard-started`, `create-index`, `delete-index`, `refresh-mapping`, `put-mapping`, `CleanupSnapshotRestoreState`, `Update snapshot state`
 MasterTaskMetadata | Metadata for the task (if any).
