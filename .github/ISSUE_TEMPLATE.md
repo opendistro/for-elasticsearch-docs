@@ -1,2 +1,3 @@
 - This issue tracker is for problems with the Open Distro for Elasticsearch *documentation*: inaccuracies, content requests, etc.
 - If you need help with troubleshooting, see [the community issue tracker](https://github.com/opendistro-for-elasticsearch/community) or [the forums](https://discuss.opendistrocommunity.dev/).
+- Thanks so much for helping us maintain good ticket hygiene. Please delete this text before posting your issue.
