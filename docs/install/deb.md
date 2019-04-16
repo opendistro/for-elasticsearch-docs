@@ -32,8 +32,7 @@ Installing and running Open Distro for Elasticsearch from an Debian package is a
 1. Install Open Distro for Elasticsearch:
 
    ```bash
-   sudo apt-get update  
-   sudo apt install elasticsearch-oss=6.6.2
+   sudo apt-get update
    sudo apt install opendistroforelasticsearch
    ```
 
