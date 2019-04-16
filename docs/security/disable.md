@@ -53,5 +53,6 @@ After the removal of any plugin, Kibana performs an "optimize" operation the nex
 
 1. In `docker-compose.yml`, change `amazon/opendistro-for-elasticsearch-kibana:0.8.0` to `kibana-no-security`.
 1. Change `ELASTICSEARCH_URL` (`docker-compose.yml`) or `elasticsearch.url` (your custom `kibana.yml`) to `http://` rather than `https://`.
+1. Change `ELASTICSEARCH_HOSTS` or `elasticsearch.hosts` to `http://` rather than `https://`.
 1. Remove all `opendistro_security` lines from `kibana.yml`.
 1. `docker-compose up`.

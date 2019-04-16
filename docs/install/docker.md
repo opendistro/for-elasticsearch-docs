@@ -126,6 +126,7 @@ services:
       - "5601"
     environment:
       ELASTICSEARCH_URL: https://odfe-node1:9200
+      ELASTICSEARCH_HOSTS: https://odfe-node1:9200
     networks:
       - odfe-net
 
