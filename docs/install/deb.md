@@ -2,7 +2,7 @@
 layout: default
 title: Debian Package
 parent: Install and Configure
-nav_order: 2
+nav_order: 3
 ---
 
 # Debian package
