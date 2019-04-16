@@ -7,7 +7,7 @@ nav_order: 98
 
 # Standalone plugin install
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch Docker images or RPM packages, you can install the Security, Alerting, SQL, and Performance Analyzer plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin. Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`) and run:
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, SQL, and Performance Analyzer plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin. Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`) and run:
 
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-0.8.0.0.zip
