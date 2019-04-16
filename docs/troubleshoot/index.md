@@ -23,6 +23,15 @@ If you encounter compatibility issues when attempting to connect Beats to Open D
 As of version 6.7, the default distribution of Beats includes a license check and fails to connect to the Apache 2.0 distribution of Elasticsearch.
 
 
+## Dependency error during upgrade
+
+If you run `sudo yum upgrade` and receive a dependency error, Elasticsearch likely has a new minor version that the Open Distro for Elasticsearch plugins don't support yet. Add the `--skip-broken` option to upgrade the rest of your system:
+
+```bash
+sudo yum upgrade --skip-broken
+```
+
+
 ## Elasticsearch fails to start on Java 8 (RPM install)
 
 If Elasticsearch fails to start and you're using Java 8, verify that you set the symbolic link (symlink) correctly in [step 5](../install/rpm) of the RPM installation. If Java is installed to a non-standard path, try looking for `tools.jar` using the following command:
