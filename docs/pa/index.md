@@ -11,9 +11,9 @@ Performance Analyzer is an agent and REST API that allows you to query numerous 
 
 To download PerfTop, see [Download](https://opendistro.github.io/for-elasticsearch/downloads.html) on the Open Distro for Elasticsearch website.
 
-You can also install it using npm:
+You can also install it using [npm](https://www.npmjs.com/):
 
-```
+```bash
 npm install -g @aws/opendistro-for-elasticsearch-perftop
 ```
 
