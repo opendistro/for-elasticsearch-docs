@@ -58,15 +58,6 @@ Installing and running Open Distro for Elasticsearch from an Debian package is a
    systemctl status elasticsearch.service
    ```
 
-   You might notice some errors if you are using Java 8. If the service is still `active (running)`, you can safely ignore them:
-
-   ```
-   elasticsearch[3969]: java.security.policy: error adding Entry:
-   elasticsearch[3969]: java.net.MalformedURLException: unknown protocol: jrt
-   elasticsearch[3969]: java.security.policy: error adding Entry:
-   elasticsearch[3969]: java.net.MalformedURLException: unknown protocol: jrt
-   ```
-
 1. To stop Open Distro for Elasticsearch:
 
    ```bash
