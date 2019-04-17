@@ -93,7 +93,7 @@ Apply configuration from a single file (`config.yml`) using PEM certificates:
 Apply configuration in `securityconfig` with keystore and truststore files:
 
 ```bash
-./sgadmin.sh \
+./securityadmin.sh \
    -cd /usr/share/elasticsearch/plugins/opendistro_security/securityconfig/ \
    -ks /path/to/keystore.jks \
    -kspass changeit \
@@ -173,7 +173,7 @@ To upload all configuration files in a directory, use:
 If you want to push a single configuration file, use:
 
 ```bash
-./securityadmin.sh -f ../securityconfig/sg_internal_users.yml -t internalusers  \
+./securityadmin.sh -f ../securityconfig/internal_users.yml -t internalusers  \
     -ts ... -tspass ... -ks ... -kspass ...
 ```
 
