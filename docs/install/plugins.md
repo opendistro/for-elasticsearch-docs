@@ -25,10 +25,10 @@ sudo yum --showduplicates list elasticsearch
 Then you can specify the version you need:
 
 ```bash
-sudo yum install elasticsearch-6.6.2-1
+sudo yum install elasticsearch-6.6.2
 ```
 
-After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started or configure it manually for production workloads.
+After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates or configure it manually for production workloads.
 
 
 ## List installed plugins
