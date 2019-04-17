@@ -1,0 +1,114 @@
+# based on https://www.digitalocean.com/community/tutorials/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: opendistro-elasticsearch
+  labels:
+    component: opendistro-elasticsearch
+spec:
+  selector:
+    component: opendistro-elasticsearch
+  clusterIP: None # service to be used as domain for related pods
+  ports:
+    - port: 9200
+      name: http
+    - port: 9300
+      name: cluster
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: odfe-cluster
+spec:
+  serviceName: opendistro-elasticsearch
+  replicas: 3
+  selector:
+    matchLabels:
+      component: opendistro-elasticsearch
+  template:
+    metadata:
+      labels:
+        component: opendistro-elasticsearch
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: component
+                  operator: In
+                  values:
+                  - opendistro-elasticsearch
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - env:
+        - name: cluster.name
+          value: opendistro
+        - name: node.name
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: opendistro_security.ssl.http.enabled
+          value: "false"
+        - name: discovery.zen.ping.unicast.hosts
+          value: "odfe-cluster-0.opendistro-elasticsearch,odfe-cluster-1.opendistro-elasticsearch,odfe-cluster-2.opendistro-elasticsearch"
+        - name: discovery.zen.minimum_master_nodes
+          value: "2"
+        - name: ES_JAVA_OPTS
+          value: "-Xms512m -Xmx512m"
+        name: opendistro-elasticsearch
+        image: amazon/opendistro-for-elasticsearch:0.8.0
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        ports:
+        - containerPort: 9200
+          name: http
+          protocol: TCP
+        - containerPort: 9300
+          name: cluster
+          protocol: TCP
+        - containerPort: 9600
+          name: performance
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 15
+          tcpSocket:
+            port: 9200
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+        livenessProbe:
+          failureThreshold: 15
+          tcpSocket:
+            port: 9200
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+        volumeMounts:
+        - name: odfe-data
+          mountPath: /usr/share/elasticsearch/data
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        fsGroup: 0
+  volumeClaimTemplates:
+  - metadata:
+      annotations:
+        volume.beta.kubernetes.io/storage-class: gp2
+      labels:
+        component: opendistro-elasticsearch
+      name: odfe-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
