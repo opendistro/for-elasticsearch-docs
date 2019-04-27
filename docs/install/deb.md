@@ -29,6 +29,13 @@ Installing and running Open Distro for Elasticsearch from an Debian package is a
    echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
    ```
 
+1. Install Elasticsearch OSS:
+
+   ```bash
+   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.7.1.deb
+   sudo dpkg  -i elasticsearch-oss-6.7.1.deb
+   ```
+
 1. Install Open Distro for Elasticsearch:
 
    ```bash
