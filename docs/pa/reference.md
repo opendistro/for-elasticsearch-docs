@@ -9,7 +9,9 @@ nav_order: 3
 
 This page contains all Performance Analyzer metrics. All metrics support the `avg`, `sum`, `min`, and `max` aggregations, although certain metrics measure only one thing, making the choice of aggregation irrelevant.
 
-This list is extensive. We recommend Ctrl + F to find individual metrics.
+For information on dimensions, see the [dimensions reference](#dimensions-reference).
+
+This list is extensive. We recommend Ctrl + F to find what you're looking for.
 {: .tip }
 
 <table>
@@ -509,6 +511,20 @@ This list is extensive. We recommend Ctrl + F to find individual metrics.
       <td>The limit (bytes) for how much memory operations can use.
       </td>
     </tr>
+    <tr>
+      <td>Master_Task_Queue_Time
+      </td>
+      <td rowspan="2">MasterTaskInsertOrder, MasterTaskPriority, MasterTaskType, MasterTaskMetadata
+      </td>
+      <td>The time (milliseconds) that a master task spent in the queue.
+      </td>
+    </tr>
+    <tr>
+      <td>Master_Task_Run_Time
+      </td>
+      <td>The time (milliseconds) that a master task has been executed.
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -530,3 +546,7 @@ DestAddr | Destination address (e.g. `010015AC`).
 Direction | `in`, `out`
 ThreadPoolType | The Elasticsearch thread pools (e.g. `index`, `search`,`snapshot`).
 CBType | `accounting`, `fielddata`, `in_flight_requests`, `parent`, `request`
+MasterTaskInsertOrder | The order in which the task was inserted (e.g. `3691`).
+MasterTaskPriority | Priority of the task (e.g. `URGENT`). Elasticsearch executes higher priority tasks before lower priority ones, regardless of `insert_order`.
+MasterTaskType | `shard-started`, `create-index`, `delete-index`, `refresh-mapping`, `put-mapping`, `CleanupSnapshotRestoreState`, `Update snapshot state`
+MasterTaskMetadata | Metadata for the task (if any).
