@@ -13,9 +13,9 @@ You might want to temporarily disable the Security plugin to make testing or int
 opendistro_security.disabled: true
 ```
 
-A more permanent option is to remove the Security plugin entirely. Delete the `plugins/security` folder on all nodes, and delete the `opendistro_security` configuration entries from `elasticsearch.yml`.
+A more permanent option is to remove the Security plugin entirely. Delete the `plugins/opendistro_security` folder on all nodes, and delete the `opendistro_security` configuration entries from `elasticsearch.yml`.
 
-Disabling or removing the plugin exposes the `security` configuration index. If the index contains sensitive information, be sure to protect it through some other means. If you no longer need the index, delete it.
+Disabling or removing the plugin exposes the configuration index for the Security plugin. If the index contains sensitive information, be sure to protect it through some other means. If you no longer need the index, delete it.
 {: .warning }
 
 
@@ -23,9 +23,7 @@ Disabling or removing the plugin exposes the `security` configuration index. If 
 
 The Security plugin is actually two plugins: one for Elasticsearch and one for Kibana. You can use the Elasticsearch plugin independently, but the Kibana plugin depends on a secured Elasticsearch cluster.
 
-If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin.
-
-After the removal of any plugin, Kibana performs an "optimize" operation the next time you start it. This operation takes several minutes even on fast machines, so be patient.
+If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. To learn more, see [Standalone Kibana plugin install](../../kibana/plugins/).
 
 
 ### RPM
