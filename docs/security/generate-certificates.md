@@ -92,9 +92,9 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 ## (Optional) Generate node and client certificates
 
-Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate new certificates for your nodes and as many client certificates as you need.
+Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
 
-If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. To learn more, see [Configure TLS certificates](../../security/tls-configuration/#advanced-hostname-verification-and-dns-lookup).
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set hostname verification to `false`. To learn more, see [Configure TLS certificates](../../security/tls-configuration/#advanced-hostname-verification-and-dns-lookup).
 
 
 ### Sample script
@@ -129,13 +129,13 @@ If you created admin and node certificates, you need to specify their DNs in `el
 opendistro_security.authcz.admin_dn:
   - 'CN=ADMIN,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
 opendistro_security.nodes_dn:
-  - 'CN=NODE,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
+  - 'CN=node1.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
 ```
 
 But if you look at the `subject` of the certificate after creating it, you might see different formatting:
 
 ```
-subject=/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=NODE
+subject=/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=node1.example.com
 ```
 
 If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. To get the string you need:
@@ -147,7 +147,7 @@ openssl x509 -subject -nameopt RFC2253 -noout -in node.pem
 Then you can copy and paste the output:
 
 ```
-subject= CN=NODE,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
+subject= CN=node1.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
 ```
 
 
