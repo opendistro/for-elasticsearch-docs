@@ -2,7 +2,7 @@
 layout: default
 title: OpenID Connect
 parent: Security
-nav_order: 7
+nav_order: 12
 ---
 
 # OpenID Connect
