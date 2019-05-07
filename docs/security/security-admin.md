@@ -71,7 +71,7 @@ All PEM options:
 Name | Description
 --- | ---
 -cert | The location of the PEM file containing the admin certificate and all intermediate certificates, if any. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of .
--key | The location of the PEM file containing the private key of the admin certificate. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`. The key must be in PKCS #8 format.
+-key | The location of the PEM file containing the private key of the admin certificate. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`. The key must be in PKCS#8 format.
 -keypass | The password of the private key of the admin certificate, if any.
 -cacert | The location of the PEM file containing the root certificate. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`.
 
@@ -120,11 +120,11 @@ Name | Description
 --- | ---
 -ks | The location of the keystore containing the admin certificate and all intermediate certificates, if any. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`.
 -kspass | The password for the keystore.
--kst | The key store type, either JKS or PKCS #12/PFX. If not specified, the Security plugin tries to determine the type from the file extension.
+-kst | The key store type, either JKS or PKCS#12/PFX. If not specified, the Security plugin tries to determine the type from the file extension.
 -ksalias | The alias of the admin certificate, if any.
 -ts | The location of the truststore containing the root certificate. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`.
 -tspass | The password for the truststore.
--tst | The truststore type, either JKS or PKCS #12/PFX. If not specified, the Security plugin tries to determine the type from the file extension.
+-tst | The truststore type, either JKS or PKCS#12/PFX. If not specified, the Security plugin tries to determine the type from the file extension.
 -tsalias | The alias for the root certificate, if any.
 
 

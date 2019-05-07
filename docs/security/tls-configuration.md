@@ -133,9 +133,15 @@ opendistro_security.ssl.http.enable\_openssl\_if\_available | Enable OpenSSL on 
 
 In addition to verifying the TLS certificates against the root CA and/or intermediate CA(s), the Security plugin can apply additional checks on the transport layer.
 
-With `hostname_verification` enabled, the Security plugin verifies that the hostname of the communication partner matches the hostname in the certificate. For example, if the hostname of your node is `node-0.example.com`, then the hostname in the TLS certificate has to be set to `node-0.example.com`, as well. Otherwise, an error is thrown. The hostname is taken from the `subject` or `SAN` entries of your certificate.
+With `enforce_hostname_verification` enabled, the Security plugin verifies that the hostname of the communication partner matches the hostname in the certificate. The hostname is taken from the `subject` or `SAN` entries of your certificate. For example, if the hostname of your node is `node-0.example.com`, then the hostname in the TLS certificate has to be set to `node-0.example.com`, as well. Otherwise, errors are thrown:
 
-In addition, when `resolve_hostnames` is enabled, the Security plugin resolves the (verified) hostname against your DNS. If the hostname does not resolve, an error is thrown.
+```
+[ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [WX6omJY] SSL Problem No name matching <hostname> found
+[ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [WX6omJY] SSL Problem Received fatal alert: certificate_unknown
+```
+
+In addition, when `resolve_hostnames` is enabled, the Security plugin resolves the (verified) hostname against your DNS. If the hostname does not resolve, errors are thrown:
+
 
 Name | Description
 :--- | :---

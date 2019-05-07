@@ -43,7 +43,7 @@ Private keys need to be of sufficient length in order to be secure, so specify `
 openssl genrsa -out root-ca-key.pem 2048
 ```
 
-If desired, add the `-aes256` option to encrypt the key using the AES-256 standard. When prompted, provide a password.
+If desired, add the `-aes256` option to encrypt the key using the AES-256 standard. This option requires a password.
 
 
 ## Generate root certificate
@@ -51,7 +51,7 @@ If desired, add the `-aes256` option to encrypt the key using the AES-256 standa
 Next, use the key to generate a self-signed certificate for the root CA:
 
 ```bash
-openssl req -new -x509 -sha256 -key private.key -out root-ca.pem
+openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
 ```
 
 - The `-x509` option specifies that you want a self-signed certificate rather than a certificate request.
@@ -92,7 +92,10 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 ## (Optional) Generate node and client certificates
 
-Follow the steps in [Generate admin certificates](#generate-admin-certificates) with new file names to generate a new certificate for your nodes and as many client certificates as you need.
+Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate new certificates for your nodes and as many client certificates as you need.
+
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. To learn more, see [Configure TLS certificates](../../security/tls-configuration/#advanced-hostname-verification-and-dns-lookup).
+
 
 ### Sample script
 
@@ -168,6 +171,9 @@ After configuring your certificates and starting Elasticsearch, run `securityadm
 ```
 ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert ../../../config/root-ca.pem -cert ../../../config/admin.pem -key ../../../config/admin-key.pem
 ```
+
+For more information about what this command does, see [Apply configuration changes](../security-admin/) and [Change passwords for read-only users](../../install/docker-security/#change-passwords-for-read-only-users).
+{: .tip }
 
 If you're using Docker, see [Bash access to containers](../../install/docker/#bash-access-to-containers).
 
