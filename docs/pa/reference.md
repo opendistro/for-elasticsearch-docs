@@ -74,7 +74,7 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
       </td>
     </tr>
     <tr>
-      <td>IO_ReadThroughtput
+      <td>IO_ReadThroughput
       </td>
       <td>Number of bytes read per second in the last five seconds.
       </td>
