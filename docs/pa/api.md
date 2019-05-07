@@ -32,155 +32,67 @@ GET _opendistro/_performanceanalyzer/metrics?metrics=Latency,CPU_Utilization&agg
 
 ```json
 {
-  "yC2YRPmpSNqpl9pStH5Mdw": {
-    "timestamp": 1548713530000,
+  "keHlhQbbTpm1BYicficEQg": {
+    "timestamp": 1554940530000,
     "data": {
       "fields": [{
-          "name": "shardid",
+          "name": "ShardID",
           "type": "VARCHAR"
         },
         {
-          "name": "latency",
+          "name": "Latency",
           "type": "DOUBLE"
         },
         {
-          "name": "cpu_utilization",
+          "name": "CPU_Utilization",
           "type": "DOUBLE"
         }
       ],
       "records": [
         [
           null,
-          306,
-          0.06842689613768262
-        ],
-        [
-          "0",
           null,
-          0.026413448068841307
+          0.012552206029147535
         ],
         [
           "1",
-          null,
-          0.02321152691614969
-        ],
-        [
-          "2",
-          null,
-          0.026813448068841308
-        ],
-        [
-          "3",
-          null,
-          0.21690950570342207
-        ],
-        [
-          "4",
-          null,
-          0.17610470282169302
+          4.8,
+          0.0009780939762972104
         ]
       ]
     }
   },
-  "47oneXY0ToyGBbI-x9Jb7A": {
-    "timestamp": 1548713530000,
+  "bHdpbMJZTs-TKtZro2SmYA": {
+    "timestamp": 1554940530000,
     "data": {
       "fields": [{
-          "name": "shardid",
+          "name": "ShardID",
           "type": "VARCHAR"
         },
         {
-          "name": "latency",
+          "name": "Latency",
           "type": "DOUBLE"
         },
         {
-          "name": "cpu_utilization",
+          "name": "CPU_Utilization",
           "type": "DOUBLE"
         }
       ],
       "records": [
         [
           null,
-          null,
-          0.008001600320064013
-        ]
-      ]
-    }
-  },
-  "xAZjzUnyTz2QFdk3V8eLzA": {
-    "timestamp": 1548713530000,
-    "data": {
-      "fields": [{
-          "name": "shardid",
-          "type": "VARCHAR"
-        },
-        {
-          "name": "latency",
-          "type": "DOUBLE"
-        },
-        {
-          "name": "cpu_utilization",
-          "type": "DOUBLE"
-        }
-      ],
-      "records": [
-        [
-          null,
-          null,
-          0.006798640271945611
-        ]
-      ]
-    }
-  },
-  "cYxWiAadQWqWQE-aTE9x4g": {
-    "timestamp": 1548713535000,
-    "data": {
-      "fields": [{
-          "name": "shardid",
-          "type": "VARCHAR"
-        },
-        {
-          "name": "latency",
-          "type": "DOUBLE"
-        },
-        {
-          "name": "cpu_utilization",
-          "type": "DOUBLE"
-        }
-      ],
-      "records": [
-        [
-          null,
-          318.5,
-          0.0904
-        ],
-        [
-          "0",
-          null,
-          0.0212
+          18.2,
+          0.011966493817311527
         ],
         [
           "1",
-          null,
-          0.022
-        ],
-        [
-          "2",
-          null,
-          0.02
-        ],
-        [
-          "3",
-          null,
-          0.294
-        ],
-        [
-          "4",
-          null,
-          0.0204
+          14.8,
+          0.0007670829370071493
         ]
       ]
     }
   }
 }
 ```
+
+In this case, each top-level object represents a node. The API returns names and data types for the metrics and dimensions that you specified, along with values from five seconds ago and current values (if different). Null values represent inactivity during that time period.
