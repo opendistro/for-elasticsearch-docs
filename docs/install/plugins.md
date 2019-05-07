@@ -1,13 +1,18 @@
 ---
 layout: default
-title: Standalone Plugin Install
+title: Standalone Elasticsearch Plugin Install
 parent: Install and Configure
-nav_order: 98
+nav_order: 90
 ---
 
-# Standalone plugin install
+# Standalone Elasticsearch plugin install
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, SQL, and Performance Analyzer plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin. Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`) and run the install command for each plugin.
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, SQL, and Performance Analyzer plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin.
+
+In addition to their Elasticsearch plugins, Security and Alerting have corresponding [Kibana plugins](../../kibana/plugins) that you probably want to install, as well.
+{: .tip }
+
+Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`) and run the install command for each plugin.
 
 
 #### Security

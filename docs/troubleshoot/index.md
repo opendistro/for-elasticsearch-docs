@@ -25,7 +25,9 @@ As of version 6.7, the default distribution of Beats includes a license check an
 
 ## Dependency error during upgrade
 
-If you run `sudo yum upgrade` and receive a dependency error, Elasticsearch likely has a new minor version that the Open Distro for Elasticsearch plugins don't support yet. Add the `--skip-broken` option to upgrade the rest of your system:
+If you run `sudo yum upgrade` and receive a dependency error, Elasticsearch likely has a new minor version that the Open Distro for Elasticsearch plugins don't support yet. You can [install a specific, supported version of Elasticsearch](../install/plugins/#compatibility) to resolve the issue.
+
+A temporary solution is to add the `--skip-broken` option to upgrade the rest of your system:
 
 ```bash
 sudo yum upgrade --skip-broken
