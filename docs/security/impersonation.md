@@ -1,22 +1,22 @@
 ---
 layout: default
-title: Impersonation
+title: User Impersonation
 parent: Security
-nav_order: 10
+nav_order: 22
 ---
 
-# Impersonation
+# User impersonation
 
-Impersonation allows specially privileged users to act as another user without knowledge of or access to the impersonated user's credentials.
+User impersonation allows specially privileged users to act as another user without knowledge of nor access to the impersonated user's credentials.
 
-This can be useful for testing purposes, or for allowing system services to safely act as a user.
+Impersonation can be useful for testing and troubleshooting, or for allowing system services to safely act as a user.
 
-Impersonation can occur on either the REST interface, or at the transport layer. 
+Impersonation can occur on either the REST interface or at the transport layer.
 
-## Configuration
 
-### REST Interface
-To allow one user to impersonate another, a setting must be added to `elasticsearch.yml`:
+## REST interface
+
+To allow one user to impersonate another, add the following to `elasticsearch.yml`:
 
 ```yaml
 opendistro_security.authcz.rest_impersonation_user:
@@ -25,11 +25,12 @@ opendistro_security.authcz.rest_impersonation_user:
     - <IMPERSONATED_USER_2>
 ```
 
-The impersonated user field may be set to a wildcard.  Setting it to `*` allows `AUTHENTICATED_USER` to impersonate any user.
+The impersonated user field supports wildcards. Setting it to `*` allows `AUTHENTICATED_USER` to impersonate any user.
 
-### Transport Interface
 
-In a similar fashion, settings may be added to the config file to enable transport interface impersonation:
+## Transport interface
+
+In a similar fashion, add the following to enable transport layer impersonation:
 
 ```yaml
 opendistro_security.authcz.impersonation_dn:
@@ -37,9 +38,11 @@ opendistro_security.authcz.impersonation_dn:
     - worf
 ```
 
+
 ## Impersonating Users
 
-To impersonate another user, submit a request to the system with the HTTP header `opendistro_security_impersonate_as` set to the name of the user to be impersonated.
+To impersonate another user, submit a request to the system with the HTTP header `opendistro_security_impersonate_as` set to the name of the user to be impersonated. A good test is to make a GET request to the `_opendistro/_security/authinfo` URI:
 
-To confirm that this works, a good initial test is to submit a `GET` request to `/_opendistro/_security/authinfo`.
-
+```bash
+curl -XGET -u admin:admin -k -H "opendistro_security_impersonate_as: user_1" https://localhost:9200/_opendistro/_security/authinfo?pretty
+```
