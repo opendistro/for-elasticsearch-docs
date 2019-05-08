@@ -49,9 +49,9 @@ Docker
 {: .label .label-green }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. `docker pull amazon/opendistro-for-elasticsearch:0.9.0`
-1. `docker pull amazon/opendistro-for-elasticsearch-kibana:0.9.0`
-1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:0.9.0`
+1. `docker pull amazon/opendistro-for-elasticsearch:1.0.0`
+1. `docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0`
+1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.0.0`
 1. In a new terminal session, run:
 
    `curl -XGET --insecure https://localhost:9200 -u admin:admin`
@@ -65,6 +65,7 @@ To learn more, see [Install](docs/install/).
 
 Open Distro for Elasticsearch version | Release highlights | Elasticsearch version
 :--- | :--- | :---
+1.0.0 | Bumps Elasticsearch version. | 7.0.1
 0.9.0 | Bumps Elasticsearch version. | 6.7.1
 0.8.0 | Bumps Elasticsearch version. | 6.6.2
 0.7.1 | Fixes Kibana multitenancy. | 6.5.4
