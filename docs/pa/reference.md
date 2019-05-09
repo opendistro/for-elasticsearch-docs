@@ -26,7 +26,7 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
     <tr>
       <td>CPU_Utilization
       </td>
-      <td rowspan="47">ShardID, IndexName, Operation, ShardRole
+      <td rowspan="18">ShardID, IndexName, Operation, ShardRole
       </td>
       <td>CPU usage ratio. CPU time (in milliseconds) used by the associated thread(s) in the past five seconds, divided by 5000 milliseconds.
       </td>
@@ -122,7 +122,21 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
       </td>
     </tr>
     <tr>
+      <td>ShardEvents
+      </td>
+      <td>The total number of events executed on a shard in the past five seconds.
+      </td>
+    </tr>
+    <tr>
+      <td>ShardBulkDocs
+      </td>
+      <td>The total number of documents indexed in the past five seconds.
+      </td>
+    </tr>
+    <tr>
       <td>Indexing_ThrottleTime
+      </td>
+      <td rowspan="29">ShardID, IndexName
       </td>
       <td>Time (milliseconds) that the index has been under merge throttling control in the past five seconds.
       </td>
@@ -293,18 +307,6 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
       <td>VersionMap_Memory
       </td>
       <td>Estimated memory usage of the version map in bytes.
-      </td>
-    </tr>
-    <tr>
-      <td>ShardEvents
-      </td>
-      <td>The total number of events executed on a shard in the past five seconds.
-      </td>
-    </tr>
-    <tr>
-      <td>ShardBulkDocs
-      </td>
-      <td>The total number of documents indexed in the past five seconds.
       </td>
     </tr>
     <tr>
