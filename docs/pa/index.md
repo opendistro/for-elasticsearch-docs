@@ -58,3 +58,22 @@ PerfTop has no interactivity. Start the application, monitor the dashboard, and 
 
 - For NodeAnalysis and similar custom dashboards, you can add the `--nodename <node_name>` argument if you want your dashboard to display metrics for only a single node.
 - For troubleshooting, add the `--logfile <log-file>.txt` argument.
+
+
+## Performance Analyzer configuration
+
+Performance Analyzer uses `/dev/shm` for temporary storage. During heavy workloads on a cluster, Performance Analyzer can use up to 1 GB of space.
+
+Docker, however, has a default `/dev/shm` size of 64 MB. To change this value, you can use the `docker run --shm-size 1gb` flag or [a similar setting in Docker Compose](https://docs.docker.com/compose/compose-file/#shm_size).
+
+If you're not using Docker, check the size of `/dev/shm` using `df -h`. The default value is probably plenty, but if you need to change its size, add the following line to `/etc/fstab`:
+
+```
+tmpfs /dev/shm tmpfs defaults,noexec,nosuid,size=1G 0 0
+```
+
+Then remount the file system:
+
+```
+mount -o remount /dev/shm
+```
