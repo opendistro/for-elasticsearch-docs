@@ -25,7 +25,7 @@ A request to the `_bulk` API looks a little different, because you specify the i
 
 ```json
 POST elasticsearch_domain/_bulk
-{ "index": { "_index" : "<index>", "_type" : "_doc", "_id" : "<id>" } }
+{ "index": { "_index" : "<index>", "_id" : "<id>" } }
 { "A JSON": "document" }
 
 ```
@@ -57,7 +57,7 @@ PUT elasticsearch_domain/movies/_doc/1
 {"title": "Spirited Away"}
 ```
 
-Indices default to five primary shards and one replica. If you want to specify non-default settings, create the index before adding documents:
+Indices default to one primary shard and one replica. If you want to specify non-default settings, create the index before adding documents:
 
 ```json
 PUT elasticsearch_domain/more-movies
@@ -73,4 +73,4 @@ Elasticsearch indices have the following naming restrictions:
 - Index names can't begin with `_` (underscore) or `-` (hyphen).
 - Index names can't contain spaces, commas, or the following characters:
 
-  `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, or `<`
+  `:`, `"`, `*`, `+`, `/`, `\`, `|`, `?`, `#`, `>`, or `<`
