@@ -39,7 +39,7 @@ output.elasticsearch:
 
 ## Logstash
 
-If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal output configuration that works with the Security plugin:
+If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal output configuration, which works with the Security plugin:
 
 ```conf
 output {
