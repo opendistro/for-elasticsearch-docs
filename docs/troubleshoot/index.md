@@ -41,7 +41,7 @@ output.elasticsearch:
 
 If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal configuration that works with the Security plugin:
 
-```
+```conf
 output {
   elasticsearch {
     hosts => ["localhost:9200"]
