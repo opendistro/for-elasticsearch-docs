@@ -9,7 +9,7 @@ nav_order: 2
 
 One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
 
-The main configuration file for authentication and authorization modules  is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
+The main configuration file for authentication and authorization modules is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
 
 `config.yml` has three main parts:
 
@@ -23,6 +23,8 @@ opendistro_security:
     authz:
       ...
 ```
+
+For a more complete example, see the [sample file on GitHub](https://github.com/opendistro-for-elasticsearch/security/blob/master/securityconfig/config.yml).
 
 
 ---

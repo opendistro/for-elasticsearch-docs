@@ -49,7 +49,7 @@ output {
     user => "admin"
     password => "admin"
     ssl => true
-    cacert => "full/path/to/root-ca.pem"
+    cacert => "/full/path/to/root-ca.pem"
   }
 }
 ```
