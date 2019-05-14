@@ -7,11 +7,11 @@ nav_order: 3
 
 # Apply configuration changes using securityadmin.sh
 
-The Security plugin stores its configuration---including users, roles, and permissions---in an index on the Elasticsearch cluster (`.opendistro_security`). Storing these settings in an index lets you change settings without restarting the cluster and eliminates the need to place configuration files on any node.
+The Security plugin stores its configuration---including users, roles, and permissions---in an index on the Elasticsearch cluster (`.opendistro_security`). Storing these settings in an index lets you change settings without restarting the cluster and eliminates the need to edit configuration files on every single node.
 
-After changing any of the configuration files in `plugins/opendistro_security/securityconfig`, however, you must run `plugins/opendistro_security/tools/securityadmin.sh` to load these new settings into the index. This script identifies itself against a cluster through an admin TLS certificate, in `.pem`, `.jks`, `.p12`, or `.pfx` format.
+After changing any of the configuration files in `plugins/opendistro_security/securityconfig`, however, you must run `plugins/opendistro_security/tools/securityadmin.sh` to load these new settings into the index. You must also run this script at least once to initialize the `.opendistro_security` index and configure your authentication and authorization methods.
 
-If the `.opendistro_security` index is already initialized, you can also use Kibana to change users, roles, and permissions. However, you need to run `securityadmin.sh` at least once to initialize the index and configure your authentication and authorization methods.
+After the `.opendistro_security` index is initialized, you can use Kibana to manage your users, roles, and permissions.
 
 
 ---
