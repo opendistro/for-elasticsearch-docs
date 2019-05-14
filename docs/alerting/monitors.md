@@ -82,7 +82,7 @@ The line moves up and down as you increase and decrease the threshold. Once this
 
 For **Trigger condition**, specify a Painless script that returns true or false. Painless is the default Elasticsearch scripting language and has a syntax similar to Groovy.
 
-Trigger condition scripts revolve around the `ctx.results[0]` variable, which corresponds to the extraction query response. For example, your script might reference `ctx.results[0].hits.total` or `ctx.results[0].hits.hits[i]._source.error_code`.
+Trigger condition scripts revolve around the `ctx.results[0]` variable, which corresponds to the extraction query response. For example, your script might reference `ctx.results[0].hits.total.value` or `ctx.results[0].hits.hits[i]._source.error_code`.
 
 A return value of true means the trigger condition has been met, and the trigger should execute its actions. Test your script using the **Run** button.
 
@@ -98,7 +98,7 @@ These scripts are Painless, not Groovy, but calling them Groovy in Jekyll gets u
 
 ```groovy
 // Evaluates to true if the query returned any documents
-ctx.results[0].hits.total > 0
+ctx.results[0].hits.total.value > 0
 ```
 
 ```groovy

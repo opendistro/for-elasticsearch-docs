@@ -1,7 +1,7 @@
 ---
 layout: default
 title: SQL
-nav_order: 7
+nav_order: 22
 has_children: true
 ---
 

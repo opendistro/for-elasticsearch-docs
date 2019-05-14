@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Performance Analyzer
-nav_order: 8
+nav_order: 23
 has_children: true
 ---
 
