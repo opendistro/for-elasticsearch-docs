@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Apply Configuration Changes
+title: Apply Changes with securityadmin.sh
 parent: Security
 nav_order: 3
 ---
 
-# Apply configuration changes
+# Apply configuration changes using securityadmin.sh
 
 The Security plugin stores its configuration---including users, roles, and permissions---in an index on the Elasticsearch cluster (`.opendistro_security`). Storing these settings in an index lets you change settings without restarting the cluster and eliminates the need to place configuration files on any node.
 
