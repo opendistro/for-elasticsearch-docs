@@ -80,6 +80,13 @@ For detailed release notes, see these GitHub repositories:
 
 ---
 
+## Builds
+
+If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Build scripts are in the `elasticsearch` and `kibana` directories. If your changes could benefit others, please consider submitting pull requests.
+
+
+---
+
 ## About Open Distro for Elasticsearch
 
 [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
