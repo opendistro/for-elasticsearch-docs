@@ -33,6 +33,14 @@ The steps on this page are most applicable if you installed Open Distro for Elas
    sudo apt install opendistroforelasticsearch
    ```
 
+   Alternately, `yum` lets you upgrade to a specific version of Open Distro for Elasticsearch:
+
+   ```bash
+   sudo yum install opendistro-for-elasticsearch-1.0.0
+   ```
+
+   Unfortunately, `apt` upgrades dependencies to their latest versions and thus only supports upgrades to the newest version of Open Distro for Elasticsearch.
+
 1. (Optional) Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins.
 
 1. Start Elasticsearch on each node:
