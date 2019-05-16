@@ -83,7 +83,7 @@ opendistro_security.ssl.http.truststore_password | Truststore password. Default 
 
 ## Configure node certificates
 
-The Security plugin needs to identify inter-cluster requests (i.e. requests between the nodes). The simplest way of configuring node certificates is to list the Distinguished Names (DNs) of these certificates in `elasticsearch.yml`. The Security plugin supports wildcards and regular expressions:
+The Security plugin needs to identify inter-cluster requests (i.e. requests between the nodes). The simplest way of configuring node certificates is to list the Distinguished Names (DNs) of these certificates in `elasticsearch.yml`. All DNs must be included in `elasticsearch.yml` on all nodes. The Security plugin supports wildcards and regular expressions:
 
 ```yml
 opendistro_security.nodes_dn:
