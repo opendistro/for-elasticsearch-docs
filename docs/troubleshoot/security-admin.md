@@ -10,6 +10,15 @@ nav_order: 4
 This page includes troubleshooting steps for `securityadmin.sh`.
 
 
+---
+
+#### Table of contents
+- TOC
+{:toc}
+
+
+---
+
 ## Cluster not reachable
 
 If `securityadmin.sh` can't reach the cluster, it outputs:

@@ -22,7 +22,7 @@ This page includes troubleshooting steps for configuring TLS certificates with t
 
 ## Validate YAML
 
-`elasticsearch.yml` and the files in `opendistro_security/securityconfig/` are in the YAML format. A linter can help verify you don't have any formatting errors: [http://www.yamllint.com/](http://www.yamllint.com/)
+`elasticsearch.yml` and the files in `opendistro_security/securityconfig/` are in the YAML format. A linter like [YAML Lint](http://www.yamllint.com/) can help verify that you don't have any formatting errors.
 
 
 ## View contents of PEM certificates
@@ -42,13 +42,13 @@ openssl x509 -in node1.pem -text -noout
 ```
 
 
-### Check for special characters in DNs
+### Check for special characters and whitespace in DNs
 
 The Security plugin uses the [string representation of Distinguished Names (RFC1779)](https://www.ietf.org/rfc/rfc1779.txt) when validating node certificates.
 
 If parts of your DN contain special characters (e.g. a comma), make sure you escape it in your configuration:
 
-```
+```yml
 opendistro_security.nodes_dn:
   - 'CN=node-0.example.com,OU=SSL,O=My\, Test,L=Test,C=DE'
 ```
@@ -57,14 +57,14 @@ You can have whitespace within a field, but not between fields.
 
 #### Bad configuration
 
-```
+```yml
 opendistro_security.nodes_dn:
   - 'CN=node-0.example.com, OU=SSL,O=My\, Test, L=Test, C=DE'
 ```
 
 #### Good configuration
 
-```
+```yml
 opendistro_security.nodes_dn:
   - 'CN=node-0.example.com,OU=SSL,O=My\, Test,L=Test,C=DE'
 ```
@@ -134,7 +134,7 @@ If you have multiple entries in the keystore and you are using aliases to refer 
 
 In order to view information about the certificates stored in your keystore or truststore, use the `keytool` command like:
 
-```
+```bash
 keytool -list -v -keystore keystore.jks
 ```
 
@@ -196,7 +196,7 @@ ExtendedKeyUsages [
 
 The Security plugin disables TLS version 1.0 by default; it is outdated, insecure, and vulnerable. If you need to use `TLSv1` and accept the risks, you can enable it in `elasticsearch.yml`:
 
-```
+```yml
 opendistro_security.ssl.http.enabled_protocols:
   - "TLSv1"
   - "TLSv1.1"
