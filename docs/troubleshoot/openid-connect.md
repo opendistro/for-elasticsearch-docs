@@ -24,8 +24,8 @@ This page includes troubleshooting steps for using OpenID Connect with the Secur
 To help troubleshoot OpenID Connect, set the log level to `debug` on Elasticsearch. Add the following lines in `config/log4j2.properties` and restart the node:
 
 ```
-logger.sg.name = com.amazon.dlic.auth.http.jwt
-logger.sg.level = trace
+logger.opendistro_security.name = com.amazon.dlic.auth.http.jwt
+logger.opendistro_security.level = trace
 ```
 
 This setting prints a lot of helpful information to your log file. If this information isn't sufficient, you can also set the log level to `trace`.
