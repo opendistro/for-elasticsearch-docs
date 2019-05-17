@@ -323,3 +323,27 @@ We recommend ceasing write requests to a cluster before restoring from a snapsho
 Snapshots are only forward-compatible, and only by one major version. For example, snapshots taken on a 2.x cluster can't be restored on a 1.x cluster nor a 6.x cluster, but they *can* be restored on a 2.x or 5.x cluster.
 
 If you have an old snapshot, you can sometimes restore it into an intermediate cluster, reindex all indices, take a new snapshot, and repeat until you arrive at your desired version, but you might find it easier to just manually index your data on the new cluster.
+
+
+### Security plugin considerations
+
+If you are using the Security plugin, snapshots have some additional restrictions:
+
+- In order to perform snapshot and restore operations, users must have the built-in `manage_snapshots` role.
+- You can only a snapshot if it does not contain global state and does not contain the `.opendistro_security` index.
+
+To restore indices from a snapshot contains global state, you must exclude it when performing the restore. If your snapshot also contains the `.opendistro_security` index, either exclude it or list all indices that you want to include:
+
+```json
+POST _snapshot/my-repository/3/_restore
+{
+  "indices": "-.opendistro_security",
+  "include_global_state": false
+}
+```
+
+The `.opendistro_security` index contains sensitive data, so we recommend excluding it when you take a snapshot. If you do need to restore the index from a snapshot, you must include an admin certificate in the request:
+
+```bash
+curl -k --cert chain.pem --key kirk.key.pem -XPOST 'https://localhost:9200/_snapshot/my_backup/3/_restore?pretty'
+```
