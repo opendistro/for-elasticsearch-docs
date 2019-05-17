@@ -60,9 +60,14 @@ server.xsrf.whitelist: [/_opendistro/_security/saml/acs]
 Some IdPs do not sign the SAML documents by default. Make sure the IdP signs all documents.
 
 
+#### Keycloak
+
+![Keycloak UI](../../images/saml-keycloak-sign-documents.png)
+
+
 ## Role settings
 
-Including user roles in the SAML response is dependent on your IdP. For example, in Keycloak, this setting is in the **Mappers** section of your client. With Okta, you have to set group attribute statements. Make sure this is configured correctly and that the `roles_key` in the SAML configuration matches the role name in the SAML response:
+Including user roles in the SAML response is dependent on your IdP. For example, in Keycloak, this setting is in the **Mappers** section of your client. In Okta, you have to set group attribute statements. Make sure this is configured correctly and that the `roles_key` in the SAML configuration matches the role name in the SAML response:
 
 ```yml
 saml:
@@ -98,7 +103,7 @@ Inspect the payload of this POST request, and use a tool like [base64decode.org]
 
 ## Check role mapping
 
-The Security plugin uses the normal a standard role mapping to map a user or backed role to one or more Security roles.
+The Security plugin uses a standard role mapping to map a user or backend role to one or more Security roles.
 
 For username, the Security plugin uses the `NameID` attribute of the SAML response by default. For some IdPs, this attribute does not contain the expected username, but some internal user ID. Check the content of the SAML response to locate the element you want to use as username, and configure it by setting the `subject_key`:
 
@@ -113,9 +118,9 @@ saml:
       subject_key: preferred_username
 ```
 
-For checking that the correct roles are contained in the SAML response, inspect the contents, and set the correct attribute name:
+For checking that the correct backend roles are contained in the SAML response, inspect the contents, and set the correct attribute name:
 
-```
+```yml
 saml:
   ...
   http_authenticator:
