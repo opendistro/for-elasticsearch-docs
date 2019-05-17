@@ -330,9 +330,9 @@ If you have an old snapshot, you can sometimes restore it into an intermediate c
 If you are using the Security plugin, snapshots have some additional restrictions:
 
 - In order to perform snapshot and restore operations, users must have the built-in `manage_snapshots` role.
-- You can only a snapshot if it does not contain global state and does not contain the `.opendistro_security` index.
+- You can't restore snapshots that contain global state or the `.opendistro_security` index.
 
-To restore indices from a snapshot contains global state, you must exclude it when performing the restore. If your snapshot also contains the `.opendistro_security` index, either exclude it or list all indices that you want to include:
+If a snapshot contains global state, you must exclude it when performing the restore. If your snapshot also contains the `.opendistro_security` index, either exclude it or list all the other indices that you want to include:
 
 ```json
 POST _snapshot/my-repository/3/_restore
