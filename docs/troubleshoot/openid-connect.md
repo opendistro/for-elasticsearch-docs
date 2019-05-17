@@ -85,9 +85,9 @@ opendistro_security.openid.client_secret: "..."
 ```
 
 
-### Failed to get subject from JWT claims, check if subject_key ... is correct.
+### "Failed to get subject from JWT claims"
 
-This error is logged on Elasticsearch and means that the username could not be extracted from the id token. Make sure the following setting matches the claims in the JWT your IdP issues:
+This error is logged on Elasticsearch and means that the username could not be extracted from the ID token. Make sure the following setting matches the claims in the JWT your IdP issues:
 
 ```
 openid_auth_domain:

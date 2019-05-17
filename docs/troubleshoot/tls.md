@@ -20,12 +20,12 @@ This page includes troubleshooting steps for configuring TLS certificates with t
 ---
 
 
-## Validate your YAML
+## Validate YAML
 
 `elasticsearch.yml` and the files in `opendistro_security/securityconfig/` are in the YAML format. A linter can help verify you don't have any formatting errors: [http://www.yamllint.com/](http://www.yamllint.com/)
 
 
-## View the contents of PEM certificates
+## View contents of PEM certificates
 
 You can use OpenSSL to display the content of each PEM certificate:
 
@@ -70,7 +70,7 @@ opendistro_security.nodes_dn:
 ```
 
 
-### Check the IP Addresses of the certificate
+### Check certificate IP addresses
 
 Sometimes the IP address in your certificate is not the one communicating with the cluster. This problem can occur if your node has multiple interfaces or is running on a dual stack network (IPv6 and IPv4).
 
@@ -95,7 +95,7 @@ IPAddress: 2001:db8:0:1:1.2.3.4
 In this example, the node tries to join the cluster with the IPv4 address of `10.0.0.42`, but the certificate contians the IPv6 address of `2001:db8:0:1:1.2.3.4`.
 
 
-### Validate the certificate chain
+### Validate certificate chain
 
 TLS certificates are organized in a certificate chain. You can check with `keytool` that the certificate chain is correct by inspecting the owner and the issuer of each certificate. If you used the demo installation script that ships with the Security plugin, the chain looks like:
 
@@ -130,7 +130,7 @@ Generally, the keystore contains client or node certificate and all intermediate
 If you have multiple entries in the keystore and you are using aliases to refer to them, make sure that the configured alias in `elasticsearch.yml` matches the one in the keystore. If there is only one entry in the keystore, you do not need to configure an alias.
 
 
-## View the contents of your keystore and truststore
+## View contents of your keystore and truststore
 
 In order to view information about the certificates stored in your keystore or truststore, use the `keytool` command like:
 
@@ -179,7 +179,7 @@ SubjectAlternativeName [
 ```
 
 
-## Check the EKU field for node certificates
+## Check EKU field for node certificates
 
 Node certificates need to have both `serverAuth` and `clientAuth` set in the extended key usage field:
 
