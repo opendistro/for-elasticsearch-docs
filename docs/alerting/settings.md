@@ -16,7 +16,7 @@ Index | Purpose
 :--- | :---
 `.opendistro-alerting-alerts` | Stores ongoing alerts.
 `.opendistro-alerting-alert-history-<date>` | Stores a history of completed alerts.
-`.opendistro-alerting-config` | Stores monitors, triggers, and destinations.
+`.opendistro-alerting-config` | Stores monitors, triggers, and destinations. [Take a snapshot](../../elasticsearch/snapshot-restore) of this index to back up your alerting configuration.
 `.opendistro-alerting-alert-history-write` (alias) | Provides a consistent URI for the `.opendistro-alerting-alert-history-<date>` index.
 
 
