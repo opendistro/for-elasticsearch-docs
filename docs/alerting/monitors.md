@@ -53,6 +53,35 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
    - Query definition gives you flexibility in terms of what you query for (using [the Elasticsearch query DSL](../../elasticsearch/full-text)) and how you evaluate the results of that query (Painless scripting).
 
+     You can even filter query results using `{% raw %}{{period_start}}{% endraw %}` and `{% raw %}{{period_end}}{% endraw %}`:
+
+     ```json
+     {
+       "size": 0,
+       "query": {
+         "bool": {
+           "filter": [{
+             "range": {
+               "timestamp": {
+                 "from": "{% raw %}{{period_end}}{% endraw %}||-1h",
+                 "to": "{% raw %}{{period_end}}{% endraw %}",
+                 "include_lower": true,
+                 "include_upper": true,
+                 "format": "epoch_millis",
+                 "boost": 1
+               }
+             }
+           }],
+           "adjust_pure_negative": true,
+           "boost": 1
+         }
+       },
+       "aggregations": {}
+     }
+     ```
+
+     "Start" and "end" refer to the interval at which the monitor runs. See [Available variables](#available-variables).
+
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
 
    To use a query, choose **Define using extraction query**, add your query (using [the Elasticsearch query DSL](../../elasticsearch/full-text)), and test it using the **Run** button.
