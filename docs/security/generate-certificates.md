@@ -123,13 +123,14 @@ rm node.csr
 
 ## Get Distinguished Names
 
-If you created admin and node certificates, you need to specify their DNs in `elasticsearch.yml`:
+If you created admin and node certificates, you must specify their DNs in `elasticsearch.yml` on all nodes:
 
 ```yml
 opendistro_security.authcz.admin_dn:
   - 'CN=ADMIN,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
 opendistro_security.nodes_dn:
   - 'CN=node1.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
+  - 'CN=node2.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
 ```
 
 But if you look at the `subject` of the certificate after creating it, you might see different formatting:
@@ -138,7 +139,7 @@ But if you look at the `subject` of the certificate after creating it, you might
 subject=/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=node1.example.com
 ```
 
-If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. To get the string you need:
+If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. To get the correct string:
 
 ```bash
 openssl x509 -subject -nameopt RFC2253 -noout -in node.pem

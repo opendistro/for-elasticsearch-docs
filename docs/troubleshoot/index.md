@@ -22,6 +22,38 @@ If you encounter compatibility issues when attempting to connect Beats to Open D
 
 As of version 6.7, the default distribution of Beats includes a license check and fails to connect to the Apache 2.0 distribution of Elasticsearch.
 
+Try this minimal output configuration for using Beats with the Security plugin:
+
+```yml
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  protocol: https
+  username: "admin"
+  password: "admin"
+  ssl.certificate_authorities:
+    - /full/path/to/root-ca.pem
+  ssl.certificate: "/full/path/to/client.pem"
+  ssl.key: "/full/path/to/client-key.pem"
+```
+
+
+## Logstash
+
+If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal output configuration, which works with the Security plugin:
+
+```conf
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    index => "logstash-index-test"
+    user => "admin"
+    password => "admin"
+    ssl => true
+    cacert => "/full/path/to/root-ca.pem"
+  }
+}
+```
+
 
 ## Dependency error during upgrade
 

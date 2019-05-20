@@ -32,7 +32,7 @@ kramdown:
 # Theme settings for just-the-docs
 search_enabled: true
 aux_links:
-  "Back to the Open Distro for Elasticsearch home page":
+  "Back to Open Distro for Elasticsearch home":
     - "https://opendistro.github.io/for-elasticsearch/"
 color_scheme: odfe
 
