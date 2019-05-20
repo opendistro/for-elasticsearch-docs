@@ -63,12 +63,12 @@ To learn more, see [Install](docs/install/).
 
 ## Version history
 
-Open Distro for Elasticsearch version | Release highlights | Elasticsearch version
-:--- | :--- | :---
-0.9.0 | Bumps Elasticsearch version. | 6.7.1
-0.8.0 | Bumps Elasticsearch version. | 6.6.2
-0.7.1 | Fixes Kibana multitenancy. | 6.5.4
-0.7.0 | Initial release. | 6.5.4
+Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
+:--- | :--- | :--- | :---
+0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
+0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
+0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
+0.7.0 | Initial release. | 11 March 2019 | 6.5.4
 
 For detailed release notes, see these GitHub repositories:
 
@@ -76,6 +76,13 @@ For detailed release notes, see these GitHub repositories:
 - [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
 - [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
 - [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
+
+
+---
+
+## Builds
+
+If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. If your changes could benefit others, please consider submitting pull requests.
 
 
 ---
