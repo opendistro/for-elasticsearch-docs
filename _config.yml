@@ -23,10 +23,8 @@ permalink: pretty
 # Build settings
 markdown: kramdown
 remote_theme: pmarsceill/just-the-docs
-theme: just-the-docs
 
 # Kramdown settings
-
 kramdown:
   toc_levels: 2..3
 
@@ -43,6 +41,9 @@ ga_tracking: UA-135423944-1
 
 # Adds on-hover anchor links to h2-h6
 anchor_links: true
+
+plugins:
+  - jekyll-remote-theme
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
