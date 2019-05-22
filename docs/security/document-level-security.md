@@ -7,14 +7,32 @@ nav_order: 23
 
 # Document-level security
 
-Document-level security allows for a role to grant a permissions to operate on a subset of documents in an index. The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and choose **DLS/FLS**.
+Document-level security lets you restrict a role to a subset of documents in an index. The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and choose **DLS/FLS**.
+
+![Document- and field-level security screen in Kibana](../../images/security-dls.png)
 
 
 ## Simple roles
 
-Use the Elasticsearch query DSL to define which documents a role grants access to. In the REST API, you provide the query as a string, so you have to escape your quotes.
+Document-level security uses the Elasticsearch query DSL to define which documents a role grants access to. In Kibana, choose an index and provide a query in the **DLS/FLS** tab:
 
-This role allows a user to read any document in any index with the field `public` set to `true`:
+```json
+{
+  "bool": {
+    "must": {
+      "match": {
+        "genres": "Comedy"
+      }
+    }
+  }
+}
+```
+
+This query specifies that for the role to have access to a document, its `genres` field must include `Comedy`.
+
+Note that a typical request to the `_search` API includes `{ "query": { ... } }` around the query, but in this case, you only need to specify the query itself.
+
+In the REST API, you provide the query as a string, so you have to escape your quotes. This role allows a user to read any document in any index with the field `public` set to `true`:
 
 ```json
 PUT _opendistro/_security/api/roles/public_data
@@ -29,12 +47,15 @@ PUT _opendistro/_security/api/roles/public_data
 }
 ```
 
+These queries can be as complex as you want, but we recommend keeping them simple to minimize the performance impact that the document-level security feature has on the cluster.
+{: .warning }
+
 
 ## Parameter substitution
 
 A number of variables exist that you can use to enforce rules based on the properties of a user. For example, `${user.name}` is replaced with the name of the current user.
 
-This rule would allow a user to read any document where there user-name was a value of the `readable_by` field:
+This rule allows a user to read any document where the username is a value of the `readable_by` field:
 
 ```json
 PUT _opendistro/_security/api/roles/user_data
