@@ -171,7 +171,7 @@ services:
       - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
 ```
 
-You can use this same method to [pass your own certificates](../override-security) for use with the [Security](../../security/) plugin.
+You can use this same method to [pass your own certificates](../docker-security/) for use with the [Security](../../security/) plugin.
 
 
 ## Bash access to containers

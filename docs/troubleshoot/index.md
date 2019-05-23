@@ -2,13 +2,13 @@
 layout: default
 title: Troubleshoot
 nav_order: 30
-has_children: false
+has_children: true
 has_toc: false
 ---
 
 # Troubleshoot
 
-This page contains a list of issues and workarounds.
+This section contains a list of issues and workarounds.
 
 
 ## Multi-tenancy issues in Kibana

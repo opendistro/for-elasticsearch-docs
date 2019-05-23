@@ -15,7 +15,7 @@ Cross-cluster search is exactly what it sounds like: it lets any node in a clust
 When accessing a *remote cluster* from a *coordinating cluster* using cross-cluster search:
 
 1. The Security plugin authenticates the user on the coordinating cluster.
-1. The Security plugin fetches the users backend roles on the coordinating cluster.
+1. The Security plugin fetches the user's backend roles on the coordinating cluster.
 1. The call including the authenticated user is forwarded to the remote cluster.
 1. The user's permissions are evaluated on the remote cluster.
 
@@ -30,7 +30,7 @@ To query indices on remote clusters, users need to have the following permission
 indices:admin/shards/search_shards
 ```
 
-#### Sample configuration
+#### Sample roles.yml configuration
 
 ```yml
 humanresources:
@@ -42,3 +42,8 @@ humanresources:
         - READ
         - indices:admin/shards/search_shards # needed for CCS
 ```
+
+
+#### Sample role in Kibana
+
+![Kibana UI for creating a cross-cluster search role](../../images/security-ccs.png)
