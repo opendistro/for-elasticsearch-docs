@@ -9,6 +9,14 @@ nav_order: 30
 
 Cross-cluster search is exactly what it sounds like: it lets any node in a cluster execute search requests across other clusters. The Security plugin supports cross-cluster search out of the box.
 
+---
+
+#### Table of contents
+1. TOC
+{:toc}
+
+
+---
 
 ## Authentication flow
 
@@ -47,3 +55,181 @@ humanresources:
 #### Sample role in Kibana
 
 ![Kibana UI for creating a cross-cluster search role](../../images/security-ccs.png)
+
+
+## Walkthrough
+
+Save this file as `docker-compose.yml` and run `docker-compose up` to start two single-node clusters on the same network:
+
+```yml
+version: '3'
+services:
+  odfe-node1:
+    image: amazon/opendistro-for-elasticsearch:0.9.0
+    container_name: odfe-node1
+    environment:
+      - cluster.name=odfe-cluster1
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - odfe-data1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
+    networks:
+      - odfe-net
+
+  odfe-node2:
+    image: amazon/opendistro-for-elasticsearch:0.9.0
+    container_name: odfe-node2
+    environment:
+      - cluster.name=odfe-cluster2
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - odfe-data2:/usr/share/elasticsearch/data
+    ports:
+      - 9250:9200
+      - 9700:9600 # required for Performance Analyzer
+    networks:
+      - odfe-net
+
+volumes:
+  odfe-data1:
+  odfe-data2:
+
+networks:
+  odfe-net:
+```
+
+After the clusters start, verify the names of each:
+
+```json
+curl -XGET -u admin:admin -k https://localhost:9200
+{
+  "cluster_name" : "odfe-cluster1",
+  ...
+}
+
+curl -XGET -u admin:admin -k https://localhost:9250
+{
+  "cluster_name" : "odfe-cluster2",
+  ...
+}
+```
+
+Both clusters run on `localhost`, so the important identifier is the port number. In this case, use port 9200 (`odfe-node1`) as the remote cluster, and port 9250 (`odfe-node2`) as the coordinating cluster.
+
+To get the IP address for the remote cluster, first identify its container ID:
+
+```bash
+docker ps
+CONTAINER ID    IMAGE                                       PORTS                                                      NAMES
+6fe89ebc5a8e    amazon/opendistro-for-elasticsearch:0.9.0   0.0.0.0:9200->9200/tcp, 0.0.0.0:9600->9600/tcp, 9300/tcp   odfe-node1
+2da08b6c54d8    amazon/opendistro-for-elasticsearch:0.9.0   9300/tcp, 0.0.0.0:9250->9200/tcp, 0.0.0.0:9700->9600/tcp   odfe-node2
+```
+
+Then get that container's IP address:
+
+```bash
+docker inspect --format='{% raw %}{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}{% endraw %}' 6fe89ebc5a8e
+172.31.0.3
+```
+
+On the coordinating cluster, add the remote cluster name and the IP address (with port 9300) for each "seed node." In this case, you only have one seed node:
+
+```json
+curl -k -XPUT -H 'Content-Type: application/json' -u admin:admin https://localhost:9250/_cluster/settings -d '
+{
+  "persistent": {
+    "search.remote": {
+      "odfe-cluster1": {
+        "seeds": ["172.31.0.3:9300"]
+      }
+    }
+  }
+}'
+```
+
+On the remote cluster, index a document:
+
+```bash
+curl -XPUT -k -H 'Content-Type: application/json' -u admin:admin https://localhost:9200/books/_doc/1 -d '{"Dracula": "Bram Stoker"}'
+```
+
+At this point, cross-cluster search works. You can test it using the `admin` user:
+
+```bash
+curl -XGET -k -u admin:admin https://localhost:9250/odfe-cluster1:books/_search?pretty
+{
+  ...
+  "hits": [{
+    "_index": "odfe-cluster1:books",
+    "_type": "_doc",
+    "_id": "1",
+    "_score": 1.0,
+    "_source": {
+      "Dracula": "Bram Stoker"
+    }
+  }]
+}
+```
+
+To continue testing, create a new user on both clusters:
+
+```bash
+curl -XPUT -k https://admin:admin@localhost:9200/_opendistro/_security/api/internalusers/booksuser  -H 'Content-Type: application/json' -d '{"password":"password"}'
+curl -XPUT -k https://admin:admin@localhost:9250/_opendistro/_security/api/internalusers/booksuser  -H 'Content-Type: application/json' -d '{"password":"password"}'
+```
+
+Then run the same search as before with `booksuser`:
+
+```json
+curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_search?pretty
+{
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "security_exception",
+        "reason" : "no permissions for [indices:admin/shards/search_shards, indices:data/read/search] and User [name=booksuser, roles=[], requestedTenant=null]"
+      }
+    ],
+    "type" : "security_exception",
+    "reason" : "no permissions for [indices:admin/shards/search_shards, indices:data/read/search] and User [name=booksuser, roles=[], requestedTenant=null]"
+  },
+  "status" : 403
+}
+```
+
+Note the permissions error. On the remote cluster, create a role with the appropriate permissions, and map `booksuser` to that role:
+
+```bash
+curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/roles/booksrole -d '{"indices" : {"books" : {"*" : [ "indices:admin/shards/search_shards","indices:data/read/search"]}}}' -i -v
+curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole -d '{"users" : ["booksuser"]}' -i -v
+```
+
+Finally, repeat the search:
+
+```bash
+curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_search?pretty
+{
+  ...
+  "hits": [{
+    "_index": "odfe-cluster1:books",
+    "_type": "_doc",
+    "_id": "1",
+    "_score": 1.0,
+    "_source": {
+      "Dracula": "Bram Stoker"
+    }
+  }]
+}
+```
