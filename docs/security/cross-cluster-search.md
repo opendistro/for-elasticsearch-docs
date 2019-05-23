@@ -217,7 +217,7 @@ curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localho
 curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole -d '{"users" : ["booksuser"]}' -i -v
 ```
 
-Both clusters must have the user, but only the remote cluster needs the role and mapping; in this case, the coordinating cluster handles authentication (i.e. "Does this request include valid user credentials?"), and the remote cluster handles authorization (i.e. "Can this user access this information?").
+Both clusters must have the user, but only the remote cluster needs the role and mapping; in this case, the coordinating cluster handles authentication (i.e. "Does this request include valid user credentials?"), and the remote cluster handles authorization (i.e. "Can this user access this data?").
 {: .tip }
 
 Finally, repeat the search:
