@@ -7,7 +7,7 @@ nav_order: 30
 
 # Cross-cluster search
 
-Cross-cluster search is exactly what it sounds like: it lets any node in a cluster execute search requests across other clusters. The Security plugin supports cross-cluster search out of the box.
+Cross-cluster search is exactly what it sounds like: it lets any node in a cluster execute search requests against other clusters. The Security plugin supports cross-cluster search out of the box.
 
 ---
 
@@ -24,10 +24,10 @@ When accessing a *remote cluster* from a *coordinating cluster* using cross-clus
 
 1. The Security plugin authenticates the user on the coordinating cluster.
 1. The Security plugin fetches the user's backend roles on the coordinating cluster.
-1. The call including the authenticated user is forwarded to the remote cluster.
+1. The call, including the authenticated user, is forwarded to the remote cluster.
 1. The user's permissions are evaluated on the remote cluster.
 
-While you can have different authentication and authorization configurations on the remote and coordinating cluster, we recommend using the same settings on both.
+You can have different authentication and authorization configurations on the remote and coordinating cluster, but we recommend using the same settings on both.
 
 
 ## Permissions
@@ -37,6 +37,7 @@ To query indices on remote clusters, users need to have the following permission
 ```
 indices:admin/shards/search_shards
 ```
+
 
 #### Sample roles.yml configuration
 
