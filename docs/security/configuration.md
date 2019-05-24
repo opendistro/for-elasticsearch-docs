@@ -166,11 +166,9 @@ opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 
 `opendistro_security.kerberos.acceptor_keytab_filepath` defines the path to the keytab file, which contains the principal that the Security plugin uses to issue requests against Kerberos.
 
-`acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin will use to issue requests against Kerberos.
+`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin will use to issue requests against Kerberos. This value must be present in the keytab file.
 
-The `acceptor_principal` defines the acceptor/server principal name the Security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.
-
-Due to security restrictions, the keytab file must be placed in the `<open-distro-install-dir>/conf` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
+Due to security restrictions, the keytab file must be placed in `config` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
 {: .warning }
 
 
