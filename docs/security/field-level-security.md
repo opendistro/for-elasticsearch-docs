@@ -11,6 +11,14 @@ Field-level security lets you control which document fields a user can see. Just
 
 The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and choose **DLS/FLS**.
 
+---
+
+#### Table of contents
+1. TOC
+{:toc}
+
+
+---
 
 ## Include or exclude fields
 
