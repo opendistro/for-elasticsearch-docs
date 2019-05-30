@@ -2,7 +2,7 @@
 layout: default
 title: Kibana Multi-Tenancy
 parent: Security
-nav_order: 24
+nav_order: 25
 ---
 
 # Kibana multi-tenancy
