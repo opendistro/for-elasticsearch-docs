@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Document-Level Security
-parent: Security
-nav_order: 23
+parent: Security - Access Control
+nav_order: 2
 ---
 
 # Document-level security

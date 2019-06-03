@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Field Masking
-parent: Security
-nav_order: 25
+parent: Security - Access Control
+nav_order: 4
 ---
 
 # Field masking
@@ -69,7 +69,7 @@ someonerole:
 
 ### REST API
 
-See [Create role](../api/#create-role).
+See [Create role](../../security-configuration/api/#create-role).
 
 
 ## (Advanced) Use an alternative hash algorithm

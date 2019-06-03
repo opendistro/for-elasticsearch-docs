@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Permissions
-parent: Security
-nav_order: 21
+parent: Security - Access Control
+nav_order: 70
 ---
 
 # Permissions
 
-This page is a complete list of available permissions in the Security plugin. Each permission controls access to a data type or API. For more information about permissions, see [Configuration](../configuration).
+This page is a complete list of available permissions in the Security plugin. Each permission controls access to a data type or API. For more information about permissions, see [Configuration](../../security-configuration/configuration).
 
 Rather than creating new action groups from individual permissions, you can often achieve your desired security posture using some combination of the default action groups. To learn more, see [Default Action Groups](../default-action-groups).
 {: .tip }

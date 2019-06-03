@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Active Directory and LDAP
-parent: Security
+parent: Security - Configuration
 nav_order: 10
 ---
 
