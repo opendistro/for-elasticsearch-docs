@@ -7,7 +7,7 @@ nav_order: 98
 
 # API
 
-The Security plugin REST API lets you programmatically create and manage users, roles, role mappings, and action groups.
+The Security plugin REST API lets you programmatically create and manage users, roles, role mappings, action groups, and tenants.
 
 ---
 
@@ -702,6 +702,138 @@ PATCH _opendistro/_security/api/rolesmapping
 }
 ```
 
+
+---
+
+## Tenants
+
+### Get tenant
+
+Retrieves one tenant.
+
+#### Request
+
+```
+GET _opendistro/_security/api/tenants/<tenant>
+```
+
+#### Sample response
+
+```json
+{
+  "human_resources" : {
+    "reserved" : false,
+    "hidden" : false,
+    "static" : false,
+    "description" : "The human resources tenant."
+  }
+}
+```
+
+
+### Get tenants
+
+Retrieves all tenants.
+
+#### Request
+
+```
+GET _opendistro/_security/api/tenants/
+```
+
+#### Sample response
+
+```json
+
+```
+
+
+### Delete tenant
+
+#### Request
+
+```
+DELETE _opendistro/_security/api/tenants/<tenant>
+```
+
+#### Sample response
+
+```json
+{
+  "status":"OK",
+  "message":"tenant human_resources deleted."
+}
+```
+
+
+### Create tenant
+
+Creates or replaces the specified tenant.
+
+#### Request
+
+```json
+PUT _opendistro/_security/api/tenants/<tenant>
+{
+  "description": "The human resources tenant."
+}
+```
+
+#### Sample response
+
+```json
+{
+  "status":"CREATED",
+  "message":"tenant human_resources created"
+}
+```
+
+
+### Patch tenant
+
+Add, delete, or modify a single tenant.
+
+#### Request
+
+```json
+PATCH _opendistro/_security/api/tenants/<tenant>
+[
+  {
+    "op": "replace", "path": "/description", "value": "An updated description"
+  }
+]
+```
+
+#### Sample response
+
+```json
+
+```
+
+
+### Patch tenants
+
+Add, delete, or modify multiple tenants in a single call.
+
+#### Request
+
+```json
+PATCH _opendistro/_security/api/tenants/
+[
+  {
+    "op": "replace", "path": "/human_resources/description", "value": "An updated description"
+  },
+  {
+    "op": "remove", "path": "/another_tenant"
+  }
+]
+```
+
+#### Sample response
+
+```json
+
+```
 
 ---
 
