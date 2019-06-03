@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Field-Level Security
-parent: Security
-nav_order: 24
+parent: Security - Access Control
+nav_order: 3
 ---
 
 # Field-level security
@@ -95,7 +95,7 @@ someonerole:
 
 ### REST API
 
-See [Create role](../api/#create-role).
+See [Create role](../../security-configuration/api/#create-role).
 
 
 ## Interaction with multiple roles

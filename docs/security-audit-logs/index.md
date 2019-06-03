@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Audit Logs
-parent: Security
-nav_order: 95
+title: Security - Audit Logs
+nav_order: 7
+has_children: true
+has_toc: false
 ---
 
-# Enable audit logs
+# Audit logs
 
 Audit logs let you track access to your Elasticsearch cluster and are useful for compliance purposes or in the aftermath of a security breach. You can configure the categories to be logged, the detail level of the logged messages, and where to store the logs.
 
@@ -17,7 +18,7 @@ To enable audit logging:
    opendistro_security.audit.type: internal_elasticsearch
    ```
 
-   This setting stores audit logs on the current cluster. For other storage options, see [Audit Log Storage Types](../storage-types).
+   This setting stores audit logs on the current cluster. For other storage options, see [Audit Log Storage Types](storage-types/).
 
 2. Restart each node.
 

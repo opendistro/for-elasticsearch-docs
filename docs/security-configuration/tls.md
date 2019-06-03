@@ -1,7 +1,7 @@
 ---
 layout: default
 title: TLS Certificates
-parent: Security
+parent: Security - Configuration
 nav_order: 4
 ---
 

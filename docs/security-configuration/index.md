@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Security
+title: Security - Configuration
 nav_order: 5
 has_children: true
 has_toc: false
@@ -8,7 +8,7 @@ has_toc: false
 
 # Security
 
-Open Distro for Elasticsearch includes the Security plugin for authentication and access control. The plugin provides numerous features.
+Open Distro for Elasticsearch includes the Security plugin for authentication and access control. The plugin provides numerous features to help you secure your cluster.
 
 Feature | Description
 :--- | :---
@@ -21,12 +21,16 @@ Audit logging | Audit logs let you track access to your Elasticsearch cluster an
 Cross-cluster search | Use a coordinating cluster to submit search requests to remote clusters.
 Kibana multi-tenancy | Create shared (or private) spaces for index patterns, visualizations, dashboards, and other Kibana objects.
 
+
+## Get started
+
 The plugin includes demo certificates so that you can get up and running quickly, but before using Open Distro for Elasticsearch in a production environment, you should configure it manually:
 
-- [Replace the demo certificates](../install/docker-security)
-- [Reconfigure `elasticsearch.yml`](tls-configuration)
-- [Reconfigure `config.yml`](configuration) (if you don't plan to use the internal user database)
-- [Change passwords for read-only users](../install/docker-security/#change-passwords-for-read-only-users)
-- [Apply changes using securityadmin.sh](security-admin)
+1. [Replace the demo certificates](../install/docker-security/)
+1. [Reconfigure `elasticsearch.yml` to use your certificates](tls/)
+1. [Reconfigure `config.yml` to use your authentication backend](configuration/) (if you don't plan to use the internal user database)
+1. [Change passwords for read-only users](../install/docker-security/#change-passwords-for-read-only-users)
+1. [Apply changes using securityadmin.sh](security-admin/)
+1. [Add users, roles, role mappings, and tenants](../security-access-control/)
 
-If you don't want to use the plugin, see [Disable security](disable).
+If you don't want to use the plugin, see [Disable security](disable/).

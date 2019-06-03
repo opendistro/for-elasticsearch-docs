@@ -1,7 +1,7 @@
 ---
 layout: default
 title: API
-parent: Security
+parent: Security - Configuration
 nav_order: 98
 ---
 

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Cross-Cluster Search
-parent: Security
-nav_order: 30
+parent: Security - Access Control
+nav_order: 60
 ---
 
 # Cross-cluster search
