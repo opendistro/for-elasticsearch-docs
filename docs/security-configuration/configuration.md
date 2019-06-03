@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Backend Configuration
-parent: Security
+parent: Security - Configuration
 nav_order: 2
 ---
 
@@ -9,7 +9,7 @@ nav_order: 2
 
 One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
 
-The main configuration file for authentication and authorization modules is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
+The main configuration file for authentication and authorization backends is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
 
 `config.yml` has three main parts:
 
@@ -126,7 +126,7 @@ You can define multiple entries in this section the same way as you can for auth
 Possible vales for `type` are:
 
 - noop: Used to skip this step altogether
-- ldap: Fetch additional roles from an LDAP server. This setting requires [additional, LDAP-specific configuration settings](#ldap).
+- ldap: Fetch additional roles from an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
 
 
 ## Examples
@@ -166,11 +166,9 @@ opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 
 `opendistro_security.kerberos.acceptor_keytab_filepath` defines the path to the keytab file, which contains the principal that the Security plugin uses to issue requests against Kerberos.
 
-`acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin will use to issue requests against Kerberos.
+`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin will use to issue requests against Kerberos. This value must be present in the keytab file.
 
-The `acceptor_principal` defines the acceptor/server principal name the Security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.
-
-Due to security restrictions, the keytab file must be placed in the `<open-distro-install-dir>/conf` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
+Due to security restrictions, the keytab file must be placed in `config` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
 {: .warning }
 
 

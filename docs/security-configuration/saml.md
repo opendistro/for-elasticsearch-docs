@@ -1,7 +1,7 @@
 ---
 layout: default
 title: SAML
-parent: Security
+parent: Security - Configuration
 nav_order: 11
 ---
 

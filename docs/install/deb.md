@@ -59,7 +59,7 @@ These steps assume you're using Ubuntu 18.04.
    curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
    ```
 
-1. For instructions on installing and running Kibana, see [Kibana](../../kibana).
+1. For instructions on installing and running Kibana, see [Kibana](../../kibana/).
 
 1. To check the status of the service:
 

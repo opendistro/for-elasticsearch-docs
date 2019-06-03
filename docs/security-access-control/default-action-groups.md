@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Default Action Groups
-parent: Security
-nav_order: 20
+parent: Security - Access Control
+nav_order: 71
 ---
 
 # Default action groups

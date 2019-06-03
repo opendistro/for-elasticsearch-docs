@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Generate Certificates
-parent: Security
+parent: Security - Configuration
 nav_order: 5
 ---
 
@@ -94,7 +94,7 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
 
-If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set hostname verification to `false`. To learn more, see [Configure TLS certificates](../../security/tls-configuration/#advanced-hostname-verification-and-dns-lookup).
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set hostname verification to `false`. To learn more, see [Configure TLS certificates](../../security-configuration/tls/#advanced-hostname-verification-and-dns-lookup).
 
 
 ### Sample script
@@ -162,7 +162,7 @@ This process generates many files, but the ones you need to add to your cluster 
 - (Optional) `node.pem`
 - (Optional) `node-key.pem`
 
-For information on adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls-configuration).
+For information on adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls/).
 
 
 ## Run securityadmin.sh

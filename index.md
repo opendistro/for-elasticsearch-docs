@@ -36,7 +36,7 @@ Component | Purpose
 :--- | :---
 Elasticsearch | Data store and search engine
 Kibana | Search frontend and visualizations
-[Security](docs/security/) | Authentication and access control for your cluster
+[Security](docs/security-configuration/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive alerts when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster

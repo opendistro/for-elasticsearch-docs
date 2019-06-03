@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Apply Changes with securityadmin.sh
-parent: Security
+parent: Security - Configuration
 nav_order: 3
 ---
 

@@ -325,7 +325,7 @@ Snapshots are only forward-compatible, and only by one major version. For exampl
 If you have an old snapshot, you can sometimes restore it into an intermediate cluster, reindex all indices, take a new snapshot, and repeat until you arrive at your desired version, but you might find it easier to just manually index your data on the new cluster.
 
 
-### Security plugin considerations
+## Security plugin considerations
 
 If you are using the Security plugin, snapshots have some additional restrictions:
 
