@@ -49,12 +49,19 @@ Docker
 {: .label .label-green }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. `docker pull amazon/opendistro-for-elasticsearch:1.0.0`
-1. `docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0`
-1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.0.0`
+1. Run the following commands:
+
+   ```bash
+   docker pull amazon/opendistro-for-elasticsearch:1.0.0
+   docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0
+   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.0.0
+   ```
+   
 1. In a new terminal session, run:
 
-   `curl -XGET --insecure https://localhost:9200 -u admin:admin`
+   ```bash
+   curl -XGET --insecure https://localhost:9200 -u admin:admin
+   ```
 
 To learn more, see [Install](docs/install/).
 
