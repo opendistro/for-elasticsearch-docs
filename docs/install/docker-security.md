@@ -121,7 +121,7 @@ If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has
 
 ## Change passwords for read-only users
 
-After the cluster starts, change the passwords for the [read-only user accounts](../../security-configuration/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
+After the cluster starts, change the passwords for the [read-only user accounts](../../security-access-control/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
 
 - The `admin` user has full privileges on the cluster.
 - `kibanaserver` user has certain permissions to the `.kibana` index that let it perform management tasks like setting index patterns and retrieving visualizations. This user, or one just like it, is required for Kibana to work properly with the Security plugin. We recommend just using `kibanaserver`.

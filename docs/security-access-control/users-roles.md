@@ -11,7 +11,7 @@ The Security plugin includes an internal user database. Use this database in pla
 
 Roles are the core way of controlling access to your cluster. Roles contain any combination of cluster-wide permissions, index-specific permissions, document- and field-level security, and tenants. Then you map users to these roles so that users gain those permissions.
 
-Unless you need to create new [read-only or hidden users](../../security-configuration/api/#read-only-and-hidden-resources), we **highly** recommend using Kibana or the REST API to create new users, roles, and role mappings. The `.yml` files are for initial setup, not ongoing use.
+Unless you need to create new [read-only or hidden users](../api/#read-only-and-hidden-resources), we **highly** recommend using Kibana or the REST API to create new users, roles, and role mappings. The `.yml` files are for initial setup, not ongoing use.
 {: .warning }
 
 ---
@@ -52,7 +52,7 @@ logstash:
 
 ### REST API
 
-See [Create user](../../security-configuration/api/#create-user).
+See [Create user](../api/#create-user).
 
 
 ## Create roles
@@ -89,7 +89,7 @@ someonerole:
 
 ### REST API
 
-See [Create role](../../security-configuration/api/#create-role).
+See [Create role](../api/#create-role).
 
 
 ## Map users to roles
@@ -120,4 +120,4 @@ kibana_user:
 
 ### REST API
 
-See [Create role mapping](../../security-configuration/api/#create-role-mapping).
+See [Create role mapping](../api/#create-role-mapping).

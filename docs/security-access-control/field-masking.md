@@ -69,7 +69,7 @@ someonerole:
 
 ### REST API
 
-See [Create role](../../security-configuration/api/#create-role).
+See [Create role](../api/#create-role).
 
 
 ## (Advanced) Use an alternative hash algorithm
