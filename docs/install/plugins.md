@@ -40,7 +40,17 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 
 ## Compatibility
 
-See [Version history](../../../#version-history) for the versions of Elasticsearch that Open Distro for Elasticsearch supports. You must have the exact compatible OSS version installed (e.g. 6.6.2 and not 6.6.1).
+See [Version history](../../../#version-history) for the versions of Elasticsearch that Open Distro for Elasticsearch supports. You must have the exact compatible OSS version installed (e.g. 6.6.2 and not 6.6.1). To get a list of available Elasticsearch versions on CentOS 7 and Amazon Linux 2:
+
+```bash
+sudo yum --showduplicates list elasticsearch-oss
+```
+
+Then you can specify the version you need:
+
+```bash
+sudo yum install elasticsearch-oss-6.7.1
+```
 
 
 ## List installed plugins
