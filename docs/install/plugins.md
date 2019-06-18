@@ -7,7 +7,7 @@ nav_order: 90
 
 # Standalone Elasticsearch plugin install
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, SQL, and Performance Analyzer plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin.
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and SQL plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin.
 
 In addition to their Elasticsearch plugins, Security and Alerting have corresponding [Kibana plugins](../../kibana/plugins) that you probably want to install, as well.
 {: .tip }
@@ -20,6 +20,8 @@ Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`)
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-0.9.0.0.zip
 ```
+
+After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates or configure it manually for production workloads.
 
 
 #### Alerting
@@ -36,28 +38,9 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ```
 
 
-#### Performance Analyzer
-
-```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-0.9.0.0.zip
-```
-
-
 ## Compatibility
 
-See [Version history](../../../#version-history) for the versions of Elasticsearch that Open Distro for Elasticsearch supports. You must have the exact compatible version installed (e.g. 6.6.2 and not 6.6.1). To get a list of available Elasticsearch versions on CentOS 7 and Amazon Linux 2:
-
-```bash
-sudo yum --showduplicates list elasticsearch
-```
-
-Then you can specify the version you need:
-
-```bash
-sudo yum install elasticsearch-6.6.2
-```
-
-After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates or configure it manually for production workloads.
+See [Version history](../../../#version-history) for the versions of Elasticsearch that Open Distro for Elasticsearch supports. You must have the exact compatible OSS version installed (e.g. 6.6.2 and not 6.6.1).
 
 
 ## List installed plugins
