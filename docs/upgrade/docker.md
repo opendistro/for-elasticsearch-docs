@@ -2,7 +2,7 @@
 layout: default
 title: Docker Upgrade
 parent: Upgrade
-nav_order: 3
+nav_order: 20
 ---
 
 # Docker upgrade
@@ -12,7 +12,7 @@ If you're using the Docker image, we highly recommend performing what amounts to
 The most important step is to leave your data volumes intact. Don't run `docker-compose down -v`. In fact, you don't need to run `docker-compose down` at all.
 {: .warn }
 
-1. Update the version strings in `docker-compose.yml`. For example, find and replace all occurrences of `:0.9.0` with `:1.0.0`. You can perform this step while the cluster is running.
+1. Update the version strings in `docker-compose.yml`. For example, find and replace all occurrences of `:1.0.0` with `:1.1.0`. You can perform this step while the cluster is running.
 
 1. Recreate the cluster using the updated file:
 

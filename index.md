@@ -53,10 +53,9 @@ Docker
 
    ```bash
    docker pull amazon/opendistro-for-elasticsearch:1.0.0
-   docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0
    docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.0.0
    ```
-   
+
 1. In a new terminal session, run:
 
    ```bash
@@ -90,7 +89,7 @@ For detailed release notes, see these GitHub repositories:
 
 ## Builds
 
-If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. If your changes could benefit others, please consider submitting a pull request.
+If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
 
 
 ---
