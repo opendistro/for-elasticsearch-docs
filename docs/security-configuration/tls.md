@@ -119,14 +119,17 @@ Name | Description
 opendistro_security.ssl.transport.enable\_openssl\_if\_available | Enable OpenSSL on the transport layer if available. Optional. Default is true.
 opendistro_security.ssl.http.enable\_openssl\_if\_available | Enable OpenSSL on the REST layer if available. Optional. Default is true.
 
+
+{% comment %}
 1. Install [OpenSSL 1.1.0](https://www.openssl.org/community/binaries.html) on every node.
-1. Install [Apache Portable Runtime ](https://apr.apache.org) on every node:
+1. Install [Apache Portable Runtime](https://apr.apache.org) on every node:
 
   ```
   sudo yum install apr
   ```
+{% endcomment %}
 
-1. Download [netty-tcnative](https://netty.io/wiki/forked-tomcat-native.html) for RPM-based distributions (`_linux-x86_64-fedora.jar_`) and place it into `plugins/opendistro_security/` on every node.
+1. Download the statically-linked JAR that includes OpenSSL, Apache Portable Runtime, and `netty-tcnative` for [RPM-based distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-fedora-linux-x86_64.jar) or [other distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-non-fedora-linux-x86_64.jar) and place it in `plugins/opendistro_security/` on every node.
 
 
 ## (Advanced) Hostname verification and DNS lookup
