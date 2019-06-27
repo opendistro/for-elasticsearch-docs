@@ -71,7 +71,7 @@ To learn more, see [Install](docs/install/).
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-1.0.0 | Adds action throttling to the alerting plugin and bumps Elasticsearch to a new major version. See [Upgrade to 1.0.0](./docs/upgrade/1-0-0/) for breaking changes. | 27 June 2019 | 7.0.1
+1.0.0 | Adds action throttling to the alerting plugin and bumps Elasticsearch to a new major version. See [Upgrade to 1.0.0](./docs/upgrade/1-0-0/) for breaking changes. | TBD | 7.0.1
 0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
 0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
 0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
