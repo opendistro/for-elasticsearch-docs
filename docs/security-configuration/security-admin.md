@@ -206,11 +206,8 @@ You can download all current configuration files from your cluster with the foll
 
 This command dumps the current Security plugin configuration from your cluster to individual files in the directory you specify. You can then use these files as backups or to load the configuration into a different cluster. This command is useful when moving a proof-of-concept to production.
 
-You can specify the download location with the `-cd` option:
-
 ```bash
-./securityadmin.sh -r -h staging.example.com -p 9300  \
-    -cd /etc/backup/ -ts ... -tspass ... -ks ... -kspass ...
+./securityadmin.sh -backup ~ -icl -nhnv -cacert ../../../config/root-ca.pem -cert ../../../config/kirk.pem -key ../../../config/kirk-key.pem
 ```
 
 To upload the dumped files to another cluster:

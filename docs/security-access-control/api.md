@@ -119,7 +119,20 @@ GET _opendistro/_security/api/actiongroups/
 #### Sample response
 
 ```json
-asdf
+{
+  "read": {
+    "reserved": true,
+    "hidden": false,
+    "allowed_actions": [
+      "indices:data/read*",
+      "indices:admin/mappings/fields/get*"
+    ],
+    "type": "index",
+    "description": "Allow all read operations",
+    "static": true
+  },
+  ...
+}
 ```
 
 
@@ -396,19 +409,33 @@ GET _opendistro/_security/api/roles/<role>
 
 ```json
 {
-  "role_starfleet" : {
-    "indices" : {
-      "pub*" : {
-        "*" : [ "READ" ],
-        "_dls_": "{ \"bool\": { \"must_not\": { \"match\": { \"Designation\": \"CEO\"  }}}}",
-        "_fls_": [
-          "Designation",
-          "FirstName",
-          "LastName",
-          "Salary"
-        ]
-      }
-    }
+  "test-role": {
+    "reserved": false,
+    "hidden": false,
+    "cluster_permissions": [
+      "cluster_composite_ops",
+      "indices_monitor"
+    ],
+    "index_permissions": [{
+      "index_patterns": [
+        "movies*"
+      ],
+      "dls": "",
+      "fls": [],
+      "masked_fields": [],
+      "allowed_actions": [
+        "read"
+      ]
+    }],
+    "tenant_permissions": [{
+      "tenant_patterns": [
+        "human_resources"
+      ],
+      "allowed_actions": [
+        "kibana_all_read"
+      ]
+    }],
+    "static": false
   }
 }
 ```
@@ -428,20 +455,28 @@ GET _opendistro/_security/api/roles/
 
 ```json
 {
-  "role_starfleet" : {
-    "indices" : {
-      "pub*" : {
-        "*" : [ "READ" ],
-        "_dls_": "{ \"bool\": { \"must_not\": { \"match\": { \"Designation\": \"CEO\"  }}}}",
-        "_fls_": [
-          "Designation",
-          "FirstName",
-          "LastName",
-          "Salary"
-        ]
-      }
-    }
-  }
+  "manage_snapshots": {
+    "reserved": true,
+    "hidden": false,
+    "description": "Provide the minimum permissions for managing snapshots",
+    "cluster_permissions": [
+      "manage_snapshots"
+    ],
+    "index_permissions": [{
+      "index_patterns": [
+        "*"
+      ],
+      "fls": [],
+      "masked_fields": [],
+      "allowed_actions": [
+        "indices:data/write/index",
+        "indices:admin/create"
+      ]
+    }],
+    "tenant_permissions": [],
+    "static": true
+  },
+  ...
 }
 ```
 
@@ -459,7 +494,7 @@ DELETE _opendistro/_security/api/roles/<role>
 ```json
 {
   "status":"OK",
-  "message":"role role_starfleet deleted."
+  "message":"role test-role deleted."
 }
 ```
 
@@ -473,18 +508,29 @@ Creates or replaces the specified role.
 ```json
 PUT _opendistro/_security/api/roles/<role>
 {
-  "cluster" : [ "*" ],
-  "indices" : {
-    "pub*" : {
-      "*" : [ "READ" ],
-      "_dls_": "{ \"bool\": { \"must_not\": { \"match\": { \"Designation\": \"CEO\"}}}}",
-      "_fls_": ["field1", "field2"]
-    }
-  },
-  "tenants": {
-    "tenant1": "RW",
-    "tenant2": "RO"
-  }  
+  "cluster_permissions": [
+    "cluster_composite_ops",
+    "indices_monitor"
+  ],
+  "index_permissions": [{
+    "index_patterns": [
+      "movies*"
+    ],
+    "dls": "",
+    "fls": [],
+    "masked_fields": [],
+    "allowed_actions": [
+      "read"
+    ]
+  }],
+  "tenant_permissions": [{
+    "tenant_patterns": [
+      "human_resources"
+    ],
+    "allowed_actions": [
+      "kibana_all_read"
+    ]
+  }]
 }
 ```
 
@@ -492,8 +538,8 @@ PUT _opendistro/_security/api/roles/<role>
 
 ```json
 {
-  "status":"OK",
-  "message":"role role_starfleet created."
+  "status": "OK",
+  "message": "'test-role' updated."
 }
 ```
 
@@ -721,11 +767,11 @@ GET _opendistro/_security/api/tenants/<tenant>
 
 ```json
 {
-  "human_resources" : {
-    "reserved" : false,
-    "hidden" : false,
-    "static" : false,
-    "description" : "The human resources tenant."
+  "human_resources": {
+    "reserved": false,
+    "hidden": false,
+    "description": "A tenant for the human resources team.",
+    "static": false
   }
 }
 ```
@@ -744,7 +790,20 @@ GET _opendistro/_security/api/tenants/
 #### Sample response
 
 ```json
-
+{
+  "global_tenant": {
+    "reserved": true,
+    "hidden": false,
+    "description": "Global tenant",
+    "static": true
+  },
+  "human_resources": {
+    "reserved": false,
+    "hidden": false,
+    "description": "A tenant for the human resources team.",
+    "static": false
+  }
+}
 ```
 
 
@@ -775,7 +834,7 @@ Creates or replaces the specified tenant.
 ```json
 PUT _opendistro/_security/api/tenants/<tenant>
 {
-  "description": "The human resources tenant."
+  "description": "A tenant for the human resources team."
 }
 ```
 
@@ -807,7 +866,10 @@ PATCH _opendistro/_security/api/tenants/<tenant>
 #### Sample response
 
 ```json
-
+{
+  "status": "OK",
+  "message": "Resource updated."
+}
 ```
 
 
@@ -821,10 +883,16 @@ Add, delete, or modify multiple tenants in a single call.
 PATCH _opendistro/_security/api/tenants/
 [
   {
-    "op": "replace", "path": "/human_resources/description", "value": "An updated description"
+    "op": "replace",
+    "path": "/human_resources/description",
+    "value": "An updated description"
   },
   {
-    "op": "remove", "path": "/another_tenant"
+    "op": "add",
+    "path": "/another_tenant",
+    "value": {
+      "description": "Another description."
+    }
   }
 ]
 ```
@@ -832,7 +900,10 @@ PATCH _opendistro/_security/api/tenants/
 #### Sample response
 
 ```json
-
+{
+  "status": "OK",
+  "message": "Resource updated."
+}
 ```
 
 ---

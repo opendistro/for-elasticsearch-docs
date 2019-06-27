@@ -66,7 +66,7 @@ Setting | Description
 
 ## Add tenants
 
-In the Security plugin, tenants are just properties of roles. To create tenants, add them to roles in Kibana or `roles.yml`.
+To create tenants, add them in Kibana or `tenants.yml`.
 
 - Read-write (`RW`) permissions let the role view and modify objects in the tenant.
 - Read-only (`RO`) permissions let the role view objects, but not modify them.
@@ -75,24 +75,62 @@ In the Security plugin, tenants are just properties of roles. To create tenants,
 #### Kibana
 
 1. Open Kibana.
-1. Choose **Security** and **Roles**.
-1. Either create a new role or select an existing one.
-1. Choose **Tenants**.
+1. Choose **Security**, **Tenants**, and add a new tenant.
+1. Give the tenant a name and description.
+1. Choose **Submit**.
 
-![Adding tenants in Kibana](../../images/security-tenants.png)
+
+#### tenants.yml
+
+```yml
+---
+_meta:
+  type: "tenants"
+  config_version: 2
+
+## Demo tenants
+admin_tenant:
+  reserved: false
+  description: "Demo tenant for admin user"
+```
+
+## Assign tenants to roles
+
+After creating a tenant, give a role access to it using the REST API or `roles.yml`.
+
+
+#### REST API
+
+See [Create role](../API/#create-role).
 
 
 #### roles.yml
 
 ```yml
-human_resources:
-  cluster:
-    ...
-  indices:
-    ...
-  tenants:
-    human_resources: RW
-    human_resources_readonly: RO
+---
+test-role:
+  reserved: false
+  hidden: false
+  cluster_permissions:
+  - "cluster_composite_ops"
+  - "indices_monitor"
+  index_permissions:
+  - index_patterns:
+    - "movies*"
+    dls: ""
+    fls: []
+    masked_fields: []
+    allowed_actions:
+    - "read"
+  tenant_permissions:
+  - tenant_patterns:
+    - "human_resources"
+    allowed_actions:
+    - "kibana_all_read"
+  static: false
+_meta:
+  type: "roles"
+  config_version: 2
 ```
 
 
