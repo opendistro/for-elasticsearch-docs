@@ -66,10 +66,7 @@ Setting | Description
 
 ## Add tenants
 
-To create tenants, add them in Kibana or `tenants.yml`.
-
-- Read-write (`RW`) permissions let the role view and modify objects in the tenant.
-- Read-only (`RO`) permissions let the role view objects, but not modify them.
+To create tenants, use Kibana, the REST API, or `tenants.yml`.
 
 
 #### Kibana
@@ -78,6 +75,11 @@ To create tenants, add them in Kibana or `tenants.yml`.
 1. Choose **Security**, **Tenants**, and add a new tenant.
 1. Give the tenant a name and description.
 1. Choose **Submit**.
+
+
+#### REST API
+
+See [Create tenant](../api/#create-tenant).
 
 
 #### tenants.yml
@@ -94,9 +96,19 @@ admin_tenant:
   description: "Demo tenant for admin user"
 ```
 
-## Assign tenants to roles
+## Give roles access to tenants
 
-After creating a tenant, give a role access to it using the REST API or `roles.yml`.
+After creating a tenant, give a role access to it using Kibana, the REST API, or `roles.yml`.
+
+- Read-write (`kibana_all_write`) permissions let the role view and modify objects in the tenant.
+- Read-only (`kibana_all_read`) permissions let the role view objects, but not modify them.
+
+
+#### Kibana
+
+1. Open Kibana.
+1. Choose **Security**, **Roles**, and **Tenant Permissions**.
+1. Choose a tenant, and give the role read or write permissions to it.
 
 
 #### REST API
