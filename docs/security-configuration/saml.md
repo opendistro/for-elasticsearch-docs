@@ -81,7 +81,7 @@ idp.metadata_file | The path to the SAML 2.0 metadata file of your IdP. Place th
 idp.metadata_url | The SAML 2.0 metadata URL of your IdP. Required if `idp.metadata_file` is not set.
 
 
-## Idp and service provider entity ID
+## IdP and service provider entity ID
 
 An entity ID is a globally unique name for a SAML entity, either an IdP or a service provider (SP). The IdP entity ID is usually provided by your IdP. The SP entity ID is the name of the configured application or client in your IdP. We recommend adding a new application for Kibana and using the URL of your Kibana installation as SP entity ID.
 
@@ -288,6 +288,20 @@ server.xsrf.whitelist: ["/_opendistro/_security/saml/acs"]
 
 If you use the logout POST binding, you also need to whitelist the logout endpoint:
 
-```
+```yml
 server.xsrf.whitelist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout"]
+```
+
+### IdP-initated SSO
+
+To use IdP-initiated SSO, set the Assertion Consumer Service endpoint of your IdP to:
+
+```
+/_opendistro/_security/saml/acs/idpinitiated
+```
+
+Then add this endpoint to `server.xsrf.whitelist` in `kibana.yml`:
+
+```yml
+server.xsrf.whitelist: ["/_opendistro/_security/saml/acs/idpinitiated", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout"]
 ```

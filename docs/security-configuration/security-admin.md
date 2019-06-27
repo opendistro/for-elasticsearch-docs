@@ -196,15 +196,15 @@ Name | Description
 -ep | Comma-separated list of enabled TLS protocols.
 
 
-### Backup and Restore
+### Backup, Restore, and Migrate
 
 You can download all current configuration files from your cluster with the following command:
 
 ```bash
-./securityadmin.sh -r -ts ... -tspass ... -ks ... -kspass ...
+./securityadmin.sh -backup /file/path -ts ... -tspass ... -ks ... -kspass ...
 ```
 
-This command dumps the current Security plugin configuration from your cluster to individual files in the working directory. You can then use these files as backups or to load the configuration into a different cluster. This command is useful when moving a proof-of-concept to production.
+This command dumps the current Security plugin configuration from your cluster to individual files in the directory you specify. You can then use these files as backups or to load the configuration into a different cluster. This command is useful when moving a proof-of-concept to production.
 
 You can specify the download location with the `-cd` option:
 
@@ -216,14 +216,19 @@ You can specify the download location with the `-cd` option:
 To upload the dumped files to another cluster:
 
 ```bash
-./securityadmin.sh -h production.example.com -p 9301 -cd /etc/backup/  \
-    -ts ... -tspass ... -ks ... -kspass ...
+./securityadmin.sh -h production.example.com -p 9301 -cd /etc/backup/ -ts ... -tspass ... -ks ... -kspass ...
+```
+
+To migrate configuration YAML files from the Open Distro for Elasticsearch 0.x.x format to the 1.x.x format:
+
+```bash
+./securityadmin.sh -migrate ../securityconfig -ts ... -tspass ... -ks ... -kspass ...
 ```
 
 Name | Description
 --- | ---
--r | Retrieve the current Security plugin configuration from a running cluster and dump it to the working directory.
--cd | Specify the directory to store the files to. You can use an absolute or relative path. Relative paths are resolved relative to the execution directory of `securityadmin.sh`.
+-backup | Retrieve the current Security plugin configuration from a running cluster and dump it to the working directory.
+-migrate | Migrate configuration YAML files from version 0.x.x to 1.x.x.
 
 
 ### Other options

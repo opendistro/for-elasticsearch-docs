@@ -11,6 +11,11 @@ has_toc: false
 This section contains a list of issues and workarounds.
 
 
+## Java error during startup
+
+You might see `[ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [odfe-node1] SSL Problem Insufficient buffer remaining for AEAD cipher fragment (2). Needs to be more than tag size (16)` when starting Open Distro for Elasticsearch. This problem is a [known issue with Java](https://bugs.openjdk.java.net/browse/JDK-8221218) and doesn't affect the operation of the cluster.
+
+
 ## Multi-tenancy issues in Kibana
 
 If you're testing multiple users in Kibana and encounter unexpected changes in tenant, use Google Chrome in an Incognito window or Firefox in a Private window.

@@ -9,10 +9,10 @@ nav_order: 20
 
 If you're using the Docker image, we highly recommend performing what amounts to a [cluster restart upgrade](../cluster-restart/). This process requires downtime, but takes very few steps and avoids problems with individual nodes rejoining the cluster and executing commands within containers.
 
-The most important step is to leave your data volumes intact. Don't run `docker-compose down -v`. In fact, you don't need to run `docker-compose down` at all.
-{: .warn }
+The most important step is to leave your data volumes intact. **Don't** run `docker-compose down -v`.
+{: .warning }
 
-1. Update the version strings in `docker-compose.yml`. For example, find and replace all occurrences of `:1.0.0` with `:1.1.0`. You can perform this step while the cluster is running.
+1. Update the version strings in `docker-compose.yml`. You can perform this step while the cluster is running. For more information, see [Sample Docker Compose file](../../install/docker/#sample-docker-compose-file).
 
 1. Recreate the cluster using the updated file:
 

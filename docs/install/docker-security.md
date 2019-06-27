@@ -20,13 +20,19 @@ services:
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
+      - node.name=odfe-node1
+      - discovery.seed_hosts=odfe-node1,odfe-node2
+      - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      - network.host=0.0.0.0 # required if not using the demo Security configuration
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the Elasticsearch user, set to at least 65536 on modern systems
+        hard: 65536
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
@@ -36,6 +42,10 @@ services:
       - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+      - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
+      - ./tenants.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/tenants.yml
+      - ./roles.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+      - ./action_groups.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/action_groups.yml
     ports:
       - 9200:9200
       - 9600:9600 # required for Performance Analyzer
@@ -46,14 +56,19 @@ services:
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
+      - node.name=odfe-node2
+      - discovery.seed_hosts=odfe-node1,odfe-node2
+      - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.zen.ping.unicast.hosts=odfe-node1
       - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
@@ -63,6 +78,10 @@ services:
       - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+      - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
+      - ./tenants.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/tenants.yml
+      - ./roles.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+      - ./action_groups.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/action_groups.yml
     networks:
       - odfe-net
   kibana:
