@@ -13,29 +13,6 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 
 1. `sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o opendistroforelasticsearch-artifacts.repo`
 
-   You can also create the file manually. It looks like this:
-
-   ```
-   [elasticsearch-6.x]
-   name=Elasticsearch repository for 6.x packages
-   baseurl=https://artifacts.elastic.co/packages/oss-6.x/yum
-   gpgcheck=1
-   gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-   enabled=1
-   autorefresh=1
-   type=rpm-md
-
-   [opendistroforelasticsearch-artifacts-repo]
-   name=Release RPM artifacts of OpenDistroForElasticsearch
-   baseurl=https://d3g5vo6xdbdb9a.cloudfront.net/yum/noarch/
-   enabled=1
-   gpgkey=https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch
-   gpgcheck=1
-   repo_gpgcheck=1
-   autorefresh=1
-   type=rpm-md
-   ```
-
 1. Open Distro for Elasticseach requires the full Java Development Kit (JDK), not just the Java Runtime Environment (JRE). If you don't have the JDK installed, install either version 8 or version 11:
 
    ```bash
