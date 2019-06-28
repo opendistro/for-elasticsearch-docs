@@ -16,17 +16,23 @@ Before deploying to a production environment, you should replace the demo securi
 version: '3'
 services:
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:0.9.0
+    image: amazon/opendistro-for-elasticsearch:1.0.0
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
+      - node.name=odfe-node1
+      - discovery.seed_hosts=odfe-node1,odfe-node2
+      - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      - network.host=0.0.0.0 # required if not using the demo Security configuration
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the Elasticsearch user, set to at least 65536 on modern systems
+        hard: 65536
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
@@ -36,24 +42,33 @@ services:
       - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+      - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
+      - ./tenants.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/tenants.yml
+      - ./roles.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+      - ./action_groups.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/action_groups.yml
     ports:
       - 9200:9200
       - 9600:9600 # required for Performance Analyzer
     networks:
       - odfe-net
   odfe-node2:
-    image: amazon/opendistro-for-elasticsearch:0.9.0
+    image: amazon/opendistro-for-elasticsearch:1.0.0
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
+      - node.name=odfe-node2
+      - discovery.seed_hosts=odfe-node1,odfe-node2
+      - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.zen.ping.unicast.hosts=odfe-node1
       - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
@@ -63,10 +78,14 @@ services:
       - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
+      - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
+      - ./tenants.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/tenants.yml
+      - ./roles.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles.yml
+      - ./action_groups.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/action_groups.yml
     networks:
       - odfe-net
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:0.9.0
+    image: amazon/opendistro-for-elasticsearch-kibana:1.0.0
     container_name: odfe-kibana
     ports:
       - 5601:5601
@@ -121,7 +140,7 @@ If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has
 
 ## Change passwords for read-only users
 
-After the cluster starts, change the passwords for the [read-only user accounts](../../security-configuration/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
+After the cluster starts, change the passwords for the [read-only user accounts](../../security-access-control/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
 
 - The `admin` user has full privileges on the cluster.
 - `kibanaserver` user has certain permissions to the `.kibana` index that let it perform management tasks like setting index patterns and retrieving visualizations. This user, or one just like it, is required for Kibana to work properly with the Security plugin. We recommend just using `kibanaserver`.

@@ -49,12 +49,18 @@ Docker
 {: .label .label-green }
 
 1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. `docker pull amazon/opendistro-for-elasticsearch:0.9.0`
-1. `docker pull amazon/opendistro-for-elasticsearch-kibana:0.9.0`
-1. `docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:0.9.0`
+1. Run the following commands:
+
+   ```bash
+   docker pull amazon/opendistro-for-elasticsearch:1.0.0
+   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.0.0
+   ```
+
 1. In a new terminal session, run:
 
-   `curl -XGET --insecure https://localhost:9200 -u admin:admin`
+   ```bash
+   curl -XGET --insecure https://localhost:9200 -u admin:admin
+   ```
 
 To learn more, see [Install](docs/install/).
 
@@ -65,6 +71,7 @@ To learn more, see [Install](docs/install/).
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+1.0.0 | Adds action throttling to the alerting plugin and bumps Elasticsearch to a new major version. See [Upgrade to 1.0.0](./docs/upgrade/1-0-0/) for breaking changes. | TBD | 7.0.1
 0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
 0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
 0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
@@ -82,7 +89,7 @@ For detailed release notes, see these GitHub repositories:
 
 ## Builds
 
-If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. If your changes could benefit others, please consider submitting pull requests.
+If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
 
 
 ---

@@ -39,7 +39,7 @@ If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin 
 1. Create a new `Dockerfile`:
 
    ```
-   FROM amazon/opendistro-for-elasticsearch-kibana:0.9.0
+   FROM amazon/opendistro-for-elasticsearch-kibana:1.0.0
    RUN /usr/share/kibana/bin/kibana-plugin remove opendistro_security
    ```
 
@@ -49,7 +49,7 @@ If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin 
    docker build --tag=kibana-no-security .
    ```
 
-1. In `docker-compose.yml`, change `amazon/opendistro-for-elasticsearch-kibana:0.9.0` to `kibana-no-security`.
+1. In `docker-compose.yml`, change `amazon/opendistro-for-elasticsearch-kibana:1.0.0` to `kibana-no-security`.
 1. Change `ELASTICSEARCH_URL` (`docker-compose.yml`) or `elasticsearch.url` (your custom `kibana.yml`) to `http://` rather than `https://`.
 1. Change `ELASTICSEARCH_HOSTS` or `elasticsearch.hosts` to `http://` rather than `https://`.
 1. Remove all `opendistro_security` lines from `kibana.yml`.
