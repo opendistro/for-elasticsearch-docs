@@ -313,12 +313,12 @@ Creates or replaces the specified user. You must specify either `password` (plai
 ```json
 PUT _opendistro/_security/api/internalusers/<username>
 {
-  "password": "kirk",
-  "roles": ["captains", "starfleet"],
-   "attributes": {
-     "attribute1": "value1",
-     "attribute2": "value2",       
-   }
+  "password": "kirkpass",
+  "backend_roles": ["captains", "starfleet"],
+  "attributes": {
+    "attribute1": "value1",
+    "attribute2": "value2"
+  }
 }
 ```
 
@@ -342,10 +342,10 @@ Updates individual attributes of an internal user.
 PATCH _opendistro/_security/api/internalusers/<username>
 [
   {
-    "op": "replace", "path": "/roles", "value": ["klingons"]
+    "op": "replace", "path": "/backend_roles", "value": ["klingons"]
   },
   {
-    "op": "replace", "path": "/attributes", "value": {"newattribute": "newvalue"}
+    "op": "replace", "path": "/attributes", "value": { "newattribute": "newvalue" }
   }
 ]
 ```
@@ -354,8 +354,8 @@ PATCH _opendistro/_security/api/internalusers/<username>
 
 ```json
 {
-  "status":"CREATED",
-  "message":"User kirk created"
+  "status": "OK",
+  "message": "'kirk' updated."
 }
 ```
 
@@ -369,13 +369,13 @@ Creates, updates, or deletes multiple internal users in a single call.
 PATCH _opendistro/_security/api/internalusers
 [
   {
-    "op": "add", "path": "/spock", "value": { "password": "testpassword1", "roles": ["testrole1"] }
+    "op": "add", "path": "/spock", "value": { "password": "testpassword1", "backend_roles": ["testrole1"] }
   },
   {
-    "op": "add", "path": "/worf", "value": { "password": "testpassword2", "roles": ["testrole2"] }
+    "op": "add", "path": "/worf", "value": { "password": "testpassword2", "backend_roles": ["testrole2"] }
   },
   {
-    "op": "delete", "path": "/riker"
+    "op": "remove", "path": "/riker"
   }
 ]
 ```
@@ -384,8 +384,8 @@ PATCH _opendistro/_security/api/internalusers
 
 ```json
 {
-  "status":"CREATED",
-  "message":"User kirk created"
+  "status": "OK",
+  "message": "Resource updated."
 }
 ```
 
