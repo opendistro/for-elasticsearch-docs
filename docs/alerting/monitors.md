@@ -37,7 +37,9 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
    For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
-   For custom webhooks, you must specify more information: parameters, authentication, and headers. This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, credentials might be visible to other Elasticsearch users.
+   For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`.
+
+   This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
 
 
 ---
@@ -176,6 +178,12 @@ If you don't want to receive notifications for alerts, you don't have to add act
 1. Add a subject and body for the message.
 
    You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). You have access to `ctx.action.name`, the name of the current action, as well as all [trigger variables](#available-variables).
+
+   If your destination is a custom webhook that expects a particular data format, you might need to include JSON (or even XML) directly in the message body:
+
+   ```json
+   {% raw %}{ "text": "Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue. - Trigger: {{ctx.trigger.name}} - Severity: {{ctx.trigger.severity}} - Period start: {{ctx.periodStart}} - Period end: {{ctx.periodEnd}}" }{% endraw %}
+   ```
 
 1. Choose **Create**.
 

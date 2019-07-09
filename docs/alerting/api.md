@@ -26,8 +26,8 @@ Use the alerting API to programmatically manage monitors and alerts.
 ```json
 POST _opendistro/_alerting/monitors
 {
-  "name": "test-monitor",
   "type": "monitor",
+  "name": "test-monitor",
   "enabled": true,
   "schedule": {
     "period": {
@@ -37,27 +37,48 @@ POST _opendistro/_alerting/monitors
   },
   "inputs": [{
     "search": {
-      "indices": ["movies"],
+      "indices": [
+        "kibana_sample_data_flights"
+      ],
       "query": {
         "size": 0,
-        "aggregations": {},
         "query": {
-          "bool": {
-            "filter": {
-              "range": {
-                "@timestamp": {
-                  "gte": "||-1h",
-                  "lte": "",
-                  "format": "epoch_millis"
-                }
-              }
-            }
+          "match_all": {
+            "boost": 1
           }
         }
       }
     }
   }],
-  "triggers": []
+  "triggers": [{
+    "name": "test-trigger",
+    "severity": "1",
+    "condition": {
+      "script": {
+        "source": "ctx.results[0].hits.total.value > 0",
+        "lang": "painless"
+      }
+    },
+    "actions": [{
+      "name": "test-action",
+      "destination_id": "ld7912sBlQ5JUWWFThoW",
+      "message_template": {
+        "source": "This is my message body."
+      },
+      "throttle_enabled": false,
+      "subject_template": {
+        "source": "TheSubject"
+      }
+    }]
+  }]
+}
+```
+
+If you use a custom webhook for your destination and need to embed JSON in the message body, be sure to escape your quotes:
+
+```json
+"message_template": {
+  {% raw %}"source": "{ \"text\": \"Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue. - Trigger: {{ctx.trigger.name}} - Severity: {{ctx.trigger.severity}} - Period start: {{ctx.periodStart}} - Period end: {{ctx.periodEnd}}\" }"{% endraw %}
 }
 ```
 
@@ -65,13 +86,16 @@ POST _opendistro/_alerting/monitors
 
 ```json
 {
-  "_id": "ZO5TOmkBi6P41RVAsNwh",
+  "_id": "st5O2GsBlQ5JUWWFThsi",
   "_version": 1,
+  "_seq_no": 6,
+  "_primary_term": 1,
   "monitor": {
     "type": "monitor",
+    "schema_version": 1,
     "name": "test-monitor",
     "enabled": true,
-    "enabled_time": 1551461756953,
+    "enabled_time": 1562702138730,
     "schedule": {
       "period": {
         "interval": 1,
@@ -80,33 +104,45 @@ POST _opendistro/_alerting/monitors
     },
     "inputs": [{
       "search": {
-        "indices": ["movies"],
+        "indices": [
+          "kibana_sample_data_flights"
+        ],
         "query": {
           "size": 0,
           "query": {
-            "bool": {
-              "filter": [{
-                "range": {
-                  "@timestamp": {
-                    "from": "||-1h",
-                    "to": "",
-                    "include_lower": true,
-                    "include_upper": true,
-                    "format": "epoch_millis",
-                    "boost": 1.0
-                  }
-                }
-              }],
-              "adjust_pure_negative": true,
-              "boost": 1.0
+            "match_all": {
+              "boost": 1
             }
-          },
-          "aggregations": {}
+          }
         }
       }
     }],
-    "triggers": [],
-    "last_update_time": 1551461756953
+    "triggers": [{
+      "id": "rd5O2GsBlQ5JUWWFTRtm",
+      "name": "test-trigger",
+      "severity": "1",
+      "condition": {
+        "script": {
+          "source": "ctx.results[0].hits.total.value > 0",
+          "lang": "painless"
+        }
+      },
+      "actions": [{
+        "id": "rt5O2GsBlQ5JUWWFTRtn",
+        "name": "test-action",
+        "destination_id": "ld7912sBlQ5JUWWFThoW",
+        "message_template": {
+          "source": "This is my message body.",
+          "lang": "mustache"
+        },
+        "throttle_enabled": false,
+        "subject_template": {
+          "source": "TheSubject",
+          "lang": "mustache"
+        }
+      }]
+    }],
+    "last_update_time": 1562702138731
   }
 }
 ```
