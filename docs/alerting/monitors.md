@@ -185,7 +185,7 @@ If you don't want to receive notifications for alerts, you don't have to add act
    {% raw %}{ "text": "Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue. - Trigger: {{ctx.trigger.name}} - Severity: {{ctx.trigger.severity}} - Period start: {{ctx.periodStart}} - Period end: {{ctx.periodEnd}}" }{% endraw %}
    ```
 
-   The message content must conform to the `Content-Type` header in the [destination](#create-destinations).
+   In this case, the message content must conform to the `Content-Type` header in the [custom webhook](#create-destinations).
 
 1. Choose **Create**.
 
