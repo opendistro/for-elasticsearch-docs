@@ -37,14 +37,21 @@ POST _opendistro/_alerting/monitors
   },
   "inputs": [{
     "search": {
-      "indices": [
-        "kibana_sample_data_flights"
-      ],
+      "indices": ["movies"],
       "query": {
         "size": 0,
+        "aggregations": {},
         "query": {
-          "match_all": {
-            "boost": 1
+          "bool": {
+            "filter": {
+              "range": {
+                "@timestamp": {
+                  "gte": "||-1h",
+                  "lte": "",
+                  "format": "epoch_millis"
+                }
+              }
+            }
           }
         }
       }
@@ -86,16 +93,16 @@ If you use a custom webhook for your destination and need to embed JSON in the m
 
 ```json
 {
-  "_id": "st5O2GsBlQ5JUWWFThsi",
+  "_id": "vd5k2GsBlQ5JUWWFxhsP",
   "_version": 1,
-  "_seq_no": 6,
+  "_seq_no": 7,
   "_primary_term": 1,
   "monitor": {
     "type": "monitor",
     "schema_version": 1,
     "name": "test-monitor",
     "enabled": true,
-    "enabled_time": 1562702138730,
+    "enabled_time": 1562703611363,
     "schedule": {
       "period": {
         "interval": 1,
@@ -105,20 +112,34 @@ If you use a custom webhook for your destination and need to embed JSON in the m
     "inputs": [{
       "search": {
         "indices": [
-          "kibana_sample_data_flights"
+          "movies"
         ],
         "query": {
           "size": 0,
           "query": {
-            "match_all": {
+            "bool": {
+              "filter": [{
+                "range": {
+                  "@timestamp": {
+                    "from": "||-1h",
+                    "to": "",
+                    "include_lower": true,
+                    "include_upper": true,
+                    "format": "epoch_millis",
+                    "boost": 1
+                  }
+                }
+              }],
+              "adjust_pure_negative": true,
               "boost": 1
             }
-          }
+          },
+          "aggregations": {}
         }
       }
     }],
     "triggers": [{
-      "id": "rd5O2GsBlQ5JUWWFTRtm",
+      "id": "ud5k2GsBlQ5JUWWFxRvi",
       "name": "test-trigger",
       "severity": "1",
       "condition": {
@@ -128,7 +149,7 @@ If you use a custom webhook for your destination and need to embed JSON in the m
         }
       },
       "actions": [{
-        "id": "rt5O2GsBlQ5JUWWFTRtn",
+        "id": "ut5k2GsBlQ5JUWWFxRvj",
         "name": "test-action",
         "destination_id": "ld7912sBlQ5JUWWFThoW",
         "message_template": {
@@ -142,7 +163,7 @@ If you use a custom webhook for your destination and need to embed JSON in the m
         }
       }]
     }],
-    "last_update_time": 1562702138731
+    "last_update_time": 1562703611363
   }
 }
 ```
