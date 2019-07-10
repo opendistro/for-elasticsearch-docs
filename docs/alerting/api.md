@@ -745,7 +745,7 @@ POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 
 ## Create destination
 
-#### Request
+#### Requests
 
 ```json
 POST _opendistro/_alerting/destinations
@@ -754,6 +754,24 @@ POST _opendistro/_alerting/destinations
   "type": "slack",
   "slack": {
     "url": "http://www.example.com"
+  }
+}
+
+POST _opendistro/_alerting/destinations
+{
+  "type": "custom_webhook",
+  "name": "my-custom-destination",
+  "custom_webhook": {
+    "path": "incomingwebhooks/123456-123456-XXXXXX",
+    "header_params": {
+      "Content-Type": "application/json"
+    },
+    "scheme": "HTTPS",
+    "port": 443,
+    "query_params": {
+      "token": "R2x1UlN4ZHF8MXxxVFJpelJNVDgzdGNwXXXXXXXXX"
+    },
+    "host": "hooks.chime.aws"
   }
 }
 ```
