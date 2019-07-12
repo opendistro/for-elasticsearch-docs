@@ -15,7 +15,7 @@ Kibana is the default visualization tool for data in Elasticsearch. It also serv
 
 You *can* start Kibana using `docker run` after [creating a Docker network](https://docs.docker.com/engine/reference/commandline/network_create/) and starting Elasticsearch, but the process of connecting Kibana to Elasticsearch is significantly easier with a Docker Compose file.
 
-1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0`.
+1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.1`.
 
 1. Create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment. A sample file that includes Kibana is available on the Open Distro for Elasticsearch [Docker installation page](../install/docker/#sample-docker-compose-file).
 
