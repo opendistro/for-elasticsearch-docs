@@ -25,7 +25,7 @@ services:
       - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      - network.host=0.0.0.0
+      - network.host=0.0.0.0 # required if not using the demo Security configuration
     ulimits:
       memlock:
         soft: -1
@@ -36,10 +36,10 @@ services:
     volumes:
       - odfe-data1:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
-      - ./esnode.pem:/usr/share/elasticsearch/config/esnode.pem
-      - ./esnode-key.pem:/usr/share/elasticsearch/config/esnode-key.pem
-      - ./kirk.pem:/usr/share/elasticsearch/config/kirk.pem
-      - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
+      - ./node.pem:/usr/share/elasticsearch/config/node.pem
+      - ./node-key.pem:/usr/share/elasticsearch/config/node-key.pem
+      - ./admin.pem:/usr/share/elasticsearch/config/admin.pem
+      - ./admin-key.pem:/usr/share/elasticsearch/config/admin-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
       - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
@@ -72,10 +72,10 @@ services:
     volumes:
       - odfe-data2:/usr/share/elasticsearch/data
       - ./root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
-      - ./esnode.pem:/usr/share/elasticsearch/config/esnode.pem
-      - ./esnode-key.pem:/usr/share/elasticsearch/config/esnode-key.pem
-      - ./kirk.pem:/usr/share/elasticsearch/config/kirk.pem
-      - ./kirk-key.pem:/usr/share/elasticsearch/config/kirk-key.pem
+      - ./node.pem:/usr/share/elasticsearch/config/node.pem
+      - ./node-key.pem:/usr/share/elasticsearch/config/node-key.pem
+      - ./admin.pem:/usr/share/elasticsearch/config/admin.pem
+      - ./admin-key.pem:/usr/share/elasticsearch/config/admin-key.pem
       - ./custom-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./internal_users.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml
       - ./roles_mapping.yml:/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/roles_mapping.yml
@@ -110,24 +110,25 @@ networks:
 Then make your changes to `elasticsearch.yml`. For a full list of settings, see [Security](../../security-configuration/). This example adds (extremely) verbose audit logging:
 
 ```yml
-opendistro_security.ssl.transport.pemcert_filepath: esnode.pem
-opendistro_security.ssl.transport.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.transport.pemcert_filepath: node.pem
+opendistro_security.ssl.transport.pemkey_filepath: node-key.pem
 opendistro_security.ssl.transport.pemtrustedcas_filepath: root-ca.pem
 opendistro_security.ssl.transport.enforce_hostname_verification: false
 opendistro_security.ssl.http.enabled: true
-opendistro_security.ssl.http.pemcert_filepath: esnode.pem
-opendistro_security.ssl.http.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.http.pemcert_filepath: node.pem
+opendistro_security.ssl.http.pemkey_filepath: node-key.pem
 opendistro_security.ssl.http.pemtrustedcas_filepath: root-ca.pem
-opendistro_security.allow_unsafe_democertificates: true
 opendistro_security.allow_default_init_securityindex: true
 opendistro_security.authcz.admin_dn:
-  - CN=kirk,OU=client,O=client,L=test, C=de
-
+  - CN=A,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
+opendistro_security.nodes_dn:
+  - 'CN=N,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA'
 opendistro_security.audit.type: internal_elasticsearch
 opendistro_security.enable_snapshot_restore_privilege: true
 opendistro_security.check_snapshot_restore_write_privileges: true
 opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
 cluster.routing.allocation.disk.threshold_enabled: false
+node.max_local_storage_nodes: 3
 opendistro_security.audit.config.disabled_rest_categories: NONE
 opendistro_security.audit.config.disabled_transport_categories: NONE
 ```
