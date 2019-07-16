@@ -165,48 +165,64 @@ When you're satisfied, modify `elasticsearch.password` in `custom-kibana.yml` to
 `internal_users.yml` looks like this:
 
 ```yml
+---
+# This is the internal user database
+# The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+
+_meta:
+  type: "internalusers"
+  config_version: 2
+
+# Define your internal users here
+
+## Demo users
+
 # New password applied
 admin:
-  readonly: true
-  hash: $2y$12$SFNvhLHf7MPCpRCq00o/BuU8GMdcD.7BymhT80YHNISBHsfJwhTou
-  roles:
-    - admin
-  attributes:
-    #no dots allowed in attribute names
-    attribute1: value1
-    attribute2: value2
-    attribute3: value3
-
-# Still using default password: logstash
-logstash:
-  hash: $2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2
-  roles:
-    - logstash
+  hash: "$2y$12$FoSl.CjkiuVQlgSajg2KnuE7qS54E4IAneBrEKYgYY7a9ZfClgy9."
+  reserved: true
+  backend_roles:
+  - "admin"
+  description: "Demo admin user"
 
 # New password applied
 kibanaserver:
-  readonly: true
-  hash: $2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H.
+  hash: "$2y$12$xTnhT4b.RPlFbFgIC0xA9ea0tqfLSfm0MEQ0G1.02q8I7yjBxUWEq"
+  reserved: true
+  description: "Demo kibanaserver user"
 
-# Still using default password: kibanaro
 kibanaro:
-  hash: $2a$12$JJSXNfTowz7Uu5ttXfeYpeYE0arACvcwlPBStB1F.MI7f0U9Z4DGC
-  roles:
-    - kibanauser
-    - readall
+  hash: "$2a$12$JJSXNfTowz7Uu5ttXfeYpeYE0arACvcwlPBStB1F.MI7f0U9Z4DGC"
+  reserved: false
+  backend_roles:
+  - "kibanauser"
+  - "readall"
+  attributes:
+    attribute1: "value1"
+    attribute2: "value2"
+    attribute3: "value3"
+  description: "Demo kibanaro user"
 
-# Still using default password: readall
+logstash:
+  hash: "$2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2"
+  reserved: false
+  backend_roles:
+  - "logstash"
+  description: "Demo logstash user"
+
 readall:
-  hash: $2a$12$ae4ycwzwvLtZxwZ82RmiEunBbIPiAmGZduBAjKN0TXdwQFtCwARz2
-  #password is: readall
-  roles:
-    - readall
+  hash: "$2a$12$ae4ycwzwvLtZxwZ82RmiEunBbIPiAmGZduBAjKN0TXdwQFtCwARz2"
+  reserved: false
+  backend_roles:
+  - "readall"
+  description: "Demo readall user"
 
-# Still using default password: snapshotrestore
 snapshotrestore:
-  hash: $2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W
-  roles:
-    - snapshotrestore
+  hash: "$2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W"
+  reserved: false
+  backend_roles:
+  - "snapshotrestore"
+  description: "Demo snapshotrestore user"
 ```
 
 

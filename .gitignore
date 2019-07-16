@@ -5,3 +5,4 @@ _site
 Gemfile.lock
 build-old-versions.sh
 _config-old-versions.yml
+scripts
