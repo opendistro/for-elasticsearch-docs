@@ -7,7 +7,7 @@ nav_order: 4
 
 # Docker security configuration
 
-Before deploying to a production environment, you should replace the demo security certificates with your own. With the RPM-based installation, you have direct access to the file system, but the Docker image requires modifying the Docker Compose file to include the replacement files.
+Before deploying to a production environment, you should replace the demo security certificates and configuration YAML files with your own. With the RPM and Debian installations, you have direct access to the file system, but the Docker image requires modifying the Docker Compose file to include the replacement files.
 
 
 #### Sample Docker Compose file
@@ -133,114 +133,11 @@ opendistro_security.audit.config.disabled_rest_categories: NONE
 opendistro_security.audit.config.disabled_transport_categories: NONE
 ```
 
+Use this same override process to specify new [authentication settings](../../security-configuration/configuration/) in `/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml`, as well as new [internal users, roles, mappings, action groups, and tenants](../../security-configuration/yaml/).
+
 To start the cluster, run `docker-compose up`.
 
 If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has insecure file permissions (should be 0600)` messages, you can use `chmod` to set file permissions before running `docker-compose up`. Docker Compose passes files to the container as-is.
 {: .note }
 
-
-## Change passwords for read-only users
-
-After the cluster starts, change the passwords for the [read-only user accounts](../../security-access-control/api/#read-only-and-hidden-resources): `admin` and `kibanaserver`.
-
-- The `admin` user has full privileges on the cluster.
-- `kibanaserver` user has certain permissions to the `.kibana` index that let it perform management tasks like setting index patterns and retrieving visualizations. This user, or one just like it, is required for Kibana to work properly with the Security plugin. We recommend just using `kibanaserver`.
-
-  Regardless of the authentication method that you choose for other users (e.g. Open ID Connect), the Kibana server user always passes its credentials to Elasticsearch using HTTP basic authentication headers, as set in `kibana.yml`.
-  {: .note }
-
-To generate new passwords, run `docker ps` to find the `odfe-node1` container ID. Then run:
-
-```
-$ docker exec <container-id> /bin/sh /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh -p newpassword
-```
-
-If you encounter a permissions error, run `docker exec <container-id> chmod +x /usr/share/elasticsearch/plugins/opendistro_security/tools/hash.sh`
-{: .tip }
-
-The hash script returns a hashed password (e.g. `$2y$12$SFNvhLHf7MPCpRCq00o/BuU8GMdcD.7BymhT80YHNISBHsfJwhTou`), which you can then copy and paste into `internal_users.yml`. Repeat the process as necessary for all read-only users. Don't worry about the other user accounts; you can change (or delete) them in Kibana.
-
-When you're satisfied, modify `elasticsearch.password` in `custom-kibana.yml` to include the new `kibanaserver` password. Then restart the cluster using `docker-compose down -v` and `docker-compose up`. The `-v` is critical in this case.
-
-`internal_users.yml` looks like this:
-
-```yml
----
-# This is the internal user database
-# The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
-
-_meta:
-  type: "internalusers"
-  config_version: 2
-
-# Define your internal users here
-
-## Demo users
-
-# New password applied
-admin:
-  hash: "$2y$12$FoSl.CjkiuVQlgSajg2KnuE7qS54E4IAneBrEKYgYY7a9ZfClgy9."
-  reserved: true
-  backend_roles:
-  - "admin"
-  description: "Demo admin user"
-
-# New password applied
-kibanaserver:
-  hash: "$2y$12$xTnhT4b.RPlFbFgIC0xA9ea0tqfLSfm0MEQ0G1.02q8I7yjBxUWEq"
-  reserved: true
-  description: "Demo kibanaserver user"
-
-kibanaro:
-  hash: "$2a$12$JJSXNfTowz7Uu5ttXfeYpeYE0arACvcwlPBStB1F.MI7f0U9Z4DGC"
-  reserved: false
-  backend_roles:
-  - "kibanauser"
-  - "readall"
-  attributes:
-    attribute1: "value1"
-    attribute2: "value2"
-    attribute3: "value3"
-  description: "Demo kibanaro user"
-
-logstash:
-  hash: "$2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2"
-  reserved: false
-  backend_roles:
-  - "logstash"
-  description: "Demo logstash user"
-
-readall:
-  hash: "$2a$12$ae4ycwzwvLtZxwZ82RmiEunBbIPiAmGZduBAjKN0TXdwQFtCwARz2"
-  reserved: false
-  backend_roles:
-  - "readall"
-  description: "Demo readall user"
-
-snapshotrestore:
-  hash: "$2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W"
-  reserved: false
-  backend_roles:
-  - "snapshotrestore"
-  description: "Demo snapshotrestore user"
-```
-
-
-## Next steps
-
-After the cluster starts, verify the new password:
-
-```bash
-curl -XGET https://localhost:9200 -u admin:admin -k
-Unauthorized
-
-curl -XGET https://localhost:9200 -u admin:newpassword -k
-{
-  ...
-  "tagline" : "You Know, for Search"
-}
-```
-
-Then you can open Kibana at [http://localhost:5601](http://localhost:5601), sign in, and perform additional user management in the **Security** panel.
-
-You can use this same override process to specify new [authentication settings](../../security-configuration/configuration/) in `/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml`.
+Finally, you can open Kibana at [http://localhost:5601](http://localhost:5601), sign in, and use the **Security** panel to perform other management tasks.

@@ -29,7 +29,7 @@ The plugin includes demo certificates so that you can get up and running quickly
 1. [Replace the demo certificates](../install/docker-security/)
 1. [Reconfigure `elasticsearch.yml` to use your certificates](tls/)
 1. [Reconfigure `config.yml` to use your authentication backend](configuration/) (if you don't plan to use the internal user database)
-1. [Change passwords for read-only users](../install/docker-security/#change-passwords-for-read-only-users)
+1. [Modify the configuration YAML files](yaml/)
 1. [Apply changes using securityadmin.sh](security-admin/)
 1. [Add users, roles, role mappings, and tenants](../security-access-control/)
 
