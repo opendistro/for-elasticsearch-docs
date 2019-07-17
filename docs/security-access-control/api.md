@@ -58,25 +58,25 @@ opendistro_security.restapi.endpoints_disabled.my-role.ROLES: ["PUT", "POST", "D
 ```
 
 
-## Read-only and hidden resources
+## Reserved and hidden resources
 
-You can mark users, role, role mappings, and action groups as read-only in their respective configuration files. Resources that have this flag set to true can't be changed using the REST API and are marked as reserved in Kibana.
+You can mark users, role, role mappings, and action groups as reserved. Resources that have this flag set to true can't be changed using the REST API nor Kibana.
 
-To mark a resource readonly, add the following flag:
+To mark a resource as reserved, add the following flag:
 
 ```yml
 kibana_user:
-  readonly: true
+  reserved: true
 ```
 
-Likewise, you can mark users, role, role mappings, and action groups as hidden. Resources that have this flag set to true are not returned by the REST API and cannot be changed nor deleted:
+Likewise, you can mark users, role, role mappings, and action groups as hidden. Resources that have this flag set to true are not returned by the REST API and not visible in Kibana:
 
 ```yml
 kibana_user:
   hidden: true
 ```
 
-Hidden resources are read-only by definition.
+Hidden resources are automatically reserved.
 
 To add or remove these flags, you need to modify `plugins/opendistro_security/securityconfig/internal_users.yml` and run `plugins/opendistro_security/tools/securityadmin.sh`.
 
@@ -163,7 +163,14 @@ Creates or replaces the specified action group.
 ```json
 PUT _opendistro/_security/api/actiongroups/<action-group>
 {
-  "permissions": ["indices:data/read/search*", "indices:data/read/msearch*", "SUGGEST" ]
+  "allowed_actions": [
+    "indices:data/write/index*",
+    "indices:data/write/update*",
+    "indices:admin/mapping/put",
+    "indices:data/write/bulk*",
+    "read",
+    "write"
+  ]
 }
 ```
 
@@ -171,8 +178,8 @@ PUT _opendistro/_security/api/actiongroups/<action-group>
 
 ```json
 {
-  "status":"CREATED",
-  "message":"action group SEARCH created"
+  "status": "CREATED",
+  "message": "'my-action-group' created."
 }
 ```
 
@@ -187,7 +194,7 @@ Updates individual attributes of an action group.
 PATCH _opendistro/_security/api/actiongroups/<action-group>
 [
   {
-    "op": "replace", "path": "/permissions", "value": ["indices:admin/create", "indices:admin/mapping/put"]
+    "op": "replace", "path": "/allowed_actions", "value": ["indices:admin/create", "indices:admin/mapping/put"]
   }
 ]
 ```
@@ -212,10 +219,10 @@ Creates, updates, or deletes multiple action groups in a single call.
 PATCH _opendistro/_security/api/actiongroups
 [
   {
-    "op": "add", "path": "/CREATE_INDEX", "value": ["indices:admin/create", "indices:admin/mapping/put"]
+    "op": "add", "path": "/CREATE_INDEX", "value": { "allowed_actions": ["indices:admin/create", "indices:admin/mapping/put"] }
   },
   {
-    "op": "delete", "path": "/CRUD"
+    "op": "remove", "path": "/CRUD"
   }
 ]
 ```

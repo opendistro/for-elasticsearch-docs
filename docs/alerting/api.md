@@ -26,8 +26,8 @@ Use the alerting API to programmatically manage monitors and alerts.
 ```json
 POST _opendistro/_alerting/monitors
 {
-  "name": "test-monitor",
   "type": "monitor",
+  "name": "test-monitor",
   "enabled": true,
   "schedule": {
     "period": {
@@ -57,7 +57,37 @@ POST _opendistro/_alerting/monitors
       }
     }
   }],
-  "triggers": []
+  "triggers": [{
+    "name": "test-trigger",
+    "severity": "1",
+    "condition": {
+      "script": {
+        "source": "ctx.results[0].hits.total.value > 0",
+        "lang": "painless"
+      }
+    },
+    "actions": [{
+      "name": "test-action",
+      "destination_id": "ld7912sBlQ5JUWWFThoW",
+      "message_template": {
+        "source": "This is my message body."
+      },
+      "throttle_enabled": false,
+      "subject_template": {
+        "source": "TheSubject"
+      }
+    }]
+  }]
+}
+```
+
+If you use a custom webhook for your destination and need to embed JSON in the message body, be sure to escape your quotes:
+
+```json
+{
+  "message_template": {
+    {% raw %}"source": "{ \"text\": \"Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue. - Trigger: {{ctx.trigger.name}} - Severity: {{ctx.trigger.severity}} - Period start: {{ctx.periodStart}} - Period end: {{ctx.periodEnd}}\" }"{% endraw %}
+  }
 }
 ```
 
@@ -65,13 +95,16 @@ POST _opendistro/_alerting/monitors
 
 ```json
 {
-  "_id": "ZO5TOmkBi6P41RVAsNwh",
+  "_id": "vd5k2GsBlQ5JUWWFxhsP",
   "_version": 1,
+  "_seq_no": 7,
+  "_primary_term": 1,
   "monitor": {
     "type": "monitor",
+    "schema_version": 1,
     "name": "test-monitor",
     "enabled": true,
-    "enabled_time": 1551461756953,
+    "enabled_time": 1562703611363,
     "schedule": {
       "period": {
         "interval": 1,
@@ -80,7 +113,9 @@ POST _opendistro/_alerting/monitors
     },
     "inputs": [{
       "search": {
-        "indices": ["movies"],
+        "indices": [
+          "movies"
+        ],
         "query": {
           "size": 0,
           "query": {
@@ -93,20 +128,44 @@ POST _opendistro/_alerting/monitors
                     "include_lower": true,
                     "include_upper": true,
                     "format": "epoch_millis",
-                    "boost": 1.0
+                    "boost": 1
                   }
                 }
               }],
               "adjust_pure_negative": true,
-              "boost": 1.0
+              "boost": 1
             }
           },
           "aggregations": {}
         }
       }
     }],
-    "triggers": [],
-    "last_update_time": 1551461756953
+    "triggers": [{
+      "id": "ud5k2GsBlQ5JUWWFxRvi",
+      "name": "test-trigger",
+      "severity": "1",
+      "condition": {
+        "script": {
+          "source": "ctx.results[0].hits.total.value > 0",
+          "lang": "painless"
+        }
+      },
+      "actions": [{
+        "id": "ut5k2GsBlQ5JUWWFxRvj",
+        "name": "test-action",
+        "destination_id": "ld7912sBlQ5JUWWFThoW",
+        "message_template": {
+          "source": "This is my message body.",
+          "lang": "mustache"
+        },
+        "throttle_enabled": false,
+        "subject_template": {
+          "source": "TheSubject",
+          "lang": "mustache"
+        }
+      }]
+    }],
+    "last_update_time": 1562703611363
   }
 }
 ```
@@ -686,7 +745,7 @@ POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 
 ## Create destination
 
-#### Request
+#### Requests
 
 ```json
 POST _opendistro/_alerting/destinations
@@ -695,6 +754,24 @@ POST _opendistro/_alerting/destinations
   "type": "slack",
   "slack": {
     "url": "http://www.example.com"
+  }
+}
+
+POST _opendistro/_alerting/destinations
+{
+  "type": "custom_webhook",
+  "name": "my-custom-destination",
+  "custom_webhook": {
+    "path": "incomingwebhooks/123456-123456-XXXXXX",
+    "header_params": {
+      "Content-Type": "application/json"
+    },
+    "scheme": "HTTPS",
+    "port": 443,
+    "query_params": {
+      "token": "R2x1UlN4ZHF8MXxxVFJpelJNVDgzdGNwXXXXXXXXX"
+    },
+    "host": "hooks.chime.aws"
   }
 }
 ```

@@ -2,7 +2,7 @@
 layout: default
 title: Generate Certificates
 parent: Security - Configuration
-nav_order: 5
+nav_order: 6
 ---
 
 # Generate certificates

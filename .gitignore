@@ -3,3 +3,6 @@ _site
 .jekyll-metadata
 .DS_Store
 Gemfile.lock
+build-old-versions.sh
+_config-old-versions.yml
+scripts
