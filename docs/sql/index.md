@@ -22,6 +22,20 @@ POST https://<host>:<port>/_opendistro/_sql
 }
 ```
 
+You can query multiple indices by listing them or using wildcards, but they must have identical mappings:
+
+```json
+POST _opendistro/_sql
+{
+  "query": "SELECT * FROM my-index1,myindex2,myindex3 LIMIT 50"
+}
+
+POST _opendistro/_sql
+{
+  "query": "SELECT * FROM my-index* LIMIT 50"
+}
+```
+
 For a sample [curl](https://curl.haxx.se/) command, try:
 
 ```bash
