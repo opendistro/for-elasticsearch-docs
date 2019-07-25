@@ -12,9 +12,6 @@ If you use the Security plugin alongside alerting, you might want to limit certa
 
 Mix and match these roles to give users the permissions they need to use the alerting feature.
 
-Monitors run as the `admin` user, which means that monitors can query all documents in all indices and do not consider the roles of the user who created the monitor. Please keep this fact in mind while working with sensitive data.
-{: .warning }
-
 
 ## View and acknowledge alerts
 

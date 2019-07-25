@@ -28,7 +28,10 @@ All settings are available using the Elasticsearch `_cluster/settings` API. None
 
 Setting | Default | Description
 :--- | :--- | :---
-`opendistro.alerting.enabled` | true | Whether the alerting plugin is enabled or not. If disabled, all monitors immediately stop running.
+`opendistro.scheduled_jobs.enabled` | true | Whether the alerting plugin is enabled or not. If disabled, all monitors immediately stop running.
+`opendistro.alerting.index_timeout` | 60s | The timeout for creating monitors and destinations using the REST APIs.
+`opendistro.alerting.request_timeout` | 10s | The timeout for miscellaneous requests from the plugin.
+`opendistro.alerting.action_throttle_max_value` | 24h | The maximum amount of time you can set for action throttling. By default, this value displays as 1440 minutes in Kibana.
 `opendistro.alerting.input_timeout` | 30s | How long the monitor can take to issue the search request.
 `opendistro.alerting.bulk_timeout` | 120s | How long the monitor can write alerts to the alert index.
 `opendistro.alerting.alert_backoff_count` | 2 | The number of retries for writing alerts before the operation fails.
@@ -42,3 +45,5 @@ Setting | Default | Description
 `opendistro.scheduled_jobs.sweeper.period` | 5m | The alerting feature uses its "job sweeper" component to periodically check for new or updated jobs. This setting is the rate at which the sweeper checks to see if any jobs (monitors) have changed and need to be rescheduled.
 `opendistro.scheduled_jobs.sweeper.page_size` | 100 | The page size for the sweeper. You shouldn't need to change this value.
 `opendistro.scheduled_jobs.sweeper.backoff_millis` | 50ms | The amount of time the sweeper waits between retries---increases exponentially after each failed retry.
+`opendistro.scheduled_jobs.sweeper.retry_count` | 3 | The total number of times the sweeper should retry before throwing an error.
+`opendistro.scheduled_jobs.request_timeout` | 10s | The timeout for the request that sweeps shards for jobs.

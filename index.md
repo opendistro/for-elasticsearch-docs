@@ -67,28 +67,6 @@ To learn more, see [Install](docs/install/).
 
 ---
 
-## Version history
-
-Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
-:--- | :--- | :--- | :---
-1.1.0 | Bumps Elasticsearch version. | TBD | 7.1.1
-1.0.1 | Fixes backend role bugs in the Security plugin. | 12 July 2019 | 7.0.1
-1.0.0 | Adds action throttling to the alerting plugin and bumps Elasticsearch to a new major version. See [Upgrade to 1.0.0](./docs/upgrade/1-0-0/) for breaking changes. | 28 June 2019 | 7.0.1
-0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
-0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
-0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
-0.7.0 | Initial release. | 11 March 2019 | 6.5.4
-
-For detailed release notes, see these GitHub repositories:
-
-- [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
-- [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
-- [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
-- [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
-
-
----
-
 ## Builds
 
 If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
