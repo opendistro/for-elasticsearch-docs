@@ -51,7 +51,7 @@ Before you can take a snapshot, you have to "register" a snapshot repository. A 
    path.repo: ["/mnt/snapshots"]
    ```
 
-   On the RPM install, you can then mount the file system. If you're using the Docker install, add the file system to each node in `docker-compose.yml` before starting the cluster:
+   On the RPM and Debian installs, you can then mount the file system. If you're using the Docker install, add the file system to each node in `docker-compose.yml` before starting the cluster:
 
    ```yml
    volumes:
