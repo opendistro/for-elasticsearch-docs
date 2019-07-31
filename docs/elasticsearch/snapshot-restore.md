@@ -7,7 +7,7 @@ nav_order: 4
 
 # Take and restore snapshots
 
-Snapshots are backups of a cluster's indices and state. State includes cluster settings, node information, index settings, and shard allocation.
+Snapshots are backups of a cluster's indices and *state*. State includes cluster settings, node information, index settings, and shard allocation.
 
 Snapshots have two main uses:
 
@@ -51,7 +51,7 @@ Before you can take a snapshot, you have to "register" a snapshot repository. A 
    path.repo: ["/mnt/snapshots"]
    ```
 
-   On the RPM install, you can then mount the file system. If you're using the Docker install, add the file system to each node in `docker-compose.yml` before starting the cluster:
+   On the RPM and Debian installs, you can then mount the file system. If you're using the Docker install, add the file system to each node in `docker-compose.yml` before starting the cluster:
 
    ```yml
    volumes:
@@ -101,7 +101,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    If you're using the Docker installation, see [Run with custom plugins](../../install/docker/#run-with-custom-plugins). Your `Dockerfile` should look something like this:
 
    ```
-   FROM amazon/opendistro-for-elasticsearch:1.0.2
+   FROM amazon/opendistro-for-elasticsearch:1.1.0
 
    ENV AWS_ACCESS_KEY_ID <access-key>
    ENV AWS_SECRET_ACCESS_KEY <secret-key>

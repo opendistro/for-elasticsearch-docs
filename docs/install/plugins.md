@@ -18,7 +18,7 @@ Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`)
 #### Security
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.0.0.2.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.1.0.0.zip
 ```
 
 After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually.
@@ -27,14 +27,14 @@ After installing the Security plugin, you can run `sudo sh /usr/share/elasticsea
 #### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.0.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.1.0.0.zip
 ```
 
 
 #### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.0.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.1.0.0.zip
 ```
 
 
@@ -42,7 +42,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 #### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.0.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.1.0.0.zip
 ```
 
 Performance Analyzer requires so many additional configuration steps that we don't recommend installing it as a standalone plugin. After installing the plugin:
