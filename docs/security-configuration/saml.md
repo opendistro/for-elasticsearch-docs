@@ -136,7 +136,9 @@ Requests from the Security plugin to the IdP can optionally be signed. Use the f
 
 Name | Description
 :--- | :---
-sp.signature\_private\_key | The private key used to sign the requests. Optional. If not provided, requests are not signed.
+sp.signature\_private\_key | The private key used to sign the requests. Optional. Cannot be used when private_key_filepath is set.
+sp.sp.signature\_private\_key\_password | The password of the private key, if any.
+sp.signature\_private\_key\_filepath | Path to the private key. The file must be placed under the Open Distro for Elasticsearch config directory, and the path must be specified relative to the config directory.
 sp.signature\_algorithm | The algorithm used to sign the requests. See below for possible values.
 
 The Security plugin supports the following signature algorithms:
