@@ -23,15 +23,15 @@ Disabling or removing the plugin exposes the configuration index for the Securit
 
 The Security plugin is actually two plugins: one for Elasticsearch and one for Kibana. You can use the Elasticsearch plugin independently, but the Kibana plugin depends on a secured Elasticsearch cluster.
 
-If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. To learn more, see [Standalone Kibana plugin install](../../kibana/plugins/).
+If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. For more information, see [Standalone Kibana plugin install](../../kibana/plugins/).
 
 
 ### RPM
 
 1. Remove all `opendistro_security` lines from `kibana.yml`.
 1. Change `elasticsearch.url` in `kibana.yml` to `http://` rather than `https://`.
-1. `sudo /usr/share/kibana/bin/kibana-plugin remove opendistro_security`.
-1. `sudo systemctl restart kibana.service`
+1. Enter `sudo /usr/share/kibana/bin/kibana-plugin remove opendistro_security`.
+1. Enter `sudo systemctl restart kibana.service`.
 
 
 ### Docker
@@ -43,7 +43,7 @@ If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin 
    RUN /usr/share/kibana/bin/kibana-plugin remove opendistro_security
    ```
 
-1. To build the new Docker image, run:
+1. To build the new Docker image, run the following command:
 
    ```bash
    docker build --tag=kibana-no-security .
@@ -53,4 +53,4 @@ If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin 
 1. Change `ELASTICSEARCH_URL` (`docker-compose.yml`) or `elasticsearch.url` (your custom `kibana.yml`) to `http://` rather than `https://`.
 1. Change `ELASTICSEARCH_HOSTS` or `elasticsearch.hosts` to `http://` rather than `https://`.
 1. Remove all `opendistro_security` lines from `kibana.yml`.
-1. `docker-compose up`.
+1. Enter `docker-compose up`.

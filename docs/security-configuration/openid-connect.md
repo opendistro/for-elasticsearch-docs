@@ -7,7 +7,7 @@ nav_order: 12
 
 # OpenID Connect
 
-The Security plugin can integrate with identify providers that use the OpenID Connect standard. This feature enables:
+The Security plugin can integrate with identify providers that use the OpenID Connect standard. This feature enables the following:
 
 * Automatic configuration
 
@@ -19,7 +19,7 @@ The Security plugin can integrate with identify providers that use the OpenID Co
 
 * Key rollover
 
-  You can change the keys used for signing the JWTs directly in your IdP. If the Security plugin detects an unknown key, it tries to retrieve it from the IdP, transparent to the user.
+  You can change the keys used for signing the JWTs directly in your IdP. If the Security plugin detects an unknown key, it tries to retrieve it from the IdP. This rollover is transparent to the user.
 
 * Kibana single sign-on
 
@@ -35,9 +35,9 @@ The Security plugin can integrate with identify providers that use the OpenID Co
 
 ## Configure OpenID Connect integration
 
-To integrate with an OpenID IdP, set up an authentication domain and choose `openid` as HTTP authentication type. JSON web tokens already contain all required information to verify the request, so set `challenge` to `false` and `authentication_backend` to `noop`.
+To integrate with an OpenID IdP, set up an authentication domain and choose `openid` as the HTTP authentication type. JSON web tokens already contain all required information to verify the request, so set `challenge` to `false` and `authentication_backend` to `noop`.
 
-Minimal configuration:
+This is the minimal configuration:
 
 ```yml
 openid_auth_domain:
@@ -55,15 +55,15 @@ openid_auth_domain:
     type: noop
 ```
 
-Configuration parameters:
+The following table shows the configuration parameters.
 
 Name | Description
 :--- | :---
-openid_connect_url | The URL of your IdP where the Security plugin can find the OpenID Connect metadata/configuration settings. This URL differs between IdPs. Required.
-jwt_header | The HTTP header that stores the token. Typically the `Authorization` header with the `Bearer` schema: `Authorization: Bearer <token>`. Optional. Default is `Authorization`.
-jwt_url_parameter | If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of the parameter here. Optional.
-subject_key | The key in the JSON payload that stores the user's name. If not defined, the [subject](https://tools.ietf.org/html/rfc7519#section-4.1.2) registered claim is used. Most IdP providers use the `preferred_username` claim. Optional.
-roles_key | The key in the JSON payload that stores the user's roles. The value of this key must be a comma-separated list of roles. Required only if you want to use roles in the JWT.
+`openid_connect_url` | The URL of your IdP where the Security plugin can find the OpenID Connect metadata/configuration settings. This URL differs between IdPs. Required.
+`jwt_header` | The HTTP header that stores the token. Typically the `Authorization` header with the `Bearer` schema: `Authorization: Bearer <token>`. Optional. Default is `Authorization`.
+`jwt_url_parameter` | If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of the parameter here. Optional.
+`subject_key` | The key in the JSON payload that stores the user's name. If not defined, the [subject](https://tools.ietf.org/html/rfc7519#section-4.1.2) registered claim is used. Most IdP providers use the `preferred_username` claim. Optional.
+`roles_key` | The key in the JSON payload that stores the user's roles. The value of this key must be a comma-separated list of roles. Required only if you want to use roles in the JWT.
 
 
 ## OpenID Connect URL
@@ -78,7 +78,7 @@ Keycloak example:
 http(s)://<server>:<port>/auth/realms/<realm>/.well-known/openid-configuration
 ```
 
-The main information that the Security plugin needs is `jwks_uri`. This URI specifies where the IdP's public key(s) in JWKS format can be found. For example:
+The main information that the Security plugin needs is `jwks_uri`. This URI specifies where the IdP's public keys in JWKS format can be found. For example:
 
 ```
 jwks_uri: "https://keycloak.example.com:8080/auth/realms/master/protocol/openid-connect/certs"
@@ -99,7 +99,7 @@ jwks_uri: "https://keycloak.example.com:8080/auth/realms/master/protocol/openid-
 }
 ```
 
-To find more information about IdP endpoints:
+For more information about IdP endpoints, see the following:
 
 - [Okta](https://developer.okta.com/docs/api/resources/oidc#well-knownopenid-configuration)
 - [Keycloak](https://www.keycloak.org/docs/3.0/securing_apps/topics/oidc/oidc-generic.html)
@@ -130,7 +130,7 @@ If the Security plugin receives a JWT with an unknown `kid`, it visits the IdP's
 
 The Security plugin can maintain multiple valid public keys at once. The OpenID specification does not allow for a validity period of public keys, so a key is valid until it has been removed from the list of valid keys in your IdP and the list of valid keys has been refreshed.
 
-If you want to roll over a key in your IdP, best practice is to:
+If you want to roll over a key in your IdP, follow these best practices:
 
 - Create a new key pair in your IdP, and give the new key a higher priority than the currently used key.
 
@@ -147,7 +147,7 @@ If you have to immediately change your public key, you can also delete the old k
 
 ## TLS settings
 
-In order to prevent man-in-the-middle attacks, you should secure the connection between the Security plugin and your IdP with TLS.
+To prevent man-in-the-middle attacks, you should secure the connection between the Security plugin and your IdP with TLS.
 
 
 ### Enabling TLS
@@ -162,13 +162,13 @@ config:
 
 Name | Description
 :--- | :---
-enable_ssl | Whether to use TSL. Default is false.
-verify_hostnames | Whether to verify the hostnames of the IdP's TLS certificate. Default is true.
+`enable_ssl` | Whether to use TSL. Default is false.
+`verify_hostnames` | Whether to verify the hostnames of the IdP's TLS certificate. Default is true.
 
 
 ### Certificate validation
 
-To validate the TLS certificate of your IdP, configure either the path to the IdP's root CA or the root certificates content:
+To validate the TLS certificate of your IdP, configure either the path to the IdP's root CA or the root certificate's content:
 
 ```yml
 config:
@@ -187,8 +187,8 @@ config:
 
 Name | Description
 :--- | :---
-pemtrustedcas_filepath | Absolute path to the PEM file containing the root CA(s) of your IdP.
-pemtrustedcas_content | The root CA content of your IdP. Cannot be used if `pemtrustedcas_filepath` is set.
+`pemtrustedcas_filepath` | Absolute path to the PEM file containing the root CAs of your IdP.
+`pemtrustedcas_content` | The root CA content of your IdP. Cannot be used if `pemtrustedcas_filepath` is set.
 
 
 ### TLS client authentication
@@ -219,32 +219,32 @@ config:
 
 Name | Description
 :--- | :---
-enable_ssl_client_auth | Whether to send the client certificate to the IdP server. Default is false.
-pemcert_filepath | Absolute path to the the client certificate.
-pemcert_content | The content of the client certificate. Cannot be used when `pemcert_filepath` is set.
-pemkey_filepath | Absolute path to the file containing the private key of the client certificate.
-pemkey_content | The content of the private key of your client certificate. Cannot be used when `pemkey_filepath` is set.
-pemkey_password | The password of your private key, if any.
+`enable_ssl_client_auth` | Whether to send the client certificate to the IdP server. Default is false.
+`pemcert_filepath` | Absolute path to the client certificate.
+`pemcert_content` | The content of the client certificate. Cannot be used when `pemcert_filepath` is set.
+`pemkey_filepath` | Absolute path to the file containing the private key of the client certificate.
+`pemkey_content` | The content of the private key of your client certificate. Cannot be used when `pemkey_filepath` is set.
+`pemkey_password` | The password of your private key, if any.
 
 
 ### Enabled ciphers and protocols
 
-You can limit the allowed ciphers and TLS protocols by using the following keys:
+You can limit the allowed ciphers and TLS protocols by using the following keys.
 
 Name | Description
 :--- | :---
-enabled_ssl_ciphers | Array. Enabled TLS cipher suites. Only Java format is supported.
-enabled_ssl_protocols | Array. Enabled TLS protocols. Only Java format is supported.
+`enabled_ssl_ciphers` | Array. Enabled TLS cipher suites. Only Java format is supported.
+`enabled_ssl_protocols` | Array. Enabled TLS protocols. Only Java format is supported.
 
 
 ## (Advanced) DoS protection
 
-To help protect against denial-of-service (DoS) attacks, the Security plugin only allows a maximum number of new key IDs in a certain span of time. If the number of new key IDs exceeds this threshold, the Security plugin returns HTTP status code 503 (Service Unavailable) and refuses to query the IdP. By default, the Security plugin does not allow for more than 10 unknown key IDs within 10 seconds. To modify these settings:
+To help protect against denial-of-service (DoS) attacks, the Security plugin only allows a maximum number of new key IDs in a certain span of time. If the number of new key IDs exceeds this threshold, the Security plugin returns HTTP status code 503 (Service Unavailable) and refuses to query the IdP. By default, the Security plugin does not allow for more than 10 unknown key IDs within 10 seconds. The following table shows how to modify these settings.
 
 Name | Description
 :--- | :---
-refresh_rate_limit_count | The maximum number of unknown key IDs in the time frame. Default is 10.
-refresh_rate_limit_time_window_ms | The time frame to use when checking the maximum number of unknown key IDs, in milliseconds. Default is 10000 (10 seconds).
+`refresh_rate_limit_count` | The maximum number of unknown key IDs in the time frame. Default is 10.
+`refresh_rate_limit_time_window_ms` | The time frame to use when checking the maximum number of unknown key IDs, in milliseconds. Default is 10000 (10 seconds).
 
 
 ## Kibana single sign-on
@@ -258,7 +258,7 @@ opendistro_security.auth.type: "openid"
 
 ### Configuration
 
-OpenID Connect providers usually publish their configuration in JSON format under the *metadata url*. Therefore most settings can be pulled in automatically, so the Kibana configuration becomes minimal. The most important settings are:
+OpenID Connect providers usually publish their configuration in JSON format under the *metadata url*. Therefore, most settings can be pulled in automatically, so the Kibana configuration becomes minimal. The most important settings are the following:
 
 - [Connect URL](#openid-connect-url)
 - Client ID
@@ -267,20 +267,20 @@ OpenID Connect providers usually publish their configuration in JSON format unde
 
 - Client secret
 
-  Beyond the ID, each client also has a client secret assigned. The client secret is usually generated when the client is created. Applications can only obtain an identity token when they provide a client secret. You can find this secret in the settings of the client on your IdP.
+  Beyond the ID, each client also has a client secret assigned. The client secret is usually generated when the client is created. Applications can obtain an identity token only when they provide a client secret. You can find this secret in the settings of the client on your IdP.
 
 
 ### Configuration parameters
 
 Name | Description
 :--- | :---
-opendistro_security.openid.connect_url | The URL where the IdP publishes the OpenID metadata. Required.
-opendistro_security.openid.client_id | The ID of the OpenID Connect client configured in your IdP. Required.
-opendistro_security.openid.client_secret | The client secret of the OpenID Connect client configured in your IdP. Required.
-opendistro_security.openid.scope | The [scope of the identity token](https://auth0.com/docs/scopes/current) issued by the IdP. Optional. Default is `openid profile email address phone`.
-opendistro_security.openid.header | HTTP header name of the JWT token. Optional. Default is `Authorization`.
-opendistro_security.openid.logout_url | The logout URL of your IdP. Optional. Only necessary if your IdP does not publish the logout URL in its metadata.
-opendistro_security.openid.base_redirect_url | The base of the redirect URL that will be sent to your IdP. Optional. Only necessary when Kibana is behind a reverse proxy, in which case it should be different than `server.host` and `server.port` in `kibana.yml`.
+`opendistro_security.openid.connect_url` | The URL where the IdP publishes the OpenID metadata. Required.
+`opendistro_security.openid.client_id` | The ID of the OpenID Connect client configured in your IdP. Required.
+`opendistro_security.openid.client_secret` | The client secret of the OpenID Connect client configured in your IdP. Required.
+`opendistro_security.openid.scope` | The [scope of the identity token](https://auth0.com/docs/scopes/current) issued by the IdP. Optional. Default is `openid profile email address phone`.
+`opendistro_security.openid.header` | HTTP header name of the JWT token. Optional. Default is `Authorization`.
+`opendistro_security.openid.logout_url` | The logout URL of your IdP. Optional. Only necessary if your IdP does not publish the logout URL in its metadata.
+`opendistro_security.openid.base_redirect_url` | The base of the redirect URL that will be sent to your IdP. Optional. Only necessary when Kibana is behind a reverse proxy, in which case it should be different than `server.host` and `server.port` in `kibana.yml`.
 
 
 ### Configuration example
@@ -315,7 +315,7 @@ elasticsearch.requestHeadersWhitelist: ["Authorization", "security_tenant"]
 
 ### Elasticsearch configuration
 
-Because Kibana requires that the internal Kibana server user can authenticate via HTTP basic authentication, you must configure two authentication domains. For OpenID Connect, the HTTP basic domain has to be placed first in the chain. Make sure you set the challenge flag to `false`.
+Because Kibana requires that the internal Kibana server user can authenticate through HTTP basic authentication, you must configure two authentication domains. For OpenID Connect, the HTTP basic domain has to be placed first in the chain. Make sure you set the challenge flag to `false`.
 
 ```yml
 basic_internal_auth_domain:

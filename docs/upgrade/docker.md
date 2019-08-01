@@ -7,7 +7,7 @@ nav_order: 20
 
 # Docker upgrade
 
-If you're using the Docker image, we highly recommend performing what amounts to a [cluster restart upgrade](../cluster-restart/). This process requires downtime, but takes very few steps and avoids problems with individual nodes rejoining the cluster and executing commands within containers.
+If you use the Docker image, we highly recommend that you perform what amounts to a [cluster restart upgrade](../cluster-restart/). This process requires downtime, but takes very few steps and avoids problems with individual nodes rejoining the cluster and executing commands within containers.
 
 The most important step is to leave your data volumes intact. **Don't** run `docker-compose down -v`.
 {: .warning }

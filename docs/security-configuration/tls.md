@@ -7,7 +7,7 @@ nav_order: 5
 
 # Configure TLS certificates
 
-TLS is configured in `elasticsearch.yml`. There are two main configuration sections: transport layer and REST layer. TLS is optional for the REST layer and mandatory for the transport layer.
+TLS is configured in `elasticsearch.yml`. There are two main configuration sections: the transport layer and the REST layer. TLS is optional for the REST layer and mandatory for the transport layer.
 
 You can find an example configuration template with all options on [GitHub](https://www.github.com/opendistro-for-elasticsearch/security-ssl/blob/master/opendistrosecurity-ssl-config-template.yml).
 {: .note }
@@ -31,54 +31,54 @@ The following tables contain the settings you can use to configure the location 
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.transport.pemkey_filepath | Path to the certificate's key file (PKCS \#8), which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.transport.pemkey_password | Key password. Omit this setting if the key has no password. Optional.
-opendistro_security.ssl.transport.pemcert_filepath | Path to the X.509 node certificate chain (PEM format), which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.transport.pemtrustedcas_filepath | Path to the root CA(s) (PEM format), which must be under the `config/` directory, specified using a relative path . Required.
+`opendistro_security.ssl.transport.pemkey_filepath` | Path to the certificate's key file (PKCS \#8), which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.transport.pemkey_password` | Key password. Omit this setting if the key has no password. Optional.
+`opendistro_security.ssl.transport.pemcert_filepath` | Path to the X.509 node certificate chain (PEM format), which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.transport.pemtrustedcas_filepath` | Path to the root CAs (PEM format), which must be under the `config` directory, specified using a relative path. Required.
 
 
 ### REST layer TLS
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.http.pemkey_filepath | Path to the certificate's key file (PKCS \#8), which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.http.pemkey_password | Key password. Omit this setting if the key has no password. Optional.
-opendistro_security.ssl.http.pemcert_filepath | Path to the X.509 node certificate chain (PEM format), which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.http.pemtrustedcas_filepath | Path to the root CA(s) (PEM format), which must be under the `config/` directory, specified using a relative path . Required.
+`opendistro_security.ssl.http.pemkey_filepath` | Path to the certificate's key file (PKCS \#8), which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.http.pemkey_password` | Key password. Omit this setting if the key has no password. Optional.
+`opendistro_security.ssl.http.pemcert_filepath` | Path to the X.509 node certificate chain (PEM format), which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.http.pemtrustedcas_filepath` | Path to the root CAs (PEM format), which must be under the `config` directory, specified using a relative path. Required.
 
 
 ## Keystore and truststore files
 
-As an alternative to certificates and private keys in PEM format, you can instead use keystore and truststore files in JKS or PKCS12/PFX format. The following settings configure the location and password of your keystore and truststore files. If desired, you can use different keystore and truststore files for the REST and the transport layer.
+As an alternative to certificates and private keys in PEM format, you can instead use keystore and truststore files in JKS or PKCS12/PFX format. The following settings configure the location and password of your keystore and truststore files. If you want, you can use different keystore and truststore files for the REST and the transport layer.
 
 
 ### Transport layer TLS
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.transport.keystore\_type | The type of the keystore file, JKS or PKCS12/PFX. Optional. Default is JKS.
-opendistro_security.ssl.transport.keystore\_filepath | Path to the keystore file, which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.transport.keystore\_alias: my\_alias | Alias name. Optional. Default is the first alias.
-opendistro_security.ssl.transport.keystore_password | Keystore password. Default is `changeit`.
-opendistro_security.ssl.transport.truststore_type | The type of the truststore file, JKS or PKCS12/PFX. Default is JKS.
-opendistro_security.ssl.transport.truststore_filepath | Path to the truststore file, which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.transport.truststore\_alias | Alias name. Optional. Default is all certificates.
-opendistro_security.ssl.transport.truststore_password | Truststore password. Default is `changeit`.
+`opendistro_security.ssl.transport.keystore_type` | The type of the keystore file, JKS or PKCS12/PFX. Optional. Default is JKS.
+`opendistro_security.ssl.transport.keystore_filepath` | Path to the keystore file, which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.transport.keystore_alias: my_alias` | Alias name. Optional. Default is the first alias.
+`opendistro_security.ssl.transport.keystore_password` | Keystore password. Default is `changeit`.
+`opendistro_security.ssl.transport.truststore_type` | The type of the truststore file, JKS or PKCS12/PFX. Default is JKS.
+`opendistro_security.ssl.transport.truststore_filepath` | Path to the truststore file, which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.transport.truststore_alias` | Alias name. Optional. Default is all certificates.
+`opendistro_security.ssl.transport.truststore_password` | Truststore password. Default is `changeit`.
 
 
 ### REST layer TLS
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.http.enabled | Whether to enable TLS on the REST layer. If enabled, only HTTPS is allowed. Optional. Default is false.
-opendistro_security.ssl.http.keystore\_type | The type of the keystore file, JKS or PKCS12/PFX. Optional. Default is JKS.
-opendistro_security.ssl.http.keystore\_filepath | Path to the keystore file, which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.http.keystore\_alias | Alias name. Optional. Default is the first alias.
-opendistro_security.ssl.http.keystore_password | Keystore password. Default is `changeit`.
-opendistro_security.ssl.http.truststore_type | The type of the truststore file, JKS or PKCS12/PFX. Default is JKS.
-opendistro_security.ssl.http.truststore_filepath | Path to the truststore file, which must be under the `config/` directory, specified using a relative path. Required.
-opendistro_security.ssl.http.truststore\_alias | Alias name. Optional. Default is all certificates.
-opendistro_security.ssl.http.truststore_password | Truststore password. Default is `changeit`.
+`opendistro_security.ssl.http.enabled` | Whether to enable TLS on the REST layer. If enabled, only HTTPS is allowed. Optional. Default is false.
+`opendistro_security.ssl.http.keystore_type` | The type of the keystore file, JKS or PKCS12/PFX. Optional. Default is JKS.
+`opendistro_security.ssl.http.keystore_filepath` | Path to the keystore file, which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.http.keystore_alias` | Alias name. Optional. Default is the first alias.
+`opendistro_security.ssl.http.keystore_password` | Keystore password. Default is `changeit`.
+`opendistro_security.ssl.http.truststore_type` | The type of the truststore file, JKS or PKCS12/PFX. Default is JKS.
+`opendistro_security.ssl.http.truststore_filepath` | Path to the truststore file, which must be under the `config` directory, specified using a relative path. Required.
+`opendistro_security.ssl.http.truststore_alias` | Alias name. Optional. Default is all certificates.
+`opendistro_security.ssl.http.truststore_password` | Truststore password. Default is `changeit`.
 
 
 ## Configure node certificates
@@ -116,8 +116,8 @@ If OpenSSL is enabled, but for one reason or another the installation does not w
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.transport.enable\_openssl\_if\_available | Enable OpenSSL on the transport layer if available. Optional. Default is true.
-opendistro_security.ssl.http.enable\_openssl\_if\_available | Enable OpenSSL on the REST layer if available. Optional. Default is true.
+`opendistro_security.ssl.transport.enable_openssl_if_available` | Enable OpenSSL on the transport layer if available. Optional. Default is true.
+`opendistro_security.ssl.http.enable_openssl_if_available` | Enable OpenSSL on the REST layer if available. Optional. Default is true.
 
 
 {% comment %}
@@ -148,8 +148,8 @@ In addition, when `resolve_hostnames` is enabled, the Security plugin resolves t
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.transport.enforce\_hostname\_verification | Whether to verify hostnames on the transport layer. Optional. Default is true.
-opendistro_security.ssl.transport.resolve\_hostname | Whether to resolve hostnames against DNS on the transport layer. Optional. Default is true. Only works if hostname verification is also enabled.
+`opendistro_security.ssl.transport.enforce_hostname_verification` | Whether to verify hostnames on the transport layer. Optional. Default is true.
+`opendistro_security.ssl.transport.resolve_hostname` | Whether to resolve hostnames against DNS on the transport layer. Optional. Default is true. Only works if hostname verification is also enabled.
 
 
 ## (Advanced) Client authentication
@@ -183,10 +183,10 @@ If this setting is not enabled, the ciphers and TLS versions are negotiated betw
 
 Name | Description
 :--- | :---
-opendistro_security.ssl.http.enabled_ciphers | Array, enabled TLS cipher suites for the REST layer. Only Java format is supported.
-opendistro_security.ssl.http.enabled_protocols | Array, enabled TLS protocols for the REST layer. Only Java format is supported.
-opendistro_security.ssl.transport.enabled_ciphers | Array, enabled TLS cipher suites for the transport layer. Only Java format is supported.
-opendistro_security.ssl.transport.enabled_protocols | Array, enabled TLS protocols for the transport layer. Only Java format is supported.
+`opendistro_security.ssl.http.enabled_ciphers` | Array, enabled TLS cipher suites for the REST layer. Only Java format is supported.
+`opendistro_security.ssl.http.enabled_protocols` | Array, enabled TLS protocols for the REST layer. Only Java format is supported.
+`opendistro_security.ssl.transport.enabled_ciphers` | Array, enabled TLS cipher suites for the transport layer. Only Java format is supported.
+`opendistro_security.ssl.transport.enabled_protocols` | Array, enabled TLS protocols for the transport layer. Only Java format is supported.
 
 ### Example settings
 

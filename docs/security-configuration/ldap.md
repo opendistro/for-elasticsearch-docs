@@ -9,7 +9,7 @@ nav_order: 10
 
 Active Directory and LDAP can be used for authentication and authorization and thus can be used both in the `authc` and `authz` sections of the configuration.
 
-The `authc` section is used for configuring authentication, which means to check if the user has entered the correct credentials. The `authz` is used for authorization, which defines how the role(s) for an authenticated user are retrieved and mapped.
+The `authc` section is used for configuring authentication, which means to check if the user has entered the correct credentials. The `authz` is used for authorization, which defines how the roles for an authenticated user are retrieved and mapped.
 
 In most cases, you want to configure both authentication and authorization. You can also use authentication only and map the users retrieved from LDAP directly to Security plugin roles.
 
@@ -55,9 +55,9 @@ authz:
 The connection settings are identical for authentication and authorization and are added to the `config` sections.
 
 
-### Hostname and Port
+### Hostname and port
 
-To configure the hostname and port of your Active Directory server(s):
+To configure the hostname and port of your Active Directory servers, use the following:
 
 ```yml
 config:
@@ -66,12 +66,12 @@ config:
     - secondary.ldap.example.com:389
 ```
 
-You can configure more than one server here. If the Security plugin cannot connect to the first server, it the remaining servers sequentially.
+You can configure more than one server here. If the Security plugin cannot connect to the first server, it tries to connect to the remaining servers sequentially.
 
 
 ### Bind DN and password
 
-To configure the `bind_dn` and `password` that the Security plugin uses when issuing queries to your server:
+To configure the `bind_dn` and `password` that the Security plugin uses when issuing queries to your server, use the following:
 
 ```yml
 config:
@@ -96,14 +96,14 @@ config:
 
 Name | Description
 :--- | :---
-enable_ssl | Whether to use LDAP over SSL (LDAPS).
-enable\_start\_tls | Whether to use STARTTLS. Can't be used in combination with LDAPS.
-enable\_ssl\_client\_auth | Whether to send the client certificate to the LDAP server.
-verify\_hostnames | Whether to verify the hostnames of the server's TLS certificate.
+`enable_ssl` | Whether to use LDAP over SSL (LDAPS).
+`enable_start_tls` | Whether to use STARTTLS. Can't be used in combination with LDAPS.
+`enable_ssl_client_auth` | Whether to send the client certificate to the LDAP server.
+`verify_hostnames` | Whether to verify the hostnames of the server's TLS certificate.
 
 ### Certificate validation
 
-By default, the Security plugin validates the TLS certificate of the LDAP server(s) against the root CA configured in `elasticsearch.yml`, either as PEM certificate or a truststore:
+By default, the Security plugin validates the TLS certificate of the LDAP servers against the root CA configured in `elasticsearch.yml`, either as a PEM certificate or a truststore:
 
 ```
 opendistro_security.ssl.transport.pemtrustedcas_filepath: ...
@@ -131,8 +131,8 @@ config:
 
 Name | Description
 :--- | :---
-pemtrustedcas\_filepath | Absolute path to the PEM file containing the root CA(s) of your Active Directory/LDAP server
-pemtrustedcas\_content | The root CA content of your Active Directory/LDAP server. Cannot be used when `pemtrustedcas\_filepath` is set.
+`pemtrustedcas_filepath` | Absolute path to the PEM file containing the root CAs of your Active Directory/LDAP server.
+`pemtrustedcas_content` | The root CA content of your Active Directory/LDAP server. Cannot be used when `pemtrustedcas_filepath` is set.
 
 
 ### Client authentication
@@ -165,16 +165,16 @@ config:
 
 Name | Description
 :--- | :---
-pemkey\_filepath | Absolute path to the file containing the private key of your certificate.
-pemkey\_content | The content of the private key of your certificate. Cannot be used when `pemkey\_filepath` is set.
-pemkey\_password | The password of your private key, if any.
-pemcert_filepath | Absolute path to the the client certificate.
-pemcert_content | The content of the client certificate. Cannot be used when `pemcert_filepath` is set.
+`pemkey_filepath` | Absolute path to the file containing the private key of your certificate.
+`pemkey_content` | The content of the private key of your certificate. Cannot be used when `pemkey_filepath` is set.
+`pemkey_password` | The password of your private key, if any.
+`pemcert_filepath` | Absolute path to the client certificate.
+`pemcert_content` | The content of the client certificate. Cannot be used when `pemcert_filepath` is set.
 
 
 ### Enabled ciphers and protocols
 
-You can limit the allowed ciphers and TLS protocols for the LDAP connection. For example, you can only allow strong ciphers and limit the TLS versions to the most recent ones:
+You can limit the allowed ciphers and TLS protocols for the LDAP connection. For example, you can allow only strong ciphers and limit the TLS versions to the most recent ones:
 
 ```yml
 ldap:
@@ -193,8 +193,8 @@ ldap:
 
 Name | Description
 :--- | :---
-enabled\_ssl\_ciphers | Array, enabled TLS ciphers. Only Java format is supported.
-enabled\_ssl\_protocols | Array, enabled TLS protocols. Only Java format is supported.
+`enabled_ssl_ciphers` | Array, enabled TLS ciphers. Only the Java format is supported.
+`enabled_ssl_protocols` | Array, enabled TLS protocols. Only the Java format is supported.
 
 
 ---
@@ -217,7 +217,7 @@ authc:
         ...
 ```
 
-Afterwards add the [connection settings](#connection-settings) for your Active Directory/LDAP server to the config section of the authentication domain:
+Next, add the [connection settings](#connection-settings) for your Active Directory/LDAP server to the config section of the authentication domain:
 
 ```yml
 config:
@@ -231,36 +231,36 @@ config:
   password: passw0rd
 ```
 
-Authentication works by issuing an LDAP query containing the username against the user subtree of the LDAP tree.
+Authentication works by issuing an LDAP query containing the user name against the user subtree of the LDAP tree.
 
-The Security plugin first takes the configured LDAP query and replaces the placeholder `{0}` with the username from the user's credentials.
+The Security plugin first takes the configured LDAP query and replaces the placeholder `{0}` with the user name from the user's credentials.
 
 ```yml
 usersearch: '(sAMAccountName={0})'
 ```
 
-Then it issues this query against the user subtree. Currently, the whole subtree beneath the configured `userbase` is searched:
+Then it issues this query against the user subtree. Currently, the entire subtree under the configured `userbase` is searched:
 
 ```yml
 userbase: 'ou=people,dc=example,dc=com'
 ```
 
-If the query was successful, the Security plugin retrieves the username from the LDAP entry. You can specify which attribute from the LDAP entry the Security plugin should use as the username:
+If the query is successful, the Security plugin retrieves the user name from the LDAP entry. You can specify which attribute from the LDAP entry the Security plugin should use as the user name:
 
 ```yml
 username_attribute: uid
 ```
 
-If this key is not set or null, then the Distinguished Name (DN) of the LDAP entry is used.
+If this key is not set or null, then the distinguished name (DN) of the LDAP entry is used.
 
 
 ### Configuration summary
 
 Name | Description
 :--- | :---
-userbase | Specifies the subtree in the directory where user information is stored.
-usersearch | The actual LDAP query that the Security plugin executes when trying to authenticate a user. The variable {0} is substituted with the username.
-username_attribute | The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the DN is used (default).
+`userbase` | Specifies the subtree in the directory where user information is stored.
+`usersearch` | The actual LDAP query that the Security plugin executes when trying to authenticate a user. The variable {0} is substituted with the user name.
+`username_attribute` | The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the DN is used (default).
 
 ### Complete authentication example
 
@@ -304,11 +304,11 @@ authz:
       ...
 ```
 
-Authorization is the process of retrieving backend roles for an authenticated user from an LDAP server. This is typically the same server(s) you use for authentication, but you can also use a different server. The only requirement is that the user to fetch the roles for actually exists on the LDAP server.
+Authorization is the process of retrieving backend roles for an authenticated user from an LDAP server. This is typically the same servers that you use for authentication, but you can also use a different server. The only requirement is that the user to fetch the roles for actually exists on the LDAP server.
 
-Since the Security plugin always checks if a user exists in the LDAP server, you need to configure `userbase`, `usersearch` and `username_attribute` also in the `authz` section.
+Because the Security plugin always checks if a user exists in the LDAP server, you must also configure `userbase`, `usersearch` and `username_attribute` in the `authz` section.
 
-Authorization works similarly to authentication. The Security plugin issues an LDAP query containing the username against the role subtree of the LDAP tree.
+Authorization works similarly to authentication. The Security plugin issues an LDAP query containing the user name against the role subtree of the LDAP tree.
 
 As an alternative, the Security plugin can also fetch roles that are defined as a direct attribute of the user entry in the user subtree.
 
@@ -324,16 +324,16 @@ rolesearch: '(member={0})'
 You can use the following variables:
 
 - `{0}` is substituted with the DN of the user.
-- `{1}` is substituted with the username, as defined by the `username_attribute` setting.
+- `{1}` is substituted with the user name, as defined by the `username_attribute` setting.
 - `{2}` is substituted with an arbitrary attribute value from the authenticated user's directory entry.
 
-The variable `{2}` refers to an attribute from the user's directory entry. The attribute you want to use is specified by the `userroleattribute` setting.
+The variable `{2}` refers to an attribute from the user's directory entry. The attribute that you should use is specified by the `userroleattribute` setting:
 
 ```yml
 userroleattribute: myattribute
 ```
 
-The Security plugin then issues the substituted query against the configured role subtree. The whole subtree underneath `rolebase` is searched.
+The Security plugin then issues the substituted query against the configured role subtree. The entire subtree under `rolebase` is searched:
 
 ```yml
 rolebase: 'ou=groups,dc=example,dc=com'
@@ -351,12 +351,12 @@ After all roles have been fetched, the Security plugin extracts the final role n
 rolename: cn
 ```
 
-If this is not set, the DN of the role entry is used. You can now use this role name for mapping it to one or more the Security plugin roles, as defined in `roles_mapping.yml`.
+If this is not set, the DN of the role entry is used. You can now use this role name for mapping it to one or more of the Security plugin roles, as defined in `roles_mapping.yml`.
 
 
-### Approach 2: Use a user's attribute as role name
+### Approach 2: Use a user's attribute as the role name
 
-If you store the roles as a direct attribute of the user entries in the user subtree, you only need to configure the attribute name:
+If you store the roles as a direct attribute of the user entries in the user subtree, you need to configure only the attribute name:
 
 ```yml
 userrolename: roles
@@ -379,12 +379,12 @@ rolesearch_enabled: false
 
 ### (Advanced) Control LDAP user attributes
 
-By default, the Security plugin reads all LDAP user attributes and make them available for index name variable substitution and DLS query variable substitution. If your LDAP entries have a lot of attributes, you might want to control which attributes should be made available. The fewer the attributes, the better the performance.
+By default, the Security plugin reads all LDAP user attributes and makes them available for index name variable substitution and DLS query variable substitution. If your LDAP entries have a lot of attributes, you might want to control which attributes should be made available. The fewer the attributes, the better the performance.
 
 Name | Description
 :--- | :---
-custom\_attr\_whitelist  | String array. Specifies the LDAP attributes that should be made available for variable substitution.
-custom\_attr\_maxval\_len  | Integer. Specifies the maximum allowed length of each attribute. All attributes longer than this value are discarded. A value of `0` disables custom attributes altogether. Default is 36.
+`custom_attr_whitelist`  | String array. Specifies the LDAP attributes that should be made available for variable substitution.
+`custom_attr_maxval_len`  | Integer. Specifies the maximum allowed length of each attribute. All attributes longer than this value are discarded. A value of `0` disables custom attributes altogether. Default is 36.
 
 Example:
 
@@ -407,18 +407,16 @@ authz:
 
 If you are using multiple authentication methods, it can make sense to exclude certain users from the LDAP role lookup.
 
-Consider the following scenario for a typical Kibana setup:
+Consider the following scenario for a typical Kibana setup: All Kibana users are stored in an LDAP/Active Directory server.
 
-All Kibana users are stored in an LDAP/Active Directory server.
+However, you also have a Kibana server user. Kibana uses this user to manage stored objects and perform monitoring and maintenance tasks. You do not want to add this user to your Active Directory installation, but rather store it in the Security plugin internal user database.
 
-However, you also have a Kibana server user. Kibana uses this user to manage stored objects and perform monitoring and maintenance tasks. You do not want to add this user to your Active Directory installation, but rather store it in the the Security plugin internal user database.
-
-In this case, it makes sense to exclude the Kibana server user from the LDAP authorization, since we already know that there is no corresponding entry. You can use the `skip_users` configuration setting to define which users should be skipped. Wildcards and regular expressions are supported.
+In this case, it makes sense to exclude the Kibana server user from the LDAP authorization because we already know that there is no corresponding entry. You can use the `skip_users` configuration setting to define which users should be skipped. Wildcards and regular expressions are supported:
 
 ```yml
 skip_users:
   - kibanaserver
-  - 'cn=Michael Jackson,ou*people,o=TEST'
+  - 'cn=Jane Doe,ou*people,o=TEST'
   - '/\S*/'
 ```
 
@@ -426,13 +424,13 @@ skip_users:
 
 If the users in your LDAP installation have a large number of roles, and you have the requirement to resolve nested roles as well, you might run into performance issues.
 
-In most cases, however, not all user roles are related to Elasticsearch and Kibana. You might only need a couple roles. In this case, you can use the nested role filter feature to define a list of roles that are filtered out from the list of the user's roles. Wildcards and regular expressions are supported.
+In most cases, however, not all user roles are related to Elasticsearch and Kibana. You might need only a couple of roles. In this case, you can use the nested role filter feature to define a list of roles that are filtered out from the list of the user's roles. Wildcards and regular expressions are supported.
 
-This only has an effect if `resolve_nested_roles` is `true`.
+This has an effect only if `resolve_nested_roles` is `true`:
 
 ```yml
 nested_role_filter: <true|false>
-  - 'cn=Michael Jackson,ou*people,o=TEST'
+  - 'cn=Jane Doe,ou*people,o=TEST'
   - ...
 ```
 
@@ -441,17 +439,17 @@ nested_role_filter: <true|false>
 
 Name | Description
 :--- | :---
-rolebase  | Specifies the subtree in the directory where role/group information is stored.
-rolesearch | The actual LDAP query that the Security plugin executes when trying to determine the roles of a user. You can use three variables here (see below).
-userroleattribute  | The attribute in a user entry to use for `{2}` variable substitution.
-userrolename  | If the roles/groups of a user are not stored in the groups subtree, but as an attribute of the user's directory entry, define this attribute name here.
-rolename  | The attribute of the role entry which should be used as role name.
-resolve\_nested\_roles  | Boolean. Whether or not to resolve nested roles. Default is false.
-skip_users  | Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
-nested\_role\_filter  | Array of role DNs that should be filtered before resolving nested roles. Wildcards and regular expressions are supported.
-rolesearch_enabled  | Boolean. Enable or disable the role search. Default is true.
-custom\_attr\_whitelist  | String array. Specifies the LDAP attributes that should be made available for variable substitution.
-custom\_attr\_maxval\_len  | Integer. Specifies the maximum allowed length of each attribute. All attributes longer than this value will be discarded. A value of `0` disables custom attributes altogether. Default is 36.
+`rolebase`  | Specifies the subtree in the directory where role/group information is stored.
+`rolesearch` | The actual LDAP query that the Security plugin executes when trying to determine the roles of a user. You can use three variables here (see below).
+`userroleattribute`  | The attribute in a user entry to use for `{2}` variable substitution.
+`userrolename`  | If the roles/groups of a user are not stored in the groups subtree, but as an attribute of the user's directory entry, define this attribute name here.
+`rolename`  | The attribute of the role entry that should be used as the role name.
+`resolve_nested_roles`  | Boolean. Whether or not to resolve nested roles. Default is `false`.
+`skip_users`  | Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
+`nested_role_filter`  | Array of role DNs that should be filtered before resolving nested roles. Wildcards and regular expressions are supported.
+`rolesearch_enabled`  | Boolean. Enable or disable the role search. Default is `true`.
+`custom_attr_whitelist`  | String array. Specifies the LDAP attributes that should be made available for variable substitution.
+`custom_attr_maxval_len`  | Integer. Specifies the maximum allowed length of each attribute. All attributes longer than this value are discarded. A value of `0` disables custom attributes altogether. Default is 36.
 
 ### Complete authorization example
 
@@ -481,6 +479,6 @@ authz:
         resolve_nested_roles: true
         skip_users:
           - kibanaserver
-          - 'cn=Michael Jackson,ou*people,o=TEST'
+          - 'cn=Jane Doe,ou*people,o=TEST'
           - '/\S*/'
 ```

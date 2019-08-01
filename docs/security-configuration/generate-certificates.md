@@ -33,20 +33,20 @@ brew install openssl
 
 ---
 
-## Generate private key
+## Generate a private key
 
 The first step in this process is to generate a private key using the `genrsa` command. As the name suggests, you should keep this file private.
 
-Private keys need to be of sufficient length in order to be secure, so specify `2048`:
+Private keys must be of sufficient length to be secure, so specify `2048`:
 
 ```bash
 openssl genrsa -out root-ca-key.pem 2048
 ```
 
-If desired, add the `-aes256` option to encrypt the key using the AES-256 standard. This option requires a password.
+You can optionally add the `-aes256` option to encrypt the key using the AES-256 standard. This option requires a password.
 
 
-## Generate root certificate
+## Generate a root certificate
 
 Next, use the key to generate a self-signed certificate for the root CA:
 
@@ -55,13 +55,13 @@ openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
 ```
 
 - The `-x509` option specifies that you want a self-signed certificate rather than a certificate request.
-- The `-sha256` option sets the hash algorithm to SHA-256. SHA-256 is the default in newer versions of OpenSSL, but older versions might use SHA-1.
+- The `-sha256` option sets the hash algorithm to SHA-256. SHA-256 is the default in later versions of OpenSSL, but earlier versions might use SHA-1.
 - Optionally, add `-days 3650` (10 years) or some other number of days to set an expiration date.
 
-Specify details for your organization as prompted. Together, these details form the Distinguished Name (DN) of your CA.
+Follow the prompts to specify details for your organization. Together, these details form the distinguished name (DN) of your CA.
 
 
-## Generate admin certificate
+## Generate an admin certificate
 
 To generate an admin certificate, first create a new key:
 
@@ -81,7 +81,7 @@ Next, create a certificate signing request (CSR). This file acts as an applicati
 openssl req -new -key admin-key.pem -out admin.csr
 ```
 
-Fill in the details as prompted. You don't need to specify a challenge password. As noted in the [OpenSSL Cookbook](https://www.feistyduck.com/books/openssl-cookbook/){:target='\_blank'}, "Having a challenge password does not increase the security of the CSR in any way."
+Follow the prompts to fill in the details. You don't need to specify a challenge password. As noted in the [OpenSSL Cookbook](https://www.feistyduck.com/books/openssl-cookbook/){:target='\_blank'}, "Having a challenge password does not increase the security of the CSR in any way."
 
 Finally, generate the certificate itself:
 
@@ -94,7 +94,7 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
 
-If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a Common Name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set hostname verification to `false`. To learn more, see [Configure TLS certificates](../../security-configuration/tls/#advanced-hostname-verification-and-dns-lookup).
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a common name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set the hostname verification to `false`. For more information, see [Configure TLS certificates](../../security-configuration/tls/#advanced-hostname-verification-and-dns-lookup).
 
 
 ### Sample script
@@ -121,9 +121,9 @@ rm node.csr
 ```
 
 
-## Get Distinguished Names
+## Get distinguished names
 
-If you created admin and node certificates, you must specify their DNs in `elasticsearch.yml` on all nodes:
+If you created admin and node certificates, you must specify their distinguished names (DNs) in `elasticsearch.yml` on all nodes:
 
 ```yml
 opendistro_security.authcz.admin_dn:
@@ -139,7 +139,7 @@ But if you look at the `subject` of the certificate after creating it, you might
 subject=/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=node1.example.com
 ```
 
-If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. To get the correct string:
+If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. Enter this to get the correct string:
 
 ```bash
 openssl x509 -subject -nameopt RFC2253 -noout -in node.pem
@@ -154,7 +154,7 @@ subject= CN=node1.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
 
 ## Configure certificates
 
-This process generates many files, but the ones you need to add to your cluster configuration are:
+This process generates many files, but these are the ones you need to add to your cluster configuration:
 
 - `root-ca.pem`
 - `admin.pem`
@@ -162,7 +162,7 @@ This process generates many files, but the ones you need to add to your cluster 
 - (Optional) `node.pem`
 - (Optional) `node-key.pem`
 
-For information on adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls/).
+For information about adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls/).
 
 
 ## Run securityadmin.sh
@@ -176,12 +176,12 @@ After configuring your certificates and starting Elasticsearch, run `securityadm
 For more information about what this command does, see [Apply configuration changes](../security-admin/) and [Change passwords for read-only users](../../install/docker-security/#change-passwords-for-read-only-users).
 {: .tip }
 
-If you're using Docker, see [Bash access to containers](../../install/docker/#bash-access-to-containers).
+If you use Docker, see [Bash access to containers](../../install/docker/#bash-access-to-containers).
 
 
 ## Kibana
 
-Depending on your settings in `kibana.yml`, you might need to add `root-ca.pem` to your Kibana node, as well. You have two options: disable SSL verification or add the root CA.
+Depending on your settings in `kibana.yml`, you might need to add `root-ca.pem` to your Kibana node. You have two options: disable SSL verification or add the root CA.
 
 - Disable SSL verification:
 
@@ -189,7 +189,7 @@ Depending on your settings in `kibana.yml`, you might need to add `root-ca.pem` 
   elasticsearch.ssl.verificationMode: none
   ```
 
-- Add root CA:
+- Add the root CA:
 
   ```yml
   elasticsearch.ssl.certificateAuthorities: ["/usr/share/kibana/config/root-ca.pem"]
