@@ -81,7 +81,7 @@ GET _search
 
 ## Multi match
 
-Like the [match](#match) query, but searches multiple fields.
+Similar to [match](#match), but searches multiple fields.
 
 The `^` lets you "boost" certain fields. Boosts are multipliers that weigh matches in one field more heavily than matches in other fields. In the following example, a match for "wind" in the title field influences `_score` four times as much as a match in the plot field. The result is that films like *The Wind Rises* and *Gone with the Wind* are near the top of the search results, and films like *Twister* and *Sharknado*, which presumably have "wind" in their plot summaries, are near the bottom.
 
@@ -153,6 +153,39 @@ GET _search
         "slop": 3,
         "analyzer": "standard",
         "zero_terms_query": "none"
+      }
+    }
+  }
+}
+```
+
+## Match phrase prefix
+
+Similar to [match phrase](#match-phrase), but creates a [prefix query](https://lucene.apache.org/core/7_5_0/core/org/apache/lucene/search/PrefixQuery.html) out of the last term in the query string.
+
+```json
+GET _search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "title": "the wind ri"
+    }
+  }
+}
+```
+
+The query accepts the following options. For descriptions of each, see [Options](#options).
+
+```json
+GET _search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "title": {
+        "query": "the wind ri",
+        "analyzer": "standard",
+        "max_expansions": 50,
+        "slop": 3
       }
     }
   }
