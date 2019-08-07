@@ -14,6 +14,8 @@ docker pull amazon/opendistro-for-elasticsearch:1.1.0
 docker pull amazon/opendistro-for-elasticsearch-kibana:1.1.0
 ```
 
+To check available versions, see [Docker Hub](https://hub.docker.com/r/amazon/opendistro-for-elasticsearch/tags).
+
 Open Distro for Elasticsearch images use `centos:7` as the base image.
 
 
