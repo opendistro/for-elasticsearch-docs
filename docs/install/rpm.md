@@ -9,6 +9,9 @@ nav_order: 2
 
 Installing and running Open Distro for Elasticsearch from an RPM package is a more manual process than the Docker image. We recommend CentOS 7 and Amazon Linux 2, but any RPM-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work. These steps assume you're using CentOS 7.
 
+RPM lets you easily [install a specific version](../plugins/#compatibility) of Open Distro for Elasticsearch, but Apt does not.
+{: .note }
+
 1. `cd /etc/yum.repos.d/`
 
 1. `sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o opendistroforelasticsearch-artifacts.repo`
@@ -24,7 +27,17 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 
    If you're using Amazon Linux 2, you might need to use Java 8.
 
-1. `sudo yum install opendistroforelasticsearch`
+1. List all available Open Distro for Elasticsearch versions:
+
+   ```bash
+   sudo yum list opendistroforelasticsearch --showduplicates
+   ```
+
+1. Choose the version you'd like and install it:
+
+   ```bash
+   sudo yum install opendistroforelasticsearch-1.1.0
+   ```
 
 1. **If you installed Java 8**, run the following command:
 
