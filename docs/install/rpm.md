@@ -9,9 +9,6 @@ nav_order: 2
 
 Installing and running Open Distro for Elasticsearch from an RPM package is a more manual process than the Docker image. We recommend CentOS 7 and Amazon Linux 2, but any RPM-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work. These steps assume you're using CentOS 7.
 
-RPM lets you easily [install a specific version](../plugins/#compatibility) of Open Distro for Elasticsearch, but Apt does not.
-{: .note }
-
 1. `cd /etc/yum.repos.d/`
 
 1. `sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o opendistroforelasticsearch-artifacts.repo`
