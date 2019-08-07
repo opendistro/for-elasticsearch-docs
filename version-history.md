@@ -13,7 +13,7 @@ Open Distro for Elasticsearch version | Release highlights | Release date | Elas
 1.0.2 | Fixes an action group bug in the Security plugin. | 23 July 2019 | 7.0.1
 1.0.1 | Fixes backend role bugs in the Security plugin. | 12 July 2019 | 7.0.1
 1.0.0 | Adds action throttling to the alerting plugin and bumps Elasticsearch to a new major version. See [Upgrade to 1.x.x](../docs/upgrade/1-0-0/) for breaking changes. | 28 June 2019 | 7.0.1
-0.10.0 | Support for older Elasticsearch version. | 6 August 2019 | 6.8.1
+0.10.0 | Support for older Elasticsearch version. | 7 August 2019 | 6.8.1
 0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
 0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
 0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
