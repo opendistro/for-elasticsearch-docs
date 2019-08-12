@@ -57,6 +57,12 @@ For example, the following line grants the `my-role` role access to the `PUT`, `
 opendistro_security.restapi.endpoints_disabled.my-role.ROLES: ["PUT", "POST", "DELETE"]
 ```
 
+To use the PUT and PATCH methods for the [configuration APIs](#configuration), add the following line to `elasticsearch.yml`:
+
+```yml
+opendistro_security.unsupported.restapi.allow_config_modification: true
+```
+
 
 ## Reserved and hidden resources
 
@@ -915,14 +921,99 @@ PATCH _opendistro/_security/api/tenants/
 
 ---
 
-## Authentication
+## Configuration
 
-### Get authentication details
+### Get configuration
+
+Retrieves the current Security plugin configuration in JSON format.
 
 #### Request
 
 ```
 GET _opendistro/_security/api/config
+```
+
+
+### Update configuration
+
+Creates or updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PUT _opendistro/_security/api/config/config
+{
+  "dynamic": {
+    "filtered_alias_mode": "warn",
+    "disable_rest_auth": false,
+    "disable_intertransport_auth": false,
+    "respect_request_indices_options": false,
+    "kibana": {
+      "multitenancy_enabled": true,
+      "server_username": "kibanaserver",
+      "index": ".kibana"
+    },
+    "http": {
+      "anonymous_auth_enabled": false
+    },
+    "authc": {
+      "basic_internal_auth_domain": {
+        "http_enabled": true,
+        "transport_enabled": true,
+        "order": 0,
+        "http_authenticator": {
+          "challenge": true,
+          "type": "basic",
+          "config": {}
+        },
+        "authentication_backend": {
+          "type": "intern",
+          "config": {}
+        },
+        "description": "Authenticate via HTTP Basic against internal users database"
+      }
+    },
+    "auth_failure_listeners": {},
+    "do_not_fail_on_forbidden": false,
+    "multi_rolespan_enabled": true,
+    "hosts_resolver_mode": "ip-only",
+    "do_not_fail_on_forbidden_empty": false
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "'config' updated."
+}
+```
+
+
+### Patch configuration
+
+Updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PATCH _opendistro/_security/api/config
+[
+  {
+    "op": "replace", "path": "/config/dynamic/authc/basic_internal_auth_domain/transport_enabled", "value": "true"
+  }
+]
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "Resource updated."
+}
 ```
 
 
