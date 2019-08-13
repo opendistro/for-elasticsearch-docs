@@ -22,7 +22,7 @@ POST https://<host>:<port>/_opendistro/_sql
 }
 ```
 
-You can query multiple indices by listing them or using wildcards, but they must have identical mappings:
+You can query multiple indices by listing them or using wildcards:
 
 ```json
 POST _opendistro/_sql
