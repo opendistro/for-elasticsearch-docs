@@ -261,6 +261,12 @@ PARTIAL | At least one shard failed to store successfully. Can only occur if you
 FAILED | The snapshot encountered an error and stored no data.
 INCOMPATIBLE | The snapshot is incompatible with the version of Elasticsearch running on this cluster. See [Conflicts and compatibility](#conflicts-and-compatibility).
 
+You can't take a snapshot if one is currently in progress. To check:
+
+```
+GET _snapshot/_status
+```
+
 
 ## Restore snapshots
 
