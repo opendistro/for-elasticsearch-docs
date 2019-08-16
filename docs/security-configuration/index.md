@@ -6,7 +6,7 @@ has_children: true
 has_toc: false
 ---
 
-# Security
+# Security - Configuration
 
 Open Distro for Elasticsearch includes the Security plugin for authentication and access control. The plugin provides numerous features to help you secure your cluster.
 
