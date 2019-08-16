@@ -46,7 +46,7 @@ You *can* start Kibana using `docker run` after [creating a Docker network](http
 
 To run Kibana when the system starts:
 
-```
+```bash
 sudo /bin/systemctl daemon-reload
 sudo /bin/systemctl enable kibana.service
 ```
