@@ -28,11 +28,12 @@ body {
 .site-title {
   @include mq(md) {
     padding-top: 0;
+    padding-bottom: 0;
     padding-left: $sp-5;
   }
   img {
     height: 100%;
-    max-width: 180px;
+    max-width: 208px;
   }
 }
 
