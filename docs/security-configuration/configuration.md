@@ -67,13 +67,13 @@ The `authc` section has the following format:
       ...
 ```
 
-An entry in the `authc` section is called an **authentication domain**. It specifies where to get the user credentials and against which backend they should be authenticated.
+An entry in the `authc` section is called an *authentication domain*. It specifies where to get the user credentials and against which backend they should be authenticated.
 
-You can use more than one authentication domain. Each authentication domain has a name (e.g. `basic_auth_internal`), `enabled` flags, and an `order`. The order makes it possible to chain authentication domains together. The Security plugin uses them in the order you provide. If the user successfully authenticates with one domain, the Security plugin skips the remaining domains.
+You can use more than one authentication domain. Each authentication domain has a name (for example, `basic_auth_internal`), `enabled` flags, and an `order`. The order makes it possible to chain authentication domains together. The Security plugin uses them in the order that you provide. If the user successfully authenticates with one domain, the Security plugin skips the remaining domains.
 
-`http_authenticator` specifies which authentication method you want to use on the HTTP layer.
+`http_authenticator` specifies which authentication method that you want to use on the HTTP layer.
 
-The syntax for defining an authenticator on the HTTP layer is:
+This is the syntax for defining an authenticator on the HTTP layer:
 
 ```yml
 http_authenticator:
@@ -83,14 +83,14 @@ http_authenticator:
     ...
 ```
 
-Allowed values for `type` are:
+These are the allowed values for `type`:
 
-- basic: HTTP basic authentication. No additional configuration is needed.
-- kerberos: Kerberos authentication. Additional, [Kerberos-specific configuration](#kerberos) is needed.
-- jwt: JSON web token authentication. Additional, [JWT-specific configuration](#json-web-token) is needed.
-- clientcert: Authentication via a client TLS certificate. This certificate must be trusted by one of the root CAs in the truststore of your nodes.
+- `basic`: HTTP basic authentication. No additional configuration is needed.
+- `kerberos`: Kerberos authentication. Additional, [Kerberos-specific configuration](#kerberos) is needed.
+- `jwt`: JSON web token authentication. Additional, [JWT-specific configuration](#json-web-token) is needed.
+- `clientcert`: Authentication through a client TLS certificate. This certificate must be trusted by one of the root CAs in the truststore of your nodes.
 
-After setting an HTTP authenticator, you need to specify against which backend system you want to authenticate the user:
+After setting an HTTP authenticator, you must specify against which backend system you want to authenticate the user:
 
 ```yml
 authentication_backend:
@@ -99,11 +99,11 @@ authentication_backend:
     ...
 ```
 
-Possible vales for `type` are:
+These are the possible values for `type`:
 
-- noop: This setting means that no further authentication against any backend system is performed. Use `noop` if the HTTP authenticator has already authenticated the user completely, as in the case of JWT, Kerberos, or client certificate authentication.
-- internal: Use the users and roles defined in `internal_users.yml` for authentication.
-- ldap: Authenticate users against an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
+- `noop`: No further authentication against any backend system is performed. Use `noop` if the HTTP authenticator has already authenticated the user completely, as in the case of JWT, Kerberos, or client certificate authentication.
+- `internal`: Use the users and roles defined in `internal_users.yml` for authentication.
+- `ldap`: Authenticate users against an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
 
 
 ## Authorization
@@ -123,10 +123,10 @@ authz:
 
 You can define multiple entries in this section the same way as you can for authentication entries. In this case, execution order is not relevant, so there is no `order` field.
 
-Possible vales for `type` are:
+These are the possible values for `type`:
 
-- noop: Used to skip this step altogether
-- ldap: Fetch additional roles from an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
+- `noop`: Skip this step altogether.
+- `ldap`: Fetch additional roles from an LDAP server. This setting requires [additional, LDAP-specific configuration settings](../ldap/).
 
 
 ## Examples
@@ -136,7 +136,7 @@ The default `plugins/opendistro_security/securityconfig/config.yml` that ships w
 
 ## HTTP basic
 
-In order to set up HTTP basic authentication, you just need to enable it in the `http_authenticator` section of the configuration:
+To set up HTTP basic authentication, you must enable it in the `http_authenticator` section of the configuration:
 
 ```yml
 http_authenticator:
@@ -144,29 +144,29 @@ http_authenticator:
   challenge: true
 ```
 
-In most cases, you want to set the `challenge` flag to `true`. The flag defines the behavior of the Security plugin if the `Authorization` field in the HTTP header is not set.
+In most cases, you set the `challenge` flag to `true`. The flag defines the behavior of the Security plugin if the `Authorization` field in the HTTP header is not set.
 
-If `challenge` is set to `true`, the Security plugin sends a response with status `UNAUTHORIZED` (401) back to the client. If the client is accessing the cluster with a browser, this triggers the authentication dialog, and the user is prompted to enter username and password.
+If `challenge` is set to `true`, the Security plugin sends a response with status `UNAUTHORIZED` (401) back to the client. If the client is accessing the cluster with a browser, this triggers the authentication dialog box, and the user is prompted to enter a user name and password.
 
-If `challenge` is set to `false` and no `Authorization` header field is set, the Security plugin does not send a `WWW-Authenticate` response back to the client, and authentication fails. You may want to use this setting if you have another challenge `http_authenticator` in your configured authentication domains. One such scenario is when you plan to use basic authentication and Kerberos together.
+If `challenge` is set to `false` and no `Authorization` header field is set, the Security plugin does not send a `WWW-Authenticate` response back to the client, and authentication fails. You might want to use this setting if you have another challenge `http_authenticator` in your configured authentication domains. One such scenario is when you plan to use basic authentication and Kerberos together.
 
 
 ## Kerberos
 
-Due to the nature of Kerberos, you need to define some settings in `elasticsearch.yml` and some in `config.yml`.
+Due to the nature of Kerberos, you must define some settings in `elasticsearch.yml` and some in `config.yml`.
 
-In `elasticsearch.yml`, you need to define:
+In `elasticsearch.yml`, define the following:
 
 ```yml
 opendistro_security.kerberos.krb5_filepath: '/etc/krb5.conf'
 opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 ```
 
-`opendistro_security.kerberos.krb5_filepath` defines the path to your Kerberos configuration file. This file contains various settings regarding your Kerberos installation, for example, the realm name(s), hostname(s), and port(s) of the Kerberos key distribution center (KDC).
+`opendistro_security.kerberos.krb5_filepath` defines the path to your Kerberos configuration file. This file contains various settings regarding your Kerberos installation, for example, the realm names, hostnames, and ports of the Kerberos key distribution center (KDC).
 
 `opendistro_security.kerberos.acceptor_keytab_filepath` defines the path to the keytab file, which contains the principal that the Security plugin uses to issue requests against Kerberos.
 
-`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin will use to issue requests against Kerberos. This value must be present in the keytab file.
+`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.
 
 Due to security restrictions, the keytab file must be placed in `config` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
 {: .warning }
@@ -191,35 +191,35 @@ A typical Kerberos authentication domain in `config.yml` looks like this:
           type: noop
 ```
 
-Authentication against Kerberos via a browser on HTTP level is achieved using SPNEGO. Kerberos/SPNEGO implementations vary, depending on your browser and operating system. This is important when deciding if you need to set the `challenge` flag to true or false.
+Authentication against Kerberos through a browser on an HTTP level is achieved using SPNEGO. Kerberos/SPNEGO implementations vary, depending on your browser and operating system. This is important when deciding if you need to set the `challenge` flag to `true` or `false`.
 
 As with [HTTP Basic Authentication](#http-basic), this flag determines how the Security plugin should react when no `Authorization` header is found in the HTTP request or if this header does not equal `negotiate`.
 
-If set to true, the Security plugin sends a response with status code 401 and a `WWW-Authenticate` header set to `negotiate`. This tells the client (browser) to resend the request with the `Authorization` header set. If set to false, the Security plugin cannot extract the credentials from the request, and authentication fails. Setting `challenge` to false thus only makes sense if the Kerberos credentials are sent in the initial request.
+If set to `true`, the Security plugin sends a response with status code 401 and a `WWW-Authenticate` header set to `negotiate`. This tells the client (browser) to resend the request with the `Authorization` header set. If set to `false`, the Security plugin cannot extract the credentials from the request, and authentication fails. Setting `challenge` to `false` thus makes sense only if the Kerberos credentials are sent in the initial request.
 
-As the name implies, setting `krb_debug` to true will output Kerberos-specific debugging messages to stdout. Use this setting if you encounter problems with your Kerberos integration.
+As the name implies, setting `krb_debug` to `true` will output Kerberos-specific debugging messages to `stdout`. Use this setting if you encounter problems with your Kerberos integration.
 
-If you set `strip_realm_from_principal` to true, the Security plugin strips the realm from the user name.
+If you set `strip_realm_from_principal` to `true`, the Security plugin strips the realm from the user name.
 
 
 ### Authentication backend
 
-Since Kerberos/SPNEGO authenticates users on HTTP level, no additional `authentication_backend` is needed. Set this value to `noop`.
+Because Kerberos/SPNEGO authenticates users on an HTTP level, no additional `authentication_backend` is needed. Set this value to `noop`.
 
 
 ## JSON web token
 
-JSON web tokens (JWT) are JSON-based access tokens that assert one or more claims. They are commonly used to implement single sign-on (SSO) solutions and fall in the category of token-based authentication systems.
+JSON web tokens (JWTs) are JSON-based access tokens that assert one or more claims. They are commonly used to implement single sign-on (SSO) solutions and fall in the category of token-based authentication systems:
 
-1. A user logs in to an authentication server by providing credentials (e.g. username and password).
+1. A user logs in to an authentication server by providing credentials (for example, a user name and password).
 1. The authentication server validates the credentials.
 1. The authentication server creates an access token and signs it.
 1. The authentication server returns the token to the user.
 1. The user stores the access token.
-1. The user sends the access token alongside every request to the service it wants to use.
+1. The user sends the access token alongside every request to the service that it wants to use.
 1. The service verifies the token and grants or denies access.
 
-A JSON web token is self-contained in the sense that it carries all necessary information to verify a user within itself. The tokens are Base64-encoded, signed JSON objects.
+A JSON web token is self-contained in the sense that it carries all necessary information to verify a user within itself. The tokens are base64-encoded, signed JSON objects.
 
 JSON web tokens consist of three parts:
 
@@ -230,7 +230,7 @@ JSON web tokens consist of three parts:
 
 ### Header
 
-The header contains information about the used signing mechanism, for example:
+The header contains information about the used signing mechanism, as shown in the following example:
 
 ```json
 {
@@ -262,7 +262,7 @@ Example:
 
 ### Signature
 
-The issuer of the token calculates the signature of the token by applying a cryptographic hash function on the Base64-encoded header and payload. These three parts are then concatenated using periods to form a complete JSON web token:
+The issuer of the token calculates the signature of the token by applying a cryptographic hash function on the base64-encoded header and payload. These three parts are then concatenated using periods to form a complete JSON web token:
 
 ```
 encoded = base64UrlEncode(header) + "." + base64UrlEncode(payload)
@@ -270,7 +270,7 @@ signature = HMACSHA256(encoded, 'secretkey');
 jwt = encoded + "." + base64UrlEncode(signature)
 ```
 
-For example:
+Example:
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
 ```
@@ -278,10 +278,10 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI
 
 ### Configure JSON web tokens
 
-If JSON web tokens are the only authentication method you use, disable the user cache by setting `opendistro_security.cache.ttl_minutes: 0`.
+If JSON web tokens are the only authentication method that you use, disable the user cache by setting `opendistro_security.cache.ttl_minutes: 0`.
 {: .warning }
 
-Set up an authentication domain and choose `jwt` as HTTP authentication type. Since the tokens already contain all required information to verify the request, `challenge` must be set to `false` and `authentication_backend` to `noop`.
+Set up an authentication domain and choose `jwt` as the HTTP authentication type. Because the tokens already contain all required information to verify the request, `challenge` must be set to `false` and `authentication_backend` to `noop`.
 
 Example:
 
@@ -302,22 +302,22 @@ jwt_auth_domain:
 I    type: noop
 ```
 
-Configuration parameter:
+The following table shows the configuration parameters.
 
 Name | Description
 :--- | :---
-signing_key | The signing key to use when verifying the token. If you use a symmetric key algorithm, it is the Base64-encoded shared secret. If you use an asymmetric algorithm, it contains the public key.
-jwt\_header | The HTTP header in which the token is transmitted. Typically the `Authorization` header with the `Bearer` schema: `Authorization: Bearer <token>`. Default is `Authorization`.
-jwt\_url\_parameter | If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of this parameter here.
-subject_key | The key in the JSON payload that stores the username. If not set, the [subject](https://tools.ietf.org/html/rfc7519#section-4.1.2) registered claim is used.
-roles_key | The key in the JSON payload that stores the user's roles. The value of this key must be a comma-separated list of roles.
+`signing_key` | The signing key to use when verifying the token. If you use a symmetric key algorithm, it is the base64-encoded shared secret. If you use an asymmetric algorithm, it contains the public key.
+`jwt_header` | The HTTP header in which the token is transmitted. This typically is the `Authorization` header with the `Bearer` schema: `Authorization: Bearer <token>`. Default is `Authorization`.
+`jwt_url_parameter` | If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of this parameter here.
+`subject_key` | The key in the JSON payload that stores the user name. If not set, the [subject](https://tools.ietf.org/html/rfc7519#section-4.1.2) registered claim is used.
+`roles_key` | The key in the JSON payload that stores the user's roles. The value of this key must be a comma-separated list of roles.
 
-Since JSON web tokens are self-contained and the user is authenticated on HTTP level, no additional `authentication_backend` is needed. Set this value to `noop`.
+Because JSON web tokens are self-contained and the user is authenticated on the HTTP level, no additional `authentication_backend` is needed. Set this value to `noop`.
 
 
 ### Symmetric key algorithms: HMAC
 
-Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the Security plugin. It must be configured as a Base64-encoded value in the `signing_key` setting:
+Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the Security plugin. It must be configured as a base64-encoded value in the `signing_key` setting:
 
 ```yml
 jwt_auth_domain:
@@ -330,11 +330,11 @@ jwt_auth_domain:
 
 ### Asymmetric key algorithms: RSA and ECDSA
 
-RSA and ECDSA are asymmetric encryption and digital signature algorithms and use a public/private key pair to sign and verify tokens. This means that they use a private key for signing the token, while the Security plugin only needs to know the public key to verify it.
+RSA and ECDSA are asymmetric encryption and digital signature algorithms and use a public/private key pair to sign and verify tokens. This means that they use a private key for signing the token, while the Security plugin needs to know only the public key to verify it.
 
-Since you cannot issue new tokens with the public key---and because you can make valid assumptions about the creator of the token---RSA and ECDSA are considered more secure than using HMAC.
+Because you cannot issue new tokens with the public key---and because you can make valid assumptions about the creator of the token---RSA and ECDSA are considered more secure than using HMAC.
 
-In order to use RS256, you only need to configure the (non-Base64-encoded) public RSA key as `signing_key` in the JWT configuration:
+To use RS256, you need to configure only the (non-base64-encoded) public RSA key as `signing_key` in the JWT configuration:
 
 ```yml
 jwt_auth_domain:
@@ -347,12 +347,12 @@ jwt_auth_domain:
       ...
 ```
 
-The Security plugin automatically detects the algorithm (RSA/ECDSA), and if necessary, you can break the key into multiple lines.
+The Security plugin automatically detects the algorithm (RSA/ECDSA), and if necessary you can break the key into multiple lines.
 
 
 ### Bearer authentication for HTTP requests
 
-The most common way of transmitting a JSON web token in an HTTP request is to add it as an HTTP header with the bearer authentication schema.
+The most common way of transmitting a JSON web token in an HTTP request is to add it as an HTTP header with the bearer authentication schema:
 
 ```
 Authorization: Bearer <JWT>
@@ -365,7 +365,7 @@ As with HTTP basic authentication, you should use HTTPS instead of HTTP when tra
 
 ### URL parameters for HTTP requests
 
-While the most common way to transmit JWTs in HTTP requests is to use a header field, the Security plugin also supports parameters. Configure the name of the GET parameter using the following key:
+Although the most common way to transmit JWTs in HTTP requests is to use a header field, the Security plugin also supports parameters. Configure the name of the `GET` parameter using the following key:
 
 ```yml
     config:
@@ -389,7 +389,7 @@ The following registered claims are validated automatically:
 
 ### Supported formats and algorithms
 
-The Security plugin supports digitally-signed compact JSON web tokens with all standard algorithms:
+The Security plugin supports digitally signed, compact JSON web tokens with all standard algorithms:
 
 ```
 HS256: HMAC using SHA-256

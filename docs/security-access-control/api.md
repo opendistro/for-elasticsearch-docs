@@ -57,26 +57,32 @@ For example, the following line grants the `my-role` role access to the `PUT`, `
 opendistro_security.restapi.endpoints_disabled.my-role.ROLES: ["PUT", "POST", "DELETE"]
 ```
 
+To use the PUT and PATCH methods for the [configuration APIs](#configuration), add the following line to `elasticsearch.yml`:
 
-## Read-only and hidden resources
+```yml
+opendistro_security.unsupported.restapi.allow_config_modification: true
+```
 
-You can mark users, role, role mappings, and action groups as read-only in their respective configuration files. Resources that have this flag set to true can't be changed using the REST API and are marked as reserved in Kibana.
 
-To mark a resource readonly, add the following flag:
+## Reserved and hidden resources
+
+You can mark users, role, role mappings, and action groups as reserved. Resources that have this flag set to true can't be changed using the REST API nor Kibana.
+
+To mark a resource as reserved, add the following flag:
 
 ```yml
 kibana_user:
-  readonly: true
+  reserved: true
 ```
 
-Likewise, you can mark users, role, role mappings, and action groups as hidden. Resources that have this flag set to true are not returned by the REST API and cannot be changed nor deleted:
+Likewise, you can mark users, role, role mappings, and action groups as hidden. Resources that have this flag set to true are not returned by the REST API and not visible in Kibana:
 
 ```yml
 kibana_user:
   hidden: true
 ```
 
-Hidden resources are read-only by definition.
+Hidden resources are automatically reserved.
 
 To add or remove these flags, you need to modify `plugins/opendistro_security/securityconfig/internal_users.yml` and run `plugins/opendistro_security/tools/securityadmin.sh`.
 
@@ -163,7 +169,14 @@ Creates or replaces the specified action group.
 ```json
 PUT _opendistro/_security/api/actiongroups/<action-group>
 {
-  "permissions": ["indices:data/read/search*", "indices:data/read/msearch*", "SUGGEST" ]
+  "allowed_actions": [
+    "indices:data/write/index*",
+    "indices:data/write/update*",
+    "indices:admin/mapping/put",
+    "indices:data/write/bulk*",
+    "read",
+    "write"
+  ]
 }
 ```
 
@@ -171,8 +184,8 @@ PUT _opendistro/_security/api/actiongroups/<action-group>
 
 ```json
 {
-  "status":"CREATED",
-  "message":"action group SEARCH created"
+  "status": "CREATED",
+  "message": "'my-action-group' created."
 }
 ```
 
@@ -187,7 +200,7 @@ Updates individual attributes of an action group.
 PATCH _opendistro/_security/api/actiongroups/<action-group>
 [
   {
-    "op": "replace", "path": "/permissions", "value": ["indices:admin/create", "indices:admin/mapping/put"]
+    "op": "replace", "path": "/allowed_actions", "value": ["indices:admin/create", "indices:admin/mapping/put"]
   }
 ]
 ```
@@ -212,10 +225,10 @@ Creates, updates, or deletes multiple action groups in a single call.
 PATCH _opendistro/_security/api/actiongroups
 [
   {
-    "op": "add", "path": "/CREATE_INDEX", "value": ["indices:admin/create", "indices:admin/mapping/put"]
+    "op": "add", "path": "/CREATE_INDEX", "value": { "allowed_actions": ["indices:admin/create", "indices:admin/mapping/put"] }
   },
   {
-    "op": "delete", "path": "/CRUD"
+    "op": "remove", "path": "/CRUD"
   }
 ]
 ```
@@ -619,7 +632,7 @@ GET _opendistro/_security/api/rolesmapping/<role>
 ```json
 {
   "role_starfleet" : {
-    "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+    "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
     "hosts" : [ "*.starfleetintranet.com" ],
     "users" : [ "worf" ]
   }
@@ -642,7 +655,7 @@ GET _opendistro/_security/api/rolesmapping
 ```json
 {
   "role_starfleet" : {
-    "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+    "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
     "hosts" : [ "*.starfleetintranet.com" ],
     "users" : [ "worf" ]
   }
@@ -677,7 +690,7 @@ Creates or replaces the specified role mapping.
 ```json
 PUT _opendistro/_security/api/rolesmapping/<role>
 {
-  "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+  "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
   "hosts" : [ "*.starfleetintranet.com" ],
   "users" : [ "worf" ]
 }
@@ -706,7 +719,7 @@ PATCH _opendistro/_security/api/rolesmapping/<role>
     "op": "replace", "path": "/users", "value": ["myuser"]
   },
   {
-    "op": "replace", "path": "/backendroles", "value": ["mybackendrole"]
+    "op": "replace", "path": "/backend_roles", "value": ["mybackendrole"]
   }
 ]
 ```
@@ -731,10 +744,10 @@ Creates or updates multiple role mappings in a single call.
 PATCH _opendistro/_security/api/rolesmapping
 [
   {
-    "op": "add", "path": "/human_resources", "value": { "users": ["user1"], "backendroles": ["backendrole2"] }
+    "op": "add", "path": "/human_resources", "value": { "users": ["user1"], "backend_roles": ["backendrole2"] }
   },
   {
-    "op": "add", "path": "/finance", "value": { "users": ["user2"], "backendroles": ["backendrole2"] }
+    "op": "add", "path": "/finance", "value": { "users": ["user2"], "backend_roles": ["backendrole2"] }
   }
 ]
 ```
@@ -908,14 +921,99 @@ PATCH _opendistro/_security/api/tenants/
 
 ---
 
-## Authentication
+## Configuration
 
-### Get authentication details
+### Get configuration
+
+Retrieves the current Security plugin configuration in JSON format.
 
 #### Request
 
 ```
 GET _opendistro/_security/api/config
+```
+
+
+### Update configuration
+
+Creates or updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PUT _opendistro/_security/api/config/config
+{
+  "dynamic": {
+    "filtered_alias_mode": "warn",
+    "disable_rest_auth": false,
+    "disable_intertransport_auth": false,
+    "respect_request_indices_options": false,
+    "kibana": {
+      "multitenancy_enabled": true,
+      "server_username": "kibanaserver",
+      "index": ".kibana"
+    },
+    "http": {
+      "anonymous_auth_enabled": false
+    },
+    "authc": {
+      "basic_internal_auth_domain": {
+        "http_enabled": true,
+        "transport_enabled": true,
+        "order": 0,
+        "http_authenticator": {
+          "challenge": true,
+          "type": "basic",
+          "config": {}
+        },
+        "authentication_backend": {
+          "type": "intern",
+          "config": {}
+        },
+        "description": "Authenticate via HTTP Basic against internal users database"
+      }
+    },
+    "auth_failure_listeners": {},
+    "do_not_fail_on_forbidden": false,
+    "multi_rolespan_enabled": true,
+    "hosts_resolver_mode": "ip-only",
+    "do_not_fail_on_forbidden_empty": false
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "'config' updated."
+}
+```
+
+
+### Patch configuration
+
+Updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PATCH _opendistro/_security/api/config
+[
+  {
+    "op": "replace", "path": "/config/dynamic/authc/basic_internal_auth_domain/transport_enabled", "value": "true"
+  }
+]
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "Resource updated."
+}
 ```
 
 

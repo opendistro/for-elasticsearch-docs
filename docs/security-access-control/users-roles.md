@@ -42,12 +42,7 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
 
 ### internal_users.yml
 
-```yml
-logstash:
-  hash: $2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2
-  roles:
-    - logstash
-```
+See [YAML files](../../security-configuration/yaml/#internal_usersyml).
 
 
 ### REST API
@@ -73,18 +68,7 @@ Just like users, you can create roles using Kibana, `roles.yml`, or the REST API
 
 ### roles.yml
 
-```yml
-someonerole:
-  cluster: []
-  indices:
-    movies:
-      '*':
-      - "READ"
-      _fls_:
-      - "~actors"
-      - "~title"
-      - "~year"
-```
+See [YAML files](../../security-configuration/yaml/#rolesyml).
 
 
 ### REST API
@@ -109,13 +93,7 @@ Just like users and roles, you create role mappings using Kibana, `roles_mapping
 
 ### roles_mapping.yml
 
-```yml
-kibana_user:
-  users:
-    - my-kibana-user
-  backendroles:
-    - kibanauser
-```
+See [YAML files](../../security-configuration/yaml/#roles_mappingyml).
 
 
 ### REST API

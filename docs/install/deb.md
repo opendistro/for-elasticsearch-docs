@@ -9,6 +9,9 @@ nav_order: 3
 
 Installing and running Open Distro for Elasticsearch from an Debian package is a more manual process than the Docker image. We recommend Ubuntu 16.04 or 18.04, but any Debian-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work.
 
+[RPM](../rpm/) lets you install specific versions of Open Distro for Elasticsearch. You *can* install specific versions using Apt, but you have to manually resolve numerous dependencies. We recommend installing the latest version, which avoids this problem.
+{: .note }
+
 These steps assume you're using Ubuntu 18.04.
 
 1. Install Java 11:
@@ -34,8 +37,8 @@ These steps assume you're using Ubuntu 18.04.
 1. Install Elasticsearch OSS:
 
    ```bash
-   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.0.1-amd64.deb
-   sudo dpkg -i elasticsearch-oss-7.0.1-amd64.deb
+   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.1.1-amd64.deb
+   sudo dpkg -i elasticsearch-oss-7.1.1-amd64.deb
    ```
 
 1. Install Open Distro for Elasticsearch:

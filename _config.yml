@@ -22,7 +22,7 @@ permalink: pretty
 
 # Build settings
 markdown: kramdown
-remote_theme: pmarsceill/just-the-docs@v0.2.5
+remote_theme: pmarsceill/just-the-docs@v0.2.6
 
 # Kramdown settings
 kramdown:
@@ -31,7 +31,7 @@ kramdown:
 # Theme settings for just-the-docs
 search_enabled: true
 aux_links:
-  "Back to Open Distro for Elasticsearch home":
+  "Open Distro for Elasticsearch home":
     - "https://opendistro.github.io/for-elasticsearch/"
 color_scheme: odfe
 
@@ -39,8 +39,14 @@ color_scheme: odfe
 # e.g, UA-1234567-89
 ga_tracking: UA-135423944-1
 
+# Disable the just-the-docs theme anchor links in favor of our custom ones
+# See _includes/head_custom.html
+heading_anchors: false
+
 # Adds on-hover anchor links to h2-h6
 anchor_links: true
+
+footer_content: 
 
 plugins:
   - jekyll-remote-theme

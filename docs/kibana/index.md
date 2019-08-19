@@ -15,7 +15,7 @@ Kibana is the default visualization tool for data in Elasticsearch. It also serv
 
 You *can* start Kibana using `docker run` after [creating a Docker network](https://docs.docker.com/engine/reference/commandline/network_create/) and starting Elasticsearch, but the process of connecting Kibana to Elasticsearch is significantly easier with a Docker Compose file.
 
-1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.0.0`.
+1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.1.0`.
 
 1. Create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment. A sample file that includes Kibana is available on the Open Distro for Elasticsearch [Docker installation page](../install/docker/#sample-docker-compose-file).
 
@@ -33,7 +33,7 @@ You *can* start Kibana using `docker run` after [creating a Docker network](http
 
 1. If you haven't already, add the `yum` repositories specified in steps 1--2 in [RPM](../install/rpm) or the `apt` repositories in steps 2--3 of [Debian package](../install/deb).
 1. `sudo yum install opendistroforelasticsearch-kibana` or `sudo apt install opendistroforelasticsearch-kibana`
-1. (Optional) Modify `/etc/kibana/kibana.yml`.
+1. Modify `/etc/kibana/kibana.yml` to use `elasticsearch.hosts` rather than `elasticsearch.url`.
 1. `sudo systemctl start kibana.service`
 1. To stop Kibana:
 
@@ -46,7 +46,7 @@ You *can* start Kibana using `docker run` after [creating a Docker network](http
 
 To run Kibana when the system starts:
 
-```
+```bash
 sudo /bin/systemctl daemon-reload
 sudo /bin/systemctl enable kibana.service
 ```

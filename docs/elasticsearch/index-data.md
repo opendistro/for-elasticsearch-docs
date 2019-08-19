@@ -14,6 +14,10 @@ For situations in which new data arrives incrementally (for example, customer or
 
 ## Introduction to indexing
 
+Before you can search data, you must *index* it. Indexing is the method by which search engines organize data for fast retrieval. The resulting structure is called, fittingly, an index.
+
+In Elasticsearch, the basic unit of data is a JSON *document*. Within an index, Elasticsearch identifies each document using a unique *ID*.
+
 A request to the index API looks like the following:
 
 ```json
@@ -30,14 +34,14 @@ POST cluster_endpoint/_bulk
 
 ```
 
-Bulk data must conform to a specific format, which requires a newline character (\n) at the end of every line, including the last line. This is the basic format:
+Bulk data must conform to a specific format, which requires a newline character (`\n`) at the end of every line, including the last line. This is the basic format:
 
 ```
-action_and_metadata>\n
-optional_document\n
-action_and_metadata\n
-optional_document\n
-...
+Action and metadata\n
+Optional document\n
+Action and metadata\n
+Optional document\n
+
 ```
 
 The document is optional, because `delete` actions do not require a document. The other actions (`index`, `create`, and `update`) all require a document.
