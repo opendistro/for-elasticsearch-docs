@@ -17,7 +17,7 @@ Open Distro for Elasticsearch version | Release highlights | Release date | Elas
 0.10.0 | Support for older Elasticsearch version. | 7 August 2019 | 6.8.1
 0.9.0 | Bumps Elasticsearch version. | 1 May 2019 | 6.7.1
 0.8.0 | Bumps Elasticsearch version. | 5 April 2019 | 6.6.2
-0.7.1 | Fixes Kibana multitenancy. | 29 March 2019 | 6.5.4
+0.7.1 | Fixes Kibana multi-tenancy. | 29 March 2019 | 6.5.4
 0.7.0 | Initial release. | 11 March 2019 | 6.5.4
 
 For detailed release notes, see these GitHub repositories:
