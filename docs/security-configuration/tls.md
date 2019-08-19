@@ -129,7 +129,7 @@ Name | Description
   ```
 {% endcomment %}
 
-1. Download the statically-linked JAR that includes OpenSSL, Apache Portable Runtime, and `netty-tcnative` for [RPM-based distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-fedora-linux-x86_64.jar) or [other distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-non-fedora-linux-x86_64.jar) and place it in `plugins/opendistro_security/` on every node.
+1. Download the statically-linked JAR that includes OpenSSL, Apache Portable Runtime, and `netty-tcnative` for [RPM-based distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.2.0j-static-2.0.20.Final-fedora-linux-x86_64.jar) or [other distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.2.0j-static-2.0.20.Final-non-fedora-linux-x86_64.jar) and place it in `plugins/opendistro_security/` on every node.
 
 
 ## (Advanced) Hostname verification and DNS lookup
