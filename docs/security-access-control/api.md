@@ -632,7 +632,7 @@ GET _opendistro/_security/api/rolesmapping/<role>
 ```json
 {
   "role_starfleet" : {
-    "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+    "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
     "hosts" : [ "*.starfleetintranet.com" ],
     "users" : [ "worf" ]
   }
@@ -655,7 +655,7 @@ GET _opendistro/_security/api/rolesmapping
 ```json
 {
   "role_starfleet" : {
-    "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+    "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
     "hosts" : [ "*.starfleetintranet.com" ],
     "users" : [ "worf" ]
   }
@@ -690,7 +690,7 @@ Creates or replaces the specified role mapping.
 ```json
 PUT _opendistro/_security/api/rolesmapping/<role>
 {
-  "backendroles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
+  "backend_roles" : [ "starfleet", "captains", "defectors", "cn=ldaprole,ou=groups,dc=example,dc=com" ],
   "hosts" : [ "*.starfleetintranet.com" ],
   "users" : [ "worf" ]
 }
@@ -719,7 +719,7 @@ PATCH _opendistro/_security/api/rolesmapping/<role>
     "op": "replace", "path": "/users", "value": ["myuser"]
   },
   {
-    "op": "replace", "path": "/backendroles", "value": ["mybackendrole"]
+    "op": "replace", "path": "/backend_roles", "value": ["mybackendrole"]
   }
 ]
 ```
@@ -744,10 +744,10 @@ Creates or updates multiple role mappings in a single call.
 PATCH _opendistro/_security/api/rolesmapping
 [
   {
-    "op": "add", "path": "/human_resources", "value": { "users": ["user1"], "backendroles": ["backendrole2"] }
+    "op": "add", "path": "/human_resources", "value": { "users": ["user1"], "backend_roles": ["backendrole2"] }
   },
   {
-    "op": "add", "path": "/finance", "value": { "users": ["user2"], "backendroles": ["backendrole2"] }
+    "op": "add", "path": "/finance", "value": { "users": ["user2"], "backend_roles": ["backendrole2"] }
   }
 ]
 ```
