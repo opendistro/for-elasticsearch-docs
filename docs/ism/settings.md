@@ -10,7 +10,7 @@ nav_order: 10
 
 ## ISM indices
 
-Index state management stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the ISM APIs.
+Index state management stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [ISM APIs](../api/).
 
 
 ## ISM settings

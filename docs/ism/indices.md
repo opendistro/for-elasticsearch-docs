@@ -11,10 +11,10 @@ has_children: false
 
 ## Add ISM settings to indices
 
-The Index State Management plugin only manages indices that specify certain ISM settings. To create a new index with ISM settings and a rollover alias:
+The Index State Management plugin only manages indices that contain ISM settings. To create a new index with ISM settings and a rollover alias:
 
 ```json
-PUT some_index
+PUT my-index1
 {
   "settings": {
     "opendistro.index_state_management.policy_name": "ingest_policy",
