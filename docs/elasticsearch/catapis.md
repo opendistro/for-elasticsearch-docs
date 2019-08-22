@@ -8,9 +8,9 @@ nav_order: 3
 # CAT APIs
 
 You can get essential stats about your cluster in an easy-to-understand, tabular format using the Compact and Aligned Text (CAT) APIs.
-It's a human-readable interface for all admin APIs that returns a textual output instead of traditional JSON.
+It's a human-readable interface for admin APIs that returns plain text instead of traditional JSON.
 
-Using the CAT APIs, you can answer questions like which node is the elected master, what state is my cluster in, how many documents are in each index, and so on.
+Using the CAT APIs, you can answer questions like which node is the elected master, what state is the cluster in, how many documents are in each index, and so on.
 
 To see the available CAT APIs:
 #### Request
@@ -25,7 +25,7 @@ Parameter | Description
 :--- | :--- |
 `?v` |  Adds a header to each of the columns in the output. It also adds some formatting to help align each of the columns together.
 `?help` | Lists the default and other available headers for a given API.
-`?h`  |  Includes information about the specified headers for a given API.
+`?h`  |  Limits the output to specific headers.
 `?format` |  Outputs the result in JSON, YAML, or CBOR formats.
 `?sort` | Sorts the output by the specified columns.
 
@@ -41,7 +41,7 @@ To see all the available headers, you can use the `?help` parameter:
 GET _cat/<api_name>?help
 ```
 
-Each API has a lot of available headers and some of them are not shown unless you explicitly specify them with the `?h` parameter:
+To limit the output to a subset of headers, you can use the `?h` parameter:
 
 ```json
 GET _cat/<api_name>?h=<header_name_1>,<header_name_2>&v
@@ -179,7 +179,7 @@ GET _cat/pending_tasks?v
 
 ## Aliases
 
-Shows the filter and routing information for aliases configured on each index.
+Shows the mapping of aliases to indices, plus routing and filtering information.
 
 ```json
 GET _cat/aliases?v
@@ -237,7 +237,7 @@ GET _cat/nodeattrs?v
 
 ## Repositories
 
-Shows the types and values of custom node repositories.
+Shows all snapshot repositories and their types.
 
 ```json
 GET _cat/repositories?v
@@ -253,7 +253,7 @@ GET _cat/snapshots/<repository>?v
 
 ## Templates
 
-Shows the names, index patterns, application order numbers, and version numbers of templates.
+Shows the names, patterns, order numbers, and version numbers of index templates.
 
 ```json
 GET _cat/templates?v
