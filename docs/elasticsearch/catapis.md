@@ -23,7 +23,7 @@ You can also use the following string parameters with your query:
 
 Parameter | Description
 :--- | :--- |
-`?v` |  Adds a header to each of the columns in the output. It also adds some formatting to help align each of the columns together.
+`?v` |  Makes the output more verbose by adding headers to the columns. It also adds some formatting to help align each of the columns together.
 `?help` | Lists the default and other available headers for a given API.
 `?h`  |  Limits the output to specific headers.
 `?format` |  Outputs the result in JSON, YAML, or CBOR formats.
