@@ -110,7 +110,9 @@ For security reasons, you cannot use wildcards nor regular expressions here.
 
 ## OpenSSL
 
-The Security plugin supports OpenSSL. We recommend OpenSSL in production for enhanced performance and a wider range of modern cipher suites. In order to use OpenSSL, you need to install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
+The Security plugin supports OpenSSL. If you use Java 8, we recommend OpenSSL in production for enhanced performance and a wider range of modern cipher suites. If you use Java 11, performance should be similar.
+
+To use OpenSSL, you must install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
 
 If OpenSSL is enabled, but for one reason or another the installation does not work, the Security plugin falls back to the Java JCE as the security engine.
 
@@ -129,7 +131,7 @@ Name | Description
   ```
 {% endcomment %}
 
-1. Download the statically-linked JAR that includes OpenSSL, Apache Portable Runtime, and `netty-tcnative` for [RPM-based distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.2.0j-static-2.0.20.Final-fedora-linux-x86_64.jar) or [other distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.2.0j-static-2.0.20.Final-non-fedora-linux-x86_64.jar) and place it in `plugins/opendistro_security/` on every node.
+1. Download the statically-linked JAR that includes OpenSSL, Apache Portable Runtime, and `netty-tcnative` for [RPM-based distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-fedora-linux-x86_64.jar) or [other distributions](https://bintray.com/floragunncom/netty-tcnative/download_file?file_path=netty-tcnative-openssl-1.1.0j-static-2.0.20.Final-non-fedora-linux-x86_64.jar) and place it in `plugins/opendistro_security/` on every node.
 
 
 ## (Advanced) Hostname verification and DNS lookup
@@ -158,7 +160,7 @@ With TLS client authentication enabled, REST clients can send a TLS certificate 
 
 - Providing an admin certificate when using the REST management API.
 - Configuring roles and permissions based on a client certificate.
-- Providing identity information for tools like Kibana, Logstash or Beats.
+- Providing identity information for tools like Kibana, Logstash, or Beats.
 
 TLS client authentication has three modes:
 
