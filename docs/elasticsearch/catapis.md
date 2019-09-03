@@ -1,30 +1,30 @@
 ---
 layout: default
-title: CAT APIs
+title: CAT API
 parent: Elasticsearch
-nav_order: 3
+nav_order: 4
 ---
 
-# CAT APIs
+# cat API
 
-You can get essential stats about your cluster in an easy-to-understand, tabular format using the Compact and Aligned Text (CAT) APIs.
-It's a human-readable interface for admin APIs that returns plain text instead of traditional JSON.
+You can get essential statistics about your cluster in an easy-to-understand, tabular format using the compact and aligned text (CAT) API.
+The cat API is a human-readable interface that returns plain text instead of traditional JSON.
 
-Using the CAT APIs, you can answer questions like which node is the elected master, what state is the cluster in, how many documents are in each index, and so on.
+Using the cat API, you can answer questions like which node is the elected master, what state is the cluster in, how many documents are in each index, and so on.
 
-To see the available CAT APIs:
+To see the available operations in the cat API, use the following command.
 #### Request
 
 ```json
 GET _cat
 ```
 
-You can also use the following string parameters with your query:
+You can also use the following string parameters with your query.
 
 Parameter | Description
 :--- | :--- |
 `?v` |  Makes the output more verbose by adding headers to the columns. It also adds some formatting to help align each of the columns together.
-`?help` | Lists the default and other available headers for a given API.
+`?help` | Lists the default and other available headers for a given operation.
 `?h`  |  Limits the output to specific headers.
 `?format` |  Outputs the result in JSON, YAML, or CBOR formats.
 `?sort` | Sorts the output by the specified columns.
@@ -32,22 +32,22 @@ Parameter | Description
 To see what each column represents, use the `?v` parameter:
 
 ```json
-GET _cat/<api_name>?v
+GET _cat/<operation_name>?v
 ```
 
 To see all the available headers, you can use the `?help` parameter:
 
 ```json
-GET _cat/<api_name>?help
+GET _cat/<operation_name>?help
 ```
 
 To limit the output to a subset of headers, you can use the `?h` parameter:
 
 ```json
-GET _cat/<api_name>?h=<header_name_1>,<header_name_2>&v
+GET _cat/<operation_name>?h=<header_name_1>,<header_name_2>&v
 ```
 
-Typically, for any API, you can first figure out what headers are available using the `?help` parameter and then use the `?h` parameter to limit the output to only the headers you care about.
+Typically, for any operation you can find out what headers are available using the `?help` parameter, and then use the `?h` parameter to limit the output to only the headers that you care about.
 
 ---
 
@@ -73,7 +73,7 @@ Shows the state of all primary and replica shards and how they are distributed.
 GET _cat/shards?v
 ```
 
-To only see information about shards of a specific index, add the index name after your query.
+To see only the information about shards of a specific index, add the index name after your query.
 
 ```json
 GET _cat/shards/<index>?v
@@ -127,7 +127,7 @@ Shows Lucene segment-level information for each index.
 GET _cat/segments?v
 ```
 
-To only see information about segments of a specific index, add the index name after your query.
+To see only the information about segments of a specific index, add the index name after your query.
 
 ```json
 GET _cat/segments/<index>?v
@@ -155,7 +155,7 @@ Shows all completed and ongoing index and shard recoveries.
 GET _cat/recovery?v
 ```
 
-To only see recoveries of a specific index, add the index name after your query.
+To see only the recoveries of a specific index, add the index name after your query.
 
 ```json
 GET _cat/recovery/<index>?v
@@ -163,13 +163,13 @@ GET _cat/recovery/<index>?v
 
 ## Health
 
-Shows the status of the cluster, how long the cluster has been up, number of nodes, and other useful information that helps you analyze the health of your cluster.
+Shows the status of the cluster, how long the cluster has been up, the number of nodes, and other useful information that helps you analyze the health of your cluster.
 
 ```json
 GET _cat/health?v
 ```
 
-## Pending Tasks
+## Pending tasks
 
 Shows the progress of all pending tasks, including task priority and time in queue.
 
@@ -191,7 +191,7 @@ To limit the information to a specific alias, add the alias name after your quer
 GET _cat/aliases/<alias>?v
 ```
 
-## Thread Pool
+## Thread pool
 
 Shows the active, queued, and rejected threads of different thread pools on each node.
 
@@ -213,7 +213,7 @@ Shows the names, components, and versions of the installed plugins.
 GET _cat/plugins?v
 ```
 
-## Field Data
+## Field data
 
 Shows the memory size used by each field per node.
 
@@ -227,7 +227,7 @@ To limit the information to a specific field, add the field name after your quer
 GET _cat/fielddata/<fields>?v
 ```
 
-## Node Attributes
+## Node attributes
 
 Shows the attributes of custom nodes.
 
