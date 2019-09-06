@@ -105,7 +105,7 @@ opendistro_security.authcz.admin_dn:
   - CN=admin,OU=SSL,O=Test,L=Test,C=DE
 ```
 
-For security reasons, you cannot use wildcards nor regular expressions here.
+For security reasons, you can't use wildcards or regular expressions here.
 
 
 ## OpenSSL
