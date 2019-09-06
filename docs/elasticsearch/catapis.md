@@ -58,7 +58,7 @@ Typically, for any operation you can find out what headers are available using t
 ---
 ## Aliases
 
-Shows the mapping of aliases to indices, plus routing and filtering information.
+Lists the mapping of aliases to indices, plus routing and filtering information.
 
 ```json
 GET _cat/aliases?v
@@ -72,21 +72,15 @@ GET _cat/aliases/<alias>?v
 
 ## Allocation
 
-Shows the allocation of disk space for indices and the number of shards on each node.
+Lists the allocation of disk space for indices and the number of shards on each node.
 Default request:
 ```json
 GET _cat/allocation?v
 ```
-Example default response:
-```json
-shards disk.indices disk.used disk.avail disk.total disk.percent host       ip         node
-     7          1mb     6.1gb     52.2gb     58.4gb           10 172.19.0.2 172.19.0.2 odfe-node2
-     7        1.1mb     6.1gb     52.2gb     58.4gb           10 172.19.0.4 172.19.0.4 odfe-node1
-```
 
 ## Count
 
-Shows the number of documents in your cluster.
+Lists the number of documents in your cluster.
 
 ```json
 GET _cat/count?v
@@ -100,7 +94,7 @@ GET _cat/count/<index>?v
 
 ## Field data
 
-Shows the memory size used by each field per node.
+Lists the memory size used by each field per node.
 
 ```json
 GET _cat/fielddata?v
@@ -114,7 +108,7 @@ GET _cat/fielddata/<fields>?v
 
 ## Health
 
-Shows the status of the cluster, how long the cluster has been up, the number of nodes, and other useful information that helps you analyze the health of your cluster.
+Lists the status of the cluster, how long the cluster has been up, the number of nodes, and other useful information that helps you analyze the health of your cluster.
 
 ```json
 GET _cat/health?v
@@ -122,7 +116,7 @@ GET _cat/health?v
 
 ## Indices
 
-Shows information related to indices⁠—how much disk space they are using, how many shards they have, their health status, and so on.
+Lists information related to indices⁠—how much disk space they are using, how many shards they have, their health status, and so on.
 
 ```json
 GET _cat/indices?v
@@ -136,7 +130,7 @@ GET _cat/indices/<index>?v
 
 ## Master
 
-Shows information that helps identify the elected master node.
+Lists information that helps identify the elected master node.
 
 ```json
 GET _cat/master?v
@@ -144,7 +138,7 @@ GET _cat/master?v
 
 ## Node attributes
 
-Shows the attributes of custom nodes.
+Lists the attributes of custom nodes.
 
 ```json
 GET _cat/nodeattrs?v
@@ -152,7 +146,7 @@ GET _cat/nodeattrs?v
 
 ## Nodes
 
-Shows node-level information, including node roles and load metrics.
+Lists node-level information, including node roles and load metrics.
 
 A few important node metrics are `pid`, `name`, `master`, `ip`, `port`, `version`, `build`, `jdk`, along with `disk`, `heap`, `ram`, and `file_desc`.
 
@@ -162,7 +156,7 @@ GET _cat/nodes?v
 
 ## Pending tasks
 
-Shows the progress of all pending tasks, including task priority and time in queue.
+Lists the progress of all pending tasks, including task priority and time in queue.
 
 ```json
 GET _cat/pending_tasks?v
@@ -170,7 +164,7 @@ GET _cat/pending_tasks?v
 
 ## Plugins
 
-Shows the names, components, and versions of the installed plugins.
+Lists the names, components, and versions of the installed plugins.
 
 ```json
 GET _cat/plugins?v
@@ -178,7 +172,7 @@ GET _cat/plugins?v
 
 ## Recovery
 
-Shows all completed and ongoing index and shard recoveries.
+Lists all completed and ongoing index and shard recoveries.
 
 ```json
 GET _cat/recovery?v
@@ -192,7 +186,7 @@ GET _cat/recovery/<index>?v
 
 ## Repositories
 
-Shows all snapshot repositories and their types.
+Lists all snapshot repositories and their types.
 
 ```json
 GET _cat/repositories?v
@@ -200,7 +194,7 @@ GET _cat/repositories?v
 
 ## Segments
 
-Shows Lucene segment-level information for each index.
+Lists Lucene segment-level information for each index.
 
 ```json
 GET _cat/segments?v
@@ -214,7 +208,7 @@ GET _cat/segments/<index>?v
 
 ## Shards
 
-Shows the state of all primary and replica shards and how they are distributed.
+Lists the state of all primary and replica shards and how they are distributed.
 
 ```json
 GET _cat/shards?v
@@ -228,7 +222,7 @@ GET _cat/shards/<index>?v
 
 ## Snapshots
 
-Shows all snapshots for a repository.
+Lists all snapshots for a repository.
 
 ```json
 GET _cat/snapshots/<repository>?v
@@ -236,7 +230,7 @@ GET _cat/snapshots/<repository>?v
 
 ## Tasks
 
-Shows the progress of all tasks currently running on your cluster.
+Lists the progress of all tasks currently running on your cluster.
 
 ```json
 GET _cat/tasks?v
@@ -244,7 +238,7 @@ GET _cat/tasks?v
 
 ## Templates
 
-Shows the names, patterns, order numbers, and version numbers of index templates.
+Lists the names, patterns, order numbers, and version numbers of index templates.
 
 ```json
 GET _cat/templates?v
@@ -252,7 +246,7 @@ GET _cat/templates?v
 
 ## Thread pool
 
-Shows the active, queued, and rejected threads of different thread pools on each node.
+Lists the active, queued, and rejected threads of different thread pools on each node.
 
 ```json
 GET _cat/thread_pool?v
