@@ -25,13 +25,13 @@ http://<kibana_host>:5601/app/kibana?security_tenant=analysts#/visualize/edit/c5
 Multi-tenancy is enabled by default, but you can disable it or change its settings using `plugins/opendistro_security/securityconfig/config.yml`:
 
 ```yml
-opendistro_security:
+config:
   dynamic:
     kibana:
       multitenancy_enabled: true
       server_username: kibanaserver
       index: '.kibana'
-      do_not_fail_on_forbidden: false
+    do_not_fail_on_forbidden: false
 ```
 
 Setting | Description
