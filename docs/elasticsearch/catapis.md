@@ -23,7 +23,7 @@ You can also use the following string parameters with your query.
 
 Parameter | Description
 :--- | :--- |
-`?v` |  Makes the output more verbose by adding headers to the columns. It also adds some formatting to help align each of the columns together.
+`?v` |  Makes the output more verbose by adding headers to the columns. It also adds some formatting to help align each of the columns together. All examples on this page include the `v` parameter.
 `?help` | Lists the default and other available headers for a given operation.
 `?h`  |  Limits the output to specific headers.
 `?format` |  Outputs the result in JSON, YAML, or CBOR formats.
@@ -35,13 +35,13 @@ To see what each column represents, use the `?v` parameter:
 GET _cat/<operation_name>?v
 ```
 
-To see all the available headers, you can use the `?help` parameter:
+To see all the available headers, use the `?help` parameter:
 
 ```json
 GET _cat/<operation_name>?help
 ```
 
-To limit the output to a subset of headers, you can use the `?h` parameter:
+To limit the output to a subset of headers, use the `?h` parameter:
 
 ```json
 GET _cat/<operation_name>?h=<header_name_1>,<header_name_2>&v
@@ -56,130 +56,9 @@ Typically, for any operation you can find out what headers are available using t
 {:toc}
 
 ---
-
-## Allocation
-
-Shows the allocation of disk space for indices and the number of shards on each node.
-
-```json
-GET _cat/allocation?v
-```
-
-## Shards
-
-Shows the state of all primary and replica shards and how they are distributed.
-
-```json
-GET _cat/shards?v
-```
-
-To see only the information about shards of a specific index, add the index name after your query.
-
-```json
-GET _cat/shards/<index>?v
-```
-
-## Master
-
-Shows information that helps identify the elected master node.
-
-```json
-GET _cat/master?v
-```
-
-## Nodes
-
-Shows node-level information, including node roles and load metrics.
-
-A few important node metrics are `pid`, `name`, `master`, `ip`, `port`, `version`, `build`, `jdk`, along with `disk`, `heap`, `ram`, and `file_desc`.
-
-```json
-GET _cat/nodes?v
-```
-
-## Tasks
-
-Shows the progress of all tasks currently running on your cluster.
-
-```json
-GET _cat/tasks?v
-```
-
-## Indices
-
-Shows information related to indices⁠—how much disk space they are using, how many shards they have, their health status, and so on.
-
-```json
-GET _cat/indices?v
-```
-
-To limit the information to a specific index, add the index name after your query.
-
-```json
-GET _cat/indices/<index>?v
-```
-
-## Segments
-
-Shows Lucene segment-level information for each index.
-
-```json
-GET _cat/segments?v
-```
-
-To see only the information about segments of a specific index, add the index name after your query.
-
-```json
-GET _cat/segments/<index>?v
-```
-
-## Count
-
-Shows the number of documents in your cluster.
-
-```json
-GET _cat/count?v
-```
-
-To see the number of documents in a specific index, add the index name after your query.
-
-```json
-GET _cat/count/<index>?v
-```
-
-## Recovery
-
-Shows all completed and ongoing index and shard recoveries.
-
-```json
-GET _cat/recovery?v
-```
-
-To see only the recoveries of a specific index, add the index name after your query.
-
-```json
-GET _cat/recovery/<index>?v
-```
-
-## Health
-
-Shows the status of the cluster, how long the cluster has been up, the number of nodes, and other useful information that helps you analyze the health of your cluster.
-
-```json
-GET _cat/health?v
-```
-
-## Pending tasks
-
-Shows the progress of all pending tasks, including task priority and time in queue.
-
-```json
-GET _cat/pending_tasks?v
-```
-
 ## Aliases
 
-Shows the mapping of aliases to indices, plus routing and filtering information.
+Lists the mapping of aliases to indices, plus routing and filtering information.
 
 ```json
 GET _cat/aliases?v
@@ -191,31 +70,31 @@ To limit the information to a specific alias, add the alias name after your quer
 GET _cat/aliases/<alias>?v
 ```
 
-## Thread pool
+## Allocation
 
-Shows the active, queued, and rejected threads of different thread pools on each node.
-
+Lists the allocation of disk space for indices and the number of shards on each node.
+Default request:
 ```json
-GET _cat/thread_pool?v
+GET _cat/allocation?v
 ```
 
-To limit the information to a specific thread pool, add the thread pool name after your query.
+## Count
+
+Lists the number of documents in your cluster.
 
 ```json
-GET _cat/thread_pool/<thread_pool>?v
+GET _cat/count?v
 ```
 
-## Plugins
-
-Shows the names, components, and versions of the installed plugins.
+To see the number of documents in a specific index, add the index name after your query.
 
 ```json
-GET _cat/plugins?v
+GET _cat/count/<index>?v
 ```
 
 ## Field data
 
-Shows the memory size used by each field per node.
+Lists the memory size used by each field per node.
 
 ```json
 GET _cat/fielddata?v
@@ -227,34 +106,154 @@ To limit the information to a specific field, add the field name after your quer
 GET _cat/fielddata/<fields>?v
 ```
 
+## Health
+
+Lists the status of the cluster, how long the cluster has been up, the number of nodes, and other useful information that helps you analyze the health of your cluster.
+
+```json
+GET _cat/health?v
+```
+
+## Indices
+
+Lists information related to indices⁠—how much disk space they are using, how many shards they have, their health status, and so on.
+
+```json
+GET _cat/indices?v
+```
+
+To limit the information to a specific index, add the index name after your query.
+
+```json
+GET _cat/indices/<index>?v
+```
+
+## Master
+
+Lists information that helps identify the elected master node.
+
+```json
+GET _cat/master?v
+```
+
 ## Node attributes
 
-Shows the attributes of custom nodes.
+Lists the attributes of custom nodes.
 
 ```json
 GET _cat/nodeattrs?v
 ```
 
+## Nodes
+
+Lists node-level information, including node roles and load metrics.
+
+A few important node metrics are `pid`, `name`, `master`, `ip`, `port`, `version`, `build`, `jdk`, along with `disk`, `heap`, `ram`, and `file_desc`.
+
+```json
+GET _cat/nodes?v
+```
+
+## Pending tasks
+
+Lists the progress of all pending tasks, including task priority and time in queue.
+
+```json
+GET _cat/pending_tasks?v
+```
+
+## Plugins
+
+Lists the names, components, and versions of the installed plugins.
+
+```json
+GET _cat/plugins?v
+```
+
+## Recovery
+
+Lists all completed and ongoing index and shard recoveries.
+
+```json
+GET _cat/recovery?v
+```
+
+To see only the recoveries of a specific index, add the index name after your query.
+
+```json
+GET _cat/recovery/<index>?v
+```
+
 ## Repositories
 
-Shows all snapshot repositories and their types.
+Lists all snapshot repositories and their types.
 
 ```json
 GET _cat/repositories?v
 ```
 
+## Segments
+
+Lists Lucene segment-level information for each index.
+
+```json
+GET _cat/segments?v
+```
+
+To see only the information about segments of a specific index, add the index name after your query.
+
+```json
+GET _cat/segments/<index>?v
+```
+
+## Shards
+
+Lists the state of all primary and replica shards and how they are distributed.
+
+```json
+GET _cat/shards?v
+```
+
+To see only the information about shards of a specific index, add the index name after your query.
+
+```json
+GET _cat/shards/<index>?v
+```
+
 ## Snapshots
 
-Shows all snapshots for a repository.
+Lists all snapshots for a repository.
 
 ```json
 GET _cat/snapshots/<repository>?v
 ```
 
+## Tasks
+
+Lists the progress of all tasks currently running on your cluster.
+
+```json
+GET _cat/tasks?v
+```
+
 ## Templates
 
-Shows the names, patterns, order numbers, and version numbers of index templates.
+Lists the names, patterns, order numbers, and version numbers of index templates.
 
 ```json
 GET _cat/templates?v
+```
+
+## Thread pool
+
+Lists the active, queued, and rejected threads of different thread pools on each node.
+
+```json
+GET _cat/thread_pool?v
+```
+
+To limit the information to a specific thread pool, add the thread pool name after your query.
+
+```json
+GET _cat/thread_pool/<thread_pool>?v
 ```
