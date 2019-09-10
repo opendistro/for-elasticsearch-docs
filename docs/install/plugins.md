@@ -195,4 +195,5 @@ sudo bin/elasticsearch-plugin install <plugin-name>
 ```
 
 
-This [Ansible playbook](https://github.com/saravanan30erd/opendistro_standalone_installation) helps to install a Production Ready Open Distro Elasticsearch Cluster and Kibana using Standalone Plugin Installation method.{: .note }
+This [Ansible playbook](https://github.com/saravanan30erd/opendistro_standalone_installation) helps to install a Production Ready Open Distro Elasticsearch Cluster and Kibana using Standalone Plugin Installation method.
+{: .note }
