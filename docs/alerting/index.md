@@ -14,6 +14,10 @@ The alerting feature notifies you when data from one or more Elasticsearch indic
 Monitors run as the `admin` user, which means that monitors can query all documents in all indices and do not consider the roles of the user who created the monitor. If your cluster contains sensitive data, we recommend [removing the alerting plugin](../install/plugins/#remove-plugins).
 {: .warning }
 
+## Alerting plugin Installation
+
+Alerting via the Kibana UI requires two plugins to be installed: the elastic plugin (directions [here](https://opendistro.github.io/for-elasticsearch-docs/docs/install/plugins/#alerting) and a Kibana plugin (directions [here](https://opendistro.github.io/for-elasticsearch-docs/docs/kibana/plugins/#alerting)
+
 To get started, choose **Alerting** in Kibana.
 
 ![Kibana side bar with link](../images/alerting.png)
