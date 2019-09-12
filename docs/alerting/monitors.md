@@ -150,8 +150,8 @@ These scripts are Painless, not Groovy, but calling them Groovy in Jekyll gets u
 ctx.results[0].hits.total.value > 0
 ```
 
-// Returns true if the avg_cpu aggregation exceeds 90
 ```groovy
+// Returns true if the avg_cpu aggregation exceeds 90
 if (ctx.results[0].aggregations.avg_cpu.value > 90) {
   return true;
 }
