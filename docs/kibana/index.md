@@ -8,7 +8,7 @@ has_toc: false
 
 # Kibana
 
-Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro for Elasticsearch [Security plugin](../security-configuration/).
+Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro for Elasticsearch [Security](../security-configuration/) and [Alerting](../alerting/) plugins.
 
 
 ## Run Kibana using Docker

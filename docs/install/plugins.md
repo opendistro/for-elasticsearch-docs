@@ -9,8 +9,6 @@ nav_order: 90
 
 If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and SQL plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin.
 
-In addition to their Elasticsearch plugins, Security and Alerting have corresponding [Kibana plugins](../../kibana/plugins) that you probably want to install, as well.
-
 
 ---
 
@@ -114,7 +112,9 @@ Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`)
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.1.0.0.zip
 ```
 
-After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually.
+After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security-configuration/security-admin/).
+
+Security has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install, as well.
 
 
 ### Alerting
@@ -122,6 +122,8 @@ After installing the Security plugin, you can run `sudo sh /usr/share/elasticsea
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.1.0.0.zip
 ```
+
+Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install, as well.
 
 
 ### SQL

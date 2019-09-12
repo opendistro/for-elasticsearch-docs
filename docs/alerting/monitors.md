@@ -55,6 +55,24 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
    - Query definition gives you flexibility in terms of what you query for (using [the Elasticsearch query DSL](../../elasticsearch/full-text)) and how you evaluate the results of that query (Painless scripting).
 
+     This example averages the `cpu_usage` field:
+
+     ```json
+     {
+       "size": 0,
+       "query": {
+         "match_all": {}
+       },
+       "aggs": {
+         "avg_cpu": {
+           "avg": {
+             "field": "cpu_usage"
+           }
+         }
+       }
+     }
+     ```
+
      You can even filter query results using `{% raw %}{{period_start}}{% endraw %}` and `{% raw %}{{period_end}}{% endraw %}`:
 
      ```json
@@ -130,6 +148,13 @@ These scripts are Painless, not Groovy, but calling them Groovy in Jekyll gets u
 ```groovy
 // Evaluates to true if the query returned any documents
 ctx.results[0].hits.total.value > 0
+```
+
+// Returns true if the avg_cpu aggregation exceeds 90
+```groovy
+if (ctx.results[0].aggregations.avg_cpu.value > 90) {
+  return true;
+}
 ```
 
 ```groovy
