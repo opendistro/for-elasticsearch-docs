@@ -32,6 +32,17 @@ In addition to their Elasticsearch plugins, Security and Alerting have correspon
   </thead>
   <tbody>
     <tr>
+      <td>7.2.0</td>
+      <td>
+        <pre>opendistro-job-scheduler        1.2.0
+opendistro_alerting             1.2.0.0
+opendistro_performance_analyzer 1.2.0.0
+opendistro_security             1.2.0.0
+opendistro_sql                  1.2.0.0</pre>
+      </td>
+    </tr>
+    <tr>
+    <tr>
       <td>7.1.1</td>
       <td>
         <pre>opendistro-job-scheduler        1.1.0
