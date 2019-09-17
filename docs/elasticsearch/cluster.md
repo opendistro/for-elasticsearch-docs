@@ -175,22 +175,20 @@ discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<p
 
 After you are done with setting the configurations, you can start Elasticsearch on all the nodes.
 
-Use this command to start Elasticsearch in the background as a daemon and record the process ID to a file named `pid`:
-
 ```yml
-./bin/elasticsearch -d -p pid
+sudo systemctl start elasticsearch.service
 ```
 
 You can go to the logs file to see the formation of the cluster:
 
 ```yml
-less logs/odfe-cluster.log
+less /var/log/elasticsearch/odfe-cluster.log
 ```
 
 Perform the following `_cat` query on any node to see all the nodes formed as a cluster:
 
 ```yml
-curl localhost:9200/_cat/nodes?v
+curl -XGET https://<private-ip>:9200/_cat/nodes?v -u admin:admin --insecure
 ```
 
 ```yml
