@@ -105,12 +105,14 @@ opendistro_security.authcz.admin_dn:
   - CN=admin,OU=SSL,O=Test,L=Test,C=DE
 ```
 
-For security reasons, you cannot use wildcards nor regular expressions here.
+For security reasons, you can't use wildcards or regular expressions here.
 
 
 ## OpenSSL
 
-The Security plugin supports OpenSSL. We recommend OpenSSL in production for enhanced performance and a wider range of modern cipher suites. In order to use OpenSSL, you need to install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
+The Security plugin supports OpenSSL. If you use Java 8, we recommend OpenSSL in production for enhanced performance and a wider range of modern cipher suites. If you use Java 11, performance should be similar.
+
+To use OpenSSL, you must install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
 
 If OpenSSL is enabled, but for one reason or another the installation does not work, the Security plugin falls back to the Java JCE as the security engine.
 
@@ -158,7 +160,7 @@ With TLS client authentication enabled, REST clients can send a TLS certificate 
 
 - Providing an admin certificate when using the REST management API.
 - Configuring roles and permissions based on a client certificate.
-- Providing identity information for tools like Kibana, Logstash or Beats.
+- Providing identity information for tools like Kibana, Logstash, or Beats.
 
 TLS client authentication has three modes:
 

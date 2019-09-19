@@ -66,7 +66,7 @@ opendistro_security.unsupported.restapi.allow_config_modification: true
 
 ## Reserved and hidden resources
 
-You can mark users, role, role mappings, and action groups as reserved. Resources that have this flag set to true can't be changed using the REST API nor Kibana.
+You can mark users, role, role mappings, and action groups as reserved. Resources that have this flag set to true can't be changed using the REST API or Kibana.
 
 To mark a resource as reserved, add the following flag:
 
