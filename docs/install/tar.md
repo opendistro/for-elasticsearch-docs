@@ -38,7 +38,7 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 1. Extract the TAR file to a directory and change to that directory:
 
    ```bash
-   tar -zxvf opendistroforelasticsearch-1.2.0.tar.gz
+   tar -zxf opendistroforelasticsearch-1.2.0.tar.gz
    cd opendistroforelasticsearch-1.2.0
    ```
 
