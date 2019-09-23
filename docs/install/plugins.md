@@ -40,7 +40,6 @@ opendistro_sql                  1.2.0.0</pre>
       </td>
     </tr>
     <tr>
-    <tr>
       <td>7.1.1</td>
       <td>
         <pre>opendistro-job-scheduler        1.1.0
