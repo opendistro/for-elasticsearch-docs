@@ -1,17 +1,14 @@
 ---
 layout: default
-title: Index Settings
-nav_order: 1
+title: Indices
+nav_order: 2
 parent: Index State Management
 has_children: false
 ---
 
-# Index settings
+# Indices
 
-
-## Add ISM settings to indices
-
-The Index State Management plugin only manages indices that contain ISM settings. To create a new index with ISM settings and a rollover alias:
+The ISM plugin only manages indices that contain ISM settings. To create a new index with ISM settings and set a rollover alias:
 
 ```json
 PUT my-index1
@@ -27,3 +24,5 @@ PUT my-index1
   }
 }
 ```
+
+In this case, the `ingest_policy` is applied to `my-index1` with the rollover action defined in `some_alias`.

@@ -1,11 +1,11 @@
 ---
 layout: default
-title: API
+title: ISM API
 parent: Index State Management
-nav_order: 90
+nav_order: 5
 ---
 
-# Index state management API
+# ISM API
 
 Use the index state management API to programmatically work with policies and managed indices. You can also start and stop the plugin.
 
@@ -19,7 +19,12 @@ Use the index state management API to programmatically work with policies and ma
 
 ---
 
+
 ## Create policy
+
+Create a new policy.
+
+
 
 #### Request
 
@@ -205,6 +210,8 @@ PUT _opendistro/_ism/policies/<policy-id>?if_seq_no=<seq_no>&if_primary_term=<pr
 
 ## Get policy
 
+Get the policy by policy_id.
+
 #### Request
 
 ```json
@@ -261,6 +268,8 @@ GET _opendistro/_ism/policies/<policy-id>
 
 ## Delete policy
 
+Delete the policy by policy_id.
+
 #### Request
 
 ```json
@@ -305,25 +314,38 @@ POST _opendistro/_ism/remove/<index>
 #### Sample response
 
 ```json
+{
+    "failures": false,
+    "failed_indices": []
+}
 
 ```
 
-
 ---
 
-## Update index policy
+## Update managed index policy
+
+This will update the managed index policy to a new policy (or new version of policy). You can use an index pattern to update multiple indices at once. When updating multiple indices you might want to include a state filter to only affect certain managed indices.
 
 #### Request
 
 ```json
 POST _opendistro/_ism/update_policy/<index>
+{
+    "policy_id": "log_rotation",
+    "state": "delete",
+    "include": [{ "state": "search" }]
+}
 ```
 
 
 #### Sample response
 
 ```json
-
+{
+    "failures": false,
+    "failed_indices": []
+}
 ```
 
 
@@ -337,13 +359,19 @@ Retries the failed action for an index. For the retry call to succeed, ISM must 
 
 ```json
 POST _opendistro/_ism/retry/<index>
+{
+    "state": "delete"
+}
 ```
 
 
 #### Sample response
 
 ```json
-
+{
+    "failures": false,
+    "failed_indices": []
+}
 ```
 
 
@@ -394,6 +422,14 @@ GET _opendistro/_ism/explain/<index>
 
 ## Get ISM status
 
+Returns the current status of the ISM plugin. We have three different states the ISM plugin can be in:
+
+1. Running
+2. Stopping
+3. Stopped
+
+This is because we have some actions that are considered unsafe to stop in the middle of. When you try to stop ISM it will move into the stopping state
+
 #### Request
 
 ```json
@@ -404,13 +440,17 @@ GET _opendistro/_ism/status
 #### Sample response
 
 ```json
-
+{
+    "status": "RUNNING"
+}
 ```
 
 
 ---
 
 ## Stop ISM
+
+Stops the management of indices.
 
 #### Request
 
@@ -422,13 +462,15 @@ POST _opendistro/_ism/stop
 #### Sample response
 
 ```json
-
+200 OK
 ```
 
 
 ---
 
 ## Start ISM
+
+Continue managing indices after ISM has been stopped.
 
 #### Request
 
@@ -440,8 +482,30 @@ POST _opendistro/_ism/start
 #### Sample response
 
 ```json
-
+200 OK
 ```
 
 
 ---
+
+## Add Policy
+
+Add a policy to an index. This will not change the policy if the index already has one.
+
+#### Request
+
+```json
+POST _opendistro/_ism/add/<index>
+{
+    "policy_id": "log_rotation"
+}
+```
+
+#### Sample response
+
+```json
+{
+    "failures": false,
+    "failed_indices": []
+}
+```
