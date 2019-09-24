@@ -75,7 +75,7 @@ This policy puts the index in an “ingest” state by default. After a period o
 
 A state is the description of the status the managed index is currently in. A managed index can only be in one state at a time. Each state has associated actions that are executed sequentially on entering a state and transitions that are checked after all the actions have been completed.
 
-This table lists the parameters you can define in a state:
+This table lists the parameters you can define for a state:
 
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
@@ -269,4 +269,4 @@ Parameter | Description | Type | Required
 `expression` | The cron expression that'll trigger the transition. | `string` | Yes
 `timezone` | The timezone that triggers the transition. | `string` | Yes
 
-If no conditions are specified, the transition to a state happens the moment it's checked, which by default is every 5 minutes.
+If no conditions are specified, the transition to a state happens the moment it's checked. The checking happens every 5 minutes by default.
