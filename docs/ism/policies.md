@@ -18,6 +18,9 @@ Policies are JSON documents that define:
 
 In other words, a policy defines the *states* an index can be in, the *actions* to perform when in a state, and the conditions needed to be met to *transition* between states.
 
+You can set up your policy to send you notifications as your indices transition to different states using the `error_notification` parameter.
+{: .notes }
+
 This table lists the parameters you can define in a policy:
 
 Parameter | Description | Type | Required | Read Only

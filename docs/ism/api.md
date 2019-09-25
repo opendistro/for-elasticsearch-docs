@@ -325,7 +325,7 @@ POST _opendistro/_ism/remove/<index>
 
 ## Update managed index policy
 
-This will update the managed index policy to a new policy (or new version of policy). You can use an index pattern to update multiple indices at once. When updating multiple indices you might want to include a state filter to only affect certain managed indices.
+This will update the managed index policy to a new policy (or to a new version of the policy). You can use an index pattern to update multiple indices at once. When updating multiple indices you might want to include a state filter to only affect certain managed indices.
 
 #### Request
 
