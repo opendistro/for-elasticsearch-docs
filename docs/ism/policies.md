@@ -25,6 +25,7 @@ This table lists the parameters you can define in a policy:
 
 Parameter | Description | Type | Required | Read Only
 :--- | :--- |:--- |:--- |
+`policy_id` |  The name of the policy. | `string` | Yes | No
 `description` |  A human-readable description of the policy. | `string` | Yes | No
 `schema_version` | The version number of the policy. It's incremented as new fields are added or removed. | `number` | Yes | No
 `last_updated_time`  |  The time the policy was last updated. It's system generated. | `timestamp` | Yes | Yes
@@ -83,7 +84,7 @@ This table lists the parameters you can define for a state:
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `name` |  The name of the state. | `string` | Yes
-`actions` | The actions to execute after entering a state. For more information, see [Actions](#actions). | `string` | Yes
+`actions` | The actions to execute after entering a state. For more information, see [Actions](#actions). | `nested list of objects` | Yes
 `transitions` | The next states and conditions required to transition to those states, if no transitions are specified then the policy assumes that it's complete and can now stop managing the index. For more information, see [Transitions](#transitions). | `nested list of objects` | Yes
 
 ---
@@ -138,8 +139,6 @@ It attempts to set the index to a read-only state before starting the merging pr
 Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |
 `max_num_segments` | The number of segments to reduce the shard to. | `number` | Yes | Null
-`only_expunge_deletes` | To set the merge process to only expunge segments with deletes. | `boolean` | No | False
-`flush` | It specifies if a flush operation needs to be performed after a forced merge. | `boolean` | No | True
 
 ```json
 {
@@ -215,25 +214,6 @@ Deletes a managed index.
 }
 ```
 
-### snapshot
-
-Takes a snapshot of the managed index at the point-in-time when the action is executed.
-
-Parameter | Description | Type | Required | Default
-:--- | :--- |:--- |:--- |
-`repository` |  The name of the repository to use for the snapshot. | `string` | Yes | -
-`snapshot` |  The name of the snapshot. | `string` | Yes | -
-`include_global_state` |  It defines whether or not to include the global state of the cluster in a snapshot. | `boolean` | No | False
-
-```json
-{
-    "snapshot": {
-        "repository": "<name_of_backup_repository>",
-        "snapshot": "some_index_snapshot"
-    }
-}
-```
-
 ### rollover
 
 Rolls an alias over to a new index when the managed index meets one of the rollover conditions.
@@ -265,9 +245,9 @@ This table lists the parameters you can define for transitions:
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `state` |  The name of the state to transition to if the conditions are met. | `string` | Yes
-`index_age` | The minimum age of the index before transitioning. | `string` | No
-`doc_count` | The minimum document count of the index before transitioning. | `number` | No
-`size` | The minimum size of the index before transitioning. | `string` | No
+`min_index_age` | The minimum age of the index before transitioning. | `string` | No
+`min_doc_count` | The minimum document count of the index before transitioning. | `number` | No
+`min_size` | The minimum size of the index before transitioning. | `string` | No
 `cron` | The cron job that'll trigger this transition if no other transition happens first. | `object` | No
 `expression` | The cron expression that'll trigger the transition. | `string` | Yes
 `timezone` | The timezone that triggers the transition. | `string` | Yes

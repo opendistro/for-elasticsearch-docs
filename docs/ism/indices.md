@@ -14,7 +14,7 @@ The ISM plugin only manages indices that contain ISM settings. To create a new i
 PUT my-index1
 {
   "settings": {
-    "opendistro.index_state_management.policy_name": "ingest_policy",
+    "opendistro.index_state_management.policy_id": "ingest_policy",
     "opendistro.index_state_management.rollover_alias": "some_alias"
   },
   "aliases": {

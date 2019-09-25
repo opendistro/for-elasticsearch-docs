@@ -50,7 +50,7 @@ You can only apply policies to indices that contain ISM settings. For informatio
 
     1. Choose **Managed Indices**.
     2. To change your policy, choose **Change policy**.
-    3. To attach a rollover alias to your policy, select your policy and choose **Add rollover alias**.
+    3. To attach a rollover alias to your index, select your policy and choose **Add rollover alias**.
     4. To remove a policy, select your policy and choose **Remove policy**.
     5. To retry a policy, select your policy and choose **Retry policy**.
 
