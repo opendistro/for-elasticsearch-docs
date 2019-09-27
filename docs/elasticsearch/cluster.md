@@ -9,36 +9,27 @@ nav_order: 2
 
 Before diving into Elasticsearch and searching and aggregating data, you first need to create an Elasticsearch cluster.
 
-Elasticsearch can operate as a single node or multi-node cluster. The steps to configure single node or multi-node clusters are, in general, quite similar. This topic shows you how to create and configure a multi-node cluster, but with only a few minor adjustments you can follow the same steps to create a single-node cluster.  
+Elasticsearch can operate as a single-node or multi-node cluster. The steps to configure both are, in general, quite similar. This page demonstrates how to create and configure a multi-node cluster, but with only a few minor adjustments, you can follow the same steps to create a single-node cluster.
 
 To create and deploy an Elasticsearch cluster according to your requirements, it’s important to understand how node discovery and cluster formation work and what settings govern them.
 
-There are many ways that you can design a cluster.
-The following illustration shows a basic architecture.
-
+There are many ways that you can design a cluster. The following illustration shows a basic architecture.
 
 ![multi-node cluster architecture diagram](../../images/cluster.png)
 
-
-This is a four-node cluster that has one dedicated master node, one dedicated coordinating node, and two data nodes that are master eligible and also used for ingesting data.
+This is a four-node cluster that has one dedicated master node, one dedicated coordinating node, and two data nodes that are master-eligible and also used for ingesting data.
 
 The following table provides brief descriptions of the node types.
 
 Node type | Description
 :--- | :--- |
 `Master` | Manages the overall operation of a cluster and keeps track of the cluster state.
-`Master-eligible` |  Available for election to become a new master node.
-`Data`  |  Stores and searches the data.
-`Ingest` |  Preprocesses the data before storing it in a cluster.
-`Coordinating` | Routes the search and aggregation requests.
+`Master-eligible` | Available for election to become a new master node.
+`Data` | Stores and searches data.
+`Ingest` | Preprocesses data before storing it in a cluster.
+`Coordinating` | Routes search and aggregation requests.
 
-This topic shows you how to work with the different node types. It assumes that you have a four-node cluster similar to the preceding illustration. You'll perform the following tasks:
-
-* Step 1: Name a cluster
-* Step 2: Set node attributes for each node in a cluster
-* Step 3: Bind a cluster to specific IP addresses
-* Step 4: Configure discovery hosts for a cluster
-* Step 5: Start a cluster
+This page demonstrates how to work with the different node types. It assumes that you have a four-node cluster similar to the preceding illustration.
 
 ---
 
@@ -47,6 +38,7 @@ This topic shows you how to work with the different node types. It assumes that 
 {:toc}
 
 ---
+
 
 ## Prerequisites
 
@@ -58,9 +50,7 @@ You can set all configurations for your cluster in this file.
 
 ## Step 1: Name a cluster
 
-Specify a unique name for the cluster.
-If you don't specify a cluster name, it's set to `elasticsearch` by default.
-Setting a descriptive cluster name is important, especially if you want to run multiple clusters inside a single network.
+Specify a unique name for the cluster. If you don't specify a cluster name, it's set to `elasticsearch` by default. Setting a descriptive cluster name is important, especially if you want to run multiple clusters inside a single network.
 
 To specify the cluster name, change the following line:
 
@@ -76,32 +66,33 @@ cluster.name: odfe-cluster
 
 Make the same change on all the nodes to make sure that they'll join to form a cluster.
 
+
 ## Step 2: Set node attributes for each node in a cluster
 
 After you name the cluster, set node attributes for each node in your cluster.
 
+
 #### Master node
 
-Give your master node a name.
-If you don't specify a name, Elasticsearch assigns a machine-generated name that makes the node difficult to monitor and troubleshoot.
+Give your master node a name. If you don't specify a name, Elasticsearch assigns a machine-generated name that makes the node difficult to monitor and troubleshoot.
 
 ```yml
 node.name: odfe-master
 ```
 
-You can also explicitly specify that this node is a master node. This is already true by default, but you could add it anyway because it makes it really easy to identify the master node:
+You can also explicitly specify that this node is a master node. This is already true by default, but adding it makes it easier to identify the master node:
 
 ```yml
 node.master: true
 ```
 
-You can make this node a dedicated master that won’t perform double-duty as a data node:
+Then make the node a dedicated master that won’t perform double-duty as a data node:
 
 ```yml
 node.data: false
 ```
 
-You can specify that this node will not be used for ingesting data:
+Specify that this node will not be used for ingesting data:
 
 ```yml
 node.ingest: false
@@ -146,9 +137,7 @@ node.ingest: false
 
 ## Step 3: Bind a cluster to specific IP addresses
 
-`network_host` defines the IP address that's used to bind the node.
-By default, Elasticsearch listens on a local host. You can also use `_local_` and `_site_` to bind to any loopback or site-local address, whether IPv4 or IPv6:
-
+`network_host` defines the IP address that's used to bind the node. By default, Elasticsearch listens on a local host. You can also use `_local_` and `_site_` to bind to any loopback or site-local address, whether IPv4 or IPv6:
 
 ```yml
 network.host: [_local_, _site_]
@@ -156,30 +145,31 @@ network.host: [_local_, _site_]
 
 Make sure to configure these settings on all of your nodes.
 
+
 ## Step 4: Configure discovery hosts for a cluster
 
 Now that you've configured the network hosts, you need to configure the discovery hosts.
 
-Zen Discovery is the built-in, default mechanism that uses unicast to find other nodes in the cluster.
+Zen Discovery is the built-in, default mechanism that uses [unicast](https://en.wikipedia.org/wiki/Unicast) to find other nodes in the cluster.
 
-You can generally just add in all of your master-eligible nodes to the `discovery.seed_hosts` array.
-So when a node starts up, it finds the other master-eligible nodes, figures out which one's the master, and asks to join the cluster.
+You can generally just add all of your master-eligible nodes to the `discovery.seed_hosts` array. When a node starts up, it finds the other master-eligible nodes, determines which one is the master, and asks to join the cluster.
 
-For example, for `odfe-master` it looks something like this:
+For example, for `odfe-master` the line looks something like this:
 
 ```yml
 discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"]
 ```
 
+
 ## Step 5: Start the cluster
 
-After you are done with setting the configurations, you can start Elasticsearch on all the nodes.
+After you set the configurations, start Elasticsearch on all nodes.
 
 ```yml
 sudo systemctl start elasticsearch.service
 ```
 
-You can go to the logs file to see the formation of the cluster:
+Then go to the logs file to see the formation of the cluster:
 
 ```yml
 less /var/log/elasticsearch/odfe-cluster.log
@@ -200,6 +190,7 @@ x.x.x.x           23          38   0    0.12    0.07     0.06 md        -      o
 ```
 
 To better understand and monitor your cluster, use the [cat API](../catapis/).
+
 
 ## Next steps
 
