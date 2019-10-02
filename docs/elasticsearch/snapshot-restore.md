@@ -322,11 +322,11 @@ You can use the `_close` API to close existing indices prior to restoring from a
 
 We recommend ceasing write requests to a cluster before restoring from a snapshot, which helps avoid scenarios such as:
 
-- You delete an index, which also deletes its alias.
-- A write request to the now-deleted alias creates a new index with the same name as the alias.
-- The alias from the snapshot fails to restore due to a naming conflict with the new index.
+1. You delete an index, which also deletes its alias.
+1. A write request to the now-deleted alias creates a new index with the same name as the alias.
+1. The alias from the snapshot fails to restore due to a naming conflict with the new index.
 
-Snapshots are only forward-compatible, and only by one major version. For example, snapshots taken on a 2.x cluster can't be restored on a 1.x cluster nor a 6.x cluster, but they *can* be restored on a 2.x or 5.x cluster.
+Snapshots are only forward-compatible, and only by one major version. For example, snapshots taken on a 2.x cluster can't be restored on a 1.x cluster or a 6.x cluster, but they *can* be restored on a 2.x or 5.x cluster.
 
 If you have an old snapshot, you can sometimes restore it into an intermediate cluster, reindex all indices, take a new snapshot, and repeat until you arrive at your desired version, but you might find it easier to just manually index your data on the new cluster.
 
