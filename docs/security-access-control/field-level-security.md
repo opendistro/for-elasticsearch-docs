@@ -68,7 +68,7 @@ You can specify field-level security settings using Kibana, `roles.yml`, and the
 - To exclude fields in `roles.yml` or the REST API, add `~` before the field name.
 - Field names support wildcards (`*`).
 
-  For example `~*sensitive` excludes all fields that end in `sensitive`. `public*` includes all fields that begin with `public`.
+  Wildcards are especially useful for excluding *subfields*. For example, if you index a document that has a string (e.g. `{"title": "Thor"}`), Elasticsearch creates a `title` field of type `text`, but it also creates a `title.keyword` subfield of type `keyword`. In this example, to prevent unauthorized access to data in the `title` field, you must also exclude the `title.keyword` subfield. Use `title*` to match all fields that begin with `title`.
 
 
 ### Kibana
