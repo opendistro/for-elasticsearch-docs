@@ -59,9 +59,9 @@ Just like users, you can create roles using Kibana, `roles.yml`, or the REST API
 
 1. Choose **Security**, **Roles**, and **Add a new role**.
 1. Provide a name for the role.
-1. Then add
+1. Then add permissions as desired.
 
-   For example, you might give a role no cluster permissions, `READ` permissions to two indices, `UNLIMITED` permissions to a third index, and read permissions to the `analysts` tenant.
+   For example, you might give a role no cluster permissions, `read` permissions to two indices, `unlimited` permissions to a third index, and read permissions to the `analysts` tenant.
 
 1. Choose **Submit**.
 
