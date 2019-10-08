@@ -28,7 +28,8 @@ To use SAML for authentication, you need to configure a respective authenticatio
 ```yml
 authc:
   saml_auth_domain:
-    enabled: true
+    http_enabled: true
+    transport_enabled: false
     order: 1
     http_authenticator:
       type: saml
@@ -59,10 +60,11 @@ authc:
     authentication_backend:
       type: internal
   saml_auth_domain:
-     enabled: true
+    http_enabled: true
+    transport_enabled: false
      order: 1
      http_authenticator:
-        type: 'saml'
+        type: saml
         challenge: true
         config:
             ...
@@ -186,7 +188,8 @@ Example:
 ```yml
 authc:
   saml_auth_domain:
-    enabled: true
+    http_enabled: true
+    transport_enabled: false
     order: 1
     http_authenticator:
       type: saml
@@ -257,7 +260,8 @@ The following example shows the minimal configuration:
 ```yml
 authc:
   saml_auth_domain:
-    enabled: true
+    http_enabled: true
+    transport_enabled: false
     order: 1
     http_authenticator:
       type: saml
