@@ -30,9 +30,9 @@ Document-level security uses the Elasticsearch query DSL to define which documen
 
 This query specifies that for the role to have access to a document, its `genres` field must include `Comedy`.
 
-Note that a typical request to the `_search` API includes `{ "query": { ... } }` around the query, but in this case, you only need to specify the query itself.
+A typical request to the `_search` API includes `{ "query": { ... } }` around the query, but in this case, you only need to specify the query itself.
 
-In the REST API, you provide the query as a string, so you have to escape your quotes. This role allows a user to read any document in any index with the field `public` set to `true`:
+In the REST API, you provide the query as a string, so you must escape your quotes. This role allows a user to read any document in any index with the field `public` set to `true`:
 
 ```json
 PUT _opendistro/_security/api/roles/public_data
@@ -70,7 +70,7 @@ PUT _opendistro/_security/api/roles/user_data
 }
 ```
 
-The following substitutions exist:
+This table lists substitutions.
 
 Term | Replaced with
 :--- | :---
@@ -90,9 +90,9 @@ PUT _opendistro/_security/api/internalusers/user1
 {
   "password": "asdf",
   "roles": ["abac"],
-   "attributes": {
-     "permissions": "\"att1\", \"att2\", \"att3\""
-   }
+  "attributes": {
+    "permissions": "\"att1\", \"att2\", \"att3\""
+  }
 }
 ```
 
@@ -101,11 +101,11 @@ PUT _opendistro/_security/api/internalusers/user1
 ```json
 PUT _opendistro/_security/api/roles/abac
 {
-    "indices" : {
-      "*" : {
-        "*" : ["READ"],
-        "_dls_": "{\"terms_set\": {\"security_attributes\": {\"terms\": [${attr.internal.permissions}], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].values.length\"}}}}"
-      }
+  "indices": {
+    "*": {
+      "*": ["READ"],
+      "_dls_": "{\"terms_set\": {\"security_attributes\": {\"terms\": [${attr.internal.permissions}], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].values.length\"}}}}"
     }
+  }
 }
 ```
