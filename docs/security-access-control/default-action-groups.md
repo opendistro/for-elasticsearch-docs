@@ -35,7 +35,7 @@ Name | Description
 INDICES_ALL | Grants all permissions on the index. Equates to `indices:*`.
 GET | Grants permissions to use `get` and `mget` actions only.
 READ | Grants read permissions such as search, get field mappings, `get`, and `mget`.
-WRITE | Grants write permissions to documents.
+WRITE | Grants permissions to create and update documents within existing indices.
 DELETE | Grants permissions to delete documents.
 CRUD | Combines the READ, WRITE and DELETE action groups.
 SEARCH | Grants permissions to search documents. Includes SUGGEST.

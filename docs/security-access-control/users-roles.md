@@ -99,3 +99,20 @@ See [YAML files](../../security-configuration/yaml/#roles_mappingyml).
 ### REST API
 
 See [Create role mapping](../api/#create-role-mapping).
+
+
+## Predefined roles
+
+The Security plugin includes several predefined roles that serve as useful defaults.
+
+Role | Description
+:--- | :---
+`all_access` | Grants full access to the cluster: all cluster-wide operations, write to all indices, write to all tenants.
+`kibana_read_only` | A special role that prevents users from making changes to visualizations, dashboards, and other Kibana objects. See `opendistro_security.readonly_mode.roles` in `kibana.yml`. Pair with the `kibana_user` role.
+`kibana_user` | Grants permissions to use Kibana: cluster-wide searches, index monitoring, and write to various Kibana indices.
+`logstash` | Grants permissions for Logstash to interact with the cluster: cluster-wide searches, cluster monitoring, and write to the various Logstash indices.
+`manage_snapshots` | Grants permissions to manage snapshot repositories, take snapshots, and restore snapshots.
+`readall` | Grants permissions for cluster-wide searches like `msearch` and search permissions for all indices.
+`readall_and_monitor` | Same as `readall`, but with added cluster monitoring permissions.
+
+For more detailed summaries of the permissions for each role, reference their action groups against the descriptions in [Default action groups](../default-action-groups/).
