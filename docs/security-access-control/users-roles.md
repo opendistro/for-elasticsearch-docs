@@ -114,5 +114,6 @@ Role | Description
 `manage_snapshots` | Grants permissions to manage snapshot repositories, take snapshots, and restore snapshots.
 `readall` | Grants permissions for cluster-wide searches like `msearch` and search permissions for all indices.
 `readall_and_monitor` | Same as `readall`, but with added cluster monitoring permissions.
+`security_rest_api_access` | A special role that allows access to the REST API. See `opendistro_security.restapi.roles_enabled` in `elasticsearch.yml` and [Access control for the API](../api/#access-control-for-the-api).
 
 For more detailed summaries of the permissions for each role, reference their action groups against the descriptions in [Default action groups](../default-action-groups/).
