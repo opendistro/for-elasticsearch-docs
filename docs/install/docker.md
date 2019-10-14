@@ -76,6 +76,7 @@ To stop the cluster and delete all data volumes, run:
 ```bash
 docker-compose down -v
 ```
+_Note: 8GB RAM/Memory is recommended for those using Docker Desktop, instead of the default 2GB setting._
 
 
 #### Sample Docker Compose file
