@@ -78,7 +78,7 @@ By default, the Security plugin uses the BLAKE2b algorithm, but you can use any 
 
 To specify a different algorithm, add it after the masked field:
 
-```yaml
+```yml
 someonerole:
   cluster: []
   indices:
@@ -95,7 +95,7 @@ someonerole:
 
 Rather than creating a hash, you can use one or more regular expressions and replacement strings to mask a field. The syntax is `<field>::/<regular-expression>/::<replacement-string>`. If you use multiple regular expressions, the results are passed from left to right, like piping in a shell:
 
-```yaml
+```yml
 hr_employee:
   index_permissions:
     - index_patterns:
