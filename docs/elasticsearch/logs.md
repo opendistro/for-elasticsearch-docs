@@ -7,19 +7,10 @@ nav_order: 20
 
 # Logs
 
-The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting.
+The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting. The location of the logs differs based on install type:
 
-The location of the logs differs based on install type. Docker, for example, writes most logs to the console and stores the remainder in `elasticsearch/logs/`. On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
-
-
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
+- On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball install also uses `elasticsearch/logs/`.
+- On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
 
 
 ## Change log levels
@@ -37,7 +28,7 @@ PUT /_cluster/settings
 }
 ```
 
-The easiest way to identify modules is not from the logs, which truncate the path (e.g. `o.e.i.r`), but from the [Elasticsearch source code](https://github.com/elastic/elasticsearch/tree/master/server/src/main/java/org/elasticsearch).
+The easiest way to identify modules is not from the logs, which abbreviate the path (e.g. `o.e.i.r`), but from the [Elasticsearch source code](https://github.com/elastic/elasticsearch/tree/master/server/src/main/java/org/elasticsearch).
 {: .tip }
 
 After the change, Elasticsearch emits much more detailed logs during reindex operations:
@@ -68,7 +59,7 @@ Other ways of changing log levels exist.
    logger.org.elasticsearch.index.reindex: debug
    ```
 
-   This approach makes sense if you want to reuse your logging configuration across multiple clusters or debug startup issues with a single node.
+   Modifying `elasticsearch.yml` makes the most sense if you want to reuse your logging configuration across multiple clusters or debug startup issues with a single node.
 
 2. Modify `log4j2.properties`:
 
@@ -76,12 +67,12 @@ Other ways of changing log levels exist.
    # Define a new logger with unique ID of reindex
    logger.reindex.name = org.elasticsearch.index.reindex
    # Set the log level for that ID
-   logger.transport.level = debug
+   logger.reindex.level = debug
    ```
 
-   This approach is extremely flexible, but requires knowledge of the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties).
+   This approach is extremely flexible, but requires familiarity with the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties).
 
-   If you examine the default `log4j2.properties` file, you can see a few Elasticsearch-specific variables:
+   If you examine the default `log4j2.properties` file in the configuration directory, you can see a few Elasticsearch-specific variables:
 
    ```
    appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c{1.}] [%node_name]%marker %m%n
