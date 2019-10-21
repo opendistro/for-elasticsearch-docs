@@ -162,7 +162,7 @@ config:
 
 Name | Description
 :--- | :---
-`enable_ssl` | Whether to use TSL. Default is false.
+`enable_ssl` | Whether to use TLS. Default is false.
 `verify_hostnames` | Whether to verify the hostnames of the IdP's TLS certificate. Default is true.
 
 
