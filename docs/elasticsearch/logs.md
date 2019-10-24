@@ -90,7 +90,7 @@ Other ways of changing log levels exist.
 
 Elasticsearch has two "slow logs," logs that help you identify performance issues: the search slow log and the indexing slow log.
 
-These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Similar to the application logs, you *can* configure slow logs using `log4j2.properties`, but in most cases, the `_settings` URI for each index is the better approach. By default, both logs are disabled (all thresholds set to `-1`).
+These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Similar to the application logs, you *can* configure slow logs using `elasticsearch.yml` or `log4j2.properties`, but in most cases, the `_settings` URI for each index is the better approach. By default, both logs are disabled (all thresholds set to `-1`).
 
 ```json
 GET <some-index>/_settings?include_defaults=true
