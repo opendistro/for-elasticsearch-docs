@@ -165,7 +165,7 @@ A line from `elasticsearch_index_indexing_slowlog.log` might look like this:
 node1 | [2019-10-24T19:48:51,012][WARN][i.i.s.index] [node1] [some-index/i86iF5kyTyy-PS8zrdDeAA] took[3.4ms], took_millis[3], type[_doc], id[1], routing[], source[{"title":"Your Name", "Director":"Makoto Shinkai"}]
 ```
 
-Slow logs can consume considerable disk space if thresholds or levels are set too low. You might consider enabling them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
+Slow logs can consume considerable disk space if thresholds or levels are set too low. You might enable them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
 
 
 ## Deprecation logs
