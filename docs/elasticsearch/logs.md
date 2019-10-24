@@ -12,10 +12,10 @@ The Elasticsearch logs include valuable information for monitoring cluster opera
 - On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball install also uses `elasticsearch/logs/`.
 - On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
 
-Logs are available in `.log` (plain text) and `.json` formats.
+Logs are available as `.log` (plain text) and `.json` files.
 
 
-## Change log levels
+## Application logs
 
 For its application logs, Elasticsearch uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) and its built-in log levels (from least to most severe) of TRACE, DEBUG, INFO, WARN, ERROR, and FATAL. The default Elasticsearch log level is INFO.
 
@@ -72,9 +72,9 @@ Other ways of changing log levels exist.
    logger.reindex.level = debug
    ```
 
-   This approach is extremely flexible, but requires familiarity with the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties). In general, the other options offer a simpler configuration and troubleshooting experience.
+   This approach is extremely flexible, but requires familiarity with the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties). In general, the other options offer a simpler configuration experience.
 
-   If you examine the default `log4j2.properties` file in the configuration directory, you see a few Elasticsearch-specific variables:
+   If you examine the default `log4j2.properties` file in the configuration directory, you can see a few Elasticsearch-specific variables:
 
    ```
    appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c{1.}] [%node_name]%marker %m%n
@@ -90,7 +90,7 @@ Other ways of changing log levels exist.
 
 Elasticsearch has two "slow logs," logs that help you identify performance issues: the search slow log and the indexing slow log.
 
-These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Similar to the application logs, you *can* configure slow logs using `elasticsearch.yml` or `log4j2.properties`, but in most cases, the `_settings` URI for each index is the better approach. By default, both logs are disabled (all thresholds set to `-1`).
+These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. By default, both logs are disabled (all thresholds set to `-1`):
 
 ```json
 GET <some-index>/_settings?include_defaults=true
