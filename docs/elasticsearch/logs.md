@@ -12,6 +12,8 @@ The Elasticsearch logs include valuable information for monitoring cluster opera
 - On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball install also uses `elasticsearch/logs/`.
 - On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
 
+Logs are available in `.log` (plain text) and `.json` formats.
+
 
 ## Change log levels
 
@@ -31,7 +33,7 @@ PUT /_cluster/settings
 The easiest way to identify modules is not from the logs, which abbreviate the path (e.g. `o.e.i.r`), but from the [Elasticsearch source code](https://github.com/elastic/elasticsearch/tree/master/server/src/main/java/org/elasticsearch).
 {: .tip }
 
-After the change, Elasticsearch emits much more detailed logs during reindex operations:
+After this sample change, Elasticsearch emits much more detailed logs during reindex operations:
 
 ```
 [2019-10-18T16:52:51,184][DEBUG][o.e.i.r.TransportReindexAction] [node1] [1626]: starting
@@ -70,9 +72,9 @@ Other ways of changing log levels exist.
    logger.reindex.level = debug
    ```
 
-   This approach is extremely flexible, but requires familiarity with the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties).
+   This approach is extremely flexible, but requires familiarity with the [Log4j 2 property file syntax](https://logging.apache.org/log4j/2.x/manual/configuration.html#Properties). In general, the other options offer a simpler configuration and troubleshooting experience.
 
-   If you examine the default `log4j2.properties` file in the configuration directory, you can see a few Elasticsearch-specific variables:
+   If you examine the default `log4j2.properties` file in the configuration directory, you see a few Elasticsearch-specific variables:
 
    ```
    appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c{1.}] [%node_name]%marker %m%n
@@ -83,4 +85,89 @@ Other ways of changing log levels exist.
    - `${sys:es.logs.cluster_name}` is the name of the cluster.
    - `[%node_name]` is the name of the node.
 
-   In general, the other options offer a simpler configuration and troubleshooting experience.
+
+## Slow logs
+
+Elasticsearch has two "slow logs," logs that help you identify performance issues: the search slow log and the indexing slow log.
+
+These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Similar to the application logs, you *can* configure slow logs using `log4j2.properties`, but in most cases, the `_settings` URI for each index is the better approach. By default, both logs are disabled (all thresholds set to `-1`).
+
+```json
+GET <some-index>/_settings?include_defaults=true
+
+{
+  "indexing": {
+    "slowlog": {
+      "reformat": "true",
+      "threshold": {
+        "index": {
+          "warn": "-1",
+          "trace": "-1",
+          "debug": "-1",
+          "info": "-1"
+        }
+      },
+      "source": "1000",
+      "level": "TRACE"
+    }
+  },
+  "search": {
+    "slowlog": {
+      "level": "TRACE",
+      "threshold": {
+        "fetch": {
+          "warn": "-1",
+          "trace": "-1",
+          "debug": "-1",
+          "info": "-1"
+        },
+        "query": {
+          "warn": "-1",
+          "trace": "-1",
+          "debug": "-1",
+          "info": "-1"
+        }
+      }
+    }
+  }
+}
+```
+
+To enable these logs, increase one or more thresholds:
+
+```json
+PUT <some-index>/_settings
+{
+  "indexing": {
+    "slowlog": {
+      "threshold": {
+        "index": {
+          "warn": "15s",
+          "trace": "750ms",
+          "debug": "3s",
+          "info": "10s"
+        }
+      },
+      "source": "500",
+      "level": "INFO"
+    }
+  }
+}
+```
+
+- `reformat` specifies whether to log the document `_source` field as a single line (`true`) or let it span multiple lines (`false`).
+- `source` is the number of characters of the document `_source` field to log.
+- `level` is the minimum log level to include.
+
+A line from `elasticsearch_index_indexing_slowlog.log` might look like this:
+
+```
+node1 | [2019-10-24T19:48:51,012][WARN][i.i.s.index] [node1] [some-index/i86iF5kyTyy-PS8zrdDeAA] took[3.4ms], took_millis[3], type[_doc], id[1], routing[], source[{"title":"Your Name", "Director":"Makoto Shinkai"}]
+```
+
+Slow logs can consume considerable disk space if thresholds or levels are set too low. You might consider enabling them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
+
+
+## Deprecation logs
+
+Deprecation logs record when clients make deprecated API calls to your cluster. These logs can help you identify and fix issues prior to upgrading to a new major version. By default, Elasticsearch logs deprecated API calls at the WARN level, which works well for almost all use cases. If desired, configure `logger.deprecation.level` using `_cluster/settings`, `elasticsearch.yml`, or `log4j2.properties`.
