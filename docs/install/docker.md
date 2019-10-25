@@ -16,7 +16,7 @@ docker pull amazon/opendistro-for-elasticsearch-kibana:1.2.0
 
 To check available versions, see [Docker Hub](https://hub.docker.com/r/amazon/opendistro-for-elasticsearch/tags).
 
-Open Distro for Elasticsearch images use `centos:7` as the base image.
+Open Distro for Elasticsearch images use `centos:7` as the base image. If you run Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Advanced**.
 
 
 ---
@@ -80,7 +80,7 @@ docker-compose down -v
 
 #### Sample Docker Compose file
 
-This sample file starts two data nodes and Kibana. If you're running Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Advanced**.
+This sample file starts two data nodes and Kibana.
 
 ```yml
 version: '3'
