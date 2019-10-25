@@ -7,7 +7,7 @@ nav_order: 20
 
 # Logs
 
-The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting. The location of the logs differs based on install type:
+The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting issues. The location of the logs differs based on install type:
 
 - On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball install also uses `elasticsearch/logs/`.
 - On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
@@ -88,7 +88,7 @@ Other ways of changing log levels exist.
 
 ## Slow logs
 
-Elasticsearch has two "slow logs," logs that help you identify performance issues: the search slow log and the indexing slow log.
+Elasticsearch has two *slow logs*, logs that help you identify performance issues: the search slow log and the indexing slow log.
 
 These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. By default, both logs are disabled (all thresholds set to `-1`):
 
@@ -165,7 +165,7 @@ A line from `elasticsearch_index_indexing_slowlog.log` might look like this:
 node1 | [2019-10-24T19:48:51,012][WARN][i.i.s.index] [node1] [some-index/i86iF5kyTyy-PS8zrdDeAA] took[3.4ms], took_millis[3], type[_doc], id[1], routing[], source[{"title":"Your Name", "Director":"Makoto Shinkai"}]
 ```
 
-Slow logs can consume considerable disk space if thresholds or levels are set too low. You might enable them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
+Slow logs can consume considerable disk space if thresholds or levels are set too low. Consider enabling them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
 
 
 ## Deprecation logs
