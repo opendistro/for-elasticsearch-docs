@@ -30,7 +30,7 @@ PUT /_cluster/settings
 }
 ```
 
-The easiest way to identify modules is not from the logs, which abbreviate the path (e.g. `o.e.i.r`), but from the [Elasticsearch source code](https://github.com/elastic/elasticsearch/tree/master/server/src/main/java/org/elasticsearch).
+The easiest way to identify modules is not from the logs, which abbreviate the path (for example, `o.e.i.r`), but from the [Elasticsearch source code](https://github.com/elastic/elasticsearch/tree/master/server/src/main/java/org/elasticsearch).
 {: .tip }
 
 After this sample change, Elasticsearch emits much more detailed logs during reindex operations:
@@ -51,7 +51,7 @@ After this sample change, Elasticsearch emits much more detailed logs during rei
 [2019-10-18T16:52:51,395][DEBUG][o.e.i.r.TransportReindexAction] [node1] Freed [1] contexts
 ```
 
-The DEBUG and TRACE levels are extremely verbose. If you enable one to troubleshoot a problem, disable it after you finish.
+The DEBUG and TRACE levels are extremely verbose. If you enable either one to troubleshoot a problem, disable it after you finish.
 
 Other ways of changing log levels exist.
 
@@ -165,7 +165,7 @@ A line from `elasticsearch_index_indexing_slowlog.log` might look like this:
 node1 | [2019-10-24T19:48:51,012][WARN][i.i.s.index] [node1] [some-index/i86iF5kyTyy-PS8zrdDeAA] took[3.4ms], took_millis[3], type[_doc], id[1], routing[], source[{"title":"Your Name", "Director":"Makoto Shinkai"}]
 ```
 
-Slow logs can consume considerable disk space if thresholds or levels are set too low. Consider enabling them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
+Slow logs can consume considerable disk space if you set thresholds or levels too low. Consider enabling them temporarily for troubleshooting or performance tuning. To disable slow logs, return all thresholds to `-1`.
 
 
 ## Deprecation logs
