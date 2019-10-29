@@ -90,7 +90,7 @@ Other ways of changing log levels exist.
 
 Elasticsearch has two *slow logs*, logs that help you identify performance issues: the search slow log and the indexing slow log.
 
-These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. By default, both logs are disabled (all thresholds set to `-1`):
+These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Unlike application logs, which you configure for modules, you configure slow logs for indices. By default, both logs are disabled (all thresholds set to `-1`):
 
 ```json
 GET <some-index>/_settings?include_defaults=true
@@ -154,6 +154,8 @@ PUT <some-index>/_settings
   }
 }
 ```
+
+In this example, Elasticsearch logs indexing operations that take 15 seconds or longer at the WARN level and operations that take between 10 and 14.*x* seconds at the INFO level. If you set a threshold to 0 seconds, Elasticsearch logs all operations, which can be useful for testing that slow logs are indeed enabled.
 
 - `reformat` specifies whether to log the document `_source` field as a single line (`true`) or let it span multiple lines (`false`).
 - `source` is the number of characters of the document `_source` field to log.
