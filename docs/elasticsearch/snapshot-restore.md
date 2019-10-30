@@ -2,7 +2,7 @@
 layout: default
 title: Take and Restore Snapshots
 parent: Elasticsearch
-nav_order: 20
+nav_order: 30
 ---
 
 # Take and restore snapshots
