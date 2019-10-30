@@ -7,10 +7,10 @@ nav_order: 20
 
 # Logs
 
-The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting issues. The location of the logs differs based on install type:
+The Elasticsearch logs include valuable information for monitoring cluster operations and troubleshooting issues. The location of the logs differs based on the installation type:
 
-- On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball install also uses `elasticsearch/logs/`.
-- On the RPM and Debian installs, Elasticsearch writes logs to `/var/log/elasticsearch/`.
+- On Docker, Elasticsearch writes most logs to the console and stores the remainder in `elasticsearch/logs/`. The tarball installation also uses `elasticsearch/logs/`.
+- On the RPM and Debian installations, Elasticsearch writes logs to `/var/log/elasticsearch/`.
 
 Logs are available as `.log` (plain text) and `.json` files.
 
@@ -53,7 +53,7 @@ After this sample change, Elasticsearch emits much more detailed logs during rei
 
 The DEBUG and TRACE levels are extremely verbose. If you enable either one to troubleshoot a problem, disable it after you finish.
 
-Other ways of changing log levels exist.
+There are other ways to change log levels:
 
 1. Add lines to `elasticsearch.yml`:
 
@@ -81,7 +81,7 @@ Other ways of changing log levels exist.
    appender.rolling_old.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log
    ```
 
-   - `${sys:es.logs.base_path}` is the directory for logs (e.g. `/var/log/elasticsearch/`).
+   - `${sys:es.logs.base_path}` is the directory for logs (for example, `/var/log/elasticsearch/`).
    - `${sys:es.logs.cluster_name}` is the name of the cluster.
    - `[%node_name]` is the name of the node.
 
@@ -90,7 +90,7 @@ Other ways of changing log levels exist.
 
 Elasticsearch has two *slow logs*, logs that help you identify performance issues: the search slow log and the indexing slow log.
 
-These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Unlike application logs, which you configure for modules, you configure slow logs for indices. By default, both logs are disabled (all thresholds set to `-1`):
+These logs rely on thresholds to define what qualifies as a "slow" search or indexing operation. For example, you might decide that a query is slow if it takes more than 15 seconds to complete. Unlike application logs, which you configure for modules, you configure slow logs for indices. By default, both logs are disabled (all thresholds are set to `-1`):
 
 ```json
 GET <some-index>/_settings?include_defaults=true
