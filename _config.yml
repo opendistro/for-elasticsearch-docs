@@ -22,7 +22,7 @@ permalink: pretty
 
 # Build settings
 markdown: kramdown
-remote_theme: pmarsceill/just-the-docs@v0.2.6
+remote_theme: pmarsceill/just-the-docs@v0.2.7
 
 # Kramdown settings
 kramdown:
@@ -30,6 +30,7 @@ kramdown:
 
 # Theme settings for just-the-docs
 search_enabled: true
+search_tokenizer_separator: /[\s/]+/
 aux_links:
   "Open Distro for Elasticsearch home":
     - "https://opendistro.github.io/for-elasticsearch/"
