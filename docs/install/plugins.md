@@ -29,6 +29,16 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
     </tr>
   </thead>
   <tbody>
+  <tr>
+    <td>7.2.1</td>
+    <td>
+      <pre>opendistro-job-scheduler        1.2.1
+opendistro_alerting             1.2.1.0
+opendistro_performance_analyzer 1.2.1.0
+opendistro_security             1.2.1.0
+opendistro_sql                  1.2.1.0</pre>
+    </td>
+  </tr>
     <tr>
       <td>7.2.0</td>
       <td>
@@ -119,7 +129,7 @@ Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`)
 ### Security
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.2.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.2.1.0.zip
 ```
 
 After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security-configuration/security-admin/).
@@ -130,7 +140,7 @@ Security has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.2.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.2.1.0.zip
 ```
 
 Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install, as well.
@@ -139,14 +149,14 @@ Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 ### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.2.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.2.1.0.zip
 ```
 
 
 ### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.2.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.2.1.0.zip
 ```
 
 Performance Analyzer requires some manual configuration after installing the plugin:

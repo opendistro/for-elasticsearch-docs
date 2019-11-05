@@ -49,6 +49,24 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 1. Push your changes, and submit a pull request.
 
 
+## New releases
+
+1. Branch.
+1. Run a find and replace for `:x.y.z` and `-x.y.z` and replace with the new version string.
+1. Start up a new cluster using the updated Docker Compose file in `docs/install/docker.md`.
+1. Update the version table in `version-history.md`.
+
+   Use `curl -XGET https://localhost:9200 -u admin:admin -k` to verify the Elasticsearch version.
+
+1. Update the plugin compatibility table in `docs/install/plugin.md`.
+
+   Use `curl -XGET https://localhost:9200/_cat/plugins -u admin:admin -k` to get the correct version strings.
+
+1. Verify that the individual plugin download links in `docs/install/plugins.md` and `docs/kibana/plugins.md` work.
+1. Run a build and look for any warnings or errors you introduced.
+1. Submit a PR.
+
+
 ## Content guidelines
 
 1. Try to stay consistent with existing content.
