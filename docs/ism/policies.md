@@ -132,6 +132,8 @@ Sets a managed index to be writeable.
 
 ### replica_count
 
+Sets the number of replicas to assign to an index.
+
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `number_of_replicas` | Defines the number of replicas to assign to an index. | `number` | Yes
