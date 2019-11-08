@@ -53,6 +53,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 
 1. Branch.
 1. Run a find and replace for `:x.y.z` and `-x.y.z` and replace with the new version string.
+1. Run a find for the underlying Elasticsearch version and update it as necessary (probably just `docs/install/deb.md`).
 1. Start up a new cluster using the updated Docker Compose file in `docs/install/docker.md`.
 1. Update the version table in `version-history.md`.
 
