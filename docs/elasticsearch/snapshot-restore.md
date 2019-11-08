@@ -299,7 +299,13 @@ POST _snapshot/my-repository/2/_restore
   "include_aliases": false,
   "partial": false,
   "rename_pattern": "kibana(.+)",
-  "rename_replacement": "restored-kibana$1"
+  "rename_replacement": "restored-kibana$1",
+  "index_settings": {
+    "index.blocks.read_only": false
+  },
+  "ignore_index_settings": [
+    "index.refresh_interval"
+  ]
 }
 ```
 
@@ -312,6 +318,8 @@ include_aliases | Whether to restore aliases alongside their associated indices.
 partial | Whether to allow the restoration of partial snapshots. Default is false.
 rename_pattern | If you want to rename indices as you restore them, use this option to specify a regular expression that matches all indices you want to restore. Use capture groups (`()`) to reuse portions of the index name.
 rename_replacement | If you want to rename indices as you restore them, use this option to specify the replacement pattern. Use `$0` to include the entire matching index name, `$1` to include the content of the first capture group, etc.
+index_settings | If you want to change index settings on restore, specify them here.
+ignore_index_settings | Rather than explicitly specifying new settings with `index_settings`, you can ignore certain index settings in the snapshot and use the cluster defaults on restore.
 
 
 ### Conflicts and compatibility
