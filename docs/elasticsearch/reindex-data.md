@@ -9,7 +9,7 @@ nav_order: 3
 
 After creating an index, if you need to make an extensive change such as adding a new field to every document or performing some computation on all integer fields, rather than deleting your index, making the change offline, and then indexing your data all over again, you can use the `_reindex` operation.
 
-With the `_reindex` operation, you can copy all or a subset of documents that you select through a query to another index. Reindex is a `POST` operation and you need to specify a source and destination index.
+With the `_reindex` operation, you can copy all or a subset of documents that you select through a query to another index. Reindex is a `POST` operation. In its most basic form, you specify a source index and a destination index.
 
 Reindexing can be an expensive operation depending on the size of your source index. We recommend you disable all replicas on your destination index and re-enable them once the reindex process is complete.
 {: .note }
@@ -151,7 +151,7 @@ POST _reindex
 
 ## Transform documents during reindexing
 
-You can use an ingesting pipeline during the `reindex` operation to transform your data in flight as part of an ingest node pipeline process. The documents from the source index go through a pipeline that transforms them in some way before they get copied to the destination index.
+You can use an ingesting pipeline during the `reindex` operation to transform your data in flight as part of an ingest pipeline.
 
 ```json
 POST _reindex
@@ -167,9 +167,9 @@ POST _reindex
 ```
 
 Another way to transform your data during the reindexing process is to use the `script` option.
-We recommend using the painless scripting language while scripting in the Elasticsearch API.
+We recommend Painless for scripting in Elasticsearch.
 
-This command runs the source index through a painless script before copying it to the destination index:
+This command runs the source index through a Painless script before copying it to the destination index:
 
 ```json
 POST _reindex
