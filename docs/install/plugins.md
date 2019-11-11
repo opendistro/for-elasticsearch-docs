@@ -142,7 +142,7 @@ Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.2.0.0.zip
 ```
 
-### Index State Management (ISM)
+### Index State Management
 
 This plugin is not officially released.
 
