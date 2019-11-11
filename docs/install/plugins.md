@@ -41,7 +41,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 
 This plugin is not officially released.
 
-To beta test this plugin, download the [zip file](https://github.com/opendistro-for-elasticsearch/index-management) and install the plugin:
+To beta test this plugin, download the latest release from https://github.com/opendistro-for-elasticsearch/index-management/releases and install the plugin:
 
 ```bash
 sudo bin/elasticsearch-plugin install file:///path/to/file
