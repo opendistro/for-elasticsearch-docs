@@ -7,7 +7,7 @@ nav_order: 3
 
 # Reindex data
 
-After creating an index, if you need to make an extensive change such as adding a new field to every document or performing some computation on all integer fields, rather than deleting your index, making the change offline, and then indexing your data all over again, you can use the `_reindex` operation.
+After creating an index, if you need to make an extensive change such as adding a new field to every document or combining multiple indices to form a new one, rather than deleting your index, making the change offline, and then indexing your data all over again, you can use the `_reindex` operation.
 
 With the `_reindex` operation, you can copy all or a subset of documents that you select through a query to another index. Reindex is a `POST` operation. In its most basic form, you specify a source index and a destination index.
 
@@ -277,7 +277,7 @@ Option | Valid values | Description | Required
 
 ## Destination Index Options
 
-You can specify the following options for your destination index:
+You can specify the following options for your source index:
 
 Option | Valid values | Description | Required
 :--- | :--- | :---
