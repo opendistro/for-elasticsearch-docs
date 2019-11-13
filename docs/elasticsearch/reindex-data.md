@@ -37,12 +37,11 @@ PUT destination
    },
    "settings":{
       "Add in your desired settings"
-      "number_of_shards": "2"
    }
 }
 ```
 
-This `reindex` command copies all the documents from a source index to a destination index:
+This `_reindex` command copies all the documents from a source index to a destination index:
 
 ```json
 POST _reindex
