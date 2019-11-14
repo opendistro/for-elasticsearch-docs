@@ -7,9 +7,9 @@ nav_order: 3
 
 # Reindex data
 
-After creating an index, if you need to make an extensive change such as adding a new field to every document or combining multiple indices to form a new one, rather than deleting your index, making the change offline, and then indexing your data all over again, you can use the `_reindex` operation.
+After creating an index, if you need to make an extensive change such as adding a new field to every document or combining multiple indices to form a new one, rather than deleting your index, making the change offline, and then indexing your data all over again, you can use the `reindex` operation.
 
-With the `_reindex` operation, you can copy all or a subset of documents that you select through a query to another index. Reindex is a `POST` operation. In its most basic form, you specify a source index and a destination index.
+With the `reindex` operation, you can copy all or a subset of documents that you select through a query to another index. Reindex is a `POST` operation. In its most basic form, you specify a source index and a destination index.
 
 Reindexing can be an expensive operation depending on the size of your source index. We recommend you disable replicas in your destination index by setting `number_of_replicas` to `0` and re-enable them once the reindex process is complete.
 {: .note }
@@ -41,7 +41,7 @@ PUT destination
 }
 ```
 
-This `_reindex` command copies all the documents from a source index to a destination index:
+This `reindex` command copies all the documents from a source index to a destination index:
 
 ```json
 POST _reindex
@@ -55,7 +55,7 @@ POST _reindex
 }
 ```
 
-If the destination index is not already created, the `_reindex` operation creates a new destination index with default configurations.
+If the destination index is not already created, the `reindex` operation creates a new destination index with default configurations.
 
 ## Reindex from a remote cluster
 
@@ -136,8 +136,6 @@ POST _reindex
 }
 ```
 
-The source indices assume the mappings and settings of the destination index.
-
 ## Reindex only unique documents
 
 You can copy only documents missing from a destination index by setting the `op_type` option to `create`.
@@ -185,7 +183,7 @@ POST _reindex
 You can transform your data during the reindexing process using the `script` option.
 We recommend Painless for scripting in Elasticsearch.
 
-This command runs the source index through a Painless script that increments a `number` field inside an `_account` object before copying it to the destination index:
+This command runs the source index through a Painless script that increments a `number` field inside an `account` object before copying it to the destination index:
 
 ```json
 POST _reindex
@@ -263,7 +261,7 @@ POST <index_name>/_update_by_query
 
 If you run this command with no parameters, it increments the version number for all documents in the index.
 
-## Source Index Options
+## Source index options
 
 You can specify the following options for your source index:
 
@@ -276,7 +274,7 @@ Option | Valid values | Description | Required
 `slice` | String | Specify manual or automatic slicing to parallelize reindexing. | No
 `sort` | List | Sort specific fields in the document before reindexing. | No
 
-## Destination Index Options
+## Destination index options
 
 You can specify the following options for your destination index:
 
