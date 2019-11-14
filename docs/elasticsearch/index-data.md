@@ -21,15 +21,15 @@ In Elasticsearch, the basic unit of data is a JSON *document*. Within an index, 
 A request to the index API looks like the following:
 
 ```json
-PUT cluster_endpoint/<index>/_doc/<id>
+PUT <index>/_doc/<id>
 { "A JSON": "document" }
 ```
 
 A request to the `_bulk` API looks a little different, because you specify the index and ID in the bulk data:
 
 ```json
-POST cluster_endpoint/_bulk
-{ "index": { "_index" : "<index>", "_id" : "<id>" } }
+POST _bulk
+{ "index": { "_index": "<index>", "_id": "<id>" } }
 { "A JSON": "document" }
 
 ```
@@ -50,22 +50,22 @@ The document is optional, because `delete` actions do not require a document. Th
 Elasticsearch features automatic index creation when you add a document to an index that doesn't already exist. It also features automatic ID generation if you don't specify an ID in the request. This simple example automatically creates the movies index, indexes the document, and assigns it a unique ID:
 
 ```json
-POST cluster_endpoint/movies/_doc
-{"title": "Spirited Away"}
+POST movies/_doc
+{ "title": "Spirited Away" }
 ```
 
 Automatic ID generation has a clear downside: because the indexing request didn't specify a document ID, you can't easily update the document at a later time. To specify an ID of 1, use the following request, and note the use of PUT instead of POST:
 
 ```json
-PUT cluster_endpoint/movies/_doc/1
-{"title": "Spirited Away"}
+PUT movies/_doc/1
+{ "title": "Spirited Away" }
 ```
 
 Indices default to one primary shard and one replica. If you want to specify non-default settings, create the index before adding documents:
 
 ```json
-PUT cluster_endpoint/more-movies
-{"settings": {"number_of_shards": 6, "number_of_replicas": 2}}
+PUT more-movies
+{ "settings": { "number_of_shards": 6, "number_of_replicas": 2 } }
 ```
 
 

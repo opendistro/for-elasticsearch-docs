@@ -59,6 +59,7 @@ PUT /_cluster/settings
 }
 ```
 
+
 ---
 
 ## Configuration file
