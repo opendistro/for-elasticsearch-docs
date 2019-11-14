@@ -136,7 +136,7 @@ POST _reindex
 }
 ```
 
-The source indices assume the mappings and settings of the destination index. 
+The source indices assume the mappings and settings of the destination index.
 
 ## Reindex only unique documents
 
@@ -278,7 +278,7 @@ Option | Valid values | Description | Required
 
 ## Destination Index Options
 
-You can specify the following options for your source index:
+You can specify the following options for your destination index:
 
 Option | Valid values | Description | Required
 :--- | :--- | :---
