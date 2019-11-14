@@ -41,11 +41,24 @@ These steps assume you're using Ubuntu 18.04.
    sudo dpkg -i elasticsearch-oss-7.2.0-amd64.deb
    ```
 
-1. Install Open Distro for Elasticsearch:
+1. Install the latest version of Open Distro for Elasticsearch:
 
    ```bash
    sudo apt-get update
    sudo apt install opendistroforelasticsearch
+   ```
+
+   If you don't want the latest version or encounter dependency errors, install the plugins individually:
+
+   ```bash
+   # List all available versions of a plugin
+   sudo apt list -a opendistro-alerting
+   # Install a specific version of a plugin
+   sudo apt install opendistro-alerting=1.2.0.0-1
+   sudo apt install opendistro-performance-analyzer=1.2.0.0-1
+   sudo apt install opendistro-job-scheduler=1.2.0.0-1
+   sudo apt install opendistro-security=1.2.0.0-0
+   sudo apt install opendistro-sql=1.2.0.0-1
    ```
 
 1. To start Open Distro for Elasticsearch:
