@@ -136,6 +136,8 @@ POST _reindex
 }
 ```
 
+The source indices assume the mappings and settings of the destination index. 
+
 ## Reindex only unique documents
 
 You can copy only documents missing from a destination index by setting the `op_type` option to `create`.
