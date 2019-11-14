@@ -61,6 +61,8 @@ These steps assume you're using Ubuntu 18.04.
    sudo apt install opendistro-sql=1.2.0.0-1
    ```
 
+   For compatibility by Elasticsearch version, see [Plugin compatibility](../plugins/#plugin-compatibility).
+
 1. To start Open Distro for Elasticsearch:
 
    ```bash
