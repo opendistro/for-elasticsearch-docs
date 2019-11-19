@@ -188,7 +188,7 @@ Set `index.index_state_management.rollover_alias` as the alias to rollover.
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `min_size` | The minimum size of the primary shard index storage required to roll over. | `number` | No
-`min_docs` |  The minimum number of documents required to roll over. | `number` | No
+`min_doc_count` |  The minimum number of documents required to roll over. | `number` | No
 `min_age` |  The minimum age from index creation required to roll over. | `number` | No
 
 ```json
