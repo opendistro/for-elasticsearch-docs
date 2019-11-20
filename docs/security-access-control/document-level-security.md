@@ -37,13 +37,18 @@ In the REST API, you provide the query as a string, so you must escape your quot
 ```json
 PUT _opendistro/_security/api/roles/public_data
 {
-  "cluster" : [ "*" ],
-  "indices" : {
-    "pub*" : {
-      "*" : [ "READ" ],
-      "_dls_": "{\"term\": { \"public\": true}}"
-    }
-  }
+  "cluster_permissions": [
+    "*"
+  ],
+  "index_permissions": [{
+    "index_patterns": [
+      "pub*"
+    ],
+    "dls": "{\"term\": { \"public\": true}}",
+    "allowed_actions": [
+      "read"
+    ]
+  }]
 }
 ```
 
@@ -60,13 +65,18 @@ This rule allows a user to read any document where the username is a value of th
 ```json
 PUT _opendistro/_security/api/roles/user_data
 {
-  "cluster" : [ "*" ],
-  "indices" : {
-    "pub*" : {
-      "*" : [ "READ" ],
-      "_dls_": "{ \"term\": { \"readable_by\": \"${user.name}\"}}"
-    }
-  }
+  "cluster_permissions": [
+    "*"
+  ],
+  "index_permissions": [{
+    "index_patterns": [
+      "pub*"
+    ],
+    "dls": "{\"term\": { \"readable_by\": \"${user.name}\"}}",
+    "allowed_actions": [
+      "read"
+    ]
+  }]
 }
 ```
 
@@ -89,7 +99,7 @@ You can use roles and parameter substitution with the `terms_set` query to enabl
 PUT _opendistro/_security/api/internalusers/user1
 {
   "password": "asdf",
-  "roles": ["abac"],
+  "backend_roles": ["abac"],
   "attributes": {
     "permissions": "\"att1\", \"att2\", \"att3\""
   }
@@ -101,11 +111,14 @@ PUT _opendistro/_security/api/internalusers/user1
 ```json
 PUT _opendistro/_security/api/roles/abac
 {
-  "indices": {
-    "*": {
-      "*": ["READ"],
-      "_dls_": "{\"terms_set\": {\"security_attributes\": {\"terms\": [${attr.internal.permissions}], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].values.length\"}}}}"
-    }
-  }
+  "index_permissions": [{
+    "index_patterns": [
+      "*"
+    ],
+    "dls": "{\"terms_set\": {\"security_attributes\": {\"terms\": [\"${attr.internal.permissions}\"], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].values.length\"}}}}",
+    "allowed_actions": [
+      "read"
+    ]
+  }]
 }
 ```

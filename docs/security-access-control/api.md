@@ -567,11 +567,11 @@ Updates individual attributes of a role.
 PATCH _opendistro/_security/api/roles/<role>
 [
   {
-    "op": "replace", "path": "/indices/public/_fls_", "value": ["field1"]
+    "op": "replace", "path": "/index_permissions/0/fls", "value": ["myfield1", "myfield2"]
   },
   {
-    "op": "remove", "path": "/indices/public/_dls_"
-  }   
+    "op": "remove", "path": "/index_permissions/0/dls"
+  }
 ]
 ```
 
@@ -579,8 +579,8 @@ PATCH _opendistro/_security/api/roles/<role>
 
 ```json
 {
-  "status":"OK",
-  "message":"role role_starfleet created."
+  "status": "OK",
+  "message": "'<role>' updated."
 }
 ```
 
@@ -595,10 +595,13 @@ Creates, updates, or deletes multiple roles in a single call.
 PATCH _opendistro/_security/api/roles
 [
   {
-    "op": "add", "path": "/klingons",  "value": { "indices" : { "klingonindex" : { "*" : [ "READ" ] }  } }
+    "op": "replace", "path": "/role1/index_permissions/0/fls", "value": ["test1", "test2"]
   },
   {
-    "op": "add", "path": "/romulans",  "value": { "indices" : { "romulansindex" : { "*" : [ "READ" ] }  } }
+    "op": "remove", "path": "/role1/index_permissions/0/dls"
+  },
+  {
+    "op": "add", "path": "/role2/cluster_permissions", "value": ["manage_snapshots"]
   }
 ]
 ```
@@ -607,8 +610,8 @@ PATCH _opendistro/_security/api/roles
 
 ```json
 {
-  "status":"OK",
-  "message":"role role_starfleet created."
+  "status": "OK",
+  "message": "Resource updated."
 }
 ```
 
