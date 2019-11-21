@@ -1052,7 +1052,7 @@ DELETE _opendistro/_security/api/cache
 
 ### Health check
 
-Checks to see if the Security plugin is up and running.
+Checks to see if the Security plugin is up and running. If you operate your cluster behind a load balancer, this operation is useful for determining node health and doesn't require a signed request.
 
 
 #### Request
