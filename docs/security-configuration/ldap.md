@@ -31,7 +31,8 @@ To enable LDAP authentication and authorization, add the following lines to `plu
 ```yml
 authc:
   ldap:
-    enabled: true
+    http_enabled: true
+    transport_enabled: true
     order: 1
     http_authenticator:
       type: basic
@@ -45,10 +46,11 @@ authc:
 ```yml
 authz:
   ldap:
-    enabled: true
-  authorization_backend:
-    type: ldap
-    config:
+    http_enabled: true
+    transport_enabled: true
+    authorization_backend:
+      type: ldap
+      config:
       ...
 ```
 
@@ -178,7 +180,8 @@ You can limit the allowed ciphers and TLS protocols for the LDAP connection. For
 
 ```yml
 ldap:
-  enabled: true
+  http_enabled: true
+  transport_enabled: true
   ...
   authentication_backend:
     type: ldap
@@ -206,7 +209,8 @@ To use Active Directory/LDAP for authentication, first configure a respective au
 ```yml
 authc:
   ldap:
-    enabled: true
+    http_enabled: true
+    transport_enabled: true
     order: 1
     http_authenticator:
       type: basic
@@ -266,7 +270,8 @@ Name | Description
 
 ```yml
 ldap:
-  enabled: false
+  http_enabled: true
+  transport_enabled: true
   order: 1
   http_authenticator:
     type: basic
@@ -297,10 +302,11 @@ To use Active Directory/LDAP for authorization, first configure a respective aut
 ```yml
 authz:
   ldap:
-    enabled: true
-  authorization_backend:
-    type: ldap
-    config:
+    http_enabled: true
+    transport_enabled: true
+    authorization_backend:
+      type: ldap
+      config:
       ...
 ```
 
@@ -390,15 +396,16 @@ Example:
 
 ```yml
 authz:
-  ldap:
-    enabled: true
-  authorization_backend:
-    type: ldap
-    config:
-      custom_attr_whitelist:
-        - attribute1
-        - attribute2
-      custom_attr_maxval_len
+  ldap:  
+    http_enabled: true
+    transport_enabled: true
+    authorization_backend:
+      type: ldap
+      config:
+        custom_attr_whitelist:
+          - attribute1
+          - attribute2
+        custom_attr_maxval_len
       ...
 ```
 
@@ -456,7 +463,8 @@ Name | Description
 ```yml
 authz:
   ldap:
-    enabled: true
+    http_enabled: true
+    transport_enabled: true
     authorization_backend:
       type: ldap
       config:
