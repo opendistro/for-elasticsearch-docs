@@ -152,12 +152,11 @@ To beta test this plugin, download the latest release from [GitHub](https://gith
 sudo bin/elasticsearch-plugin install file:///path/to/file
 ```
 
-### Anomaly detection
-
 ### Anomaly Detection
 
 This is a preview plugin, and we recommend not using it in production. It's currently in development and is subject to change.
-To test this feature, pull the code from GitHub and build it yourself.
+To test this feature, clone the anomaly detection repo in your own environment and build from it.
+
 
 ### Performance Analyzer
 
