@@ -49,7 +49,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 1. Choose **Alerting**, **Monitors**, **Create monitor**.
 1. Specify a name and schedule for the monitor.
 1. Choose one or more indices. You can also use `*` as a wildcard to specify an index pattern.
-1. Define the monitor in one of two ways: visually or using a query.
+1. Define the monitor in one of three ways: visually, using a query, or using an anomaly detector.
 
    - Visual definition works well for monitors that you can define as "some value is above or below some threshold for some amount of time."
 
@@ -102,11 +102,16 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
      "Start" and "end" refer to the interval at which the monitor runs. See [Available variables](#available-variables).
 
+   - Anomaly detection works for pairing with the anomaly detection plugin. See [Anomaly Detection](../ad/).
+
+
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
 
    To use a query, choose **Define using extraction query**, add your query (using [the Elasticsearch query DSL](../../elasticsearch/full-text)), and test it using the **Run** button.
 
    The monitor makes this query to Elasticsearch as often as the schedule dictates; check the **Query Performance** section and make sure you're comfortable with the performance implications.
+
+   To use an anomaly detector, choose **Define using Anomaly detector** and select your **Detector**.
 
 1. Choose **Create**.
 
@@ -115,7 +120,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 ## Create triggers
 
-The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose **Define using visual graph** or **Define using extraction query** when you created the monitor.
+The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose **Define using visual graph** or **Define using extraction query** or **Define using Anomaly detector** when you created the monitor.
 
 Either way, you begin by specifying a name and severity level for the trigger. Severity levels help you manage alerts. A trigger with a high severity level (e.g. 1) might page a specific individual, whereas a trigger with a low severity level might message a chat room.
 
@@ -137,6 +142,16 @@ A return value of true means the trigger condition has been met, and the trigger
 
 The **Info** link next to **Trigger condition** contains a useful summary of the variables and results available to your query.
 {: .tip }
+
+### Anomaly detector
+
+For **Trigger type**, choose **Anomaly detector grade and confidence**.
+
+Specify the **Anomaly grade condition** for the aggregation and timeframe you chose earlier, "IS ABOVE 0.7" or "IS EXACTLY 0.5."
+
+Specify the **Anomaly confidence condition** for the aggregation and timeframe you chose earlier, "IS ABOVE 0.7" or "IS EXACTLY 0.5."
+
+The line moves up and down as you increase and decrease the threshold. Once this line is crossed, the trigger evaluates to true.
 
 
 #### Sample scripts
