@@ -1,6 +1,6 @@
 ---
 layout: default
-title: AD API
+title: Anomaly Detection API
 parent: Anomaly Detection
 nav_order: 1
 ---
