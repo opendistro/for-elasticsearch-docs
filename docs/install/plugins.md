@@ -5,9 +5,9 @@ parent: Install and Configure
 nav_order: 90
 ---
 
-# Standalone Elasticsearch plugin install
+# Standalone Elasticsearch plugin installation
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and SQL plugins on a compatible Elasticsearch cluster just like any other Elasticsearch plugin.
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and SQL plugins on a compatible Elasticsearch cluster, just like any other Elasticsearch plugin.
 
 
 ---
@@ -98,13 +98,13 @@ opendistro_sql                  0.7.0.0</pre>
   </tbody>
 </table>
 
-To install plugins manually, you must have the exact OSS version of Elasticsearch installed (e.g. 6.6.2 and not 6.6.1). To get a list of available Elasticsearch versions on CentOS 7 and Amazon Linux 2:
+To install plugins manually, you must have the exact OSS version of Elasticsearch installed (for example, 6.6.2 and not 6.6.1). To get a list of available Elasticsearch versions on CentOS 7 and Amazon Linux 2, run the following command:
 
 ```bash
 sudo yum list elasticsearch-oss --showduplicates
 ```
 
-Then you can specify the version you need:
+Then you can specify the version that you need:
 
 ```bash
 sudo yum install elasticsearch-oss-6.7.1
@@ -113,7 +113,7 @@ sudo yum install elasticsearch-oss-6.7.1
 
 ## Install plugins
 
-Navigate to the Elasticsearch home directory (likely `/usr/share/elasticsearch`) and run the install command for each plugin.
+Navigate to the Elasticsearch home directory (most likely, it is `/usr/share/elasticsearch`), and run the install command for each plugin.
 
 
 ### Security
@@ -124,7 +124,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 
 After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security-configuration/security-admin/).
 
-Security has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install, as well.
+Security has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
 ### Alerting
@@ -133,7 +133,7 @@ Security has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.2.0.0.zip
 ```
 
-Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install, as well.
+Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
 ### SQL
@@ -151,6 +151,13 @@ To beta test this plugin, download the latest release from [GitHub](https://gith
 ```bash
 sudo bin/elasticsearch-plugin install file:///path/to/file
 ```
+
+### Anomaly detection
+
+### Anomaly Detection
+
+This is a preview plugin, and we recommend not using it in production. It's currently in development and is subject to change.
+To test this feature, pull the code from GitHub and build it yourself.
 
 ### Performance Analyzer
 
