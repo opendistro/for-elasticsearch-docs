@@ -50,7 +50,7 @@ You can add a maximum of five features for a detector.
 
 The **Total anomalies** graph plots the anomaly grade with the corresponding measure of confidence.
 
-Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score represents the measure of confidence in the anomaly grade.
+Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score is an estimate of the probability that the reported anomaly grade matches the expected anomaly grade. Confidence increases as the model observes more data and learns the data behavior and trends. Note that confidence is distinct from model accuracy.
 
 The **Features** graph plots the features based on the aggregation method. On the top-right corner, you can vary the date-time range of the detector.
 
