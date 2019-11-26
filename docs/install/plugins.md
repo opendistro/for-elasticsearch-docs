@@ -152,45 +152,6 @@ To beta test this plugin, download the latest release from [GitHub](https://gith
 sudo bin/elasticsearch-plugin install file:///path/to/file
 ```
 
-### Anomaly Detection
-
-This is an alpha plugin, and we recommend not using it in production. It's currently in development and is subject to change.
-
-To run this plugin, you must first remove your existing alerting plugin, install the anomaly detection plugin, and then add back the alerting plugin.
-
-1. Remove your existing alerting plugin:
-
-    ```bash
-    #Elasticsearch
-    bin/elasticsearch-plugin remove alerting
-
-    #Kibana (Optional, only if you use Kibana)
-    bin/kibana-plugin remove opendistro-alerting
-    ```
-
-1. Install the anomaly detection plugin:
-
-    ```bash
-    #Elasticsearch
-    bin/elasticsearch-plugin install <alpha AD artifact url>
-
-    #Kibana (Optional, only if you use Kibana)
-    bin/kibana-plugin install <alpha Kbn-AD artifact url>
-    ```
-
-1. Reinstall the alerting plugin:
-
-    ```bash
-    #Elasticsearch
-    bin/elasticsearch-plugin install <alpha artifact url>
-
-    #Kibana (Optional, only if you use Kibana)
-    bin/kibana-plugin install <alpha alerting artifact url>
-    ```
-
-1. Restart Elasticsearch on this node.
-1. Repeat steps 1-4 on every node that you want to run anomaly detection on.
-
 ### Performance Analyzer
 
 ```bash
