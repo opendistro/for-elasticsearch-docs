@@ -135,6 +135,7 @@ POST _reindex
    }
 }
 ```
+Make sure the number of shards for your source and destination indices are the same.
 
 ## Reindex only unique documents
 
