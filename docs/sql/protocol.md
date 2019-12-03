@@ -17,7 +17,7 @@ query.
 
 ### Example 1
 
-Use <span class="title-ref">filter</span> to add more conditions to
+Use `filter` to add more conditions to
 Elasticsearch DSL directly.
 
 SQL query:
@@ -77,7 +77,7 @@ Explain:
 
 ### Example 2
 
-Use <span class="title-ref">parameters</span> for actual parameter value
+Use `parameters` for actual parameter value
 in prepared SQL query.
 
 SQL query:
@@ -199,8 +199,8 @@ schema and result set well formatted.
 ### Example 1
 
 Here is an example for normal response. The
-<span class="title-ref">schema</span> includes field name and its type
-and <span class="title-ref">datarows</span> includes the result set.
+`schema` includes field name and its type
+and `datarows` includes the result set.
 
 SQL query:
 
