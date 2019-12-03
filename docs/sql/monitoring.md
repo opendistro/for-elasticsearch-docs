@@ -1,4 +1,20 @@
+---
+layout: default
+title: Plugin Monitoring
+parent: SQL
+nav_order: 7
+---
+
 # Plugin Monitoring
+
+---
+
+#### Table of contents
+- TOC
+{:toc}
+
+
+---
 
 ## Introduction
 

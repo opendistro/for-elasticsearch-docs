@@ -1,4 +1,20 @@
+---
+layout: default
+title: Plugin Settings
+parent: SQL
+nav_order: 6
+---
+
 # Plugin Settings
+
+---
+
+#### Table of contents
+- TOC
+{:toc}
+
+
+---
 
 ## Introduction
 

@@ -1,5 +1,21 @@
+---
+layout: default
+title: Endpoints
+parent: SQL
+nav_order: 4
+---
 
-# Endpoint
+
+# Endpoints
+
+---
+
+#### Table of contents
+- TOC
+{:toc}
+
+
+---
 
 ## Introduction
 
