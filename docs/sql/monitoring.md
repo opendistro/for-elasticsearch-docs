@@ -14,50 +14,14 @@ implemented.
 
 The meaning of fields in the response is as follows:
 
-<table>
-<colgroup>
-<col style="width: 30%" />
-<col style="width: 69%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Field name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><blockquote>
-<p>request_total</p>
-</blockquote></td>
-<td><blockquote>
-<p>Total count of request</p>
-</blockquote></td>
-</tr>
-<tr class="even">
-<td><blockquote>
-<p>request_count</p>
-</blockquote></td>
-<td><blockquote>
-<p>Total count of request within the interval</p>
-</blockquote></td>
-</tr>
-<tr class="odd">
-<td>failed_request_count_syserr</td>
-<td>Count of failed request due to system error within the interval</td>
-</tr>
-<tr class="even">
-<td>failed_request_count_cuserr</td>
-<td>Count of failed request due to bad request within the interval</td>
-</tr>
-<tr class="odd">
-<td><blockquote>
-<p>failed_request_count_cb</p>
-</blockquote></td>
-<td>Indicate if plugin is being circuit broken within the interval</td>
-</tr>
-</tbody>
-</table>
+|                 Field name|                                                    Description|
+| ------------------------- | ------------------------------------------------------------- |
+|              request_total|                                         Total count of request|
+|              request_count|                     Total count of request within the interval|
+|failed_request_count_syserr|Count of failed request due to system error within the interval|
+|failed_request_count_cuserr| Count of failed request due to bad request within the interval|
+|    failed_request_count_cb| Indicate if plugin is being circuit broken within the interval|
+
 
 ### Example
 
