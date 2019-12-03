@@ -1,16 +1,5 @@
-<div class="highlight">
-
-sh
-
-</div>
 
 # Endpoint
-
-**Table of contents**
-
-<div class="contents" data-local="" data-depth="1">
-
-</div>
 
 ## Introduction
 
