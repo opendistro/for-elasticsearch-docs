@@ -2,7 +2,7 @@
 layout: default
 title: Index Data
 parent: Elasticsearch
-nav_order: 2
+nav_order: 3
 ---
 
 # Index data
