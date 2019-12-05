@@ -40,27 +40,27 @@ You can update the setting with a new value like this.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
-      "transient" : {
-        "opendistro.sql.enabled" : false
-      }
-    }'
+>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
+  "transient" : {
+    "opendistro.sql.enabled" : false
+  }
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "acknowledged" : true,
-      "persistent" : { },
-      "transient" : {
-        "opendistro" : {
-          "sql" : {
-            "enabled" : "false"
-          }
-        }
+{
+  "acknowledged": true,
+  "persistent": {},
+  "transient": {
+    "opendistro": {
+      "sql": {
+        "enabled": "false"
       }
     }
+  }
+}
 ```
 
 ### Example 2
@@ -70,22 +70,22 @@ Query result after the setting updated is like:
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT * FROM accounts"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query" : "SELECT * FROM accounts"
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "error" : {
-        "reason" : "Invalid SQL query",
-        "details" : "Either opendistro.sql.enabled or rest.action.multi.allow_explicit_index setting is false",
-        "type" : "SQLFeatureDisabledException"
-      },
-      "status" : 400
-    }
+{
+  "error": {
+    "reason": "Invalid SQL query",
+    "details": "Either opendistro.sql.enabled or rest.action.multi.allow_explicit_index setting is false",
+    "type": "SQLFeatureDisabledException"
+  },
+  "status": 400
+}
 ```
 
 ## opendistro.sql.query.slowlog
@@ -106,29 +106,29 @@ You can update the setting with a new value like this.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
-      "transient" : {
-        "opendistro.sql.query.slowlog" : 10
-      }
-    }'
+>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
+  "transient" : {
+    "opendistro.sql.query.slowlog" : 10
+  }
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "acknowledged" : true,
-      "persistent" : { },
-      "transient" : {
-        "opendistro" : {
-          "sql" : {
-            "query" : {
-              "slowlog" : "10"
-            }
-          }
+{
+  "acknowledged": true,
+  "persistent": {},
+  "transient": {
+    "opendistro": {
+      "sql": {
+        "query": {
+          "slowlog": "10"
         }
       }
     }
+  }
+}
 ```
 
 ## opendistro.sql.query.analysis.enabled
@@ -149,31 +149,31 @@ You can update the setting with a new value like this.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
-      "transient" : {
-        "opendistro.sql.query.analysis.enabled" : false
-      }
-    }'
+>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
+  "transient" : {
+    "opendistro.sql.query.analysis.enabled" : false
+  }
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "acknowledged" : true,
-      "persistent" : { },
-      "transient" : {
-        "opendistro" : {
-          "sql" : {
-            "query" : {
-              "analysis" : {
-                "enabled" : "false"
-              }
-            }
+{
+  "acknowledged": true,
+  "persistent": {},
+  "transient": {
+    "opendistro": {
+      "sql": {
+        "query": {
+          "analysis": {
+            "enabled": "false"
           }
         }
       }
     }
+  }
+}
 ```
 
 ## opendistro.sql.query.analysis.semantic.suggestion
@@ -194,33 +194,33 @@ You can update the setting with a new value like this.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
-      "transient" : {
-        "opendistro.sql.query.analysis.semantic.suggestion" : true
-      }
-    }'
+>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
+  "transient" : {
+    "opendistro.sql.query.analysis.semantic.suggestion" : true
+  }
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "acknowledged" : true,
-      "persistent" : { },
-      "transient" : {
-        "opendistro" : {
-          "sql" : {
-            "query" : {
-              "analysis" : {
-                "semantic" : {
-                  "suggestion" : "true"
-                }
-              }
+{
+  "acknowledged": true,
+  "persistent": {},
+  "transient": {
+    "opendistro": {
+      "sql": {
+        "query": {
+          "analysis": {
+            "semantic": {
+              "suggestion": "true"
             }
           }
         }
       }
     }
+  }
+}
 ```
 
 ### Example 2
@@ -230,22 +230,22 @@ Query result after the setting updated is like:
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT first FROM accounts"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query" : "SELECT first FROM accounts"
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "error" : {
-        "reason" : "Invalid SQL query",
-        "details" : "Field [first] cannot be found or used here. Did you mean [firstname]?",
-        "type" : "SemanticAnalysisException"
-      },
-      "status" : 400
-    }
+{
+  "error": {
+    "reason": "Invalid SQL query",
+    "details": "Field [first] cannot be found or used here. Did you mean [firstname]?",
+    "type": "SemanticAnalysisException"
+  },
+  "status": 400
+}
 ```
 
 ## opendistro.sql.query.analysis.semantic.threshold
@@ -267,31 +267,31 @@ You can update the setting with a new value like this.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
-      "transient" : {
-        "opendistro.sql.query.analysis.semantic.threshold" : 50
-      }
-    }'
+>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
+  "transient" : {
+    "opendistro.sql.query.analysis.semantic.threshold" : 50
+  }
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "acknowledged" : true,
-      "persistent" : { },
-      "transient" : {
-        "opendistro" : {
-          "sql" : {
-            "query" : {
-              "analysis" : {
-                "semantic" : {
-                  "threshold" : "50"
-                }
-              }
+{
+  "acknowledged": true,
+  "persistent": {},
+  "transient": {
+    "opendistro": {
+      "sql": {
+        "query": {
+          "analysis": {
+            "semantic": {
+              "threshold": "50"
             }
           }
         }
       }
     }
+  }
+}
 ```

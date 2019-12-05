@@ -37,7 +37,7 @@ You can send HTTP GET request with your query embedded in URL parameter.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X GET localhost:9200/_opendistro/_sql?sql=SELECT * FROM accounts
+>> curl -H 'Content-Type: application/json' -X GET localhost:9200/_opendistro/_sql?sql=SELECT * FROM accounts
 ```
 
 ## POST
@@ -51,9 +51,9 @@ You can also send HTTP POST request with your query in request body.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT * FROM accounts"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query" : "SELECT * FROM accounts"
+}'
 ```
 
 ## Explain
@@ -70,50 +70,46 @@ directly.
 Explain query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql/_explain -d '{
-      "query" : "SELECT firstname, lastname FROM accounts WHERE age > 20"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql/_explain -d '{
+  "query" : "SELECT firstname, lastname FROM accounts WHERE age > 20"
+}'
 ```
 
 Explain:
 
 ```json
-    {
-      "from" : 0,
-      "size" : 200,
-      "query" : {
-        "bool" : {
-          "filter" : [
-            {
-              "bool" : {
-                "must" : [
-                  {
-                    "range" : {
-                      "age" : {
-                        "from" : 20,
-                        "to" : null,
-                        "include_lower" : false,
-                        "include_upper" : true,
-                        "boost" : 1.0
-                      }
-                    }
-                  }
-                ],
-                "adjust_pure_negative" : true,
-                "boost" : 1.0
+{
+  "from": 0,
+  "size": 200,
+  "query": {
+    "bool": {
+      "filter": [{
+        "bool": {
+          "must": [{
+            "range": {
+              "age": {
+                "from": 20,
+                "to": null,
+                "include_lower": false,
+                "include_upper": true,
+                "boost": 1.0
               }
             }
-          ],
-          "adjust_pure_negative" : true,
-          "boost" : 1.0
+          }],
+          "adjust_pure_negative": true,
+          "boost": 1.0
         }
-      },
-      "_source" : {
-        "includes" : [
-          "firstname",
-          "lastname"
-        ],
-        "excludes" : [ ]
-      }
+      }],
+      "adjust_pure_negative": true,
+      "boost": 1.0
     }
+  },
+  "_source": {
+    "includes": [
+      "firstname",
+      "lastname"
+    ],
+    "excludes": []
+  }
+}
 ```

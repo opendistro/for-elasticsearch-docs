@@ -39,60 +39,56 @@ Elasticsearch DSL directly.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT firstname, lastname, balance FROM accounts",
-      "filter" : {
-        "range" : {
-          "balance" : {
-            "lt" : 10000
-          }
-        }
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query" : "SELECT firstname, lastname, balance FROM accounts",
+  "filter" : {
+    "range" : {
+      "balance" : {
+        "lt" : 10000
       }
-    }'
+    }
+  }
+}'
 ```
 
 Explain:
 
 ```json
-    {
-      "from" : 0,
-      "size" : 200,
-      "query" : {
-        "bool" : {
-          "filter" : [
-            {
-              "bool" : {
-                "filter" : [
-                  {
-                    "range" : {
-                      "balance" : {
-                        "from" : null,
-                        "to" : 10000,
-                        "include_lower" : true,
-                        "include_upper" : false,
-                        "boost" : 1.0
-                      }
-                    }
-                  }
-                ],
-                "adjust_pure_negative" : true,
-                "boost" : 1.0
+{
+  "from": 0,
+  "size": 200,
+  "query": {
+    "bool": {
+      "filter": [{
+        "bool": {
+          "filter": [{
+            "range": {
+              "balance": {
+                "from": null,
+                "to": 10000,
+                "include_lower": true,
+                "include_upper": false,
+                "boost": 1.0
               }
             }
-          ],
-          "adjust_pure_negative" : true,
-          "boost" : 1.0
+          }],
+          "adjust_pure_negative": true,
+          "boost": 1.0
         }
-      },
-      "_source" : {
-        "includes" : [
-          "firstname",
-          "lastname",
-          "balance"
-        ],
-        "excludes" : [ ]
-      }
+      }],
+      "adjust_pure_negative": true,
+      "boost": 1.0
     }
+  },
+  "_source": {
+    "includes": [
+      "firstname",
+      "lastname",
+      "balance"
+    ],
+    "excludes": []
+  }
+}
 ```
 
 ### Example 2
@@ -103,48 +99,42 @@ in prepared SQL query.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT * FROM accounts WHERE age = ?",
-      "parameters" : [
-        {
-          "type" : "integer",
-          "value" : 30
-        }
-      ]
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query": "SELECT * FROM accounts WHERE age = ?",
+  "parameters": [{
+    "type": "integer",
+    "value": 30
+  }]
+}'
 ```
 
 Explain:
 
 ```json
-    {
-      "from" : 0,
-      "size" : 200,
-      "query" : {
-        "bool" : {
-          "filter" : [
-            {
-              "bool" : {
-                "must" : [
-                  {
-                    "term" : {
-                      "age" : {
-                        "value" : 30,
-                        "boost" : 1.0
-                      }
-                    }
-                  }
-                ],
-                "adjust_pure_negative" : true,
-                "boost" : 1.0
+{
+  "from": 0,
+  "size": 200,
+  "query": {
+    "bool": {
+      "filter": [{
+        "bool": {
+          "must": [{
+            "term": {
+              "age": {
+                "value": 30,
+                "boost": 1.0
               }
             }
-          ],
-          "adjust_pure_negative" : true,
-          "boost" : 1.0
+          }],
+          "adjust_pure_negative": true,
+          "boost": 1.0
         }
-      }
+      }],
+      "adjust_pure_negative": true,
+      "boost": 1.0
     }
+  }
+}
 ```
 
 ## Elasticsearch DSL
@@ -160,61 +150,60 @@ efforts are needed to parse and interpret it.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
-      "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "_shards" : {
-        "total" : 5,
-        "failed" : 0,
-        "successful" : 5,
-        "skipped" : 0
-      },
-      "hits" : {
-        "hits" : [
-          {
-            "_index" : "accounts",
-            "_type" : "account",
-            "_source" : {
-              "firstname" : "Nanette",
-              "age" : 28,
-              "lastname" : "Bates"
-            },
-            "_id" : "13",
-            "sort" : [
-              28
-            ],
-            "_score" : null
-          },
-          {
-            "_index" : "accounts",
-            "_type" : "account",
-            "_source" : {
-              "firstname" : "Amber",
-              "age" : 32,
-              "lastname" : "Duke"
-            },
-            "_id" : "1",
-            "sort" : [
-              32
-            ],
-            "_score" : null
-          }
-        ],
-        "total" : {
-          "value" : 4,
-          "relation" : "eq"
+{
+  "_shards": {
+    "total": 5,
+    "failed": 0,
+    "successful": 5,
+    "skipped": 0
+  },
+  "hits": {
+    "hits": [{
+        "_index": "accounts",
+        "_type": "account",
+        "_source": {
+          "firstname": "Nanette",
+          "age": 28,
+          "lastname": "Bates"
         },
-        "max_score" : null
+        "_id": "13",
+        "sort": [
+          28
+        ],
+        "_score": null
       },
-      "took" : 100,
-      "timed_out" : false
-    }
+      {
+        "_index": "accounts",
+        "_type": "account",
+        "_source": {
+          "firstname": "Amber",
+          "age": 32,
+          "lastname": "Duke"
+        },
+        "_id": "1",
+        "sort": [
+          32
+        ],
+        "_score": null
+      }
+    ],
+    "total": {
+      "value": 4,
+      "relation": "eq"
+    },
+    "max_score": null
+  },
+  "took": 100,
+  "timed_out": false
+}
 ```
 
 ## JDBC Format
@@ -233,45 +222,44 @@ and `datarows` includes the result set.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
-      "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
+  "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
+}'
 ```
 
 Result set:
 
 ```json
+{
+  "schema": [{
+      "name": "firstname",
+      "type": "text"
+    },
     {
-      "schema" : [
-        {
-          "name" : "firstname",
-          "type" : "text"
-        },
-        {
-          "name" : "lastname",
-          "type" : "text"
-        },
-        {
-          "name" : "age",
-          "type" : "long"
-        }
-      ],
-      "total" : 4,
-      "datarows" : [
-        [
-          "Nanette",
-          "Bates",
-          28
-        ],
-        [
-          "Amber",
-          "Duke",
-          32
-        ]
-      ],
-      "size" : 2,
-      "status" : 200
+      "name": "lastname",
+      "type": "text"
+    },
+    {
+      "name": "age",
+      "type": "long"
     }
+  ],
+  "total": 4,
+  "datarows": [
+    [
+      "Nanette",
+      "Bates",
+      28
+    ],
+    [
+      "Amber",
+      "Duke",
+      32
+    ]
+  ],
+  "size": 2,
+  "status": 200
+}
 ```
 
 ### Example 2
@@ -282,22 +270,22 @@ instead.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
-      "query" : "SELECT unknown FROM accounts"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
+  "query" : "SELECT unknown FROM accounts"
+}'
 ```
 
 Result set:
 
 ```json
-    {
-      "error" : {
-        "reason" : "Invalid SQL query",
-        "details" : "Field [unknown] cannot be found or used here.",
-        "type" : "SemanticAnalysisException"
-      },
-      "status" : 400
-    }
+{
+  "error": {
+    "reason": "Invalid SQL query",
+    "details": "Field [unknown] cannot be found or used here.",
+    "type": "SemanticAnalysisException"
+  },
+  "status": 400
+}
 ```
 
 ## CSV Format
@@ -311,19 +299,19 @@ You can also use CSV format to download result set as CSV.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=csv -d '{
-      "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=csv -d '{
+  "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
+}'
 ```
 
 Result set:
 
 ```csv
-    firstname,lastname,age
-    Nanette,Bates,28
-    Amber,Duke,32
-    Dale,Adams,33
-    Hattie,Bond,36
+firstname,lastname,age
+Nanette,Bates,28
+Amber,Duke,32
+Dale,Adams,33
+Hattie,Bond,36
 ```
 
 ## Raw Format
@@ -338,16 +326,16 @@ line tool for post processing.
 SQL query:
 
 ```console
-    >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=raw -d '{
-      "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
-    }'
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=raw -d '{
+  "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
+}'
 ```
 
 Result set:
 
 ```
-    Nanette|Bates|28
-    Amber|Duke|32
-    Dale|Adams|33
-    Hattie|Bond|36
+Nanette|Bates|28
+Amber|Duke|32
+Dale|Adams|33
+Hattie|Bond|36
 ```
