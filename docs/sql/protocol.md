@@ -306,7 +306,7 @@ SQL query:
 
 Result set:
 
-```csv
+```text
 firstname,lastname,age
 Nanette,Bates,28
 Amber,Duke,32
@@ -333,7 +333,7 @@ SQL query:
 
 Result set:
 
-```
+```text
 Nanette|Bates|28
 Amber|Duke|32
 Dale|Adams|33
