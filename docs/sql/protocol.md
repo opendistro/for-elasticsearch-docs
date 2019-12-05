@@ -38,6 +38,7 @@ Elasticsearch DSL directly.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
       "query" : "SELECT firstname, lastname, balance FROM accounts",
       "filter" : {
@@ -48,9 +49,11 @@ SQL query:
         }
       }
     }'
+```
 
 Explain:
 
+```json
     {
       "from" : 0,
       "size" : 200,
@@ -90,6 +93,7 @@ Explain:
         "excludes" : [ ]
       }
     }
+```
 
 ### Example 2
 
@@ -98,6 +102,7 @@ in prepared SQL query.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
       "query" : "SELECT * FROM accounts WHERE age = ?",
       "parameters" : [
@@ -107,9 +112,11 @@ SQL query:
         }
       ]
     }'
+```
 
 Explain:
 
+```json
     {
       "from" : 0,
       "size" : 200,
@@ -138,6 +145,7 @@ Explain:
         }
       }
     }
+```
 
 ## Elasticsearch DSL
 
@@ -151,12 +159,15 @@ efforts are needed to parse and interpret it.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
       "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
     }'
+```
 
 Result set:
 
+```json
     {
       "_shards" : {
         "total" : 5,
@@ -204,6 +215,7 @@ Result set:
       "took" : 100,
       "timed_out" : false
     }
+```
 
 ## JDBC Format
 
@@ -220,12 +232,15 @@ and `datarows` includes the result set.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
       "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age LIMIT 2"
     }'
+```
 
 Result set:
 
+```json
     {
       "schema" : [
         {
@@ -257,6 +272,7 @@ Result set:
       "size" : 2,
       "status" : 200
     }
+```
 
 ### Example 2
 
@@ -265,12 +281,15 @@ instead.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=jdbc -d '{
       "query" : "SELECT unknown FROM accounts"
     }'
+```
 
 Result set:
 
+```json
     {
       "error" : {
         "reason" : "Invalid SQL query",
@@ -279,6 +298,7 @@ Result set:
       },
       "status" : 400
     }
+```
 
 ## CSV Format
 
@@ -290,17 +310,21 @@ You can also use CSV format to download result set as CSV.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=csv -d '{
       "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
     }'
+```
 
 Result set:
 
+```csv
     firstname,lastname,age
     Nanette,Bates,28
     Amber,Duke,32
     Dale,Adams,33
     Hattie,Bond,36
+```
 
 ## Raw Format
 
@@ -313,13 +337,17 @@ line tool for post processing.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql?format=raw -d '{
       "query" : "SELECT firstname, lastname, age FROM accounts ORDER BY age"
     }'
+```
 
 Result set:
 
+```
     Nanette|Bates|28
     Amber|Duke|32
     Dale|Adams|33
     Hattie|Bond|36
+```

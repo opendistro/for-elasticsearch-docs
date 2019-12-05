@@ -43,10 +43,13 @@ The meaning of fields in the response is as follows:
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X GET localhost:9200/_opendistro/_sql/stats
+```
 
 Result set:
 
+```json
     {
       "failed_request_count_cb" : 0,
       "failed_request_count_cuserr" : 0,
@@ -55,3 +58,4 @@ Result set:
       "request_count" : 0,
       "failed_request_count_syserr" : 0
     }
+```

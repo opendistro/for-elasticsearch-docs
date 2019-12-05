@@ -39,14 +39,17 @@ You can update the setting with a new value like this.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
       "transient" : {
         "opendistro.sql.enabled" : false
       }
     }'
+```
 
 Result set:
 
+```json
     {
       "acknowledged" : true,
       "persistent" : { },
@@ -58,6 +61,7 @@ Result set:
         }
       }
     }
+```
 
 ### Example 2
 
@@ -65,12 +69,15 @@ Query result after the setting updated is like:
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
       "query" : "SELECT * FROM accounts"
     }'
+```
 
 Result set:
 
+```json
     {
       "error" : {
         "reason" : "Invalid SQL query",
@@ -79,6 +86,7 @@ Result set:
       },
       "status" : 400
     }
+```
 
 ## opendistro.sql.query.slowlog
 
@@ -97,14 +105,17 @@ You can update the setting with a new value like this.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
       "transient" : {
         "opendistro.sql.query.slowlog" : 10
       }
     }'
+```
 
 Result set:
 
+```json
     {
       "acknowledged" : true,
       "persistent" : { },
@@ -118,6 +129,7 @@ Result set:
         }
       }
     }
+```
 
 ## opendistro.sql.query.analysis.enabled
 
@@ -136,14 +148,17 @@ You can update the setting with a new value like this.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
       "transient" : {
         "opendistro.sql.query.analysis.enabled" : false
       }
     }'
+```
 
 Result set:
 
+```json
     {
       "acknowledged" : true,
       "persistent" : { },
@@ -159,6 +174,7 @@ Result set:
         }
       }
     }
+```
 
 ## opendistro.sql.query.analysis.semantic.suggestion
 
@@ -177,14 +193,17 @@ You can update the setting with a new value like this.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
       "transient" : {
         "opendistro.sql.query.analysis.semantic.suggestion" : true
       }
     }'
+```
 
 Result set:
 
+```json
     {
       "acknowledged" : true,
       "persistent" : { },
@@ -202,6 +221,7 @@ Result set:
         }
       }
     }
+```
 
 ### Example 2
 
@@ -209,12 +229,15 @@ Query result after the setting updated is like:
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
       "query" : "SELECT first FROM accounts"
     }'
+```
 
 Result set:
 
+```json
     {
       "error" : {
         "reason" : "Invalid SQL query",
@@ -223,6 +246,7 @@ Result set:
       },
       "status" : 400
     }
+```
 
 ## opendistro.sql.query.analysis.semantic.threshold
 
@@ -242,14 +266,17 @@ You can update the setting with a new value like this.
 
 SQL query:
 
+```console
     >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_cluster/settings -d '{
       "transient" : {
         "opendistro.sql.query.analysis.semantic.threshold" : 50
       }
     }'
+```
 
 Result set:
 
+```json
     {
       "acknowledged" : true,
       "persistent" : { },
@@ -267,3 +294,4 @@ Result set:
         }
       }
     }
+```
