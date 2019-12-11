@@ -20,7 +20,7 @@ Setting | Default | Description
 `opendistro.index_state_management.coordinator.sweep_period` | 10 minutes | How often the routine background sweep is run.
 `opendistro.index_state_management.coordinator.backoff_millis` | 50 milliseconds | The backoff time between retries for failures in the `ManagedIndexCoordinator` (such as when we update managed indices).
 `opendistro.index_state_management.coordinator.backoff_count` | 2 | The count of retries for failures in the `ManagedIndexCoordinator`.
-`opendistro.index_state_management.history.enabled` | True | Specifies whether audit history is enabled or not.
+`opendistro.index_state_management.history.enabled` | True | Specifies whether audit history is enabled or not. The logs from are automatically indexed to a logs document.
 `opendistro.index_state_management.history.max_docs` | 2,500,000 | The maximum number of documents before rolling over the audit history index.
 `opendistro.index_state_management.history.max_age` | 24 hours | The maximum age before rolling over the audit history index.
 `opendistro.index_state_management.history.rollover_check_period` | 8 hours | The time between rollover checks for the audit history index.

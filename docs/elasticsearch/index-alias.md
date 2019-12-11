@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Index Alias
+title: Index Aliases
 parent: Elasticsearch
 nav_order: 5
 ---
@@ -15,7 +15,7 @@ For example, if you’re storing logs into indices based on the month and you fr
 
 Since you can switch the indices an alias points to at any time, referring to indices using aliases in your applications allows you to reindex your data without any downtime.
 
-Index aliases are point-in-time based so they only point to the current index. Aliases are NOT automatically updated when indices that are added to an alias are changed later.
+Index aliases are point-in-time based, so they only point to the current index. Aliases are automatically updated when indices that are added to an alias are changed later.
 {: .note }
 
 ---
@@ -112,10 +112,23 @@ POST _aliases
 
 ## Manage aliases
 
+To list the mapping of aliases to indices:
+
+```json
+GET _cat/aliases?v
+```
+
+#### Sample response
+
+```json
+alias     index   filter    routing.index   routing.search
+alias1    index-1   *             -                 -
+```
+
 To check which indices an alias points to:
 
 ```json
-GET /*/_alias/alias1
+GET _alias/alias1
 ```
 
 #### Sample response
@@ -144,9 +157,7 @@ HEAD /alias1/_alias/
 
 ## Add aliases at index creation
 
-You can add an index to an alias at the time you’re creating the index.
-
-This command adds `index-1` to `alias1` as soon as it’s created:
+You can add an index to an alias as you create the index:
 
 ```json
 PUT index-1
