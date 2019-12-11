@@ -442,7 +442,7 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
     <tr>
       <td>Net_Throughput
       </td>
-      <td>The number of bytes of data transmitted or received per second by all network interfaces.
+      <td>The number of bits transmitted or received per second by all network interfaces.
       </td>
     </tr>
     <tr>

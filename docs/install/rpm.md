@@ -35,7 +35,7 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 1. Choose the version you'd like and install it:
 
    ```bash
-   sudo yum install opendistroforelasticsearch-1.2.0
+   sudo yum install opendistroforelasticsearch-1.2.1
    ```
 
 1. **If you installed Java 8**, run the following command:
