@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+1.2.1 | Bumps Elasticsearch version. | 4 November 2019 | 7.2.1
 1.2.0 | Bumps Elasticsearch version. | 19 September 2019 | 7.2.0
 1.1.0 | Bumps Elasticsearch version. | 30 July 2019 | 7.1.1
 1.0.2 | Fixes an action group bug in the Security plugin. | 23 July 2019 | 7.0.1
