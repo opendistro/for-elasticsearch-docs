@@ -8,9 +8,9 @@ has_children: false
 
 # Managed indices
 
-You can automate the changing or updating of a policy on a schedule using the managed index operations.
+You can change or update a policy using the managed index operations.
 
-This table lists the parameters that you can update using the managed index operation.
+This table lists the fields of managed index operations.
 
 Parameter | Description | Type | Required | Read Only
 :--- | :--- |:--- |:--- |
@@ -34,27 +34,25 @@ The following example shows a managed index policy:
 
 ```json
 {
-   "managed_index":{
-      "name":"my_index",
-      "index":"my_index",
-      "index_uuid":"sOKSOfkdsoSKeofjIS",
-      "enabled":true,
-      "enabled_time":1553112384,
-      "last_updated_time":1553112384,
-      "schedule":{
-         "interval":{
-            "period":1,
-            "unit":"MINUTES",
-            "start_time":1553112384
-         }
-      },
-      "policy_id":"log_rotation",
-      "policy_version":1,
-      "policy":{
-         ...
-      },
-      "change_policy":null
-   }
+  "managed_index": {
+    "name": "my_index",
+    "index": "my_index",
+    "index_uuid": "sOKSOfkdsoSKeofjIS",
+    "enabled": true,
+    "enabled_time": 1553112384,
+    "last_updated_time": 1553112384,
+    "schedule": {
+      "interval": {
+        "period": 1,
+        "unit": "MINUTES",
+        "start_time": 1553112384
+      }
+    },
+    "policy_id": "log_rotation",
+    "policy_version": 1,
+    "policy": {...},
+    "change_policy": null
+  }
 }
 ```
 
@@ -66,7 +64,7 @@ If an index is stuck in its current state, never proceeding, and you want to upd
 
 If you update the policy without including an identical state, ISM updates the policy only after all actions in the current state finish executing. Alternately, you can choose a specific state in your old policy after which you want the new policy to take effect.
 
-To change a policy, do the following:
+To change a policy using Kibana UI, do the following:
 
 - Under **Managed indices**, choose the indices that you want to attach the new policy to.
 - To attach the new policy to indices in specific states, choose **Choose state filters**, and then choose those states.

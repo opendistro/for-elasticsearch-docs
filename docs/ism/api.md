@@ -18,9 +18,9 @@ Use the index state management operations to programmatically work with policies
 
 ---
 
-## Create index
+## Add policy at index creation
 
-Creates an index. To create an index with a policy attached to it, include the policy as an index setting in the request.
+You can attach a policy to an index at the time you’re creating the index.
 
 #### Request
 
