@@ -15,7 +15,7 @@ Index State Management (ISM) is a plugin that lets you automate these periodic, 
 
 For example, you can define a policy that moves your index into a `read_only` state after 30 days and then deletes it after a set period of 90 days.
 
-You might want to perform an index rollover after a certain amount of time or run a `_forcemerge` operation on an index during off-peak hours to improve search performance during peak hours.
+You might want to perform an index rollover after a certain amount of time or run a `force_merge` operation on an index during off-peak hours to improve search performance during peak hours.
 
 ## Get started with ISM
 
@@ -60,5 +60,5 @@ Make sure that the alias that you enter already exists. For more information abo
 
 For information about managing your policies, see [Managed Indices](../ism/managedindices/).
 
-The ISM plugin can only run with full admin access.
+To use the ISM plugin, you need to have the correct admin privileges as set in the security plugin.
 {: .note }
