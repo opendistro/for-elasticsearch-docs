@@ -64,7 +64,7 @@ If an index is stuck in its current state, never proceeding, and you want to upd
 
 If you update the policy without including an identical state, ISM updates the policy only after all actions in the current state finish executing. Alternately, you can choose a specific state in your old policy after which you want the new policy to take effect.
 
-To change a policy using Kibana UI, do the following:
+To change a policy using Kibana, do the following:
 
 - Under **Managed indices**, choose the indices that you want to attach the new policy to.
 - To attach the new policy to indices in specific states, choose **Choose state filters**, and then choose those states.
