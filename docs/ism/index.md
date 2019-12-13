@@ -15,7 +15,7 @@ Index State Management (ISM) is a plugin that lets you automate these periodic, 
 
 For example, you can define a policy that moves your index into a `read_only` state after 30 days and then deletes it after a set period of 90 days.
 
-You might want to perform an index rollover after a certain amount of time, take a snapshot prior to the rollover, or run a `_forcemerge` operation on an index during off-peak hours to improve search performance during peak hours.
+You might want to perform an index rollover after a certain amount of time or run a `force_merge` operation on an index during off-peak hours to improve search performance during peak hours.
 
 ## Get started with ISM
 
@@ -27,11 +27,12 @@ A policy is a set of rules that describes how an index should be managed. For in
 
 1. Choose the **Index Policies** tab.
 2. Choose **Create policy**.
-3. In the **Policy** section, enter a policy ID.
+3. In the **Name policy** section, enter a policy ID.
 4. In the **Define policy** section, enter your policy.
 5. Choose **Create**.
 
-After you create a policy, your next step is to attach this policy to an index or indices. You can attach policies to one or more index templates.
+After you create a policy, your next step is to attach this policy to an index or indices.
+You can also include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it.
 
 ### Step 2: Attach policies to indices
 
@@ -40,24 +41,24 @@ After you create a policy, your next step is to attach this policy to an index o
 3. Choose **Apply policy**.
 4. From the **Policy ID** menu, choose the policy that you created.
 You can see a preview of your policy.
-5. If your policy includes a rollover action, specify a rollover alias.
-Make sure that the alias that you enter already exists.
+5. If your policy includes a rollover operation, specify a rollover alias.
+Make sure that the alias that you enter already exists. For more information about the rollover operation, see [rollover](../ism/policies/#rollover).
 6. Choose **Apply**.
 
-After you attach a policy to an index, a background task runs every 5 minutes to check if the conditions defined in the policy are met. If the conditions are met, the policy executes the actions set in the policy. To change the default time interval for this background task, see [Settings](../ism/settings/).
+After you attach a policy to an index, a job is created that executes every 5 minutes by default to perform the actions set in the policy and check the conditions to transition the index into different states. To change the default time interval for this job, see [Settings](../ism/settings/).
 
-If you want to use an Elasticsearch operation to create an index with a policy already attached to it, see [ISM API](../ism/api/).
+If you want to use an Elasticsearch operation to create an index with a policy already attached to it, see [create index](../ism/api//#create-index).
 
 ### Step 3: Manage indices
 
 1. Choose **Managed Indices**.
 2. To change your policy, see [Change Policy](../ism/managedindices#changepolicy).
 3. To attach a rollover alias to your index, select your policy and choose **Add rollover alias**.
-Make sure that the alias that you enter already exists.
+Make sure that the alias that you enter already exists. For more information about the rollover operation, see [rollover](../ism/policies/#rollover).
 4. To remove a policy, choose your policy, and then choose **Remove policy**.
 5. To retry a policy, choose your policy, and then choose **Retry policy**.
 
-For information about automating the policy management process, see [Managed Indices](../ism/managedindices/).
+For information about managing your policies, see [Managed Indices](../ism/managedindices/).
 
-Make sure that you run the ISM plugin with full admin access.
+To use the ISM plugin, you need to have the correct admin privileges as set in the security plugin.
 {: .note }

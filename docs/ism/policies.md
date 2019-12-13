@@ -11,16 +11,16 @@ has_children: false
 Policies are JSON documents that define the following:
 
 - The *states* that an index can be in, including the default state for new indices. For example, you might name your states "hot," "warm," "delete," and so on. For more information, see [States](#states).
-- Any *actions* that you want the plugin to take when an index enters a state, such as performing a rollover or taking a snapshot. For more information, see [Actions](#actions).
+- Any *actions* that you want the plugin to take when an index enters a state, such as performing a rollover. For more information, see [Actions](#actions).
 - The conditions that must be met for an index to move into a new state, known as *transitions*. For example, if an index is more than eight weeks old, you might want to move it to the "delete" state. For more information, see [Transitions](#transitions).
 
 In other words, a policy defines the *states* that an index can be in, the *actions* to perform when in a state, and the conditions that must be met to *transition* between states.
 
-This table lists the parameters that you can define in a policy.
+This table lists the relevant fields of a policy.
 
-Parameter | Description | Type | Required | Read Only
+Field | Description | Type | Required | Read Only
 :--- | :--- |:--- |:--- |
-`policy_id` |  The name of the policy. | `string` | Yes | No
+`policy_id` |  The name of the policy. | `string` | Yes | Yes
 `description` |  A human-readable description of the policy. | `string` | Yes | No
 `last_updated_time`  |  The time the policy was last updated. | `timestamp` | Yes | Yes
 `error_notification` |  The destination and message template for error notifications. The destination could be Amazon Chime, Slack, or a webhook URL. | `object` | No | No
@@ -42,7 +42,7 @@ A state is the description of the status that the managed index is currently in.
 
 This table lists the parameters that you can define for a state.
 
-Parameter | Description | Type | Required
+Field | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `name` |  The name of the state. | `string` | Yes
 `actions` | The actions to execute after entering a state. For more information, see [Actions](#actions). | `nested list of objects` | Yes
@@ -60,24 +60,27 @@ This table lists the parameters that you can define for an action.
 
 Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |
-`timeout` |  The timeout period for the action. Accepts time units for minutes, hours, and days. | `time unit` | No | Specific to action
+`timeout` |  The timeout period for the action. Accepts time units for minutes, hours, and days. | `time unit` | No | -
 `retry` | The retry configuration for the action. | `object` | No | Specific to action
-`count` | The number of retry counts. | `number` | No | Specific to action
+
+The `retry` operation has the following parameters:
+
+Parameter | Description | Type | Required | Default
+:--- | :--- |:--- |:--- |
+`count` | The number of retry counts. | `number` | Yes | -
 `backoff` | The backoff policy type to use when retrying. | `string` | No | Exponential
-`delay` | The time to wait between retries. Accepts time units for minutes, hours, and days. | `time unit` | No | Specific to action
+`delay` | The time to wait between retries. Accepts time units for minutes, hours, and days. | `time unit` | No | 1 minute
 
-All actions have common `timeout`, `retry`, and `backoff` settings. If you don't specify these settings, ISM uses its defaults.
-
-The following example action has a timeout period of one hour. The policy retries this action three times with an exponential backup policy, with a delay of five seconds between each retry.
+The following example action has a timeout period of one hour. The policy retries this action three times with an exponential backoff policy, with a delay of 10 minutes between each retry:
 
 ```json
 "actions": {
-    "timeout": "1h",
-    "retry": {
-        "count": 3,
-        "backoff": "exponential",
-        "delay": "5s"
-    }
+  "timeout": "1h",
+  "retry": {
+    "count": 3,
+    "backoff": "exponential",
+    "delay": "10m"
+  }
 }
 ```
 
@@ -91,23 +94,22 @@ ISM supports the following operations:
 - [close](#close)
 - [open](#open)
 - [delete](#delete)
-- [snapshot](#snapshot)
 - [rollover](#rollover)
 - [notification](#notification)
 
-### forcemerge
+### force_merge
 
 Reduces the number of Lucene segments by merging the indices. This operation attempts to set the index to a `read-only` state before starting the merging process.
 
-Parameter | Description | Type | Required | Default
+Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
-`max_num_segments` | The number of segments to reduce the shard to. | `number` | Yes | Null
+`max_num_segments` | The number of segments to reduce the shard to. | `number` | Yes
 
 ```json
 {
-    "forcemerge": {
-        "max_num_segments": 1
-    }
+  "force_merge": {
+    "max_num_segments": 1
+  }
 }
 ```
 
@@ -117,7 +119,7 @@ Sets a managed index to be read only.
 
 ```json
 {
-    "read_only": {}
+  "read_only": {}
 }
 ```
 
@@ -127,7 +129,7 @@ Sets a managed index to be writeable.
 
 ```json
 {
-    "read_write": {}
+  "read_write": {}
 }
 ```
 
@@ -141,9 +143,9 @@ Parameter | Description | Type | Required
 
 ```json
 {
-    "replica_count": {
-        "number_of_replicas": 2
-    }
+  "replica_count": {
+    "number_of_replicas": 2
+  }
 }
 ```
 
@@ -153,7 +155,7 @@ Closes the managed index.
 
 ```json
 {
-    "close": {}
+  "close": {}
 }
 ```
 
@@ -163,7 +165,7 @@ Opens a managed index.
 
 ```json
 {
-    "open": {}
+  "open": {}
 }
 ```
 
@@ -173,7 +175,7 @@ Deletes a managed index.
 
 ```json
 {
-    "delete": {}
+  "delete": {}
 }
 ```
 
@@ -188,13 +190,13 @@ Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `min_size` | The minimum size of the primary shard index storage required to roll over. | `number` | No
 `min_doc_count` |  The minimum number of documents required to roll over. | `number` | No
-`min_age` |  The minimum age from index creation required to roll over. | `number` | No
+`min_index_age` |  The minimum age from index creation required to roll over. | `number` | No
 
 ```json
 {
-    "rollover": {
-        "min_docs": 100000000
-    }
+  "rollover": {
+    "min_doc_count": 100000000
+  }
 }
 ```
 
@@ -205,20 +207,20 @@ Sends you a notification.
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `destination` | The destination URL. | `Slack, Amazon Chime, or webhook URL` | Yes
-`message_template` |  The text of the message. | `object` | Yes
+`message_template` |  The text of the message. You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). | `object` | Yes
 
 ```json
 {
-   "notification":{
-      "destination":{
-         "chime":{
-            "url":"<url>"
-         }
-      },
-      "message_template":{
-         "source":"The index {index_name} is being deleted"
+  "notification": {
+    "destination": {
+      "chime": {
+        "url": "<url>"
       }
-   }
+    },
+    "message_template": {
+      "source": "The index {% raw %}{{ctx.index}}{% endraw %} is being deleted."
+    }
+  }
 }
 ```
 
@@ -230,12 +232,19 @@ Transitions define the conditions that need to be met for a state to change. Aft
 
 Transitions are evaluated in the order in which they are defined. For example, if the conditions for the first transition are met, then this transition takes place and the rest of the transitions are dismissed.
 
+If you don't specify any conditions in a transition and leave it empty, then it's assumed to be the equivalent of always true. This means that the policy transitions the index to this state the moment it checks.
+
 This table lists the parameters you can define for transitions.
 
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
-`state` |  The name of the state to transition to if the conditions are met. | `string` | Yes
-`empty` |  Assumed to be the equivalent of always `true`, meaning that the policy transitions the index to this state the moment it checks. | `string` | No
+`state_name` |  The name of the state to transition to if the conditions are met. | `string` | Yes
+`conditions` |  List the conditions for the transition. | `list` | Yes
+
+The `conditions` object has the following parameters:
+
+Parameter | Description | Type | Required
+:--- | :--- |:--- |:--- |
 `min_index_age` | The minimum age of the index required to transition. | `string` | No
 `min_doc_count` | The minimum document count of the index required to transition. | `number` | No
 `min_size` | The minimum size of the index required to transition. | `string` | No
@@ -243,11 +252,24 @@ Parameter | Description | Type | Required
 `cron.expression` | The `cron` expression that triggers the transition. | `string` | Yes
 `cron.timezone` | The timezone that triggers the transition. | `string` | Yes
 
-If no conditions are specified, ISM transitions the index to the state the moment it checks. ISM checks the conditions every 5 minutes by default.
+The following example transitions the index to a `cold` state after a period of 30 days:
+
+```json
+"transitions": [
+  {
+    "state_name": "cold",
+    "conditions": {
+      "min_index_age": "30d"
+    }
+  }
+]
+```
+
+ISM checks the conditions every  execution of the policy based on the set interval.
 
 ## Example policy
 
-The following example policy implements a `hot`, `warm`, and `delete` workflow. You can this policy as a template to prioritize resources to your indices based on their levels of activity.
+The following example policy implements a `hot`, `warm`, and `delete` workflow. You can use this policy as a template to prioritize resources to your indices based on their levels of activity.
 
 In this case, an index is initially in a `hot` state. After a day, it changes to a `warm` state, where the number of replicas increases to 5 to improve the read performance.
 
@@ -255,68 +277,66 @@ After 30 days, the policy moves this index into a `delete` state. The service se
 
 ```json
 {
-   "policy":{
-      "description":"hot warm delete workflow",
-      "default_state":"hot",
-      "schema_version":1,
-      "states":[
-         {
-            "name":"hot",
-            "actions":[
-               {
-                  "rollover":{
-                     "min_age":"1d"
-                  }
-               }
-            ],
-            "transitions":[
-               {
-                  "state_name":"warm"
-               }
-            ]
-         },
-         {
-            "name":"warm",
-            "actions":[
-               {
-                  "replica_count":{
-                     "number_of_replicas":5
-                  }
-               }
-            ],
-            "transitions":[
-               {
-                  "state_name":"delete",
-                  "conditions":{
-                     "min_index_age":"30d"
-                  }
-               }
-            ]
-         },
-         {
-            "name":"delete",
-            "actions":[
-               {
-                  "notification":{
-                     "destination":{
-                        "chime":{
-                           "url":"<URL>"
-                        }
-                     },
-                     "message_template":{
-                        "source":"The index {% raw %}{ctx.index}{% endraw %} is being deleted"
-                     }
-                  }
-               },
-               {
-                  "delete":{
-
-                  }
-               }
-            ]
-         }
-      ]
-   }
+  "policy": {
+    "description": "hot warm delete workflow",
+    "default_state": "hot",
+    "schema_version": 1,
+    "states": [
+      {
+        "name": "hot",
+        "actions": [
+          {
+            "rollover": {
+              "min_age": "1d"
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "state_name": "warm"
+          }
+        ]
+      },
+      {
+        "name": "warm",
+        "actions": [
+          {
+            "replica_count": {
+              "number_of_replicas": 5
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "state_name": "delete",
+            "conditions": {
+              "min_index_age": "30d"
+            }
+          }
+        ]
+      },
+      {
+        "name": "delete",
+        "actions": [
+          {
+            "notification": {
+              "destination": {
+                "chime": {
+                  "url": "<URL>"
+                }
+              },
+              "message_template": {
+                "source": "The index {% raw %}{{ctx.index}}{% endraw %} is being deleted"
+              }
+            }
+          },
+          {
+            "delete": {}
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 
