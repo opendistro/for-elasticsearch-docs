@@ -7,7 +7,7 @@ nav_order: 4
 
 # Settings
 
-We recommend that you don't change the settings. The default settings should work well for most use cases.
+We don't recommend changing these settings; the defaults should work well for most use cases.
 
 ISM stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [ISM API operations](../api/).
 
