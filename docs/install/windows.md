@@ -24,7 +24,7 @@ As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.co
 
 1. Open a second command prompt window, and send requests to the server to verify that Open Distro for Elasticsearch is up and running:
 
-   ```bash
+   ```
    curl -XGET https://localhost:9200 -u admin:admin --insecure
    curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
    ```
@@ -36,7 +36,7 @@ As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.co
 
 You can modify `config\elasticsearch.yml` or specify environment variables as arguments using `-E`:
 
-```bash
+```
 .\bin\elasticsearch.bat -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node
 ```
 
