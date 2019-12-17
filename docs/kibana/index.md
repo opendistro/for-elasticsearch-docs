@@ -96,11 +96,28 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
    ```
 
 
-## Run Kibana on Windows (alpha)
+## Run Kibana on Windows (ZIP, alpha)
 
 1. Download the ZIP.
 
 1. Extract the ZIP file to a directory and open that directory at the command prompt.
+
+1. If desired, modify `config/kibana.yml`.
+
+1. Run Kibana:
+
+   ```
+   .\bin\kibana.bat
+   ```
+
+
+## Run Kibana on Windows (EXE, alpha)
+
+1. Download the EXE file, run it, and click through the steps.
+
+1. Open the command prompt.
+
+1. Navigate to the Kibana install directory.
 
 1. If desired, modify `config/kibana.yml`.
 

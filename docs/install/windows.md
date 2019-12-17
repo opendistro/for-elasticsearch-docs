@@ -12,6 +12,9 @@ Like the [tarball installation](../tar/), we only recommend the Windows version 
 As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), which you can use to install [Debian packages](../deb/).
 {: .tip }
 
+
+## ZIP install
+
 1. Download the ZIP.
 
 1. Extract the ZIP file to a directory and open that directory at the command prompt.
@@ -22,14 +25,32 @@ As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.co
    .\bin\elasticsearch.bat
    ```
 
-1. Open a second command prompt window, and send requests to the server to verify that Open Distro for Elasticsearch is up and running:
+
+## EXE install
+
+1. Install Java 11.
+
+1. Download the EXE file, run it, and click through the steps.
+
+1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory:
+
+1. Run Open Distro for Elasticsearch:
 
    ```
-   curl -XGET https://localhost:9200 -u admin:admin --insecure
-   curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+   .\bin\elasticsearch.bat
    ```
 
-   You must have [curl](https://curl.haxx.se/windows/) installed for these commands to work. Alternatives include [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6) (only PowerShell 6 and later support the `-SkipCertificateCheck` flag) and [Postman](https://www.getpostman.com/downloads/).
+
+## Verify the install
+
+After you start Open Distro for Elasticsearch, open a second command prompt window. Then send requests to the server to verify that it is up and running:
+
+```
+curl -XGET https://localhost:9200 -u admin:admin --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+```
+
+You must have [curl](https://curl.haxx.se/windows/) installed for these commands to work. Alternatives include [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6) (only PowerShell 6 and later support the `-SkipCertificateCheck` flag) and [Postman](https://www.getpostman.com/downloads/).
 
 
 ## Configuration
