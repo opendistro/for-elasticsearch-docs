@@ -23,7 +23,7 @@ If you encounter the error `FATAL  Error: Request Timeout after 30000ms` during 
 
 ## Can't open Kibana on Windows
 
-Kibana doesn't support Microsoft Edge and many versions of Internet Explorer. We recommend using Firefox and Chrome.
+Kibana doesn't support Microsoft Edge and many versions of Internet Explorer. We recommend using Firefox or Chrome.
 
 
 ## Illegal reflective access operation in logs
