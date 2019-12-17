@@ -96,6 +96,21 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
    ```
 
 
+## Run Kibana on Windows (alpha)
+
+1. Download the ZIP.
+
+1. Extract the ZIP file to a directory and open that directory at the command prompt.
+
+1. If desired, modify `config/kibana.yml`.
+
+1. Run Kibana:
+
+   ```
+   .\bin\kibana.bat
+   ```
+
+
 ## Get started with Kibana
 
 1. After starting Kibana, you can access it at port 5601. For example, [http://localhost:5601](http://localhost:5601){:target='\_blank'}
