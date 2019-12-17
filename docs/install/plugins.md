@@ -32,11 +32,13 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.3.2</td>
     <td>
-      <pre>opendistro-job-scheduler        1.3.0
-opendistro_alerting             1.3.0.0
+      <pre>opendistro-job-scheduler        1.3.0.0
+opendistro_alerting             1.3.0.1
+opendistro_index_management     1.3.0.1
 opendistro_performance_analyzer 1.3.0.0
 opendistro_security             1.3.0.0
-opendistro_sql                  1.3.0.0</pre>
+opendistro_sql                  1.3.0.0
+</pre>
     </td>
   </tr>
   <tr>
@@ -150,7 +152,7 @@ Security has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.3.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.3.0.1.zip
 ```
 
 Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -162,15 +164,13 @@ Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.3.0.0.zip
 ```
 
+
 ### Index State Management
 
-This plugin is not officially released.
-
-To beta test this plugin, download the latest release from [GitHub](https://github.com/opendistro-for-elasticsearch/index-management/releases) and install the plugin:
-
 ```bash
-sudo bin/elasticsearch-plugin install file:///path/to/file
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.3.0.1.zip
 ```
+
 
 ### Anomaly Detection
 
