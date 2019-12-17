@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+1.3.0 | Adds [Index State Management](../docs/ism/) plugins for Elasticsearch and Kibana and bumps Elasticsearch version. | 4 November 2019 | 7.3.2
 1.2.1 | Bumps Elasticsearch version. | 4 November 2019 | 7.2.1
 1.2.0 | Bumps Elasticsearch version. | 19 September 2019 | 7.2.0
 1.1.0 | Bumps Elasticsearch version. | 30 July 2019 | 7.1.1
