@@ -21,6 +21,11 @@ You might see `[ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [odfe-no
 If you encounter the error `FATAL  Error: Request Timeout after 30000ms` during startup, try running Kibana on a more powerful machine. We recommend four CPU cores and 8 GB of RAM.
 
 
+## Can't open Kibana on Windows
+
+Kibana doesn't support Microsoft Edge and many versions of Internet Explorer. We recommend using Firefox and Chrome.
+
+
 ## Illegal reflective access operation in logs
 
 This is a [known issue](https://github.com/opendistro-for-elasticsearch/performance-analyzer/issues/21) with Performance Analyzer that shouldn't affect functionality.
