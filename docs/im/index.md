@@ -13,7 +13,7 @@ If you analyze time-series data, you likely prioritize new data over old data. Y
 
 Index Management (IM) is a plugin that lets you automate these periodic, administrative operations by triggering them based on changes in the index age, index size, or number of documents. Using the IM plugin, you can define *policies* that automatically handle index rollovers or deletions to fit your use case.
 
-For example, you can define a policy that moves your index into a `read_only` state after 30 days and then deletes it after a set period of 90 days.
+For example, you can define a policy that moves your index into a `read_only` state after 30 days and then deletes it after a set period of 90 days. You can also set up the policy to send you a notification message when the index is deleted.
 
 You might want to perform an index rollover after a certain amount of time or run a `force_merge` operation on an index during off-peak hours to improve search performance during peak hours.
 
