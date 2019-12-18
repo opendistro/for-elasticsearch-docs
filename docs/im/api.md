@@ -1,13 +1,13 @@
 ---
 layout: default
-title: ISM API
-parent: Index State Management
+title: IM API
+parent: Index Management
 nav_order: 5
 ---
 
-# ISM API
+# IM API
 
-Use the index state management operations to programmatically work with policies and managed indices.
+Use the index management operations to programmatically work with policies and managed indices.
 
 ---
 
@@ -179,7 +179,7 @@ POST _opendistro/_ism/add/<index>
 
 ## Update policy
 
-Updates a policy. Use the `seq_no` and `primary_term` parameters to update an existing policy. If these numbers don't match the existing policy or the policy doesn't exist, ISM throws an error.
+Updates a policy. Use the `seq_no` and `primary_term` parameters to update an existing policy. If these numbers don't match the existing policy or the policy doesn't exist, IM throws an error.
 
 #### Request
 
@@ -408,7 +408,7 @@ DELETE _opendistro/_ism/policies/<policy-id>
 
 ## Remove policy from index
 
-Removes any ISM policy from the index.
+Removes any IM policy from the index.
 
 #### Request
 
@@ -459,7 +459,7 @@ POST _opendistro/_ism/update_policy/<index>
 
 ## Retry failed index
 
-Retries the failed action for an index. For the retry call to succeed, ISM must manage the index, and the index must be in a failed state. You can use index patterns (`*`) to retry multiple failed indices.
+Retries the failed action for an index. For the retry call to succeed, IM must manage the index, and the index must be in a failed state. You can use index patterns (`*`) to retry multiple failed indices.
 
 #### Request
 

@@ -2,7 +2,7 @@
 layout: default
 title: Managed Indices
 nav_order: 3
-parent: Index State Management
+parent: Index Management
 has_children: false
 ---
 
@@ -58,11 +58,11 @@ The following example shows a managed index policy:
 
 ## Change policy
 
-You can change any managed index policy, but ISM has a few constraints in place to make sure that policy changes don't break indices.
+You can change any managed index policy, but IM has a few constraints in place to make sure that policy changes don't break indices.
 
-If an index is stuck in its current state, never proceeding, and you want to update its policy immediately, make sure that the new policy includes the same state---same name, same actions, same order---as the old policy. In this case, even if the policy is in the middle of executing an action, ISM applies the new policy.
+If an index is stuck in its current state, never proceeding, and you want to update its policy immediately, make sure that the new policy includes the same state---same name, same actions, same order---as the old policy. In this case, even if the policy is in the middle of executing an action, IM applies the new policy.
 
-If you update the policy without including an identical state, ISM updates the policy only after all actions in the current state finish executing. Alternately, you can choose a specific state in your old policy after which you want the new policy to take effect.
+If you update the policy without including an identical state, IM updates the policy only after all actions in the current state finish executing. Alternately, you can choose a specific state in your old policy after which you want the new policy to take effect.
 
 To change a policy using Kibana, do the following:
 
