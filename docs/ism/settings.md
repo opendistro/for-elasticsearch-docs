@@ -9,7 +9,7 @@ nav_order: 4
 
 We recommend that you don't change the settings. The default settings should work well for most use cases.
 
-ISM stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [ISM API operations](../api/).
+Index State Management (ISM) stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [ISM API operations](../api/).
 
 All settings are available using the Elasticsearch `_cluster/settings` operation. None require a restart, and all can be marked `persistent` or `transient`.
 
