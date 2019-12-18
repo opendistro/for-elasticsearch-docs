@@ -1,15 +1,15 @@
 ---
 layout: default
 title: Settings
-parent: Index State Management
+parent: Index Management
 nav_order: 4
 ---
 
 # Settings
 
-We recommend that you don't change the settings. The default settings should work well for most use cases.
+We don't recommend changing these settings; the defaults should work well for most use cases.
 
-Index Management (IM) stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [IM API operations](../api/).
+IM stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [IM API operations](../api/).
 
 All settings are available using the Elasticsearch `_cluster/settings` operation. None require a restart, and all can be marked `persistent` or `transient`.
 

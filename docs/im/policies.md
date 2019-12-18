@@ -2,7 +2,7 @@
 layout: default
 title: Policies
 nav_order: 1
-parent: Index State Management
+parent: Index Management
 has_children: false
 ---
 
@@ -86,8 +86,8 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
-## ISM supported operations
-ISM supports the following operations:
+## IM supported operations
+IM supports the following operations:
 
 - [forcemerge](#forcemerge)
 - [read_only](#read_only)
@@ -267,7 +267,7 @@ The following example transitions the index to a `cold` state after a period of 
 ]
 ```
 
-ISM checks the conditions every  execution of the policy based on the set interval.
+IM checks the conditions every  execution of the policy based on the set interval.
 
 ## Example policy
 
