@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Anomaly Detection
+title: Anomaly Detection (Alpha)
 nav_order: 34
 has_children: true
 ---
 
-# Anomaly Detection
+# Anomaly Detection (alpha)
 Kibana
 {: .label .label-yellow :}
 
