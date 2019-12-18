@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Anomaly Detection API
-parent: Anomaly Detection
+parent: Anomaly Detection (Alpha)
 nav_order: 1
 ---
 
