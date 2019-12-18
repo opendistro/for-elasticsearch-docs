@@ -7,7 +7,7 @@ nav_order: 5
 
 # IM API
 
-Use the index state management operations to programmatically work with policies and managed indices.
+Use the index management operations to programmatically work with policies and managed indices.
 
 ---
 
