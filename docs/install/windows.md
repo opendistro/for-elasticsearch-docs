@@ -7,7 +7,7 @@ nav_order: 4
 
 # Windows
 
-Like the [tarball installation](../tar/), we only recommend the Windows version of Open Distro for Elasticsearch for testing and development purposes. This version is an alpha, and we only test on Windows 10.
+Like the [tarball installation](../tar/), we only recommend the Windows installation of Open Distro for Elasticsearch for testing and development purposes. The install package is an alpha, and we only test on Windows 10 and Windows Server 2019.
 
 As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), which you can use to install [Debian packages](../deb/).
 {: .tip }
