@@ -11,8 +11,8 @@ Alpha
 
 The Open Distro for Elasticsearch Performance Analyzer plugin (PA) captures Elasticsearch and JVM activity, plus their lower-level resource usage (e.g. disk, network, CPU, and memory). Based on this instrumentation, Performance Analyzer computes and exposes diagnostic metrics so that administrators can measure and understand the bottlenecks in their Elasticsearch clusters.
 
-The Root Cause Analysis plugin (RCA) uses the information from PA to alert administrators about the root cause of performance and availability issues that their clusters might be experiencing.
+The Root Cause Analysis framework (RCA) uses the information from PA to alert administrators about the root cause of performance and availability issues that their clusters might be experiencing.
 
-In broad strokes, the plugin helps you access data streams from Elasticsearch nodes running PA. You write snippets of Java to choose the streams that matter to you and evaluate the stream's PA metrics against certain thresholds. As RCA runs, you can access the state of each analysis using the REST API.
+In broad strokes, the framework helps you access data streams from Elasticsearch nodes running PA. You write snippets of Java to choose the streams that matter to you and evaluate the stream's PA metrics against certain thresholds. As RCA runs, you can access the state of each analysis using the REST API.
 
-To learn more about the Root Cause Analysis plugin, see its repository on GitHub.
+To learn more about the Root Cause Analysis framework, see its repository on GitHub.
