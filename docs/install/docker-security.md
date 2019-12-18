@@ -2,7 +2,7 @@
 layout: default
 title: Docker Security Configuration
 parent: Install and Configure
-nav_order: 6
+nav_order: 7
 ---
 
 # Docker security configuration

@@ -96,6 +96,38 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
    ```
 
 
+## Run Kibana on Windows (ZIP, alpha)
+
+1. Download the ZIP.
+
+1. Extract [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.3.0-kibana.zip) to a directory and open that directory at the command prompt.
+
+1. If desired, modify `config/kibana.yml`.
+
+1. Run Kibana:
+
+   ```
+   .\bin\kibana.bat
+   ```
+
+
+## Run Kibana on Windows (EXE, alpha)
+
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_for_Elasticsearch_Kibana_windows-x64_1_3_0.exe), run it, and click through the steps.
+
+1. Open the command prompt.
+
+1. Navigate to the Kibana install directory.
+
+1. If desired, modify `config/kibana.yml`.
+
+1. Run Kibana:
+
+   ```
+   .\bin\kibana.bat
+   ```
+
+
 ## Get started with Kibana
 
 1. After starting Kibana, you can access it at port 5601. For example, [http://localhost:5601](http://localhost:5601){:target='\_blank'}
