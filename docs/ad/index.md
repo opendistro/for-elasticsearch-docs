@@ -5,9 +5,9 @@ nav_order: 34
 has_children: true
 ---
 
-# Anomaly Detection (alpha)
-Kibana
-{: .label .label-yellow :}
+# Anomaly Detection
+Alpha
+{: .label .label-red :}
 
 An anomaly is any unusual change in behavior. Anomalies in your time-series data can lead to valuable insights. For example, for IT infrastructure data, an anomaly in the memory usage metric might help you uncover early signs of a system failure.
 
