@@ -13,6 +13,6 @@ The Open Distro for Elasticsearch Performance Analyzer plugin (PA) captures Elas
 
 The Root Cause Analysis framework (RCA) uses the information from PA to alert administrators about the root cause of performance and availability issues that their clusters might be experiencing.
 
-In broad strokes, the framework helps you access data streams from Elasticsearch nodes running PA. You write snippets of Java to choose the streams that matter to you and evaluate the stream's PA metrics against certain thresholds. As RCA runs, you can access the state of each analysis using the REST API.
+In broad strokes, the framework helps you access data streams from Elasticsearch nodes running PA. You write snippets of Java to choose the streams that matter to you and evaluate the streams' PA metrics against certain thresholds. As RCA runs, you can access the state of each analysis using the REST API.
 
-To learn more about the Root Cause Analysis framework, see its repository on GitHub.
+To learn more about Root Cause Analysis, see its repository on GitHub.
