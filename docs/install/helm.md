@@ -22,7 +22,7 @@ The specification in the default Helm chart caters to a number of standard use c
 For information about the default configuration, steps to configure security, and configurable parameters, see the
 [README](https://github.com/opendistro-for-elasticsearch/community/tree/master/open-distro-elasticsearch-kubernetes/helm).
 
-The instructions here assume you have a Kubernetes cluster with Helm preinstalled. See the [Kubernetes documentation](https://kubernetes.io/docs/setup/) for steps to configure a Kubernetes cluster and the [Helm documentation](https://helm.sh/docs/intro/install/) to install Helm. 
+The instructions here assume you have a Kubernetes cluster with Helm preinstalled. See the [Kubernetes documentation](https://kubernetes.io/docs/setup/) for steps to configure a Kubernetes cluster and the [Helm documentation](https://helm.sh/docs/intro/install/) to install Helm.
 Run the `helm init` command to make sure you also have the Tiller server installed. For more information about Tiller, see the [Tiller documentation](https://tiller.readthedocs.io/en/latest/).
 {: .note }
 
@@ -49,7 +49,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Deploy Elasticsearch:
 
    ```bash
-   helm install --name opendistro-es opendistro-es-1.1.0.tgz
+   helm install opendistro-es opendistro-es-1.3.0.tgz
    ```
 
 If you see a `namespaces "default" is forbidden` error, create a tiller service account and deploy with a cluster binding role.
@@ -149,5 +149,5 @@ opendistro-es-master-0                     1/1     Running   0          15m
 To delete or uninstall this deployment:
 
 ```bash
-helm delete --name opendistro-es
+helm delete opendistro-es
 ```
