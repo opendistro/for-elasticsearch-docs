@@ -39,7 +39,7 @@ Kibana | Search frontend and visualizations
 [Security](docs/security-configuration/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
-[Index Management](docs/im/) | Automate index operations
+[Index State Management](docs/ism/) | Automate index operations
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
 
 

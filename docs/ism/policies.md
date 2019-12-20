@@ -2,7 +2,7 @@
 layout: default
 title: Policies
 nav_order: 1
-parent: Index Management
+parent: Index State Management
 has_children: false
 ---
 
@@ -16,7 +16,7 @@ Policies are JSON documents that define the following:
 
 In other words, a policy defines the *states* that an index can be in, the *actions* to perform when in a state, and the conditions that must be met to *transition* between states.
 
-You have complete flexibility in the way you can design your policies. You can create any state, transition to any other state, and specify any number of actions in each state. 
+You have complete flexibility in the way you can design your policies. You can create any state, transition to any other state, and specify any number of actions in each state.
 
 This table lists the relevant fields of a policy.
 
@@ -86,8 +86,8 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
-## IM supported operations
-IM supports the following operations:
+## ISM supported operations
+ISM supports the following operations:
 
 - [forcemerge](#forcemerge)
 - [read_only](#read_only)
@@ -267,7 +267,7 @@ The following example transitions the index to a `cold` state after a period of 
 ]
 ```
 
-IM checks the conditions every  execution of the policy based on the set interval.
+ISM checks the conditions every  execution of the policy based on the set interval.
 
 ## Example policy
 
