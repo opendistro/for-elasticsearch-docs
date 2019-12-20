@@ -230,7 +230,7 @@ You can use `ctx` variables in your message to represent a number of policy para
 
 The following `ctx` variable options are available for every policy:
 
-####Guaranteed variables
+#### Guaranteed variables
 
 Parameter | Description | Type
 :--- | :--- |:--- |:--- |
