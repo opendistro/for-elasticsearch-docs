@@ -89,7 +89,7 @@ The following example action has a timeout period of one hour. The policy retrie
 ## ISM supported operations
 ISM supports the following operations:
 
-- [forcemerge](#forcemerge)
+- [force_merge](#forcemerge)
 - [read_only](#read_only)
 - [read_write](#read_write)
 - [replica_count](#replica_count)
