@@ -63,8 +63,9 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 
    Use `curl -XGET https://localhost:9200/_cat/plugins -u admin:admin -k` to get the correct version strings.
 
+1. Run a build (`build.sh`), and look for any warnings or errors you introduced.
 1. Verify that the individual plugin download links in `docs/install/plugins.md` and `docs/kibana/plugins.md` work.
-1. Run a build and look for any warnings or errors you introduced.
+1. Check for any other bad links (`check-links.sh`). Expect a few false positives for the `localhost` links.
 1. Submit a PR.
 
 
