@@ -53,7 +53,6 @@ Run the `helm init` command to make sure you also have the Tiller server install
    ```
 
 If you see a `namespaces "default" is forbidden` error, create a tiller service account and deploy with a cluster binding role.
-See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
 For example:
 
 ```bash
@@ -61,12 +60,13 @@ $ kubectl create serviceaccount --namespace kube-system tiller
 $ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 $ kubectl patch deploy --namespace kube-system tiller-deploy -p'{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 ```
+See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
 
 The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
 
 ```bash
-helm install --values=customevalues.yaml opendistro-es-1.1.0.tgz
+helm install --values=customevalues.yaml opendistro-es-1.3.0.tgz
 ```
 
 #### Sample output
