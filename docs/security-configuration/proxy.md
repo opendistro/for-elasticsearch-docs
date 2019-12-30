@@ -37,9 +37,9 @@ config:
     http:
       anonymous_auth_enabled: false
       xff:
-        enabled: false
+        enabled: true
         internalProxies: '192\.168\.0\.10|192\.168\.0\.11'
-        remoteIpHeader:  'x-forwarded-for'
+        remoteIpHeader: 'x-forwarded-for'
 ```
 
 You can configure the following settings:
@@ -59,8 +59,9 @@ Configure the names of the HTTP header fields that carry the authenticated usern
 
 ```yml
 proxy_auth_domain:
-  enabled: true
-  order: 1
+  http_enabled: true
+  transport_enabled: true
+  order: 0
   http_authenticator:
     type: proxy
     challenge: false
@@ -76,12 +77,36 @@ Name | Description
 `user_header` | The HTTP header field containing the authenticated username. Default is `x-proxy-user`.
 `roles_header` | The HTTP header field containing the comma-separated list of authenticated role names. The Security plugin uses the roles found in this header field as backend roles. Default is `x-proxy-roles`.
 `roles_separator` | The separator for roles. Default is `,`.
-`attr_header_prefix` | 'x-proxy-ext-'
+
+
+## Enable extended proxy authentication
+
+The Security plugin has an extended version of the `proxy` type that lets you pass additional user attributes for use with document-level security. Aside from `type: extended-proxy` and `attr_header_prefix`, configuration is identical:
+
+```yml
+proxy_auth_domain:
+  http_enabled: true
+  transport_enabled: true
+  order: 0
+  http_authenticator:
+    type: extended-proxy
+    challenge: false
+    config:
+      user_header: "x-proxy-user"
+      roles_header: "x-proxy-roles"
+      attr_header_prefix: "x-proxy-ext-"
+  authentication_backend:
+    type: noop
+```
+
+Name | Description
+:--- | :---
+`attr_header_prefix` | The header prefix that the proxy uses to provide user attributes. For example, if the proxy provides `x-proxy-ext-namespace: my-namespace`, use `${attr.proxy.namespace}` in document-level security queries.
 
 
 ## Example
 
-The following example uses an nginx proxy in front of a three-node Elasticsearch cluster. For simplicity, we use hardcoded values for `x-proxy-user` and `x-proxy-roles`. In a real world example you would set these headers dynamically.
+The following example uses an nginx proxy in front of a three-node Elasticsearch cluster. For simplicity, we use hardcoded values for `x-proxy-user` and `x-proxy-roles`. In a real world example you would set these headers dynamically. The example also includes a commented header for use with the extended proxy.
 
 ```
 events {
@@ -106,7 +131,7 @@ http {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header x-proxy-user test;
       proxy_set_header x-proxy-roles test;
-      proxy_set_header x-proxy-ext-namespace IN;
+      #proxy_set_header x-proxy-ext-namespace my-namespace;
     }
   }
 
@@ -134,10 +159,12 @@ config:
         order: 0
         http_authenticator:
           type: proxy
+          #type: extended-proxy
           challenge: false
           config:
             user_header: "x-proxy-user"
             roles_header: "x-proxy-roles"
+            #attr_header_prefix: "x-proxy-ext-"
         authentication_backend:
           type: noop
 ```
@@ -154,9 +181,9 @@ In this case, `nginx.example.com` runs on `172.16.0.203`, so add this IP to the 
 
 ## Kibana proxy authentication
 
-To use proxy authentication with Kibana, the most common configuration is to place the authenticating proxy in front of Kibana and let Kibana pass the user and role headers to the Security plugin.
+To use proxy authentication with Kibana, the most common configuration is to place the proxy in front of Kibana and let Kibana pass the user and role headers to the Security plugin.
 
-In this case, the remote address of the HTTP call is the IP of Kibana, because it sits directly in front of the Security plugin. Add the IP of Kibana to the list of internal proxies:
+In this case, the remote address of the HTTP call is the IP of Kibana, because it sits directly in front of Elasticsearch. Add the IP of Kibana to the list of internal proxies:
 
 ```yml
 ---
@@ -169,8 +196,8 @@ config:
     http:
       xff:
         enabled: true
-        remoteIpHeader: 'x-forwarded-for'
-        internalProxies: '<Kibana IP>'
+        remoteIpHeader: "x-forwarded-for"
+        internalProxies: '<kibana-ip-address>'
 ```
 
 To pass the user and role headers that the authenticating proxy adds from Kibana to the Security plugin, add them to the HTTP header whitelist in `kibana.yml`:
