@@ -17,15 +17,21 @@
 @import "./support/support";
 
 //
+// Import custom overrides
+//
+
+@import "./custom/custom";
+
+//
 // Import custom color scheme scss
 //
 
-{% if site.color_scheme == "odfe" %}
-@import "./color_schemes/odfe.scss";
-{% endif %}
-
 {% if site.color_scheme == "dark" %}
 @import "./color_schemes/dark.scss";
+{% endif %}
+
+{% if site.color_scheme == "odfe" %}
+@import "./color_schemes/odfe.scss";
 {% endif %}
 
 // Modules
@@ -40,8 +46,4 @@
 @import "./tables";
 @import "./code";
 @import "./utilities/utilities";
-
-//
-// Import custom overrides
-//
-@import "./custom/custom";
+@import "./overrides";
