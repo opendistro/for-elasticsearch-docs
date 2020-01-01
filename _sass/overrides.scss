@@ -166,14 +166,14 @@ h5 + p.label {
 
 .side-bar {
   @include mq(xl) {
-    width: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + #{$nav-width});
+    width: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 + #{$nav-width});
     min-width: $nav-width;
   }
 }
 
 .main-content {
   @include mq(xl) {
-    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + #{$nav-width});
+    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 + #{$nav-width});
   }
 }
 
@@ -186,8 +186,8 @@ h5 + p.label {
   padding: 0;
   @include mq(xl) {
     display: block;
-    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 +
-        #{$nav-width + $content-width + 8px});
+    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 +
+        #{$nav-width + $content-width + 11px});
     margin-top: 59px;
   }
 }
