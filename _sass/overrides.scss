@@ -181,14 +181,13 @@ h5 + p.label {
 
 .toc {
   display: none;
-  z-index: 100;
-  width: $toc-width;
-  padding: 0;
   @include mq(xl) {
     display: block;
-    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 +
-        #{$nav-width + $content-width + 11px});
-    margin-top: 59px;
+    position: sticky;
+    top: 59px;
+    left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 +
+        #{$nav-width + $content-width + 27px});
+    width: $toc-width;
   }
 }
 
@@ -209,6 +208,8 @@ h5 + p.label {
   list-style-type: none;
   background-color: $sidebar-color;
   padding: $sp-6 $sp-4;
+  max-height: calc(100% - 118px);
+  overflow: auto;
 }
 
 .toc-item {
