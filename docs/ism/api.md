@@ -25,7 +25,7 @@ You can attach a policy to an index at the time you’re creating the index.
 #### Request
 
 ```json
-PUT my-index1
+PUT index_1
 {
   "settings": {
     "opendistro.index_state_management.policy_id": "ingest_policy",
@@ -38,7 +38,7 @@ PUT my-index1
   }
 }
 ```
-In this case, the `ingest_policy` is applied to `my-index1` with the rollover action defined in `some_alias`.
+In this case, the `ingest_policy` is applied to `index_1` with the rollover action defined in `some_alias`.
 
 
 ## Create policy
@@ -48,7 +48,7 @@ Creates a policy.
 #### Request
 
 ```json
-PUT _opendistro/_ism/policies/<policy-id>
+PUT _opendistro/_ism/policies/policy_1
 {
   "policy": {
     "description": "ingesting logs",
@@ -100,54 +100,57 @@ PUT _opendistro/_ism/policies/<policy-id>
 
 ```json
 {
-  "_id": "ingest_policy",
+  "_id": "policy_1",
   "_version": 1,
   "_primary_term": 1,
-  "_seq_no": 0,
+  "_seq_no": 7,
   "policy": {
-    "description": "ingesting logs",
-    "last_updated_time": 1562945389152,
-    "schema_version": 1,
-    "default_notification": null,
-    "default_state": "ingest",
-    "states": [
-      {
-        "name": "ingest",
-        "actions": [
-          {
-            "rollover": {
-              "min_doc_count": 5
+    "policy": {
+      "policy_id": "policy_1",
+      "description": "ingesting logs",
+      "last_updated_time": 1577990761311,
+      "schema_version": 1,
+      "error_notification": null,
+      "default_state": "ingest",
+      "states": [
+        {
+          "name": "ingest",
+          "actions": [
+            {
+              "rollover": {
+                "min_doc_count": 5
+              }
             }
-          }
-        ],
-        "transitions": [
-          {
-            "state_name": "search"
-          }
-        ]
-      },
-      {
-        "name": "search",
-        "actions": [],
-        "transitions": [
-          {
-            "state_name": "delete",
-            "conditions": {
-              "min_index_age": "5m"
+          ],
+          "transitions": [
+            {
+              "state_name": "search"
             }
-          }
-        ]
-      },
-      {
-        "name": "delete",
-        "actions": [
-          {
-            "delete": {}
-          }
-        ],
-        "transitions": []
-      }
-    ]
+          ]
+        },
+        {
+          "name": "search",
+          "actions": [],
+          "transitions": [
+            {
+              "state_name": "delete",
+              "conditions": {
+                "min_index_age": "5m"
+              }
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "actions": [
+            {
+              "delete": {}
+            }
+          ],
+          "transitions": []
+        }
+      ]
+    }
   }
 }
 ```
@@ -162,9 +165,9 @@ Adds a policy to an index. This operation does not change the policy if the inde
 #### Request
 
 ```json
-POST _opendistro/_ism/add/<index>
+POST _opendistro/_ism/add/index_1
 {
-  "policy_id": "log_rotation"
+  "policy_id": "policy_1"
 }
 ```
 
@@ -172,6 +175,7 @@ POST _opendistro/_ism/add/<index>
 
 ```json
 {
+  "updated_indices": 1,
   "failures": false,
   "failed_indices": []
 }
@@ -187,12 +191,8 @@ Updates a policy. Use the `seq_no` and `primary_term` parameters to update an ex
 #### Request
 
 ```json
-PUT _opendistro/_ism/policies/
+PUT _opendistro/_ism/policies/policy_1?if_seq_no=7&if_primary_term=1
 {
-  "_id": "ingest_policy",
-  "_version": 1,
-  "_primary_term": 1,
-  "_seq_no": 0,
   "policy": {
     "description": "ingesting logs",
     "default_state": "ingest",
@@ -243,54 +243,57 @@ PUT _opendistro/_ism/policies/
 
 ```json
 {
-  "_id": "ingest_policy",
+  "_id": "policy_1",
   "_version": 2,
   "_primary_term": 1,
-  "_seq_no": 1,
+  "_seq_no": 10,
   "policy": {
-    "description": "ingesting logs",
-    "last_updated_time": 1562946116260,
-    "schema_version": 1,
-    "default_notification": null,
-    "default_state": "ingest",
-    "states": [
-      {
-        "name": "ingest",
-        "actions": [
-          {
-            "rollover": {
-              "min_doc_count": 5
+    "policy": {
+      "policy_id": "policy_1",
+      "description": "ingesting logs",
+      "last_updated_time": 1577990934044,
+      "schema_version": 1,
+      "error_notification": null,
+      "default_state": "ingest",
+      "states": [
+        {
+          "name": "ingest",
+          "actions": [
+            {
+              "rollover": {
+                "min_doc_count": 5
+              }
             }
-          }
-        ],
-        "transitions": [
-          {
-            "state_name": "search"
-          }
-        ]
-      },
-      {
-        "name": "search",
-        "actions": [],
-        "transitions": [
-          {
-            "state_name": "delete",
-            "conditions": {
-              "min_index_age": "5m"
+          ],
+          "transitions": [
+            {
+              "state_name": "search"
             }
-          }
-        ]
-      },
-      {
-        "name": "delete",
-        "actions": [
-          {
-            "delete": {}
-          }
-        ],
-        "transitions": []
-      }
-    ]
+          ]
+        },
+        {
+          "name": "search",
+          "actions": [],
+          "transitions": [
+            {
+              "state_name": "delete",
+              "conditions": {
+                "min_index_age": "5m"
+              }
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "actions": [
+            {
+              "delete": {}
+            }
+          ],
+          "transitions": []
+        }
+      ]
+    }
   }
 }
 ```
@@ -305,7 +308,7 @@ Gets the policy by `policy_id`.
 #### Request
 
 ```json
-GET _opendistro/_ism/policies/<policy-id>
+GET _opendistro/_ism/policies/policy_1
 ```
 
 
@@ -313,15 +316,16 @@ GET _opendistro/_ism/policies/<policy-id>
 
 ```json
 {
-  "_id": "ingest_policy",
+  "_id": "policy_1",
   "_version": 2,
-  "_seq_no": 1,
+  "_seq_no": 10,
   "_primary_term": 1,
   "policy": {
+    "policy_id": "policy_1",
     "description": "ingesting logs",
-    "last_updated_time": 1562946116260,
+    "last_updated_time": 1577990934044,
     "schema_version": 1,
-    "default_notification": null,
+    "error_notification": null,
     "default_state": "ingest",
     "states": [
       {
@@ -365,41 +369,6 @@ GET _opendistro/_ism/policies/<policy-id>
 }
 ```
 
-
----
-
-## Delete policy
-
-Deletes the policy by `policy_id`.
-
-#### Request
-
-```json
-DELETE _opendistro/_ism/policies/<policy-id>
-```
-
-
-#### Sample response
-
-```json
-{
-	"_index": ".opendistro-ism-config",
-	"_type": "_doc",
-	"_id": "ingest_policy",
-	"_version": 3,
-	"result": "deleted",
-	"forced_refresh": true,
-	"_shards": {
-		"total": 2,
-		"successful": 1,
-		"failed": 0
-	},
-	"_seq_no": 2,
-	"_primary_term": 1
-}
-```
-
-
 ---
 
 ## Remove policy from index
@@ -409,7 +378,7 @@ Removes any ISM policy from the index.
 #### Request
 
 ```json
-POST _opendistro/_ism/remove/<index>
+POST _opendistro/_ism/remove/index_1
 ```
 
 
@@ -417,10 +386,10 @@ POST _opendistro/_ism/remove/<index>
 
 ```json
 {
+  "updated_indices": 1,
   "failures": false,
   "failed_indices": []
 }
-
 ```
 
 ---
@@ -432,13 +401,13 @@ Updates the managed index policy to a new policy (or to a new version of the pol
 #### Request
 
 ```json
-POST _opendistro/_ism/update_policy/<index>
+POST _opendistro/_ism/change_policy/index_1
 {
-  "policy_id": "log_rotation",
+  "policy_id": "policy_1",
   "state": "delete",
   "include": [
     {
-      "state": "search"
+      "state": "searches"
     }
   ]
 }
@@ -449,11 +418,11 @@ POST _opendistro/_ism/update_policy/<index>
 
 ```json
 {
+  "updated_indices": 0,
   "failures": false,
   "failed_indices": []
 }
 ```
-
 
 ---
 
@@ -464,7 +433,7 @@ Retries the failed action for an index. For the retry call to succeed, ISM must 
 #### Request
 
 ```json
-POST _opendistro/_ism/retry/<index>
+POST _opendistro/_ism/retry/index_1
 {
   "state": "delete"
 }
@@ -475,11 +444,11 @@ POST _opendistro/_ism/retry/<index>
 
 ```json
 {
+  "updated_indices": 0,
   "failures": false,
   "failed_indices": []
 }
 ```
-
 
 ---
 
@@ -490,7 +459,7 @@ Gets the current state of the index. You can use index patterns to get the statu
 #### Request
 
 ```json
-GET _opendistro/_ism/explain/<index>
+GET _opendistro/_ism/explain/index_1
 ```
 
 
@@ -498,27 +467,41 @@ GET _opendistro/_ism/explain/<index>
 
 ```json
 {
-  "some_index-01": {
-    "index.opendistro.index_state_management.policy_name": "ingest_policy",
-    "index": "some_index-01",
-    "index_uuid": "dwaF_8mVT62j4KI-I5n9tw",
-    "policy_name": "ingest_policy",
-    "policy_seq_no": 3,
-    "policy_primary_term": 1,
-    "rolled_over": false,
-    "state": "ingest",
-    "state_start_time": 1562946874143,
-    "action_index": 0,
-    "action": "rollover",
-    "action_start_time": 1562946933881,
-    "step": "attempt_rollover",
-    "step_start_time": 1562946933881,
-    "step_completed": false,
-    "consumed_retries": 0,
-    "failed": false,
-    "info": {
-      "message": "Attempting to rollover"
-    }
+  "index_1": {
+    "index.opendistro.index_state_management.policy_id": "policy_1"
   }
+}
+```
+
+---
+
+## Delete policy
+
+Deletes the policy by `policy_id`.
+
+#### Request
+
+```json
+DELETE _opendistro/_ism/policies/policy_1
+```
+
+
+#### Sample response
+
+```json
+{
+  "_index": ".opendistro-ism-config",
+  "_type": "_doc",
+  "_id": "policy_1",
+  "_version": 3,
+  "result": "deleted",
+  "forced_refresh": true,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "_seq_no": 15,
+  "_primary_term": 1
 }
 ```
