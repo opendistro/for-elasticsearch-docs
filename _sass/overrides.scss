@@ -5,7 +5,7 @@ $media-queries: (
   sm: 500px,
   md: $content-width,
   lg: $content-width + $nav-width,
-  xl: $content-width + $nav-width + $toc-width + 16px
+  xl: $content-width + $nav-width + $toc-width
 );
 
 body {
@@ -166,14 +166,14 @@ h5 + p.label {
 
 .side-bar {
   @include mq(xl) {
-    width: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 + #{$nav-width});
+    width: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + #{$nav-width});
     min-width: $nav-width;
   }
 }
 
 .main-content {
   @include mq(xl) {
-    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 + #{$nav-width});
+    margin-left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + #{$nav-width});
   }
 }
 
@@ -185,8 +185,8 @@ h5 + p.label {
     display: block;
     position: sticky;
     top: 59px;
-    left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 3 +
-        #{$nav-width + $content-width + 27px});
+    left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 +
+        #{$nav-width + $content-width - 8px});
     width: $toc-width;
   }
 }
@@ -210,6 +210,7 @@ h5 + p.label {
   padding: $sp-6 $sp-4;
   max-height: calc(100% - 118px);
   overflow: auto;
+  margin-left: $sp-6;
 }
 
 .toc-item {
