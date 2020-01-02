@@ -27,4 +27,5 @@ For detailed release notes, see these GitHub repositories:
 - [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
 - [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
 - [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
+- [Index State Management](https://github.com/opendistro-for-elasticsearch/index-management/releases)
 - [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
