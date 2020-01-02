@@ -37,7 +37,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Change to the `opendistro-es` directory:
 
    ```bash
-   cd helm/opendistro-es/
+   cd opendistro-es/
    ```
 
 1. Package the Helm chart:
