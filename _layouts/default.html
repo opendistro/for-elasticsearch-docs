@@ -89,6 +89,11 @@ layout: table_wrappers
       </div>
     </div>
   </div>
+  <div class="toc">
+    {% include toc.html html=content h_min=2 h_max=2 class="toc-list" item_class="toc-item" sanitize=true %}
+  </div>
+  </div>
+
   {% if site.anchor_links != nil %}
     <script>
       anchors.add();
