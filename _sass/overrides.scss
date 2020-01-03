@@ -185,9 +185,9 @@ h5 + p.label {
     display: block;
     position: fixed;
     top: 59px;
-    left: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 +
-        #{$nav-width + $content-width - 8px});
+    right: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + 8px);
     width: $toc-width;
+    height: 100%;
   }
 }
 
