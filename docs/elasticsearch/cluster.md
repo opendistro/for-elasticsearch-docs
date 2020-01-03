@@ -137,11 +137,18 @@ node.ingest: false
 
 ## Step 3: Bind a cluster to specific IP addresses
 
-`network_host` defines the IP address that's used to bind the node. By default, Elasticsearch listens on a local host. You can also use `_local_` and `_site_` to bind to any loopback or site-local address, whether IPv4 or IPv6:
+`network_host` defines the IP address that's used to bind the node. By default, Elasticsearch listens on a local host, which limits the cluster to a single node. You can also use `_local_` and `_site_` to bind to any loopback or site-local address, whether IPv4 or IPv6:
 
 ```yml
 network.host: [_local_, _site_]
 ```
+
+To form a multi-node cluster, specify the IP address of the node:
+
+```yml
+network.host: <IP address of the node>
+```
+
 
 Make sure to configure these settings on all of your nodes.
 
