@@ -7,9 +7,9 @@ nav_order: 5
 
 # Helm
 
-Helm is a package manager that allows you easily install and manage Elasticsearch in a Kubernetes cluster. You can define your Elasticsearch configurations in a YAML file and use Helm to deploy your applications in a version-controlled and reproducible way.
+Helm is a package manager that allows you to easily install and manage Elasticsearch in a Kubernetes cluster. You can define your Elasticsearch configurations in a YAML file and use Helm to deploy your applications in a version-controlled and reproducible way.
 
-The Helm chart contains the following resources:
+The Helm chart contains the resources described in the following table.
 
 Resource | Description
 :--- | :---
@@ -17,7 +17,7 @@ Resource | Description
 `values.yaml` |  Default configuration values for the chart.
 `templates` |  Templates that combine with values to generate the Kubernetes manifest files.
 
-The specification in the default Helm chart caters to a number of standard use cases and setups. You can modify the default chart to configure your desired specifications and set Transport Layer Security (TLS) and role-based access control (RBAC).
+The specification in the default Helm chart supports many standard use cases and setups. You can modify the default chart to configure your desired specifications and set Transport Layer Security (TLS) and role-based access control (RBAC).
 
 For information about the default configuration, steps to configure security, and configurable parameters, see the
 [README](https://github.com/opendistro-for-elasticsearch/community/tree/master/open-distro-elasticsearch-kubernetes/helm).
@@ -37,7 +37,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Change to the `opendistro-es` directory:
 
    ```bash
-   cd opendistro-es/
+   cd helm/opendistro-es/
    ```
 
 1. Package the Helm chart:
@@ -52,15 +52,15 @@ Run the `helm init` command to make sure you also have the Tiller server install
    helm install opendistro-es opendistro-es-1.3.0.tgz
    ```
 
-If you see a `namespaces "default" is forbidden` error, create a tiller service account and deploy with a cluster binding role.
-For example:
+If you see a `namespaces "default" is forbidden` error, create a Tiller service account and deploy with a cluster binding role, as shown in the following example. See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
+
 
 ```bash
 $ kubectl create serviceaccount --namespace kube-system tiller
 $ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 $ kubectl patch deploy --namespace kube-system tiller-deploy -p'{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 ```
-See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
+
 
 The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
@@ -131,7 +131,7 @@ opendistro-es-data    1s
 opendistro-es-master  1s
 ```
 
-To make sure your Elasticsearch cluster is up and running:
+To make sure your Elasticsearch cluster is up and running, run the following command:
 
 ```bash
 $ kubectl get pods
@@ -146,7 +146,7 @@ opendistro-es-master-0                     1/1     Running   0          15m
 
 ## Uninstall using Helm
 
-To delete or uninstall this deployment:
+To delete or uninstall this deployment, run the following command:
 
 ```bash
 helm delete opendistro-es
