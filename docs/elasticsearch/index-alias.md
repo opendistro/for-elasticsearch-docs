@@ -9,11 +9,11 @@ nav_order: 4
 
 An alias is a virtual index name that can point to one or more indices.
 
-If your data is spread across multiple indices, rather than keeping track of which indices to query, you can create an alias and query that instead.
+If your data is spread across multiple indices, rather than keeping track of which indices to query, you can create an alias and query it instead.
 
 For example, if you’re storing logs into indices based on the month and you frequently query the logs for the previous two months, you can create a `last_2_months` alias and update the indices it points to each month.
 
-Since you can switch the indices an alias points to at any time, referring to indices using aliases in your applications allows you to reindex your data without any downtime.
+Because you can change the indices an alias points to at any time, referring to indices using aliases in your applications allows you to reindex your data without any downtime.
 
 ---
 
@@ -48,7 +48,7 @@ POST _aliases
 }
 ```
 
-You should see this response:
+You should see the following response:
 
 ```json
 {
@@ -58,7 +58,7 @@ You should see this response:
 
 If this request fails, make sure the index that you're adding to the alias already exists.
 
-To check if `alias1` refers to `index-1`:
+To check if `alias1` refers to `index-1`, run the following command:
 
 ```json
 GET alias1
@@ -67,7 +67,7 @@ GET alias1
 ## Add or remove indices
 
 You can perform multiple actions in the same `_aliases` operation.
-For example, this command removes `index-1` and adds `index-2` to `alias1`:
+For example, the following command removes `index-1` and adds `index-2` to `alias1`:
 
 ```json
 POST _aliases
@@ -109,7 +109,7 @@ POST _aliases
 
 ## Manage aliases
 
-To list the mapping of aliases to indices:
+To list the mapping of aliases to indices, run the following command:
 
 ```json
 GET _cat/aliases?v
@@ -122,7 +122,7 @@ alias     index   filter    routing.index   routing.search
 alias1    index-1   *             -                 -
 ```
 
-To check which indices an alias points to:
+To check which indices an alias points to, run the following command:
 
 ```json
 GET _alias/alias1
@@ -140,13 +140,13 @@ GET _alias/alias1
 }
 ```
 
-Conversely, to find which alias points to a specific index:
+Conversely, to find which alias points to a specific index, run the following command:
 
 ```json
 GET /index-2/_alias/*
 ```
 
-To check if an alias exists:
+To check if an alias exists, run the following command:
 
 ```json
 HEAD /alias1/_alias/
@@ -192,7 +192,7 @@ POST _aliases
 
 ## Index alias options
 
-You can specify the following options:
+You can specify the options shown in the following table.
 
 Option | Valid values | Description | Required
 :--- | :--- | :---
@@ -200,4 +200,4 @@ Option | Valid values | Description | Required
 `alias` | String | The name of the alias. | No
 `filter` | Object | Add a filter to the alias. | No
 `routing` | String | Limit search to an associated shard value. You can specify `search_routing` and `index_routing` independently. | No
-`is_write_index` | String | Specify the index that would accept any write operations to the alias. If this value is not specified, then no write operations are allowed. | No
+`is_write_index` | String | Specify the index that accepts any write operations to the alias. If this value is not specified, then no write operations are allowed. | No
