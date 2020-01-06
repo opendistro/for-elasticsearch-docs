@@ -172,23 +172,23 @@ discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<p
 
 After you set the configurations, start Elasticsearch on all nodes.
 
-```yml
+```bash
 sudo systemctl start elasticsearch.service
 ```
 
 Then go to the logs file to see the formation of the cluster:
 
-```yml
+```bash
 less /var/log/elasticsearch/odfe-cluster.log
 ```
 
 Perform the following `_cat` query on any node to see all the nodes formed as a cluster:
 
-```yml
+```bash
 curl -XGET https://<private-ip>:9200/_cat/nodes?v -u admin:admin --insecure
 ```
 
-```yml
+```
 ip             heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
 x.x.x.x           13          61   0    0.02    0.04     0.05 mi        *      odfe-master
 x.x.x.x           16          60   0    0.06    0.05     0.05 md        -      odfe-d1
@@ -201,4 +201,10 @@ To better understand and monitor your cluster, use the [cat API](../catapis/).
 
 ## Next steps
 
-To set up security, see [Security - Configuration](../../security-configuration/).
+If you are using the Security plugin, the previous request to `_cat/nodes?v` might have failed with an initialization error. To initialize the plugin, run `elasticsearch/plugins/opendistro_security/tools/securityadmin.sh`. A sample command that uses the demo certificates might look like this:
+
+```bash
+sudo ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -h <private-ip>
+```
+
+For full guidance around configuration options, see [Security - Configuration](../../security-configuration).
