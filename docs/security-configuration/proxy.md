@@ -205,3 +205,9 @@ To pass the user and role headers that the authenticating proxy adds from Kibana
 ```yml
 elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization","x-proxy-user","x-proxy-roles"]
 ```
+
+You must also enable the authentication type in `kibana.yml`:
+
+```yml
+opendistro_security.auth.type: "proxy"
+```
