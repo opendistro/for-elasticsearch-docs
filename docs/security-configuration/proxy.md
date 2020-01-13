@@ -45,7 +45,7 @@ config:
 You can configure the following settings:
 
 Name | Description
-: ---| :---
+:--- | :---
 `enabled` | Enables or disables proxy support. Default is false.
 `internalProxies` | A regular expression containing the IP addresses of all trusted proxies. The pattern `.*` trusts all internal proxies.
 `remoteIpHeader` | Name of the HTTP header field that has the hostname chain. Default is `x-forwarded-for`.
@@ -203,7 +203,7 @@ config:
 To pass the user and role headers that the authenticating proxy adds from Kibana to the Security plugin, add them to the HTTP header whitelist in `kibana.yml`:
 
 ```yml
-elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization","x-proxy-user","x-proxy-roles"]
+elasticsearch.requestHeadersWhitelist: ["securitytenant","Authorization","x-forwarded-for","x-proxy-user","x-proxy-roles"]
 ```
 
 You must also enable the authentication type in `kibana.yml`:
