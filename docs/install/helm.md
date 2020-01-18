@@ -37,7 +37,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Change to the `opendistro-es` directory:
 
    ```bash
-   cd helm/opendistro-es/
+   cd opendistro-build/helm/opendistro-es/
    ```
 
 1. Package the Helm chart:
@@ -72,77 +72,66 @@ helm install --values=customevalues.yaml opendistro-es-1.3.0.tgz
 #### Sample output
 
 ```yaml
-NAME:   opendistro-es
-LAST DEPLOYED: Tue Dec 17 14:33:48 2019
+NAME: opendistro-es
+LAST DEPLOYED: Fri Jan 17 14:44:19 2020
 NAMESPACE: default
-STATUS: DEPLOYED
-
-RESOURCES:
-==> v1/Pod(related)
-NAME                                   AGE
-opendistro-es-client-77b988f547-ddbvc  1s
-opendistro-es-client-77b988f547-gtgtx  1s
-opendistro-es-data-0                   1s
-opendistro-es-kibana-f785fdb84-8czxb   1s
-opendistro-es-master-0                 1s
-
-==> v1/RoleBinding
-NAME                               AGE
-opendistro-es-elastic-rolebinding  1s
-opendistro-es-kibana-rolebinding   1s
-
-==> v1/Secret
-NAME                     AGE
-opendistro-es-es-config  1s
-
-==> v1/Service
-NAME                          AGE
-opendistro-es-client-service  1s
-opendistro-es-data-svc        1s
-opendistro-es-discovery       1s
-opendistro-es-kibana-svc      1s
-
-==> v1/ServiceAccount
-NAME                  AGE
-opendistro-es-es      1s
-opendistro-es-kibana  1s
-
-==> v1beta1/Deployment
-NAME                  AGE
-opendistro-es-client  1s
-opendistro-es-kibana  1s
-
-==> v1beta1/Ingress
-NAME                          AGE
-opendistro-es-client-service  1s
-
-==> v1beta1/PodSecurityPolicy
-NAME               AGE
-opendistro-es-psp  1s
-
-==> v1beta1/Role
-NAME                  AGE
-opendistro-es-es      1s
-opendistro-es-kibana  1s
-
-==> v1beta1/StatefulSet
-NAME                  AGE
-opendistro-es-data    1s
-opendistro-es-master  1s
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 ```
 
-To make sure your Elasticsearch cluster is up and running, run the following command:
+To make sure your Elasticsearch pod is up and running, run the following command:
 
 ```bash
 $ kubectl get pods
-
-NAME                                       READY   STATUS    RESTARTS   AGE
-opendistro-es-13-client-5f87767448-6b6h6   1/1     Running   0          15m
-opendistro-es-13-client-5f87767448-9rvrr   1/1     Running   0          15m
-opendistro-es-data-0                       1/1     Running   0          15m
-opendistro-es-kibana-54d4b996c6-g2rxb      1/1     Running   0          15m
-opendistro-es-master-0                     1/1     Running   0          15m
+NAME                                    READY   STATUS    RESTARTS   AGE
+opendistro-es-client-988fb9fbf-ph8fd    1/1     Running   0          111m
+opendistro-es-client-988fb9fbf-xsz8n    1/1     Running   0          111m
+opendistro-es-data-0                    1/1     Running   0          111m
+opendistro-es-data-1                    1/1     Running   0          110m
+opendistro-es-data-2                    1/1     Running   0          110m
+opendistro-es-kibana-786f547486-75gw4   1/1     Running   0          111m
+opendistro-es-master-0                  1/1     Running   0          111m
+opendistro-es-master-1                  1/1     Running   0          106m
 ```
+
+To access the Elasticsearch shell:
+
+```bash
+$ kubectl exec -it opendistro-es-master-1 -- /bin/bash
+```
+
+You can send requests to the pod to verify that Elasticsearch is up and running:
+
+```bash
+$ curl -XGET https://localhost:9200 -u admin:admin --insecure
+
+{
+  "name" : "opendistro-es-master-1",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-bGzvzXvRmifC54-gt2pWA",
+  "version" : {
+    "number" : "7.3.2",
+    "build_flavor" : "oss",
+    "build_type" : "tar",
+    "build_hash" : "1c1faf1",
+    "build_date" : "2019-09-06T14:40:30.409026Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.1.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+```
+
+To set up port forwarding to access Kibana, exit the Elasticsearch shell and run the following command:
+
+```bash
+$ kubectl port-forward deployment/opendistro-es-kibana 5601
+```
+
+You can now access Kibana from your browser at: http://localhost:5601.
 
 ## Uninstall using Helm
 
