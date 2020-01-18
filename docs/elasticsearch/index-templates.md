@@ -7,9 +7,7 @@ nav_order: 5
 
 # Index template
 
-An index template formats all newly created indexes to a one like you may already have by automatically picking up on a naming schema.
-
-For example, if you have log indices being continuously indexed every day, you can define an index template to have all these log indices with the same mappings and settings.
+Index templates let you initialize new indices with predefined mappings and settings. For example, if you continuously index log data, you can define an index template so that all of these indices have the same number of shards and replicas.
 
 ---
 
@@ -28,7 +26,7 @@ To create an index template, use a POST request:
 POST _template
 ```
 
-This command creates a template named `daily_logs` and applies it to any new index that matches the regular expression `logs-2020-01-*` and also adds it to the `my_logs` alias:
+This command creates a template named `daily_logs` and applies it to any new index whose name matches the regular expression `logs-2020-01-*` and also adds it to the `my_logs` alias:
 
 ```json
 PUT _template/daily_logs
@@ -65,15 +63,10 @@ You should see the following response:
 }
 ```
 
-Now, if you create an index named `logs-2020-01-01`:
+If you create an index named `logs-2020-01-01`, you can see that it has the mappings and settings from the template:
 
 ```json
 PUT logs-2020-01-01
-```
-
-It will have the mappings and settings defined in the `daily_logs` template:
-
-```json
 GET logs-2020-01-01
 ```
 
@@ -110,7 +103,7 @@ GET logs-2020-01-01
 }
 ```
 
-You can keep creating indexes: `logs-2020-01-02`, `logs-2020-01-03`, and so on, and they will all have the same mappings and settings.
+Any additional indices that match this pattern---`logs-2020-01-02`, `logs-2020-01-03`, etc.---will inherit the same mappings and settings.
 
 ## Retrieve template
 
@@ -146,11 +139,11 @@ HEAD _template/<name>
 
 ## Configure multiple templates
 
-You can create multiple index templates for your indices. If an index matches more than one template, all the mappings and settings are merged for that index.
+You can create multiple index templates for your indices. If the index name matches more than one template, Elasticsearch merges all mappings and settings from all matching templates and applies them to the index.
 
-The values from the more recently created templates override the later ones. So you can define a few common settings in a generic template that can act as a catchall and then keep adding more specialized ones.
+The values from the more recently created templates override the later ones. So you can define a few common settings in a generic template that can act as a catch-all and then keep adding more specialized ones.
 
-You can also explicitly specify the priority of the templates using the `order` parameter. A template with a lower order number is applied first and a one with a higher order number overrides it.
+An even better approach is to explicitly specify template priority using the `order` parameter. Elasticsearch applies templates with lower order numbers first and then overrides them with templates that have higher order numbers.
 
 For example, if you have the following two templates that both match the `logs-2020-01-02` index and there’s a conflict in the `number_of_shards` field:
 
@@ -184,7 +177,7 @@ PUT _template/template-02
 }
 ```
 
-Because `template-02` has a greater `order` value it takes precedence so the `logs-2020-01-02` index would have the `number_of_shards` value as 3.
+Because `template-02` has a higher `order` value, it takes precedence. The `logs-2020-01-02` index would have the `number_of_shards` value as 3.
 
 ## Delete template
 
@@ -199,6 +192,6 @@ DELETE _template/daily_logs
 You can specify the options shown in the following table:
 
 Option | Type | Description | Required
-:--- | :--- | :---
+:--- | :--- | :--- | :---
 `order` | `Number` | Specify the priority of the index template.  | No
 `create` | `Boolean` | Specify whether or not this index template should replace an existing one. | No
