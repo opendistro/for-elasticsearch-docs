@@ -7,7 +7,7 @@ nav_order: 11
 
 # Search template
 
-You can store your full-text queries as a search template. Search templates accept input parameters and dynamically create an Elasticsearch query with those parameters.
+You can store your full-text queries as a search template. Search templates accept input parameters and dynamically create an Elasticsearch query with those parameters.  \^
 
 For example, if you use Elasticsearch as a backend search engine for your application or website, you can take in user input from a search bar or a form field and pass them as parameters into a search template. That way, the syntax to create Elasticsearch queries is abstracted from your end users.
 
