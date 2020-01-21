@@ -2,7 +2,7 @@
 layout: default
 title: Reindex Data
 parent: Elasticsearch
-nav_order: 5
+nav_order: 6
 ---
 
 # Reindex data

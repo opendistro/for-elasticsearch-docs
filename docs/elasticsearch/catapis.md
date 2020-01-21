@@ -2,7 +2,7 @@
 layout: default
 title: CAT API
 parent: Elasticsearch
-nav_order:  6
+nav_order:  7
 ---
 
 # cat API
