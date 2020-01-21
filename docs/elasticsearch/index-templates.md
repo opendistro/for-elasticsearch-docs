@@ -103,7 +103,7 @@ GET logs-2020-01-01
 }
 ```
 
-Any additional indices that match this pattern---`logs-2020-01-02`, `logs-2020-01-03`, etc.---will inherit the same mappings and settings.
+Any additional indices that match this pattern---`logs-2020-01-02`, `logs-2020-01-03`, and so on---will inherit the same mappings and settings.
 
 ## Retrieve template
 
@@ -131,7 +131,7 @@ To get a list of all templates that match a pattern:
 GET _template/daily*
 ```
 
-To check if a particular template exists:
+To check if a specific template exists:
 
 ```json
 HEAD _template/<name>
@@ -141,11 +141,11 @@ HEAD _template/<name>
 
 You can create multiple index templates for your indices. If the index name matches more than one template, Elasticsearch merges all mappings and settings from all matching templates and applies them to the index.
 
-The values from the more recently created templates override the later ones. So you can define a few common settings in a generic template that can act as a catch-all and then keep adding more specialized ones.
+The settings from the more recently created index templates override the settings of older index templates. So, you can first define a few common settings in a generic template that can act as a catch-all and then add more specialized settings as required.
 
 An even better approach is to explicitly specify template priority using the `order` parameter. Elasticsearch applies templates with lower order numbers first and then overrides them with templates that have higher order numbers.
 
-For example, if you have the following two templates that both match the `logs-2020-01-02` index and there’s a conflict in the `number_of_shards` field:
+For example, say you have the following two templates that both match the `logs-2020-01-02` index and there’s a conflict in the `number_of_shards` field:
 
 #### Template 1
 
@@ -177,11 +177,11 @@ PUT _template/template-02
 }
 ```
 
-Because `template-02` has a higher `order` value, it takes precedence. The `logs-2020-01-02` index would have the `number_of_shards` value as 3.
+Because `template-02` has a higher `order` value, it takes precedence over `template-01` . The `logs-2020-01-02` index would have the `number_of_shards` value as 3.
 
 ## Delete template
 
-You can delete an index template using its name.
+You can delete an index template using its name, as shown in the following command:
 
 ```json
 DELETE _template/daily_logs
@@ -194,4 +194,4 @@ You can specify the options shown in the following table:
 Option | Type | Description | Required
 :--- | :--- | :--- | :---
 `order` | `Number` | Specify the priority of the index template.  | No
-`create` | `Boolean` | Specify whether or not this index template should replace an existing one. | No
+`create` | `Boolean` | Specify whether this index template should replace an existing one. | No
