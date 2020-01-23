@@ -78,7 +78,7 @@ opendistro_security.audit.config.disabled_transport_categories: NONE
 By default, the Security plugin logs events on both REST and the transport layer. You can disable either type:
 
 ```yml
-opendistro_security.audit.enable_rest: true
+opendistro_security.audit.enable_rest: false
 opendistro_security.audit.enable_transport: false
 ```
 
