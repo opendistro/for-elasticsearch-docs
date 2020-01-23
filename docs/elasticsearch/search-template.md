@@ -344,19 +344,11 @@ You can use the `toJson` tag to to convert parameters to their JSON representati
 ```json
 GET _search/template
 {
-  "source": "{% raw %}{\"query\":{\"bool\":{\"must\": {{#toJson}}text_entries{{/toJson}}}}}{% endraw %}",
+  "source": "{% raw %}{\"query\":{\"bool\":{\"must\":{\"term\": {{#toJson}}text_entries{{/toJson}}}}}{% endraw %}",
   "params": {
     "text_entries": [
-      {
-        "match": {
-          "text_entry": "love"
-        }
-      },
-      {
-        "match": {
-          "text_entry": "soldier"
-        }
-      }
+        { "term": { "text_entry" : "love" } },
+        { "term": { "text_entry" : "soldier" } }
     ]
   }
 }
@@ -372,12 +364,12 @@ GET _search/template
       "bool": {
         "must": [
           {
-            "match": {
+            "term": {
               "text_entry": "love"
             }
           },
           {
-            "match": {
+            "term": {
               "text_entry": "soldier"
             }
           }
