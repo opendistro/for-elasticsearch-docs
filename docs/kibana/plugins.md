@@ -13,7 +13,7 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
 ## Prerequisites
 
 1. An Elasticsearch cluster that uses a [compatible version](../../../version-history)
-1. The Security and/or Alerting plugins [installed on the cluster](../../install/plugins)
+1. The corresponding Elasticsearch plugins [installed on the cluster](../../install/plugins)
 1. The corresponding version of [Kibana](../) (e.g. Kibana 6.7.1 works with Elasticsearch 6.7.1)
 
 
