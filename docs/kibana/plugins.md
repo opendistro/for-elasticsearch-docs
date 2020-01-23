@@ -7,7 +7,7 @@ nav_order: 1
 
 # Standalone Kibana plugin install
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security and Alerting plugins for Kibana individually.
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and Index State Management plugins for Kibana individually.
 
 
 ## Prerequisites
@@ -38,6 +38,15 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
+
+
+#### Index State Management
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistro_index_management_kibana-1.3.0.1.zip
+```
+
+This plugin provides a user interface for managing policies.
 
 
 ## List installed plugins

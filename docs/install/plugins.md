@@ -7,7 +7,7 @@ nav_order: 90
 
 # Standalone Elasticsearch plugin installation
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the Security, Alerting, and SQL plugins on a compatible Elasticsearch cluster, just like any other Elasticsearch plugin.
+If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the individual plugins on a compatible Elasticsearch cluster, just like any other Elasticsearch plugins.
 
 
 ---
