@@ -187,7 +187,8 @@ h5 + p.label {
     top: 59px;
     right: calc((100% - #{$nav-width + $content-width + $toc-width}) / 2 + 8px);
     width: $toc-width;
-    height: 100%;
+    max-height: calc(100% - 118px);
+    overflow: auto;
   }
 }
 
@@ -207,8 +208,6 @@ h5 + p.label {
   list-style-type: none;
   background-color: $sidebar-color;
   padding: $sp-6 $sp-4;
-  max-height: calc(100% - 118px);
-  overflow: auto;
   margin-left: $sp-6;
 }
 
