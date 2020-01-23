@@ -405,7 +405,7 @@ authz:
         custom_attr_whitelist:
           - attribute1
           - attribute2
-        custom_attr_maxval_len
+        custom_attr_maxval_len: 36
       ...
 ```
 
@@ -436,7 +436,7 @@ In most cases, however, not all user roles are related to Elasticsearch and Kiba
 This has an effect only if `resolve_nested_roles` is `true`:
 
 ```yml
-nested_role_filter: <true|false>
+nested_role_filter:
   - 'cn=Jane Doe,ou*people,o=TEST'
   - ...
 ```
