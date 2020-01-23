@@ -11,15 +11,6 @@ We generate this reference from the Elasticsearch REST API specification. As suc
 
 For language issues, missing information, and inaccuracies, modify the JSON files in `rest-api-spec/src/main/resources/rest-api-spec/api` and submit pull requests to the upstream Elasticsearch repository.
 
-
----
-
-#### Table of contents
-
-- TOC
-{:toc}
-
-
 ---
 
 ## bulk

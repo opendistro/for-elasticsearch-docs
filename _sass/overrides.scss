@@ -209,6 +209,9 @@ h5 + p.label {
   background-color: $sidebar-color;
   padding: $sp-6 $sp-4;
   margin-left: $sp-6;
+  margin-right: 0;
+  margin-bottom: 0;
+  overflow: auto;
 }
 
 .toc-item {
