@@ -13,18 +13,12 @@ For example, if you use Elasticsearch as a backend search engine for your applic
 
 Whenever you find yourself writing code to convert user input into Elasticsearch queries, you can simplify your code with search templates. If you need to add fields to your search query, you can just modify the template without making changes to your code.
 
-Search templates are expressed using the Mustache language. For a list of all syntax options, see the [Mustache manual](http://mustache.github.io/mustache.5.html).
+Search templates use the Mustache language. For a list of all syntax options, see the [Mustache manual](http://mustache.github.io/mustache.5.html).
 {: .note }
-
----
-
-#### Table of contents
-1. TOC
-{:toc}
 
 ## Create search templates
 
-A search template has two components: the query and the parameters. Parameters are user inputted values that get placed into variables. Variables are represented with double braces in Mustache notation. When encountering a variable like `{% raw %}{{var}}{% endraw %}` in the query, Elasticsearch goes to the `params` section and looks for a parameter called `var` and replaces it with the specified value.
+A search template has two components: the query and the parameters. Parameters are user inputted values that get placed into variables. Variables are represented with double braces in Mustache notation. When encountering a variable like `{% raw %}{{var}}{% endraw %}` in the query, Elasticsearch goes to the `params` section, looks for a parameter called `var`, and replaces it with the specified value.
 
 You can code your application to ask your user what they want to search for and then plug in that value in the `params` object at run time.
 
@@ -53,13 +47,14 @@ To run this search on a specific index, add the index name to the request:
 GET shakespeare/_search/template
 ```
 
-You can implement pagination and show a set number of search results at a time using the `from` and `size` parameters:
+You can implement pagination using the `from` and `size` parameters.
+The `from` parameter is the document number that you want to start showing the results from and `size` is the number of results that you want to show. So if `size` is 10, you want to start the results from page 2, set `"from": 10` (since the results are zero-indexed).
 
 ```json
 GET _search/template
 {
   "source": {
-    "from": "{% raw %}{{page}}{% endraw %}",
+    "from": "{% raw %}{{from}}{% endraw %}",
     "size": "{% raw %}{{size}}{% endraw %}",
     "query": {
       "match": {
@@ -69,13 +64,13 @@ GET _search/template
   },
   "params": {
     "play_name": "Henry IV",
-    "page": 0,
+    "from": 10,
     "size": 10
   }
 }
 ```
 
-To improve the search experience, you can define defaults so that the user doesn’t have to specify every possible parameter. If the parameter is not defined in the `params` section, the default is used.
+To improve the search experience, you can define defaults so that the user doesn’t have to specify every possible parameter. If the parameter is not defined in the `params` section, Elasticsearch uses the default value.
 
 The syntax for defining the default value for a variable `var` is as follows:
 
@@ -83,13 +78,13 @@ The syntax for defining the default value for a variable `var` is as follows:
 {% raw %}{{var}}{{^var}}default value{{/var}}{% endraw %}
 ```
 
-This command sets the defaults for page number as 0 and number of results per page as 10.
+This command sets the defaults for `from` as 10 and `size` as 10:
 
 ```json
 GET _search/template
 {
   "source": {
-    "from": "{% raw %}{{page}}{{^page}}0{{/page}}{% endraw %}",
+    "from": "{% raw %}{{from}}{{^from}}10{{/from}}{% endraw %}",
     "size": "{% raw %}{{size}}{{^size}}10{{/size}}{% endraw %}",
     "query": {
       "match": {
@@ -106,9 +101,9 @@ GET _search/template
 
 ## Save and execute search templates
 
-Once you have the search template working the way you want it to, you can save the source of that template as a script making it reusable for different input parameters.
+After you have the search template working the way you want it to, you can save the source of that template as a script, making it reusable for different input parameters.
 
-When saving the search template as a script, you need to specify the `lang` parameter to be `mustache`:
+When saving the search template as a script, you need to specify the `lang` parameter as `mustache`:
 
 ```json
 POST _scripts/play_search_template
@@ -116,7 +111,7 @@ POST _scripts/play_search_template
   "script": {
     "lang": "mustache",
     "source": {
-      "from": "{% raw %}{{page}}{{^page}}0{{/page}}{% endraw %}",
+      "from": "{% raw %}{{from}}{{^from}}0{{/from}}{% endraw %}",
       "size": "{% raw %}{{size}}{{^size}}10{{/size}}{% endraw %}",
       "query": {
         "match": {
@@ -131,7 +126,7 @@ POST _scripts/play_search_template
 }
 ```
 
-Once the template is saved, you can refer to it by the template name using the `id` parameter.
+Now you can reuse the template by referring to its `id` parameter.
 You can reuse this source template over and over again for different input values.
 
 ```json
@@ -140,7 +135,7 @@ GET _search/template
   "id": "play_search_template",
   "params": {
     "play_name": "Henry IV",
-    "page": 0,
+    "from": 0,
     "size": 1
   }
 }
@@ -184,7 +179,7 @@ GET _search/template
 }
 ```
 
-If you have a stored template and want to validate it, you can use the `render` operation:
+If you have a stored template and want to validate it, use the `render` operation:
 
 ```json
 POST _render/template
@@ -219,18 +214,18 @@ You can specify conditions, run loops, join arrays, convert arrays to JSON, and 
 
 ### Conditions
 
-You can use the section tag in Mustache to represent conditions:
+Use the section tag in Mustache to represent conditions:
 
 ```json
 {% raw %}{{#var}}var{{/var}}{% endraw %}
 ```
 
-When `var` is a Boolean value, this syntax acts as an `if` condition. The `{% raw %}{{#var}}{% endraw %}` and `{% raw %}{{/var}}{% endraw %}` tags insert the values placed between them only if `var` evaluates to `true`.
+When `var` is a boolean value, this syntax acts as an `if` condition. The `{% raw %}{{#var}}{% endraw %}` and `{% raw %}{{/var}}{% endraw %}` tags insert the values placed between them only if `var` evaluates to `true`.
 
 Using section tags would make your JSON invalid, so you must write your query in a string format instead.
 
-In this command, if you change the `limit` parameter to `true`, you would get back only two documents.
-That's because only when the condition is `true` the `size` parameter is activated.
+This command includes the `size` parameter in the query only when the `limit` parameter is set to `true`.
+So if you change the `limit` parameter to `true`, the `size` parameter is activated and you would get back only two documents.
 
 ```json
 GET _search/template
@@ -245,7 +240,7 @@ GET _search/template
 ```
 
 You can also design an `if-else` condition.
-This command sets `size` to `2` if `limit` is `true` or sets it to `10` otherwise:
+This command sets `size` to `2` if `limit` is `true`. Otherwise, it sets `size` to `10`.
 
 ```json
 GET _search/template
@@ -260,7 +255,7 @@ GET _search/template
 
 ### Loops
 
-You can also use the section tag to implement a `foreach` loop:
+You can also use the section tag to implement a foreach loop:
 
 ```
 {% raw %}{{#var}}{{.}}}{{/var}}{% endraw %}
@@ -301,7 +296,7 @@ GET _search/template
 
 ### Join
 
-You can use the `join` tag to concatenate values of an array separated by commas:
+You can use the `join` tag to concatenate values of an array (separated by commas):
 
 ```json
 GET _search/template
@@ -322,7 +317,7 @@ GET _search/template
 }
 ```
 
-Rendered as:
+Renders as:
 
 ```json
 GET _search/template
@@ -344,7 +339,7 @@ You can use the `toJson` tag to to convert parameters to their JSON representati
 ```json
 GET _search/template
 {
-  "source": "{% raw %}{\"query\":{\"bool\":{\"must\":{\"term\": {{#toJson}}text_entries{{/toJson}}}}}{% endraw %}",
+  "source": "{\"query\":{\"bool\":{\"must\":[{\"terms\": {\"text_entries\": {{#toJson}}text_entries{{/toJson}} }}] }}}",
   "params": {
     "text_entries": [
         { "term": { "text_entry" : "love" } },
@@ -354,7 +349,7 @@ GET _search/template
 }
 ```
 
-Rendered as:
+Renders as:
 
 ```json
 GET _search/template
@@ -364,13 +359,19 @@ GET _search/template
       "bool": {
         "must": [
           {
-            "term": {
-              "text_entry": "love"
-            }
-          },
-          {
-            "term": {
-              "text_entry": "soldier"
+            "terms": {
+              "text_entries": [
+                {
+                  "term": {
+                    "text_entry": "love"
+                  }
+                },
+                {
+                  "term": {
+                    "text_entry": "soldier"
+                  }
+                }
+              ]
             }
           }
         ]
