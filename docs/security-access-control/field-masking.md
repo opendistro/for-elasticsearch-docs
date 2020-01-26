@@ -105,7 +105,6 @@ hr_employee:
       masked_fields:
         - 'lastname::/.*/::*'
         - '*ip_source::/[0-9]{1,3}$/::XXX::/^[0-9]{1,3}/::***'
-asdf
 someonerole:
   cluster: []
   indices:
