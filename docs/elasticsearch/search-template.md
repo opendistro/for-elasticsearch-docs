@@ -11,16 +11,16 @@ You can convert your full-text queries into a search template to accept user inp
 
 For example, if you use Elasticsearch as a backend search engine for your application or website, you can take in user queries from a search bar or a form field and pass them as parameters into a search template. That way, the syntax to create Elasticsearch queries is abstracted from your end users.
 
-Whenever you find yourself writing code to convert user input into Elasticsearch queries, you can simplify your code with search templates. If you need to add fields to your search query, you can just modify the template without making changes to your code.
+When you're writing code to convert user input into Elasticsearch queries, you can simplify your code with search templates. If you need to add fields to your search query, you can just modify the template without making changes to your code.
 
 Search templates use the Mustache language. For a list of all syntax options, see the [Mustache manual](http://mustache.github.io/mustache.5.html).
 {: .note }
 
 ## Create search templates
 
-A search template has two components: the query and the parameters. Parameters are user inputted values that get placed into variables. Variables are represented with double braces in Mustache notation. When encountering a variable like `{% raw %}{{var}}{% endraw %}` in the query, Elasticsearch goes to the `params` section, looks for a parameter called `var`, and replaces it with the specified value.
+A search template has two components: the query and the parameters. Parameters are user-inputted values that get placed into variables. Variables are represented with double braces in Mustache notation. When encountering a variable like `{% raw %}{{var}}{% endraw %}` in the query, Elasticsearch goes to the `params` section, looks for a parameter called `var`, and replaces it with the specified value.
 
-You can code your application to ask your user what they want to search for and then plug in that value in the `params` object at run time.
+You can code your application to ask your user what they want to search for and then plug in that value in the `params` object at runtime.
 
 This command defines a search template to find a play by its name. The `{% raw %}{{play_name}}{% endraw %}` in the query is replaced by the value `Henry IV`:
 
@@ -48,9 +48,7 @@ GET shakespeare/_search/template
 ```
 
 You can implement pagination using the `from` and `size` parameters.
-The `from` parameter is the document number that you want to start showing the results from and `size` is the number of results that you want to show.
-
-So if `size` is 10 and `from` is 0, you see the first 10 results. If you change `from` to 10, you will see the next 10 results (since the results are zero-indexed). Each time the user clicks on the next page for the search results in the UI, your application must make the same search query with an incremented `from` value.
+The `from` parameter indicates the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. For example, if the value of `size` is 10 and the value of `from` is 0, you see the first 10 results. If you change the value of `from` to 10, you will see the next 10 results (because the results are zero-indexed). Each time the user clicks the next page for search results, your application must make the same search query with an incremented `from` value.
 
 ```json
 GET _search/template
@@ -66,7 +64,7 @@ GET _search/template
   },
   "params": {
     "play_name": "Henry IV",
-    "from": 0,
+    "from": 10,
     "size": 10
   }
 }
@@ -103,7 +101,7 @@ GET _search/template
 
 ## Save and execute search templates
 
-After you have the search template working the way you want it to, you can save the source of that template as a script, making it reusable for different input parameters.
+After the search template works the way you want it to, you can save the source of that template as a script, making it reusable for different input parameters.
 
 When saving the search template as a script, you need to specify the `lang` parameter as `mustache`:
 
@@ -129,7 +127,7 @@ POST _scripts/play_search_template
 ```
 
 Now you can reuse the template by referring to its `id` parameter.
-You can reuse this source template over and over again for different input values.
+You can reuse this source template for different input values.
 
 ```json
 GET _search/template
@@ -227,7 +225,7 @@ When `var` is a boolean value, this syntax acts as an `if` condition. The `{% ra
 Using section tags would make your JSON invalid, so you must write your query in a string format instead.
 
 This command includes the `size` parameter in the query only when the `limit` parameter is set to `true`.
-So if you change the `limit` parameter to `true`, the `size` parameter is activated and you would get back only two documents.
+In the following example, the `limit` parameter is `true`, so the `size` parameter is activated. As a result, you would get back only two documents.
 
 ```json
 GET _search/template
@@ -235,7 +233,7 @@ GET _search/template
   "source": "{% raw %}{ {{#limit}} \"size\": \"{{size}}\", {{/limit}}  \"query\":{\"match\":{\"play_name\": \"{{play_name}}\"}}}{% endraw %}",
   "params": {
     "play_name": "Henry IV",
-    "limit": false,
+    "limit": true,
     "size": 2
   }
 }
@@ -336,7 +334,7 @@ GET _search/template
 
 ### Convert to JSON
 
-You can use the `toJson` tag to to convert parameters to their JSON representation:
+You can use the `toJson` tag to convert parameters to their JSON representation:
 
 ```json
 GET _search/template
@@ -383,7 +381,7 @@ GET _search/template
 }
 ```
 
-## Multi search templates
+## Multiple search templates
 
 You can bundle multiple search templates and send them to your Elasticsearch cluster in a single request using the `msearch` operation.
 This saves network round trip time, so you get back the response more quickly as compared to independent requests.
