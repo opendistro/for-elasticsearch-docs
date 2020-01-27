@@ -11,5 +11,5 @@ has_toc: false
 This section links to useful Open Distro for Elasticsearch resources.
 
 - [Open Distro for Elasticsearch blog](https://opendistro.github.io/for-elasticsearch/blog/) -- includes release announcements, technical walkthroughs, and case studies.
-- [Ansible playbook](https://github.com/saravanan30erd/opendistro_standalone_installation) -- helps with installing a production-ready Open Distro Elasticsearch cluster with Kibana using the [standalone plugin installation](../install/plugins/) method
-- [Ansible role](https://github.com/trombik/ansible-role-opendistroforelasticsearch) -- helps for advanced use of ansible configuration settings without Kibana focus on elasticsearch only
+- [Ansible playbook](https://github.com/saravanan30erd/opendistro_standalone_installation) -- helps with installing a production-ready Open Distro Elasticsearch cluster with Kibana using the [standalone plugin installation](../install/plugins/) method.
+- [Ansible role](https://github.com/trombik/ansible-role-opendistroforelasticsearch) -- a reusable Ansible configuration for Open Distro for Elasticsearch (Elasticsearch only, no Kibana).
