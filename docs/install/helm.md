@@ -49,7 +49,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Deploy Elasticsearch:
 
    ```bash
-   helm install opendistro-es opendistro-es-1.3.0.tgz
+   helm install opendistro-es opendistro-es-1.4.0.tgz
    ```
 
 If you see a `namespaces "default" is forbidden` error, create a Tiller service account and deploy with a cluster binding role, as shown in the following example. See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
@@ -66,7 +66,7 @@ The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
 
 ```bash
-helm install --values=customevalues.yaml opendistro-es-1.3.0.tgz
+helm install --values=customevalues.yaml opendistro-es-1.4.0.tgz
 ```
 
 #### Sample output
@@ -105,24 +105,6 @@ You can send requests to the pod to verify that Elasticsearch is up and running:
 
 ```bash
 $ curl -XGET https://localhost:9200 -u admin:admin --insecure
-
-{
-  "name" : "opendistro-es-master-1",
-  "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "-bGzvzXvRmifC54-gt2pWA",
-  "version" : {
-    "number" : "7.3.2",
-    "build_flavor" : "oss",
-    "build_type" : "tar",
-    "build_hash" : "1c1faf1",
-    "build_date" : "2019-09-06T14:40:30.409026Z",
-    "build_snapshot" : false,
-    "lucene_version" : "8.1.0",
-    "minimum_wire_compatibility_version" : "6.8.0",
-    "minimum_index_compatibility_version" : "6.0.0-beta1"
-  },
-  "tagline" : "You Know, for Search"
-}
 ```
 
 To set up port forwarding to access Kibana, exit the Elasticsearch shell and run the following command:

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Anomaly Detection (Alpha)
-nav_order: 34
+nav_order: 36
 has_children: true
 ---
 
