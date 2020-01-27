@@ -14,7 +14,7 @@ Index State Management (ISM) stores its configuration in the `.opendistro-ism-co
 All settings are available using the Elasticsearch `_cluster/settings` operation. None require a restart, and all can be marked `persistent` or `transient`.
 
 Setting | Default | Description
-:--| :- | :--------------
+:--- | :--- | :---
 `opendistro.index_state_management.enabled` | True | Specifies whether ISM is enabled or not.
 `opendistro.index_state_management.job_interval` | 5 minutes | The interval at which the managed index jobs are run.
 `opendistro.index_state_management.coordinator.sweep_period` | 10 minutes | How often the routine background sweep is run.
