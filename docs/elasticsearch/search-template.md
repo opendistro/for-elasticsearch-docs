@@ -48,7 +48,9 @@ GET shakespeare/_search/template
 ```
 
 You can implement pagination using the `from` and `size` parameters.
-The `from` parameter is the document number that you want to start showing the results from and `size` is the number of results that you want to show. So if `size` is 10, you want to start the results from page 2, set `"from": 10` (since the results are zero-indexed).
+The `from` parameter is the document number that you want to start showing the results from and `size` is the number of results that you want to show.
+
+So if `size` is 10 and `from` is 0, you see the first 10 results. If you change `from` to 10, you will see the next 10 results (since the results are zero-indexed). Each time the user clicks on the next page for the search results in the UI, your application must make the same search query with an incremented `from` value.
 
 ```json
 GET _search/template
@@ -64,7 +66,7 @@ GET _search/template
   },
   "params": {
     "play_name": "Henry IV",
-    "from": 10,
+    "from": 0,
     "size": 10
   }
 }
