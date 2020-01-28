@@ -41,6 +41,8 @@ new-user:
   hash: "$2y$12$88IFVl6IfIwCFh5aQYfOmuXVL9j2hz/GusQb35o.4sdTDAEMTOD.K"
   reserved: false
   hidden: false
+  opendistro_security_roles:
+  - "some-security-role"
   backend_roles:
   - "some-backend-role"
   attributes:
