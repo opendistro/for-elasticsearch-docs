@@ -9,15 +9,15 @@ nav_order: 11
 
 The `bool` query lets you combine multiple search queries with boolean logic. You can use boolean logic to include, exclude, or optionally include search queries.
 
-The `bool` query is often the go-to query for most searches because it allows you to construct an advanced query by chaining together a number of simple ones.
+The `bool` query can be your go-to query because it allows you to construct an advanced query by chaining together a number of simple ones.
 
 You can use the following clauses (subqueries) within the `bool` query:
 
 Clause | Behavior
 :--- | :---
-`must` | The results must match the queries in this clause. If you have multiple queries in this clause, every single one must match. Acts as an `and` operator.
+`must` | The results must match the queries in this clause. If you have multiple queries, every single one must match. Acts as an `and` operator.
 `must_not` | This is the anti-must clause. All matches are excluded from the results. Acts as a `not` operator.
-`should` | The results should match the queries but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1).
+`should` | The results should match the queries but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1). Acts as an `or` operator.
 `filter` | Filters reduce your dataset before applying the queries. Filters behave like queries but they do not affect the relevancy score that the results are sorted by.
 
 The structure of a bool query is as follows:
@@ -63,13 +63,6 @@ GET shakespeare/_search
           }
         }
       ],
-      "must_not": [
-        {
-          "term": {
-            "speaker": "ROMEO"
-          }
-        }
-      ],
       "should": [
         {
           "match": {
@@ -79,6 +72,13 @@ GET shakespeare/_search
         {
           "match": {
             "text_entry": "grace"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "term": {
+            "speaker": "ROMEO"
           }
         }
       ],
@@ -132,7 +132,7 @@ GET shakespeare/_search
 }
 ```
 
-If you want to identify which of these clauses actually caused the matching results, name each of your queries. You will get back a `matched_queries` array that lists the queries that matched these results. If you remove the queries not mentioned in this object, you will still see the exact same result.
+If you want to identify which of these clauses actually caused the matching results, name each of your queries:
 
 ```json
 GET shakespeare/_search
@@ -183,4 +183,13 @@ GET shakespeare/_search
     }
   }
 }
+```
+
+You will get back a `matched_queries` array that lists the queries that matched these results. If you remove the queries not seen in this list, you will still see the exact same result.
+
+```json
+"matched_queries" : [
+  "text-love",
+  "text-life"
+]
 ```
