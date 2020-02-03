@@ -18,7 +18,7 @@ Clause | Behavior
 `must` | The results must match the queries in this clause. If you have multiple queries, every single one must match. Acts as an `and` operator.
 `must_not` | This is the anti-must clause. All matches are excluded from the results. Acts as a `not` operator.
 `should` | The results should match the queries but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1). Acts as an `or` operator.
-`filter` | Filters reduce your dataset before applying the queries. Filters behave like queries but they do not affect the relevancy score that the results are sorted by.
+`filter` | Filters reduce your dataset before applying the queries. They behave like queries but they do not affect the relevancy score that the results are sorted by.
 
 The structure of a bool query is as follows:
 
@@ -185,7 +185,7 @@ GET shakespeare/_search
 }
 ```
 
-You will get back a `matched_queries` array that lists the queries that matched these results. If you remove the queries not seen in this list, you will still see the exact same result.
+You get back a `matched_queries` array that lists the queries that matched these results:
 
 ```json
 "matched_queries" : [
@@ -193,3 +193,4 @@ You will get back a `matched_queries` array that lists the queries that matched 
   "text-life"
 ]
 ```
+If you remove the queries not seen in this list, you will still see the exact same result.
