@@ -191,17 +191,17 @@ To better understand and monitor your cluster, use the [cat API](../catapis/).
 
 ## Step 6: Configure shard allocation awareness or forced awareness
 
-If your nodes are spread across multiple geographical zones, you can configure shard allocation awareness to allocate all replica shards to a zone that’s different from their primary shard.
+If your nodes are spread across many geographical zones, you can configure shard allocation awareness to allocate all replica shards to a zone that’s different from their primary shard.
 
 With shard allocation awareness, if the nodes in one of your zones fail, you can be assured that your replica shards are spread across your other zones. It adds a layer of fault tolerance than just individual node failure.
 
 To configure shard allocation awareness, add zone attributes to `odfe-d1` and `odfe-d2`, respectively:
 
 ```yml
-node.attr.zone: zone1
+node.attr.zone: 1
 ```
 ```yml
-node.attr.zone: zone2
+node.attr.zone: 2
 ```
 
 Log in to your master node and update the cluster settings:
@@ -217,9 +217,9 @@ PUT _cluster/settings
 
 You can either use `persistent` or `transient` settings. Persistent settings persist through a cluster reboot, transient settings do not.
 
-Shard allocation awareness prefers to separate primaries and replicas across multiple zones but if there is only one zone available like in the event of a failure, then replicas are allocated to the only remaining zone.
+Shard allocation awareness prefers to separate primary and replica shards across multiple zones but if there is only one zone available like in the event of a failure, then replica shards are allocated to the only remaining zone.
 
-You also have the option to require that primaries and replicas are never allocated to the same zone. This is called forced awareness.
+You also have the option to require that primary and replica shards are never allocated to the same zone. This is called forced awareness.
 
 To configure forced awareness, specify all the possible values for your zone attributes:
 
@@ -228,7 +228,7 @@ PUT _cluster/settings
 {
   "persistent": {
     "cluster.routing.allocation.awareness.attributes": "zone",
-    "cluster.routing.allocation.awareness.force.zone.values":["1"]
+    "cluster.routing.allocation.awareness.force.zone.values":["1", "2"]
   }
 }
 ```
@@ -236,7 +236,7 @@ Now, if one of the data nodes fail, forced awareness will not allocate the repli
 
 You generally want to use allocation awareness when the hardware in each of your zones is less than 50% utilized so that it has the storage capacity to allocate replicas in the same zone.
 
-If you’re in a situation where you do not have the capacity in any one zone to contain the entire cluster with all its primaries and replicas, then you should use forced awareness. So in the event of a failure, you don't over allocate your last remaining zone and essentially lock up your cluster because it's storage is maxed out.
+If you’re in a situation where you do not have the capacity in any one zone to contain the entire cluster with all its primary and replica shards, then you should use forced awareness. So in the event of a failure, you don't over-allocate your last remaining zone and essentially lock up your cluster because it's storage is maxed out.
 
 ## Step 7: Set up a hot/warm architecture
 
@@ -270,9 +270,20 @@ If you take a look at the shard allocation for `newindex`:
 
 ```json
 GET _cat/shards/newindex?v
+index     shard prirep state      docs store ip         node
+new_index 2     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 2     r      UNASSIGNED
+new_index 3     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 3     r      UNASSIGNED
+new_index 4     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 4     r      UNASSIGNED
+new_index 1     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 1     r      UNASSIGNED
+new_index 0     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 0     r      UNASSIGNED
 ```
 
-All primary shards are allocated to `odfe-d1` which is our hot node. All the replica shards are unassigned because we’re forcing this index to allocate only to hot nodes.
+All primary shards are allocated to `odfe-d1`, which is our hot node. All the replica shards are unassigned because we’re forcing this index to allocate only to hot nodes.
 
 To add an index `oldindex` to the warm node:
 
@@ -285,17 +296,28 @@ PUT oldindex
 }
 ```
 
-If you take a look at the shard allocation for `oldindex`:
+The shard allocation for `oldindex`:
 
 ```json
 GET _cat/shards/oldindex?v
+index     shard prirep state      docs store ip        node
+old_index 2     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 2     r      UNASSIGNED
+old_index 3     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 3     r      UNASSIGNED
+old_index 4     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 4     r      UNASSIGNED
+old_index 1     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 1     r      UNASSIGNED
+old_index 0     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 0     r      UNASSIGNED
 ```
 
-You can see the same thing only that all our primaries are allocated to `odfe-d2`. Again, all replica shards are unassigned because we only have one warm node.
+You can see the same thing only that all the primary shards are allocated to `odfe-d2`. Again, all replica shards are unassigned because we only have one warm node.
 
 You can configure your [index templates](../index-templates/) to set the `index.routing.allocation.require.temp` value to `hot`. So that your most recent data is indexed to your hot nodes.
 
-You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and once it reaches a certain age update this setting to warm nodes. That will automatically reallocate your data from your hot nodes to your warm nodes.
+You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and once it reaches a certain age update this setting to warm nodes. This will automatically reallocate your data from your hot nodes to your warm nodes.
 
 ## Next steps
 
