@@ -215,7 +215,7 @@ Then run `sudo sysctl -p` to reload.
 The `docker-compose.yml` file above also contains several key settings: `bootstrap.memory_lock=true`, `ES_JAVA_OPTS=-Xms512m -Xmx512m`, `nofile 65536` and `port 9600`. Respectively, these settings disable memory swapping (along with `memlock`), set the size of the Java heap (we recommend half of system RAM), set a limit of 65536 open files for the Elasticsearch user, and allow you to access Performance Analyzer on port 9600.
 
 
-## Run with custom plugins
+## Customize the Docker image
 
 To run the image with a custom plugin, first create a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/):
 
@@ -239,4 +239,19 @@ COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsea
 COPY --chown=elasticsearch:elasticsearch my-key-file.pem /usr/share/elasticsearch/config/
 COPY --chown=elasticsearch:elasticsearch my-certificate-chain.pem /usr/share/elasticsearch/config/
 COPY --chown=elasticsearch:elasticsearch my-root-cas.pem /usr/share/elasticsearch/config/
+```
+
+Alternately, you might want to remove a plugin. This `Dockerfile` removes the Security plugin:
+
+```
+FROM amazon/opendistro-for-elasticsearch:1.3.0
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
+COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
+```
+
+In this case, `elasticsearch.yml` is a "vanilla" version of the file with no Open Distro for Elasticsearch entries. It might look like this:
+
+```yml
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
 ```
