@@ -12,7 +12,7 @@ The KNN plugin adds several new index settings, cluster settings, and statistics
 
 ## Index settings
 
-The default values should work well for most use cases, but you can change them when you create the index.
+The default values should work well for most use cases, but you can change these settings when you create the index.
 
 Setting | Default | Description
 :--- | :--- | :---
@@ -25,8 +25,8 @@ Setting | Default | Description
 
 Setting | Default | Description
 :--- | :--- | :---
-`knn.algo_param.index_thread_qty` | 1 | The number of threads used for graph creation.
-`knn.cache.item.expiry.enabled` | false |Whether to remove graphs that have not been accessed for a certain duration from memory.
+`knn.algo_param.index_thread_qty` | 1 | The number of threads used for graph creation. Keeping this value low reduces the CPU impact of the KNN plugin, but also reduces indexing performance.
+`knn.cache.item.expiry.enabled` | false | Whether to remove graphs that have not been accessed for a certain duration from memory.
 `knn.cache.item.expiry.minutes` | 3h | If enabled, the idle time before removing a graph from memory.
 `knn.circuit_breaker.unset.percentage` | 75.0 | The native memory usage threshold for the circuit breaker.
 `knn.circuit_breaker.triggered` | false | True when memory usage exceeds the `knn.circuit_breaker.unset.percentage` value.

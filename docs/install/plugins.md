@@ -38,7 +38,6 @@ opendistro_index_management     1.4.0.0
 opendistro_performance_analyzer 1.4.0.0
 opendistro_security             1.4.0.0
 opendistro_sql                  1.4.0.0
-opendistro-knn                  1.4.0.0
 </pre>
     </td>
   </tr>
