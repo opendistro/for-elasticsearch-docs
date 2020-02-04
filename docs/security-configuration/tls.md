@@ -108,9 +108,9 @@ opendistro_security.authcz.admin_dn:
 For security reasons, you can't use wildcards or regular expressions here.
 
 
-## OpenSSL
+## (Advanced) OpenSSL
 
-The Security plugin supports OpenSSL. If you use Java 8, we recommend OpenSSL in production for enhanced performance and a wider range of modern cipher suites. If you use Java 11, performance should be similar.
+The Security plugin supports OpenSSL, but we only recommend it if you use Java 8. If you use Java 11, we recommend the default configuration.
 
 To use OpenSSL, you must install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
 
