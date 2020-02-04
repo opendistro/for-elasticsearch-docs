@@ -36,8 +36,7 @@ GET _search
       "should": [
         {}
       ],
-      "filter": {
-      }
+      "filter": {}
     }
   }
 }
@@ -75,6 +74,7 @@ GET shakespeare/_search
           }
         }
       ],
+      "minimum_should_match": 1,
       "must_not": [
         {
           "term": {
@@ -82,7 +82,6 @@ GET shakespeare/_search
           }
         }
       ],
-      "minimum_should_match": 1,
       "filter": {
         "term": {
           "play_name": "Romeo and Juliet"
@@ -97,34 +96,34 @@ GET shakespeare/_search
 
 ```json
 {
-  "took" : 12,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 4,
-    "successful" : 4,
-    "skipped" : 0,
-    "failed" : 0
+  "took": 12,
+  "timed_out": false,
+  "_shards": {
+    "total": 4,
+    "successful": 4,
+    "skipped": 0,
+    "failed": 0
   },
-  "hits" : {
-    "total" : {
-      "value" : 1,
-      "relation" : "eq"
+  "hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
     },
-    "max_score" : 11.356054,
-    "hits" : [
+    "max_score": 11.356054,
+    "hits": [
       {
-        "_index" : "shakespeare",
-        "_type" : "_doc",
-        "_id" : "88020",
-        "_score" : 11.356054,
-        "_source" : {
-          "type" : "line",
-          "line_id" : 88021,
-          "play_name" : "Romeo and Juliet",
-          "speech_number" : 19,
-          "line_number" : "4.5.61",
-          "speaker" : "PARIS",
-          "text_entry" : "O love! O life! not life, but love in death!"
+        "_index": "shakespeare",
+        "_type": "_doc",
+        "_id": "88020",
+        "_score": 11.356054,
+        "_source": {
+          "type": "line",
+          "line_id": 88021,
+          "play_name": "Romeo and Juliet",
+          "speech_number": 19,
+          "line_number": "4.5.61",
+          "speaker": "PARIS",
+          "text_entry": "O love! O life! not life, but love in death!"
         }
       }
     ]
@@ -149,13 +148,6 @@ GET shakespeare/_search
           }
         }
       ],
-      "must_not": [
-        {
-          "term": {
-            "speaker": "ROMEO"
-          }
-        }
-      ],
       "should": [
         {
           "match": {
@@ -175,6 +167,13 @@ GET shakespeare/_search
         }
       ],
       "minimum_should_match": 1,
+      "must_not": [
+        {
+          "term": {
+            "speaker": "ROMEO"
+          }
+        }
+      ],
       "filter": {
         "term": {
           "play_name": "Romeo and Juliet"
