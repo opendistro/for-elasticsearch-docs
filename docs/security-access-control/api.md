@@ -86,6 +86,74 @@ Hidden resources are automatically reserved.
 
 To add or remove these flags, you need to modify `plugins/opendistro_security/securityconfig/internal_users.yml` and run `plugins/opendistro_security/tools/securityadmin.sh`.
 
+
+---
+
+## Account
+
+### Get account details
+
+Returns account details for the current user. For example, if you sign the request as the `admin` user, the response includes details for that user.
+
+
+#### Request
+
+```
+GET _opendistro/_security/api/account
+```
+
+#### Sample response
+
+```json
+{
+  "user_name": "admin",
+  "is_reserved": true,
+  "is_hidden": false,
+  "is_internal_user": true,
+  "user_requested_tenant": null,
+  "backend_roles": [
+    "admin"
+  ],
+  "custom_attribute_names": [],
+  "tenants": {
+    "global_tenant": true,
+    "admin_tenant": true,
+    "admin": true
+  },
+  "roles": [
+    "all_access",
+    "own_index"
+  ]
+}
+```
+
+
+### Change password
+
+Changes the password for the current user.
+
+
+#### Request
+
+```json
+PUT _opendistro/_security/api/account
+{
+    "current_password" : "old-password",
+    "password" : "new-password"
+}
+```
+
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "'test-user' updated."
+}
+```
+
+
 ---
 
 ## Action groups

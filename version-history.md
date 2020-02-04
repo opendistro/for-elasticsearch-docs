@@ -9,7 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-1.4.0 | Adds the [KNN](../docs/knn/) plugin for Elasticsearch and bumps Elasticsearch version. | TBD | 7.4.2
+1.4.0 | Adds the [KNN](../docs/knn/) plugin for Elasticsearch, adds account management to the Security plugin API and Kibana, and bumps Elasticsearch version. | TBD | 7.4.2
 1.3.0 | Adds [Index State Management](../docs/ism/) plugins for Elasticsearch and Kibana and bumps Elasticsearch version. | 17 December 2019 | 7.3.2
 1.2.1 | Bumps Elasticsearch version. | 4 November 2019 | 7.2.1
 1.2.0 | Bumps Elasticsearch version. | 19 September 2019 | 7.2.0
