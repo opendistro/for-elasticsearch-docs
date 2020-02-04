@@ -131,7 +131,9 @@ GET shakespeare/_search
 }
 ```
 
-If you want to identify which of these clauses actually caused the matching results, name each of your queries:
+If you want to identify which of these clauses actually caused the matching results, name each of your queries.
+We need to change the queries such that the field names contain an object instead of the query itself.
+
 
 ```json
 GET shakespeare/_search
@@ -143,7 +145,7 @@ GET shakespeare/_search
           "match": {
             "text_entry": {
               "query": "love",
-              "_name": "text-love"
+              "_name": "love-must"
             }
           }
         }
@@ -153,7 +155,7 @@ GET shakespeare/_search
           "match": {
             "text_entry": {
               "query": "life",
-              "_name": "text-life"
+              "_name": "life-should"
             }
           }
         },
@@ -161,7 +163,7 @@ GET shakespeare/_search
           "match": {
             "text_entry": {
               "query": "grace",
-              "_name": "text-grace"
+              "_name": "grace-should"
             }
           }
         }
@@ -169,14 +171,20 @@ GET shakespeare/_search
       "minimum_should_match": 1,
       "must_not": [
         {
-          "term": {
-            "speaker": "ROMEO"
+          "match": {
+            "speaker": {
+              "query": "ROMEO",
+              "_name": "ROMEO-must-not"
+            }
           }
         }
       ],
       "filter": {
-        "term": {
-          "play_name": "Romeo and Juliet"
+        "match": {
+          "play_name": {
+            "query": "Romeo and Juliet",
+            "_name": "Romeo-and-Juliet-filter"
+          }
         }
       }
     }
@@ -187,9 +195,12 @@ GET shakespeare/_search
 You get back a `matched_queries` array that lists the queries that matched these results:
 
 ```json
-"matched_queries" : [
-  "text-love",
-  "text-life"
+"matched_queries": [
+  "Romeo-and-Juliet-filter",
+  "love-must",
+  "life-should"
 ]
 ```
 If you remove the queries not seen in this list, you will still see the exact same result.
+You don't need this for the `must`, `must_not`, and `filter` clauses because they match for all results.
+It's useful though to understand which `should` clause matched to better understand the relevancy score.
