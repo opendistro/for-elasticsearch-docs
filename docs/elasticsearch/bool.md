@@ -48,7 +48,7 @@ For example, if you have all the works of Shakespeare indexed in an Elasticsearc
 2. The `speaker` field must not contain `ROMEO`.
 3. Filter these results to the play `Romeo and Juliet` without affecting the relevancy score.
 
-The `bool` query to meet these requirements would be:
+A sample `bool` query that meets these requirements is as follows:
 
 ```json
 GET shakespeare/_search
@@ -77,13 +77,13 @@ GET shakespeare/_search
       "minimum_should_match": 1,
       "must_not": [
         {
-          "term": {
+          "match": {
             "speaker": "ROMEO"
           }
         }
       ],
       "filter": {
-        "term": {
+        "match": {
           "play_name": "Romeo and Juliet"
         }
       }
@@ -131,8 +131,8 @@ GET shakespeare/_search
 }
 ```
 
-If you want to identify which of these clauses actually caused the matching results, name each of your queries.
-We need to change the queries such that the field names contain an object instead of the query itself.
+If you want to identify which of these clauses actually caused the matching results, name each of your queries with the `_name` parameter.
+To add the `_name` parameter, change the field name in the `match` query to an object:
 
 
 ```json
@@ -201,6 +201,6 @@ You get back a `matched_queries` array that lists the queries that matched these
   "life-should"
 ]
 ```
-If you remove the queries not seen in this list, you will still see the exact same result.
-You don't need this for the `must`, `must_not`, and `filter` clauses because they match for all results.
-It's useful though to understand which `should` clause matched to better understand the relevancy score.
+
+If you remove the queries not in this list, you will still see the exact same result.
+By examining which `should` clause matched, you can better understand the relevancy score of the results.
