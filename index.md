@@ -30,17 +30,18 @@ Open Distro for Elasticsearch is well-suited to the following use cases:
 * Clickstream analytics
 * Search backend
 
-Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers several extra features:
+Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers many extra features:
 
 Component | Purpose
 :--- | :---
-Elasticsearch | Data store and search engine
-Kibana | Search frontend and visualizations
+[Elasticsearch](docs/elasticsearch) | Data store and search engine
+[Kibana](docs/kibana) | Search frontend and visualizations
 [Security](docs/security-configuration/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
 [Index State Management](docs/ism/) | Automate index operations
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
+[Anomaly Detection](docs/ad/) | Identify atypical data and receive automatic notifications
 
 
 ---
