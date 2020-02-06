@@ -301,7 +301,7 @@ After 30 days, the policy moves this index into a `delete` state. The service se
         "actions": [
           {
             "rollover": {
-              "min_age": "1d"
+              "min_index_age": "1d"
             }
           }
         ],
