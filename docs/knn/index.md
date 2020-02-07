@@ -102,7 +102,7 @@ GET my-index/_search
   "post_filter": {
     "range": {
       "price": {
-        "gte": 6,
+        "gte": 5,
         "lte": 10
       }
     }
