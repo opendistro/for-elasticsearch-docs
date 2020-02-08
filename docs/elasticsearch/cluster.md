@@ -238,7 +238,7 @@ Now, if a data node fails, forced awareness does not allocate the replicas to a 
 In our two-zone architecture, we can use allocation awareness if `odfe-d1` and `odfe-d2` are less than 50% utilized, so that each of them have the storage capacity to allocate replicas in the same zone.
 If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This to make sure that in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
 
-Using allocation awareness or forced awareness would depend on how much you space you might need in each zone to balance your primary and replica shards for cluster stability.
+Choosing allocation awareness or forced awareness depends on how much you space you might need in each zone to balance your primary and replica shards.
 
 ## (Advanced) Step 7: Set up a hot-warm architecture
 
