@@ -9,18 +9,18 @@ nav_order: 11
 
 The `bool` query lets you combine multiple search queries with boolean logic. You can use boolean logic to include, exclude, or optionally include search queries.
 
-The `bool` query can be your go-to query because it allows you to construct an advanced query by chaining together a number of simple ones.
+The `bool` query is a go-to query because it allows you to construct an advanced query by chaining together a number of simple ones.
 
-You can use the following clauses (subqueries) within the `bool` query:
+Use the following clauses (subqueries) within the `bool` query:
 
 Clause | Behavior
 :--- | :---
 `must` | The results must match the queries in this clause. If you have multiple queries, every single one must match. Acts as an `and` operator.
 `must_not` | This is the anti-must clause. All matches are excluded from the results. Acts as a `not` operator.
-`should` | The results should match the queries but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1). Acts as an `or` operator.
-`filter` | Filters reduce your dataset before applying the queries. They behave like queries but they do not affect the relevancy score that the results are sorted by.
+`should` | The results should match the queries, but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1). Acts as an `or` operator.
+`filter` | Filters reduce your dataset before applying the queries. They behave like queries, but do not affect the relevancy score that the results are sorted by.
 
-The structure of a bool query is as follows:
+The structure of a `bool` query is as follows:
 
 ```json
 GET _search
@@ -42,13 +42,13 @@ GET _search
 }
 ```
 
-For example, if you have all the works of Shakespeare indexed in an Elasticsearch cluster and you want to construct a single search query with the following requirements:
+For example, assume you have the complete works of Shakespeare indexed in an Elasticsearch cluster and want to construct a single query that meets these requirements:
 
 1. The `text_entry` field must contain the word `love` and should contain either `life` or `grace`.
 2. The `speaker` field must not contain `ROMEO`.
 3. Filter these results to the play `Romeo and Juliet` without affecting the relevancy score.
 
-A sample `bool` query that meets these requirements is as follows:
+Use the following query:
 
 ```json
 GET shakespeare/_search
@@ -83,7 +83,7 @@ GET shakespeare/_search
         }
       ],
       "filter": {
-        "match": {
+        "term": {
           "play_name": "Romeo and Juliet"
         }
       }
@@ -131,7 +131,7 @@ GET shakespeare/_search
 }
 ```
 
-If you want to identify which of these clauses actually caused the matching results, name each of your queries with the `_name` parameter.
+If you want to identify which of these clauses actually caused the matching results, name each query with name the `_name` parameter.
 To add the `_name` parameter, change the field name in the `match` query to an object:
 
 
@@ -180,11 +180,8 @@ GET shakespeare/_search
         }
       ],
       "filter": {
-        "match": {
-          "play_name": {
-            "query": "Romeo and Juliet",
-            "_name": "Romeo-and-Juliet-filter"
-          }
+        "term": {
+          "play_name": "Romeo and Juliet"
         }
       }
     }
@@ -192,11 +189,10 @@ GET shakespeare/_search
 }
 ```
 
-You get back a `matched_queries` array that lists the queries that matched these results:
+Elasticsearch returns a `matched_queries` array that lists the queries that matched these results:
 
 ```json
 "matched_queries": [
-  "Romeo-and-Juliet-filter",
   "love-must",
   "life-should"
 ]
@@ -204,3 +200,91 @@ You get back a `matched_queries` array that lists the queries that matched these
 
 If you remove the queries not in this list, you will still see the exact same result.
 By examining which `should` clause matched, you can better understand the relevancy score of the results.
+
+You can also construct complex boolean expressions by nesting `bool` queries.
+For example, to find a `text_entry` field that matches (`love` OR `hate`) AND (`life` OR `grace`) in the play `Romeo and Juliet`:
+
+```json
+GET shakespeare/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "text_entry": "love"
+                }
+              },
+              {
+                "match": {
+                  "text": "hate"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "text_entry": "life"
+                }
+              },
+              {
+                "match": {
+                  "text": "grace"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "filter": {
+        "term": {
+          "play_name": "Romeo and Juliet"
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample output
+
+```json
+{
+  "took": 10,
+  "timed_out": false,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 1,
+    "max_score": 11.37006,
+    "hits": [
+      {
+        "_index": "shakespeare",
+        "_type": "doc",
+        "_id": "88020",
+        "_score": 11.37006,
+        "_source": {
+          "type": "line",
+          "line_id": 88021,
+          "play_name": "Romeo and Juliet",
+          "speech_number": 19,
+          "line_number": "4.5.61",
+          "speaker": "PARIS",
+          "text_entry": "O love! O life! not life, but love in death!"
+        }
+      }
+    ]
+  }
+}
+```
