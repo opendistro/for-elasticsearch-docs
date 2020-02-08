@@ -25,8 +25,11 @@ Open Distro for Elasticsearch version | Release highlights | Release date | Elas
 
 For detailed release notes, see these GitHub repositories:
 
+- [Open Distro for Elasticsearch](https://github.com/opendistro-for-elasticsearch/opendistro-build/tree/master/release-notes)
 - [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
 - [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
 - [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
 - [Index State Management](https://github.com/opendistro-for-elasticsearch/index-management/releases)
 - [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
+- [KNN](https://github.com/opendistro-for-elasticsearch/k-NN/releases)
+- [Anomaly Detection](https://github.com/opendistro-for-elasticsearch/anomaly-detection/releases)

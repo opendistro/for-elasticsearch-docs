@@ -8,6 +8,9 @@ has_toc: false
 
 # KNN
 
+KNN is currently only available as part of the Docker image.
+{: .warning }
+
 Short for its associated *k-nearest neighbors* algorithm, the KNN plugin lets you search for points in a vector space and find the "nearest neighbors" for those points by Euclidean distance. Use cases include recommendations (for example, an "other songs you might like" feature in a music application), image recognition, and fraud detection. For background information on the algorithm, see [Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm).
 
 

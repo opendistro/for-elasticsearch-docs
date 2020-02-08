@@ -38,6 +38,7 @@ opendistro_index_management     1.4.0.0
 opendistro_performance_analyzer 1.4.0.0
 opendistro_security             1.4.0.0
 opendistro_sql                  1.4.0.0
+opendistro-knn                  1.4.0.0
 </pre>
     </td>
   </tr>
@@ -186,9 +187,8 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 
 ### KNN
 
-```bash
-sudo bin/elasticsearch-plugin install
-```
+KNN is currently only available as part of the Docker image.
+{: .warning }
 
 
 ### Anomaly Detection
