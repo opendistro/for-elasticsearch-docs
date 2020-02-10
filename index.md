@@ -30,17 +30,18 @@ Open Distro for Elasticsearch is well-suited to the following use cases:
 * Clickstream analytics
 * Search backend
 
-Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers several extra features:
+Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers many extra features:
 
 Component | Purpose
 :--- | :---
-Elasticsearch | Data store and search engine
-Kibana | Search frontend and visualizations
+[Elasticsearch](docs/elasticsearch) | Data store and search engine
+[Kibana](docs/kibana) | Search frontend and visualizations
 [Security](docs/security-configuration/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
 [Index State Management](docs/ism/) | Automate index operations
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
+[Anomaly Detection](docs/ad/) | Identify atypical data and receive automatic notifications
 
 
 ---
@@ -53,8 +54,8 @@ Docker
 1. Run the following commands:
 
    ```bash
-   docker pull amazon/opendistro-for-elasticsearch:1.3.0
-   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.3.0
+   docker pull amazon/opendistro-for-elasticsearch:1.4.0
+   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.4.0
    ```
 
 1. In a new terminal session, run:

@@ -42,16 +42,16 @@ For a sample [curl](https://curl.haxx.se/) command, try:
 curl -XPOST https://localhost:9200/_opendistro/_sql -u admin:admin -k -d '{"query": "SELECT * FROM kibana_sample_data_flights LIMIT 10"}' -H 'Content-Type: application/json'
 ```
 
-By default, queries return JSON, but you can also return data in CSV format:
+By default, queries return data in JDBC format, but you can also return data in standard Elasticsearch JSON, CSV, or raw formats:
 
 ```json
-POST _opendistro/_sql?format=csv
+POST _opendistro/_sql?format=json|csv|raw
 {
   "query": "SELECT * FROM my-index LIMIT 50"
 }
 ```
 
-When you return data in CSV format, each row corresponds to a *document*, and each column corresponds to a *field*. Conceptually, you might find it useful to think of each Elasticsearch index as a database table.
+When you return data in CSV or raw format, each row corresponds to a *document*, and each column corresponds to a *field*. Conceptually, you might find it useful to think of each Elasticsearch index as a database table.
 
 
 ## User interfaces
@@ -78,7 +78,7 @@ If a query isn't behaving the way you expect, use the `_explain` API to see the 
 ```json
 POST _opendistro/_sql/_explain
 {
-  "query": "SELECT * FROM * LIMIT  50"
+  "query": "SELECT * FROM my-index LIMIT  50"
 }
 ```
 
@@ -86,5 +86,8 @@ POST _opendistro/_sql/_explain
 #### Sample response
 
 ```json
-{"from":0,"size":50}
+{
+  "from": 0,
+  "size": 50
+}
 ```

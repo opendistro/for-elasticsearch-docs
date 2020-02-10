@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+1.4.0 | Adds the [KNN](../docs/knn/) plugin for Elasticsearch to the Docker image, adds account management to the Security plugin API and Kibana, and bumps Elasticsearch version. | 10 February 2020 | 7.4.2
 1.3.0 | Adds [Index State Management](../docs/ism/) plugins for Elasticsearch and Kibana and bumps Elasticsearch version. | 17 December 2019 | 7.3.2
 1.2.1 | Bumps Elasticsearch version. | 4 November 2019 | 7.2.1
 1.2.0 | Bumps Elasticsearch version. | 19 September 2019 | 7.2.0
@@ -24,8 +25,11 @@ Open Distro for Elasticsearch version | Release highlights | Release date | Elas
 
 For detailed release notes, see these GitHub repositories:
 
+- [Open Distro for Elasticsearch](https://github.com/opendistro-for-elasticsearch/opendistro-build/tree/master/release-notes)
 - [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
 - [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
 - [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
 - [Index State Management](https://github.com/opendistro-for-elasticsearch/index-management/releases)
 - [Performance Analyzer](https://github.com/opendistro-for-elasticsearch/performance-analyzer/releases)
+- [KNN](https://github.com/opendistro-for-elasticsearch/k-NN/releases)
+- [Anomaly Detection](https://github.com/opendistro-for-elasticsearch/anomaly-detection/releases)

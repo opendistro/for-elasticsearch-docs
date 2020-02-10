@@ -17,7 +17,7 @@ As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.co
 
 ## ZIP install
 
-1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.3.0.zip).
+1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.4.0.zip).
 
 1. Extract the file to a directory, and open that directory at the command prompt.
 
