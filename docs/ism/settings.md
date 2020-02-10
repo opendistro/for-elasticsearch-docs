@@ -5,7 +5,7 @@ parent: Index State Management
 nav_order: 4
 ---
 
-# Settings
+# ISM Settings
 
 We don't recommend changing these settings; the defaults should work well for most use cases.
 

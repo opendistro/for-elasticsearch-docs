@@ -5,7 +5,7 @@ parent: KNN
 nav_order: 10
 ---
 
-# Settings
+# KNN Settings
 
 The KNN plugin adds several new index settings, cluster settings, and statistics.
 

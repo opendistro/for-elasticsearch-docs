@@ -41,7 +41,7 @@ PUT my-index
 
 The `knn_vector` data type supports a single list of up to 10,000 floats, with the number of floats defined by the required dimension parameter.
 
-In Elasticsearch, codecs handle the storage and retrieval of indices. The KNN plugin uses a custom codec to writes vector data to a graph so that the underlying KNN search library can read it.
+In Elasticsearch, codecs handle the storage and retrieval of indices. The KNN plugin uses a custom codec to write vector data to a graph so that the underlying KNN search library can read it.
 {: .tip }
 
 After you create the index, add some data to it:
