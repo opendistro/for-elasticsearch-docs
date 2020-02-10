@@ -51,11 +51,11 @@ GET /_opendistro/_knn/nodeId1,nodeId2/stats/statName1,statName2
 
 Statistic |  Description
 :--- | :---
-totalLoadTime | The time in nanoseconds that KNN has taken to load graphs into the cache.
-evictionCount | The number of graphs that have been evicted from the cache due to memory constraints or idle time.
-hitCount | The number of cache hits.
-cacheCapacityReached | Whether `knn.memory.circuit_breaker.limit` has been reached.
-loadSuccessCount | The number of times KNN successfully loaded a graph into the cache.
-graphMemoryUsage | Current cache size (total size of all graphs in memory) in kilobytes.
-missCount | The number of cache misses.
-loadExceptionCount | The number of times an exception occurred when trying to load a graph into the cache.
+`totalLoadTime` | The time in nanoseconds that KNN has taken to load graphs into the cache.
+`evictionCount` | The number of graphs that have been evicted from the cache due to memory constraints or idle time.
+`hitCount` | The number of cache hits. A cache hit occurs when a user queries a graph and it is already loaded into memory.
+`cacheCapacityReached` | Whether `knn.memory.circuit_breaker.limit` has been reached.
+`loadSuccessCount` | The number of times KNN successfully loaded a graph into the cache.
+`graphMemoryUsage` | Current cache size (total size of all graphs in memory) in kilobytes.
+`missCount` | The number of cache misses. A cache miss occurs when a user queries a graph and it has not yet been loaded into memory.
+`loadExceptionCount` | The number of times an exception occurred when trying to load a graph into the cache.
