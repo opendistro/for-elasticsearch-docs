@@ -102,7 +102,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
      "Start" and "end" refer to the interval at which the monitor runs. See [Available variables](#available-variables).
 
-   - Anomaly detection works for pairing with the anomaly detection plugin. See [Anomaly Detection](../ad/).
+   - Anomaly detection works for pairing with the anomaly detection plugin. See [Anomaly Detection](../../ad/).
 
 
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
