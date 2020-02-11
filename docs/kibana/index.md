@@ -96,7 +96,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
    ```
 
 
-## Run Kibana on Windows (ZIP, alpha)
+## Run Kibana on Windows (ZIP)
 
 1. Download the ZIP.
 
@@ -111,9 +111,9 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
    ```
 
 
-## Run Kibana on Windows (EXE, alpha)
+## Run Kibana on Windows (EXE)
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_for_Elasticsearch_Kibana_windows-x64_1_3_0.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_Kibana_1.4.0.exe), run it, and click through the steps.
 
 1. Open the command prompt.
 

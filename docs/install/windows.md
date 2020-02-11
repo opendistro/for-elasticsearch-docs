@@ -1,17 +1,15 @@
 ---
 layout: default
-title: Windows (Alpha)
+title: Windows
 parent: Install and Configure
 nav_order: 6
 ---
 
 # Windows
-Alpha
-{: .label .label-red :}
 
 Like the [tarball installation](../tar/), we only recommend the Windows installation of Open Distro for Elasticsearch for testing and development purposes. We test on Windows 10 and Windows Server 2019, but other versions might work.
 
-As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), which you can use to install [Debian packages](../deb/).
+As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), which you can use to install [Debian packages](../deb/).
 {: .tip }
 
 
@@ -32,7 +30,7 @@ As an alternative, we recommend [Ubuntu for Windows 10](https://www.microsoft.co
 
 1. Install Java 11.
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_for_Elasticsearch_windows-x64_1.3.0.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_1.4.0.exe), run it, and click through the steps.
 
 1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory:
 

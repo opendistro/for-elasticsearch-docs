@@ -33,12 +33,12 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
     <td>7.4.2</td>
     <td>
       <pre>opendistro-job-scheduler        1.4.0.0
+opendistro-knn                  1.4.0.0
 opendistro_alerting             1.4.0.0
 opendistro_index_management     1.4.0.0
 opendistro_performance_analyzer 1.4.0.0
 opendistro_security             1.4.0.0
 opendistro_sql                  1.4.0.0
-opendistro-knn                  1.4.0.0
 </pre>
     </td>
   </tr>
