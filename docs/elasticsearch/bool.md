@@ -7,7 +7,7 @@ nav_order: 11
 
 # Boolean queries
 
-The `bool` query lets you combine multiple search queries with boolean logic. You can use boolean logic to include, exclude, or optionally include search queries.
+The `bool` query lets you combine multiple search queries with boolean logic. You can use boolean logic between queries to either narrow or broaden your search results.
 
 The `bool` query is a go-to query because it allows you to construct an advanced query by chaining together a number of simple ones.
 
