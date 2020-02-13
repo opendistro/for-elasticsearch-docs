@@ -181,7 +181,7 @@ GET movies/_doc/1
 }
 ```
 
-Note that the `_version` field of the document is incremented to 2. Use the `version` field to keep track of how many times a document is updated.
+Note that the `_version` field of the document is incremented to 2. Use the `_version` field to keep track of how many times a document is updated.
 
 POST requests are made for partial updates to a document. To altogether replace a document, use a PUT request:
 
@@ -219,4 +219,4 @@ To delete a document from an index, use a DELETE request:
 DELETE movies/_doc/1
 ```
 
-The delete operation increments the `_version` field. If you add the document back, the `_version` field is again incremented. This is because when you delete a document it isn't completely gone. The metadata of the document is still retained in the index.
+The delete operation increments the `_version` field. If you add the document back, the `_version` field is still incremented. This is because when you delete a document it isn't completely gone. The metadata of the document is still retained in the index.
