@@ -25,9 +25,9 @@ Node type | Description
 :--- | :--- |
 `Master` | Manages the overall operation of a cluster and keeps track of the cluster state. This includes creating and deleting indices, keeping track of the nodes that join and leave the cluster, checking the health of each node in the cluster (by running ping requests), and allocating shards to nodes.
 `Master-eligible` | Available for election to become a new master node. Elects one node among them as the master node through a voting process.
-`Data` | Stores and searches data. Performs all data-related operations (indexing, searching, aggregating) on the shards stored locally. They are the worker nodes of your cluster and need more disk space than any other node type.
-`Ingest` | Preprocesses data before storing it in a cluster. Runs an ingest pipeline that transforms your data before adding it to an index.
-`Coordinating` | Routes search and aggregation requests. Forwards each client request to the shards on the data nodes, collects and aggregates the results into one final result, and sends this result back to the client.
+`Data` | Stores and searches data. Performs all data-related operations (indexing, searching, aggregating) on the on local shards. These are the worker nodes of your cluster and need more disk space than any other node type.
+`Ingest` | Preprocesses data before storing it in the cluster. Runs an ingest pipeline that transforms your data before adding it to an index.
+`Coordinating` | Forwards each client request to the shards on the data nodes, collects and aggregates the results into one final result, and sends this result back to the client.
 
 By default, each node is a master-eligible, data, ingest, and coordinating node. On large clusters, it’s important to have dedicated nodes for each role for the overall stability of the cluster.
 
