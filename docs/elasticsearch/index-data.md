@@ -97,7 +97,7 @@ GET movies/_doc/1
 }
 ```
 
-You can see the document in the `_source` object. If the document is not found, the `found` key will be set to `false` and the `_source` object will not be part of the result.
+You can see the document in the `_source` object. If the document is not found, the `found` key is `false` and the `_source` object is not part of the response.
 
 To retrieve multiple documents with a single command, use the `_mget` operation.
 The format for retrieving multiple documents is similar to the `_bulk` operation, where you must specify the index and ID in the request body:
@@ -160,7 +160,7 @@ POST movies/_doc/1/_update
 }
 ```
 
-The `title` field is updated and the `genre` field is added:
+Note the updated `title` field and new `genre` field:
 
 ```json
 GET movies/_doc/1
@@ -181,9 +181,9 @@ GET movies/_doc/1
 }
 ```
 
-Note that the `_version` field of the document is incremented to 2. Use the `_version` field to keep track of how many times a document is updated.
+The document also has an incremented `_version` field. Use this field to keep track of how many times a document is updated.
 
-POST requests are made for partial updates to a document. To altogether replace a document, use a PUT request:
+POST requests make partial updates to documents. To altogether replace a document, use a PUT request:
 
 ```json
 PUT movies/_doc/1
@@ -194,8 +194,7 @@ PUT movies/_doc/1
 
 The document with ID of 1 will contain only the `title` field, because the entire document will be replaced with the document indexed in this PUT request.
 
-You can conditionally update a document based on whether or not it already exists using the `upsert` object.
-Here, if the document exists, it's `title` field is changed to `Castle in the Sky`; if it doesn't already exist, the document within the `upsert` object is indexed:
+Use the `upsert` object to conditionally update documents based on whether they already exist. Here, if the document exists, its `title` field changes to `Castle in the Sky`. If it doesn't, Elasticsearch indexes the document in the `upsert` object.
 
 ```json
 POST movies/_doc/2/_update
@@ -219,4 +218,4 @@ To delete a document from an index, use a DELETE request:
 DELETE movies/_doc/1
 ```
 
-The delete operation increments the `_version` field. If you add the document back, the `_version` field is still incremented. This is because when you delete a document it isn't completely gone. The metadata of the document is still retained in the index.
+The DELETE operation increments the `_version` field. If you add the document back to the same ID, the `_version` field increments again. This behavior occurs because Elasticsearch deletes the document `_source`, but retains its metadata.
