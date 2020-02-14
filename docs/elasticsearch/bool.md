@@ -9,7 +9,7 @@ nav_order: 11
 
 The `bool` query lets you combine multiple search queries with boolean logic. You can use boolean logic between queries to either narrow or broaden your search results.
 
-The `bool` query is a go-to query because it allows you to construct an advanced query by chaining together a number of simple ones.
+The `bool` query is a go-to query because it allows you to construct an advanced query by chaining together several simple ones.
 
 Use the following clauses (subqueries) within the `bool` query:
 
@@ -17,8 +17,8 @@ Clause | Behavior
 :--- | :---
 `must` | The results must match the queries in this clause. If you have multiple queries, every single one must match. Acts as an `and` operator.
 `must_not` | This is the anti-must clause. All matches are excluded from the results. Acts as a `not` operator.
-`should` | The results should match the queries, but don't have to match. Each matching `should` clause increases the relevancy score. You can optionally require one or more queries to match with the `minimum_number_should_match` parameter (default is 1). Acts as an `or` operator.
-`filter` | Filters reduce your dataset before applying the queries. They behave like queries, but do not affect the relevancy score that the results are sorted by.
+`should` | The results should, but don't have to, match the queries. Each matching `should` clause increases the relevancy score. As an option, you can require one or more queries to match the value of the `minimum_number_should_match` parameter (default is 1).
+`filter` | Filters reduce your dataset before applying the queries. They behave like queries but do not affect the relevancy score that the results are sorted by.
 
 The structure of a `bool` query is as follows:
 
@@ -42,7 +42,7 @@ GET _search
 }
 ```
 
-For example, assume you have the complete works of Shakespeare indexed in an Elasticsearch cluster and want to construct a single query that meets these requirements:
+For example, assume you have the complete works of Shakespeare indexed in an Elasticsearch cluster. You want to construct a single query that meets the following requirements:
 
 1. The `text_entry` field must contain the word `love` and should contain either `life` or `grace`.
 2. The `speaker` field must not contain `ROMEO`.
@@ -131,7 +131,7 @@ GET shakespeare/_search
 }
 ```
 
-If you want to identify which of these clauses actually caused the matching results, name each query with name the `_name` parameter.
+If you want to identify which of these clauses actually caused the matching results, name each query with the `_name` parameter.
 To add the `_name` parameter, change the field name in the `match` query to an object:
 
 
