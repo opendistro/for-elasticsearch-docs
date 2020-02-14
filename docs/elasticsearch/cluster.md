@@ -21,15 +21,15 @@ This is a four-node cluster that has one dedicated master node, one dedicated co
 
 The following table provides brief descriptions of the node types.
 
-Node type | Description
-:--- | :--- |
-`Master` | Manages the overall operation of a cluster and keeps track of the cluster state. This includes creating and deleting indices, keeping track of the nodes that join and leave the cluster, checking the health of each node in the cluster (by running ping requests), and allocating shards to nodes.
-`Master-eligible` | Available for election to become a new master node. Elects one node among them as the master node through a voting process.
-`Data` | Stores and searches data. Performs all data-related operations (indexing, searching, aggregating) on the on local shards. These are the worker nodes of your cluster and need more disk space than any other node type.
-`Ingest` | Preprocesses data before storing it in the cluster. Runs an ingest pipeline that transforms your data before adding it to an index.
-`Coordinating` | Forwards each client request to the shards on the data nodes, collects and aggregates the results into one final result, and sends this result back to the client.
+Node type | Description | Best practices for production
+:--- | :--- | :-- |
+`Master` | Manages the overall operation of a cluster and keeps track of the cluster state. This includes creating and deleting indices, keeping track of the nodes that join and leave the cluster, checking the health of each node in the cluster (by running ping requests), and allocating shards to nodes. | Three dedicated master nodes in three different zones is right for all/just about all production use cases. Two of them will be idle for most of the time except when one of them goes down or needs some maintenance. The redundancy is to make sure that your cluster never loses quorum.
+`Master-eligible` | Elects one node among them as the master node through a voting process. | For production, make sure you have dedicated master nodes. The way to achieve a dedicated node type is to mark all other node types as false.
+`Data` | Stores and searches data. Performs all data-related operations (indexing, searching, aggregating) on local shards. These are the worker nodes of your cluster and need more disk space than any other node type. | Keep adding data nodes evenly across all your zones proportional to the volume of your data.
+`Ingest` | Preprocesses data before storing it in the cluster. Runs an ingest pipeline that transforms your data before adding it to an index. | If you plan to ingest a lot of data and run complex ingest pipelines, we recommend you use two dedicated ingest nodes. You can also optionally offload your indexing from the data nodes so that your data nodes are used exclusively for searching and aggregating.
+`Coordinating` | Forwards each client request to the shards on the data nodes, collects and aggregates the results into one final result, and sends this result back to the client. | A couple of dedicated coordinating-only nodes is appropriate for search-heavy workloads.
 
-By default, each node is a master-eligible, data, ingest, and coordinating node. On large clusters, it’s important to have dedicated nodes for each role for the overall stability of the cluster.
+By default, each node is a master-eligible, data, ingest, and coordinating node. Assigning node roles is based on a trade off between what you deem acceptable performance for your cluster versus cost constraints.
 
 This page demonstrates how to work with the different node types. It assumes that you have a four-node cluster similar to the preceding illustration.
 
