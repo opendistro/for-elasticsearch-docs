@@ -29,7 +29,7 @@ Node type | Description | Best practices for production
 `Ingest` | Preprocesses data before storing it in the cluster. Runs an ingest pipeline that transforms your data before adding it to an index. | If you plan to ingest a lot of data and run complex ingest pipelines, we recommend you use two dedicated ingest nodes. You can also optionally offload your indexing from the data nodes so that your data nodes are used exclusively for searching and aggregating.
 `Coordinating` | Forwards each client request to the shards on the data nodes, collects and aggregates the results into one final result, and sends this result back to the client. | A couple of dedicated coordinating-only nodes is appropriate for search-heavy workloads.
 
-By default, each node is a master-eligible, data, ingest, and coordinating node. Assigning node roles is based on a trade off between what you deem acceptable performance for your cluster versus cost constraints.
+By default, each node is a master-eligible, data, ingest, and coordinating node. Assign and allocate node types to achieve an optimum price-performance ratio.
 
 This page demonstrates how to work with the different node types. It assumes that you have a four-node cluster similar to the preceding illustration.
 
