@@ -60,7 +60,7 @@ opendistro_security.restapi.endpoints_disabled.my-role.ROLES: ["PUT", "POST", "D
 To use the PUT and PATCH methods for the [configuration APIs](#configuration), add the following line to `elasticsearch.yml`:
 
 ```yml
-opendistro_security.unsupported.restapi.allow_config_modification: true
+opendistro_security.unsupported.restapi.allow_securityconfig_modification: true
 ```
 
 
@@ -1025,61 +1025,13 @@ PUT _opendistro/_security/api/securityconfig/config
       "index": ".kibana"
     },
     "http": {
-      "anonymous_auth_enabled": false,
-      "xff": {
-        "enabled": false,
-        "internalProxies": "192\\.168\\.0\\.10|192\\.168\\.0\\.11",
-        "remoteIpHeader": "X-Forwarded-For"
-      }
+      "anonymous_auth_enabled": false
     },
     "authc": {
-      "jwt_auth_domain": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "order": 0,
-        "http_authenticator": {
-          "challenge": false,
-          "type": "jwt",
-          "config": {
-            "signing_key": "base64 encoded HMAC key or public RSA/ECDSA pem key",
-            "jwt_header": "Authorization"
-          }
-        },
-        "authentication_backend": {
-          "type": "noop",
-          "config": {}
-        },
-        "description": "Authenticate via Json Web Token"
-      },
-      "ldap": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "order": 5,
-        "http_authenticator": {
-          "challenge": false,
-          "type": "basic",
-          "config": {}
-        },
-        "authentication_backend": {
-          "type": "ldap",
-          "config": {
-            "enable_ssl": false,
-            "enable_start_tls": false,
-            "enable_ssl_client_auth": false,
-            "verify_hostnames": true,
-            "hosts": [
-              "localhost:8389"
-            ],
-            "userbase": "ou=people,dc=example,dc=com",
-            "usersearch": "(sAMAccountName={0})"
-          }
-        },
-        "description": "Authenticate via LDAP or Active Directory"
-      },
       "basic_internal_auth_domain": {
         "http_enabled": true,
         "transport_enabled": true,
-        "order": 4,
+        "order": 0,
         "http_authenticator": {
           "challenge": true,
           "type": "basic",
@@ -1090,93 +1042,6 @@ PUT _opendistro/_security/api/securityconfig/config
           "config": {}
         },
         "description": "Authenticate via HTTP Basic against internal users database"
-      },
-      "proxy_auth_domain": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "order": 3,
-        "http_authenticator": {
-          "challenge": false,
-          "type": "proxy",
-          "config": {
-            "user_header": "x-proxy-user",
-            "roles_header": "x-proxy-roles"
-          }
-        },
-        "authentication_backend": {
-          "type": "noop",
-          "config": {}
-        },
-        "description": "Authenticate via proxy"
-      },
-      "clientcert_auth_domain": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "order": 2,
-        "http_authenticator": {
-          "challenge": false,
-          "type": "clientcert",
-          "config": {
-            "username_attribute": "cn"
-          }
-        },
-        "authentication_backend": {
-          "type": "noop",
-          "config": {}
-        },
-        "description": "Authenticate via SSL client certificates"
-      },
-      "kerberos_auth_domain": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "order": 6,
-        "http_authenticator": {
-          "challenge": true,
-          "type": "kerberos",
-          "config": {
-            "krb_debug": false,
-            "strip_realm_from_principal": true
-          }
-        },
-        "authentication_backend": {
-          "type": "noop",
-          "config": {}
-        }
-      }
-    },
-    "authz": {
-      "roles_from_another_ldap": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "authorization_backend": {
-          "type": "ldap",
-          "config": {}
-        },
-        "description": "Authorize via another Active Directory"
-      },
-      "roles_from_myldap": {
-        "http_enabled": false,
-        "transport_enabled": false,
-        "authorization_backend": {
-          "type": "ldap",
-          "config": {
-            "enable_ssl": false,
-            "enable_start_tls": false,
-            "enable_ssl_client_auth": false,
-            "verify_hostnames": true,
-            "hosts": [
-              "localhost:8389"
-            ],
-            "rolebase": "ou=groups,dc=example,dc=com",
-            "rolesearch": "(member={0})",
-            "userrolename": "disabled",
-            "rolename": "cn",
-            "resolve_nested_roles": true,
-            "userbase": "ou=people,dc=example,dc=com",
-            "usersearch": "(uid={0})"
-          }
-        },
-        "description": "Authorize via LDAP or Active Directory"
       }
     },
     "auth_failure_listeners": {},
