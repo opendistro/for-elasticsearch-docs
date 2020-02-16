@@ -54,12 +54,14 @@ POST movies/_doc
 { "title": "Spirited Away" }
 ```
 
-Automatic ID generation has a clear downside: because the indexing request didn't specify a document ID, you can't easily update the document at a later time. To specify an ID of 1, use the following request, and note the use of PUT instead of POST:
+Automatic ID generation has a clear downside: because the indexing request didn't specify a document ID, you can't easily update the document at a later time. Also, if you run this request 10 times, Elasticsearch indexes this document as 10 different documents with unique IDs. To specify an ID of 1, use the following request, and note the use of PUT instead of POST:
 
 ```json
 PUT movies/_doc/1
 { "title": "Spirited Away" }
 ```
+
+Because you must specify an ID, if you run this command 10 times, you still have just one document indexed with the `_version` field incremented to 10. 
 
 Indices default to one primary shard and one replica. If you want to specify non-default settings, create the index before adding documents:
 
