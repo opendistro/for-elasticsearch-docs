@@ -7,7 +7,7 @@ nav_order: 1
 
 # Authentication flow
 
-Understanding the authentication flow is the best way to get started with configuring the Security plugin for Open Distro for Elasticsearch.
+Understanding the authentication flow is the best way to get started with configuring the Security plugin.
 
 1. To identify a user who wants to access the cluster, the Security plugin needs the user's credentials.
 
@@ -15,12 +15,12 @@ Understanding the authentication flow is the best way to get started with config
 
 2. The Security plugin authenticates the user's credentials against a backend: the internal user database, Lightweight Directory Access Protocol (LDAP), Active Directory, Kerberos, or JSON web tokens.
 
-   The plugin supports chaining backends. If more than one backend is configured, the plugin tries to authenticate the user against all backends until one succeeds. A common use case is to combine the internal user database of the Security plugin with LDAP/Active Directory.
+   The plugin supports chaining backends. If more than one backend is configured, the plugin tries to authenticate the user sequentially against each backend until one succeeds. A common use case is to combine the internal user database of the Security plugin with LDAP/Active Directory.
 
 3. (Optional) After an authenticator verifies the user's credentials, the plugin collects any backend roles. In most cases, this backend is LDAP/Active Directory.
 
-4. After the user is authenticated and any backend roles are retrieved, the Security plugin uses role mapping to map security roles to the user (or to the user's backend roles).
+4. After the user is authenticated and any backend roles are retrieved, the Security plugin uses the role mapping to assign security roles to the user.
 
-   If the role mapping doesn't include the user (or the user's backend roles), the user is successfully authenticated but has no permissions.
+   If the role mapping doesn't include the user (or the user's backend roles), the user is successfully authenticated, but has no permissions.
 
 5. The user can now perform actions as defined by the mapped security roles. For example, a user might map to the `kibana_user` role and thus have permissions to access Kibana.

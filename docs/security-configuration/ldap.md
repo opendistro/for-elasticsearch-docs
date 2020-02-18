@@ -14,16 +14,6 @@ The `authc` section is used for configuring authentication, which means to check
 In most cases, you want to configure both authentication and authorization. You can also use authentication only and map the users retrieved from LDAP directly to Security plugin roles.
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
-
 ## Connection settings
 
 To enable LDAP authentication and authorization, add the following lines to `plugins/opendistro_security/securityconfig/config.yml`:
@@ -102,6 +92,7 @@ Name | Description
 `enable_start_tls` | Whether to use STARTTLS. Can't be used in combination with LDAPS.
 `enable_ssl_client_auth` | Whether to send the client certificate to the LDAP server.
 `verify_hostnames` | Whether to verify the hostnames of the server's TLS certificate.
+
 
 ### Certificate validation
 
@@ -266,6 +257,7 @@ Name | Description
 `usersearch` | The actual LDAP query that the Security plugin executes when trying to authenticate a user. The variable {0} is substituted with the user name.
 `username_attribute` | The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the DN is used (default).
 
+
 ### Complete authentication example
 
 ```yml
@@ -427,6 +419,7 @@ skip_users:
   - '/\S*/'
 ```
 
+
 ### (Advanced) Exclude roles from nested role lookups
 
 If the users in your LDAP installation have a large number of roles, and you have the requirement to resolve nested roles as well, you might run into performance issues.
@@ -457,6 +450,7 @@ Name | Description
 `rolesearch_enabled`  | Boolean. Enable or disable the role search. Default is `true`.
 `custom_attr_whitelist`  | String array. Specifies the LDAP attributes that should be made available for variable substitution.
 `custom_attr_maxval_len`  | Integer. Specifies the maximum allowed length of each attribute. All attributes longer than this value are discarded. A value of `0` disables custom attributes altogether. Default is 36.
+
 
 ### Complete authorization example
 

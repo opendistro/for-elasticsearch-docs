@@ -9,7 +9,7 @@ nav_order: 2
 
 One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
 
-The main configuration file for authentication and authorization backends is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).
+The main configuration file for authentication and authorization backends is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how to fetch additional roles from backend systems (optional).
 
 `config.yml` has three main parts:
 
@@ -27,15 +27,6 @@ opendistro_security:
 For a more complete example, see the [sample file on GitHub](https://github.com/opendistro-for-elasticsearch/security/blob/master/securityconfig/config.yml).
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## HTTP
 
 The `http` section has the following format:
@@ -51,6 +42,7 @@ xff: # optional section
 ```
 
 If you disable anonymous authentication, the Security plugin won't initialize if you have not provided at least one `authc`.
+
 
 ## Authentication
 
@@ -108,7 +100,7 @@ These are the possible values for `type`:
 
 ## Authorization
 
-After the user has been authenticated, the Security plugin can optionally collect additional user roles from backend systems. The authorization configuration has the following format:
+After the user has been authenticated, the Security plugin can optionally collect additional roles from backend systems. The authorization configuration has the following format:
 
 ```yml
 authz:
@@ -241,6 +233,7 @@ The header contains information about the used signing mechanism, as shown in th
 
 In this case, the header states that the message was signed using HMAC-SHA256.
 
+
 ### Payload
 
 The payload of a JSON web token contains the so-called [JWT Claims](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#RegisteredClaimName). A claim can be any piece of information about the user that the application that created the token has verified.
@@ -259,6 +252,7 @@ Example:
   "roles": "admin, devops"
 }
 ```
+
 
 ### Signature
 

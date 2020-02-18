@@ -24,15 +24,6 @@ The Security plugin can integrate with identify providers that use the OpenID Co
 * Kibana single sign-on
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## Configure OpenID Connect integration
 
 To integrate with an OpenID IdP, set up an authentication domain and choose `openid` as the HTTP authentication type. JSON web tokens already contain all required information to verify the request, so set `challenge` to `false` and `authentication_backend` to `noop`.

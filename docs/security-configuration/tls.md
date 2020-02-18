@@ -13,15 +13,6 @@ You can find an example configuration template with all options on [GitHub](http
 {: .note }
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## X.509 PEM certificates and PKCS \#8 keys
 
 The following tables contain the settings you can use to configure the location of your PEM certificates and private keys.

@@ -13,14 +13,6 @@ Most solutions work as a proxy in front of Elasticsearch and the Security plugin
 
 The Security plugin then extracts these HTTP header fields from the request and uses the values to determine the user's permissions.
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
 
 ## Enable proxy detection
 

@@ -12,15 +12,6 @@ The Security plugin supports user authentication through SAML single sign-on. Th
 This profile is meant for use with web browsers. It is not a general-purpose way of authenticating users against the Security plugin, so its primary use case is to support Kibana single sign-on.
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## Activating SAML
 
 To use SAML for authentication, you need to configure a respective authentication domain in the `authc` section of `plugins/opendistro_security/securityconfig/config.yml`. Because SAML works solely on the HTTP layer, you do not need any `authentication_backend` and can set it to `noop`. Place all SAML-specific configuration options in this chapter in the `config` section of the SAML HTTP authenticator:

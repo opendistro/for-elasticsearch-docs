@@ -12,15 +12,6 @@ Before running `securityadmin.sh` to load the settings into the `.opendistro_sec
 The best use of these YAML files is to configure [reserved and hidden resources](../../security-access-control/api/#reserved-and-hidden-resources), such as the `admin` and `kibanaserver` users. You might find it easier to create other users, roles, mappings, action groups, and tenants using Kibana or the REST API.
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## internal_users.yml
 
 This file contains any initial users that you want to add to the Security plugin's internal user database.

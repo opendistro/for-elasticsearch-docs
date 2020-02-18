@@ -14,15 +14,6 @@ After changing any of the configuration files in `plugins/opendistro_security/se
 After the `.opendistro_security` index is initialized, you can use Kibana to manage your users, roles, and permissions.
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## Configure the admin certificate
 
 You can configure all certificates that should have admin privileges in `elasticsearch.yml` stating their respective distinguished names (DNs). If you use the demo certificates, for example, you can use the `kirk` certificate:

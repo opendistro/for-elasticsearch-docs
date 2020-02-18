@@ -24,15 +24,6 @@ brew install openssl
 ```
 
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## Generate a private key
 
 The first step in this process is to generate a private key using the `genrsa` command. As the name suggests, you should keep this file private.
@@ -139,13 +130,13 @@ But if you look at the `subject` of the certificate after creating it, you might
 subject=/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=node1.example.com
 ```
 
-If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. Enter this to get the correct string:
+If you compare this string to the ones in `elasticsearch.yml` above, you can see that you need to invert the order of elements and use commas rather than slashes. Enter this command to get the correct string:
 
 ```bash
 openssl x509 -subject -nameopt RFC2253 -noout -in node.pem
 ```
 
-Then you can copy and paste the output:
+Then you can copy and paste the output into `elasticsearch.yml`:
 
 ```
 subject= CN=node1.example.com,OU=UNIT,O=ORG,L=TORONTO,ST=ONTARIO,C=CA
@@ -159,8 +150,8 @@ This process generates many files, but these are the ones you need to add to you
 - `root-ca.pem`
 - `admin.pem`
 - `admin-key.pem`
-- (Optional) `node.pem`
-- (Optional) `node-key.pem`
+- (Optional) `each-node-cert.pem`
+- (Optional) `each-node-key.pem`
 
 For information about adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls/).
 

@@ -28,7 +28,7 @@ The Security plugin is actually two plugins: one for Elasticsearch and one for K
 If you disable the Security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. For more information, see [Standalone Kibana plugin install](../../kibana/plugins/).
 
 
-### RPM
+### RPM or DEB
 
 1. Remove all `opendistro_security` lines from `kibana.yml`.
 1. Change `elasticsearch.url` in `kibana.yml` to `http://` rather than `https://`.
