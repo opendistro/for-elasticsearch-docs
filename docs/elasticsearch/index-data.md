@@ -61,7 +61,7 @@ PUT movies/_doc/1
 { "title": "Spirited Away" }
 ```
 
-Because you must specify an ID, if you run this command 10 times, you still have just one document indexed with the `_version` field incremented to 10. 
+Because you must specify an ID, if you run this command 10 times, you still have just one document indexed with the `_version` field incremented to 10.
 
 Indices default to one primary shard and one replica. If you want to specify non-default settings, create the index before adding documents:
 
@@ -88,14 +88,16 @@ After you index a document, you can retrieve it by sending a GET request to the 
 GET movies/_doc/1
 
 {
-  "_index": "movies",
   "_type": "_doc",
-  "_id": "1",
-  "_version": 1,
-  "found": true,
+  "_seq_no": 0,
+  "_index": "movies",
   "_source": {
     "title": "Spirited Away"
-  }
+  },
+  "_version": 1,
+  "_primary_term": 1,
+  "found": true,
+  "_id": "1"
 }
 ```
 
@@ -168,18 +170,20 @@ Note the updated `title` field and new `genre` field:
 GET movies/_doc/1
 
 {
-  "_index": "movies",
   "_type": "_doc",
-  "_id": "1",
-  "_version": 2,
-  "found": true,
+  "_seq_no": 1,
+  "_index": "movies",
   "_source": {
-    "title": "Castle in the Sky",
     "genre": [
       "Animation",
       "Fantasy"
-    ]
-  }
+    ],
+    "title": "Castle in the Sky"
+  },
+  "_version": 2,
+  "_primary_term": 1,
+  "found": true,
+  "_id": "1"
 }
 ```
 
@@ -211,6 +215,44 @@ POST movies/_doc/2/_update
   }
 }
 ```
+
+#### Sample response
+
+```json
+{
+  "_type": "_doc",
+  "_seq_no": 2,
+  "_shards": {
+    "successful": 2,
+    "failed": 0,
+    "total": 2
+  },
+  "_index": "movies",
+  "_version": 1,
+  "_primary_term": 1,
+  "result": "created",
+  "_id": "2"
+}
+```
+
+Each update operation for a document has a unique combination of the `_seq_no` and `_primary_term` values.
+
+If you update a document at the same time that other users are also making updates, it’s possible in the time between the retrieving and updating of the document, it’s been updated by another user. Your update operation then ends up updating an older version of this document. You won't see any error when this happens, but the fields of the updated document are now inaccurate.
+
+To prevent this from happening, use the `_seq_no` and `_primary_term` values in the request header:
+
+```json
+POST movies/_doc/2/_update?if_seq_no=2&if_primary_term=1
+{
+  "doc": {
+    "title": "Castle in the Sky",
+    "genre": ["Animation", "Fantasy"]
+  }
+}
+```
+
+If the document is updated after we retrieved it, the `_seq_no` and `_primary_term` values are different and our update operation fails with a `409 — Conflict` error.
+
 
 ## Delete data
 
