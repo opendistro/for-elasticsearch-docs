@@ -35,6 +35,8 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
    sudo yum install perl-Digest-SHA
    ```
 
+   Due to a [known issue](https://github.com/opendistro-for-elasticsearch/opendistro-build/issues/81) with the checksum, this step might fail. You can still proceed with the installation.
+
 1. Extract the TAR file to a directory and change to that directory:
 
    ```bash
