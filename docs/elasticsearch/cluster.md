@@ -238,15 +238,15 @@ Now, if a data node fails, forced awareness does not allocate the replicas to a 
 In our two-zone architecture, we can use allocation awareness if `odfe-d1` and `odfe-d2` are less than 50% utilized, so that each of them have the storage capacity to allocate replicas in the same zone.
 If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This to make sure that in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
 
-Choosing allocation awareness or forced awareness depends on how much you space you might need in each zone to balance your primary and replica shards.
+Choosing allocation awareness or forced awareness depends on how much space you might need in each zone to balance your primary and replica shards.
 
 ## (Advanced) Step 7: Set up a hot-warm architecture
 
 You can design a hot-warm architecture where you first index your data to hot nodes---fast and expensive---and after a certain period of time move them to warm nodes---slow and cheap.
 
-If you have time-series data you're streaming in that you rarely update and want the older data to go onto cheaper storage, this architecture can be a good fit.
+If you analyze time series data that you rarely update and want the older data to go onto a cheaper storage, this architecture can be a good fit
 
-The hot-warm architecture helps with efficient hardware utilization. Rather than increasing the number of hot nodes and using fast storage for data you don't access very often, you can independently scale hot nodes for faster indexing or warm nodes for longer data retention.
+This architecture helps save money on storage costs. Rather than increasing the number of hot nodes and using fast, expensive storage, you can add warm nodes for data that you don't access as frequently.
 
 To configure a hot-warm storage architecture, add `temp` attributes to `odfe-d1` and `odfe-d2`, respectively:
 
