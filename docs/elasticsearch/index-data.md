@@ -237,9 +237,9 @@ POST movies/_doc/2/_update
 
 Each update operation for a document has a unique combination of the `_seq_no` and `_primary_term` values.
 
-If you update a document at the same time that other users are also making updates, it’s possible in the time between the retrieving and updating of the document, it’s been updated by another user. Your update operation then ends up updating an older version of this document. You won't see any error when this happens, but the fields of the updated document are now inaccurate.
+Elasticsearch first writes your updates to the primary shard and then sends this change to all the replica shards. An uncommon issue can occur if multiple users of your Elasticsearch-based application make updates to existing documents in the same index. In this situation, another user can read and update a document from a replica before it receives your update from the primary shard. Your update operation then ends up updating an older version of the document. In the best case, you and the other user make the same changes, and the document remains accurate. In the worst case, the document now contains out-of-date information.
 
-To prevent this from happening, use the `_seq_no` and `_primary_term` values in the request header:
+To prevent this situation, use the `_seq_no` and `_primary_term` values in the request header:
 
 ```json
 POST movies/_doc/2/_update?if_seq_no=2&if_primary_term=1
