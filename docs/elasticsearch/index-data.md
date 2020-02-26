@@ -47,6 +47,8 @@ Optional document\n
 The document is optional, because `delete` actions do not require a document. The other actions (`index`, `create`, and `update`) all require a document. If you specifically want the action to fail if the document already exists, use the `create` action instead of the `index` action.
 {: .note }
 
+If any one of the actions fail, Elasticsearch continues to execute the other actions. Examine the `items` array in the response to figure out what went wrong. The entries in the `items` array are in the same order as the actions specified in the request.
+
 Elasticsearch features automatic index creation when you add a document to an index that doesn't already exist. It also features automatic ID generation if you don't specify an ID in the request. This simple example automatically creates the movies index, indexes the document, and assigns it a unique ID:
 
 ```json
@@ -253,6 +255,7 @@ POST movies/_doc/2/_update?if_seq_no=2&if_primary_term=1
 
 If the document is updated after we retrieved it, the `_seq_no` and `_primary_term` values are different and our update operation fails with a `409 — Conflict` error.
 
+When using the `_bulk` API, specify the `_seq_no` and `_primary_term` values within the action metadata.
 
 ## Delete data
 
