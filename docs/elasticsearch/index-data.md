@@ -90,16 +90,16 @@ After you index a document, you can retrieve it by sending a GET request to the 
 GET movies/_doc/1
 
 {
-  "_type": "_doc",
-  "_seq_no": 0,
-  "_index": "movies",
-  "_source": {
-    "title": "Spirited Away"
-  },
-  "_version": 1,
-  "_primary_term": 1,
-  "found": true,
-  "_id": "1"
+  "_index" : "movies",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "_seq_no" : 0,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "title" : "Spirited Away"
+  }
 }
 ```
 
@@ -157,7 +157,7 @@ If the document exists, you get back a `200 OK` response, and if it doesn't, you
 To update existing fields or to add new fields, send a POST request to the `_update` operation with your changes in a `doc` object:
 
 ```json
-POST movies/_doc/1/_update
+POST movies/_update/1
 {
   "doc": {
     "title": "Castle in the Sky",
@@ -172,21 +172,22 @@ Note the updated `title` field and new `genre` field:
 GET movies/_doc/1
 
 {
-  "_type": "_doc",
-  "_seq_no": 1,
-  "_index": "movies",
-  "_source": {
-    "genre": [
+  "_index" : "movies",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 2,
+  "_seq_no" : 1,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "title" : "Castle in the Sky",
+    "genre" : [
       "Animation",
       "Fantasy"
-    ],
-    "title": "Castle in the Sky"
-  },
-  "_version": 2,
-  "_primary_term": 1,
-  "found": true,
-  "_id": "1"
+    ]
+  }
 }
+
 ```
 
 The document also has an incremented `_version` field. Use this field to keep track of how many times a document is updated.
@@ -205,7 +206,7 @@ The document with ID of 1 will contain only the `title` field, because the entir
 Use the `upsert` object to conditionally update documents based on whether they already exist. Here, if the document exists, its `title` field changes to `Castle in the Sky`. If it doesn't, Elasticsearch indexes the document in the `upsert` object.
 
 ```json
-POST movies/_doc/2/_update
+POST movies/_update/2
 {
   "doc": {
     "title": "Castle in the Sky"
@@ -222,18 +223,18 @@ POST movies/_doc/2/_update
 
 ```json
 {
-  "_type": "_doc",
-  "_seq_no": 2,
-  "_shards": {
-    "successful": 2,
-    "failed": 0,
-    "total": 2
+  "_index" : "movies",
+  "_type" : "_doc",
+  "_id" : "2",
+  "_version" : 2,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
   },
-  "_index": "movies",
-  "_version": 1,
-  "_primary_term": 1,
-  "result": "created",
-  "_id": "2"
+  "_seq_no" : 3,
+  "_primary_term" : 1
 }
 ```
 
@@ -244,7 +245,7 @@ Elasticsearch first writes your updates to the primary shard and then sends this
 To prevent this situation, use the `_seq_no` and `_primary_term` values in the request header:
 
 ```json
-POST movies/_doc/2/_update?if_seq_no=2&if_primary_term=1
+POST movies/_update/2?if_seq_no=3&if_primary_term=1
 {
   "doc": {
     "title": "Castle in the Sky",
