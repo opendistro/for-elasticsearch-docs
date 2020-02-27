@@ -215,9 +215,9 @@ PUT _cluster/settings
 }
 ```
 
-You can either use `persistent` or `transient` settings. We recommend persistent, as it persists through a cluster reboot. Transient settings do not.
+You can either use `persistent` or `transient` settings. We recommend the `persistent` setting because it persists through a cluster reboot. Transient settings do not persist through a cluster reboot.
 
-Shard allocation awareness attempts to separate primary and replica shards across multiple zones, but if only one zone is available (such as after a zone failure), Elasticsearch allocates replica shards to the only remaining zone.
+Shard allocation awareness attempts to separate primary and replica shards across multiple zones. But, if only one zone is available (such as after a zone failure), Elasticsearch allocates replica shards to the only remaining zone.
 
 Another option is to require that primary and replica shards are never allocated to the same zone. This is called forced awareness.
 
@@ -236,7 +236,7 @@ PUT _cluster/settings
 Now, if a data node fails, forced awareness does not allocate the replicas to a node in the same zone. Instead, the cluster enters a yellow state and only allocates the replicas when nodes in another zone come online.
 
 In our two-zone architecture, we can use allocation awareness if `odfe-d1` and `odfe-d2` are less than 50% utilized, so that each of them have the storage capacity to allocate replicas in the same zone.
-If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This to make sure that in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
+If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This approach helps to make sure that, in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
 
 Choosing allocation awareness or forced awareness depends on how much space you might need in each zone to balance your primary and replica shards.
 
@@ -244,7 +244,7 @@ Choosing allocation awareness or forced awareness depends on how much space you 
 
 You can design a hot-warm architecture where you first index your data to hot nodes---fast and expensive---and after a certain period of time move them to warm nodes---slow and cheap.
 
-If you analyze time series data that you rarely update and want the older data to go onto a cheaper storage, this architecture can be a good fit
+If you analyze time series data that you rarely update and want the older data to go onto cheaper storage, this architecture can be a good fit.
 
 This architecture helps save money on storage costs. Rather than increasing the number of hot nodes and using fast, expensive storage, you can add warm nodes for data that you don't access as frequently.
 
@@ -270,7 +270,7 @@ PUT newindex
 }
 ```
 
-If you examine the shard allocation for `newindex`:
+Take a look at the following shard allocation for `newindex`:
 
 ```json
 GET _cat/shards/newindex?v
@@ -321,7 +321,7 @@ In this case, all primary shards are allocated to `odfe-d2`. Again, all replica 
 
 A popular approach is to configure your [index templates](../index-templates/) to set the `index.routing.allocation.require.temp` value to `hot`. This way, Elasticsearch stores your most recent data on your hot nodes.
 
-You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and once it reaches a certain age update this setting to warm nodes and, once it reaches a certain age, change this setting to automatically move your data from hot nodes to warm nodes.
+You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and, once it reaches a certain age, change this setting to automatically move your data from hot nodes to warm nodes.
 
 ## Next steps
 
