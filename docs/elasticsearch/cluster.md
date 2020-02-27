@@ -31,15 +31,6 @@ Node type | Description
 
 This page demonstrates how to work with the different node types. It assumes that you have a four-node cluster similar to the preceding illustration.
 
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
----
-
-
 ## Prerequisites
 
 Before you get started, you must install and configure Elasticsearch on all of your nodes. For information about the available options, see [Install and Configure](../../install/).
@@ -198,6 +189,139 @@ x.x.x.x           23          38   0    0.12    0.07     0.06 md        -      o
 
 To better understand and monitor your cluster, use the [cat API](../catapis/).
 
+## (Advanced) Step 6: Configure shard allocation awareness or forced awareness
+
+If your nodes are spread across several geographical zones, you can configure shard allocation awareness to allocate all replica shards to a zone that’s different from their primary shard.
+
+With shard allocation awareness, if the nodes in one of your zones fail, you can be assured that your replica shards are spread across your other zones. It adds a layer of fault tolerance to ensure your data survives a zone failure beyond just individual node failures.
+
+To configure shard allocation awareness, add zone attributes to `odfe-d1` and `odfe-d2`, respectively:
+
+```yml
+node.attr.zone: zoneA
+```
+```yml
+node.attr.zone: zoneB
+```
+
+Update the cluster settings:
+
+```json
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.awareness.attributes": "zone"
+  }
+}
+```
+
+You can either use `persistent` or `transient` settings. We recommend the `persistent` setting because it persists through a cluster reboot. Transient settings do not persist through a cluster reboot.
+
+Shard allocation awareness attempts to separate primary and replica shards across multiple zones. But, if only one zone is available (such as after a zone failure), Elasticsearch allocates replica shards to the only remaining zone.
+
+Another option is to require that primary and replica shards are never allocated to the same zone. This is called forced awareness.
+
+To configure forced awareness, specify all the possible values for your zone attributes:
+
+```json
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.awareness.attributes": "zone",
+    "cluster.routing.allocation.awareness.force.zone.values":["zoneA", "zoneB"]
+  }
+}
+```
+
+Now, if a data node fails, forced awareness does not allocate the replicas to a node in the same zone. Instead, the cluster enters a yellow state and only allocates the replicas when nodes in another zone come online.
+
+In our two-zone architecture, we can use allocation awareness if `odfe-d1` and `odfe-d2` are less than 50% utilized, so that each of them have the storage capacity to allocate replicas in the same zone.
+If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This approach helps to make sure that, in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
+
+Choosing allocation awareness or forced awareness depends on how much space you might need in each zone to balance your primary and replica shards.
+
+## (Advanced) Step 7: Set up a hot-warm architecture
+
+You can design a hot-warm architecture where you first index your data to hot nodes---fast and expensive---and after a certain period of time move them to warm nodes---slow and cheap.
+
+If you analyze time series data that you rarely update and want the older data to go onto cheaper storage, this architecture can be a good fit.
+
+This architecture helps save money on storage costs. Rather than increasing the number of hot nodes and using fast, expensive storage, you can add warm nodes for data that you don't access as frequently.
+
+To configure a hot-warm storage architecture, add `temp` attributes to `odfe-d1` and `odfe-d2`, respectively:
+
+```yml
+node.attr.temp: hot
+```
+```yml
+node.attr.temp: warm
+```
+
+You can set the attribute name and value to whatever you want as long as it’s consistent for all your hot and warm nodes.
+
+To add an index `newindex` to the hot node:
+
+```json
+PUT newindex
+{
+  "settings": {
+    "index.routing.allocation.require.temp": "hot"
+  }
+}
+```
+
+Take a look at the following shard allocation for `newindex`:
+
+```json
+GET _cat/shards/newindex?v
+index     shard prirep state      docs store ip         node
+new_index 2     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 2     r      UNASSIGNED
+new_index 3     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 3     r      UNASSIGNED
+new_index 4     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 4     r      UNASSIGNED
+new_index 1     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 1     r      UNASSIGNED
+new_index 0     p      STARTED       0  230b 10.0.0.225 odfe-d1
+new_index 0     r      UNASSIGNED
+```
+
+In this example, all primary shards are allocated to `odfe-d1`, which is our hot node. All replica shards are unassigned, because we're forcing this index to allocate only to hot nodes.
+
+To add an index `oldindex` to the warm node:
+
+```json
+PUT oldindex
+{
+  "settings": {
+    "index.routing.allocation.require.temp": "warm"
+  }
+}
+```
+
+The shard allocation for `oldindex`:
+
+```json
+GET _cat/shards/oldindex?v
+index     shard prirep state      docs store ip        node
+old_index 2     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 2     r      UNASSIGNED
+old_index 3     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 3     r      UNASSIGNED
+old_index 4     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 4     r      UNASSIGNED
+old_index 1     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 1     r      UNASSIGNED
+old_index 0     p      STARTED       0  230b 10.0.0.74 odfe-d2
+old_index 0     r      UNASSIGNED
+```
+
+In this case, all primary shards are allocated to `odfe-d2`. Again, all replica shards are unassigned because we only have one warm node.
+
+A popular approach is to configure your [index templates](../index-templates/) to set the `index.routing.allocation.require.temp` value to `hot`. This way, Elasticsearch stores your most recent data on your hot nodes.
+
+You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and specify actions to take on it. For example, when the index reaches a specific age, change the `index.routing.allocation.require.temp` setting to `warm` to automatically move your data from hot nodes to warm nodes.
 
 ## Next steps
 
