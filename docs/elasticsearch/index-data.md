@@ -44,14 +44,14 @@ Optional document\n
 
 ```
 
+The document is optional, because `delete` actions do not require a document. The other actions (`index`, `create`, and `update`) all require a document. If you specifically want the action to fail if the document already exists, use the `create` action instead of the `index` action.
+{: .note }
+
 To index bulk data using the `curl` command, navigate to the folder where you have your file saved and run the following command:
 
 ```json
 curl -H "Content-Type: application/x-ndjson" -POST https://localhost:9200/data/_bulk -u admin:admin --insecure --data-binary "@data.json"
 ```
-
-The document is optional, because `delete` actions do not require a document. The other actions (`index`, `create`, and `update`) all require a document. If you specifically want the action to fail if the document already exists, use the `create` action instead of the `index` action.
-{: .note }
 
 If any one of the actions in the `_bulk` API fail, Elasticsearch continues to execute the other actions. Examine the `items` array in the response to figure out what went wrong. The entries in the `items` array are in the same order as the actions specified in the request.
 
