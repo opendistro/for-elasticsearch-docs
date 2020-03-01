@@ -151,6 +151,8 @@ Parameter | Description | Type | Required
 }
 ```
 
+For information about setting replicas, see [Primary and replica shards](../../elasticsearch/index/#primary-and-replica-shards).
+
 ### close
 
 Closes the managed index.
@@ -160,6 +162,14 @@ Closes the managed index.
   "close": {}
 }
 ```
+
+When you close an index, it remains in the cluster but uses no resources except the disk space that it consumes. Close your unused indices to free your memory and CPU resources but still keep your data.
+
+Once you close an index, all read-write operations to that index are blocked. You also cannot search a closed index.
+
+Closing an index is useful when you need to keep your data for a longer time than you need to search through them. For example, you may need to keep your log data for 30 days, but keep it searchable for only the first 7 days. This ensures your queries are fast and limited only to the data you need.
+
+It’s also much easier to reopen a closed index than restoring an index from a backup.
 
 ### open
 
