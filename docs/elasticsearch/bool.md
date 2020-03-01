@@ -18,7 +18,7 @@ Clause | Behavior
 `must` | The results must match the queries in this clause. If you have multiple queries, every single one must match. Acts as an `and` operator.
 `must_not` | This is the anti-must clause. All matches are excluded from the results. Acts as a `not` operator.
 `should` | The results should, but don't have to, match the queries. Each matching `should` clause increases the relevancy score. As an option, you can require one or more queries to match the value of the `minimum_number_should_match` parameter (default is 1).
-`filter` | Filters reduce your dataset before applying the queries. They behave like queries but do not affect the relevancy score that the results are sorted by.
+`filter` | Filters reduce your dataset before applying the queries. A query within a filter clause is a yes-no option, where if a document matches the query it's included in the results, otherwise it's not. Filter queries do not affect the relevancy score that the results are sorted by, so they are faster and their results are cached. Use the filter query to filter the results based on exact matches, ranges, dates, numbers, and so on.
 
 The structure of a `bool` query is as follows:
 
