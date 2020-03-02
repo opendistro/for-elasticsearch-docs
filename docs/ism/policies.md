@@ -163,13 +163,9 @@ Closes the managed index.
 }
 ```
 
-When you close an index, it remains in the cluster but uses no resources except the disk space that it consumes. Close your unused indices to free your memory and CPU resources but still keep your data.
+Closed indices remain on disk, but consume no CPU or memory. You can't read from, write to, or search closed indices."
 
-Once you close an index, all read-write operations to that index are blocked. You also cannot search a closed index.
-
-Closing an index is useful when you need to keep your data for a longer time than you need to search through them. For example, you may need to keep your log data for 30 days, but keep it searchable for only the first 7 days. This ensures your queries are fast and limited only to the data you need.
-
-It’s also much easier to reopen a closed index than restoring an index from a backup.
+Closing an index is a good option if you need to retain data for longer than you need to actively search it and have sufficient disk space on your data nodes. If you need to search the data again, reopening a closed index is simpler than restoring an index from a snapshot.
 
 ### open
 
