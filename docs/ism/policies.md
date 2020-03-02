@@ -151,6 +151,8 @@ Parameter | Description | Type | Required
 }
 ```
 
+For information about setting replicas, see [Primary and replica shards](../../elasticsearch/index/#primary-and-replica-shards).
+
 ### close
 
 Closes the managed index.
@@ -160,6 +162,10 @@ Closes the managed index.
   "close": {}
 }
 ```
+
+Closed indices remain on disk, but consume no CPU or memory. You can't read from, write to, or search closed indices."
+
+Closing an index is a good option if you need to retain data for longer than you need to actively search it and have sufficient disk space on your data nodes. If you need to search the data again, reopening a closed index is simpler than restoring an index from a snapshot.
 
 ### open
 

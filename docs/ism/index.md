@@ -45,7 +45,7 @@ You can see a preview of your policy.
 Make sure that the alias that you enter already exists. For more information about the rollover operation, see [rollover](../ism/policies/#rollover).
 6. Choose **Apply**.
 
-After you attach a policy to an index, a job is created that executes every 5 minutes by default to perform the actions set in the policy and check the conditions to transition the index into different states. To change the default time interval for this job, see [Settings](../ism/settings/).
+After you attach a policy to an index, ISM creates a job that runs every 5 minutes by default to perform policy actions, check conditions, and transition the index into different states. To change the default time interval for this job, see [Settings](../ism/settings/).
 
 If you want to use an Elasticsearch operation to create an index with a policy already attached to it, see [create index](../ism/api//#create-index).
 
