@@ -192,7 +192,7 @@ Deletes a managed index.
 Rolls an alias over to a new index when the managed index meets one of the rollover conditions.
 
 The index format must match the pattern: `^.*-\\d+$`. For example, `(logs-000001)`.
-Set `index.index_state_management.rollover_alias` as the alias to rollover.
+Set `index.opendistro.index_state_management.rollover_alias` as the alias to rollover.
 
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
