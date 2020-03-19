@@ -117,3 +117,62 @@ Role | Description
 `security_rest_api_access` | A special role that allows access to the REST API. See `opendistro_security.restapi.roles_enabled` in `elasticsearch.yml` and [Access control for the API](../api/#access-control-for-the-api).
 
 For more detailed summaries of the permissions for each role, reference their action groups against the descriptions in [Default action groups](../default-action-groups/).
+
+## Sample roles
+
+The following examples show how you might set up a read-only and a bulk access role.
+
+### Set up a read-only role in Kibana
+
+Create a new `read_only_index` role:
+
+1. Open **Kibana**.
+1. Choose **Security**, **Roles**.
+1. Choose the *+* button, enter a role name `read_only_index`.
+1. Choose the **Cluster Permissions** tab, select **Add Action Group**.
+1. In **Permissions: Action Groups**, select `cluster_composite_ops_ro` and choose **Add Action Group**.
+1. Choose the **Index Permissions** tab, select **Add index permissions** and add your index pattern `my-index-*`.
+1. In **Permissions: Action Groups**, choose **Add Action Group** and select `read`.
+1. Choose **Save Role Definition**.
+
+Map `kibana_user` and `kibana_read_only` roles to the `read_only_index` role:
+
+1. Choose **Security**, **Role Mappings**.
+1. Next to `kibana_user`, choose the **Edit** button.
+- If you don't already have a `kibana_user` role, choose the *+* button and create the role.
+1. In the **Users** field, add your `read_only_index` role and choose **Submit**.
+1. Next to `kibana_read_only`, choose the **Edit** button.
+- If you don't already have a `kibana_read_only` role, choose the *+* button and create the role.
+1. In the **Users** field, add your `read_only_index` role and choose **Submit**.
+
+Create a new tenant and grant role access:
+
+1. Choose **Security**, **Tenants**, enter your desired name.
+1. Choose the *+* button, enter your desired tenant name.
+1. Choose **Submit**.
+1. Choose **Security**, **Roles**.
+1. Next to the `read_only_index` role, choose **Edit**.
+1. Choose the **Tenants Permissions** tab, in **Permissions**, select `kibana_all_read`.
+1. Add a tenant pattern to select all required tenants.
+1. Choose **Save Role Definition**.
+1. For the global tenant, make sure the permission is set to `kibana_all_read`.
+
+### Set up a bulk access role in Kibana
+
+Create a new `bulk_access` role:
+
+1. Open **Kibana**.
+1. Choose **Security**, **Roles**.
+1. Choose the *+* button, enter a role name `bulk_access`.
+1. Choose the **Cluster Permissions** tab, select **Add Action Group**.
+1. In **Permissions: Action Groups**, select `cluster_composite_ops` and choose **Add Action Group**.
+1. Choose the **Index Permissions** tab, select **Add index permissions** and your index patterns `my-index-*`.
+1. In **Permissions: Action Groups**, choose **Add Action Group** and select `write`.
+1. Choose **Save Role Definition**.
+
+Map bulk access permissions to the `bulk_access` role:
+
+1. Choose **Security**, **Role Mappings**.
+1. Choose the *+* button, select the `bulk_access` role.
+1. In **Users**, choose **Add User** and add your `bulk_access` user.
+1. Choose **Submit**.
