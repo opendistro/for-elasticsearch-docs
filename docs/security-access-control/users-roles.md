@@ -147,7 +147,7 @@ Map `kibana_user` and `kibana_read_only` roles to the `read_only_index` role:
 
 Create a new tenant and grant role access:
 
-1. Choose **Security**, **Tenants**, enter your desired name.
+1. Choose **Security**, **Tenants**.
 1. Choose the *+* button, enter your desired tenant name.
 1. Choose **Submit**.
 1. Choose **Security**, **Roles**.
