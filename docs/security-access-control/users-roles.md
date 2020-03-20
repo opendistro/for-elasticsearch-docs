@@ -155,7 +155,6 @@ Create a new tenant and grant role access:
 1. Choose the **Tenants Permissions** tab, in **Permissions**, select `kibana_all_read`.
 1. Add a tenant pattern to select all required tenants.
 1. Choose **Save Role Definition**.
-1. For the global tenant, make sure the permission is set to `kibana_all_read`.
 
 ### Set up a bulk access role in Kibana
 
