@@ -17,6 +17,9 @@ For example, you can define a policy that moves your index into a `read_only` st
 
 You might want to perform an index rollover after a certain amount of time or run a `force_merge` operation on an index during off-peak hours to improve search performance during peak hours.
 
+To use the ISM plugin, your user role needs to be mapped to the `all_access` role that gives you full access to the cluster. To learn more, see [Users and roles](../security-access-control/users-roles).
+{: .note }
+
 ## Get started with ISM
 
 To get started, choose **Index Management** in Kibana.
@@ -59,6 +62,3 @@ Make sure that the alias that you enter already exists. For more information abo
 5. To retry a policy, choose your policy, and then choose **Retry policy**.
 
 For information about managing your policies, see [Managed Indices](../ism/managedindices/).
-
-To use the ISM plugin, you need to have the correct admin privileges as set in the security plugin.
-{: .note }
