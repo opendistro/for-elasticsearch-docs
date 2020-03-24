@@ -14,19 +14,19 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 1. Download the tarball:
 
    ```bash
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.4.0.tar.gz -o opendistroforelasticsearch-1.4.0.tar.gz
+   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.6.0.tar.gz -o opendistroforelasticsearch-1.6.0.tar.gz
    ```
 
 1. Download the checksum:
 
    ```bash
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.4.0.tar.gz.sha512 -o opendistroforelasticsearch-1.4.0.tar.gz.sha512
+   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.6.0.tar.gz.sha512 -o opendistroforelasticsearch-1.6.0.tar.gz.sha512
    ```
 
 1. Verify the tarball against the checksum:
 
    ```bash
-   shasum -a 512 -c opendistroforelasticsearch-1.4.0.tar.gz.sha512
+   shasum -a 512 -c opendistroforelasticsearch-1.6.0.tar.gz.sha512
    ```
 
    On CentOS, you might not have `shasum`. Install this package:
@@ -40,8 +40,8 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 1. Extract the TAR file to a directory and change to that directory:
 
    ```bash
-   tar -zxf opendistroforelasticsearch-1.4.0.tar.gz
-   cd opendistroforelasticsearch-1.4.0
+   tar -zxf opendistroforelasticsearch-1.6.0.tar.gz
+   cd opendistroforelasticsearch-1.6.0
    ```
 
 1. Run Open Distro for Elasticsearch:
