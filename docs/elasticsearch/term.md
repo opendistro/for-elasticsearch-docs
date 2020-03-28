@@ -291,7 +291,7 @@ GET shakespeare/_search
 
 ## Range
 
-Use the range query to search for a range of values in a field.
+Use the `range` query to search for a range of values in a field.
 
 To search for documents where the `line_id` value is >= 10 and <= 20:
 
