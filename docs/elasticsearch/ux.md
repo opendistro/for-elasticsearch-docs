@@ -26,19 +26,19 @@ Autocomplete shows suggestions to the user while they’re typing.
 
 For example, if a user types in “pop”, we would like to show suggestions like “popcorn” and “popsicles” before they can finish typing any further. These suggestions help guide your users to the right search term with fewer keystrokes.
 
-Elasticsearch allows you design autocomplete that’s:
+Elasticsearch allows you to design autocomplete that’s:
 
-- Responsive: Updates suggestions each time the user types in a letter.
+- Responsive: Updates suggestions with each keystroke.
 - Relevant: Serves a few but relevant suggestions.
 - Forgiving: Tolerates typos.
 
 You can implement autocomplete in the following different ways:
 
-### Query time
+### Prefix matching (query time)
 
 Use prefix matching to implement autocomplete on any text analyzed field at query time. This is easy because you don’t have to set up special mappings or index your data in a particular way; it simply works with the data that you’ve already indexed.
 
-For example, assume that the user types in the word “Kin” to search the `text_entry` field. We can use the `match_phrase_prefix` query to get back a match for all `text_entry` fields that begin with this phrase.
+For example, assume that the user types in the phrase “qui” to search the `text_entry` field. To autocomplete this phrase, use the `match_phrase_prefix` query to search all `text_entry` fields that begin with "qui".
 To make the word order and relative positions more flexible, specify a `slop` value.
 
 ```json
@@ -47,7 +47,7 @@ GET shakespeare/_search
   "query": {
     "match_phrase_prefix": {
       "text_entry": {
-        "query": "Kin",
+        "query": "qui",
         "slop": 3
       }
     }
@@ -64,7 +64,7 @@ GET shakespeare/_search
   "query": {
     "match_phrase_prefix": {
       "text_entry": {
-        "query": "Kin",
+        "query": "qui",
         "slop": 3,
         "max_expansions": 10
       }
@@ -74,7 +74,241 @@ GET shakespeare/_search
 ```
 
 The flexibility of query-time autocomplete comes at the cost of search performance.
-To implement this feature on a large scale, we suggest you use an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
+When implementing this feature on a large scale, we suggest you use an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
+
+### Edge N-gram matching (index time)
+
+Using edge N-grams to implement autocomplete improves your search performance.
+
+Think of an N-gram as a sliding window on a word, where N stands for the length of the window.
+If we were to N-gram the word "quick", the results would depend on the value of N:
+
+N | Type | N-gram
+:--- | :--- | :---
+1 | Unigram | [ `q`, `u`, `i`, `c`, `k` ]
+2 | Bigram | [ `qu`, `ui`, `ic`, `ck` ]
+3 | Trigram | [ `qui`, `uic`, `ick` ]
+4 | Four-gram | [ `quic`, `uick` ]
+5 | Five-gram | [ `quick` ]
+
+We can compute the N-grams of a field and match the input queries with it.
+
+For autocomplete, we only need the beginning N-grams of a search phrase. So, we use a specialized type of N-gram called edge N-gram.
+
+Edge n-gramming the word "quick" results in:
+
+- `q`
+- `qu`
+- `qui`
+- `quic`
+- `quick`
+
+This follows the sequence we expect the user to type.
+
+To set up your fields as edge N-grams:
+
+*Step 1: Create an autocomplete analyzer*
+
+Configure a custom `edge_ngram` token filter called `autocomplete_filter`.
+For any term this filter receives, it produces edge N-grams with a minimum N-gram length of 1 (a single character) and a maximum length of 20. So, we can handle words of up to 20 letters in our autocomplete solution.
+
+```json
+"filter": {
+    "autocomplete_filter": {
+      "type": "edge_ngram",
+      "min_gram": 1,
+      "max_gram": 20
+    }
+  }
+```
+
+Use this token filter in a custom analyzer called `autocomplete`. This analyzer uses the standard tokenizer to tokenize a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the `autocomplete_filter`.
+
+```json
+{
+  "analyzer": {
+    "autocomplete": {
+      "type": "custom",
+      "tokenizer": "standard",
+      "filter": [
+        "lowercase",
+        "autocomplete_filter"
+      ]
+    }
+  }
+}
+```
+
+Next, map the `text_entry` field to be of type `text` and apply our custom `autocomplete` analyzer:
+
+```json
+"mappings": {
+  "properties": {
+    "text_entry": {
+      "type": "text",
+      "analyzer": "autocomplete"
+    }
+  }
+}
+```
+
+The full request to create the index and instantiate the token filter and analyzer is as follows:
+
+```json
+PUT shakespeare
+{
+  "mappings": {
+    "properties": {
+      "text_entry": {
+        "type": "text",
+        "analyzer": "autocomplete"
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "autocomplete_filter": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "autocomplete_filter"
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+Use the `analyze` operation to test this analyzer:
+
+```json
+POST shakespeare/_analyze
+{
+  "analyzer": "autocomplete",
+  "text": "quick"
+}
+```
+
+It returns the edge N-grams as tokens:
+
+* `q`
+* `qu`
+* `qui`
+* `quic`
+* `quick`
+
+*Step 2: Use the standard analyzer on the query side*
+
+We want to ensure that our inverted index contains edge N-grams of every term, but we want to match the terms the user types as it is. For this, use the `autocomplete` analyzer at index time and the `standard` analyzer at search time.
+Otherwise, the query is split into edge N-grams and we get results for everything that matches `q`, `u`, and `i`.
+This is one of the few occasions where we use a different analyzer on the index side and query side.
+
+```json
+GET shakespeare/_search
+{
+  "query": {
+    "match": {
+      "text_entry": {
+        "query": "qui",
+        "analyzer": "standard"
+      }
+    }
+  }
+}
+```
+
+#### Sample Response
+
+```json
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 533,
+      "relation" : "eq"
+    },
+    "max_score" : 9.712725,
+    "hits" : [
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "22006",
+        "_score" : 9.712725,
+        "_source" : {
+          "type" : "line",
+          "line_id" : 22007,
+          "play_name" : "Antony and Cleopatra",
+          "speech_number" : 12,
+          "line_number" : "5.2.44",
+          "speaker" : "CLEOPATRA",
+          "text_entry" : "Quick, quick, good hands."
+        }
+      },
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "54665",
+        "_score" : 9.712725,
+        "_source" : {
+          "type" : "line",
+          "line_id" : 54666,
+          "play_name" : "Loves Labours Lost",
+          "speech_number" : 21,
+          "line_number" : "5.1.52",
+          "speaker" : "HOLOFERNES",
+          "text_entry" : "Quis, quis, thou consonant?"
+        }
+      },
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "65579",
+        "_score" : 9.478242,
+        "_source" : {
+          "type" : "line",
+          "line_id" : 65580,
+          "play_name" : "Merry Wives of Windsor",
+          "speech_number" : 2,
+          "line_number" : "3.3.2",
+          "speaker" : "MISTRESS PAGE",
+          "text_entry" : "Quickly, quickly! is the buck-basket--"
+        }
+      }
+    ]
+  }
+}
+```
+
+Alternatively, specify the `search_analyzer` in the mapping itself:
+
+```json
+"mappings": {
+  "properties": {
+    "text_entry": {
+      "type": "text",
+      "analyzer": "autocomplete",
+      "search_analyzer": "standard"
+    }
+  }
+}
+```
 
 ## Pagination
 
@@ -234,6 +468,8 @@ DELETE _search/scroll/_all
 
 The `scroll` operation is a point-in-time search just like a snapshot corresponding to a specific timestamp. Documents added when the search is context is open are not taken into account in the results.
 
+-----Search after
+
 ## Sort
 
 For any site search, it’s important for your users to be able to sort the results in a way that’s most meaningful to them.
@@ -265,7 +501,7 @@ GET shakespeare/_search
 
 The sort parameter is an array, so you can specify multiple field values.
 
-After `line_id`, let's sort by the `speech_number`. In this case, if we have two fields with the same value for `line_id`, Elasticsearch uses `speech_number`, which is the second option for sorting.
+After `line_id`, let's sort by `speech_number`. In this case, if we have two fields with the same value for `line_id`, Elasticsearch uses `speech_number`, which is the second option for sorting.
 
 ```json
 GET shakespeare/_search
@@ -305,20 +541,27 @@ You can continue to sort by any number of field values to get the results in jus
 }
 ```
 
-For fields that contain an array of numbers, you can sort by `avg`, `sum`, and `median` of the numbers:
+For numeric fields that contain an array of numbers, sort by `avg`, `sum`, and `median` modes:
 
 ```json
----
+"sort": [
+  {
+    "price": {
+      "order": "asc",
+      "mode": "avg"
+    }
+  }
+]
 ```
 
-Use the `min` and `max` modes to sort by minimum and maximum values. These modes are not limited to numeric data types.
+Sort by minimum and maximum values of the fields using the `min` and `max` modes. These modes work for both numeric and string data types.
 
-A string field that’s analyzed cannot be used to sort documents. Because the inverted index only contains the individual tokenized terms and not the entire string. So we cannot sort by the `play_name`, for example.
+A text field that’s analyzed cannot be used to sort documents, because the inverted index only contains the individual tokenized terms and not the entire string. So, we cannot sort by the `play_name`, for example.
 
-One workaround is map a raw version of that field as a keyword type, so it won’t be analyzed and we can keep a copy of the full original version of the `play_name` field for sorting purposes.
+One workaround is map a raw version of the text field as a keyword type, so it won’t be analyzed and we have a copy of the full original version for sorting purposes.
 
 ```json
-GET shakespeare/_search?size=4
+GET shakespeare/_search
 {
   "query": {
     "term": {
@@ -329,7 +572,7 @@ GET shakespeare/_search?size=4
   },
   "sort": [
     {
-      "play_name.raw": {
+      "play_name.keyword": {
         "order": "desc"
       }
     }
@@ -341,9 +584,9 @@ You get back results sorted by the `play_name` field in alphabetic order.
 
 ## Highlight
 
-Highlighting the search term(s) in the results is a useful feature that a lot of users expect out of a search engine.
+Highlighting the search term(s) in the results is a useful feature that a lot of users expect.
 
-To highlight the search terms, add a highlight object outside of the query block:
+To highlight the search terms, add a `highlight` parameter outside of the query block:
 
 ```json
 GET shakespeare/_search
@@ -361,7 +604,7 @@ GET shakespeare/_search
 }
 ```
 
-For each document in the results, you get back a highlight object that shows your search term wrapped in an `em` tag:
+For each document in the results, you get back a `highlight` object that shows your search term wrapped in an `em` tag:
 
 ```json
 "highlight": {
@@ -371,9 +614,9 @@ For each document in the results, you get back a highlight object that shows you
 }
 ```
 
-Design your application code to parse the results from the highlight object and perform some action on the search terms, such as changing their color, bolding, italicizing, and so on.
+Design your application code to parse the results from the `highlight` object and perform some action on the search terms, such as changing their color, bolding, italicizing, and so on.
 
-Change the default `em` tags using `pretag` and `posttag` parameters:
+To change the default `em` tags, use the `pretag` and `posttag` parameters:
 
 ```json
 GET shakespeare/_search?format=yaml
@@ -393,4 +636,4 @@ GET shakespeare/_search?format=yaml
 }
 ```
 
-The highlight parameter highlights the original terms even when using synonyms or stemming for the search itself.
+The `highlight` parameter highlights the original terms even when using synonyms or stemming for the search itself.
