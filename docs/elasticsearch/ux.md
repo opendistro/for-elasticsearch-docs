@@ -152,7 +152,7 @@ Next, map the `text_entry` field to be of type `text` and apply our custom `auto
 }
 ```
 
-The full request to create the index and instantiate the token filter and analyzer is as follows:
+The full request to create the index and instantiate the edge N-gram filter and analyzer is as follows:
 
 ```json
 PUT shakespeare
@@ -309,6 +309,14 @@ Alternatively, specify the `search_analyzer` in the mapping itself:
   }
 }
 ```
+
+### Completion suggestor
+
+Use the completion suggestor to make your autocomplete solution as efficient as possible and also to have explicit control over it’s suggestions.
+
+The completion suggestor accepts a list of suggestions and builds them into a finite-state transducer, an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about finite-state transducers, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
+
+As the user types, Elasticsearch moves through the graph one character at a time along the matching path. After it runs out of user input, it examines the remaining possible endings to produce a list of suggestions.
 
 ## Pagination
 
@@ -468,7 +476,8 @@ DELETE _search/scroll/_all
 
 The `scroll` operation is a point-in-time search just like a snapshot corresponding to a specific timestamp. Documents added when the search is context is open are not taken into account in the results.
 
------Search after
+Because open search contexts consume a lot of memory, we suggest you do not use this for frequent user queries.
+If you don't need the search context open, use the `sort` parameter with the `search_after` parameter for scrolling.
 
 ## Sort
 
@@ -520,7 +529,7 @@ GET shakespeare/_search
       }
     },
     {
-      "spech_number": {
+      "speech_number": {
         "order": "desc"
       }
     }
@@ -581,6 +590,38 @@ GET shakespeare/_search
 ```
 
 You get back results sorted by the `play_name` field in alphabetic order.
+
+Use the `sort` with `search_after` operation for more efficient scrolling.
+You get back results after the values you specify in the `search_after` array.
+
+Make sure you have the same number of values in the `search_after` array as in the `sort` array, also ordered in the same way.
+In this case, you get back results after `line_id = 3202` and `speech_number = 8`.
+
+```json
+GET shakespeare/_search
+{
+  "query": {
+    "term": {
+      "play_name": {
+        "value": "Henry IV"
+      }
+    }
+  },
+  "sort": [
+    {
+      "line_id": {
+        "order": "desc"
+      }
+    },
+    {
+      "speech_number": {
+        "order": "desc"
+      }
+    }
+  ],
+  "search_after": ["3202", "8"]
+}
+```
 
 ## Highlight
 
