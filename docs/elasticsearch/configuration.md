@@ -97,6 +97,5 @@ opendistro_security.enable_snapshot_restore_privilege: true
 opendistro_security.check_snapshot_restore_write_privileges: true
 opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
 cluster.routing.allocation.disk.threshold_enabled: false
-node.max_local_storage_nodes: 3
 ######## End OpenDistro for Elasticsearch Security Demo Configuration ########
 ```
