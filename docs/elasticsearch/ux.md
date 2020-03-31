@@ -7,12 +7,12 @@ nav_order: 12
 
 # Search UX
 
-Expectations from a search engine have evolved over the years. Just returning relevant results quickly is no longer enough for most users.
+Expectations from search engines have evolved over the years. Just returning relevant results quickly is no longer enough for most users.
 Elasticsearch allows you to easily implement many features that enhance your user’s search experience.
 
 Feature | Description
 :--- | :---
-Autocomplete | Suggest complete phrases as the user types, speeding up the path to answers.
+Autocomplete | Suggest complete phrases as the user types.
 Pagination |  Display 10-20 results per page but allow your users to adjust.
 Scroll | Allow scrolling through a large number of results.
 Sort | Allow sorting results by different criteria.
@@ -22,9 +22,9 @@ Highlight | Highlight the search term in the results.
 
 ## Autocomplete
 
-Autocomplete shows suggestions to the user while they’re typing.
+Shows suggestions to the user while they’re typing.
 
-For example, if a user types in “pop”, we would like to show suggestions like “popcorn” and “popsicles” before they can finish typing any further. These suggestions help guide your users to the right search term with fewer keystrokes.
+For example, if a user types in “pop”, before they finish typing, show suggestions like “popcorn” and “popsicles” to complete the query. These suggestions preempt your user's intention and lead them to a possible search term more quickly.
 
 Elasticsearch allows you to design autocomplete that’s:
 
@@ -32,7 +32,7 @@ Elasticsearch allows you to design autocomplete that’s:
 - Relevant: Serves a few but relevant suggestions.
 - Forgiving: Tolerates typos.
 
-You can implement autocomplete in the following different ways:
+Implement autocomplete in one of three ways: prefixes, edge N-grams, and completion suggestors.
 
 ### Prefix matching (query time)
 
@@ -74,7 +74,7 @@ GET shakespeare/_search
 ```
 
 The flexibility of query-time autocomplete comes at the cost of search performance.
-When implementing this feature on a large scale, we suggest you use an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
+When implementing this feature on a large scale, we suggest you use an index-time solution instead. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
 
 ### Edge N-gram matching (index time)
 
@@ -93,7 +93,7 @@ N | Type | N-gram
 
 We can compute the N-grams of a field and match the input queries with it.
 
-For autocomplete, we only need the beginning N-grams of a search phrase. So, we use a specialized type of N-gram called edge N-gram.
+For autocomplete, we only need the beginning N-grams of a search phrase. So, we use a special type of N-gram called edge N-gram.
 
 Edge n-gramming the word "quick" results in:
 
@@ -122,7 +122,7 @@ For any term this filter receives, it produces edge N-grams with a minimum N-gra
   }
 ```
 
-Use this token filter in a custom analyzer called `autocomplete`. This analyzer uses the standard tokenizer to tokenize a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the `autocomplete_filter`.
+Use this token filter in a custom analyzer called `autocomplete`. This analyzer tokenizes a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the above `autocomplete_filter`.
 
 ```json
 {
@@ -209,8 +209,8 @@ It returns the edge N-grams as tokens:
 
 *Step 2: Use the standard analyzer on the query side*
 
-We want to ensure that our inverted index contains edge N-grams of every term, but we want to match the terms the user types as it is. For this, use the `autocomplete` analyzer at index time and the `standard` analyzer at search time.
-Otherwise, the query is split into edge N-grams and we get results for everything that matches `q`, `u`, and `i`.
+We want to ensure that our inverted index contains edge N-grams of every term, but we don't want to match it with edge N-grams of the search query. Use the `autocomplete` analyzer at index time but the `standard` analyzer at search time.
+Otherwise, the user query is split into edge N-grams and we get results for everything that matches `q`, `u`, and `i`.
 This is one of the few occasions where we use a different analyzer on the index side and query side.
 
 ```json
@@ -310,13 +310,558 @@ Alternatively, specify the `search_analyzer` in the mapping itself:
 }
 ```
 
-### Completion suggestor
+### Completion suggestor (index time)
 
-Use the completion suggestor to make your autocomplete solution as efficient as possible and also to have explicit control over it’s suggestions.
+Use the completion suggestor to make your autocomplete solution as efficient as possible and also to have explicit control over it’s suggestions. The completion suggestor accepts a list of suggestions and builds them into a finite-state transducer (FST), an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about FSTs, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
 
-The completion suggestor accepts a list of suggestions and builds them into a finite-state transducer, an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about finite-state transducers, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
+As the user types, Elasticsearch moves through the FST graph one character at a time along the matching path. After it runs out of user input, it examines the remaining possible endings to produce a list of suggestions.
 
-As the user types, Elasticsearch moves through the graph one character at a time along the matching path. After it runs out of user input, it examines the remaining possible endings to produce a list of suggestions.
+Index the data with a dedicated field type called `completion`, which stores the FST-like data structures in the index.
+
+```json
+PUT shakespeare
+{
+  "mappings": {
+    "properties": {
+      "text_entry": {
+        "type": "completion"
+      }
+    }
+  }
+}
+```
+
+To get back suggestions, use the `search` endpoint with the `suggest` parameter:
+
+```json
+GET shakespeare/_search
+{
+  "suggest": {
+    "autocomplete": {
+      "prefix": "To be",
+      "completion": {
+        "field": "text_entry"
+      }
+    }
+  }
+}
+```
+
+The results are based on prefix matching of the FSTs.
+
+#### Sample Response
+
+```json
+{
+  "took" : 9,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "suggest" : {
+    "text_entry" : [
+      {
+        "text" : "To be",
+        "offset" : 0,
+        "length" : 5,
+        "options" : [
+          {
+            "text" : "To be a comrade with the wolf and owl,--",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "50652",
+            "_score" : 1.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 50653,
+              "play_name" : "King Lear",
+              "speech_number" : 68,
+              "line_number" : "2.4.230",
+              "speaker" : "KING LEAR",
+              "text_entry" : "To be a comrade with the wolf and owl,--"
+            }
+          },
+          {
+            "text" : "To be a make-peace shall become my age:",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "78566",
+            "_score" : 1.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 78567,
+              "play_name" : "Richard II",
+              "speech_number" : 20,
+              "line_number" : "1.1.160",
+              "speaker" : "JOHN OF GAUNT",
+              "text_entry" : "To be a make-peace shall become my age:"
+            }
+          },
+          {
+            "text" : "To be a party in this injury.",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "75259",
+            "_score" : 1.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 75260,
+              "play_name" : "Othello",
+              "speech_number" : 57,
+              "line_number" : "5.1.93",
+              "speaker" : "IAGO",
+              "text_entry" : "To be a party in this injury."
+            }
+          },
+          {
+            "text" : "To be a preparation gainst the Polack;",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "33591",
+            "_score" : 1.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 33592,
+              "play_name" : "Hamlet",
+              "speech_number" : 17,
+              "line_number" : "2.2.67",
+              "speaker" : "VOLTIMAND",
+              "text_entry" : "To be a preparation gainst the Polack;"
+            }
+          },
+          {
+            "text" : "to be a friar, from the time of his remembrance to",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "14870",
+            "_score" : 1.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 14871,
+              "play_name" : "Alls well that ends well",
+              "speech_number" : 36,
+              "line_number" : "4.3.104",
+              "speaker" : "Second Lord",
+              "text_entry" : "to be a friar, from the time of his remembrance to"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The `size` parameter lets you control how many suggestions to return.
+To tolerate user typos, use the `fuzzy` option. Use the `min_length` parameter to specify the length at which to enable fuzzy search.
+
+```json
+GET shakespeare/_search
+{
+  "suggest": {
+    "autocomplete": {
+      "prefix": "To me",
+      "completion": {
+        "field": "text_entry",
+        "size": 3,
+        "fuzzy": {
+          "fuzziness": "auto",
+          "min_length": 2
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample Response
+
+```json
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "suggest" : {
+    "text_entry" : [
+      {
+        "text" : "To me",
+        "offset" : 0,
+        "length" : 5,
+        "options" : [
+          {
+            "text" : "To make a bastard and a slave of me!",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "5369",
+            "_score" : 4.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 5370,
+              "play_name" : "Henry VI Part 1",
+              "speech_number" : 2,
+              "line_number" : "4.5.15",
+              "speaker" : "JOHN TALBOT",
+              "text_entry" : "To make a bastard and a slave of me!"
+            }
+          },
+          {
+            "text" : "To make a bloody supper in the Tower.",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "12504",
+            "_score" : 4.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 12505,
+              "play_name" : "Henry VI Part 3",
+              "speech_number" : 40,
+              "line_number" : "5.5.85",
+              "speaker" : "CLARENCE",
+              "text_entry" : "To make a bloody supper in the Tower."
+            }
+          },
+          {
+            "text" : "To make a bondmaid and a slave of me;",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "89458",
+            "_score" : 4.0,
+            "_source" : {
+              "type" : "line",
+              "line_id" : 89459,
+              "play_name" : "Taming of the Shrew",
+              "speech_number" : 1,
+              "line_number" : "2.1.2",
+              "speaker" : "BIANCA",
+              "text_entry" : "To make a bondmaid and a slave of me;"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Improve relevancy by manually adding curated suggestions.
+Add weights to prioritize your suggestions.
+The easiest way to store suggestions is to add a `suggest` field.
+
+Map the `text_entry_suggest` field as the `completion` type.
+
+```json
+PUT shakespeare
+{
+  "mappings": {
+    "properties": {
+      "text": { "type": "text" },
+      "text_entry_suggest": {
+        "type": "completion"
+      }
+    }
+  }
+}
+```
+
+Index a document with the curated suggestions and assign a weight:
+
+```json
+PUT shakespeare/_doc/1
+{
+  "text_entry": "To be, or",
+  "text_entry_suggest":
+  {
+    "input": [
+      "To be, or not to be: that is the question:"
+      ],
+    "weight": 10
+  }
+}
+```
+
+Perform a search:
+
+```json
+GET shakespeare/_search
+{
+  "suggest": {
+    "text_entry": {
+      "text": "to be or not to be",
+      "completion": {
+        "field": "text_entry_suggest"
+      }
+    }
+  }
+}
+```
+
+You see the indexed document in the results:
+
+```json
+{
+  "took" : 4,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "suggest" : {
+    "text_entry" : [
+      {
+        "text" : "to be or not to be",
+        "offset" : 0,
+        "length" : 18,
+        "options" : [
+          {
+            "text" : "to be or not to be",
+            "_index" : "shakespeare",
+            "_type" : "_doc",
+            "_id" : "1",
+            "_score" : 10.0,
+            "_source" : {
+              "text_entry" : "To be, or not to be: that is the question:",
+              "text_entry_suggest" : {
+                "input" : [
+                  "to be or not to be"
+                ],
+                "weight" : 10
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Use the `term` suggestor to suggest corrected spellings on a per term basis.
+
+The suggestions are based on an edit distance, which is the number of characters that need to be changed for a term to match.
+
+```json
+PUT shakespeare
+{
+  "mappings": {
+    "properties": {
+      "text_entry": {
+        "type": "text"
+      }
+    }
+  }
+}
+```
+
+User misspells a search term:
+
+```json
+GET shakespeare/_search
+{
+  "suggest": {
+    "spell-check": {
+      "text": "lief",
+      "term": {
+        "field": "text_entry"
+      }
+    }
+  }
+}
+```
+
+The `term` suggestor returns a list of possible corrections:
+
+```json
+{
+  "took" : 48,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "suggest" : {
+    "spell-check" : [
+      {
+        "text" : "lifee",
+        "offset" : 0,
+        "length" : 5,
+        "options" : [
+          {
+            "text" : "lifes",
+            "score" : 0.8,
+            "freq" : 21
+          },
+          {
+            "text" : "life",
+            "score" : 0.75,
+            "freq" : 805
+          },
+          {
+            "text" : "lives",
+            "score" : 0.6,
+            "freq" : 187
+          },
+          {
+            "text" : "liege",
+            "score" : 0.6,
+            "freq" : 138
+          },
+          {
+            "text" : "lived",
+            "score" : 0.6,
+            "freq" : 80
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The higher the score the better the suggestion is. The frequency represents the number of times the term appears in the documents in that index.
+
+To implement a "Did you mean `suggestion`?" feature, use a `phrase` suggestor.
+This is similar to the `term` suggestor, except that it uses N-gram language models to suggest whole phrases instead.
+The set up for this is a little more involved.
+
+```json
+PUT shakespeare
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "trigram": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": ["lowercase","shingle"]
+          }
+        },
+        "filter": {
+          "shingle": {
+            "type": "shingle",
+            "min_shingle_size": 2,
+            "max_shingle_size": 3
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "text_entry": {
+        "type": "text",
+        "fields": {
+          "trigram": {
+            "type": "text",
+            "analyzer": "trigram"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Where `shingles` are the same as `gram_size`, except that it applies to words instead of individual letters.
+
+If you run a query with an incorrect phrase:
+
+```json
+POST shakespeare/_search
+{
+  "suggest": {
+    "text": "That is the qution",
+    "simple_phrase": {
+      "phrase": {
+        "field": "text_entry.trigram"
+      }
+    }
+  }
+}
+```
+
+You get back the corrected phrase:
+
+```json
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "suggest" : {
+    "simple_phrase" : [
+      {
+        "text" : "That is the qution",
+        "offset" : 0,
+        "length" : 18,
+        "options" : [
+          {
+            "text" : "that is the question",
+            "score" : 0.0015543294
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 
 ## Pagination
 
