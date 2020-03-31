@@ -101,7 +101,7 @@ ISM supports the following operations:
 
 ### force_merge
 
-Reduces the number of Lucene segments by merging the indices. This operation attempts to set the index to a `read-only` state before starting the merging process.
+Reduces the number of Lucene segments by merging the segments of individual shards. This operation attempts to set the index to a `read-only` state before starting the merging process.
 
 Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
