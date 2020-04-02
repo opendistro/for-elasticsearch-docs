@@ -58,11 +58,12 @@ When you return data in CSV or raw format, each row corresponds to a *document*,
 
 Kibana
 {: .label .label-yellow :}
+
 ### Index data
 
 The SQL plugin is for read-only purposes, so you cannot index or update data using SQL.
 
-To start using the SQL plugin, use the `bulk` operation to index some sample data:
+Use the `bulk` operation to index some sample data:
 
 ```json
 PUT accounts/_bulk?refresh
@@ -110,7 +111,7 @@ WHERE _id = 0
 
 ### Delete data
 
-To delete a document from an index, use a `DELETE` clause:
+To delete a document from an index, use the `DELETE` clause:
 
 ```sql
 DELETE
@@ -156,10 +157,11 @@ FROM index
 
 Specify the fields to be retrieved.
 
-*Example 1*: Use `*` to retrieve all fields in an index.
+*Example 1*: Use `*` to retrieve all fields in an index:
 
 ```sql
-SELECT * FROM accounts
+SELECT *
+FROM accounts
 ```
 
 | id | account_number | firstname | gender | city | balance | employer | state | email | address | lastname | age
@@ -172,7 +174,8 @@ SELECT * FROM accounts
 *Example 2*: Use field name(s) to retrieve only specific fields:
 
 ```sql
-SELECT firstname, lastname FROM accounts
+SELECT firstname, lastname
+FROM accounts
 ```
 
 | id | firstname | lastname
@@ -182,29 +185,31 @@ SELECT firstname, lastname FROM accounts
 2 | Nanette | Bates
 3 | Dale | Adams
 
-*Example 3*: Use field aliases instead of field names. Field aliases are used to make field names more precise.
+*Example 3*: Use field aliases instead of field names. Field aliases are used to make field names more readable:
 
 ```sql
-SELECT account_number AS num FROM accounts
+SELECT account_number AS num
+FROM accounts
 ```
 
-| id | account_number
+| id | num
 :--- | :---
 0 | 1
 1 | 6
 2 | 13
 3 | 18
 
-*Example 4*: Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names.
+*Example 4*: Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names:
 
 ```sql
-SELECT DISTINCT age FROM accounts
+SELECT DISTINCT age
+FROM accounts
 ```
 
 | id | age
 :--- | :---
-0 | 32
-1 | 28
+0 | 28
+1 | 32
 2 | 33
 3 | 36
 
@@ -213,22 +218,32 @@ SELECT DISTINCT age FROM accounts
 Specify the index that you want search.
 
 *Example 1*: Use index aliases to query across indexes. To learn about index aliases, see [Index Alias](../elasticsearch/index-alias/).
+In this sample query, `acc` is an alias for the `accounts` index:
 
 ```sql
-SELECT acc.account_number FROM accounts acc
+SELECT account_number, accounts.age
+FROM accounts
 ```
 
-| id | account_number
-:--- | :---
-0 | 1
-1 | 6
-2 | 13
-3 | 18
-
-*Example 2*: Use index patterns to query indices that match a specific pattern.
+or
 
 ```sql
-SELECT account_number FROM account *
+SELECT account_number, acc.age
+FROM accounts acc
+```
+
+| id | account_number | age
+:--- | :--- | :---
+0 | 1 | 32
+1 | 6 | 36
+2 | 13 | 28
+3 | 18 | 33
+
+*Example 2*: Use index patterns to query indices that match a specific pattern:
+
+```sql
+SELECT account_number
+FROM account*
 ```
 
 | id | account_number
@@ -251,41 +266,47 @@ Specify a condition to filter the results.
 `>=` | Greater than or equal to.
 `<=` | Less than or equal to.
 `IN` | Specify multiple `OR` operators.
-`BETWEEN` | Similar to a range query. For more information about range queries, see [range query](../elasticsearch/term/).
+`BETWEEN` | Similar to a range query. For more information about range queries, see [Range query](../elasticsearch/term/#range).
 `LIKE` | Use for full text search. For more information about full-text queries, see [Full-text queries](../elasticsearch/full-text/).
 `IS NULL` | Check if the field value is `NULL`.
-`IS NOT NULL` | Make sure the field value is `NOT NULL`.
+`IS NOT NULL` | Check if the field value is `NOT NULL`.
 
-Combine conditions with boolean operators `NOT`, `AND`, or `OR` to build more complex expressions.
+Combine comparison operators (`=`, `<>`, `>`, `>=`, `<`, `<=`) with boolean operators `NOT`, `AND`, or `OR` to build more complex expressions.
 
-*Example 1*: Use comparison operators (`=`, `<>`, `>`, `>=`, `<`, `<=`) for numbers, strings, or dates.
+*Example 1*: Use comparison operators for numbers, strings, or dates:
 
 ```sql
-SELECT account_number FROM accounts WHERE account_number = 1
+SELECT account_number
+FROM accounts
+WHERE account_number = 1
 ```
 
 | id | account_number
 :--- | :---
 0 | 1
 
-*Example 2*: Elasticsearch allows for flexible schema so documents in an index may have different fields. Use `IS NULL` or `IS NOT NULL` to retrieve missing fields or existing fields only. We do not differentiate between missing fields and fields explicitly set to `NULL`:
+*Example 2*: Elasticsearch allows for flexible schema so documents in an index may have different fields. Use `IS NULL` or `IS NOT NULL` to retrieve only missing fields or existing fields. We do not differentiate between missing fields and fields explicitly set to `NULL`:
 
 ```sql
-SELECT account_number, employer FROM accounts WHERE employer IS NULL
+SELECT account_number, employer
+FROM accounts
+WHERE employer IS NULL
 ```
 
-| id | account_number
-:--- | :---
-0 | 18
+| id | account_number | employer
+:--- | :--- | :---
+0 | 18 |
 
 #### Group By
 
-Group documents with the same field value into buckets. Use along with aggregation functions to aggregate inside each bucket.
+Group documents with the same field value into buckets.
 
 *Example 1*: Group by fields:
 
 ```sql
-SELECT age FROM accounts GROUP BY age
+SELECT age
+FROM accounts
+GROUP BY age
 ```
 
 | id | age
@@ -298,7 +319,9 @@ SELECT age FROM accounts GROUP BY age
 *Example 2*: Group by field alias:
 
 ```sql
-SELECT account_number AS num FROM accounts GROUP BY num
+SELECT account_number AS num
+FROM accounts
+GROUP BY num
 ```
 
 | id | num
@@ -308,10 +331,12 @@ SELECT account_number AS num FROM accounts GROUP BY num
 2 | 13
 3 | 18
 
-*Example 4*: Use scalar functions in the `GROUP BY` clause.
+*Example 4*: Use scalar functions in the `GROUP BY` clause:
 
 ```sql
-SELECT ABS(age) AS a FROM accounts GROUP BY ABS(age)
+SELECT ABS(age) AS a
+FROM accounts
+GROUP BY ABS(age)
 ```
 
 | id | a
@@ -323,28 +348,32 @@ SELECT ABS(age) AS a FROM accounts GROUP BY ABS(age)
 
 #### Having
 
-Use the `HAVING` clause to aggregate based on different functions like `count`, `sum`, `avg`, `min`, and `max`.
-The `HAVING` clause filters results from the `GROUP BY` clause.
+Use the `HAVING` clause to aggregate inside each bucket based on aggregation functions (`COUNT`, `AVG`, `SUM`, `MIN`, and `MAX`).
+The `HAVING` clause filters results from the `GROUP BY` clause:
 
 *Example 1*:
 
 ```sql
-SELECT age, MAX(balance) FROM accounts GROUP BY age HAVING MIN(balance) > 10000
+SELECT age, MAX(balance)
+FROM accounts
+GROUP BY age HAVING MIN(balance) > 10000
 ```
 
 | id | age | MAX (balance)
 :--- | :---
-0 | 28 | 39225
-1 | 32 | 32838
+0 | 28 | 32838
+1 | 32 | 39225
 
 #### Order By
 
-Use `ORDER BY` sort results into your desired order.
+Use the `ORDER BY` clause to sort results into your desired order.
 
-*Example 1*: Use `ORDER BY` to sort by ascending or descending order. Besides regular field names, using `ordinal`, `alias`, or `scalar` functions are supported.
+*Example 1*: Use `ORDER BY` to sort by ascending or descending order. Besides regular field names, using `ordinal`, `alias`, or `scalar` functions are supported:
 
 ```sql
-SELECT account_number FROM accounts ORDER BY account_number DESC
+SELECT account_number
+FROM accounts
+ORDER BY account_number DESC
 ```
 
 | id | account_number
@@ -354,10 +383,12 @@ SELECT account_number FROM accounts ORDER BY account_number DESC
 2 | 6
 3 | 1
 
-*Example 2*: Specify if documents with missing fields are to be put at the beginning or at the end of the results. The default behavior of Elasticsearch is to return nulls or missing fields at the end. To push them before non-nulls use the `IS NOT NULL` operator:
+*Example 2*: Specify if documents with missing fields are to be put at the beginning or at the end of the results. The default behavior of Elasticsearch is to return nulls or missing fields at the end. To push them before non-nulls, use the `IS NOT NULL` operator:
 
 ```sql
-SELECT employer FROM accounts ORDER BY employer IS NOT NULL
+SELECT employer
+FROM accounts
+ORDER BY employer IS NOT NULL
 ```
 
 | id | employer
@@ -369,22 +400,26 @@ SELECT employer FROM accounts ORDER BY employer IS NOT NULL
 
 #### Limit
 
-Specify the maximum number of documents that you want to see. This is similar to the `size` parameter in Elasticsearch. Used to prevent fetching large amounts of data into memory.
+Specify the maximum number of documents that you want to retrieve. This is similar to the `size` parameter in Elasticsearch. Used to prevent fetching large amounts of data into memory.
 
-*Example 1*: Specify the number of documents to be returned:
+*Example 1*: Specify the number of results to be returned:
 
 ```sql
-SELECT account_number FROM accounts ORDER BY account_number LIMIT 1
+SELECT account_number
+FROM accounts
+ORDER BY account_number LIMIT 1
 ```
 
 | id | account_number
 :--- | :---
 0 | 1
 
-*Example 2*: Specify an offset position for a simple pagination solution. The first argument is equivalent to the `size` parameter in Elasticsearch. It's inefficient for large indexes. Use `ORDER BY` to ensure the same order between pages.
+*Example 2*: Specify the document number that you want to start returning the results from. The second argument is equivalent to the `from` parameter in Elasticsearch. Use `ORDER BY` to ensure the same order between pages:
 
 ```sql
-SELECT account_number FROM accounts ORDER BY account_number LIMIT 1, 1
+SELECT account_number
+FROM accounts
+ORDER BY account_number LIMIT 1, 1
 ```
 
 | id | account_number
