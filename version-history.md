@@ -9,7 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-1.6.0 | Bumps Elasticsearch version. | 30 March 2020 | 7.6.1
+1.6.0 | Optimizes security for a faster version of the implied permission type, adds memoization of results for batch requests, implements lazy loading for k-NN `efSearch` parameter, improves exception handling and report date handling using standard formats for the SQL plugin, and bumps Elasticsearch version. | 02 April 2020 | 7.6.1
 1.4.0 | Adds the [KNN](../docs/knn/) plugin for Elasticsearch to the Docker image, adds account management to the Security plugin API and Kibana, and bumps Elasticsearch version. | 10 February 2020 | 7.4.2
 1.3.0 | Adds [Index State Management](../docs/ism/) plugins for Elasticsearch and Kibana and bumps Elasticsearch version. | 17 December 2019 | 7.3.2
 1.2.1 | Bumps Elasticsearch version. | 4 November 2019 | 7.2.1
