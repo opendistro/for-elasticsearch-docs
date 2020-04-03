@@ -54,8 +54,8 @@ Docker
 1. Run the following commands:
 
    ```bash
-   docker pull amazon/opendistro-for-elasticsearch:1.4.0
-   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.4.0
+   docker pull amazon/opendistro-for-elasticsearch:1.6.0
+   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.6.0
    ```
 
 1. In a new terminal session, run:
