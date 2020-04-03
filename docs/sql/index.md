@@ -102,7 +102,7 @@ After you index a document, retrieve it using the following SQL expression:
 ```sql
 SELECT *
 FROM accounts
-WHERE _id = 0
+WHERE _id = 1
 ```
 
 | id | account_number | firstname | gender | city | balance | employer | state | email | address | lastname | age
@@ -125,9 +125,9 @@ WHERE _id = 0
 
 ### Search and aggregate data
 
-Use the `SELECT` clause along with `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `LIMIT` to search and aggregate data.
+Use the `SELECT` clause, along with `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `LIMIT` to search and aggregate data.
 
-Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indices to retrieve them from. All other clauses are optional and you can use them according to your requirements.
+Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indices to retrieve them from. All other clauses are optional. Use them according to your needs. 
 
 The complete syntax for searching and aggregating data is as follows:
 
