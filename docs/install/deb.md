@@ -22,6 +22,12 @@ These steps assume you're using Ubuntu 18.04.
    sudo apt install openjdk-11-jdk
    ```
 
+1. Install unzip:
+
+   ```bash
+   sudo apt install unzip
+   ```
+
 1. Download and add signing keys for the repositories:
 
    ```bash
