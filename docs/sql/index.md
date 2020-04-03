@@ -9,7 +9,11 @@ has_children: true
 
 Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, this feature is a great option.
 
-To use the feature, send requests to the `_opendistro/_sql` URI. You can use a request parameter or the request body (recommended).
+SQL UI is now supported. Use the SQL UI to easily run on-demand SQL queries, translate SQL into its REST equivalent, and view and save results as text, JSON, JDBC, or CSV.
+
+![Kibana SQL UI plugin](../images/sql.png)
+
+To use the REST API, send requests to the `_opendistro/_sql` URI. You can use a request parameter or the request body (recommended).
 
 ```sql
 GET https://<host>:<port>/_opendistro/_sql?sql=select * from my-index limit 50
@@ -127,7 +131,7 @@ WHERE _id = 0
 
 Use the `SELECT` clause, along with `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `LIMIT` to search and aggregate data.
 
-Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indices to retrieve them from. All other clauses are optional. Use them according to your needs. 
+Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indices to retrieve them from. All other clauses are optional. Use them according to your needs.
 
 The complete syntax for searching and aggregating data is as follows:
 
