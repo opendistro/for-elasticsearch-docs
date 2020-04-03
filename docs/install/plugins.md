@@ -200,7 +200,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 
 ### KNN
 
-KNN is currently only available as part of the Docker image.
+KNN is only available as part of the all-in-one installs: Docker, RPM, and Debian.
 {: .warning }
 
 
