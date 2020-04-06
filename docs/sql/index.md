@@ -16,7 +16,7 @@ SQL UI is now supported. Use the SQL UI to easily run on-demand SQL queries, tra
 To use the REST API, send requests to the `_opendistro/_sql` URI. You can use a request parameter or the request body (recommended).
 
 ```sql
-GET https://<host>:<port>/_opendistro/_sql?sql=select * from my-index limit 50
+POST https://<host>:<port>/_opendistro/_sql?sql=select * from my-index limit 50
 ```
 
 ```json
