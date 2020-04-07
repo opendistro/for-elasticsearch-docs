@@ -18,7 +18,6 @@ These steps assume you're using Ubuntu 18.04.
 
    ```bash
    sudo add-apt-repository ppa:openjdk-r/ppa
-   sudo apt update
    sudo apt install openjdk-11-jdk
    ```
 
