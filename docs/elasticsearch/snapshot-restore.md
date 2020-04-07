@@ -215,7 +215,7 @@ PUT _snapshot/my-repository/2
 {
   "indices": "kibana*,my-index*,-my-index-2016",
   "ignore_unavailable": true,
-  "include_global_state": true,
+  "include_global_state": false,
   "partial": false
 }
 ```
@@ -298,7 +298,7 @@ POST _snapshot/my-repository/2/_restore
 {
   "indices": "kibana*,my-index*",
   "ignore_unavailable": true,
-  "include_global_state": true,
+  "include_global_state": false,
   "include_aliases": false,
   "partial": false,
   "rename_pattern": "kibana(.+)",
