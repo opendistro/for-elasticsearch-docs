@@ -2,7 +2,7 @@
 layout: default
 title: Helm
 parent: Install and Configure
-nav_order: 5
+nav_order: 4
 ---
 
 # Helm

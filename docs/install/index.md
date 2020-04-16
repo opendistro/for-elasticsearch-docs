@@ -7,4 +7,4 @@ has_children: true
 
 # Install and configure Open Distro for Elasticsearch
 
-Open Distro for Elasticsearch has several download options: Docker image, RPM package, Debian package, and tarball.
+Open Distro for Elasticsearch has many download options: Docker image, RPM package, Debian package, tarball, and Windows executable.

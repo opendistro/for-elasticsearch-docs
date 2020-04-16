@@ -2,7 +2,7 @@
 layout: default
 title: Tarball
 parent: Install and Configure
-nav_order: 4
+nav_order: 5
 ---
 
 # Tarball
