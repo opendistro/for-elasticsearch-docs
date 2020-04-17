@@ -64,9 +64,11 @@ POST _opendistro/_anomaly_detection/detectors
     }
   },
   "detection_interval": {
-    "period": {
-      "interval": 1,
-      "unit": "Minutes"
+    "window_delay": {
+      "period": {
+        "interval": 1,
+        "unit": "Minutes"
+      }
     }
   }
 }
@@ -170,8 +172,8 @@ POST _opendistro/_anomaly_detection/detectors/<detector_id>/_preview
           "data": 20
         }
       ],
-      "start_time": 1573514220000,
-      "end_time": 1573514520000
+      "data_start_time": 1573514220000,
+      "data_end_time": 1573514520000
     }
   ],
   "anomaly_detector": {
@@ -198,7 +200,12 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_start
 #### Sample response
 
 ```json
-Stopped detector: u7ul83AB5cW85GzE0nTs
+{
+  "_id": "tNWMEHEBdsd5fFw61sVn",
+  "_version": 1,
+  "_seq_no": 6,
+  "_primary_term": 19
+}
 ```
 
 
@@ -217,12 +224,7 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_stop
 #### Sample response
 
 ```json
-{
-  "_id": "tNWMEHEBdsd5fFw61sVn",
-  "_version": 1,
-  "_seq_no": 6,
-  "_primary_term": 19
-}
+Stopped detector: u7ul83AB5cW85GzE0nTs
 ```
 
 
@@ -284,7 +286,8 @@ POST /_opendistro/_anomaly_detection/results/_search
         "_source": {
           "detector_id": "dAaHjG4B5Uh30OvgBjjc",
           "anomaly_score": 2.4603645209872402,
-          "start_time": 1574391785478,
+          "data_start_time": 1574391785478,
+          "execution_start_time": 1577391685375,
           "confidence": 0.8429920264756339,
           "feature_data": [
             {
@@ -293,7 +296,8 @@ POST /_opendistro/_anomaly_detection/results/_search
               "data": 70.1979163525
             }
           ],
-          "end_time": 1574392085478,
+          "data_end_time": 1574392085478,
+          "execution_end_time": 1577391685377,
           "anomaly_grade": 0.6303142329020289
         }
       },
@@ -308,7 +312,7 @@ POST /_opendistro/_anomaly_detection/results/_search
         "_source": {
           "detector_id": "dAaHjG4B5Uh30OvgBjjc",
           "anomaly_score": 2.5436755068046835,
-          "start_time": 1574392085478,
+          "data_start_time": 1574392085478,
           "confidence": 0.8430908518635617,
           "feature_data": [
             {
@@ -317,7 +321,7 @@ POST /_opendistro/_anomaly_detection/results/_search
               "data": 73.5079350732
             }
           ],
-          "end_time": 1574392385478,
+          "data_end_time": 1574392385478,
           "anomaly_grade": 0.630996309963105
         }
       }

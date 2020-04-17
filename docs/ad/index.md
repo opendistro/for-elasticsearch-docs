@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Anomaly Detection (Alpha)
+title: Anomaly Detection
 nav_order: 36
 has_children: true
 ---
@@ -28,8 +28,8 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. For **Data source**, choose the index that you want to use as the data source. You can optionally use index patterns to choose multiple indices.
 1. Choose the **Timestamp field** in your index.
 1. For **Data filter**, you can optionally filter the index that you chose as the data source. From the **Filter type** menu, choose  **Visual filter**, and then design your filter query by selecting **Fields**, **Operator**, and **Value**, or choose **Custom Expression** and add in your own JSON filter query.
-1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more real time this detector is, but the more computing resources it consumes.
-1. To add extra processing time for data collection, specify a **Window delay** value.
+1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more data points the detector gets, but the more computing resources it consumes.
+1. To add extra processing time for data collection, specify a **Window delay** value. Window delay is like a buffer that tells the detector to wait for a certain amount of time before processing the data. This is to account for any time your data source may need for internal processing.
 1. Choose **Create**.
 
 After you create the detector, the next step is to add features to it.
@@ -50,7 +50,9 @@ You can add a maximum of five features for a detector.
 
 ### Step 3: Observe the results
 
-The **Live anomalies** chart shows you the live anomaly results for the last 20 minutes.
+![Anomaly detection results](../images/ad.png)
+
+The **Live anomalies** chart shows you the live anomaly results for the last 60 intervals. For example, if the interval is set to 10, it shows the results for the last 600 minutes.
 
 The **Anomaly history** chart plots the anomaly grade with the corresponding measure of confidence.
 
@@ -60,7 +62,9 @@ The **Feature breakdown** graph plots the features based on the aggregation meth
 
 ### Step 4: Set up alerts
 
-To create a monitor to send you notifications when any anomalies are detected, choose **Set up alerts**. For steps to create a monitor and set notifications based on your anomaly detector, see [Monitor](../alerting/monitors/).
+To create a monitor to send you notifications when any anomalies are detected, choose **Set up alerts**.
+- You're redirected to the **Alerting**, **Add monitor** page.
+For steps to create a monitor and set notifications based on your anomaly detector, see [Monitor](../alerting/monitors/). If you stop or delete a detector, make sure to delete any monitors associated with the detector, as this is not done automatically.
 
 ### Step 5: Adjust the model
 
@@ -73,5 +77,5 @@ To see all the configuration settings, choose the **Detector configuration** tab
 
 Go to the **Detectors** page to change or delete your detectors.
 
-1. To make changes to your detector, choose **Actions**, and then choose **Edit detector**. You need to stop the detector before changing the configuration settings. After completing your changes, choose **Save change**.
+1. To make changes to your detector, choose **Actions**, and then choose **Edit detector**. You need to *stop* the detector before changing the configuration settings. After completing your changes, choose **Save change**.
 2. To delete your detector, choose **Actions**, and then choose **Delete detector**. Choose **Delete** to confirm.
