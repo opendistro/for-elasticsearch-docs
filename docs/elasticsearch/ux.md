@@ -8,13 +8,13 @@ nav_order: 12
 # Search UX
 
 Expectations from search engines have evolved over the years. Just returning relevant results quickly is no longer enough for most users.
-Elasticsearch allows you to easily implement many features that enhance your user’s search experience.
+Elasticsearch includes many features that enhance the user's search experience.
 
 Feature | Description
 :--- | :---
-Autocomplete | Suggest complete phrases as the user types.
-Pagination |  Display 10-20 results per page but allow your users to adjust.
-Scroll | Allow scrolling through a large number of results.
+Autocomplete | Suggest phrases as the user types.
+Pagination |  Rather than a single, long list, break search results into pages.
+Scroll | Return a large number of results in chunks.
 Sort | Allow sorting results by different criteria.
 Highlight | Highlight the search term in the results.
 
@@ -22,9 +22,9 @@ Highlight | Highlight the search term in the results.
 
 ## Autocomplete
 
-Shows suggestions to the user while they’re typing.
+Autocomplete shows suggestions to users while they type.
 
-For example, if a user types in “pop”, before they finish typing, show suggestions like “popcorn” and “popsicles” to complete the query. These suggestions preempt your user's intention and lead them to a possible search term more quickly.
+For example, if a user types "pop," Elasticsearch provides suggestions like "popcorn" or "popsicles." These suggestions preempt your user's intention and lead them to a possible search term more quickly.
 
 Elasticsearch allows you to design autocomplete that’s:
 
@@ -37,10 +37,10 @@ Use these same methods to implement instant search. Instant search is where you 
 
 ### Prefixes (query time)
 
-Use prefix matching to implement autocomplete on any text analyzed field at query time. This is easy because you don’t have to set up special mappings or index your data in a particular way; it simply works with the data that you’ve already indexed.
+Prefix matching doesn't require any special mappings. It works with your data as-is.
 
-For example, assume that the user types in the phrase “qui” to search the `text_entry` field. To autocomplete this phrase, use the `match_phrase_prefix` query to search all `text_entry` fields that begin with the prefix "qui".
-To make the word order and relative positions flexible, specify a `slop` value.
+For example, assume that the user types “qui” into a search UI. To autocomplete this phrase, use the `match_phrase_prefix` query to search all `text_entry` fields that begin with the prefix "qui."
+To make the word order and relative positions flexible, specify a `slop` value. To learn about the `slop` option, see [Options](../full-text/#options).
 
 ```json
 GET shakespeare/_search
@@ -57,7 +57,7 @@ GET shakespeare/_search
 ```
 
 Prefix matching is a fairly resource intensive operation. A prefix of `a` could match hundreds of thousands of terms and not be useful to your user.
-To limit the impact of prefix expansion, set `max_expansions` to a reasonable number:
+To limit the impact of prefix expansion, set `max_expansions` to a reasonable number. To learn about the `max_expansions` option, see [Options](../full-text/#options).
 
 ```json
 GET shakespeare/_search
@@ -75,14 +75,14 @@ GET shakespeare/_search
 ```
 
 The ease of implementing query-time autocomplete comes at the cost of performance.
-When implementing this feature on a large scale, we suggest you use an index-time solution instead. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
+When implementing this feature on a large scale, we recommend an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
 
 ### Edge N-grams (index time)
 
 Use edge N-grams to implement autocomplete at index time to improve its performance.
 
-Think of an N-gram as a sliding window on a word, where N stands for the length of the window.
-If we were to N-gram the word "quick", the results would depend on the value of N:
+Think of an N-gram as a sequence of N characters.
+If we N-gram the word "quick," the results depend on the value of N.
 
 N | Type | N-gram
 :--- | :--- | :---
@@ -92,7 +92,7 @@ N | Type | N-gram
 4 | Four-gram | [ `quic`, `uick` ]
 5 | Five-gram | [ `quick` ]
 
-For autocomplete, we only need the beginning N-grams of a search phrase. So, we use a special type of N-gram called edge N-gram.
+For autocomplete, we only need the beginning N-grams of a search phrase. So we use a special type of N-gram called edge N-gram.
 
 Edge N-gramming the word "quick" results in:
 
@@ -104,55 +104,8 @@ Edge N-gramming the word "quick" results in:
 
 This follows the sequence we expect the user to type.
 
-Compute the edge N-grams of a text field and match the input queries with it.
-
-To set up your fields as edge N-grams:
-
-*Step 1: Create an autocomplete analyzer*
-
-Configure a custom `edge_ngram` filter called `edge_ngram_filter`.
-This filter produces edge N-grams with a minimum N-gram length of 1 (a single letter) and a maximum length of 20. So, we can offer suggestions for words of up to 20 letters.
-
-```json
-"filter": {
-  "edge_ngram_filter": {
-    "type": "edge_ngram",
-    "min_gram": 1,
-    "max_gram": 20
-  }
-}
-```
-
-Use this filter in a custom analyzer called `autocomplete`. This analyzer tokenizes a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the above `edge_ngram_filter`.
-
-```json
-"analyzer": {
-    "autocomplete": {
-      "type": "custom",
-      "tokenizer": "standard",
-      "filter": [
-        "lowercase",
-        "edge_ngram_filter"
-      ]
-    }
-  }
-}
-```
-
-Map the `text_entry` field to be of type `text` and apply our custom `autocomplete` analyzer:
-
-```json
-"mappings": {
-  "properties": {
-    "text_entry": {
-      "type": "text",
-      "analyzer": "autocomplete"
-    }
-  }
-}
-```
-
-The full request to create the index and instantiate the edge N-gram filter and analyzer is as follows:
+Configuring a field to use edge N-grams is a two-step process.
+First, create an autocomplete analyzer with an edge N-gram filter:
 
 ```json
 PUT shakespeare
@@ -189,6 +142,12 @@ PUT shakespeare
 }
 ```
 
+In this case, we create the index and instantiate the edge N-gram filter and analyzer.
+
+The `edge_ngram_filter` produces edge N-grams with a minimum N-gram length of 1 (a single letter) and a maximum length of 20. So, we can offer suggestions for words of up to 20 letters.
+
+The `autocomplete` analyzer tokenizes a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the above `edge_ngram_filter`.
+
 Use the `analyze` operation to test this analyzer:
 
 ```json
@@ -207,7 +166,7 @@ It returns edge N-grams as tokens:
 * `quic`
 * `quick`
 
-*Step 2: Use the standard analyzer on the query side*
+Use the standard analyzer on the query side:
 
 Use the `standard` analyzer at search time. Otherwise, the user query is split into edge N-grams and we get results for everything that matches `q`, `u`, and `i`.
 This is one of the few occasions where we use a different analyzer on the index side and query side.
@@ -273,21 +232,6 @@ GET shakespeare/_search
           "line_number": "5.1.52",
           "speaker": "HOLOFERNES",
           "text_entry": "Quis, quis, thou consonant?"
-        }
-      },
-      {
-        "_index": "shakespeare",
-        "_type": "_doc",
-        "_id": "65579",
-        "_score": 9.478242,
-        "_source": {
-          "type": "line",
-          "line_id": 65580,
-          "play_name": "Merry Wives of Windsor",
-          "speech_number": 2,
-          "line_number": "3.3.2",
-          "speaker": "MISTRESS PAGE",
-          "text_entry": "Quickly, quickly! is the buck-basket--"
         }
       }
     ]
@@ -406,54 +350,6 @@ The results are based on prefix matching of the FSTs.
               "speaker": "JOHN OF GAUNT",
               "text_entry": "To be a make-peace shall become my age:"
             }
-          },
-          {
-            "text": "To be a party in this injury.",
-            "_index": "shakespeare",
-            "_type": "_doc",
-            "_id": "75259",
-            "_score": 1,
-            "_source": {
-              "type": "line",
-              "line_id": 75260,
-              "play_name": "Othello",
-              "speech_number": 57,
-              "line_number": "5.1.93",
-              "speaker": "IAGO",
-              "text_entry": "To be a party in this injury."
-            }
-          },
-          {
-            "text": "To be a preparation gainst the Polack;",
-            "_index": "shakespeare",
-            "_type": "_doc",
-            "_id": "33591",
-            "_score": 1,
-            "_source": {
-              "type": "line",
-              "line_id": 33592,
-              "play_name": "Hamlet",
-              "speech_number": 17,
-              "line_number": "2.2.67",
-              "speaker": "VOLTIMAND",
-              "text_entry": "To be a preparation gainst the Polack;"
-            }
-          },
-          {
-            "text": "to be a friar, from the time of his remembrance to",
-            "_index": "shakespeare",
-            "_type": "_doc",
-            "_id": "14870",
-            "_score": 1,
-            "_source": {
-              "type": "line",
-              "line_id": 14871,
-              "play_name": "Alls well that ends well",
-              "speech_number": 36,
-              "line_number": "4.3.104",
-              "speaker": "Second Lord",
-              "text_entry": "to be a friar, from the time of his remembrance to"
-            }
           }
         ]
       }
@@ -541,22 +437,6 @@ GET shakespeare/_search
               "line_number": "5.5.85",
               "speaker": "CLARENCE",
               "text_entry": "To make a bloody supper in the Tower."
-            }
-          },
-          {
-            "text": "To make a bondmaid and a slave of me;",
-            "_index": "shakespeare",
-            "_type": "_doc",
-            "_id": "89458",
-            "_score": 4,
-            "_source": {
-              "type": "line",
-              "line_id": 89459,
-              "play_name": "Taming of the Shrew",
-              "speech_number": 1,
-              "line_number": "2.1.2",
-              "speaker": "BIANCA",
-              "text_entry": "To make a bondmaid and a slave of me;"
             }
           }
         ]
@@ -665,22 +545,6 @@ You see the indexed document as the first result:
               "speaker": "JOHN TALBOT",
               "text_entry": "To make a bastard and a slave of me!"
             }
-          },
-          {
-            "text": "To make a bloody supper in the Tower.",
-            "_index": "shakespeare",
-            "_type": "_doc",
-            "_id": "12504",
-            "_score": 4,
-            "_source": {
-              "type": "line",
-              "line_id": 12505,
-              "play_name": "Henry VI Part 3",
-              "speech_number": 40,
-              "line_number": "5.5.85",
-              "speaker": "CLARENCE",
-              "text_entry": "To make a bloody supper in the Tower."
-            }
           }
         ]
       }
@@ -768,7 +632,7 @@ Use the `term` suggestor to return a list of possible corrections:
 }
 ```
 
-The higher the score the better the suggestion is. The frequency represents the number of times the term appears in the documents in that index.
+The higher the score, the better the suggestion is. The frequency represents the number of times the term appears in the documents in that index.
 
 To implement a "Did you mean `suggestion`?" feature, use a `phrase` suggestor.
 This is similar to the `term` suggestor, except that it uses N-gram language models to suggest whole phrases instead of individual words.
@@ -876,7 +740,7 @@ You get back the corrected phrase:
 
 Use the `from` and `size` parameters to return results to your users one page at time.
 
-The `from` parameter indicates the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. The `from` and `size` parameters together act as a sliding window that moves through the results.
+The `from` parameter indicates the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. Together, they let you return a subset of the search results.
 
 For example, if the value of `size` is 10 and the value of `from` is 0, you see the first 10 results. If you change the value of `from` to 10, you see the next 10 results (because the results are zero-indexed). So, if you want to see results starting from result 11, `from` must be 10.
 
@@ -891,32 +755,6 @@ GET shakespeare/_search
     }
   }
 }
-```
-
-```json
-Search Results
-------------- from: 0, size: 10
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-------------- from: 10, size: 10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
 ```
 
 To calculate the `from` parameter relative to the page number:
@@ -935,7 +773,7 @@ GET shakespeare/_search?from=0&size=10
 
 If you only specify the `size` parameter, the `from` parameter defaults to 0.
 
-Querying for pages deep in your results could have a significant performance impact, so this approach is limited to 10000 results.
+Querying for pages deep in your results could have a significant performance impact, so this approach is limited to 10,000 results.
 
 The `from` and `size` parameters are completely stateless, so the results are always based on the latest available data.
 This could cause inconsistent pagination.
@@ -945,7 +783,9 @@ Use the `scroll` operation for consistent pagination. With the `scroll` operatio
 
 ## Scroll
 
-The `from` and `size` parameters allow you to paginate your search results, but with a limit of 10000 results at a time. If you need to request massive volumes of data for say a machine learning job, use the `scroll` operation instead. The `scroll` operation allows you to request an unlimited number of results.
+The `from` and `size` parameters allow you to paginate your search results, but with a limit of 10,000 results at a time.
+
+If you need to request massive volumes of data from, for example, a machine learning job, use the `scroll` operation instead. The `scroll` operation allows you to request an unlimited number of results.
 
 To use the scroll operation, add a `scroll` parameter to the request header with a search context to tell Elasticsearch how long you need to keep scrolling. This search context needs to be long enough to process a single batch of results. The `size` parameter allows you to set the number of results that you want returned for each batch.
 
@@ -972,9 +812,9 @@ GET _search/scroll
 }
 ```
 
-Using this scroll ID, you get results in batches of 10000 as long as the search context is still open. Typically, the scroll ID does not change between requests. But it could change, so make sure you always use the latest scroll ID. If the next scroll request is not sent within the set search context, the results are not returned.
+Using this scroll ID, you get results in batches of 10,000 as long as the search context is still open. Typically, the scroll ID does not change between requests, but it *can* change, so make sure to always use the latest scroll ID. If the next scroll request is not sent within the set search context, the results are not returned.
 
-If you expect billions of results, use a sliced scroll. Slicing allows you to perform multiple scroll operations for the same request but in parallel.
+If you expect billions of results, use a sliced scroll. Slicing allows you to perform multiple scroll operations for the same request, but in parallel.
 Set the ID and the maximum number of slices we can have for this scroll:
 
 ```json
@@ -1028,7 +868,7 @@ To close all open scroll contexts:
 DELETE _search/scroll/_all
 ```
 
-The `scroll` operation is a point-in-time search just like a snapshot corresponding to a specific timestamp. Documents added when the search is context is open are not taken into account in the results.
+The `scroll` operation corresponds to a specific timestamp. Documents added after that timestamp are not considered as potential results.
 
 Because open search contexts consume a lot of memory, we suggest you do not use this for frequent user queries.
 If you don't need the search context open, use the `sort` parameter with the `search_after` parameter for scrolling.
@@ -1062,7 +902,7 @@ GET shakespeare/_search
 }
 ```
 
-The sort parameter is an array, so you can specify multiple field values.
+The sort parameter is an array, so you can specify multiple field values in order of their priority.
 
 After `line_id`, let's sort by `speech_number`. In this case, if we have two fields with the same value for `line_id`, Elasticsearch uses `speech_number`, which is the second option for sorting.
 
