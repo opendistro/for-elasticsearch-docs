@@ -174,6 +174,14 @@ After installing the Security plugin, you can run `sudo sh /usr/share/elasticsea
 
 Security has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
+### Job scheduler
+
+```bash
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-job-scheduler/opendistro-job-scheduler-1.6.0.0.zip
+```
+
+Install job scheduler to use alerting and index state management.
+
 
 ### Alerting
 
@@ -181,6 +189,7 @@ Security has a corresponding [Kibana plugin](../../kibana/plugins) that you prob
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.6.0.0.zip
 ```
 
+To use alerting, you need to install the job scheduler plugin.
 Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
@@ -196,6 +205,8 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.6.0.0.zip
 ```
+
+To use index state management, you need to install the job scheduler plugin.
 
 
 ### KNN
