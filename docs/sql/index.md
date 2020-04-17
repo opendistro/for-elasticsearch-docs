@@ -125,7 +125,7 @@ PUT _cluster/settings
 }'
 ```
 
-1. Run the query again to see if it works.
+Run the query again to see if it works.
 
 ### Index mapping verification exception
 
