@@ -143,6 +143,6 @@ If you see the following verification exception:
 }
 ```
 
-Make sure the index is not an index pattern and it doesn't have multiple types.
+Make sure the index in your query is not an index pattern and it doesn't have multiple types.
 
 If these workarounds don't work, submit a [Github issue](https://github.com/opendistro-for-elasticsearch/sql/issues).
