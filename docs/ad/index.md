@@ -63,8 +63,11 @@ The **Feature breakdown** graph plots the features based on the aggregation meth
 ### Step 4: Set up alerts
 
 To create a monitor to send you notifications when any anomalies are detected, choose **Set up alerts**.
-- You're redirected to the **Alerting**, **Add monitor** page.
-For steps to create a monitor and set notifications based on your anomaly detector, see [Monitor](../alerting/monitors/). If you stop or delete a detector, make sure to delete any monitors associated with the detector, as this is not done automatically.
+You're redirected to the **Alerting**, **Add monitor** page.
+
+For steps to create a monitor and set notifications based on your anomaly detector, see [Monitor](../alerting/monitors/).
+
+If you stop or delete a detector, make sure to delete any monitors associated with the detector, as this is not done automatically.
 
 ### Step 5: Adjust the model
 
