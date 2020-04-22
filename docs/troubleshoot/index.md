@@ -88,7 +88,7 @@ sudo yum upgrade --skip-broken
 
 ## Elasticsearch fails to start on Java 8 (RPM install)
 
-If Elasticsearch fails to start and you're using Java 8, verify that you set the symbolic link (symlink) correctly in [step 5](../install/rpm) of the RPM installation. If Java is installed to a non-standard path, try looking for `tools.jar` using the following command:
+If Elasticsearch fails to start and you're using Java 8, verify that you set the symbolic link (symlink) correctly in [step 6](../install/rpm) of the RPM installation. If Java is installed to a non-standard path, try looking for `tools.jar` using the following command:
 
 ```bash
 ls /usr/lib/jvm/java-1.8.0-openjdk-*/lib/tools.jar
