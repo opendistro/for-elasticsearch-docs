@@ -13,11 +13,7 @@ SQL UI is now supported. Use the SQL UI to easily run on-demand SQL queries, tra
 
 ![Kibana SQL UI plugin](../images/sql.png)
 
-To use the REST API, send requests to the `_opendistro/_sql` URI. You can use a request parameter or the request body (recommended).
-
-```sql
-POST _opendistro/_sql?sql=select * from my-index limit 50
-```
+To use the REST API, send requests to the `_opendistro/_sql` URI. You need to use the request body.
 
 ```json
 POST _opendistro/_sql
