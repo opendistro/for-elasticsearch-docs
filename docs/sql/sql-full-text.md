@@ -7,9 +7,9 @@ nav_order: 2
 
 # Full-text search
 
-Use SQL commands for full-text search. For more information about full-text queries in Elasticsearch, see [Full-text queries](../../elasticsearch/full-text/).
+Use SQL commands for full-text search. SQL supports a subset of the full-text queries available in Elasticsearch.
 
-
+To learn about full-text queries in Elasticsearch, see [Full-text queries](../../elasticsearch/full-text/).
 
 ---
 
@@ -33,7 +33,7 @@ FROM accounts
 WHERE MATCH_QUERY(address, 'Holmes')
 ```
 
-Or,
+Alternate syntax:
 
 ```sql
 SELECT account_number, address
@@ -51,7 +51,7 @@ WHERE address = MATCH_QUERY('Holmes')
 
 To search for text in multiple fields, use `MULTI_MATCH`, `MULTIMATCH`, or `MULTIMATCHQUERY` functions.
 
-For example, to search for `Dale` in either the `firstname` or `lastname` fields:
+For example, search for `Dale` in either the `firstname` or `lastname` fields:
 
 
 ```sql
@@ -109,7 +109,7 @@ WHERE MATCH_PHRASE(address, '880 Holmes Lane')
 
 To return a relevance score along with every matching document, use `SCORE`, `SCOREQUERY`, or `SCORE_QUERY` functions.
 
-You need to pass in two arguments. The first is the `MATCH_QUERY` expression and the second is an optional floating point number to boost the score (default value is 1.0).
+You need to pass in two arguments. The first is the `MATCH_QUERY` expression. The second is an optional floating point number to boost the score (default value is 1.0).
 
 
 ```sql
