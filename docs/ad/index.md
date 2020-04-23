@@ -29,7 +29,7 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. Choose the **Timestamp field** in your index.
 1. For **Data filter**, you can optionally filter the index that you chose as the data source. From the **Filter type** menu, choose  **Visual filter**, and then design your filter query by selecting **Fields**, **Operator**, and **Value**, or choose **Custom Expression** and add in your own JSON filter query.
 1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more data points the detector gets, but the more computing resources it consumes.
-1. To add extra processing time for data collection, specify a **Window delay** value. Window delay is like a buffer that tells the detector to wait for a certain amount of time before processing the data. This is to account for any time your data source may need for internal processing.
+1. To add extra processing time for data collection, specify a **Window delay** value. Window delay tells the detector to wait for a certain amount of time before processing the data. It can help account for any time your data source may need for internal processing.
 1. Choose **Create**.
 
 After you create the detector, the next step is to add features to it.
