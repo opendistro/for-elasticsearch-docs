@@ -173,7 +173,16 @@ GET _opendistro/_security/api/actiongroups/<action-group>
 
 ```json
 {
-  "SEARCH" : [ "indices:data/read/search*", "indices:data/read/msearch*", "SUGGEST" ]
+  "custom_action_group": {
+    "reserved": false,
+    "hidden": false,
+    "allowed_actions": [
+      "kibana_all_read",
+      "indices:admin/aliases/get",
+      "indices:admin/aliases/exists"
+    ],
+    "static": false
+  }
 }
 ```
 
