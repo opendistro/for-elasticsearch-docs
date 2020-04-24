@@ -181,6 +181,7 @@ GET _opendistro/_security/api/actiongroups/<action-group>
       "indices:admin/aliases/get",
       "indices:admin/aliases/exists"
     ],
+    "description": "My custom action group",
     "static": false
   }
 }
