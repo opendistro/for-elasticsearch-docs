@@ -7,12 +7,20 @@ nav_order: 6
 
 # PartiQL
 
-SQL plugin supports PartiQL: a SQL-compatible query language that makes it easy and efficient to query semi-structured and nested data for any data format. For now our implementation is only partially compatible with PartiQL specification and more support will be provided in future.
+SQL plugin supports PartiQL: a SQL-compatible query language that lets you query semi-structured and nested data for any data format. The SQL plugin only supports a subset of the PartiQL specification.
+To learn about PartiQL, see [PartiQL](https://partiql.org/).
 
-Use the `bulk` operation to index some sample data:
+
+## Querying nested collection
+
+In SQL-92, a database table can only have tuples that consist of scalar values.
+
+PartiQL extends SQL-92 to allow you to query and unnest nested collections. In Elasticsearch, this is very useful to query a JSON index with nested objects or fields.
+
+To follow along, use the `bulk` operation to index some sample data:
 
 ```json
-PUT employees_nested/_bulk?refresh
+POST employees_nested/_bulk?refresh
 {"index":{"_id":"1"}}
 {"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"AWS Redshift Spectrum querying","started_year":1990},{"name":"AWS Redshift security","started_year":1999},{"name":"AWS Aurora security","started_year":2015}]}
 {"index":{"_id":"2"}}
@@ -21,13 +29,9 @@ PUT employees_nested/_bulk?refresh
 {"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"AWS Redshift security","started_year":1998},{"name":"AWS Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
 ```
 
-### Querying nested collection
-
-In SQL-92, a database table can only have tuples that consists of scalar values. PartiQL extends SQL-92 to allow you query and unnest nested collection conveniently. In Elasticsearch world, this is very useful for index with object or nested field.
-
 ### Example 1: Unnesting a Nested Collection
 
-In the following example, it finds nested document (project) with field value (name) that satisfies the predicate (contains 'security'). Note that because each parent document can have more than one nested documents, the matched nested document is flattened. In other word, the final result is the Cartesian Product between parent and nested documents.
+This example finds the nested document (`projects`) with a field value (`name`) that satisfies the predicate (contains `security`). Because each parent document can have more than one nested documents, the nested document that matches is flattened. In other words, the final result is the cartesian product between the parent and nested documents.
 
 ```sql
 SELECT e.name AS employeeName,
@@ -108,9 +112,9 @@ Bob Smith | AWS Redshift security
 Jane Smith | AWS Hello security
 Jane Smith | AWS Redshift security
 
-### Example 2: Unnesting in Existential Subquery
+### Example 2: Unnesting in existential subquery
 
-Alternatively, a nested collection can be unnested in subquery to check if it satisfies a condition.
+To unnest a nested collection in a subquery to check if it satisfies a condition:
 
 ```sql
 SELECT e.name AS employeeName
@@ -209,7 +213,7 @@ Explain:
 
 Result set:
 
-| employeeName
-:---
-Bob Smith
-Jane Smith
+| employeeName |
+:--- | :---
+Bob Smith |
+Jane Smith |
