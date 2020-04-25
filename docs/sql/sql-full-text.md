@@ -7,7 +7,7 @@ nav_order: 2
 
 # Full-text search
 
-Use SQL commands for full-text search. SQL supports a subset of the full-text queries available in Elasticsearch.
+Use SQL commands for full-text search. The SQL plugin supports a subset of the full-text queries available in Elasticsearch.
 
 To learn about full-text queries in Elasticsearch, see [Full-text queries](../../elasticsearch/full-text/).
 
