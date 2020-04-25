@@ -30,6 +30,8 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. For **Data filter**, you can optionally filter the index that you chose as the data source. From the **Filter type** menu, choose  **Visual filter**, and then design your filter query by selecting **Fields**, **Operator**, and **Value**, or choose **Custom Expression** and add in your own JSON filter query.
 1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more data points the detector gets, but the more computing resources it consumes.
 1. To add extra processing time for data collection, specify a **Window delay** value. Window delay tells the detector to wait for a certain amount of time before processing the data. It can help account for any time your data source may need for internal processing.
+- For example, assume you have sales order data that you want to monitor for anomalies every 10 minutes, so you set the detector interval as 10 minutes.
+If the detector is run at 2:00, it aggregates orders from 1:50 to 2:00. But, if your data is ingested into the Elasticsearch cluster with a delay of 1 minute, it only aggregates orders from 1:49 to 1:59 and misses the orders from 1:59 to 2:00. In this scenario, adding a window delay of 1 minute shifts the data window back to the original 1:50 to 2:00.
 1. Choose **Create**.
 
 After you create the detector, the next step is to add features to it.
@@ -45,6 +47,8 @@ You can add a maximum of five features for a detector.
 1. Enter the **Name** of the feature.
 1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the field and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
 1. Preview sample anomalies and adjust the feature settings if needed.
+- For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximates the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
+Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
 1. Choose **Save**.
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
 
