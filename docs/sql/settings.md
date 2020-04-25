@@ -2,7 +2,7 @@
 layout: default
 title: Plugin Settings
 parent: SQL
-nav_order: 6
+nav_order: 7
 ---
 
 # Plugin Settings
