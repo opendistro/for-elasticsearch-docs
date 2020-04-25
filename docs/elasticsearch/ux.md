@@ -166,8 +166,6 @@ It returns edge N-grams as tokens:
 * `quic`
 * `quick`
 
-Use the standard analyzer on the query side:
-
 Use the `standard` analyzer at search time. Otherwise, the user query is split into edge N-grams and we get results for everything that matches `q`, `u`, and `i`.
 This is one of the few occasions where we use a different analyzer on the index side and query side.
 
@@ -596,9 +594,9 @@ Use the `term` suggestor to return a list of possible corrections:
   "suggest": {
     "spell-check": [
       {
-        "text": "lifee",
+        "text": "lief",
         "offset": 0,
-        "length": 5,
+        "length": 4,
         "options": [
           {
             "text": "lifes",
