@@ -75,12 +75,15 @@ exclude() | `SELECT exclude('*name') FROM my-index`
 
 You must enable fielddata in the document mapping for most string functions to work properly.
 
+The specification shows the return type of the function with a generic type `T` as the argument.
+For example, `abs(number T) -> T` means that the function `abs` accepts a numerical argument of type `T`, which could be any sub-type of the `number` type, and it returns the actual type of `T` as the return type.
+
 Function | Specification | Example
 :--- | :--- | :---
 abs | `abs(number T) -> T` | `SELECT abs(number) FROM my-index`
 acos | `acos(number T) -> double` | `SELECT acos(number) FROM my-index`
 add | `add(number T, number) -> T` | `SELECT add(number, 5) FROM my-index`
-ascii | `ascii(string T) -> integer` | `SELECT ascii(name) FROM my-index`
+ascii | `ascii(string T) -> integer` | `SELECT ascii(name.keyword) FROM my-index`
 asin | `asin(number T) -> double` | `SELECT asin(number) FROM my-index`
 atan | `atan(number T) -> double` | `SELECT atan(number) FROM my-index`
 atan2 | `atan2(number T, number) -> double` | `SELECT atan2(number, 5) FROM my-index`
@@ -104,15 +107,15 @@ floor | `floor(number T) -> T` | `SELECT floor(number) AS Rounded_Down FROM my-i
 if | `if(boolean, es_type, es_type) -> es_type` | `SELECT if(boolean, es_type) FROM my-index`
 ifnull | `ifnull(es_type, es_type) -> es_type` | `SELECT ifnull(es_type, es_type) FROM my-index`
 isnull | `isnull(es_type) -> integer` | `SELECT isnull(es_type) FROM my-index`
-left | `left(string T, integer) -> T` | `SELECT left(name, 5) FROM my-index`
-length | `length(string) -> integer` | `SELECT length(name) FROM my-index`
+left | `left(string T, integer) -> T` | `SELECT left(name.keyword, 5) FROM my-index`
+length | `length(string) -> integer` | `SELECT length(name.keyword) FROM my-index`
 ln | `ln(number T) -> double` | `SELECT ln(number) FROM my-index`
-locate | `locate(string, string, integer) -> integer` or `locate(string, string) -> INTEGER` | `SELECT locate(firstname, lastname) FROM my-index`
+locate | `locate(string, string, integer) -> integer` or `locate(string, string) -> INTEGER` | `SELECT locate(name.keyword, lastname.keyword) FROM my-index`
 log | `log(number T) -> double` or `log(number T, number) -> double` | `SELECT log(number) FROM my-index`
 log2 | `log2(number T) -> double` | `SELECT log2(number) FROM my-index`
 log10 | `log10(number T) -> double` | `SELECT log10(number) FROM my-index`
-lower | `lower(string T) -> T` or `lower(string T, string) -> T` | `SELECT lower(name) FROM my-index`
-ltrim | `ltrim(string T) -> T` | `SELECT ltrim(name) FROM my-index`
+lower | `lower(string T) -> T` or `lower(string T, string) -> T` | `SELECT lower(name.keyword) FROM my-index`
+ltrim | `ltrim(string T) -> T` | `SELECT ltrim(name.keyword) FROM my-index`
 maketime | `maketime(integer, integer, integer) -> date` | `SELECT maketime(number, 5, 2) FROM my-index`
 modulus | `modulus(number T, number) -> T` | `SELECT modulus(number, 5) FROM my-index`
 month | `month(date) -> integer` | `SELECT month(date) FROM my-index`
@@ -124,22 +127,22 @@ pow | `pow(number T) -> T` or `pow(number T, number) -> T` | `SELECT pow(number)
 power | `power(number T) -> T` or `power(number T, number) -> T` | `SELECT power(number) FROM my-index`
 radians | `radians(number T) -> double` | `SELECT radians(number) FROM my-index`
 rand | `rand() -> number` or `rand(number T) -> T` | `SELECT rand(number) FROM my-index`
-replace | `replace(string T, string, string) -> T` | `SELECT replace(name, firstname, lastname) FROM my-index`
-right | `right(string T, integer) -> T` | `SELECT right(name, 5) FROM my-index`
+replace | `replace(string T, string, string) -> T` | `SELECT replace(name.keyword, firstname.keyword, lastname.keyword) FROM my-index`
+right | `right(string T, integer) -> T` | `SELECT right(name.keyword, 5) FROM my-index`
 rint | `rint(number T) -> T` | `SELECT rint(number) FROM my-index`
 round | `round(number T) -> T` | `SELECT round(number) FROM my-index`
-rtrim | `rtrim(string T) -> T` | `SELECT rtrim(name) FROM my-index`
+rtrim | `rtrim(string T) -> T` | `SELECT rtrim(name.keyword) FROM my-index`
 sign | `sign(number T) -> T` | `SELECT sign(number) FROM my-index`
 signum | `signum(number T) -> T` | `SELECT signum(number) FROM my-index`
 sin | `sin(number T) -> double` | `SELECT sin(number) FROM my-index`
 sinh | `sinh(number T) -> double` | `SELECT sinh(number) FROM my-index`
 sqrt | `sqrt(number T) -> T` | `SELECT sqrt(number) FROM my-index`
-substring | `substring(string T, integer, integer) -> T` | `SELECT substring(name, 2,5) FROM my-index`
+substring | `substring(string T, integer, integer) -> T` | `SELECT substring(name.keyword, 2,5) FROM my-index`
 subtract | `subtract(number T, number) -> T` | `SELECT subtract(number, 2) FROM my-index`
 tan | `tan(number T) -> double` | `SELECT tan(number) FROM my-index`
 timestamp | `timestamp(date) -> date` | `SELECT timestamp(date) FROM my-index`
-trim | `trim(string T) -> T` | `SELECT trim(name) FROM my-index`
-upper | `upper(string T) -> T` or `upper(string T, string) -> T` | `SELECT upper(name) FROM my-index`
+trim | `trim(string T) -> T` | `SELECT trim(name.keyword) FROM my-index`
+upper | `upper(string T) -> T` or `upper(string T, string) -> T` | `SELECT upper(name.keyword) FROM my-index`
 year | `year(date) -> integer` | `SELECT year(date) FROM my-index`
 / |  | `SELECT number / 100 FROM my-index`
 % |  | `SELECT number % 100 FROM my-index`
