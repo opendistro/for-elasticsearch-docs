@@ -29,9 +29,11 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. Choose the **Timestamp field** in your index.
 1. For **Data filter**, you can optionally filter the index that you chose as the data source. From the **Filter type** menu, choose  **Visual filter**, and then design your filter query by selecting **Fields**, **Operator**, and **Value**, or choose **Custom Expression** and add in your own JSON filter query.
 1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more data points the detector gets, but the more computing resources it consumes.
-1. To add extra processing time for data collection, specify a **Window delay** value. Window delay tells the detector to wait for a certain amount of time before processing the data. It can help account for any time your data source may need for internal processing.
-- For example, assume you have sales order data that you want to monitor for anomalies every 10 minutes, so you set the detector interval as 10 minutes.
-If the detector is run at 2:00, it aggregates orders from 1:50 to 2:00. But, if your data is ingested into the Elasticsearch cluster with a delay of 1 minute, it only aggregates orders from 1:49 to 1:59 and misses the orders from 1:59 to 2:00. In this scenario, adding a window delay of 1 minute shifts the data window back to the original 1:50 to 2:00.
+1. To add extra processing time for data collection, specify a **Window delay** value. This is to tell the detector that the data is not ingested into Elasticsearch in real time but with a certain delay.
+Set the window delay to shift the detector interval to account for this delay.
+- For example, say the detector interval is 10 minutes and data is ingested into your cluster with a general delay of 1 minute.
+Assume the detector runs at 2:00, the detector attempts to get the last 10 minutes of data from 1:50 to 2:00, but because of the 1-minute delay, it only gets 9 minutes of data and misses the data from 1:59 to 2:00.
+Setting the window delay to 1 minute, shifts the interval window to 1:49 - 1:59, so the detector accounts for all 10 minutes of the detector interval time.
 1. Choose **Create**.
 
 After you create the detector, the next step is to add features to it.
