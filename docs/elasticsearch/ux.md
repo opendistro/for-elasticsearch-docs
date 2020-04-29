@@ -33,7 +33,7 @@ Elasticsearch allows you to design autocomplete that’s:
 - Forgiving: Tolerates typos.
 
 Implement autocomplete in one of three ways: prefixes, edge N-grams, and completion suggesters.
-Use these same methods to implement instant search. Instant search is where you show search results as your users type.
+Use these same methods to implement instant search. Instant search is where you show search results as your user types.
 
 ### Prefixes (query time)
 
@@ -92,9 +92,9 @@ N | Type | N-gram
 4 | Four-gram | [ `quic`, `uick` ]
 5 | Five-gram | [ `quick` ]
 
-Autocomplete needs only the beginning N-grams of a search phrase, so use a special type of N-gram called edge N-gram.
+Autocomplete needs only the beginning N-grams of a search phrase, so it uses a special type of N-gram called edge N-gram.
 
-Edge N-gramming the word "quick" results in:
+Edge N-gramming the word "quick" results in the following:
 
 - `q`
 - `qu`
@@ -104,8 +104,7 @@ Edge N-gramming the word "quick" results in:
 
 This follows the same sequence the user types.
 
-Configuring a field to use edge N-grams is a two-step process.
-First, create an autocomplete analyzer with an edge N-gram filter:
+To configure a field to use edge N-grams, create an autocomplete analyzer with an edge N-gram filter:
 
 ```json
 PUT shakespeare
@@ -166,8 +165,8 @@ It returns edge N-grams as tokens:
 * `quic`
 * `quick`
 
-Use the `standard` analyzer at search time. Otherwise, the user query splits into edge N-grams and you get results for everything that matches `q`, `u`, and `i`.
-This is one of the few occasions where you use a different analyzer on the index side and query side.
+Use the `standard` analyzer at search time. Otherwise, the search query splits into edge N-grams and you get results for everything that matches `q`, `u`, and `i`.
+This is one of the few occasions where you use a different analyzer on the index and query side.
 
 ```json
 GET shakespeare/_search
@@ -253,7 +252,7 @@ Alternatively, specify the `search_analyzer` in the mapping itself:
 
 ### Completion suggester (index time)
 
-Use the completion suggester to make your autocomplete solution as efficient as possible and also to have explicit control over its suggestions. The completion suggester accepts a list of suggestions and builds them into a finite-state transducer (FST), an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about FSTs, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
+Use the completion suggester to make your autocomplete solution as efficient as possible and to have explicit control over its suggestions. The completion suggester accepts a list of suggestions and builds them into a finite-state transducer (FST), an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about FSTs, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
 
 As the user types, the completion suggester moves through the FST graph one character at a time along a matching path. After it runs out of user input, it examines the remaining endings to produce a list of suggestions.
 
@@ -445,8 +444,8 @@ GET shakespeare/_search
 ```
 
 The `suggest` parameter finds suggestions using only prefix matching.
-For example, you don't get back "To be, or not to be", which you might want as a suggestion.
-To workaround this issue, manually add curated suggestions and add weights to prioritize your suggestions.
+For example, you don't get back "To be, or not to be," which you might want as a suggestion.
+To work around this issue, manually add curated suggestions and add weights to prioritize your suggestions.
 
 Index a document with an input suggestion and assign a weight:
 
@@ -631,9 +630,9 @@ Use the `term` suggester to return a list of corrections:
 The higher the score, the better the suggestion is. The frequency represents the number of times the term appears in the documents in that index.
 
 To implement a "Did you mean `suggestion`?" feature, use a `phrase` suggester.
-The `phrase` is similar to the `term` suggester, except that it uses N-gram language models to suggest whole phrases instead of individual words.
+The `phrase` suggester is similar to the `term` suggester, except that it uses N-gram language models to suggest whole phrases instead of individual words.
 
-Create a custom analyzer called `trigram` that uses a `shingle` filter. This filter is the same as the `edge_ngram` filter, but it applies to words instead of letters:
+Create a custom analyzer called `trigram` that uses a `shingle` filter. This filter is similar to the `edge_ngram` filter, but it applies to words instead of letters:
 
 ```json
 PUT shakespeare
@@ -734,7 +733,7 @@ You get back the corrected phrase:
 
 ## Pagination
 
-Use the `from` and `size` parameters to return results to your users one page at time.
+Use the `from` and `size` parameters to return results to your users one page at a time.
 
 The `from` parameter is the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. Together, they let you return a subset of the search results.
 
@@ -759,9 +758,9 @@ To calculate the `from` parameter relative to the page number:
 from = size * (page_number - 1)
 ```
 
-Each time the user chooses the next page of the results, your application must make the same search query with an incremented `from` value.
+Each time the user chooses the next page of the results, your application needs to make the same search query with an incremented `from` value.
 
-You could also specify the `from` and `size` parameters in the search URI:
+You can also specify the `from` and `size` parameters in the search URI:
 
 ```json
 GET shakespeare/_search?from=0&size=10
@@ -769,10 +768,10 @@ GET shakespeare/_search?from=0&size=10
 
 If you only specify the `size` parameter, the `from` parameter defaults to 0.
 
-Querying for pages deep in your results could have a significant performance impact, so Elasticsearch limits this approach to 10,000 results.
+Querying for pages deep in your results can have a significant performance impact, so Elasticsearch limits this approach to 10,000 results.
 
 The `from` and `size` parameters are stateless, so the results are based on the latest available data.
-This could cause inconsistent pagination.
+This can cause inconsistent pagination.
 For example, assume a user stays on the first page of the results for a minute and then navigates to the second page; in that time, a new document is indexed in the background which is relevant enough to show up on the first page. In this scenario, the last result of the first page is pushed to the second page, so the user ends up seeing a result on the second page that they already saw on the first page.
 
 Use the `scroll` operation for consistent pagination. The `scroll` operation keeps a search context open for a certain period of time. Any data changes do not affect the results during this time.
@@ -828,7 +827,7 @@ GET shakespeare/_search?scroll=10m
 }
 ```
 
-You get back 10 results, with a single scroll ID.
+With a single scroll ID, you get back 10 results.
 You can have up to 10 IDs.
 Perform the same command with ID equal to 1:
 
@@ -845,7 +844,7 @@ GET shakespeare/_search?scroll=10m
 }
 ```
 
-Close the search context when you’re done scrolling, because it continues consume computing resources until the timeout:
+Close the search context when you’re done scrolling, because it continues to consume computing resources until the timeout:
 
 ```json
 DELETE _search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAAcWdmpUZDhnRFBUcWFtV21nMmFwUGJEQQ==
@@ -899,9 +898,9 @@ GET shakespeare/_search
 }
 ```
 
-The sort parameter is an array, so you can specify multiple field values in order of their priority.
+The sort parameter is an array, so you can specify multiple field values in the order of their priority.
 
-After `line_id`, let's sort by `speech_number`. If you have two fields with the same value for `line_id`, Elasticsearch uses `speech_number`, which is the second option for sorting.
+If you have two fields with the same value for `line_id`, Elasticsearch uses `speech_number`, which is the second option for sorting.
 
 ```json
 GET shakespeare/_search
@@ -940,7 +939,7 @@ You can continue to sort by any number of field values to get the results in jus
   ]
 ```
 
-For numeric fields that contain an array of numbers, sort by `avg`, `sum`, and `median` modes:
+For numeric fields that contain an array of numbers, you can sort by `avg`, `sum`, and `median` modes:
 
 ```json
 "sort": [
@@ -953,7 +952,7 @@ For numeric fields that contain an array of numbers, sort by `avg`, `sum`, and `
 ]
 ```
 
-Sort by minimum and maximum values of the fields using the `min` and `max` modes. These modes work for both numeric and string data types.
+To sort by the minimum or maximum values, use the `min` or `max` modes. These modes work for both numeric and string data types.
 
 A text field that’s analyzed cannot be used to sort documents, because the inverted index only contains the individual tokenized terms and not the entire string. So, you cannot sort by the `play_name`, for example.
 
