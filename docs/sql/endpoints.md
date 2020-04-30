@@ -2,7 +2,7 @@
 layout: default
 title: Endpoints
 parent: SQL
-nav_order: 5
+nav_order: 6
 ---
 
 

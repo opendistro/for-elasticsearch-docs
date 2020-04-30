@@ -2,7 +2,7 @@
 layout: default
 title: Plugin Monitoring
 parent: SQL
-nav_order: 8
+nav_order: 9
 ---
 
 # Plugin Monitoring
