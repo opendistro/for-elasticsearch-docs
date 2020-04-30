@@ -89,7 +89,7 @@ atan | `atan(number T) -> double` | `SELECT atan(0.5) FROM my-index LIMIT 1`
 atan2 | `atan2(number T, number) -> double` | `SELECT atan2(1, 0.5) FROM my-index LIMIT 1`
 cbrt | `cbrt(number T) -> T` | `SELECT cbrt(0.5) FROM my-index LIMIT 1`
 ceil | `ceil(number T) -> T` | `SELECT ceil(0.5) FROM my-index LIMIT 1`
-concat_ws |  | `SELECT concat_ws("-", "Tutorial", "is", "fun!") FROM my-index LIMIT 1`
+concat_ws | `concat_ws(separator, string, string…) -> string` | `SELECT concat_ws("-", "Tutorial", "is", "fun!") FROM my-index LIMIT 1`
 cos | `cos(number T) -> double` | `SELECT cos(0.5) FROM my-index LIMIT 1`
 cosh | `cosh(number T) -> double` | `SELECT cosh(0.5) FROM my-index LIMIT 1`
 cot | `cot(number T) -> double` | `SELECT cot(0.5) FROM my-index LIMIT 1`
@@ -143,8 +143,8 @@ timestamp | `timestamp(date) -> date` | `SELECT timestamp(date) FROM my-index LI
 trim | `trim(string T) -> T` | `SELECT trim(name.keyword) FROM my-index LIMIT 1`
 upper | `upper(string T) -> T` or `upper(string T, string) -> T` | `SELECT upper(name.keyword) FROM my-index LIMIT 1`
 year | `year(date) -> integer` | `SELECT year(date) FROM my-index LIMIT 1`
-/ |  | `SELECT 1 / 100 FROM my-index LIMIT 1`
-% |  | `SELECT 1 % 100 FROM my-index LIMIT 1`
+/ | `number [op] number -> number` | `SELECT 1 / 100 FROM my-index LIMIT 1`
+% | `number [op] number -> number` | `SELECT 1 % 100 FROM my-index LIMIT 1`
 
 ## Joins
 
