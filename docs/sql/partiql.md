@@ -7,26 +7,23 @@ nav_order: 6
 
 # PartiQL
 
-SQL plugin supports PartiQL: a SQL-compatible query language that lets you query semi-structured and nested data for any data format. The SQL plugin only supports a subset of the PartiQL specification.
-To learn about PartiQL, see [PartiQL](https://partiql.org/).
+SQL plugin supports [PartiQL](https://partiql.org/), a SQL-compatible query language that lets you query semi-structured and nested data for any data format. The SQL plugin only supports a subset of the PartiQL specification.
 
 
 ## Querying nested collection
 
-In SQL-92, a database table can only have tuples that consist of scalar values.
-
-PartiQL extends SQL-92 to allow you to query and unnest nested collections. In Elasticsearch, this is very useful to query a JSON index with nested objects or fields.
+PartiQL extends SQL to allow you to query and unnest nested collections. In Elasticsearch, this is very useful to query a JSON index with nested objects or fields.
 
 To follow along, use the `bulk` operation to index some sample data:
 
 ```json
 POST employees_nested/_bulk?refresh
 {"index":{"_id":"1"}}
-{"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"AWS Redshift Spectrum querying","started_year":1990},{"name":"AWS Redshift security","started_year":1999},{"name":"AWS Aurora security","started_year":2015}]}
+{"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"Spectrum Querying","started_year":1990},{"name":"Security","started_year":1999},{"name":"OpenDistro security","started_year":2015}]}
 {"index":{"_id":"2"}}
 {"id":4,"name":"Susan Smith","title":"Dev Mgr","projects":[]}
 {"index":{"_id":"3"}}
-{"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"AWS Redshift security","started_year":1998},{"name":"AWS Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
+{"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"OpenDistro security","started_year":1998},{"name":"Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
 ```
 
 ### Example 1: Unnesting a Nested Collection
@@ -107,10 +104,10 @@ Result set:
 
 | employeeName | projectName
 :--- | :---
-Bob Smith | AWS Aurora security
-Bob Smith | AWS Redshift security
-Jane Smith | AWS Hello security
-Jane Smith | AWS Redshift security
+Bob Smith | Security
+Bob Smith | OpenDistro security
+Jane Smith | Hello security
+Jane Smith | OpenDistro security
 
 ### Example 2: Unnesting in existential subquery
 
