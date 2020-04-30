@@ -297,6 +297,13 @@ WHERE employer IS NULL
 :--- | :--- | :---
 0 | 18 |
 
+*Example 3*: Deletes a document that satisfies the predicates in the `WHERE` clause:
+
+```sql
+DELETE FROM accounts
+WHERE age > 30
+```
+
 #### Group By
 
 Group documents with the same field value into buckets.
