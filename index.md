@@ -14,13 +14,6 @@ This site contains the technical documentation for [Open Distro for Elasticsearc
 
 ---
 
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
-
 ## Why use Open Distro for Elasticsearch?
 
 Open Distro for Elasticsearch is well-suited to the following use cases:
