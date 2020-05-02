@@ -113,3 +113,67 @@ Explain:
   }
 }
 ```
+
+## Cursor
+
+### Description
+
+To get back a paginated response, use the `fetch_size` parameter. The value of `fetch_size` should be greater than 0, the default value is 1000. A value of 0 will fallback to a non-paginated response.
+
+The `fetch_size` parameter is only supported for the JDBC response format.
+{: .note }
+
+
+### Example
+
+SQL query:
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "fetch_size" : 5,
+  "query" : "SELECT firstname, lastname FROM accounts WHERE age > 20 ORDER BY state ASC"
+}'
+```
+
+Result set:
+
+```json
+{
+  "schema": [
+    {
+      "name": "firstname",
+      "type": "text"
+    },
+    {
+      "name": "lastname",
+      "type": "text"
+    }
+  ],
+  "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9",
+  "total": 956,
+  "datarows": [
+    [
+      "Cherry",
+      "Carey"
+    ],
+    [
+      "Lindsey",
+      "Hawkins"
+    ],
+    [
+      "Sargent",
+      "Powers"
+    ],
+    [
+      "Campos",
+      "Olsen"
+    ],
+    [
+      "Savannah",
+      "Kirby"
+    ]
+  ],
+  "size": 5,
+  "status": 200
+}
+```
