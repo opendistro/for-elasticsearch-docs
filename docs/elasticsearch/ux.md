@@ -14,7 +14,7 @@ Feature | Description
 :--- | :---
 Autocomplete | Suggest phrases as the user types.
 Pagination |  Rather than a single, long list, break search results into pages.
-Scroll | Return a large number of results in chunks.
+Scroll | Return a large number of results in batches.
 Sort | Allow sorting results by different criteria.
 Highlight | Highlight the search term in the results.
 
@@ -92,7 +92,7 @@ N | Type | N-gram
 4 | Four-gram | [ `quic`, `uick` ]
 5 | Five-gram | [ `quick` ]
 
-Autocomplete needs only the beginning N-grams of a search phrase, so it uses a special type of N-gram called edge N-gram.
+Autocomplete needs only the beginning N-grams of a search phrase, so Elasticsearch uses a special type of N-gram called edge N-gram.
 
 Edge N-gramming the word "quick" results in the following:
 
@@ -104,7 +104,7 @@ Edge N-gramming the word "quick" results in the following:
 
 This follows the same sequence the user types.
 
-To configure a field to use edge N-grams, create an autocomplete analyzer with an edge N-gram filter:
+To configure a field to use edge N-grams, create an autocomplete analyzer with an `edge_ngram` filter:
 
 ```json
 PUT shakespeare
@@ -355,8 +355,7 @@ The phrase "to be" is prefix matched with the FST of the `text_entry` field.
 }
 ```
 
-To specify the number of suggestions that you want to return, use the `size` parameter.
-To tolerate user typos, use the `fuzzy` option. Use the `min_length` parameter to specify the length at which to enable fuzzy search.
+To specify the number of suggestions that you want to return, use the `size` parameter:
 
 ```json
 GET shakespeare/_search
@@ -366,11 +365,7 @@ GET shakespeare/_search
       "prefix": "To m",
       "completion": {
         "field": "text_entry",
-        "size": 3,
-        "fuzzy": {
-          "fuzziness": "auto",
-          "min_length": 2
-        }
+        "size": 3
       }
     }
   }
@@ -472,11 +467,7 @@ GET shakespeare/_search
       "prefix": "To m",
       "completion": {
         "field": "text_entry",
-        "size": 3,
-        "fuzzy": {
-          "fuzziness": "auto",
-          "min_length": 2
-        }
+        "size": 3
       }
     }
   }
@@ -627,7 +618,7 @@ Use the `term` suggester to return a list of corrections:
 }
 ```
 
-The higher the score, the better the suggestion is. The frequency represents the number of times the term appears in the documents in that index.
+The higher the score, the better the suggestion is. The frequency represents the number of times the term appears in the documents of that index.
 
 To implement a "Did you mean `suggestion`?" feature, use a `phrase` suggester.
 The `phrase` suggester is similar to the `term` suggester, except that it uses N-gram language models to suggest whole phrases instead of individual words.
@@ -735,7 +726,7 @@ You get back the corrected phrase:
 
 Use the `from` and `size` parameters to return results to your users one page at a time.
 
-The `from` parameter is the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. Together, they let you return a subset of the search results.
+The `from` parameter is the document number that you want to start showing the results from. The `size` parameter is the number of results that you want to show. Together, they let you return a subset of the search results.
 
 For example, if the value of `size` is 10 and the value of `from` is 0, you see the first 10 results. If you change the value of `from` to 10, you see the next 10 results (because the results are zero-indexed). So, if you want to see results starting from result 11, `from` must be 10.
 
