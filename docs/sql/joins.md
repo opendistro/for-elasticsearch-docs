@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Joins
+title: Complex Queries
 parent: SQL
 nav_order: 3
 ---
 
-# Joins
+# Complex queries
 
-Open Distro for Elasticsearch SQL supports inner joins, cross joins, and left outer joins.
+Besides simple SFW (`SELECT-FROM-WHERE`) queries, the SQL plugin supports complex queries such as subquery, join, union, and minus. These queries operate on more than one Elasticsearch index. To examine how these queries execute behind the scenes, use the `explain` operation.
 
 ---
 
@@ -18,7 +18,14 @@ Open Distro for Elasticsearch SQL supports inner joins, cross joins, and left ou
 
 ---
 
-## Constraints
+
+## Joins
+
+Open Distro for Elasticsearch SQL supports inner joins, cross joins, and left outer joins.
+
+
+
+### Constraints
 
 Joins have a number of constraints:
 
@@ -40,7 +47,7 @@ Joins have a number of constraints:
 1. You can't use GROUP BY or ORDER BY for results.
 1. LIMIT with OFFSET (e.g. `LIMIT 25 OFFSET 25`) is not supported.
 
-## Description
+### Description
 
 The `JOIN` clause combines columns from one or more indices using values common to each.
 
@@ -198,3 +205,217 @@ Result set:
 6 | Hattie | Bond | 6 | Jane Smith
 13 | Nanette | Bates | null | null
 18 | Dale | Adams | null | null
+
+## Subquery
+
+A subquery is a complete `SELECT` statement used within another statement and enclosed in parenthesis.
+From the explain output, you can see that some subqueries are actually transformed to an equivalent join query to execute.
+
+### Example 1: Table subquery
+
+SQL query:
+
+```sql
+SELECT a1.firstname, a1.lastname, a1.balance
+FROM accounts a1
+WHERE a1.account_number IN (
+  SELECT a2.account_number
+  FROM accounts a2
+  WHERE a2.balance > 10000
+)
+```
+
+Explain:
+
+```json
+{
+  "Physical Plan" : {
+    "Project [ columns=[a1.balance, a1.firstname, a1.lastname] ]" : {
+      "Top [ count=200 ]" : {
+        "BlockHashJoin[ conditions=( a1.account_number = a2.account_number ), type=JOIN, blockSize=[FixedBlockSize with size=10000] ]" : {
+          "Scroll [ accounts as a2, pageSize=10000 ]" : {
+            "request" : {
+              "size" : 200,
+              "query" : {
+                "bool" : {
+                  "filter" : [
+                    {
+                      "bool" : {
+                        "adjust_pure_negative" : true,
+                        "must" : [
+                          {
+                            "bool" : {
+                              "adjust_pure_negative" : true,
+                              "must" : [
+                                {
+                                  "bool" : {
+                                    "adjust_pure_negative" : true,
+                                    "must_not" : [
+                                      {
+                                        "bool" : {
+                                          "adjust_pure_negative" : true,
+                                          "must_not" : [
+                                            {
+                                              "exists" : {
+                                                "field" : "account_number",
+                                                "boost" : 1
+                                              }
+                                            }
+                                          ],
+                                          "boost" : 1
+                                        }
+                                      }
+                                    ],
+                                    "boost" : 1
+                                  }
+                                },
+                                {
+                                  "range" : {
+                                    "balance" : {
+                                      "include_lower" : false,
+                                      "include_upper" : true,
+                                      "from" : 10000,
+                                      "boost" : 1,
+                                      "to" : null
+                                    }
+                                  }
+                                }
+                              ],
+                              "boost" : 1
+                            }
+                          }
+                        ],
+                        "boost" : 1
+                      }
+                    }
+                  ],
+                  "adjust_pure_negative" : true,
+                  "boost" : 1
+                }
+              },
+              "from" : 0
+            }
+          },
+          "Scroll [ accounts as a1, pageSize=10000 ]" : {
+            "request" : {
+              "size" : 200,
+              "from" : 0,
+              "_source" : {
+                "excludes" : [ ],
+                "includes" : [
+                  "firstname",
+                  "lastname",
+                  "balance",
+                  "account_number"
+                ]
+              }
+            }
+          },
+          "useTermsFilterOptimization" : false
+        }
+      }
+    }
+  },
+  "description" : "Hash Join algorithm builds hash table based on result of first query, and then probes hash table to find matched rows for each row returned by second query",
+  "Logical Plan" : {
+    "Project [ columns=[a1.balance, a1.firstname, a1.lastname] ]" : {
+      "Top [ count=200 ]" : {
+        "Join [ conditions=( a1.account_number = a2.account_number ) type=JOIN ]" : {
+          "Group" : [
+            {
+              "Project [ columns=[a1.balance, a1.firstname, a1.lastname, a1.account_number] ]" : {
+                "TableScan" : {
+                  "tableAlias" : "a1",
+                  "tableName" : "accounts"
+                }
+              }
+            },
+            {
+              "Project [ columns=[a2.account_number] ]" : {
+                "Filter [ conditions=[AND ( AND account_number ISN null, AND balance GT 10000 ) ] ]" : {
+                  "TableScan" : {
+                    "tableAlias" : "a2",
+                    "tableName" : "accounts"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+Result set:
+
+| a1.firstname | a1.lastname | a1.balance
+:--- | :--- | :--- | :--- | :--- | :---
+Amber | Duke | 39225
+Nanette | Bates | 32838
+
+### Example 2: From subquery
+
+SQL query:
+
+```sql
+SELECT a.f, a.l, a.a
+FROM (
+  SELECT firstname AS f, lastname AS l, age AS a
+  FROM accounts
+  WHERE age > 30
+) AS a
+```
+
+Explain:
+
+```json
+{
+  "from" : 0,
+  "size" : 200,
+  "query" : {
+    "bool" : {
+      "filter" : [
+        {
+          "bool" : {
+            "must" : [
+              {
+                "range" : {
+                  "age" : {
+                    "from" : 30,
+                    "to" : null,
+                    "include_lower" : false,
+                    "include_upper" : true,
+                    "boost" : 1.0
+                  }
+                }
+              }
+            ],
+            "adjust_pure_negative" : true,
+            "boost" : 1.0
+          }
+        }
+      ],
+      "adjust_pure_negative" : true,
+      "boost" : 1.0
+    }
+  },
+  "_source" : {
+    "includes" : [
+      "firstname",
+      "lastname",
+      "age"
+    ],
+    "excludes" : [ ]
+  }
+}
+```
+
+Result set:
+
+| f | l | a
+:--- | :--- | :---
+Amber | Duke | 32
+Dale | Adams | 33
+Hattie | Bond | 36
