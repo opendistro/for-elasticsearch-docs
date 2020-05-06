@@ -9,6 +9,15 @@ nav_order: 6
 
 SQL plugin supports [PartiQL](https://partiql.org/), a SQL-compatible query language that lets you query semi-structured and nested data for any data format. The SQL plugin only supports a subset of the PartiQL specification.
 
+---
+
+#### Table of contents
+- TOC
+{:toc}
+
+
+---
+
 
 ## Querying nested collection
 
@@ -26,7 +35,7 @@ POST employees_nested/_bulk?refresh
 {"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"SQL security","started_year":1998},{"name":"Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
 ```
 
-### Example 1: Unnesting a Nested Collection
+### Example 1: Unnesting a nested collection
 
 This example finds the nested document (`projects`) with a field value (`name`) that satisfies the predicate (contains `security`). Because each parent document can have more than one nested documents, the nested document that matches is flattened. In other words, the final result is the cartesian product between the parent and nested documents.
 
