@@ -19,11 +19,11 @@ To follow along, use the `bulk` operation to index some sample data:
 ```json
 POST employees_nested/_bulk?refresh
 {"index":{"_id":"1"}}
-{"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"Spectrum Querying","started_year":1990},{"name":"Security","started_year":1999},{"name":"OpenDistro security","started_year":2015}]}
+{"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"SQL Spectrum querying","started_year":1990},{"name":"SQL security","started_year":1999},{"name":"Elasticsearch security","started_year":2015}]}
 {"index":{"_id":"2"}}
 {"id":4,"name":"Susan Smith","title":"Dev Mgr","projects":[]}
 {"index":{"_id":"3"}}
-{"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"OpenDistro security","started_year":1998},{"name":"Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
+{"id":6,"name":"Jane Smith","title":"Software Eng 2","projects":[{"name":"SQL security","started_year":1998},{"name":"Hello security","started_year":2015,"address":[{"city":"Dallas","state":"TX"}]}]}
 ```
 
 ### Example 1: Unnesting a Nested Collection
@@ -104,10 +104,10 @@ Result set:
 
 | employeeName | projectName
 :--- | :---
-Bob Smith | Security
-Bob Smith | OpenDistro security
+Bob Smith | Elasticsearch Security
+Bob Smith | SQL security
 Jane Smith | Hello security
-Jane Smith | OpenDistro security
+Jane Smith | SQL security
 
 ### Example 2: Unnesting in existential subquery
 
