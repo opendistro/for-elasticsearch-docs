@@ -23,7 +23,7 @@ To get started, choose **Anomaly Detection** in Kibana.
 
 A detector is an individual anomaly detection task. You can create multiple detectors, and all the detectors can run simultaneously, with each analyzing data from different sources.
 
-1. Choose **Detector**, **Create Detector**.
+1. Choose **Create Detector**.
 1. Enter the **Name** of the detector and a brief **Description**. Make sure the name that you enter is unique and descriptive enough to help you to identify the purpose of this detector.
 1. For **Data source**, choose the index that you want to use as the data source. You can optionally use index patterns to choose multiple indices.
 1. Choose the **Timestamp field** in your index.
@@ -47,7 +47,8 @@ You can add a maximum of five features for a detector.
 
 1. On the **Features** page, select **Add features**.
 1. Enter the **Name** of the feature.
-1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the field and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
+1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the **field** and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
+- You can add up to 5 features.
 1. Preview sample anomalies and adjust the feature settings if needed.
 - For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximates the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
 Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
@@ -55,6 +56,12 @@ Examine the sample preview and use it to fine-tune your feature configurations, 
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
 
 ### Step 3: Observe the results
+
+Choose the **Anomaly results** tab.
+
+You will have to wait for some time to see the anomaly results.
+The detector needs at least 6 data points in 8 continuous intervals to initialize.
+So, if the detector interval is 10 min, the detector might take more than an hour to initialize.
 
 ![Anomaly detection results](../images/ad.png)
 
