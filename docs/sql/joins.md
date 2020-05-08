@@ -55,7 +55,7 @@ The `JOIN` clause combines columns from one or more indices using values common 
 
 Inner join creates a new result set by combining columns of two indices based on your join predicates. It iterates the two indices and compares each document to find the ones that satisfy the join predicates. You can optionally precede the `JOIN` clause with an `INNER` keyword.
 
-The join predicate(s) is specified by an ON clause.
+The join predicate(s) is specified by the ON clause.
 
 SQL query:
 
@@ -70,7 +70,7 @@ JOIN employees_nested e
 
 Explain:
 
-The `explain` output is complicated because a `JOIN` clause is associated with two Elasticsearch DSL queries that execute in separate query planner frameworks. You can interpret it by examining the `Physical Plan` and `Logical Plan` objects.
+The `explain` output is complicated, because a `JOIN` clause is associated with two Elasticsearch DSL queries that execute in separate query planner frameworks. You can interpret it by examining the `Physical Plan` and `Logical Plan` objects.
 
 ```json
 {
@@ -146,11 +146,11 @@ Result set:
 :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :---
 6 | Hattie | Bond | 6 | Jane Smith
 
-### Example 2: Cross Join
+### Example 2: Cross join
 
-Cross join or cartesian join combines each document from the first index with each document from the second.
+Cross join, also known as cartesian join, combines each document from the first index with each document from the second.
 The result set is the the cartesian product of documents of both indices.
-It's similar to the inner join without the `ON` clause that specifies the join condition.
+This operation is similar to the inner join without the `ON` clause that specifies the join condition.
 
 It's risky to perform cross join on two indices of large or even medium size. It might trigger a circuit breaker that terminates the query to avoid running out of memory.
 {: .warning }
