@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Plugin Settings
+title: Settings
 parent: SQL
-nav_order: 6
+nav_order: 4
 ---
 
-# Plugin Settings
+# Settings
 
 When Elasticsearch bootstraps, SQL plugin will register a few settings
 in Elasticsearch cluster settings. Most of the settings are able to
