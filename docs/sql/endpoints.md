@@ -118,7 +118,7 @@ Explain:
 
 ### Description
 
-To get back a paginated response, use the `fetch_size` parameter. The value of `fetch_size` should be greater than 0, the default value is 1000. A value of 0 will fallback to a non-paginated response.
+To get back a paginated response, use the `fetch_size` parameter. The value of `fetch_size` should be greater than 0. The default value is 1,000. A value of 0 will fallback to a non-paginated response.
 
 The `fetch_size` parameter is only supported for the JDBC response format.
 {: .note }
