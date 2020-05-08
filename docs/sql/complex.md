@@ -2,28 +2,17 @@
 layout: default
 title: Complex Queries
 parent: SQL
-nav_order: 3
+nav_order: 6
 ---
 
 # Complex queries
 
 Besides simple SFW (`SELECT-FROM-WHERE`) queries, the SQL plugin supports complex queries such as subquery, join, union, and minus. These queries operate on more than one Elasticsearch index. To examine how these queries execute behind the scenes, use the `explain` operation.
 
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
 
 ## Joins
 
 Open Distro for Elasticsearch SQL supports inner joins, cross joins, and left outer joins.
-
-
 
 ### Constraints
 
@@ -50,6 +39,16 @@ Joins have a number of constraints:
 ### Description
 
 The `JOIN` clause combines columns from one or more indices using values common to each.
+
+### Syntax
+
+Rule `tableSource`:
+
+![tableSource](../../images/tableSource.png)
+
+Rule `joinPart`:
+
+![joinPart](../../images/joinPart.png)
 
 ### Example 1: Inner join
 
