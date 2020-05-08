@@ -2,7 +2,7 @@
 layout: default
 title: Supported Operations
 parent: SQL
-nav_order: 1
+nav_order: 8
 ---
 
 # Supported operations
