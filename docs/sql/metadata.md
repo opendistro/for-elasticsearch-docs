@@ -1,14 +1,23 @@
 ---
 layout: default
-title: Metadata Search
+title: Metadata Queries
 parent: SQL
-nav_order: 3
+nav_order: 7
 ---
 
-# Metadata search
+# Metadata queries
 
 To see basic metadata about your indices, use the `SHOW` and `DESCRIBE` commands.
 
+### Syntax
+
+Rule `showStatement`:
+
+![showStatement](../../images/showStatement.png)
+
+Rule `showFilter`:
+
+![showFilter](../../images/showFilter.png)
 
 ### Example 1: See metadata for indices
 
