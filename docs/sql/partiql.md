@@ -1,23 +1,13 @@
 ---
 layout: default
-title: PartiQL
+title: PartiQL (JSON) Support
 parent: SQL
-nav_order: 6
+nav_order: 10
 ---
 
-# PartiQL
+# PartiQL (JSON) support
 
 SQL plugin supports [PartiQL](https://partiql.org/), a SQL-compatible query language that lets you query semi-structured and nested data for any data format. The SQL plugin only supports a subset of the PartiQL specification.
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
 
 ## Querying nested collection
 
