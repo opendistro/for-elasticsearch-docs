@@ -2,7 +2,7 @@
 layout: default
 title: Full-Text Search
 parent: SQL
-nav_order: 2
+nav_order: 11
 ---
 
 # Full-text search
@@ -10,15 +10,6 @@ nav_order: 2
 Use SQL commands for full-text search. The SQL plugin supports a subset of the full-text queries available in Elasticsearch.
 
 To learn about full-text queries in Elasticsearch, see [Full-text queries](../../elasticsearch/full-text/).
-
----
-
-#### Table of contents
-1. TOC
-{:toc}
-
-
----
 
 ## Match
 
