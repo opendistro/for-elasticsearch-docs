@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Plugin Settings
+title: Settings
 parent: SQL
-nav_order: 6
+nav_order: 4
 ---
 
-# Plugin Settings
+# Settings
 
 ---
 

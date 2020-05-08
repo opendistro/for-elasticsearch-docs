@@ -1,23 +1,12 @@
 ---
 layout: default
-title: Endpoints
+title: Endpoint
 parent: SQL
-nav_order: 4
+nav_order: 1
 ---
 
 
-# Endpoints
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
-## Introduction
+# Endpoint
 
 To send query request to SQL plugin, you can either use a request
 parameter in HTTP GET or request body by HTTP POST request. POST request

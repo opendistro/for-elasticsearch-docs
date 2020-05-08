@@ -2,22 +2,12 @@
 layout: default
 title: Supported Operations
 parent: SQL
-nav_order: 1
+nav_order: 8
 ---
 
 # Supported operations
 
 Open Distro for Elasticsearch supports the following SQL operations.
-
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
 
 ## Statements
 

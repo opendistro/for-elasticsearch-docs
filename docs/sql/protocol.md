@@ -2,21 +2,10 @@
 layout: default
 title: Protocol
 parent: SQL
-nav_order: 5
+nav_order: 2
 ---
 
 # Protocol
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
-## Introduction
 
 For the protocol, SQL plugin provides multiple response formats for
 different purposes while the request format is same for all. Among them
