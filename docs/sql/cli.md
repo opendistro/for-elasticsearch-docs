@@ -7,63 +7,84 @@ nav_order: 20
 
 # SQL CLI
 
-SQL CLI is a stand-alone Python application that you can launch with the `odfesql` "wake" word.
+SQL CLI is a stand-alone Python application that you can launch with the `odfesql` command.
+
+Install the SQL plugin to your Elasticsearch instance, run the CLI using MacOS or Linux, and connect to any valid Elasticsearch end-point.
 
 ![SQL CLI](../../images/cli.gif)
 
-Install the SQL plugin to your Elasticsearch instance, run the SQL CLI using MacOS or Linux, and connect to any valid Elasticsearch end-point.
+## Features
 
-It has the following features:
+SQL CLI has the following features:
 
 - Multi-line input
-- Input auto-complete with index suggestions
+- Autocomplete for SQL syntax and index names
 - Syntax highlighting
-- Formatted output
+- Formatted output:
   - Tabular format
   - Field names with color
-  - Enabled horizontal display (by default) and vertical display when output is too wide, for better visualization
+  - Enabled horizontal display (by default) and vertical display when output is too wide for your terminal, for better visualization
   - Pagination for large output
 - Works with or without security enabled
-- Supports load configuration files
+- Supports loading configuration files
 - Supports all SQL plugin queries
 
 ## Install
 
-To install SQL CLI:
+To install the CLI:
 
-```python
+1. We suggest you install and activate a python3 virtual environment to avoid changing your local environment:
+
+```
+pip install virtualenv
+virtualenv venv
+source ./bin/activate
+```
+
+2. To install the CLI:
+
+```
 pip install odfesql
 ```
 
 The SQL CLI only works with Python 3.
 {: .note }
 
+## Using the CLI
+
+1. Index the sample [accounts test data](https://github.com/opendistro-for-elasticsearch/sql/blob/master/src/test/resources/doctest/testdata/accounts.json).
+1. To launch the CLI, run:
+```
+odfesql
+```
+1. Run a sample SQL command:
+```
+SELECT * FROM accounts
+```
+By default, you see a maximum output of 200 rows. To show results more than 200 rows, add a `LIMIT` clause with the desired value.
 
 ## Configure
 
-A config file is automatically created at `~/.config/odfesql-cli/config` at your first launch (for MacOS and Linux).
-
-For a list of all available configurations, see [clirc](https://github.com/opendistro-for-elasticsearch/sql-cli/blob/master/src/conf/clirc).
-
-After you configure the SQL CLI the first time, it's auto-loaded thereafter.
+When you first launch the SQL CLI, a configuration file is automatically created at `~/.config/odfesql-cli/config` (for MacOS and Linux). After you configure the SQL CLI the first time, it's auto-loaded thereafter.
 
 You can configure the following connection properties:
 
-- `endpoint`: You do not need to specify an option, anything that follows the launch word `odfesql` is considered as the endpoint. If you do not provide an endpoint, by default, the SQL CLI connects to http://localhost:9200.
-- `-u/-w`: You need to provide your username and password credentials when connecting to Elasticsearch with the security plugin installed.
+- `endpoint`: You do not need to specify an option, anything that follows the launch command `odfesql` is considered as the endpoint. If you do not provide an endpoint, by default, the SQL CLI connects to http://localhost:9200.
+- `-u/-w`: Supports username and password for HTTP basic authentication, such as with the security plugin or fine-grained access control for Amazon Elasticsearch Service.
+
+For a list of all available configurations, see [clirc](https://github.com/opendistro-for-elasticsearch/sql-cli/blob/master/src/conf/clirc).
 
 ## Query options
 
 Run a single query with the following options:
 
-- `--help`: help page for options
-- `-q`: follow by a single query
-- `-f`: specify JDBC or raw format output
-- `-v`: display data vertically
-- `-e`: translate SQL to DSL
-
+- `--help`: Help page for options
+- `-q`: Follow by a single query
+- `-f`: Specify JDBC or raw format output
+- `-v`: Display data vertically
+- `-e`: Translate SQL to DSL
 
 ## CLI options
 
-- `-p`: always use pager to display output
-- `--clirc`: provide the path of configuration file that you want to load
+- `-p`: Always use pager to display output
+- `--clirc`: Provide path for the configuration file
