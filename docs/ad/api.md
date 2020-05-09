@@ -701,5 +701,99 @@ GET _opendistro/_anomaly_detection/stats/<stat>
 }
 ```
 
+## Create monitor
+
+Create a monitor to set up alerts for the detector.
+
+#### Request
+
+```json
+POST /_opendistro/_alerting/monitors
+{
+    "type":"monitor",
+    "name":"ylwu-test-nab_art_daily_jumpsdown-monitor",
+    "enabled":true,
+    "schedule":{
+        "period":{
+            "interval":5,
+            "unit":"MINUTES"
+        }
+    },
+    "inputs":[
+        {
+            "anomaly_detector":{
+                "detector_id":"dAaHjG4B5Uh30OvgBjjc"
+            }
+        }
+    ],
+    "triggers":[
+        {
+            "name":"ad-trigger",
+            "severity":"1",
+            "condition":{
+                "script":{
+                    "source":"ctx.results[0].anomalyGrade > 0 && ctx.results[0].confidence > 0.7",
+                    "lang":"painless"
+                }
+            },
+            "actions":[
+
+            ]
+        }
+    ]
+}
+```
+
+## Profile detector
+
+Returns information related to the current state of the detector and memory usage, including current errors and shingle size, to help troubleshoot the detector.
+
+This command also helps locate logs by identifying the nodes that run the anomaly detector job for each detector.
+
+#### Request
+
+```json
+GET /_opendistro/_anomaly_detection/detectors/<detectorId>/_profile/
+GET /_opendistro/_anomaly_detection/detectors/<detectorId>/_profile?_all
+GET /_opendistro/_anomaly_detection/detectors/<detectorId>/_profile/<type>
+```
+#### Sample Responses
+
+```json
+curl -X GET "localhost:9200/_opendistro/_anomaly_detection/detectors/4j1313EBhPlEUyl3nsX-/_profile"
+{"state":"DISABLED","error":"Stopped detector: AD models memory usage exceeds our limit."}
+
+curl -X GET "localhost:9200/_opendistro/_anomaly_detection/detectors/cneh7HEBHPICjJIdXdrR/_profile?_all=true&pretty"
+{
+  "state" : "RUNNING",
+  "models" : [
+    {
+      "model_id" : "cneh7HEBHPICjJIdXdrR_model_rcf_2",
+      "model_size_in_bytes" : 4456448,
+      "node_id" : "VS29z70PSzOdHiEw4SoV9Q"
+    },
+    {
+      "model_id" : "cneh7HEBHPICjJIdXdrR_model_rcf_1",
+      "model_size_in_bytes" : 4456448,
+      "node_id" : "VS29z70PSzOdHiEw4SoV9Q"
+    },
+    {
+      "model_id" : "cneh7HEBHPICjJIdXdrR_model_threshold",
+      "node_id" : "Og23iUroTdKrkwS-y89zLw"
+    },
+    {
+      "model_id" : "cneh7HEBHPICjJIdXdrR_model_rcf_0",
+      "model_size_in_bytes" : 4456448,
+      "node_id" : "Og23iUroTdKrkwS-y89zLw"
+    }
+  ],
+  "shingle_size" : 8,
+  "coordinating_node" : "Og23iUroTdKrkwS-y89zLw",
+  "total_size_in_bytes" : 13369344
+}
+
+curl -X GET "localhost:9200/_opendistro/_anomaly_detection/detectors/Pl536HEBnXkDrah03glg/_profile/total_size_in_bytes"
+{"total_size":13369344}%
+```
 
 ---
