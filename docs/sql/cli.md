@@ -31,48 +31,59 @@ SQL CLI has the following features:
 
 ## Install
 
-To install the CLI:
+Launch your local Elasticsearch instance and make sure you have the SQL plugin installed.
+
+To install the SQL CLI:
 
 1. We suggest you install and activate a python3 virtual environment to avoid changing your local environment:
-
 ```
 pip install virtualenv
 virtualenv venv
+cd venv
 source ./bin/activate
 ```
 
-2. To install the CLI:
-
+2. Install the CLI:
 ```
-pip install odfesql
+pip3 install odfesql
 ```
 
 The SQL CLI only works with Python 3.
 {: .note }
 
-## Using the CLI
-
-1. Index the sample [accounts test data](https://github.com/opendistro-for-elasticsearch/sql/blob/master/src/test/resources/doctest/testdata/accounts.json).
-1. To launch the CLI, run:
+3. To launch the CLI, run:
 ```
-odfesql
+odfesql https://localhost:9200 --username admin --password admin
 ```
-1. Run a sample SQL command:
-```
-SELECT * FROM accounts
-```
-By default, you see a maximum output of 200 rows. To show results more than 200 rows, add a `LIMIT` clause with the desired value.
+By default, the `odfesql` command connects to http://localhost:9200.
 
 ## Configure
 
-When you first launch the SQL CLI, a configuration file is automatically created at `~/.config/odfesql-cli/config` (for MacOS and Linux). After you configure the SQL CLI the first time, it's auto-loaded thereafter.
+When you first launch the SQL CLI, a configuration file is automatically created at `~/.config/odfesql-cli/config` (for MacOS and Linux), the configuration is auto-loaded thereafter.
 
 You can configure the following connection properties:
 
 - `endpoint`: You do not need to specify an option, anything that follows the launch command `odfesql` is considered as the endpoint. If you do not provide an endpoint, by default, the SQL CLI connects to http://localhost:9200.
 - `-u/-w`: Supports username and password for HTTP basic authentication, such as with the security plugin or fine-grained access control for Amazon Elasticsearch Service.
+- `-aws-auth`: Turns on AWS sigV4 authentication to connect to an Amazon Elasticsearch endpoint. Use with the AWS CLI (`aws configure`) to retrieve the local AWS configuration to authenticate and connect.
 
 For a list of all available configurations, see [clirc](https://github.com/opendistro-for-elasticsearch/sql-cli/blob/master/src/conf/clirc).
+
+## Using the CLI
+
+1. Save the sample [accounts test data](https://github.com/opendistro-for-elasticsearch/sql/blob/master/src/test/resources/doctest/testdata/accounts.json) file.
+
+1. Index the sample data.
+```
+curl -H "Content-Type: application/x-ndjson" -POST https://localhost:9200/data/_bulk -u admin:admin --insecure --data-binary "@accounts.json"
+```
+
+1. Run a sample SQL command:
+```
+SELECT * FROM accounts;
+```
+
+By default, you see a maximum output of 200 rows. To show more results, add a `LIMIT` clause with the desired value.
 
 ## Query options
 

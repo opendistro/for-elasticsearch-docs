@@ -2,7 +2,7 @@
 layout: default
 title: JDBC Driver
 parent: SQL
-nav_order: 9
+nav_order: 25
 ---
 
 # JDBC driver
