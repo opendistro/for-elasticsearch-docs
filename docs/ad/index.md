@@ -59,9 +59,10 @@ Examine the sample preview and use it to fine-tune your feature configurations, 
 Choose the **Anomaly results** tab.
 
 You will have to wait for some time to see the anomaly results.
-The detector needs at least 6 data points in 8 continuous intervals to initialize.
+The detector needs at least 6 data points in 8 continuous intervals (shingles) to initialize.
 So, if the detector interval is 10 min, the detector might take more than an hour to initialize.
-If you see the detector pending in initialization for a long time, increase the detector interval or make sure you have data in each detector interval to fasten the process.
+If you see the detector pending in initialization for a long time, increase the detector interval to fasten the process.
+Or, use the [profile detector](./api#profile-detector) operation to make sure you have sufficient data in a shingle size of 8.
 
 ![Anomaly detection results](../images/ad.png)
 
