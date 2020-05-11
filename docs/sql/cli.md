@@ -65,7 +65,7 @@ You can configure the following connection properties:
 
 - `endpoint`: You do not need to specify an option, anything that follows the launch command `odfesql` is considered as the endpoint. If you do not provide an endpoint, by default, the SQL CLI connects to http://localhost:9200.
 - `-u/-w`: Supports username and password for HTTP basic authentication, such as with the security plugin or fine-grained access control for Amazon Elasticsearch Service.
-- `-aws-auth`: Turns on AWS sigV4 authentication to connect to an Amazon Elasticsearch endpoint. Use with the AWS CLI (`aws configure`) to retrieve the local AWS configuration to authenticate and connect.
+- `--aws-auth`: Turns on AWS sigV4 authentication to connect to an Amazon Elasticsearch endpoint. Use with the AWS CLI (`aws configure`) to retrieve the local AWS configuration to authenticate and connect.
 
 For a list of all available configurations, see [clirc](https://github.com/opendistro-for-elasticsearch/sql-cli/blob/master/src/conf/clirc).
 
