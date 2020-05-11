@@ -153,3 +153,7 @@ POST _opendistro/_sql/_explain
   "size": 50
 }
 ```
+
+## Contributing
+
+To get involved and help us improve the SQL plugin, see the [development guide](https://github.com/opendistro-for-elasticsearch/sql/blob/master/docs/developing.rst) for help setting up development project.
