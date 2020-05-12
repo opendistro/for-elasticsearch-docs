@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Settings
+title: Plugin Settings
 parent: SQL
 nav_order: 6
 ---
