@@ -16,7 +16,7 @@ Before deploying to a production environment, you should replace the demo securi
 version: '3'
 services:
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:1.4.0
+    image: amazon/opendistro-for-elasticsearch:1.6.0
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
@@ -52,7 +52,7 @@ services:
     networks:
       - odfe-net
   odfe-node2:
-    image: amazon/opendistro-for-elasticsearch:1.4.0
+    image: amazon/opendistro-for-elasticsearch:1.6.0
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
@@ -85,7 +85,7 @@ services:
     networks:
       - odfe-net
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:1.4.0
+    image: amazon/opendistro-for-elasticsearch-kibana:1.6.0
     container_name: odfe-kibana
     ports:
       - 5601:5601
@@ -128,7 +128,6 @@ opendistro_security.enable_snapshot_restore_privilege: true
 opendistro_security.check_snapshot_restore_write_privileges: true
 opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
 cluster.routing.allocation.disk.threshold_enabled: false
-node.max_local_storage_nodes: 3
 opendistro_security.audit.config.disabled_rest_categories: NONE
 opendistro_security.audit.config.disabled_transport_categories: NONE
 ```

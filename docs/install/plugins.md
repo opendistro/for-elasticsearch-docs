@@ -30,6 +30,19 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.6.1</td>
+    <td>
+      <pre>opendistro-job-scheduler        1.6.0.0
+opendistro-knn                  1.6.0.0
+opendistro_alerting             1.6.0.0
+opendistro_index_management     1.6.0.0
+opendistro_performance_analyzer 1.6.0.0
+opendistro_security             1.6.0.0
+opendistro_sql                  1.6.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.4.2</td>
     <td>
       <pre>opendistro-job-scheduler        1.4.0.0
@@ -154,7 +167,7 @@ Navigate to the Elasticsearch home directory (most likely, it is `/usr/share/ela
 ### Security
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.4.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.6.0.0.zip
 ```
 
 After installing the Security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security-configuration/security-admin/).
@@ -162,38 +175,46 @@ After installing the Security plugin, you can run `sudo sh /usr/share/elasticsea
 Security has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
+### Job Scheduler
+
+```bash
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-job-scheduler/opendistro-job-scheduler-1.6.0.0.zip
+```
+
+
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.4.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.6.0.0.zip
 ```
 
-Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
+To install Alerting, you must first install the Job Scheduler plugin. Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
 ### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.4.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-1.6.0.0.zip
 ```
 
 
 ### Index State Management
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.4.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.6.0.0.zip
 ```
+
+To install Index State Management, you must first install the Job Scheduler plugin.
 
 
 ### KNN
 
-KNN is currently only available as part of the Docker image.
-{: .warning }
+KNN is only available as part of the all-in-one installs: Docker, RPM, and Debian.
 
 
 ### Anomaly Detection
 
-This is a preview plugin, which we do not recommend using in production. It's currently in development and is subject to change.
+Anomaly Detection is a preview plugin, which we do not recommend using in production. It's currently in development and is subject to change.
 
 To test this plugin, clone [the Anomaly Detection repository](https://github.com/opendistro-for-elasticsearch/anomaly-detection) and build it manually using instructions in the README.
 
@@ -201,13 +222,15 @@ To test this plugin, clone [the Anomaly Detection repository](https://github.com
 ### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.4.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.6.0.0.zip
 ```
 
 Performance Analyzer requires some manual configuration after installing the plugin:
 
 1. Create `/usr/lib/systemd/system/opendistro-performance-analyzer.service` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/opendistro-performance-analyzer.service).
+
 1. Create `/usr/share/elasticsearch/bin/performance-analyzer-agent-cli` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/performance-analyzer-agent-cli).
+
 1. Make the CLI executable:
 
    ```bash
@@ -215,6 +238,7 @@ Performance Analyzer requires some manual configuration after installing the plu
    ```
 
 1. Create the `postinit` script for [RPM-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/rpm) or [Debian-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/deb) distributions in your home directory.
+
 1. Run the script:
 
    ```bash

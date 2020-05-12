@@ -101,7 +101,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    If you're using the Docker installation, see [Customize the Docker image](../../install/docker/#customize-the-docker-image). Your `Dockerfile` should look something like this:
 
    ```
-   FROM amazon/opendistro-for-elasticsearch:1.4.0
+   FROM amazon/opendistro-for-elasticsearch:1.6.0
 
    ENV AWS_ACCESS_KEY_ID <access-key>
    ENV AWS_SECRET_ACCESS_KEY <secret-key>
@@ -144,16 +144,16 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
 1. (Optional) Add other settings to `elasticsearch.yml`:
 
    ```yml
-   disable_chunked_encoding: false # Disables chunked encoding for compatibility with some storage services, but you probably don't need to change this value.
-   endpoint: s3.amazonaws.com # S3 has alternate endpoints, but you probably don't need to change this value.
-   max_retries: 3 # number of retries if a request fails
-   path_style_access: false # whether to use the deprecated path-style bucket URLs.
+   s3.client.default.disable_chunked_encoding: false # Disables chunked encoding for compatibility with some storage services, but you probably don't need to change this value.
+   s3.client.default.endpoint: s3.amazonaws.com # S3 has alternate endpoints, but you probably don't need to change this value.
+   s3.client.default.max_retries: 3 # number of retries if a request fails
+   s3.client.default.path_style_access: false # whether to use the deprecated path-style bucket URLs.
    # You probably don't need to change this value, but for more information, see https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#path-style-access.
-   protocol: https # http or https
-   proxy.host: my-proxy-host # the hostname for your proxy server
-   proxy.port: 8080 # port for your proxy server
-   read_timeout: 50s # the S3 connection timeout
-   use_throttle_retries: true # whether the client should wait a progressively longer amount of time (exponential backoff) between each successive retry
+   s3.client.default.protocol: https # http or https
+   s3.client.default.proxy.host: my-proxy-host # the hostname for your proxy server
+   s3.client.default.proxy.port: 8080 # port for your proxy server
+   s3.client.default.read_timeout: 50s # the S3 connection timeout
+   s3.client.default.use_throttle_retries: true # whether the client should wait a progressively longer amount of time (exponential backoff) between each successive retry
    ```
 
 1. If you changed `elasticsearch.yml`, you must restart each node in the cluster. Otherwise, you only need to reload secure cluster settings:
@@ -215,7 +215,7 @@ PUT _snapshot/my-repository/2
 {
   "indices": "kibana*,my-index*,-my-index-2016",
   "ignore_unavailable": true,
-  "include_global_state": true,
+  "include_global_state": false,
   "partial": false
 }
 ```
@@ -298,7 +298,7 @@ POST _snapshot/my-repository/2/_restore
 {
   "indices": "kibana*,my-index*",
   "ignore_unavailable": true,
-  "include_global_state": true,
+  "include_global_state": false,
   "include_aliases": false,
   "partial": false,
   "rename_pattern": "kibana(.+)",
