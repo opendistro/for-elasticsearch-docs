@@ -2,7 +2,7 @@
 layout: default
 title: Joins
 parent: SQL
-nav_order: 6
+nav_order: 3
 ---
 
 # Joins
