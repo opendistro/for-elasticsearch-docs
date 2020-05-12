@@ -70,6 +70,7 @@ services:
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster1
+      - discovery.type=single-node
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
     ulimits:
@@ -89,6 +90,7 @@ services:
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster2
+      - discovery.type=single-node
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
     ulimits:
@@ -213,8 +215,8 @@ curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_
 Note the permissions error. On the remote cluster, create a role with the appropriate permissions, and map `booksuser` to that role:
 
 ```bash
-curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/roles/booksrole -d '{"indices" : {"books" : {"*" : [ "indices:admin/shards/search_shards","indices:data/read/search"]}}}' -i -v
-curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole -d '{"users" : ["booksuser"]}' -i -v
+curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/roles/booksrole -d '{"index_permissions":[{"index_patterns":["books"],"allowed_actions":["indices:admin/shards/search_shards","indices:data/read/search"]}]}'
+curl -XPUT -k -u admin:admin -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole -d '{"users" : ["booksuser"]}'
 ```
 
 Both clusters must have the user, but only the remote cluster needs the role and mapping; in this case, the coordinating cluster handles authentication (i.e. "Does this request include valid user credentials?"), and the remote cluster handles authorization (i.e. "Can this user access this data?").
