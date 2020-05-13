@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Troubleshoot
+title: Troubleshooting
 parent: SQL
 nav_order: 15
 ---
 
-# Troubleshoot
+# Troubleshooting
 
 The SQL plugin is stateless, so troubleshooting is mostly focused on why a particular query fails.
 
