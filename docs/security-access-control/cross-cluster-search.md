@@ -66,7 +66,7 @@ Save this file as `docker-compose.yml` and run `docker-compose up` to start two 
 version: '3'
 services:
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:1.6.0
+    image: amazon/opendistro-for-elasticsearch:1.7.0
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster1
@@ -86,7 +86,7 @@ services:
       - odfe-net
 
   odfe-node2:
-    image: amazon/opendistro-for-elasticsearch:1.6.0
+    image: amazon/opendistro-for-elasticsearch:1.7.0
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster2
@@ -136,8 +136,8 @@ To get the IP address for the remote cluster, first identify its container ID:
 ```bash
 docker ps
 CONTAINER ID    IMAGE                                       PORTS                                                      NAMES
-6fe89ebc5a8e    amazon/opendistro-for-elasticsearch:1.6.0   0.0.0.0:9200->9200/tcp, 0.0.0.0:9600->9600/tcp, 9300/tcp   odfe-node1
-2da08b6c54d8    amazon/opendistro-for-elasticsearch:1.6.0   9300/tcp, 0.0.0.0:9250->9200/tcp, 0.0.0.0:9700->9600/tcp   odfe-node2
+6fe89ebc5a8e    amazon/opendistro-for-elasticsearch:1.7.0   0.0.0.0:9200->9200/tcp, 0.0.0.0:9600->9600/tcp, 9300/tcp   odfe-node1
+2da08b6c54d8    amazon/opendistro-for-elasticsearch:1.7.0   9300/tcp, 0.0.0.0:9250->9200/tcp, 0.0.0.0:9700->9600/tcp   odfe-node2
 ```
 
 Then get that container's IP address:
