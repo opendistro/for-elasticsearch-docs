@@ -9,7 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-[1.7.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/release-notes-odfe-1.7.0.md) | asdf | TBD | 7.6.1
+[1.7.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/release-notes-odfe-1.7.0.md) | Adds numerous new SQL operations, SQL user interface for Kibana, SQL CLI, Anomaly Detection plugin, and Anomaly Detection user interface for Kibana. | 13 May 2020 | 7.6.1
 [1.6.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/release-notes-odfe-1.6.0.md) | Optimizes security for a faster version of the implied permission type, adds memoization of results for batch requests, implements lazy loading for k-NN `efSearch` parameter, adds the KNN plugin to the RPM and Debian installs, improves exception handling and report date handling using standard formats for the SQL plugin, and bumps Elasticsearch version. | 02 April 2020 | 7.6.1
 [1.4.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/release-notes-odfe-1.4.0.md) | Adds the [KNN](../docs/knn/) plugin for Elasticsearch to the Docker image, adds account management to the Security plugin API and Kibana, and bumps Elasticsearch version. | 10 February 2020 | 7.4.2
 [1.3.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/release-notes-odfe-1.3.0.md) | Adds [Index State Management](../docs/ism/) plugins for Elasticsearch and Kibana and bumps Elasticsearch version. | 17 December 2019 | 7.3.2
