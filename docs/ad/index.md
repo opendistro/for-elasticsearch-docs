@@ -28,7 +28,11 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. For **Data source**, choose the index that you want to use as the data source. You can optionally use index patterns to choose multiple indices.
 1. Choose the **Timestamp field** in your index.
 1. For **Data filter**, you can optionally filter the index that you chose as the data source. From the **Filter type** menu, choose  **Visual filter**, and then design your filter query by selecting **Fields**, **Operator**, and **Value**, or choose **Custom Expression** and add in your own JSON filter query.
-1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data. The shorter you set this interval, the more data points the detector gets, but the more computing resources it consumes.
+1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data.
+- The detector aggregates the data in this interval, then feeds the aggregated result into the anomaly detection model.
+The shorter you set this interval, the less data points the detector aggregates.
+The anomaly detection model shingle process needs at least 6 aggregated data points in 8 continuous intervals.
+A shorter interval means the model will pass shingle process more quickly and start to generate the anomaly result.
 1. To add extra processing time for data collection, specify a **Window delay** value. This is to tell the detector that the data is not ingested into Elasticsearch in real time but with a certain delay.
 Set the window delay to shift the detector interval to account for this delay.
 - For example, say the detector interval is 10 minutes and data is ingested into your cluster with a general delay of 1 minute.
@@ -51,7 +55,7 @@ You can add a maximum of five features for a detector.
 1. Preview sample anomalies and adjust the feature settings if needed.
 - For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximates the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
 Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
-1. Choose **Save**.
+1. Choose **Save and start detector**.
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
 
 ### Step 3: Observe the results
@@ -61,18 +65,20 @@ Choose the **Anomaly results** tab.
 You will have to wait for some time to see the anomaly results.
 The detector needs at least 6 data points in 8 continuous intervals (shingles) to initialize.
 So, if the detector interval is 10 min, the detector might take more than an hour to initialize.
-If you see the detector pending in initialization for a long time, increase the detector interval to fasten the process.
+If you see the detector pending in initialization for a long time, decrease the detector interval to fasten the process.
 Or, use the [profile detector](./api#profile-detector) operation to make sure you have sufficient data in a shingle size of 8.
 
 ![Anomaly detection results](../images/ad.png)
 
-The **Live anomalies** chart shows you the live anomaly results for the last 60 intervals. For example, if the interval is set to 10, it shows the results for the last 600 minutes.
+The **Live anomalies** chart shows you the live anomaly results for the last 60 intervals. For example, if the interval is set to 10, it shows the results for the last 600 minutes. This chart is refreshed every 30 seconds.
 
 The **Anomaly history** chart plots the anomaly grade with the corresponding measure of confidence.
 
 Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score is an estimate of the probability that the reported anomaly grade matches the expected anomaly grade. Confidence increases as the model observes more data and learns the data behavior and trends. Note that confidence is distinct from model accuracy.
 
 The **Feature breakdown** graph plots the features based on the aggregation method. On the top-right corner, you can vary the date-time range of the detector.
+
+The **Anomaly occurrence** table shows the `Start time`, `End time`, `Data confidence`, and `Anomaly grade` for each anomaly detected.
 
 ### Step 4: Set up alerts
 
@@ -87,12 +93,19 @@ If you stop or delete a detector, make sure to delete any monitors associated wi
 
 To see all the configuration settings, choose the **Detector configuration** tab.
 
-1. To make any changes to the detector configuration, in the **Detector configuration** section, choose **Edit**
-1. To enable or disable features or fine tune the time interval to minimize any false positives, in the **Features** section, choose **Edit**.
+1. To make any changes to the detector configuration, or fine tune the time interval to minimize any false positives, in the **Detector configuration** section, choose **Edit**.
+- You need to stop the detector to change the detector configuration. In the pop-up box, confirm that you want to stop the detector and proceed.
+1. To enable or disable features, in the **Features** section, choose **Edit** and adjust the feature settings as needed. After you make your changes, choose **Save and start detector**.
+- Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
+
 
 ### Step 6: Manage your detectors
 
-Go to the **Detectors** page to change or delete your detectors.
+Go to the **Detector details** page to change or delete your detectors.
 
-1. To make changes to your detector, choose **Actions**, and then choose **Edit detector**. You need to *stop* the detector before changing the configuration settings. After completing your changes, choose **Save change**.
-2. To delete your detector, choose **Actions**, and then choose **Delete detector**. Choose **Delete** to confirm.
+1. To make changes to your detector, choose the detector name to open the detector details page.
+1. Choose **Actions**, and then choose **Edit detector**.
+ - You need to stop the detector to change the detector configuration. In the pop-up box, confirm that you want to stop the detector and proceed.
+1. After making your changes, choose **Save changes**.
+1. To delete your detector, choose **Actions**, and then choose **Delete detector**.
+- In the pop-up box, type `delete` to confirm and choose **Delete**.
