@@ -57,13 +57,11 @@ Choose **Next** to proceed with the installation.
   <img src="../../images/windows_installer_select_and_browse.png" width="506" height="397">
 </p>
 
-
 4. Choose **Install**, **Finish**.
 
 <p align="center">
   <img src="../../images/windows_installer_install.png" width="506" height="397">
 </p>
-
 
 5. The **DSN** comes already set up with the installation.
 - The following connection information is set up as part of the default DSN:

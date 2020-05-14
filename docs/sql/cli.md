@@ -45,7 +45,7 @@ source ./bin/activate
 
 2. Install the CLI:
 ```
-pip3 install odfesql
+pip3 install odfe-sql-cli
 ```
 
 The SQL CLI only works with Python 3.
