@@ -31,8 +31,9 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data.
 - The detector aggregates the data in this interval, then feeds the aggregated result into the anomaly detection model.
 The shorter you set this interval, the less data points the detector aggregates.
-The anomaly detection model shingle process needs at least 6 aggregated data points in 8 continuous intervals.
-A shorter interval means the model will pass shingle process more quickly and start to generate the anomaly result.
+The anomaly detection model uses a shingling process, which is a technique that uses consecutive data points to create a sample for the model. This process needs at least 6 aggregated data points in a certain number of continuous intervals.
+A shorter interval means the model will pass the shingle process more quickly and start to generate the anomaly result.
+We recommend you set the detector interval based on your actual data. Too long intervals delays the results and too short intervals cause data to be missing and not consecutive-enough for the shingle process.
 1. To add extra processing time for data collection, specify a **Window delay** value. This is to tell the detector that the data is not ingested into Elasticsearch in real time but with a certain delay.
 Set the window delay to shift the detector interval to account for this delay.
 - For example, say the detector interval is 10 minutes and data is ingested into your cluster with a general delay of 1 minute.
@@ -65,8 +66,9 @@ Choose the **Anomaly results** tab.
 You will have to wait for some time to see the anomaly results.
 The detector needs at least 6 data points in 8 continuous intervals (shingles) to initialize.
 So, if the detector interval is 10 min, the detector might take more than an hour to initialize.
-If you see the detector pending in initialization for a long time, decrease the detector interval to fasten the process.
-Or, use the [profile detector](./api#profile-detector) operation to make sure you have sufficient data in a shingle size of 8.
+If you see the detector pending in initialization for longer than a day, aggregate your existing data using the detector interval to check if there are any missing data points.
+If you find a lot of missing data points from the aggregate data, consider increasing the detector interval.
+Or, use the [profile detector](./api#profile-detector) operation to make sure you have sufficient data for the shingle process.
 
 ![Anomaly detection results](../images/ad.png)
 
