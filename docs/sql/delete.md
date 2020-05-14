@@ -2,7 +2,7 @@
 layout: default
 title: Delete
 parent: SQL
-nav_order: 9
+nav_order: 11
 ---
 
 

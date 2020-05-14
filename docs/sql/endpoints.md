@@ -2,7 +2,7 @@
 layout: default
 title: Endpoint
 parent: SQL
-nav_order: 1
+nav_order: 12
 ---
 
 
@@ -166,4 +166,59 @@ Result set:
   "size": 5,
   "status": 200
 }
+```
+
+To fetch subsequent pages, use the `cursor` from last response:
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9"
+}'
+```
+
+The result only has the `fetch_size` number of `datarows` and `cursor`.
+The last page has only `datarows` and no `cursor`.
+The `datarows` can have more than the `fetch_size` number of records in case the nested fields are flattened.
+
+```json
+{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMabcde12345",
+  "datarows": [
+    [
+      "Abbas",
+      "Hussain"
+    ],
+    [
+      "Chen",
+      "Dai"
+    ],
+    [
+      "Anirudha",
+      "Jadhav"
+    ],
+    [
+      "Peng",
+      "Huo"
+    ],
+    [
+      "John",
+      "Doe"
+    ]
+  ]
+}
+```
+
+The `cursor` context is automatically cleared on the last page.
+To explicitly clear cursor context, use the `_opendistro/_sql/close endpoint` operation.
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql/close -d '{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9"
+}'
+```
+
+#### Sample response
+
+```json
+{"succeeded":true}
 ```

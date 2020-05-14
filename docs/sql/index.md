@@ -9,49 +9,7 @@ has_children: true
 
 Open Distro for Elasticsearch SQL lets you write queries in SQL rather than the [Elasticsearch query domain-specific language (DSL)](../elasticsearch/full-text). If you're already familiar with SQL and don't want to learn the query DSL, this feature is a great option.
 
-SQL UI is now supported. Use the SQL UI to easily run on-demand SQL queries, translate SQL into its REST equivalent, and view and save results as text, JSON, JDBC, or CSV.
-
-To use the REST API, send requests to the `_opendistro/_sql` URI. You need to use the request body.
-
-```json
-POST _opendistro/_sql
-{
-  "query": "SELECT * FROM my-index LIMIT 50"
-}
-```
-
-You can query multiple indices by listing them or using wildcards:
-
-```json
-POST _opendistro/_sql
-{
-  "query": "SELECT * FROM my-index1,myindex2,myindex3 LIMIT 50"
-}
-
-POST _opendistro/_sql
-{
-  "query": "SELECT * FROM my-index* LIMIT 50"
-}
-```
-
-For a sample [curl](https://curl.haxx.se/) command, try:
-
-```bash
-curl -XPOST https://localhost:9200/_opendistro/_sql -u admin:admin -k -d '{"query": "SELECT * FROM kibana_sample_data_flights LIMIT 10"}' -H 'Content-Type: application/json'
-```
-
-By default, queries return data in JDBC format, but you can also return data in standard Elasticsearch JSON, CSV, or raw formats:
-
-```json
-POST _opendistro/_sql?format=json|csv|raw
-{
-  "query": "SELECT * FROM my-index LIMIT 50"
-}
-```
-
-When you return data in CSV or raw format, each row corresponds to a *document*, and each column corresponds to a *field*. Conceptually, you might find it useful to think of each Elasticsearch index as a database table.
-
-## User interfaces
+## Quick start
 
 To get started with the SQL plugin, choose **SQL Workbench** in Kibana.
 

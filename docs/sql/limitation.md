@@ -1,21 +1,36 @@
 ---
 layout: default
-title: SQL Limitation
+title: Limitations
 parent: SQL
-nav_order: 31
+nav_order: 17
 ---
 
-## SELECT FROM WHERE
-### Select literal is not supported
-Select Literal expression is not supported. e.g. `Select 1` is not supported. [Issue #256](https://github.com/opendistro-for-elasticsearch/sql/issues/256)
-### Where clause doesn't support arithmetic operations
-The Where clause doesn't support expression. e.g. `SELECT FlightNum FROM kibana_sample_data_flights where (AvgTicketPrice + 100) <= 1000` is not supported. [Issue #234](https://github.com/opendistro-for-elasticsearch/sql/issues/234)
-### Aggregation over expression is not supported
-Aggregation can only been applied on field, the aggregation can't accept expression as paramater. e.g. `avg(log(age))` is not supported. [Issue #288](https://github.com/opendistro-for-elasticsearch/sql/issues/288)
+# Limitations
 
-## Conflict type in multiple index query
-Query using wildcard index will fail if the index has the field with conflict type. [Issue #445](https://github.com/opendistro-for-elasticsearch/sql/issues/445). e.g. 
-There are two indexs with has field `a` 
+The SQL plugin has the following limitations:
+
+## SELECT FROM WHERE
+
+### Select literal is not supported
+
+The select literal expression is not supported. For example, `Select 1` is not supported.
+Here's a link to the Github issue - [Issue #256](https://github.com/opendistro-for-elasticsearch/sql/issues/256).
+
+### Where clause does not support arithmetic operations
+
+The `WHERE` clause does not support expressions. For example, `SELECT FlightNum FROM kibana_sample_data_flights where (AvgTicketPrice + 100) <= 1000` is not supported.
+Here's a link to the Github issue - [Issue #234](https://github.com/opendistro-for-elasticsearch/sql/issues/234).
+
+### Aggregation over expression is not supported
+
+You can only apply aggregation on fields, aggregations can't accept an expression as a parameter. For example, `avg(log(age))` is not supported.
+Here's a link to the Github issue - [Issue #288](https://github.com/opendistro-for-elasticsearch/sql/issues/288).
+
+### Conflict type in multiple index query
+
+Queries using wildcard index fail if the index has the field with a conflict type.
+For example, if you have two indices with field `a`:
+
 ```
 POST conflict_index_1/_doc/
 {
@@ -32,39 +47,53 @@ POST conflict_index_2/_doc/
   }
 }
 ```
-Then the query will failed becuase the field mapping conflict. e.g. The query `SELECT * FROM conflict_index*` will failed with reason.
-```
+
+Then, the query fails because of the field mapping conflict. The query `SELECT * FROM conflict_index*` also fails for the same reason.
+
+```sql
 Error occurred in Elasticsearch engine: Different mappings are not allowed for the same field[a]: found [{properties:{b:{type:long},c:{type:long}}}] and [{properties:{b:{type:long}}}] ",
     "details": "com.amazon.opendistroforelasticsearch.sql.rewriter.matchtoterm.VerificationException: Different mappings are not allowed for the same field[a]: found [{properties:{b:{type:long},c:{type:long}}}] and [{properties:{b:{type:long}}}] \nFor more details, please send request for Json format to see the raw response from elasticsearch engine.",
     "type": "VerificationException
 ```
 
-## Subquery in From clause
-The Subquery in From in the format of `SELECT outer FROM (SELECT inner)` clause is supported only when the query could be merged into one query. e.g.
-The following query is supported.
-```
+Here's a link to the Github issue - [Issue #445](https://github.com/opendistro-for-elasticsearch/sql/issues/445).
+
+## Subquery in the FROM clause
+
+Subquery in the `FROM` clause in this format: `SELECT outer FROM (SELECT inner)` is supported only when the query is merged into one query. For example, the following query is supported:
+
+```sql
 SELECT t.f, t.d
 FROM (
     SELECT FlightNum as f, DestCountry as d
     FROM kibana_sample_data_flights
     WHERE OriginCountry = 'US') t
 ```
-But if the outer query has `GROUP BY` or `ORDER BY`, then it is not supported.
 
-## Join doesn't support aggregation on Joined result.
-The Join doesn't support aggregation on the joined result. e.g. `SELECT depo.name, avg(empo.age) FROM empo JOIN depo WHERE empo.id == depo.id GROUP BY depo.name` is not supported. [Issue 110](https://github.com/opendistro-for-elasticsearch/sql/issues/110).
+But, if the outer query has `GROUP BY` or `ORDER BY`, then it's not supported.
 
-## Pagination
-The pagination query enable user to get the paginated respones. Currently, the pagination only support basic query. e.g. The following query will return the data with cursor id.
-```
+## JOIN does not support aggregations on the joined result
+
+The `join` query does not support aggregations on the joined result.
+For example, e.g. `SELECT depo.name, avg(empo.age) FROM empo JOIN depo WHERE empo.id == depo.id GROUP BY depo.name` is not supported.
+Here's a link to the Github issue - [Issue 110](https://github.com/opendistro-for-elasticsearch/sql/issues/110).
+
+## Pagination only supports basic queries
+
+The pagination query enables you to get back paginated responses.
+Currently, the pagination only supports basic queries. For example, the following query returns the data with cursor id.
+
+```json
 POST _opendistro/_sql/
 {
   "fetch_size" : 5,
   "query" : "SELECT OriginCountry, DestCountry FROM kibana_sample_data_flights ORDER BY OriginCountry ASC"
 }
 ```
+
 The response in JDBC format with cursor id.
-```
+
+```json
 {
   "schema": [
     {
@@ -86,4 +115,5 @@ The response in JDBC format with cursor id.
   "status": 200
 }
 ```
-The query with `Aggregation` and `Join` doesn't support pagination feature now.
+
+The query with `aggregation` and `join` does not support pagination for now.

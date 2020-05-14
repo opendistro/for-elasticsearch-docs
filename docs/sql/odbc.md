@@ -2,7 +2,7 @@
 layout: default
 title: ODBC Driver
 parent: SQL
-nav_order: 30
+nav_order: 4
 ---
 
 # ODBC driver

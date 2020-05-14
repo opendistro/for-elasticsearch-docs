@@ -133,7 +133,7 @@ FROM accounts
 ## From
 
 Specify the index that you want search.
-You can specify subqueries within the `FROM` clause. 
+You can specify subqueries within the `FROM` clause.
 
 ### Syntax
 
