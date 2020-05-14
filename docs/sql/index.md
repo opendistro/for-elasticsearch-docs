@@ -79,39 +79,6 @@ WHERE _id = 0
 :--- | :---
 0 | 1
 
-## Troubleshoot queries
-
-The most common error is the dreaded null pointer exception, which can occur during parsing errors or when using the wrong HTTP method (POST vs. GET and vice versa). The POST method and HTTP request body offer the most consistent results:
-
-```json
-POST _opendistro/_sql
-{
-  "query": "SELECT * FROM my-index WHERE ['name.firstname']='saanvi' LIMIT 5"
-}
-```
-
-If a query isn't behaving the way you expect, use the `_explain` API to see the translated query, which you can then troubleshoot. For most operations, `_explain` returns Elasticsearch query DSL. For `UNION`, `MINUS`, and `JOIN`, it returns something more akin to a SQL execution plan.
-
-
-#### Sample request
-
-```json
-POST _opendistro/_sql/_explain
-{
-  "query": "SELECT * FROM my-index LIMIT  50"
-}
-```
-
-
-#### Sample response
-
-```json
-{
-  "from": 0,
-  "size": 50
-}
-```
-
 ## Contributing
 
 To get involved and help us improve the SQL plugin, see the [development guide](https://github.com/opendistro-for-elasticsearch/sql/blob/master/docs/developing.rst) for help setting up development project.
