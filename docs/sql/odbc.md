@@ -7,7 +7,7 @@ nav_order: 4
 
 # ODBC driver
 
-The Open Database Connectivity (ODBC) driver is a read-only ODBC driver for Windows and MacOS that lets you connect business intelligence (BI) applications to the SQL plugin.
+The Open Database Connectivity (ODBC) driver is a read-only ODBC driver for Windows and macOS that lets you connect business intelligence (BI) applications to the SQL plugin.
 
 ## Specifications
 
@@ -20,7 +20,7 @@ The following operating systems are supported:
 | Operating System | Version
 :--- | :---
 Windows | Windows 10
-MacOS | Catalina 10.15.4 and Mojave 10.14.6
+macOS | Catalina 10.15.4 and Mojave 10.14.6
 
 ## Concepts
 
@@ -37,34 +37,18 @@ To install the driver, download the bundled distribution installer from [here](h
 ### Windows
 
 1. Open the downloaded `ODFE SQL ODBC Driver-<version>-Windows.msi` installer.
-- In the case installer is unsigned it shows the following pop up. Choose **More info** and **Run anyway**.
-Choose **Next** to proceed with the installation.
 
-<p align="center">
-  <img src="../../images/windows_signing_error_1.png" width="400" height="400">
-  <img src="../../images/windows_singing_error_2.png" width="400" height="400">
-</p>
+   The installer is unsigned and shows a security dialog. Choose **More info** and **Run anyway**.
 
-<p align="center">
-  <img src="../../images/windows_installer_home.png" width="506" height="397">
-</p>
+1. Choose **Next** to proceed with the installation.
 
-2. Accept the agreement and choose **Next**.
+1. Accept the agreement, and choose **Next**.
 
-3. The installer comes bundled with documentation and useful resources files to connect with various BI tools, for example `.tdc` file for Tableau. You can choose to keep the documentation and resources, or remove it. You can also choose the download location. Choose **Next**.
+1. The installer comes bundled with documentation and useful resources files to connect with various BI tools (for example, a `.tdc` file for Tableau). You can choose to keep or remove these resources. Choose **Next**.
 
-<p align="center">
-  <img src="../../images/windows_installer_select_and_browse.png" width="506" height="397">
-</p>
+1. Choose **Install** and **Finish**.
 
-4. Choose **Install**, **Finish**.
-
-<p align="center">
-  <img src="../../images/windows_installer_install.png" width="506" height="397">
-</p>
-
-5. The **DSN** comes already set up with the installation.
-- The following connection information is set up as part of the default DSN:
+The following connection information is set up as part of the default DSN:
 
 ```
 Host: localhost
@@ -72,63 +56,34 @@ Port: 9200
 Auth: NONE
 ```
 
-To customize the DSN, use **ODBC Data Source Administrator** which is pre-installed on Windows10.
+To customize the DSN, use **ODBC Data Source Administrator** which is pre-installed on Windows 10.
 
-<p align="center">
-  <img src="../../images/windows_dsn_customize.png" width="672" height="282">
-</p>
+![ODBC Data Source Administrator screenshot](../../images/windows_dsn_customize.png)
 
 
-### MacOS
+### macOS
+
+Before installing the ODBC Driver on macOS, install the iODBC Driver Manager.
 
 1. Open the downloaded `ODFE SQL ODBC Driver-<version>-Darwin.pkg` installer.
-- In case the installer is unsigned, it shows the following pop up. Right click on the installer and select **Open**.
-Choose **Continue** to proceed with the installation.
 
-<p align="center">
-  <img src="../../images/mac_signing_error_1.png" width="417" height="211">
-  <img src="../../images/mac_signing_error_2.png" width="417" height="211">
-</p>
+   The installer is unsigned and shows a security dialog. Right-click on the installer and choose **Open**.
 
+1. Choose **Continue** several times to proceed with the installation.
 
-<p align="center">
-  <img src="../../images/mac_installer_home.png" width="506" height="397">
-</p>
+1. Choose the **Destination** to install the driver files.
 
-2. Choose **Continue** to move past the **Introduction** and **Readme** .
+1. The installer comes bundled with documentation and useful resources files to connect with various BI tools (for example, a `.tdc` file for Tableau). You can choose to keep or remove these resources. Choose **Continue**.
 
-3. Accept the agreement and choose **Continue**.
+1. Choose **Install** and **Close**.
 
-<p align="center">
-  <img src="../../images/mac_installer_license.png" width="506" height="397">
-</p>
-
-
-4. Choose the **Destination** to install the driver files.
-
-5. The installer comes bundled with documentation and useful resources files to connect with various BI tools, for example `.tdc` file for Tableau. You can choose to keep the documentation and resources, or remove it. Choose **Customize** to choose the needed files. Choose **Continue**.
-
-<p align="center">
-  <img src="../../images/mac_installer_select_and_browse.png" width="506" height="397">
-</p>
-
-6. Choose **Install**, **Close**.
-
-<p align="center">
-  <img src="../../images/mac_installer_succesful.png" width="506" height="397">
-</p>
-
-7. Currently, the **DSN** is not set up as part of the installation and needs to be configured manually.
-
-Make sure to install `iODBC Driver Manager` before installing the ODBC Driver on Mac.
-
-- Open `iODBC Administrator`:
+Currently, the DSN is not set up as part of the installation and needs to be configured manually. First, open `iODBC Administrator`:
 
 ```
 sudo /Applications/iODBC/iODBC\ Administrator64.app/Contents/MacOS/iODBC\ Administrator64
 ```
 
-This gives the application permissions to save the driver and DSN configurations.
+This command gives the application permissions to save the driver and DSN configurations.
 
 - Choose **ODBC Drivers** tab.
 - Choose **Add a Driver** and fill in the following details:
@@ -153,12 +108,14 @@ This gives the application permissions to save the driver and DSN configurations
   - Choose **OK** to save the DSN configuration.
 - Choose **OK** to exit the iODBC Administrator.
 
+
 ## Customizing the ODBC driver
 
-The driver is in the form of a library file: `odfesqlodbc.dll` for Windows and `libodfesqlodbc.dylib` for MacOS.
+The driver is in the form of a library file: `odfesqlodbc.dll` for Windows and `libodfesqlodbc.dylib` for macOS.
 
 If you're using with ODBC compatible BI tools, refer to your BI tool documentation for configuring a new ODBC driver.
 Typically, all that's required is to make the BI tool aware of the location of the driver library file and then use it to set up the database (i.e., Elasticsearch) connection.
+
 
 ### Connection strings and other settings
 
@@ -172,6 +129,7 @@ You can configure the following driver options using a DSN or connection string:
 
 All option names are case-insensitive.
 {: .note }
+
 
 #### Basic options
 
@@ -215,42 +173,35 @@ Pre-requisites:
 
 - Make sure the DSN is already set up.
 - Make sure Elasticsearch is running on _host_ and _port_ as configured in DSN.
-- Make sure the `.tdc` is copied to `<user_home_directory>/Documents/My Tableau Repository/Datasources` in both MacOS and Windows.
+- Make sure the `.tdc` is copied to `<user_home_directory>/Documents/My Tableau Repository/Datasources` in both macOS and Windows.
 
 1. Start Tableau. Under the **Connect** section, go to **To a Server** and choose **Other Databases (ODBC)**.
 
-<p align="center">
-  <img src="../../images/tableau_connection.png" width="733" height="516">
-</p>
+   ![Tableu connection screen](../../images/tableau_connection.png)
 
-2. In the **DSN drop-down**, select the Elasticsearch DSN you set up in the previous set of steps. The options you added will be automatically filled into the **Connection Attributes**.
+1. In the **DSN drop-down**, select the Elasticsearch DSN you set up in the previous set of steps. The options you added will be automatically filled into the **Connection Attributes**.
 
-<p align="center">
-  <img src="../../images/tableau_dsn.png" width="303" height="470">
-</p>
+   ![Tableu DSN screen](../../images/tableau_dsn.png)
 
-3. Select **Sign In**. After a few seconds, Tableau connects to your Elasticsearch server. Once connected, you will directed to  **Datasource** window. The **Database** will be already populated with name of the Elasticsearch cluster.
+1. Select **Sign In**. After a few seconds, Tableau connects to your Elasticsearch server. Once connected, you will directed to  **Datasource** window. The **Database** will be already populated with name of the Elasticsearch cluster.
 To list all the indices, click the search icon under **Table**.
 
-<p align="center">
-  <img src="../../images/tableau_sample_data.png" width="620" height="424">
-</p>
+   ![Tableu sample data](../../images/tableau_sample_data.png)
 
-4. Start playing with data by dragging table to connection area. Choose **Update Now** or **Automatically Update** to populate table data.
+1. Start playing with data by dragging table to connection area. Choose **Update Now** or **Automatically Update** to populate table data.
 
-<p align="center">
-  <img src="../../images/tableau_sample_viz.png" width="745" height="500">
-</p>
+   ![Tableu visualization](../../images/tableau_sample_viz.png)
+
 
 ### Troubleshooting
 
-**Problem:** Unable to connect to server. A error window after signing in as below.
+**Problem**
 
-<p align="center">
-  <img src="../../images/tableau_connection_error.png" width="360" height="220">
-</p>
+Unable to connect to server. A error window after signing in as below.
 
-**Workaround:**
+![Tableu visualization](../../images/tableau_connection_error.png)
+
+**Workaround**
 
 This is most likely due to Elasticsearch server not running on **host** and **post** configured in DSN.
 Confirm **host** and **post** are correct and Elasticsearch server is running with ODFE SQL plugin.
