@@ -1,22 +1,11 @@
 ---
 layout: default
-title: Plugin Monitoring
+title: Monitoring
 parent: SQL
-nav_order: 7
+nav_order: 14
 ---
 
-# Plugin Monitoring
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
-## Introduction
+# Monitoring
 
 By a stats endpoint, you are able to collect metrics for the plugin
 within the interval. Note that only node level statistics collecting is

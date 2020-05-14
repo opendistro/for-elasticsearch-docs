@@ -1,23 +1,12 @@
 ---
 layout: default
-title: Endpoints
+title: Endpoint
 parent: SQL
-nav_order: 4
+nav_order: 12
 ---
 
 
-# Endpoints
-
----
-
-#### Table of contents
-- TOC
-{:toc}
-
-
----
-
-## Introduction
+# Endpoint
 
 To send query request to SQL plugin, you can either use a request
 parameter in HTTP GET or request body by HTTP POST request. POST request
@@ -112,4 +101,124 @@ Explain:
     "excludes": []
   }
 }
+```
+
+
+## Cursor
+
+### Description
+
+To get back a paginated response, use the `fetch_size` parameter. The value of `fetch_size` should be greater than 0. The default value is 1,000. A value of 0 will fallback to a non-paginated response.
+
+The `fetch_size` parameter is only supported for the JDBC response format.
+{: .note }
+
+
+### Example
+
+SQL query:
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+  "fetch_size" : 5,
+  "query" : "SELECT firstname, lastname FROM accounts WHERE age > 20 ORDER BY state ASC"
+}'
+```
+
+Result set:
+
+```json
+{
+  "schema": [
+    {
+      "name": "firstname",
+      "type": "text"
+    },
+    {
+      "name": "lastname",
+      "type": "text"
+    }
+  ],
+  "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9",
+  "total": 956,
+  "datarows": [
+    [
+      "Cherry",
+      "Carey"
+    ],
+    [
+      "Lindsey",
+      "Hawkins"
+    ],
+    [
+      "Sargent",
+      "Powers"
+    ],
+    [
+      "Campos",
+      "Olsen"
+    ],
+    [
+      "Savannah",
+      "Kirby"
+    ]
+  ],
+  "size": 5,
+  "status": 200
+}
+```
+
+To fetch subsequent pages, use the `cursor` from last response:
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql -d '{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9"
+}'
+```
+
+The result only has the `fetch_size` number of `datarows` and `cursor`.
+The last page has only `datarows` and no `cursor`.
+The `datarows` can have more than the `fetch_size` number of records in case the nested fields are flattened.
+
+```json
+{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMabcde12345",
+  "datarows": [
+    [
+      "Abbas",
+      "Hussain"
+    ],
+    [
+      "Chen",
+      "Dai"
+    ],
+    [
+      "Anirudha",
+      "Jadhav"
+    ],
+    [
+      "Peng",
+      "Huo"
+    ],
+    [
+      "John",
+      "Doe"
+    ]
+  ]
+}
+```
+
+The `cursor` context is automatically cleared on the last page.
+To explicitly clear cursor context, use the `_opendistro/_sql/close endpoint` operation.
+
+```console
+>> curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_sql/close -d '{
+   "cursor": "d:eyJhIjp7fSwicyI6IkRYRjFaWEo1UVc1a1JtVjBZMmdCQUFBQUFBQUFBQU1XZWpkdFRFRkZUMlpTZEZkeFdsWnJkRlZoYnpaeVVRPT0iLCJjIjpbeyJuYW1lIjoiZmlyc3RuYW1lIiwidHlwZSI6InRleHQifSx7Im5hbWUiOiJsYXN0bmFtZSIsInR5cGUiOiJ0ZXh0In1dLCJmIjo1LCJpIjoiYWNjb3VudHMiLCJsIjo5NTF9"
+}'
+```
+
+#### Sample response
+
+```json
+{"succeeded":true}
 ```
