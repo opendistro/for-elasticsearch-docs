@@ -172,6 +172,7 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_preview
 ```json
 {
   "anomaly_result": [
+    ...
     {
       "detector_id": "m4ccEnIBTXsGi3mvMt9p",
       "data_start_time": 1588843020000,
@@ -186,6 +187,7 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_preview
       "anomaly_grade": 0,
       "confidence": 0.99
     }
+    ...
   ],
   "anomaly_detector": {
     "name": "test-detector",
@@ -257,10 +259,10 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_start
 
 ```json
 {
-  "_id": "tNWMEHEBdsd5fFw61sVn",
-  "_version": 1,
-  "_seq_no": 6,
-  "_primary_term": 19
+  "_id" : "m4ccEnIBTXsGi3mvMt9p",
+  "_version" : 1,
+  "_seq_no" : 6,
+  "_primary_term" : 1
 }
 ```
 
@@ -846,14 +848,14 @@ GET _opendistro/_anomaly_detection/stats/<stat>
       "ad_execute_failure_count" : 7,
       "models" : [
         {
-          "detector_id" : "asbPyG4BlFrvFHzloDO-",
+          "detector_id" : "m4ccEnIBTXsGi3mvMt9p",
           "model_type" : "rcf",
-          "model_id" : "asbPyG4BlFrvFHzloDO-_model_rcf_0"
+          "model_id" : "m4ccEnIBTXsGi3mvMt9p_model_rcf_0"
         },
         {
-          "detector_id" : "asbPyG4BlFrvFHzloDO-",
+          "detector_id" : "m4ccEnIBTXsGi3mvMt9p",
           "model_type" : "threshold",
-          "model_id" : "asbPyG4BlFrvFHzloDO-_model_threshold"
+          "model_id" : "m4ccEnIBTXsGi3mvMt9p_model_threshold"
         }
       ]
     },
@@ -867,14 +869,14 @@ GET _opendistro/_anomaly_detection/stats/<stat>
       "ad_execute_failure_count" : 0,
       "models" : [
         {
-          "detector_id" : "asbPyG4BlFrvFHzloDO-",
+          "detector_id" : "m4ccEnIBTXsGi3mvMt9p",
           "model_type" : "rcf",
-          "model_id" : "asbPyG4BlFrvFHzloDO-_model_rcf_2"
+          "model_id" : "m4ccEnIBTXsGi3mvMt9p_model_rcf_2"
         },
         {
-          "detector_id" : "asbPyG4BlFrvFHzloDO-",
+          "detector_id" : "m4ccEnIBTXsGi3mvMt9p",
           "model_type" : "rcf",
-          "model_id" : "asbPyG4BlFrvFHzloDO-_model_rcf_1"
+          "model_id" : "m4ccEnIBTXsGi3mvMt9p_model_rcf_1"
         }
       ]
     }
