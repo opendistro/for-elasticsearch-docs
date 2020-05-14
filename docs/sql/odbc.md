@@ -17,17 +17,19 @@ The ODBC driver is compatible with ODBC version 3.51.
 
 The following operating systems are supported:
 
-| Operating System | Version
+Operating System | Version
 :--- | :---
 Windows | Windows 10
 macOS | Catalina 10.15.4 and Mojave 10.14.6
 
+
 ## Concepts
 
-| Term | Definition
+Term | Definition
 :--- | :---
-|  **DSN**    | A DSN (Data Source Name) is used to store driver information in the system. By storing the information in the system, the information does not need to be specified each time the driver connects.
-|  **.tdc** file    | The TDC file contains configuration information that Tableau applies to any connection matching the database vendor name and driver name defined in the file. This configuration allows you to fine-tune parts of your ODBC data connection and turn on/off certain features not supported by the data source.
+**DSN** | A DSN (Data Source Name) is used to store driver information in the system. By storing the information in the system, the information does not need to be specified each time the driver connects.
+**.tdc** file | The TDC file contains configuration information that Tableau applies to any connection matching the database vendor name and driver name defined in the file. This configuration allows you to fine-tune parts of your ODBC data connection and turn on/off certain features not supported by the data source.
+
 
 ## Install driver
 
@@ -85,28 +87,30 @@ sudo /Applications/iODBC/iODBC\ Administrator64.app/Contents/MacOS/iODBC\ Admini
 
 This command gives the application permissions to save the driver and DSN configurations.
 
-- Choose **ODBC Drivers** tab.
-- Choose **Add a Driver** and fill in the following details:
-  - **Description of the Driver**: Enter the driver name that you used for the ODBC connection (for example, ODFE SQL ODBC Driver).
-  - **Driver File Name**: Enter the path to the driver file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
-  - **Setup File Name**: Enter the path to the setup file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
-  - Choose the user driver.
-  - Choose **OK** to save the options.
-- Choose the **User DSN** tab.
-- Select **Add**.
-  - Choose the driver that you added above.
-  - For **Data Source Name (DSN)**, enter the name of the DSN used to store connection options (for example, ODFE SQL ODBC DSN).
-  - For **Comment**, add an optional comment.
-  - Add key-value pairs by using the `+` button. We recommend the following options for a default local Elasticsearch installation:
-    - **Host**: `localhost` - Elasticsearch server endpoint
-    - **Port**: `9200` - The server port
-    - **Auth**: `NONE` - The authentication mode
-    - **Username**: `(blank)` - The username used for BASIC auth
-    - **Password**: `(blank)`- The password used for BASIC auth
-    - **ResponseTimeout**: `10` - The number of seconds to wait for a response from the server
-    - **UseSSL**: `0` - Do not use SSL for connections
-  - Choose **OK** to save the DSN configuration.
-- Choose **OK** to exit the iODBC Administrator.
+1. Choose **ODBC Drivers** tab.
+1. Choose **Add a Driver** and fill in the following details:
+   - **Description of the Driver**: Enter the driver name that you used for the ODBC connection (for example, ODFE SQL ODBC Driver).
+   - **Driver File Name**: Enter the path to the driver file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
+   - **Setup File Name**: Enter the path to the setup file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
+
+1. Choose the user driver.
+1. Choose **OK** to save the options.
+1. Choose the **User DSN** tab.
+1. Select **Add**.
+1. Choose the driver that you added above.
+1. For **Data Source Name (DSN)**, enter the name of the DSN used to store connection options (for example, ODFE SQL ODBC DSN).
+1. For **Comment**, add an optional comment.
+1. Add key-value pairs by using the `+` button. We recommend the following options for a default local Elasticsearch installation:
+   - **Host**: `localhost` - Elasticsearch server endpoint
+   - **Port**: `9200` - The server port
+   - **Auth**: `NONE` - The authentication mode
+   - **Username**: `(blank)` - The username used for BASIC auth
+   - **Password**: `(blank)`- The password used for BASIC auth
+   - **ResponseTimeout**: `10` - The number of seconds to wait for a response from the server
+   - **UseSSL**: `0` - Do not use SSL for connections
+
+1. Choose **OK** to save the DSN configuration.
+1. Choose **OK** to exit the iODBC Administrator.
 
 
 ## Customizing the ODBC driver
@@ -133,7 +137,7 @@ All option names are case-insensitive.
 
 #### Basic options
 
-| Option | Description | Type | Default
+Option | Description | Type | Default
 :--- | :---
 `DSN` | Data source name that you used for configuring the connection. | `string` | -
 `Host / Server` | Hostname or IP address for the target cluster. | `string` | -
@@ -141,7 +145,7 @@ All option names are case-insensitive.
 
 #### Authentication Options
 
-| Option | Description | Type | Default
+Option | Description | Type | Default
 :--- | :---
 `Auth` | Authentication mechanism to use. | `BASIC` (basic HTTP), `AWS_SIGV4` (AWS auth), or `NONE` | `NONE`
 `User / UID` | [`Auth=BASIC`] Username for the connection. | `string` | -
@@ -150,7 +154,7 @@ All option names are case-insensitive.
 
 #### Advanced options
 
-| Option | Description | Type | Default
+Option | Description | Type | Default
 :--- | :---
 `UseSSL` | Whether to establish the connection over SSL/TLS. | `boolean (0 or 1)` | `false (0)`
 `HostnameVerification` | Indicates whether certificate hostname verification should be performed for an SSL/TLS connection. | `boolean` (0 or 1) | `true (1)`
@@ -158,7 +162,7 @@ All option names are case-insensitive.
 
 #### Logging options
 
-| Option | Description | Type | Default
+Option | Description | Type | Default
 :--- | :---
 `LogLevel` | Severity level for driver logs. | one of `ES_OFF`, `ES_FATAL`, `ES_ERROR`, `ES_INFO`, `ES_DEBUG`, `ES_TRACE`, `ES_ALL` | `ES_WARNING`
 `LogOutput` | Location for storing driver logs. | `string` | `WIN: C:\`, `MAC: /tmp`
