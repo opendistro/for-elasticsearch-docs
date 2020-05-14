@@ -48,6 +48,17 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Monitors**, **Create monitor**.
 1. Specify a name and schedule for the monitor.
+
+The anomaly detection option is for pairing with the anomaly detection plugin. See [Anomaly Detection](../../ad/).
+For anomaly detector, choose an appropriate schedule for the monitor based on the detector interval. Otherwise, the alerting monitor may miss reading the results.
+
+For example, assume you set the monitor interval and the detector interval as 5 minutes, and you start the detector at 12:00. If an anomaly is detected at 12:05, it might be available at 12:06 because of the delay between writing the anomaly and it being available for queries. The monitor reads the anomaly results between 12:00 and 12:05, so it does not get the anomaly results available at 12:06.
+
+To avoid this issue, make sure the alerting monitor is at least twice the detector interval.
+When you create a monitor using Kibana, the anomaly detector plugin generates a default monitor schedule that's twice the detector interval.
+
+Whenever you update a detector’s interval, make sure to update the associated monitor interval as well, as the anomaly detection plugin does not do this automatically.
+
 1. Choose one or more indices. You can also use `*` as a wildcard to specify an index pattern.
 1. Define the monitor in one of three ways: visually, using a query, or using an anomaly detector.
 
@@ -101,8 +112,6 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
      ```
 
      "Start" and "end" refer to the interval at which the monitor runs. See [Available variables](#available-variables).
-
-   - Anomaly detection works for pairing with the anomaly detection plugin. See [Anomaly Detection](../../ad/).
 
 
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
