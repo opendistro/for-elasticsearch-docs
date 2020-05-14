@@ -1,67 +1,11 @@
 ---
 layout: default
-title: Supported Operations
+title: Functions
 parent: SQL
 nav_order: 8
 ---
 
-# Supported operations
-
-Open Distro for Elasticsearch supports the following SQL operations.
-
-## Statements
-
-Statement | Example
-:--- | :---
-Select | `SELECT * FROM my-index`
-Delete | `DELETE FROM my-index WHERE _id=1`
-Where | `SELECT * FROM my-index WHERE ['field']='value'`
-Order by | `SELECT * FROM my-index ORDER BY _id asc`
-Group by | `SELECT * FROM my-index GROUP BY range(age, 20,30,39)`
-Limit | `SELECT * FROM my-index LIMIT 50` (default is 200)
-Union | `SELECT * FROM my-index1 UNION SELECT * FROM my-index2`
-Minus | `SELECT * FROM my-index1 MINUS SELECT * FROM my-index2`
-
-Like any complex query, large UNION and MINUS statements can strain or even crash your cluster.
-{: .warning }
-
-
-## Conditions
-
-Condition | Example
-:--- | :---
-Like | `SELECT * FROM my-index WHERE name LIKE 'j%'`
-And | `SELECT * FROM my-index WHERE name LIKE 'j%' AND age > 21`
-Or | `SELECT * FROM my-index WHERE name LIKE 'j%' OR age > 21`
-Count distinct | `SELECT count(distinct age) FROM my-index`
-In | `SELECT * FROM my-index WHERE name IN ('alejandro', 'carolina')`
-Not | `SELECT * FROM my-index WHERE name NOT IN ('jane')`
-Between | `SELECT * FROM my-index WHERE age BETWEEN 20 AND 30`
-Aliases | `SELECT avg(age) AS Average_Age FROM my-index`
-Date | `SELECT * FROM my-index WHERE birthday='1990-11-15'`
-Null | `SELECT * FROM my-index WHERE name IS NULL`
-
-
-## Aggregations
-
-Aggregation | Example
-:--- | :---
-avg() | `SELECT avg(age) FROM my-index`
-count() | `SELECT count(age) FROM my-index`
-max() | `SELECT max(age) AS Highest_Age FROM my-index`
-min() | `SELECT min(age) AS Lowest_Age FROM my-index`
-sum() | `SELECT sum(age) AS Age_Sum FROM my-index`
-
-
-## Include and exclude fields
-
-Pattern | Example
-:--- | :---
-include() | `SELECT include('a*'), exclude('age') FROM my-index`
-exclude() | `SELECT exclude('*name') FROM my-index`
-
-
-## Functions
+# Functions
 
 You must enable fielddata in the document mapping for most string functions to work properly.
 
@@ -135,22 +79,3 @@ upper | `upper(string T) -> T` or `upper(string T, string) -> T` | `SELECT upper
 year | `year(date) -> integer` | `SELECT year(date) FROM my-index LIMIT 1`
 / | `number [op] number -> number` | `SELECT 1 / 100 FROM my-index LIMIT 1`
 % | `number [op] number -> number` | `SELECT 1 % 100 FROM my-index LIMIT 1`
-
-## Joins
-
-See [Joins](../joins) for constraints and limitations.
-
-Join | Example
-:--- | :---
-Inner join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p JOIN dogs d ON d.holdersName = p.firstname WHERE p.age > 12 AND d.age > 1`
-Left outer join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p LEFT JOIN dogs d ON d.holdersName = p.firstname`
-Cross join | `SELECT p.firstname, p.lastname, p.gender, dogs.name FROM people p CROSS JOIN dogs d`
-
-
-## Show
-
-Show commands, well, show you indices and mappings that match an index pattern. You can use `*` or `%` for wildcards.
-
-Show | Example
-:--- | :---
-Show tables like | `SHOW TABLES LIKE logs-*`
