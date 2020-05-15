@@ -87,7 +87,7 @@ You're redirected to the **Alerting**, **Add monitor** page.
 
 For steps to create a monitor and set notifications based on your anomaly detector, see [Monitor](../alerting/monitors/).
 
-If you stop or delete a detector, make sure to delete any monitors associated with the detector, as this is not done automatically.
+If you stop or delete a detector, make sure to delete any monitors associated with the detector.
 
 ### Step 5: Adjust the model
 
