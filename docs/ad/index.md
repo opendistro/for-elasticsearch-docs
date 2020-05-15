@@ -53,7 +53,7 @@ You can add a maximum of five features for a detector.
 1. Enter the **Name** of the feature.
 1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the **field** and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
 1. Preview sample anomalies and adjust the feature settings if needed.
-- For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximates the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
+- For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximate the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
 Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
 1. Choose **Save and start detector**.
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
