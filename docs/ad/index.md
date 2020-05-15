@@ -31,7 +31,7 @@ A detector is an individual anomaly detection task. You can create multiple dete
 1. For **Detector operation settings**, define the **Detector interval** to set the time interval at which the detector collects data.
 - The detector aggregates the data in this interval, then feeds the aggregated result into the anomaly detection model.
 The shorter you set this interval, the fewer data points the detector aggregates.
-The anomaly detection model uses a shingling process: a technique that uses consecutive data points to create a sample for the model. This process needs a certain number of aggregated data points from contiguous intervals.
+The anomaly detection model uses a shingling process, a technique that uses consecutive data points to create a sample for the model. This process needs a certain number of aggregated data points from contiguous intervals.
 - We recommend you set the detector interval based on your actual data. Too long of an interval might delay the results and too short of an interval might miss some data and also not have a sufficient number of consecutive data points for the shingle process.
 1. To add extra processing time for data collection, specify a **Window delay** value. This is to tell the detector that the data is not ingested into Elasticsearch in real time but with a certain delay.
 Set the window delay to shift the detector interval to account for this delay.
@@ -53,7 +53,7 @@ You can add a maximum of five features for a detector.
 1. Enter the **Name** of the feature.
 1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the **field** and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
 1. Preview sample anomalies and adjust the feature settings if needed.
-- For sample previews, the anomaly detection plugin selects a small number of data samples, for example, one data point for every 30 minutes, and uses interpolation to estimate the remaining data points to approximate the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
+- For sample previews, the anomaly detection plugin selects a small number of data samples---for example, one data point every 30 minutes---and uses interpolation to estimate the remaining data points to approximate the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
 Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
 1. Choose **Save and start detector**.
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
@@ -63,7 +63,7 @@ Examine the sample preview and use it to fine-tune your feature configurations, 
 Choose the **Anomaly results** tab.
 
 You will have to wait for some time to see the anomaly results.
-If the detector interval is 10 min, the detector might take more than an hour to start, as it's waiting for sufficient data to generate anomalies.
+If the detector interval is 10 minutes, the detector might take more than an hour to start, as it's waiting for sufficient data to generate anomalies.
 A shorter interval means the model passes the shingle process more quickly and starts to generate the anomaly results sooner.
 Use the [profile detector](./api#profile-detector) operation to make sure you check you have sufficient data points.
 If you see the detector pending in "initialization" for longer than a day, aggregate your existing data using the detector interval to check if for any missing data points. If you find a lot of missing data points from the aggregated data, consider increasing the detector interval.
