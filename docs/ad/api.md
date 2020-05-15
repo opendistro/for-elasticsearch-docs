@@ -1114,7 +1114,7 @@ This command also helps locate logs by identifying the nodes that run the anomal
 
 ```json
 GET _opendistro/_anomaly_detection/detectors/<detectorId>/_profile/
-GET _opendistro/_anomaly_detection/detectors/<detectorId>/_profile?_all
+GET _opendistro/_anomaly_detection/detectors/<detectorId>/_profile?_all=true
 GET _opendistro/_anomaly_detection/detectors/<detectorId>/_profile/<type>
 ```
 #### Sample Responses
