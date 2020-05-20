@@ -13,7 +13,7 @@ Discovering anomalies using conventional methods such as creating visualizations
 
 The anomaly detection feature automatically detects anomalies in your Elasticsearch data in near real-time using the Random Cut Forest (RCF) algorithm. RCF is an unsupervised machine learning algorithm that models a sketch of your incoming data stream to compute an `anomaly grade` and `confidence score` value for each incoming data point. These values are used to differentiate an anomaly from normal variations. For more information about how RCF works, see [Random Cut Forests](https://pdfs.semanticscholar.org/8bba/52e9797f2e2cc9a823dbd12514d02f29c8b9.pdf?_ga=2.56302955.1913766445.1574109076-1059151610.1574109076).
 
-You can pair the anomaly detection plugin with the alerting plugin to notify you as soon as an anomaly is detected.
+You can pair the anomaly detection plugin with the [alerting plugin](../alerting/index/) to notify you as soon as an anomaly is detected.
 
 ## Get started with Anomaly Detection
 
@@ -44,7 +44,9 @@ After you create the detector, the next step is to add features to it.
 
 ### Step 2: Add features to your detector
 
-A feature is the field in your index that you want to find anomalies for. A detector can discover anomalies across one or more features. You must choose an aggregation method for each feature: `average()`, `sum()`, `min()`, or `max()`. The aggregation method determines what constitutes an anomaly. For example, if you choose `min()`, the detector focuses on finding anomalies based on the minimum values of your feature. If you choose `average()`, the detector finds anomalies based on the average values of your feature.
+In this case, a feature is the field in your index that you to check for anomalies. A detector can discover anomalies across one or more features. You must choose an aggregation method for each feature: `average()`, `sum()`, `min()`, or `max()`. The aggregation method determines what constitutes an anomaly.
+
+For example, if you choose `min()`, the detector focuses on finding anomalies based on the minimum values of your feature. If you choose `average()`, the detector finds anomalies based on the average values of your feature.
 
 You can add a maximum of five features for a detector.
 {: .note }
@@ -63,22 +65,22 @@ Examine the sample preview and use it to fine-tune your feature configurations, 
 Choose the **Anomaly results** tab.
 
 You will have to wait for some time to see the anomaly results.
+
 If the detector interval is 10 minutes, the detector might take more than an hour to start, as it's waiting for sufficient data to generate anomalies.
+
 A shorter interval means the model passes the shingle process more quickly and starts to generate the anomaly results sooner.
 Use the [profile detector](./api#profile-detector) operation to make sure you check you have sufficient data points.
+
 If you see the detector pending in "initialization" for longer than a day, aggregate your existing data using the detector interval to check if for any missing data points. If you find a lot of missing data points from the aggregated data, consider increasing the detector interval.
 
 ![Anomaly detection results](../images/ad.png)
 
-The **Live anomalies** chart shows you the live anomaly results for the last 60 intervals. For example, if the interval is set to 10, it shows the results for the last 600 minutes. This chart is refreshed every 30 seconds.
-
-The **Anomaly history** chart plots the anomaly grade with the corresponding measure of confidence.
+- The **Live anomalies** chart displays the live anomaly results for the last 60 intervals. For example, if the interval is set to 10, it shows the results for the last 600 minutes. This chart refreshes every 30 seconds.
+- The **Anomaly history** chart plots the anomaly grade with the corresponding measure of confidence.
+- The **Feature breakdown** graph plots the features based on the aggregation method. You can vary the date-time range of the detector.
+- The **Anomaly occurrence** table shows the `Start time`, `End time`, `Data confidence`, and `Anomaly grade` for each anomaly detected.
 
 Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score is an estimate of the probability that the reported anomaly grade matches the expected anomaly grade. Confidence increases as the model observes more data and learns the data behavior and trends. Note that confidence is distinct from model accuracy.
-
-The **Feature breakdown** graph plots the features based on the aggregation method. On the top-right corner, you can vary the date-time range of the detector.
-
-The **Anomaly occurrence** table shows the `Start time`, `End time`, `Data confidence`, and `Anomaly grade` for each anomaly detected.
 
 ### Step 4: Set up alerts
 
