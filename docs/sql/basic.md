@@ -331,9 +331,9 @@ ORDER BY employer IS NOT NULL
 
 ## Limit
 
-Specify the maximum number of documents that you want to retrieve. This is similar to the `size` parameter in Elasticsearch. Used to prevent fetching large amounts of data into memory.
+Specify the maximum number of documents that you want to retrieve. Used to prevent fetching large amounts of data into memory.
 
-*Example 1*: Specify the number of results to be returned:
+*Example 1*: If you pass in a single argument, it's mapped to the `size` parameter in Elasticsearch and the `from` parameter is set to 0.
 
 ```sql
 SELECT account_number
@@ -345,7 +345,8 @@ ORDER BY account_number LIMIT 1
 :--- | :---
 0 | 1
 
-*Example 2*: Specify the document number that you want to start returning the results from. The second argument is equivalent to the `from` parameter in Elasticsearch. Use `ORDER BY` to ensure the same order between pages:
+*Example 2*: If you pass in two arguments, the first is mapped to the `from` parameter and the second to the `size` parameter in Elasticsearch. You can use this for simple pagination for small indices, as it's inefficient for large indices.
+Use `ORDER BY` to ensure the same order between pages:
 
 ```sql
 SELECT account_number
