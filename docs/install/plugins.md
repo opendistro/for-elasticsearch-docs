@@ -215,9 +215,9 @@ KNN is only available as part of the all-in-one installs: Docker, RPM, and Debia
 
 ### Anomaly Detection
 
-Anomaly Detection is a preview plugin, which we do not recommend using in production. It's currently in development and is subject to change.
-
-To test this plugin, clone [the Anomaly Detection repository](https://github.com/opendistro-for-elasticsearch/anomaly-detection) and build it manually using instructions in the README.
+```bash
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-1.7.0.0.zip
+```
 
 
 ### Performance Analyzer
