@@ -18,7 +18,7 @@ The following table shows the differences between them:
 *Relevance* | Term-level queries simply return documents that match without sorting them based on the relevance score. They still calculate the relevance score, it’s just that this score is the same for all the documents that are returned. | Full-text queries calculate a relevance score for each match and sort the results by decreasing order of relevance.
 *Use Case* | Use term-level queries when you want to match exact values such as numbers, dates, tags, and so on, and don't need the matches to be sorted by relevance. | Use full-text queries to match text fields and sort by relevance after taking into account factors like casing and stemming variants.
 
-Elasticsearch uses a probabilistic ranking framework called Okapi BM25 to calculate relevance scores. To learn more about Okapi BM25, see [The Probabilistic Relevance Framework: BM25 and Beyond](http://www.staff.city.ac.uk/~sb317/papers/foundations_bm25_review.pdf).
+Elasticsearch uses a probabilistic ranking framework called Okapi BM25 to calculate relevance scores. To learn more about Okapi BM25, see [Wikipedia](https://en.wikipedia.org/wiki/Okapi_BM25).
 {: .note }
 
 Assume you have the complete works of Shakespeare indexed in an Elasticsearch cluster. We use a term-level query to search for the phrase "To be, or not to be" in the `text_entry` field:
