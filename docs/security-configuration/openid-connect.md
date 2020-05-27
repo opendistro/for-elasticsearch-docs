@@ -310,7 +310,8 @@ Because Kibana requires that the internal Kibana server user can authenticate th
 
 ```yml
 basic_internal_auth_domain:
-  enabled: true
+  http_enabled: true
+  transport_enabled: true
   order: 0
   http_authenticator:
     type: basic
@@ -318,7 +319,8 @@ basic_internal_auth_domain:
   authentication_backend:
     type: internal
 openid_auth_domain:
-  enabled: true
+  http_enabled: true
+  transport_enabled: true
   order: 1
   http_authenticator:
     type: openid
