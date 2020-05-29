@@ -71,14 +71,14 @@ For other settings, see [Important settings](../docker/#important-settings).
 
 ## Performance Analyzer
 
-In a tarball installation, Performance Analyzer collects data when it is enabled. But, in order to read that data over a REST API on port 9600, you must first manually launch the associated reader agent process:
+In a tarball installation, Performance Analyzer collects data when it is enabled. But in order to read that data using the REST API on port 9600, you must first manually launch the associated reader agent process:
 
 1. Create `./bin/performance-analyzer-agent-cli` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/performance-analyzer-agent-cli).
 
 1. Make the CLI executable:
 
    ```bash
-   sudo chmod +x /usr/share/elasticsearch/bin/performance-analyzer-agent-cli
+   sudo chmod +x ./bin/performance-analyzer-agent-cli
    ```
 
 1. Launch the agent CLI:
