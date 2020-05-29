@@ -33,7 +33,7 @@ Component | Purpose
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
 [Index State Management](docs/ism/) | Automate index operations
-[KNN](docs/knn/) | Find “nearest neighbors” by Euclidean distance
+[KNN](docs/knn/) | Find “nearest neighbors” in your vector data
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
 [Anomaly Detection](docs/ad/) | Identify atypical data and receive automatic notifications
 
