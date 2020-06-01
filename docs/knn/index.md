@@ -8,12 +8,12 @@ has_toc: false
 
 # KNN
 
-Short for its associated *k-nearest neighbors* algorithm, the KNN plugin lets you search for points in a vector space and find the "nearest neighbors" for those points by Euclidean distance or Cosine similarity. Use cases include recommendations (for example, an "other songs you might like" feature in a music application), image recognition, and fraud detection. For background information on the algorithm, see [Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm).
+Short for its associated *k-nearest neighbors* algorithm, the KNN plugin lets you search for points in a vector space and find the "nearest neighbors" for those points by Euclidean distance or cosine similarity. Use cases include recommendations (for example, an "other songs you might like" feature in a music application), image recognition, and fraud detection. For background information on the algorithm, see [Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm).
 
 
 ## Get started
 
-To use the KNN plugin, you must create an index with the `index.knn` setting and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` with `l2` or `cosinesimil` to use either Euclidean or Cosine Similarity space for distance calculations, respectively. By default, `index.knn.space_type` is set to `l2`. For more information on these spaces, please refer to the [NMSLIB documentation](https://github.com/nmslib/nmslib/blob/master/manual/spaces.md). Here is an example that creates an index with 2 `knn_vector` fields that uses Cosine Similarity:
+To use the KNN plugin, you must create an index with the `index.knn` setting and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` with `l2` or `cosinesimil`, respectively, to use either Euclidean distance or cosine similarity for calculations. By default, `index.knn.space_type` is set to `l2`. Here is an example that creates an index with two knn_vector fields and uses cosine similarity:
 
 ```json
 PUT my-index
