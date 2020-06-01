@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>Monitors - Open Distro for Elasticsearch Documentation</title>
+  <link rel="stylesheet" href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/css/just-the-docs.css">
+  <link rel="shortcut icon" href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/images/favicon.ico">
+
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135423944-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-135423944-1');
+    </script>
+  
+
+  
+    <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/js/search-data.js"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+  
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+  
+
+  <!-- SiteCatalyst code version: H.25.1. Copyright 1996-2012 Adobe, Inc. All Rights Reserved -->
+  <script><!--
+  /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+  var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+  <script language="JavaScript" type="text/javascript"><!--
+  if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+  //--></script>
+  <noscript>
+  <img src="//amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazonalldev2/1/H.25.1--NS/0" height="1" width="1" border="0" alt="" />
+  </noscript>
+  <!--/DO NOT REMOVE/-->
+  <!-- End SiteCatalyst code version: H.25.1. -->
+
+  <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/" class="site-title"><img src="/for-elasticsearch-docs/old/0.9.0/assets/images/logo.svg"></a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/" class="navigation-list-link">About</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/" class="navigation-list-link">Install and Configure</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/docker/" class="navigation-list-link">Docker</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/rpm/" class="navigation-list-link">RPM</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/deb/" class="navigation-list-link">Debian Package</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/docker-security/" class="navigation-list-link">Docker Security Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/plugins/" class="navigation-list-link">Standalone Elasticsearch Plugin Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/other-components/" class="navigation-list-link">Other Components</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/encryption-at-rest/" class="navigation-list-link">Encryption at Rest</a>
+                      
+                    </li>
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/" class="navigation-list-link">Elasticsearch</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/configuration/" class="navigation-list-link">Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/index-data/" class="navigation-list-link">Index Data</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/full-text/" class="navigation-list-link">Full-Text Queries</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/snapshot-restore/" class="navigation-list-link">Take and Restore Snapshots</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/" class="navigation-list-link">Kibana</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/plugins/" class="navigation-list-link">Standalone Kibana Plugin Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/maptiles/" class="navigation-list-link">WMS Map Server</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/" class="navigation-list-link">Security</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/concepts/" class="navigation-list-link">Basics</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/configuration/" class="navigation-list-link">Backend Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/security-admin/" class="navigation-list-link">Apply Configuration Changes</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/tls-configuration/" class="navigation-list-link">TLS Certificates</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/generate-certificates/" class="navigation-list-link">Generate Certificates</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/ldap/" class="navigation-list-link">Active Directory and LDAP</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/saml/" class="navigation-list-link">SAML</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/openid-connect/" class="navigation-list-link">OpenID Connect</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/default-action-groups/" class="navigation-list-link">Default Action Groups</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/permissions/" class="navigation-list-link">Permissions</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/document-level-security/" class="navigation-list-link">Document-Level Security</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/cross-cluster-search/" class="navigation-list-link">Cross-Cluster Search</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-logs/" class="navigation-list-link">Audit Logs</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-log-storage-types/" class="navigation-list-link">Audit Log Storage Types</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-logs-field-reference/" class="navigation-list-link">Audit Log Field Reference</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/disable/" class="navigation-list-link">Disable Security</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/" class="navigation-list-link">Alerting</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/monitors/" class="navigation-list-link active">Monitors</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/settings/" class="navigation-list-link">Management</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/security-roles/" class="navigation-list-link">Security Roles</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/cron/" class="navigation-list-link">Cron</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/" class="navigation-list-link">SQL</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/operations/" class="navigation-list-link">Supported Operations</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/jdbc/" class="navigation-list-link">JDBC Driver</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/joins/" class="navigation-list-link">Joins</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/" class="navigation-list-link">Performance Analyzer</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/dashboards/" class="navigation-list-link">Create Dashboards</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/reference/" class="navigation-list-link">Metrics Reference</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/troubleshoot/" class="navigation-list-link">Troubleshoot</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-100">See a problem? Submit <a href="https://github.com/opendistro/for-elasticsearch-docs/issues">issues</a> or <a href="https://github.com/opendistro/for-elasticsearch-docs/pulls">pull requests</a> on <a href="https://github.com/opendistro/for-elasticsearch-docs">GitHub</a>.</p>
+        <p class="text-small text-grey-dk-100 mb-0">© 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search..." aria-label="Search" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0"><a href="https://opendistro.github.io/for-elasticsearch/">Back to the Open Distro for Elasticsearch home page</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/">Alerting</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>Monitors</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="monitors">Monitors</h1>
+
+<h4 id="table-of-contents">Table of contents</h4>
+<ul id="markdown-toc">
+  <li><a href="#key-terms" id="markdown-toc-key-terms">Key terms</a></li>
+  <li><a href="#create-destinations" id="markdown-toc-create-destinations">Create destinations</a></li>
+  <li><a href="#create-monitors" id="markdown-toc-create-monitors">Create monitors</a></li>
+  <li><a href="#create-triggers" id="markdown-toc-create-triggers">Create triggers</a>    <ul>
+      <li><a href="#visual-graph" id="markdown-toc-visual-graph">Visual graph</a></li>
+      <li><a href="#extraction-query" id="markdown-toc-extraction-query">Extraction query</a></li>
+    </ul>
+  </li>
+  <li><a href="#add-actions" id="markdown-toc-add-actions">Add actions</a></li>
+  <li><a href="#work-with-alerts" id="markdown-toc-work-with-alerts">Work with alerts</a></li>
+</ul>
+
+<hr />
+
+<h2 id="key-terms">Key terms</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Term</th>
+      <th style="text-align: left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Monitor</td>
+      <td style="text-align: left">A job that runs on a defined schedule and queries Elasticsearch. The results of these queries are then used as input for one or more <em>triggers</em>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Trigger</td>
+      <td style="text-align: left">Conditions that, if met, generate <em>alerts</em> and can perform some <em>action</em>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Alert</td>
+      <td style="text-align: left">A notification that a monitor’s trigger condition has been met.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Action</td>
+      <td style="text-align: left">The information that you want the monitor to send out after being triggered. Actions have a <em>destination</em>, a message subject, and a message body.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Destination</td>
+      <td style="text-align: left">A reusable location for an action, such as Amazon Chime, Slack, or a webhook URL.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="create-destinations">Create destinations</h2>
+
+<ol>
+  <li>Choose <strong>Alerting</strong>, <strong>Destinations</strong>, <strong>Add destination</strong>.</li>
+  <li>Specify a name for the destination so that you can identify it later.</li>
+  <li>For <strong>Type</strong>, choose Slack, Amazon Chime, or custom webhook.</li>
+  <li>
+    <p>Specify the webhook URL. These requests use the HTTP POST method.</p>
+
+    <p>For more information about webhooks, see the documentation for <a href="https://api.slack.com/incoming-webhooks">Slack</a> and <a href="https://docs.aws.amazon.com/chime/latest/ug/webhooks.html">Chime</a>.</p>
+
+    <p>For custom webhooks, you must specify more information: parameters, authentication, and headers. This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, credentials might be visible to other Elasticsearch users.</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="create-monitors">Create monitors</h2>
+
+<ol>
+  <li>Choose <strong>Alerting</strong>, <strong>Monitors</strong>, <strong>Create monitor</strong>.</li>
+  <li>Specify a name and schedule for the monitor.</li>
+  <li>Choose one or more indices. You can also use <code class="highlighter-rouge">*</code> as a wildcard to specify an index pattern.</li>
+  <li>
+    <p>Define the monitor in one of two ways: visually or using a query.</p>
+
+    <ul>
+      <li>
+        <p>Visual definition works well for monitors that you can define as “some value is above or below some threshold for some amount of time.”</p>
+      </li>
+      <li>
+        <p>Query definition gives you flexibility in terms of what you query for (using <a href="../../elasticsearch/full-text">the Elasticsearch query DSL</a>) and how you evaluate the results of that query (Painless scripting).</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>To define a monitor visually, choose <strong>Define using visual graph</strong>. Then choose an aggregation (for example, <code class="highlighter-rouge">count()</code> or <code class="highlighter-rouge">average()</code>), a set of documents, and a timeframe. Visual definition works well for most monitors.</p>
+
+    <p>To use a query, choose <strong>Define using extraction query</strong>, add your query (using <a href="../../elasticsearch/full-text">the Elasticsearch query DSL</a>), and test it using the <strong>Run</strong> button.</p>
+
+    <p>The monitor makes this query to Elasticsearch as often as the schedule dictates; check the <strong>Query Performance</strong> section and make sure you’re comfortable with the performance implications.</p>
+  </li>
+  <li>Choose <strong>Create</strong>.</li>
+</ol>
+
+<hr />
+
+<h2 id="create-triggers">Create triggers</h2>
+
+<p>The next step in creating a monitor is to create a trigger. These steps differ depending on whether you chose <strong>Define using visual graph</strong> or <strong>Define using extraction query</strong> when you created the monitor.</p>
+
+<p>Either way, you begin by specifying a name and severity level for the trigger. Severity levels help you manage alerts. A trigger with a high severity level (e.g. 1) might page a specific individual, whereas a trigger with a low severity level might message a chat room.</p>
+
+<h3 id="visual-graph">Visual graph</h3>
+
+<p>For <strong>Trigger condition</strong>, specify a threshold for the aggregation and timeframe you chose earlier, such as “is below 1,000” or “is exactly 10.”</p>
+
+<p>The line moves up and down as you increase and decrease the threshold. Once this line is crossed, the trigger evaluates to true.</p>
+
+<h3 id="extraction-query">Extraction query</h3>
+
+<p>For <strong>Trigger condition</strong>, specify a Painless script that returns true or false. Painless is the default Elasticsearch scripting language and has a syntax similar to Groovy.</p>
+
+<p>Trigger condition scripts revolve around the <code class="highlighter-rouge">ctx.results[0]</code> variable, which corresponds to the extraction query response. For example, your script might reference <code class="highlighter-rouge">ctx.results[0].hits.total</code> or <code class="highlighter-rouge">ctx.results[0].hits.hits[i]._source.error_code</code>.</p>
+
+<p>A return value of true means the trigger condition has been met, and the trigger should execute its actions. Test your script using the <strong>Run</strong> button.</p>
+
+<p class="tip">The <strong>Info</strong> link next to <strong>Trigger condition</strong> contains a useful summary of the variables and results available to your query.</p>
+
+<h4 id="sample-scripts">Sample scripts</h4>
+
+<!-- These scripts are Painless, not Groovy, but calling them Groovy in Jekyll gets us syntax highlighting in the generated HTML. -->
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Evaluates to true if the query returned any documents</span>
+<span class="n">ctx</span><span class="o">.</span><span class="na">results</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">hits</span><span class="o">.</span><span class="na">total</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performs some crude custom scoring and returns true if that score exceeds a certain value</span>
+<span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ctx</span><span class="o">.</span><span class="na">results</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">hits</span><span class="o">.</span><span class="na">hits</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="c1">// Weighs 500 errors 10 times as heavily as 503 errors</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">results</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">hits</span><span class="o">.</span><span class="na">hits</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">_source</span><span class="o">.</span><span class="na">http_status_code</span> <span class="o">==</span> <span class="s2">"500"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">score</span> <span class="o">+=</span> <span class="mi">10</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">results</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">hits</span><span class="o">.</span><span class="na">hits</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">_source</span><span class="o">.</span><span class="na">http_status_code</span> <span class="o">==</span> <span class="s2">"503"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="mi">99</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="available-variables">Available variables</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variable</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.results</code></td>
+      <td style="text-align: left">An array with one element (i.e. <code class="highlighter-rouge">ctx.results[0]</code>). Contains the query results. This variable is empty if the trigger was unable to retrieve results. See <code class="highlighter-rouge">ctx.error</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.monitor</code></td>
+      <td style="text-align: left">Includes <code class="highlighter-rouge">ctx.monitor.name</code>, <code class="highlighter-rouge">ctx.monitor.type</code>, <code class="highlighter-rouge">ctx.monitor.enabled</code>, <code class="highlighter-rouge">ctx.monitor.enabled_time</code>, <code class="highlighter-rouge">ctx.monitor.schedule</code>, <code class="highlighter-rouge">ctx.monitor.inputs</code>, <code class="highlighter-rouge">triggers</code> and <code class="highlighter-rouge">ctx.monitor.last_update_time</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.trigger</code></td>
+      <td style="text-align: left">Includes <code class="highlighter-rouge">ctx.trigger.name</code>, <code class="highlighter-rouge">ctx.trigger.severity</code>, <code class="highlighter-rouge">ctx.trigger.condition</code>, and <code class="highlighter-rouge">ctx.trigger.actions</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.periodStart</code></td>
+      <td style="text-align: left">Unix timestamp for the beginning of the period during which the alert triggered. For example, if a monitor runs every ten minutes, a period might begin at 10:40 and end at 10:50.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.periodEnd</code></td>
+      <td style="text-align: left">The end of the period during which the alert triggered.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.error</code></td>
+      <td style="text-align: left">The error message if the trigger was unable to retrieve results or unable to evaluate the trigger, typically due to a compile error or null pointer exception. Null otherwise.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">ctx.alert</code></td>
+      <td style="text-align: left">The current, active alert (if it exists). Includes <code class="highlighter-rouge">ctx.alert.id</code>, <code class="highlighter-rouge">ctx.alert.version</code>, and <code class="highlighter-rouge">ctx.alert.isAcknowledged</code>. Null if no alert is active.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="add-actions">Add actions</h2>
+
+<p>The final step in creating a monitor is to add one or more actions. Actions send notifications when trigger conditions are met and support <a href="https://slack.com/">Slack</a>, <a href="https://aws.amazon.com/chime/">Amazon Chime</a>, and webhooks.</p>
+
+<p class="tip">If you don’t want to receive notifications for alerts, you don’t have to add actions to your triggers. Instead, you can periodically check Kibana.</p>
+
+<ol>
+  <li>Specify a name for the action.</li>
+  <li>Choose a destination.</li>
+  <li>
+    <p>Add a subject and body for the message.</p>
+
+    <p>You can add variables to your messages using <a href="https://mustache.github.io/mustache.5.html">Mustache templates</a>. You have access to <code class="highlighter-rouge">ctx.action.name</code>, the name of the current action, as well as all <a href="#available-variables">trigger variables</a>.</p>
+  </li>
+  <li>Choose <strong>Create</strong>.</li>
+</ol>
+
+<p>After an action sends a message, the content of that message has left the purview of the Security plugin. Securing access to the message (e.g. access to the Slack channel) is your responsibility.</p>
+
+<h4 id="sample-message">Sample message</h4>
+
+<div class="language-mustache highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Monitor <span class="k">{{</span><span class="nv">ctx</span><span class="p">.</span><span class="nv">monitor</span><span class="p">.</span><span class="nv">name</span><span class="k">}}</span> just entered an alert state. Please investigate the issue.
+- Trigger: <span class="k">{{</span><span class="nv">ctx</span><span class="p">.</span><span class="nv">trigger</span><span class="p">.</span><span class="nv">name</span><span class="k">}}</span>
+- Severity: <span class="k">{{</span><span class="nv">ctx</span><span class="p">.</span><span class="nv">trigger</span><span class="p">.</span><span class="nv">severity</span><span class="k">}}</span>
+- Period start: <span class="k">{{</span><span class="nv">ctx</span><span class="p">.</span><span class="nv">periodStart</span><span class="k">}}</span>
+- Period end: <span class="k">{{</span><span class="nv">ctx</span><span class="p">.</span><span class="nv">periodEnd</span><span class="k">}}</span>
+</code></pre></div></div>
+
+<p class="note">If you want to use the <code class="highlighter-rouge">ctx.results</code> variable in a message, use <code class="highlighter-rouge">{{ctx.results.0}}</code> rather than <code class="highlighter-rouge">{{ctx.results[0]}}</code>. This difference is due to how Mustache handles bracket notation.</p>
+
+<hr />
+
+<h2 id="work-with-alerts">Work with alerts</h2>
+
+<p>Alerts persist until you resolve the root cause and have the following states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">State</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Active</td>
+      <td style="text-align: left">The alert is ongoing and unacknowledged. Alerts remain in this state until you acknowledge them, delete the trigger associated with the alert, or delete the monitor entirely.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Acknowledged</td>
+      <td style="text-align: left">Someone has acknowledged the alert, but not fixed the root cause.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Completed</td>
+      <td style="text-align: left">The alert is no longer ongoing. Alerts enter this state after the corresponding trigger evaluates to false.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Error</td>
+      <td style="text-align: left">An error occurred while executing the trigger—usually the result of a a bad trigger or destination.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Deleted</td>
+      <td style="text-align: left">Someone deleted the monitor or trigger associated with this alert while the alert was ongoing.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+      anchors.add();
+    </script>
+  
+</body>
+</html>
