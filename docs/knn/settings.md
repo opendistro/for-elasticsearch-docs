@@ -19,6 +19,7 @@ Setting | Default | Description
 `index.knn.algo_param.ef_search` | 512 | The size of the dynamic list used during KNN searches. Higher values lead to more accurate, but slower searches.
 `index.knn.algo_param.ef_construction` | 512 | The size of the dynamic list used during KNN graph creation. Higher values lead to a more accurate graph, but slower indexing speed.
 `index.knn.algo_param.m` | 16 | The number of bidirectional links that the plugin creates for each new element. Increasing and decreasing this value can have a large impact on memory consumption. Keep this value between 2-100.
+`index.knn.space_type` | "l2" | The vector space used to calculate the distance between vectors. Currently, the KNN plugin supports the "l2" space (Euclidean distance) and "cosinesimil" space (Cosine Similarity). For more information on these spaces, please refer to the [NMSLIB documentation](https://github.com/nmslib/nmslib/blob/master/manual/spaces.md).
 
 
 ## Cluster settings
