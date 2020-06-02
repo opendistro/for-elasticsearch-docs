@@ -64,6 +64,7 @@ Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |
 `timeout` |  The timeout period for the action. Accepts time units for minutes, hours, and days. | `time unit` | No | -
 `retry` | The retry configuration for the action. | `object` | No | Specific to action
+`snapshot` | The snapshot configuration for the action. For information about snapshots, see [Take and restore snapshots](../../elasticsearch/snapshot-restore/).| `object` | No | -
 
 The `retry` operation has the following parameters:
 
@@ -72,6 +73,24 @@ Parameter | Description | Type | Required | Default
 `count` | The number of retry counts. | `number` | Yes | -
 `backoff` | The backoff policy type to use when retrying. | `string` | No | Exponential
 `delay` | The time to wait between retries. Accepts time units for minutes, hours, and days. | `time unit` | No | 1 minute
+
+The `snapshot` operation has the following parameters:
+
+Parameter | Description | Type | Required | Default
+:--- | :--- |:--- |:--- |
+`repository` | The repository name that you register through the native snapshot API operations.  | `string` | Yes | -
+`snapshot` | The name of the snapshot. | `string` | Yes | -
+
+For example:
+
+```json
+{
+  "snapshot": {
+    "repository": "my_backup",
+    "snapshot": "my_snapshot"
+  }
+}
+```
 
 The following example action has a timeout period of one hour. The policy retries this action three times with an exponential backoff policy, with a delay of 10 minutes between each retry:
 
