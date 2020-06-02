@@ -224,33 +224,15 @@ The destination system **must** return a response otherwise the notification ope
 
 ```json
 {
-  "policy": {
-    "description": "ingesting logs",
-    "default_state": "ingest",
-    "states": [
-      {
-        "name": "ingest",
-        "actions": [
-          {
-            "notification": {
-              "destination": {
-                "chime": {
-                  "url": "<url>"
-                }
-              },
-              "message_template": {
-                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
-              }
-            }
-          }
-        ],
-        "transitions": [
-          {
-            "state_name": "ingest"
-          }
-        ]
+  "notification": {
+    "destination": {
+      "chime": {
+        "url": "<url>"
       }
-    ]
+    },
+    "message_template": {
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
+    }
   }
 }
 ```
@@ -259,33 +241,15 @@ The destination system **must** return a response otherwise the notification ope
 
 ```json
 {
-  "policy": {
-    "description": "ingesting logs",
-    "default_state": "ingest",
-    "states": [
-      {
-        "name": "ingest",
-        "actions": [
-          {
-            "notification": {
-              "destination": {
-                "custom_webhook": {
-                  "url": "https://<your_webhook>"
-                }
-              },
-              "message_template": {
-                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
-              }
-            }
-          }
-        ],
-        "transitions": [
-          {
-            "state_name": "ingest"
-          }
-        ]
+  "notification": {
+    "destination": {
+      "custom_webhook": {
+        "url": "https://<your_webhook>"
       }
-    ]
+    },
+    "message_template": {
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
+    }
   }
 }
 ```
@@ -294,33 +258,15 @@ The destination system **must** return a response otherwise the notification ope
 
 ```json
 {
-  "policy": {
-    "description": "ingesting logs",
-    "default_state": "ingest",
-    "states": [
-      {
-        "name": "ingest",
-        "actions": [
-          {
-            "notification": {
-              "destination": {
-                "slack": {
-                  "url": "https://hooks.slack.com/services/xxx/xxxxxx"
-                }
-              },
-              "message_template": {
-                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
-              }
-            }
-          }
-        ],
-        "transitions": [
-          {
-            "state_name": "ingest"
-          }
-        ]
+  "notification": {
+    "destination": {
+      "slack": {
+        "url": "https://hooks.slack.com/services/xxx/xxxxxx"
       }
-    ]
+    },
+    "message_template": {
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
+    }
   }
 }
 ```
