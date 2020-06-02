@@ -218,17 +218,109 @@ Parameter | Description | Type | Required
 `destination` | The destination URL. | `Slack, Amazon Chime, or webhook URL` | Yes
 `message_template` |  The text of the message. You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). | `object` | Yes
 
+The destination system **must** return a response otherwise the notification operation throws an error.
+
+#### Example 1: Chime notification
+
 ```json
 {
-  "notification": {
-    "destination": {
-      "chime": {
-        "url": "<url>"
+  "policy": {
+    "description": "ingesting logs",
+    "default_state": "ingest",
+    "states": [
+      {
+        "name": "ingest",
+        "actions": [
+          {
+            "notification": {
+              "destination": {
+                "chime": {
+                  "url": "<url>"
+                }
+              },
+              "message_template": {
+                "source": "the index is {{ctx.index}}"
+              }
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "state_name": "ingest"
+          }
+        ]
       }
-    },
-    "message_template": {
-      "source": "The index {% raw %}{{ctx.index}}{% endraw %} is being deleted."
-    }
+    ]
+  }
+}
+```
+
+#### Example 2: Custom webhook notification
+
+```json
+{
+  "policy": {
+    "description": "ingesting logs",
+    "default_state": "ingest",
+    "states": [
+      {
+        "name": "ingest",
+        "actions": [
+          {
+            "notification": {
+              "destination": {
+                "custom_webhook": {
+                  "url": "https://<your_webhook>"
+                }
+              },
+              "message_template": {
+                "source": "the index is {{ctx.index}}"
+              }
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "state_name": "ingest"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### Example 3: Slack notification
+
+```json
+{
+  "policy": {
+    "description": "ingesting logs",
+    "default_state": "ingest",
+    "states": [
+      {
+        "name": "ingest",
+        "actions": [
+          {
+            "notification": {
+              "destination": {
+                "slack": {
+                  "url": "https://hooks.slack.com/services/xxx/xxxxxx"
+                }
+              },
+              "message_template": {
+                "source": "the index is {{ctx.index}}"
+              }
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "state_name": "ingest"
+          }
+        ]
+      }
+    ]
   }
 }
 ```
