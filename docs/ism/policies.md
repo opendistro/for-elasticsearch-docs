@@ -239,7 +239,7 @@ The destination system **must** return a response otherwise the notification ope
                 }
               },
               "message_template": {
-                "source": "the index is {{ctx.index}}"
+                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
               }
             }
           }
@@ -274,7 +274,7 @@ The destination system **must** return a response otherwise the notification ope
                 }
               },
               "message_template": {
-                "source": "the index is {{ctx.index}}"
+                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
               }
             }
           }
@@ -309,7 +309,7 @@ The destination system **must** return a response otherwise the notification ope
                 }
               },
               "message_template": {
-                "source": "the index is {{ctx.index}}"
+                "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
               }
             }
           }
