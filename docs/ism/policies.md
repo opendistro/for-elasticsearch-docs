@@ -98,6 +98,7 @@ ISM supports the following operations:
 - [delete](#delete)
 - [rollover](#rollover)
 - [notification](#notification)
+- [snapshot](#notification)
 
 ### force_merge
 
@@ -217,6 +218,10 @@ Parameter | Description | Type | Required
 `destination` | The destination URL. | `Slack, Amazon Chime, or webhook URL` | Yes
 `message_template` |  The text of the message. You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). | `object` | Yes
 
+The destination system **must** return a response otherwise the notification operation throws an error.
+
+#### Example 1: Chime notification
+
 ```json
 {
   "notification": {
@@ -226,7 +231,41 @@ Parameter | Description | Type | Required
       }
     },
     "message_template": {
-      "source": "The index {% raw %}{{ctx.index}}{% endraw %} is being deleted."
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
+    }
+  }
+}
+```
+
+#### Example 2: Custom webhook notification
+
+```json
+{
+  "notification": {
+    "destination": {
+      "custom_webhook": {
+        "url": "https://<your_webhook>"
+      }
+    },
+    "message_template": {
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
+    }
+  }
+}
+```
+
+#### Example 3: Slack notification
+
+```json
+{
+  "notification": {
+    "destination": {
+      "slack": {
+        "url": "https://hooks.slack.com/services/xxx/xxxxxx"
+      }
+    },
+    "message_template": {
+      "source": "the index is {% raw %}{{ctx.index}}{% endraw %}"
     }
   }
 }
@@ -243,6 +282,26 @@ Parameter | Description | Type
 `index` | The name of the index. | `string`
 `index_uuid` | The uuid of the index. | `string`
 `policy_id` | The name of the policy. | `string`
+
+### snapshot
+
+Backup your cluster’s indices and state. For more information about snapshots, see [Take and restore snapshots](../../elasticsearch/snapshot-restore/).
+
+The `snapshot` operation has the following parameters:
+
+Parameter | Description | Type | Required | Default
+:--- | :--- |:--- |:--- |
+`repository` | The repository name that you register through the native snapshot API operations.  | `string` | Yes | -
+`snapshot` | The name of the snapshot. | `string` | Yes | -
+
+```json
+{
+  "snapshot": {
+    "repository": "my_backup",
+    "snapshot": "my_snapshot"
+  }
+}
+```
 
 ---
 
