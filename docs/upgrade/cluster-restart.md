@@ -26,6 +26,13 @@ The steps on this page are most applicable if you installed Open Distro for Elas
    sudo systemctl stop elasticsearch.service
    ```
 
+1. If you use the Debian package, upgrade to the underlying Elasticsearch version of the new Open Distro for Elasticsearch release:
+
+   ```bash
+   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-x.y.z-amd64.deb
+   sudo dpkg -i elasticsearch-oss-x.y.z-amd64.deb
+   ```
+
 1. Upgrade packages on each node using `yum` or `apt`:
 
    ```bash
