@@ -33,9 +33,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
    bundle exec jekyll serve
    ```
 
-   Alternately, run `build.sh`, which includes some convenience flags and is faster to type.
-
-   You might receive a couple `Invalid theme folder: _sass` warnings from Jekyll. You can safely ignore them.
+   Alternately, run `build.sh`, which includes some convenience flags, is faster to type, and opens a live preview automatically.
 
 1. Open [http://localhost:4000/for-elasticsearch-docs/](http://localhost:4000/for-elasticsearch-docs/).
 
