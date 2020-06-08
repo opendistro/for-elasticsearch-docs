@@ -17,20 +17,20 @@ Mix and match these roles to give users the permissions they need to use the ale
 
 1. In Kibana, choose **Security**, **Roles**.
 1. Create a new security role named `alerting_alerts`.
-1. In the **Index Permissions** tab, choose **Add new index and document type**.
-1. Specify the `.opendistro-alerting-alerts` index and `*` document type and **Save**.
-1. Choose the `CRUD` action group and **Save role definition**.
+1. In the **Index Permissions** tab, choose **Add index permissions**.
+1. Specify the `.opendistro-alerting-alerts` index pattern.
+1. Add the `crud` action group and **Save role definition**.
 1. Choose **Role Mappings**.
-1. Map the `alerting_acknowledge` role to the desired users or backend roles.
+1. Map the `alerting_alerts` role to the desired users or backend roles.
 
 
 ## Create, update, and delete monitors and destinations
 
 1. In Kibana, choose **Security**, **Roles**.
 1. Create a new security role named `alerting_monitors`.
-1. In the **Index Permissions** tab, choose **Add new index and document type**.
-1. Specify the `.opendistro-alerting-config` index and `*` document type and **Save**.
-1. Choose the `CRUD` action group and **Save role definition**.
+1. In the **Index Permissions** tab, choose **Add index permissions**.
+1. Specify the `.opendistro-alerting-config` index pattern.
+1. Add the `crud` action group and **Save role definition**.
 1. Choose **Role Mappings**.
 1. Map the `alerting_monitors` role to the desired users or backend roles.
 
@@ -39,10 +39,10 @@ Mix and match these roles to give users the permissions they need to use the ale
 
 1. In Kibana, choose **Security**, **Roles**.
 1. Create a new security role named `alerting_read_only`.
-1. In the **Index Permissions** tab, choose **Add new index and document type**.
-1. Specify the `.opendistro-alerting-alerts` index and `*` document type and **Save**.
-1. Choose the `READ` action group and **Add new index and document type**.
-1. Specify the `.opendistro-alerting-config` index and `*` document type and **Save**.
-1. Choose the `READ` action group and **Save role definition**.
+1. In the **Index Permissions** tab, choose **Add index permissions**.
+1. Specify the `.opendistro-alerting-alerts` index pattern.
+1. Choose **Add index pattern** to add a second index pattern.
+1. Specify the `.opendistro-alerting-config` index pattern.
+1. Choose the `read` action group and **Save role definition**.
 1. Choose **Role Mappings**.
 1. Map the `alerting_read_only` role to the desired users or backend roles.
