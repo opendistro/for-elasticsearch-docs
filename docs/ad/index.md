@@ -15,7 +15,7 @@ The anomaly detection feature automatically detects anomalies in your Elasticsea
 
 You can pair the anomaly detection plugin with the [alerting plugin](../alerting/index/) to notify you as soon as an anomaly is detected.
 
-To use the anomaly detection plugin, your computer needs to have more than one CPU.
+To use the anomaly detection plugin, your computer needs to have more than one CPU core.
 {: .note }
 
 ## Get started with Anomaly Detection
