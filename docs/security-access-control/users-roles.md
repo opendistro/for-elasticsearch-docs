@@ -33,7 +33,7 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
 1. Provide a username and password. The Security plugin automatically hashes the password and stores it in the `.opendistro_security` index.
 1. If desired, specify backend roles and attributes.
 
-   Backend roles differ from security roles. Backend roles are external roles that come from an external authentication system (e.g. LDAP/Active Directory). If you aren't using an external system, you can ignore backend roles.
+   Backend roles differ from security roles. Backend roles are arbitrary strings that you specify *or* that come from an external authentication system (e.g. LDAP/Active Directory). Backend roles can help simplify the [role mapping](#map-users-to-roles) process. Rather than mapping a security role to 100 individual users, you can map the security role to a single backend role that all 100 users share.
 
    Attributes are optional user properties that you can use for variable substitution in index permissions or document-level security.
 
@@ -87,7 +87,7 @@ Just like users and roles, you create role mappings using Kibana, `roles_mapping
 
 1. Choose **Security**, **Role Mappings**, and **Add a new role mapping**.
 1. Select the role. If a role is greyed-out, a mapping for it already exists. Return to the **Role Mappings** screen and edit the existing mapping.
-1. Specify users, backend roles (roles from from LDAP or Active Directory), and hosts (e.g. `*.devops.my-organization.org`) as desired.
+1. Specify users, backend roles, or hosts (e.g. `*.devops.my-organization.org`) as desired.
 1. Choose **Submit**.
 
 
@@ -122,56 +122,44 @@ For more detailed summaries of the permissions for each role, reference their ac
 
 The following examples show how you might set up a read-only and a bulk access role.
 
-### Set up a read-only role in Kibana
+### Set up a read-only user in Kibana
 
 Create a new `read_only_index` role:
 
-1. Open **Kibana**.
+1. Open Kibana.
 1. Choose **Security**, **Roles**.
-1. Choose the *+* button, and then enter a role name `read_only_index`.
-1. Choose the **Cluster Permissions** tab, and then select **Add Action Group**.
-1. In **Permissions: Action Groups**, select `cluster_composite_ops_ro` and then choose **Add Action Group**.
-1. Choose the **Index Permissions** tab, select **Add index permissions** and then add your index pattern `my-index-*`.
-1. In **Permissions: Action Groups**, choose **Add Action Group** and select `read`.
+1. Create a new role named `read_only_index`.
+1. In the **Cluster Permissions** tab, choose **Add Action Group** and `cluster_composite_ops_ro`.
+1. In the **Index Permissions** tab, choose **Add index permissions** and then add your index pattern. For example, you might specify `my-index-*`.
+1. Choose **Add Action Group** and `read`.
 1. Choose **Save Role Definition**.
 
-Map `kibana_user` and `kibana_read_only` roles to the `read_only_index` role:
+Map three roles to the read-only user:
 
 1. Choose **Security**, **Role Mappings**.
 1. Next to `kibana_user`, choose the **Edit** button.
-- If you don't already have a `kibana_user` role, choose the *+* button and then create the role.
-1. In the **Users** field, add your `read_only_index` role and then choose **Submit**.
-1. Next to `kibana_read_only`, choose the **Edit** button.
-- If you don't already have a `kibana_read_only` role, choose the *+* button and then create the role.
-1. In the **Users** field, add your `read_only_index` role and then choose **Submit**.
 
-Create a new tenant and grant role access:
+   If you don't see `kibana_user`, choose the *+* button to add the role mapping.
 
-1. Choose **Security**, **Tenants**.
-1. Choose the *+* button, and then enter your desired tenant name.
-1. Choose **Submit**.
-1. Choose **Security**, **Roles**.
-1. Next to the `read_only_index` role, choose **Edit**.
-1. Choose the **Tenants Permissions** tab, in **Permissions**, select `kibana_all_read`.
-1. Add a tenant pattern to select all required tenants.
-1. Choose **Save Role Definition**.
+1. Choose **Add User**, add your user, and then **Submit**.
+1. Perform steps 1--3 with the `kibana_read_only` role and the new `read_only_index` role.
+
 
 ### Set up a bulk access role in Kibana
 
 Create a new `bulk_access` role:
 
-1. Open **Kibana**.
+1. Open Kibana.
 1. Choose **Security**, **Roles**.
-1. Choose the *+* button, and then enter a role name `bulk_access`.
-1. Choose the **Cluster Permissions** tab, and then select **Add Action Group**.
-1. In **Permissions: Action Groups**, select `cluster_composite_ops` and then choose **Add Action Group**.
-1. Choose the **Index Permissions** tab, select **Add index permissions** and your index patterns `my-index-*`.
-1. In **Permissions: Action Groups**, choose **Add Action Group** and then select `write`.
+1. Create a new role named `bulk_access`.
+1. In the **Cluster Permissions** tab, choose **Add Action Group**.
+1. In the **Cluster Permissions** tab, choose **Add Action Group** and `cluster_composite_ops`.
+1. In the **Index Permissions** tab, choose **Add index permissions** and then add your index pattern. For example, you might specify `my-index-*`.
+1. Choose **Add Action Group** and `write`.
 1. Choose **Save Role Definition**.
 
-Map bulk access permissions to the `bulk_access` role:
+Map the role to your user:
 
 1. Choose **Security**, **Role Mappings**.
 1. Choose the *+* button, and then select the `bulk_access` role.
-1. In **Users**, choose **Add User** and then add your `bulk_access` user.
-1. Choose **Submit**.
+1. Choose **Add User**, add your user, and then **Submit**.
