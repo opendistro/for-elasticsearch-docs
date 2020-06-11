@@ -158,7 +158,7 @@ For information about adding and configuring these certificates, see [Docker sec
 
 ## Run securityadmin.sh
 
-After configuring your certificates and starting Elasticsearch, run `securityadmin.sh` to initialize the Security plugin:
+After configuring your certificates and starting Elasticsearch, run `securityadmin.sh` to initialize the security plugin:
 
 ```
 ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert ../../../config/root-ca.pem -cert ../../../config/admin.pem -key ../../../config/admin-key.pem

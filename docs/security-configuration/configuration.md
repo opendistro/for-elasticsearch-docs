@@ -7,9 +7,9 @@ nav_order: 2
 
 # Backend configuration
 
-One of the first steps to using the Security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
+One of the first steps to using the security plugin is to decide on an authentication backend, which handles [steps 2-3 of the authentication flow](../concepts/#authentication-flow). The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.
 
-The main configuration file for authentication and authorization backends is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how to fetch additional roles from backend systems (optional).
+The main configuration file for authentication and authorization backends is `plugins/opendistro_security/securityconfig/config.yml`. It defines how the security plugin retrieves the user credentials, how it verifies these credentials, and how to fetch additional roles from backend systems (optional).
 
 `config.yml` has three main parts:
 
@@ -41,7 +41,7 @@ xff: # optional section
   trustedProxies: <string> # Regex pattern
 ```
 
-If you disable anonymous authentication, the Security plugin won't initialize if you have not provided at least one `authc`.
+If you disable anonymous authentication, the security plugin won't initialize if you have not provided at least one `authc`.
 
 
 ## Authentication
@@ -61,7 +61,7 @@ The `authc` section has the following format:
 
 An entry in the `authc` section is called an *authentication domain*. It specifies where to get the user credentials and against which backend they should be authenticated.
 
-You can use more than one authentication domain. Each authentication domain has a name (for example, `basic_auth_internal`), `enabled` flags, and an `order`. The order makes it possible to chain authentication domains together. The Security plugin uses them in the order that you provide. If the user successfully authenticates with one domain, the Security plugin skips the remaining domains.
+You can use more than one authentication domain. Each authentication domain has a name (for example, `basic_auth_internal`), `enabled` flags, and an `order`. The order makes it possible to chain authentication domains together. The security plugin uses them in the order that you provide. If the user successfully authenticates with one domain, the security plugin skips the remaining domains.
 
 `http_authenticator` specifies which authentication method that you want to use on the HTTP layer.
 
@@ -100,7 +100,7 @@ These are the possible values for `type`:
 
 ## Authorization
 
-After the user has been authenticated, the Security plugin can optionally collect additional roles from backend systems. The authorization configuration has the following format:
+After the user has been authenticated, the security plugin can optionally collect additional roles from backend systems. The authorization configuration has the following format:
 
 ```yml
 authz:
@@ -136,11 +136,11 @@ http_authenticator:
   challenge: true
 ```
 
-In most cases, you set the `challenge` flag to `true`. The flag defines the behavior of the Security plugin if the `Authorization` field in the HTTP header is not set.
+In most cases, you set the `challenge` flag to `true`. The flag defines the behavior of the security plugin if the `Authorization` field in the HTTP header is not set.
 
-If `challenge` is set to `true`, the Security plugin sends a response with status `UNAUTHORIZED` (401) back to the client. If the client is accessing the cluster with a browser, this triggers the authentication dialog box, and the user is prompted to enter a user name and password.
+If `challenge` is set to `true`, the security plugin sends a response with status `UNAUTHORIZED` (401) back to the client. If the client is accessing the cluster with a browser, this triggers the authentication dialog box, and the user is prompted to enter a user name and password.
 
-If `challenge` is set to `false` and no `Authorization` header field is set, the Security plugin does not send a `WWW-Authenticate` response back to the client, and authentication fails. You might want to use this setting if you have another challenge `http_authenticator` in your configured authentication domains. One such scenario is when you plan to use basic authentication and Kerberos together.
+If `challenge` is set to `false` and no `Authorization` header field is set, the security plugin does not send a `WWW-Authenticate` response back to the client, and authentication fails. You might want to use this setting if you have another challenge `http_authenticator` in your configured authentication domains. One such scenario is when you plan to use basic authentication and Kerberos together.
 
 
 ## Kerberos
@@ -156,9 +156,9 @@ opendistro_security.kerberos.acceptor_keytab_filepath: 'eskeytab.tab'
 
 `opendistro_security.kerberos.krb5_filepath` defines the path to your Kerberos configuration file. This file contains various settings regarding your Kerberos installation, for example, the realm names, hostnames, and ports of the Kerberos key distribution center (KDC).
 
-`opendistro_security.kerberos.acceptor_keytab_filepath` defines the path to the keytab file, which contains the principal that the Security plugin uses to issue requests against Kerberos.
+`opendistro_security.kerberos.acceptor_keytab_filepath` defines the path to the keytab file, which contains the principal that the security plugin uses to issue requests against Kerberos.
 
-`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the Security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.
+`opendistro_security.kerberos.acceptor_principal: 'HTTP/localhost'` defines the principal that the security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.
 
 Due to security restrictions, the keytab file must be placed in `config` or a subdirectory, and the path in `elasticsearch.yml` must be relative, not absolute.
 {: .warning }
@@ -185,13 +185,13 @@ A typical Kerberos authentication domain in `config.yml` looks like this:
 
 Authentication against Kerberos through a browser on an HTTP level is achieved using SPNEGO. Kerberos/SPNEGO implementations vary, depending on your browser and operating system. This is important when deciding if you need to set the `challenge` flag to `true` or `false`.
 
-As with [HTTP Basic Authentication](#http-basic), this flag determines how the Security plugin should react when no `Authorization` header is found in the HTTP request or if this header does not equal `negotiate`.
+As with [HTTP Basic Authentication](#http-basic), this flag determines how the security plugin should react when no `Authorization` header is found in the HTTP request or if this header does not equal `negotiate`.
 
-If set to `true`, the Security plugin sends a response with status code 401 and a `WWW-Authenticate` header set to `negotiate`. This tells the client (browser) to resend the request with the `Authorization` header set. If set to `false`, the Security plugin cannot extract the credentials from the request, and authentication fails. Setting `challenge` to `false` thus makes sense only if the Kerberos credentials are sent in the initial request.
+If set to `true`, the security plugin sends a response with status code 401 and a `WWW-Authenticate` header set to `negotiate`. This tells the client (browser) to resend the request with the `Authorization` header set. If set to `false`, the security plugin cannot extract the credentials from the request, and authentication fails. Setting `challenge` to `false` thus makes sense only if the Kerberos credentials are sent in the initial request.
 
 As the name implies, setting `krb_debug` to `true` will output Kerberos-specific debugging messages to `stdout`. Use this setting if you encounter problems with your Kerberos integration.
 
-If you set `strip_realm_from_principal` to `true`, the Security plugin strips the realm from the user name.
+If you set `strip_realm_from_principal` to `true`, the security plugin strips the realm from the user name.
 
 
 ### Authentication backend
@@ -311,7 +311,7 @@ Because JSON web tokens are self-contained and the user is authenticated on the 
 
 ### Symmetric key algorithms: HMAC
 
-Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the Security plugin. It must be configured as a base64-encoded value in the `signing_key` setting:
+Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the security plugin. It must be configured as a base64-encoded value in the `signing_key` setting:
 
 ```yml
 jwt_auth_domain:
@@ -324,7 +324,7 @@ jwt_auth_domain:
 
 ### Asymmetric key algorithms: RSA and ECDSA
 
-RSA and ECDSA are asymmetric encryption and digital signature algorithms and use a public/private key pair to sign and verify tokens. This means that they use a private key for signing the token, while the Security plugin needs to know only the public key to verify it.
+RSA and ECDSA are asymmetric encryption and digital signature algorithms and use a public/private key pair to sign and verify tokens. This means that they use a private key for signing the token, while the security plugin needs to know only the public key to verify it.
 
 Because you cannot issue new tokens with the public key---and because you can make valid assumptions about the creator of the token---RSA and ECDSA are considered more secure than using HMAC.
 
@@ -341,7 +341,7 @@ jwt_auth_domain:
       ...
 ```
 
-The Security plugin automatically detects the algorithm (RSA/ECDSA), and if necessary you can break the key into multiple lines.
+The security plugin automatically detects the algorithm (RSA/ECDSA), and if necessary you can break the key into multiple lines.
 
 
 ### Bearer authentication for HTTP requests
@@ -359,7 +359,7 @@ As with HTTP basic authentication, you should use HTTPS instead of HTTP when tra
 
 ### URL parameters for HTTP requests
 
-Although the most common way to transmit JWTs in HTTP requests is to use a header field, the Security plugin also supports parameters. Configure the name of the `GET` parameter using the following key:
+Although the most common way to transmit JWTs in HTTP requests is to use a header field, the security plugin also supports parameters. Configure the name of the `GET` parameter using the following key:
 
 ```yml
     config:
@@ -383,7 +383,7 @@ The following registered claims are validated automatically:
 
 ### Supported formats and algorithms
 
-The Security plugin supports digitally signed, compact JSON web tokens with all standard algorithms:
+The security plugin supports digitally signed, compact JSON web tokens with all standard algorithms:
 
 ```
 HS256: HMAC using SHA-256

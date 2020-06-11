@@ -14,7 +14,7 @@ The best use of these YAML files is to configure [reserved and hidden resources]
 
 ## internal_users.yml
 
-This file contains any initial users that you want to add to the Security plugin's internal user database.
+This file contains any initial users that you want to add to the security plugin's internal user database.
 
 The file format requires a hashed password. To generate one, run `plugins/opendistro_security/tools/hash.sh -p <new-password>`. If you decide to keep any of the demo users, *change their passwords*.
 
@@ -91,7 +91,7 @@ snapshotrestore:
 
 ## roles.yml
 
-This file contains any initial roles that you want to add to the Security plugin. Aside from some metadata, the default file is empty, because the Security plugin has a number of static roles that it adds automatically.
+This file contains any initial roles that you want to add to the security plugin. Aside from some metadata, the default file is empty, because the security plugin has a number of static roles that it adds automatically.
 
 ```yml
 ---
@@ -204,7 +204,7 @@ kibana_server:
 
 ## action_groups.yml
 
-This file contains any initial action that you want to add to the Security plugin. Aside from some metadata, the default file is empty, because the Security plugin has a number of static action groups that it adds automatically. These static action groups cover a wide variety of use cases and are a great way to get started with the plugin.
+This file contains any initial action that you want to add to the security plugin. Aside from some metadata, the default file is empty, because the security plugin has a number of static action groups that it adds automatically. These static action groups cover a wide variety of use cases and are a great way to get started with the plugin.
 
 ```yml
 ---

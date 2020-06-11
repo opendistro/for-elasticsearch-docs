@@ -7,7 +7,7 @@ nav_order: 90
 
 # API
 
-The Security plugin REST API lets you programmatically create and manage users, roles, role mappings, action groups, and tenants.
+The security plugin REST API lets you programmatically create and manage users, roles, role mappings, action groups, and tenants.
 
 ---
 
@@ -20,7 +20,7 @@ The Security plugin REST API lets you programmatically create and manage users, 
 
 ## Access control for the API
 
-Just like Elasticsearch permissions, you control access to the Security plugin REST API using roles. Specify roles in `elasticsearch.yml`:
+Just like Elasticsearch permissions, you control access to the security plugin REST API using roles. Specify roles in `elasticsearch.yml`:
 
 ```yml
 opendistro_security.restapi.roles_enabled: ["<role>", ...]
@@ -397,7 +397,7 @@ DELETE _opendistro/_security/api/internalusers/<username>
 
 ### Create user
 
-Creates or replaces the specified user. You must specify either `password` (plain text) or `hash` (the hashed user password). If you specify `password`, the Security plugin automatically hashes the password before storing it.
+Creates or replaces the specified user. You must specify either `password` (plain text) or `hash` (the hashed user password). If you specify `password`, the security plugin automatically hashes the password before storing it.
 
 #### Request
 
@@ -1006,7 +1006,7 @@ PATCH _opendistro/_security/api/tenants/
 
 ### Get configuration
 
-Retrieves the current Security plugin configuration in JSON format.
+Retrieves the current security plugin configuration in JSON format.
 
 #### Request
 
@@ -1104,7 +1104,7 @@ PATCH _opendistro/_security/api/securityconfig
 
 ### Flush cache
 
-Flushes the Security plugin user, authentication, and authorization cache.
+Flushes the security plugin user, authentication, and authorization cache.
 
 
 #### Request
@@ -1130,7 +1130,7 @@ DELETE _opendistro/_security/api/cache
 
 ### Health check
 
-Checks to see if the Security plugin is up and running. If you operate your cluster behind a load balancer, this operation is useful for determining node health and doesn't require a signed request.
+Checks to see if the security plugin is up and running. If you operate your cluster behind a load balancer, this operation is useful for determining node health and doesn't require a signed request.
 
 
 #### Request

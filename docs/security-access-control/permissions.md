@@ -7,7 +7,7 @@ nav_order: 70
 
 # Permissions
 
-This page is a complete list of available permissions in the Security plugin. Each permission controls access to a data type or API.
+This page is a complete list of available permissions in the security plugin. Each permission controls access to a data type or API.
 
 Rather than creating new action groups from individual permissions, you can often achieve your desired security posture using some combination of the default action groups. To learn more, see [Default Action Groups](../default-action-groups).
 {: .tip }

@@ -7,19 +7,19 @@ nav_order: 12
 
 # OpenID Connect
 
-The Security plugin can integrate with identify providers that use the OpenID Connect standard. This feature enables the following:
+The security plugin can integrate with identify providers that use the OpenID Connect standard. This feature enables the following:
 
 * Automatic configuration
 
-  Point the Security plugin to the metadata of your identity provider (IdP), and the Security plugin uses that data for configuration.
+  Point the security plugin to the metadata of your identity provider (IdP), and the security plugin uses that data for configuration.
 
 * Automatic key fetching
 
-  The Security plugin automatically retrieves the public key for validating the JSON web tokens (JWTs) from the JSON web key set (JWKS) endpoint of your IdP. You don't have to configure keys or shared secrets in `config.yml`.
+  The security plugin automatically retrieves the public key for validating the JSON web tokens (JWTs) from the JSON web key set (JWKS) endpoint of your IdP. You don't have to configure keys or shared secrets in `config.yml`.
 
 * Key rollover
 
-  You can change the keys used for signing the JWTs directly in your IdP. If the Security plugin detects an unknown key, it tries to retrieve it from the IdP. This rollover is transparent to the user.
+  You can change the keys used for signing the JWTs directly in your IdP. If the security plugin detects an unknown key, it tries to retrieve it from the IdP. This rollover is transparent to the user.
 
 * Kibana single sign-on
 
@@ -50,7 +50,7 @@ The following table shows the configuration parameters.
 
 Name | Description
 :--- | :---
-`openid_connect_url` | The URL of your IdP where the Security plugin can find the OpenID Connect metadata/configuration settings. This URL differs between IdPs. Required.
+`openid_connect_url` | The URL of your IdP where the security plugin can find the OpenID Connect metadata/configuration settings. This URL differs between IdPs. Required.
 `jwt_header` | The HTTP header that stores the token. Typically the `Authorization` header with the `Bearer` schema: `Authorization: Bearer <token>`. Optional. Default is `Authorization`.
 `jwt_url_parameter` | If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of the parameter here. Optional.
 `subject_key` | The key in the JSON payload that stores the user's name. If not defined, the [subject](https://tools.ietf.org/html/rfc7519#section-4.1.2) registered claim is used. Most IdP providers use the `preferred_username` claim. Optional.
@@ -59,7 +59,7 @@ Name | Description
 
 ## OpenID Connect URL
 
-OpenID Connect specifies various endpoints for integration purposes. The most important endpoint is `well-known`, which lists endpoints and other configuration options for the Security plugin.
+OpenID Connect specifies various endpoints for integration purposes. The most important endpoint is `well-known`, which lists endpoints and other configuration options for the security plugin.
 
 The URL differs between IdPs, but usually ends in `/.well-known/openid-configuration`.
 
@@ -69,7 +69,7 @@ Keycloak example:
 http(s)://<server>:<port>/auth/realms/<realm>/.well-known/openid-configuration
 ```
 
-The main information that the Security plugin needs is `jwks_uri`. This URI specifies where the IdP's public keys in JWKS format can be found. For example:
+The main information that the security plugin needs is `jwks_uri`. This URI specifies where the IdP's public keys in JWKS format can be found. For example:
 
 ```
 jwks_uri: "https://keycloak.example.com:8080/auth/realms/master/protocol/openid-connect/certs"
@@ -114,12 +114,12 @@ When an IdP generates and signs a JSON web token, it must add the ID of the key 
 
 As per the [OpenID Connect specification](http://openid.net/specs/openid-connect-messages-1_0-20.html), the `kid` (key ID) is mandatory. Token verification does not work if an IdP fails to add the `kid` field to the JWT.
 
-If the Security plugin receives a JWT with an unknown `kid`, it visits the IdP's `jwks_uri` and retrieves all available, valid keys. These keys are used and cached until a refresh is triggered by retrieving another unknown key ID.
+If the security plugin receives a JWT with an unknown `kid`, it visits the IdP's `jwks_uri` and retrieves all available, valid keys. These keys are used and cached until a refresh is triggered by retrieving another unknown key ID.
 
 
 ## Key rollover and multiple public keys
 
-The Security plugin can maintain multiple valid public keys at once. The OpenID specification does not allow for a validity period of public keys, so a key is valid until it has been removed from the list of valid keys in your IdP and the list of valid keys has been refreshed.
+The security plugin can maintain multiple valid public keys at once. The OpenID specification does not allow for a validity period of public keys, so a key is valid until it has been removed from the list of valid keys in your IdP and the list of valid keys has been refreshed.
 
 If you want to roll over a key in your IdP, follow these best practices:
 
@@ -127,7 +127,7 @@ If you want to roll over a key in your IdP, follow these best practices:
 
   Your IdP uses this new key over the old key.
 
-- Upon first appearance of the new `kid` in a JWT, the Security plugin refreshes the key list.
+- Upon first appearance of the new `kid` in a JWT, the security plugin refreshes the key list.
 
   At this point, both the old key and the new key are valid. Tokens signed with the old key are also still valid.
 
@@ -138,7 +138,7 @@ If you have to immediately change your public key, you can also delete the old k
 
 ## TLS settings
 
-To prevent man-in-the-middle attacks, you should secure the connection between the Security plugin and your IdP with TLS.
+To prevent man-in-the-middle attacks, you should secure the connection between the security plugin and your IdP with TLS.
 
 
 ### Enabling TLS
@@ -184,7 +184,7 @@ Name | Description
 
 ### TLS client authentication
 
-To use TLS client authentication, configure the PEM certificate and private key the Security plugin should send for TLS client authentication (or its content):
+To use TLS client authentication, configure the PEM certificate and private key the security plugin should send for TLS client authentication (or its content):
 
 ```yml
 config:
@@ -230,7 +230,7 @@ Name | Description
 
 ## (Advanced) DoS protection
 
-To help protect against denial-of-service (DoS) attacks, the Security plugin only allows a maximum number of new key IDs in a certain span of time. If the number of new key IDs exceeds this threshold, the Security plugin returns HTTP status code 503 (Service Unavailable) and refuses to query the IdP. By default, the Security plugin does not allow for more than 10 unknown key IDs within 10 seconds. The following table shows how to modify these settings.
+To help protect against denial-of-service (DoS) attacks, the security plugin only allows a maximum number of new key IDs in a certain span of time. If the number of new key IDs exceeds this threshold, the security plugin returns HTTP status code 503 (Service Unavailable) and refuses to query the IdP. By default, the security plugin does not allow for more than 10 unknown key IDs within 10 seconds. The following table shows how to modify these settings.
 
 Name | Description
 :--- | :---

@@ -25,7 +25,7 @@ services:
       - cluster.initial_master_nodes=odfe-node1,odfe-node2
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-      - network.host=0.0.0.0 # required if not using the demo Security configuration
+      - network.host=0.0.0.0 # required if not using the demo security configuration
     ulimits:
       memlock:
         soft: -1

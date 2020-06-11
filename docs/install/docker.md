@@ -241,7 +241,7 @@ COPY --chown=elasticsearch:elasticsearch my-certificate-chain.pem /usr/share/ela
 COPY --chown=elasticsearch:elasticsearch my-root-cas.pem /usr/share/elasticsearch/config/
 ```
 
-Alternately, you might want to remove a plugin. This `Dockerfile` removes the Security plugin:
+Alternately, you might want to remove a plugin. This `Dockerfile` removes the security plugin:
 
 ```
 FROM amazon/opendistro-for-elasticsearch:1.8.0

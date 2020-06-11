@@ -42,7 +42,7 @@ If you encounter compatibility issues when attempting to connect Beats to Open D
 
 As of version 6.7, the default distribution of Beats includes a license check and fails to connect to the Apache 2.0 distribution of Elasticsearch.
 
-Try this minimal output configuration for using Beats with the Security plugin:
+Try this minimal output configuration for using Beats with the security plugin:
 
 ```yml
 output.elasticsearch:
@@ -59,7 +59,7 @@ output.elasticsearch:
 
 ## Logstash
 
-If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal output configuration, which works with the Security plugin:
+If you're having trouble connecting Logstash to Open Distro for Elasticsearch, try this minimal output configuration, which works with the security plugin:
 
 ```conf
 output {

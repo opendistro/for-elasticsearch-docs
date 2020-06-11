@@ -7,9 +7,9 @@ nav_order: 11
 
 # SAML
 
-The Security plugin supports user authentication through SAML single sign-on. The Security plugin implements the web browser SSO profile of the SAML 2.0 protocol.
+The security plugin supports user authentication through SAML single sign-on. The security plugin implements the web browser SSO profile of the SAML 2.0 protocol.
 
-This profile is meant for use with web browsers. It is not a general-purpose way of authenticating users against the Security plugin, so its primary use case is to support Kibana single sign-on.
+This profile is meant for use with web browsers. It is not a general-purpose way of authenticating users against the security plugin, so its primary use case is to support Kibana single sign-on.
 
 
 ## Activating SAML
@@ -43,7 +43,8 @@ We recommend adding at least one other authentication domain, such as LDAP or th
 ```yml
 authc:
   basic_internal_auth_domain:
-    enabled: true
+    http_enabled: true
+    transport_enabled: true
     order: 0
     http_authenticator:
       type: basic
@@ -66,7 +67,7 @@ authc:
 
 ## Identity provider metadata
 
-A SAML identity provider (IdP) provides a SAML 2.0 metadata file describing the IdP's capabilities and configuration. The Security plugin can read IdP metadata either from a URL or a file. The choice that you make depends on your IdP and your preferences. The SAML 2.0 metadata file is required.
+A SAML identity provider (IdP) provides a SAML 2.0 metadata file describing the IdP's capabilities and configuration. The security plugin can read IdP metadata either from a URL or a file. The choice that you make depends on your IdP and your preferences. The SAML 2.0 metadata file is required.
 
 Name | Description
 :--- | :---
@@ -125,7 +126,7 @@ Name | Description
 
 ## Request signing
 
-Requests from the Security plugin to the IdP can optionally be signed. Use the following settings to configure request signing.
+Requests from the security plugin to the IdP can optionally be signed. Use the following settings to configure request signing.
 
 Name | Description
 :--- | :---
@@ -134,7 +135,7 @@ Name | Description
 `sp.signature_private_key_filepath` | Path to the private key. The file must be placed under the Open Distro for Elasticsearch `config` directory, and the path must be specified relative to that same directory.
 `sp.signature_algorithm` | The algorithm used to sign the requests. See the next table for possible values.
 
-The Security plugin supports the following signature algorithms.
+The security plugin supports the following signature algorithms.
 
 Algorithm | Value
 :--- | :---
@@ -147,18 +148,18 @@ RSA_SHA512 | http://www.w3.org/2001/04/xmldsig-more#rsa-sha512;
 
 ## Logout
 
-Usually, IdPs provide information about their individual logout URL in their SAML 2.0 metadata. If this is the case, the Security plugin uses them to render the correct logout link in Kibana. If your IdP does not support an explicit logout, you can force a re-login when the user visits Kibana again.
+Usually, IdPs provide information about their individual logout URL in their SAML 2.0 metadata. If this is the case, the security plugin uses them to render the correct logout link in Kibana. If your IdP does not support an explicit logout, you can force a re-login when the user visits Kibana again.
 
 Name | Description
 :--- | :---
 `sp.forceAuthn` | Force a re-login even if the user has an active session with the IdP.
 
-Currently, the Security plugin supports only the `HTTP-Redirect` logout binding. Make sure this is configured correctly in your IdP.
+Currently, the security plugin supports only the `HTTP-Redirect` logout binding. Make sure this is configured correctly in your IdP.
 
 
 ## Exchange key settings
 
-SAML, unlike other protocols, is not meant to be used for exchanging user credentials with each request. The Security plugin trades the SAML response for a lightweight JSON web token that stores the validated user attributes. This token is signed by an exchange key that you can choose freely. Note that when you change this key, all tokens signed with it become invalid immediately.
+SAML, unlike other protocols, is not meant to be used for exchanging user credentials with each request. The security plugin trades the SAML response for a lightweight JSON web token that stores the validated user attributes. This token is signed by an exchange key that you can choose freely. Note that when you change this key, all tokens signed with it become invalid immediately.
 
 Name | Description
 :--- | :---
@@ -223,7 +224,7 @@ Name | Description
 
 ### Client authentication
 
-The Security plugin can use TLS client authentication when fetching the IdP metadata. If enabled, the Security plugin sends a TLS client certificate to the IdP for each metadata request. Use the following keys to configure client authentication.
+The security plugin can use TLS client authentication when fetching the IdP metadata. If enabled, the security plugin sends a TLS client certificate to the IdP for each metadata request. Use the following keys to configure client authentication.
 
 Name | Description
 :--- | :---
@@ -272,7 +273,7 @@ authc:
 
 ## Kibana configuration
 
-Because most of the SAML-specific configuration is done in the Security plugin, just activate SAML in your `kibana.yml` by adding the following:
+Because most of the SAML-specific configuration is done in the security plugin, just activate SAML in your `kibana.yml` by adding the following:
 
 ```
 opendistro_security.auth.type: "saml"

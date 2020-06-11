@@ -74,7 +74,7 @@ Name | Description
 
 ## Configure node certificates
 
-The Security plugin needs to identify inter-cluster requests (i.e. requests between the nodes). The simplest way of configuring node certificates is to list the Distinguished Names (DNs) of these certificates in `elasticsearch.yml`. All DNs must be included in `elasticsearch.yml` on all nodes. The Security plugin supports wildcards and regular expressions:
+The security plugin needs to identify inter-cluster requests (i.e. requests between the nodes). The simplest way of configuring node certificates is to list the Distinguished Names (DNs) of these certificates in `elasticsearch.yml`. All DNs must be included in `elasticsearch.yml` on all nodes. The security plugin supports wildcards and regular expressions:
 
 ```yml
 opendistro_security.nodes_dn:
@@ -89,7 +89,7 @@ If your node certificates have an OID identifier in the SAN section, you can omi
 
 ## Configure admin certificates
 
-Admin certificates are regular client certificates that have elevated rights to perform administrative tasks. You need an admin certificate to change the the Security plugin configuration using `plugins/opendistro_security/tools/securityadmin.sh` or the REST API. Admin certificates are configured in `elasticsearch.yml` by stating their DN(s):
+Admin certificates are regular client certificates that have elevated rights to perform administrative tasks. You need an admin certificate to change the the security plugin configuration using `plugins/opendistro_security/tools/securityadmin.sh` or the REST API. Admin certificates are configured in `elasticsearch.yml` by stating their DN(s):
 
 ```yml
 opendistro_security.authcz.admin_dn:
@@ -101,11 +101,11 @@ For security reasons, you can't use wildcards or regular expressions here.
 
 ## (Advanced) OpenSSL
 
-The Security plugin supports OpenSSL, but we only recommend it if you use Java 8. If you use Java 11, we recommend the default configuration.
+The security plugin supports OpenSSL, but we only recommend it if you use Java 8. If you use Java 11, we recommend the default configuration.
 
 To use OpenSSL, you must install OpenSSL, the Apache Portable Runtime, and a Netty version with OpenSSL support matching your platform on all nodes.
 
-If OpenSSL is enabled, but for one reason or another the installation does not work, the Security plugin falls back to the Java JCE as the security engine.
+If OpenSSL is enabled, but for one reason or another the installation does not work, the security plugin falls back to the Java JCE as the security engine.
 
 Name | Description
 :--- | :---
@@ -127,16 +127,16 @@ Name | Description
 
 ## (Advanced) Hostname verification and DNS lookup
 
-In addition to verifying the TLS certificates against the root CA and/or intermediate CA(s), the Security plugin can apply additional checks on the transport layer.
+In addition to verifying the TLS certificates against the root CA and/or intermediate CA(s), the security plugin can apply additional checks on the transport layer.
 
-With `enforce_hostname_verification` enabled, the Security plugin verifies that the hostname of the communication partner matches the hostname in the certificate. The hostname is taken from the `subject` or `SAN` entries of your certificate. For example, if the hostname of your node is `node-0.example.com`, then the hostname in the TLS certificate has to be set to `node-0.example.com`, as well. Otherwise, errors are thrown:
+With `enforce_hostname_verification` enabled, the security plugin verifies that the hostname of the communication partner matches the hostname in the certificate. The hostname is taken from the `subject` or `SAN` entries of your certificate. For example, if the hostname of your node is `node-0.example.com`, then the hostname in the TLS certificate has to be set to `node-0.example.com`, as well. Otherwise, errors are thrown:
 
 ```
 [ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [WX6omJY] SSL Problem No name matching <hostname> found
 [ERROR][c.a.o.s.s.t.OpenDistroSecuritySSLNettyTransport] [WX6omJY] SSL Problem Received fatal alert: certificate_unknown
 ```
 
-In addition, when `resolve_hostnames` is enabled, the Security plugin resolves the (verified) hostname against your DNS. If the hostname does not resolve, errors are thrown:
+In addition, when `resolve_hostnames` is enabled, the security plugin resolves the (verified) hostname against your DNS. If the hostname does not resolve, errors are thrown:
 
 
 Name | Description
@@ -147,7 +147,7 @@ Name | Description
 
 ## (Advanced) Client authentication
 
-With TLS client authentication enabled, REST clients can send a TLS certificate with the HTTP request to provide identity information to the Security plugin. There are three main usage scenarios for TLS client authentication:
+With TLS client authentication enabled, REST clients can send a TLS certificate with the HTTP request to provide identity information to the security plugin. There are three main usage scenarios for TLS client authentication:
 
 - Providing an admin certificate when using the REST management API.
 - Configuring roles and permissions based on a client certificate.
@@ -155,9 +155,9 @@ With TLS client authentication enabled, REST clients can send a TLS certificate 
 
 TLS client authentication has three modes:
 
-* `NONE`: The Security plugin does not accept TLS client certificates. If one is sent, it is discarded.
-* `OPTIONAL`: The Security plugin accepts TLS client certificates if they are sent, but does not require them.
-* `REQUIRE`: The Security plugin only accepts REST requests when a valid client TLS certificate is sent.
+* `NONE`: The security plugin does not accept TLS client certificates. If one is sent, it is discarded.
+* `OPTIONAL`: The security plugin accepts TLS client certificates if they are sent, but does not require them.
+* `REQUIRE`: The security plugin only accepts REST requests when a valid client TLS certificate is sent.
 
 For the REST management API, the client authentication modes has to be OPTIONAL at a minimum.
 
@@ -172,7 +172,7 @@ opendistro_security.ssl.http.clientauth_mode | The TLS client authentication mod
 
 You can limit the allowed ciphers and TLS protocols for the REST layer. For example, you can only allow strong ciphers and limit the TLS versions to the most recent ones.
 
-If this setting is not enabled, the ciphers and TLS versions are negotiated between the browser and the Security plugin automatically, which in some cases can lead to a weaker cipher suite being used. You can configure the ciphers and protocols using the following settings.
+If this setting is not enabled, the ciphers and TLS versions are negotiated between the browser and the security plugin automatically, which in some cases can lead to a weaker cipher suite being used. You can configure the ciphers and protocols using the following settings.
 
 Name | Description
 :--- | :---
@@ -192,7 +192,7 @@ opendistro_security.ssl.http.enabled_protocols:
   - "TLSv1.2"
 ```
 
-Because it is insecure, the Security plugin disables `TLSv1` by default. If you need to use `TLSv1` and accept the risks, you can still enable it:
+Because it is insecure, the security plugin disables `TLSv1` by default. If you need to use `TLSv1` and accept the risks, you can still enable it:
 
 ```yml
 opendistro_security.ssl.http.enabled_protocols:

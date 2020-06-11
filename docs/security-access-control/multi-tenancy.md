@@ -39,7 +39,7 @@ Setting | Description
 `multitenancy_enabled` | Enable or disable multi-tenancy. Default is true.
 `server_username` | Must match the name of the Kibana server user from `kibana.yml`. Default is `kibanaserver`.
 `index` | Must match the name of the Kibana index from `kibana.yml`. Default is `.kibana`.
-`do_not_fail_on_forbidden` | If true, the Security plugin removes any content that a user is not allowed to see from search results. If false, the plugin returns a security exception. Default is false.
+`do_not_fail_on_forbidden` | If true, the security plugin removes any content that a user is not allowed to see from search results. If false, the plugin returns a security exception. Default is false.
 
 `kibana.yml` has some additional settings:
 
@@ -148,14 +148,14 @@ _meta:
 
 ## Manage Kibana indices
 
-The open source version of Kibana saves all objects to a single index: `.kibana`. The Security plugin uses this index for the global tenant, but separate indices for every other tenant. Each user also has a private tenant, so you might see a large number of indices that follow two patterns:
+The open source version of Kibana saves all objects to a single index: `.kibana`. The security plugin uses this index for the global tenant, but separate indices for every other tenant. Each user also has a private tenant, so you might see a large number of indices that follow two patterns:
 
 ```
 .kibana_<hash>_<tenant_name>
 .kibana_<hash>_<username>
 ```
 
-The Security plugin scrubs these index names of special characters, so they might not be a perfect match of tenant names and usernames.
+The security plugin scrubs these index names of special characters, so they might not be a perfect match of tenant names and usernames.
 {: .tip }
 
 To back up your Kibana data, [take a snapshot](../../elasticsearch/snapshot-restore/) of all tenant indices using an index pattern such as `.kibana*`.

@@ -8,7 +8,7 @@ has_children: false
 
 # Security roles
 
-If you use the Security plugin alongside alerting, you might want to limit certain users to certain permissions. For example, you might want some users to only be able to view and acknowledge alerts, while others can create monitors and destinations. This page contains some sample roles for common use cases.
+If you use the security plugin alongside alerting, you might want to limit certain users to certain permissions. For example, you might want some users to only be able to view and acknowledge alerts, while others can create monitors and destinations. This page contains some sample roles for common use cases.
 
 Mix and match these roles to give users the permissions they need to use the alerting feature.
 

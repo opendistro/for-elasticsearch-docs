@@ -344,7 +344,7 @@ If you have an old snapshot, you can sometimes restore it into an intermediate c
 
 ## Security plugin considerations
 
-If you are using the Security plugin, snapshots have some additional restrictions:
+If you are using the security plugin, snapshots have some additional restrictions:
 
 - In order to perform snapshot and restore operations, users must have the built-in `manage_snapshots` role.
 - You can't restore snapshots that contain global state or the `.opendistro_security` index.

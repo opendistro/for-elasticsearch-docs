@@ -329,7 +329,7 @@ You can then use the [Index State Management (ISM)](../../ism/index/) plugin to 
 
 ## Next steps
 
-If you are using the Security plugin, the previous request to `_cat/nodes?v` might have failed with an initialization error. To initialize the plugin, run `elasticsearch/plugins/opendistro_security/tools/securityadmin.sh`. A sample command that uses the demo certificates might look like this:
+If you are using the security plugin, the previous request to `_cat/nodes?v` might have failed with an initialization error. To initialize the plugin, run `elasticsearch/plugins/opendistro_security/tools/securityadmin.sh`. A sample command that uses the demo certificates might look like this:
 
 ```bash
 sudo ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -h <private-ip>

@@ -7,7 +7,7 @@ nav_order: 1
 
 # Users and roles
 
-The Security plugin includes an internal user database. Use this database in place of or in addition to an external authentication system such as LDAP or Active Directory.
+The security plugin includes an internal user database. Use this database in place of or in addition to an external authentication system such as LDAP or Active Directory.
 
 Roles are the core way of controlling access to your cluster. Roles contain any combination of cluster-wide permissions, index-specific permissions, document- and field-level security, and tenants. Then you map users to these roles so that users gain those permissions.
 
@@ -30,7 +30,7 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
 ### Kibana
 
 1. Choose **Security**, **Internal User Database**, and **Add a new internal user**.
-1. Provide a username and password. The Security plugin automatically hashes the password and stores it in the `.opendistro_security` index.
+1. Provide a username and password. The security plugin automatically hashes the password and stores it in the `.opendistro_security` index.
 1. If desired, specify backend roles and attributes.
 
    Backend roles differ from security roles. Backend roles are arbitrary strings that you specify *or* that come from an external authentication system (e.g. LDAP/Active Directory). Backend roles can help simplify the [role mapping](#map-users-to-roles) process. Rather than mapping a security role to 100 individual users, you can map the security role to a single backend role that all 100 users share.
@@ -78,7 +78,7 @@ See [Create role](../api/#create-role).
 
 ## Map users to roles
 
-After creating roles, you map users (or backend roles) to them. Intuitively, people often think of this process as giving a user one or more roles, but in the Security plugin, the process is reversed; you select a role and then map one or more users to it.
+After creating roles, you map users (or backend roles) to them. Intuitively, people often think of this process as giving a user one or more roles, but in the security plugin, the process is reversed; you select a role and then map one or more users to it.
 
 Just like users and roles, you create role mappings using Kibana, `roles_mapping.yml`, or the REST API.
 
@@ -103,7 +103,7 @@ See [Create role mapping](../api/#create-role-mapping).
 
 ## Predefined roles
 
-The Security plugin includes several predefined roles that serve as useful defaults.
+The security plugin includes several predefined roles that serve as useful defaults.
 
 Role | Description
 :--- | :---
