@@ -36,7 +36,7 @@ We provide a fully functional example that can help you understand how to use an
 
 1. Index a document as `psantos`:
 
-   ```
+   ```bash
    curl -XPUT https://localhost:9200/new-index/_doc/1 -H 'Content-Type: application/json' -d '{"title": "Spirited Away"}' -u psantos:password -k
    ```
 
@@ -44,7 +44,7 @@ We provide a fully functional example that can help you understand how to use an
 
 1. Search for the document as `jroe`:
 
-   ```
+   ```bash
    curl -XGET https://localhost:9200/new-index/_search?pretty -u jroe:password -k
    ```
 
