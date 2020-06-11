@@ -50,6 +50,8 @@ We provide a fully functional example that can help you understand how to use an
 
    This request succeeds, because the `Developers` group is mapped to the `readall` role.
 
+1. If you want to examine the contents of the various containers, run `docker ps` to find the container name and then `docker exec -it <container-name> /bin/bash`.
+
 
 ## Connection settings
 
