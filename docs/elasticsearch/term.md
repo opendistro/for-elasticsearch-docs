@@ -7,21 +7,21 @@ nav_order: 9
 
 # Term-level queries
 
-Elasticsearch supports two types of queries when searching for data: term-level queries and full-text queries.
+Elasticsearch supports two types of queries when you search for data: term-level queries and full-text queries.
 
 The following table shows the differences between them:
 
 | | Term-level queries | Full-text queries
 :--- | :--- | :---
 *Description* | Term-level queries answer which documents match a query. | Full-text queries answer how well the documents match a query.
-*Analyzer* | The search term is not analyzed. This means that the term query searches for your search term as it is.  | The search term is analyzed by the same analyzer that was used for the specific field of the document at the time it was indexed. This means that your search term goes through the same analysis process that the document's field did.
-*Relevance* | Term-level queries simply return documents that match without sorting them based on the relevance score. They still calculate the relevance score, it’s just that this score is the same for all the documents that are returned. | Full-text queries calculate a relevance score for each match and sort the results by decreasing order of relevance.
+*Analyzer* | The search term isn't analyzed. This means that the term query searches for your search term as it is.  | The search term is analyzed by the same analyzer that was used for the specific field of the document at the time it was indexed. This means that your search term goes through the same analysis process that the document's field did.
+*Relevance* | Term-level queries simply return documents that match without sorting them based on the relevance score. They still calculate the relevance score, but this score is the same for all the documents that are returned. | Full-text queries calculate a relevance score for each match and sort the results by decreasing order of relevance.
 *Use Case* | Use term-level queries when you want to match exact values such as numbers, dates, tags, and so on, and don't need the matches to be sorted by relevance. | Use full-text queries to match text fields and sort by relevance after taking into account factors like casing and stemming variants.
 
-Elasticsearch uses a probabilistic ranking framework called Okapi BM25 to calculate relevance scores. To learn more about Okapi BM25, see [Wikipedia](https://en.wikipedia.org/wiki/Okapi_BM25).
+Elasticsearch uses a probabilistic ranking framework called Okapi BM25 to calculate relevance scores. To learn more about Okapi BM25, see [The Probabilistic Relevance Framework: BM25 and Beyond](http://www.staff.city.ac.uk/~sb317/papers/foundations_bm25_review.pdf).
 {: .note }
 
-Assume you have the complete works of Shakespeare indexed in an Elasticsearch cluster. We use a term-level query to search for the phrase "To be, or not to be" in the `text_entry` field:
+Assume that you have the complete works of Shakespeare indexed in an Elasticsearch cluster. We use a term-level query to search for the phrase "To be, or not to be" in the `text_entry` field:
 
 ```json
 GET shakespeare/_search
@@ -57,7 +57,7 @@ GET shakespeare/_search
 }
 ```
 
-We don’t get back any hits, because the term “To be, or not to be” is searched literally in the inverted index, where only the analyzed values of the text fields are stored. Term-level queries are not suited for searching on analyzed text fields because they often yield unexpected results. When working with text data, use term-level queries only for fields mapped as keyword only.
+We don’t get back any matches (`hits`). This is because the term “To be, or not to be” is searched literally in the inverted index, where only the analyzed values of the text fields are stored. Term-level queries aren't suited for searching on analyzed text fields because they often yield unexpected results. When working with text data, use term-level queries only for fields mapped as keyword only.
 
 Using a full-text query:
 
@@ -72,7 +72,7 @@ GET shakespeare/_search
 }
 ```
 
-The search query “To be, or not to be” is analyzed and tokenized into an array of tokens just like the `text_entry` field of the documents. The full-text query then performs an intersection of tokens between our search query and the `text_entry` fields for all the documents and then sorts the results by relevance scores:
+The search query “To be, or not to be” is analyzed and tokenized into an array of tokens just like the `text_entry` field of the documents. The full-text query performs an intersection of tokens between our search query and the `text_entry` fields for all the documents, and then sorts the results by relevance scores:
 
 #### Sample response
 
@@ -146,7 +146,7 @@ The search query “To be, or not to be” is analyzed and tokenized into an arr
 
 For a list of all full-text queries, see [Full-text queries](../full-text/).
 
-If you want to query for an exact term “HAMLET” in the speaker field and don't need the results to be sorted by relevance scores, a term-level query is more efficient:
+If you want to query for an exact term like “HAMLET” in the speaker field and don't need the results to be sorted by relevance scores, a term-level query is more efficient:
 
 ```json
 GET shakespeare/_search
@@ -205,7 +205,7 @@ GET shakespeare/_search
           "speech_number" : 11,
           "line_number" : "1.2.68",
           "speaker" : "HAMLET",
-          "text_entry" : "Not so, my lord; I am too much i the sun."
+          "text_entry" : "Not so, my lord; I am too much i' the sun."
         }
       },
       {
@@ -229,8 +229,8 @@ GET shakespeare/_search
 ...
 ```
 
-The term-level queries are exact matches. So, if you search for “Hamlet”, you don’t get back any hits, because “HAMLET” is a keyword field and is stored in Elasticsearch literally and not in an analyzed form.
-The search query “HAMLET” is also searched literally. So, to get a match on this field, we need to type the exact same characters.
+The term-level queries are exact matches. So, if you search for “Hamlet”, you don’t get back any matches, because “HAMLET” is a keyword field and is stored in Elasticsearch literally and not in an analyzed form.
+The search query “HAMLET” is also searched literally. So, to get a match on this field, we need to enter the exact same characters.
 
 ---
 
@@ -269,7 +269,7 @@ GET shakespeare/_search
 }
 ```
 
-You get back documents that match any one of the terms.
+You get back documents that match any of the terms.
 
 ## IDs
 
@@ -316,7 +316,7 @@ Parameter | Behavior
 `lte` | Less than or equal to.
 `lt` | Less than.
 
-Assume you have a `products` index and you want to find all the products that were added in the year 2019:
+Assume that you have a `products` index and you want to find all the products that were added in the year 2019:
 
 ```json
 GET products/_search
@@ -332,7 +332,7 @@ GET products/_search
 }
 ```
 
-Specify relative dates using basic math expressions.
+Specify relative dates by using basic math expressions.
 
 To subtract 1 year and 1 day from the specified date:
 
@@ -402,7 +402,7 @@ GET shakespeare/_search
 
 ## Wildcards
 
-Use wildcards to search for terms that match a wildcard pattern.
+Use wildcard queries to search for terms that match a wildcard pattern.
 
 Feature | Behavior
 :--- | :---
@@ -426,13 +426,13 @@ GET shakespeare/_search
 
 If we change `*` to `?`, we get no matches, because `?` refers to a single character.
 
-Wildcard queries tend to be slow because they need to iterate over a lot of terms. Avoid placing wildcards at the beginning of a query as it could be a very expensive operation.
+Wildcard queries tend to be slow because they need to iterate over a lot of terms. Avoid placing wildcard characters at the beginning of a query because it could be a very expensive operation in terms of both resources and time.
 
 ## Regex
 
 Use the `regex` query to search for terms that match a regular expression.
 
-This regular expression matches any one uppercase or lowercase letter:
+This regular expression matches any single uppercase or lowercase letter:
 
 ```json
 GET shakespeare/_search
@@ -447,4 +447,4 @@ GET shakespeare/_search
 
 Regular expressions are applied to the terms in the field and not the entire value of the field.
 
-The efficiency of your regular expression depends a lot on the patterns you write. Make sure you write `regex` queries with either a prefix or suffix to improve performance.
+The efficiency of your regular expression depends a lot on the patterns you write. Make sure that you write `regex` queries with either a prefix or suffix to improve performance.
