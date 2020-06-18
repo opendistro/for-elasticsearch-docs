@@ -12,6 +12,29 @@ The security plugin supports user authentication through SAML single sign-on. Th
 This profile is meant for use with web browsers. It is not a general-purpose way of authenticating users against the security plugin, so its primary use case is to support Kibana single sign-on.
 
 
+## Docker example
+
+We provide a fully functional example that can help you understand how to use SAML with Kibana.
+
+1. Download and unzip [the example ZIP file]({{site.url}}{{site.baseurl}}/assets/examples/saml-example.zip).
+1. At the command line, run `docker-compose up`.
+1. Review the files:
+
+   * `docker-compose.yml` defines two ODFE nodes, a Kibana server, and a SAML server.
+   * `custom-kibana.yml` add a few SAML settings to the default `kibana.yml` file.
+   * `config.yml` configures SAML for authentication.
+
+1. Access Kibana at [http://localhost:5601](http://localhost:5601){:target='\_blank'}. Note that Kibana immediately redirects you to the SAML login page.
+
+1. Log in as `admin` with a password of `admin`.
+
+1. After logging in, note that your user in the upper-right is `SAMLAdmin`, as defined in `/var/www/simplesamlphp/config/authsources.php` of the SAML server.
+
+1. If you want to examine the contents of the SAML server, run `docker ps` to find its container ID and then `docker exec -it <container-id> /bin/bash`.
+
+   In particular, you might find it helpful to review the contents of `/var/www/simplesamlphp/config/` and `/var/www/simplesamlphp/metadata/`.
+
+
 ## Activating SAML
 
 To use SAML for authentication, you need to configure a respective authentication domain in the `authc` section of `plugins/opendistro_security/securityconfig/config.yml`. Because SAML works solely on the HTTP layer, you do not need any `authentication_backend` and can set it to `noop`. Place all SAML-specific configuration options in this chapter in the `config` section of the SAML HTTP authenticator:
@@ -54,14 +77,14 @@ authc:
   saml_auth_domain:
     http_enabled: true
     transport_enabled: false
-     order: 1
-     http_authenticator:
-        type: saml
-        challenge: true
-        config:
-            ...
-     authentication_backend:
-        type: noop
+    order: 1
+    http_authenticator:
+      type: saml
+      challenge: true
+      config:
+        ...
+    authentication_backend:
+      type: noop
 ```
 
 
