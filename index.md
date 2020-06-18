@@ -7,7 +7,7 @@ permalink: /
 
 # Open Distro for Elasticsearch Documentation
 
-This site contains the technical documentation for [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
+This site contains the technical documentation for [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, SQL support, automated index management, deep performance analysis, and more.
 
 [Get started](#get-started){: .btn .btn-purple }
 
