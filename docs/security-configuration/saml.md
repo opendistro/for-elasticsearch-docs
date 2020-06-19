@@ -30,9 +30,9 @@ We provide a fully functional example that can help you understand how to use SA
 
 1. After logging in, note that your user in the upper-right is `SAMLAdmin`, as defined in `/var/www/simplesamlphp/config/authsources.php` of the SAML server.
 
-1. If you want to examine the contents of the SAML server, run `docker ps` to find its container ID and then `docker exec -it <container-id> /bin/bash`.
+1. If you want to examine the SAML server, run `docker ps` to find its container ID and then `docker exec -it <container-id> /bin/bash`.
 
-   In particular, you might find it helpful to review the contents of `/var/www/simplesamlphp/config/` and `/var/www/simplesamlphp/metadata/`.
+   In particular, you might find it helpful to review the contents of the `/var/www/simplesamlphp/config/` and `/var/www/simplesamlphp/metadata/` directories.
 
 
 ## Activating SAML
