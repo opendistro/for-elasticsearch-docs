@@ -346,7 +346,7 @@ The destination system **must** return a response otherwise the notification ope
 }
 ```
 
-You can use the same `ctx` variables as the `notification` operation.
+You can use the same options for `ctx` variables as the `notification` operation.
 
 ### snapshot
 
