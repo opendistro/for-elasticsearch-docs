@@ -198,9 +198,9 @@ Set `index.opendistro.index_state_management.rollover_alias` as the alias to rol
 
 Parameter | Description | Type | Example | Required
 :--- | :--- |:--- |:--- |
-`min_size` | The minimum size of the total primary shard index storage (without the replicas) required to roll over. For example, say you set `min_size` as 100 GB and your index has 5 primaries and 5 replicas of 20 GB each, the total size of the primaries is 100 GB, so the rollover takes place. In the scenario that you're continuously ingesting data, at the time ISM checks the policy, the size of the primaries could be 99 GB, so the rollover doesn't take place. In this case, if ISM checks the `min_size` value after 5 min, the rollover operation is delayed. | `string` | `20GB` or `5MB` | No
+`min_size` | The minimum size of the total primary shard index storage (without the replicas) required to roll over. For example, say you set `min_size` as 100 GB and your index has 5 primaries and 5 replicas of 20 GB each, the total size of the primaries is 100 GB, so the rollover takes place. In the scenario that you're continuously ingesting data, at the time ISM checks the policy, the size of the primaries could be 99 GB, so the rollover doesn't take place. In this case, if ISM checks the `min_size` value after 5 min, the rollover operation is delayed. | `string` | `20gb` or `5mb` | No
 `min_doc_count` |  The minimum number of documents required to roll over. | `number` | `2000000` | No
-`min_index_age` |  The minimum age from index creation required to roll over. | `string` | `5D` or `7H` | No
+`min_index_age` |  The minimum age from index creation required to roll over. | `string` | `5d` or `7h` | cNo
 
 ```json
 {
