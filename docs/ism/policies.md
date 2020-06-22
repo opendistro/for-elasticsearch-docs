@@ -196,11 +196,11 @@ Rolls an alias over to a new index when the managed index meets one of the rollo
 The index format must match the pattern: `^.*-\d+$`. For example, `(logs-000001)`.
 Set `index.opendistro.index_state_management.rollover_alias` as the alias to rollover.
 
-Parameter | Description | Type | Required
+Parameter | Description | Type | Example | Required
 :--- | :--- |:--- |:--- |
-`min_size` | The minimum size of the primary shard index storage required to roll over. | `number` | No
-`min_doc_count` |  The minimum number of documents required to roll over. | `number` | No
-`min_index_age` |  The minimum age from index creation required to roll over. | `number` | No
+`min_size` | The minimum size of the total primary shard index storage (without the replicas) required to roll over. For example, say you set `min_size` as 100 GB and your index has 5 primaries and 5 replicas of 20 GB each, the total size of the primaries is 100 GB, so the rollover takes place. In the scenario that you're continuously ingesting data, at the time ISM checks the policy, the size of the primaries could be 99 GB, so the rollover doesn't take place. In this case, if ISM checks the `min_size` value after 5 min, the rollover operation is delayed. | `string` | `20GB` or `5MB` | No
+`min_doc_count` |  The minimum number of documents required to roll over. | `number` | `2000000` | No
+`min_index_age` |  The minimum age from index creation required to roll over. | `string` | `5D` or `7H` | No
 
 ```json
 {
