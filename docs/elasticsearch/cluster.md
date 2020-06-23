@@ -193,6 +193,7 @@ x.x.x.x           23          38   0    0.12    0.07     0.06 md        -      o
 
 To better understand and monitor your cluster, use the [cat API](../catapis/).
 
+
 ## (Advanced) Step 6: Configure shard allocation awareness or forced awareness
 
 If your nodes are spread across several geographical zones, you can configure shard allocation awareness to allocate all replica shards to a zone that’s different from their primary shard.
@@ -243,6 +244,7 @@ In our two-zone architecture, we can use allocation awareness if `odfe-d1` and `
 If that is not the case, and `odfe-d1` and `odfe-d2` do not have the capacity to contain all primary and replica shards, we can use forced awareness. This approach helps to make sure that, in the event of a failure, Elasticsearch doesn't overload your last remaining zone and lock up your cluster due to lack of storage.
 
 Choosing allocation awareness or forced awareness depends on how much space you might need in each zone to balance your primary and replica shards.
+
 
 ## (Advanced) Step 7: Set up a hot-warm architecture
 
@@ -325,8 +327,8 @@ In this case, all primary shards are allocated to `odfe-d2`. Again, all replica 
 
 A popular approach is to configure your [index templates](../index-templates/) to set the `index.routing.allocation.require.temp` value to `hot`. This way, Elasticsearch stores your most recent data on your hot nodes.
 
-{% comment %} (You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and specify actions to take on it. For example, when the index reaches a specific age, change the `index.routing.allocation.require.temp` setting to `warm` to automatically move your data from hot nodes to warm nodes.)
-{% endcomment %}
+{% comment %}You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and specify actions to take on it. For example, when the index reaches a specific age, change the `index.routing.allocation.require.temp` setting to `warm` to automatically move your data from hot nodes to warm nodes.{% endcomment %}
+
 
 ## Next steps
 
