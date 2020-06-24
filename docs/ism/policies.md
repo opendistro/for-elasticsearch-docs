@@ -205,7 +205,23 @@ Parameter | Description | Type | Example | Required
 ```json
 {
   "rollover": {
+    "min_size": "50gb"
+  }
+}
+```
+
+```json
+{
+  "rollover": {
     "min_doc_count": 100000000
+  }
+}
+```
+
+```json
+{
+  "rollover": {
+    "min_index_age": "30d"
   }
 }
 ```
