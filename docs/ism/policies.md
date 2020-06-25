@@ -196,16 +196,32 @@ Rolls an alias over to a new index when the managed index meets one of the rollo
 The index format must match the pattern: `^.*-\d+$`. For example, `(logs-000001)`.
 Set `index.opendistro.index_state_management.rollover_alias` as the alias to rollover.
 
-Parameter | Description | Type | Required
+Parameter | Description | Type | Example | Required
 :--- | :--- |:--- |:--- |
-`min_size` | The minimum size of the primary shard index storage required to roll over. | `number` | No
-`min_doc_count` |  The minimum number of documents required to roll over. | `number` | No
-`min_index_age` |  The minimum age from index creation required to roll over. | `number` | No
+`min_size` | The minimum size of the total primary shard storage (not counting replicas) required to roll over the index. For example, if you set `min_size` to 100 GiB and your index has 5 primary shards and 5 replica shards of 20 GiB each, the total size of the primaries is 100 GiB, so the rollover occurs. ISM doesn't check indices continually, so it doesn't roll over indices at exactly 100 GiB. Instead, if an index is continuously growing, ISM might check it at 99 GiB, not perform the rollover, check again when the shards reach 105 GiB, and then perform the operation. | `string` | `20gb` or `5mb` | No
+`min_doc_count` |  The minimum number of documents required to roll over the index. | `number` | `2000000` | No
+`min_index_age` |  The minimum age required to roll over the index. Index age is the time between its creation and the present. | `string` | `5d` or `7h` | No
+
+```json
+{
+  "rollover": {
+    "min_size": "50gb"
+  }
+}
+```
 
 ```json
 {
   "rollover": {
     "min_doc_count": 100000000
+  }
+}
+```
+
+```json
+{
+  "rollover": {
+    "min_index_age": "30d"
   }
 }
 ```
