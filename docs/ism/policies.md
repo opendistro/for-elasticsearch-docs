@@ -99,7 +99,7 @@ ISM supports the following operations:
 - [rollover](#rollover)
 - [notification](#notification)
 - [error_notification](#error_notification)
-- [snapshot](#notification)
+- [snapshot](#snapshot)
 
 ### force_merge
 
@@ -153,7 +153,7 @@ Parameter | Description | Type | Required
 }
 ```
 
-For information about setting replicas, see [Primary and replica shards](../../elasticsearch/index/#primary-and-replica-shards).
+For information about setting replicas, see [Primary and replica shards](../../elasticsearch/#primary-and-replica-shards).
 
 ### close
 
