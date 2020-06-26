@@ -26,6 +26,11 @@ If you encounter the error `FATAL  Error: Request Timeout after 30000ms` during 
 Kibana doesn't support Microsoft Edge and many versions of Internet Explorer. We recommend using Firefox or Chrome.
 
 
+## Can't update by script when FLS, DLS, or field masking is active
+
+The security plugin blocks the update by script operation (`POST <index>/_update/<id>`) when field-level security, document-level security, or field masking are active. You can still update documents using the standard index operation (`PUT <index>/_doc/<id>`).
+
+
 ## Illegal reflective access operation in logs
 
 This is a [known issue](https://github.com/opendistro-for-elasticsearch/performance-analyzer/issues/21) with Performance Analyzer that shouldn't affect functionality.
