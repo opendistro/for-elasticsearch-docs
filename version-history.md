@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+[1.9.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.9.0.md) |  | TBD | 7.8.0
 [1.8.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.8.0.md) | Adds snapshot operation to Index State Management, a new `count` aggregation to Anomaly Detection, and cosine similarity to KNN. Also bumps Elasticsearch version. | 2 June 2020 | 7.7.0
 [1.7.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.7.0.md) | Adds numerous new SQL operations, SQL user interface for Kibana, SQL CLI, Anomaly Detection plugin, and Anomaly Detection user interface for Kibana. | 13 May 2020 | 7.6.1
 [1.6.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.6.0.md) | Optimizes security for a faster version of the implied permission type, adds memoization of results for batch requests, implements lazy loading for k-NN `efSearch` parameter, adds the KNN plugin to the RPM and Debian installs, improves exception handling and report date handling using standard formats for the SQL plugin, and bumps Elasticsearch version. | 02 April 2020 | 7.6.1

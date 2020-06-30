@@ -49,7 +49,7 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Deploy Elasticsearch:
 
    ```bash
-   helm install opendistro-es opendistro-es-1.8.0.tgz
+   helm install opendistro-es opendistro-es-1.9.0.tgz
    ```
 
 If you see a `namespaces "default" is forbidden` error, create a Tiller service account and deploy with a cluster binding role, as shown in the following example. See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
@@ -66,7 +66,7 @@ The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
 
 ```bash
-helm install --values=customevalues.yaml opendistro-es-1.8.0.tgz
+helm install --values=customevalues.yaml opendistro-es-1.9.0.tgz
 ```
 
 #### Sample output

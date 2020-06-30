@@ -15,7 +15,7 @@ Kibana is the default visualization tool for data in Elasticsearch. It also serv
 
 You *can* start Kibana using `docker run` after [creating a Docker network](https://docs.docker.com/engine/reference/commandline/network_create/) and starting Elasticsearch, but the process of connecting Kibana to Elasticsearch is significantly easier with a Docker Compose file.
 
-1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.8.0`.
+1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:1.9.0`.
 
 1. Create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment. A sample file that includes Kibana is available on the Open Distro for Elasticsearch [Docker installation page](../install/docker/#sample-docker-compose-file).
 
@@ -59,19 +59,19 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 1. Download the tarball:
 
    ```bash
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.8.0.tar.gz -o opendistroforelasticsearch-kibana-1.8.0.tar.gz
+   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.9.0.tar.gz -o opendistroforelasticsearch-kibana-1.9.0.tar.gz
    ```
 
 1. Download the checksum:
 
    ```bash
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.8.0.tar.gz.sha512 -o opendistroforelasticsearch-kibana-1.8.0.tar.gz.sha512
+   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.9.0.tar.gz.sha512 -o opendistroforelasticsearch-kibana-1.9.0.tar.gz.sha512
    ```
 
 1. Verify the tarball against the checksum:
 
    ```bash
-   shasum -a 512 -c opendistroforelasticsearch-kibana-1.8.0.tar.gz.sha512
+   shasum -a 512 -c opendistroforelasticsearch-kibana-1.9.0.tar.gz.sha512
    ```
 
    On CentOS, you might not have `shasum`. Install this package:
@@ -83,7 +83,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 1. Extract the TAR file to a directory and change to that directory:
 
    ```bash
-   tar -zxf opendistroforelasticsearch-kibana-1.8.0.tar.gz
+   tar -zxf opendistroforelasticsearch-kibana-1.9.0.tar.gz
    cd opendistroforelasticsearch-kibana
    ```
 
@@ -100,7 +100,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
 1. Download the ZIP.
 
-1. Extract [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.8.0-kibana.zip) to a directory and open that directory at the command prompt.
+1. Extract [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.9.0-kibana.zip) to a directory and open that directory at the command prompt.
 
 1. If desired, modify `config/kibana.yml`.
 
