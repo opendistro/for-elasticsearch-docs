@@ -48,7 +48,11 @@ body {
 }
 
 .site-title {
-  padding: 0 0 0 $sp-5;
+  @include mq(md) {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: $sp-5;
+  }
 }
 
 .img-border {
