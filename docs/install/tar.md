@@ -73,8 +73,6 @@ For other settings, see [Important settings](../docker/#important-settings).
 
 In a tarball installation, Performance Analyzer collects data when it is enabled. But in order to read that data using the REST API on port 9600, you must first manually launch the associated reader agent process:
 
-1. Create `./bin/performance-analyzer-agent-cli` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/performance-analyzer-agent-cli).
-
 1. Make the CLI executable:
 
    ```bash
@@ -86,3 +84,29 @@ In a tarball installation, Performance Analyzer collects data when it is enabled
    ```bash
    ES_HOME="$PWD" ./bin/performance-analyzer-agent-cli
    ```
+
+1. In a separate window, enable the Performance Analyzer plugin
+
+   ```bash
+   curl localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   ```
+   
+   If you receive the `curl: (52) Empty reply from server` error, you are likely protecting your cluster with 
+   opendistro-security and need to provide identity certificates. Modify the command below if you're using your own 
+   certificates.
+   
+   ```bash
+   curl -k --cert config/kirk.pem --key config/kirk-key.pem https://localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   ```
+   
+1. Finally, enable the Root Cause Analyzer (RCA) framework
+
+    ```bash
+    curl localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+    ```
+
+    As explained in step #3, if you run into `curl: (52) Empty reply from server`, run the command below to enable RCA
+    
+    ```bash
+    curl -k --cert config/kirk.pem --key config/kirk-key.pem https://localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+    ```

@@ -2,7 +2,7 @@
 layout: default
 title: Root Cause Analysis (Alpha)
 nav_order: 39
-has_children: false
+has_children: true
 ---
 
 # Root Cause Analysis

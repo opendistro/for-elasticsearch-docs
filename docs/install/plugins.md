@@ -244,21 +244,21 @@ Performance Analyzer requires some manual configuration after installing the plu
 
 1. Create `/usr/lib/systemd/system/opendistro-performance-analyzer.service` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/opendistro-performance-analyzer.service).
 
-1. Create `/usr/share/elasticsearch/bin/performance-analyzer-agent-cli` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/performance-analyzer-agent-cli).
-
 1. Make the CLI executable:
 
    ```bash
    sudo chmod +x /usr/share/elasticsearch/bin/performance-analyzer-agent-cli
    ```
 
-1. Create the `postinit` script for [RPM-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/rpm) or [Debian-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/deb) distributions in your home directory.
+1. Run the appropriate postinst script for your Linux distro
 
-1. Run the script:
-
-   ```bash
-   sudo sh postinit 1
-   ```
+    ```bash
+   # DEB distros
+   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/deb/postinst.sh 1
+   
+   # RPM distros
+   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/rpm/postinst.sh 1
+    ```
 
 1. Start the Elasticsearch service:
 
