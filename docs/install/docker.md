@@ -214,7 +214,65 @@ Then run `sudo sysctl -p` to reload.
 
 The `docker-compose.yml` file above also contains several key settings: `bootstrap.memory_lock=true`, `ES_JAVA_OPTS=-Xms512m -Xmx512m`, `nofile 65536` and `port 9600`. Respectively, these settings disable memory swapping (along with `memlock`), set the size of the Java heap (we recommend half of system RAM), set a limit of 65536 open files for the Elasticsearch user, and allow you to access Performance Analyzer on port 9600.
 
+### Setup Performance Analyzer
 
+By default, Performance Analyzer's endpoints will not be accessible from outside the Docker container.
+
+To edit this behavior you'll need to open up a shell session in the container and modify the configuration.
+
+```bash
+docker ps # Lookup the container id
+docker exec -it <container-id> /bin/bash
+# Inside container
+cd plugins/opendistro_performance_analyzer/pa_config/
+vi performance-analyzer.properties
+```
+
+Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`. An example is provided below.
+```bash
+# ======================== Elasticsearch performance analyzer plugin config =========================
+
+# NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
+
+# WebService bind host; default to all interfaces
+webservice-bind-host = 0.0.0.0
+
+# Metrics data location
+metrics-location = /dev/shm/performanceanalyzer/
+
+# Metrics deletion interval (minutes) for metrics data.
+# Interval should be between 1 to 60.
+metrics-deletion-interval = 1
+
+# If set to true, the system cleans up the files behind it. So at any point, we should expect only 2
+# metrics-db-file-prefix-path files. If set to false, no files are cleaned up. This can be useful, if you are archiving
+# the files and wouldn't like for them to be cleaned up.
+cleanup-metrics-db-files = true
+
+# WebService exposed by App's port
+webservice-listener-port = 9600
+
+# Metric DB File Prefix Path location
+metrics-db-file-prefix-path = /tmp/metricsdb_
+
+https-enabled = false
+
+#Setup the correct path for certificates
+certificate-file-path = specify_path
+
+private-key-file-path = specify_path
+
+# Plugin Stats Metadata file name, expected to be in the same location
+plugin-stats-metadata = plugin-stats-metadata
+
+# Agent Stats Metadata file name, expected to be in the same location
+agent-stats-metadata = agent-stats-metadata
+```
+
+Finally, restart the Performance Analyzer agent and it will become accessible.
+```bash
+kill $(ps aux | grep -i 'PerformanceAnalyzerApp' | grep -v grep | awk '{print $2}')
+```
 ## Customize the Docker image
 
 To run the image with a custom plugin, first create a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/):
