@@ -219,7 +219,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.8.0.0.zip
 ```
 
-To install Index State Management, you must first install the Job Scheduler plugin.
+To install Index State Management, you must first install the Job Scheduler plugin. ISM has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
 ### KNN
