@@ -86,7 +86,7 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
-For a list of available unit types, see [Common Options](../../elasticsearch/options/).
+For a list of available unit types, see [Supported Units](../../elasticsearch/units/).
 
 ## ISM supported operations
 ISM supports the following operations:
