@@ -333,11 +333,30 @@ sudo bin/elasticsearch-plugin list
 
 ## Remove plugins
 
+### (Optional) Cleanup Performance Analyzer files
+
+Performance Analyzer relies on certain config files to run. If you want to delete these files, run one of the 
+scripts we've provided based on your Linux distribution
+
+```bash
+# Debian distribution
+sudo sh plugins/opendistro_performance_analyer/install/deb/postrm
+
+# Redhat distribution
+sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
+```
+
+Then you can proceed with the normal removal procedure.
+
+### Removal Command
+
 ```bash
 sudo bin/elasticsearch-plugin remove <plugin-name>
 ```
 
 Then restart Elasticsearch on the node.
+
+
 
 
 ## Update plugins
