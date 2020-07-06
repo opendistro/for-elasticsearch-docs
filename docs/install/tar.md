@@ -159,3 +159,28 @@ In a tarball installation, Performance Analyzer collects data when it is enabled
     ```bash
     curl -k --cert config/kirk.pem --key config/kirk-key.pem https://localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
     ```
+   
+### Removing PerformanceAnalyzer
+
+1. cd into the opendistro root folder of your installation e.g. `cd opendistroforelasticsearch-1.9.0`
+
+1. Set ES_HOME  `export ES_HOME="$PWD"`
+
+1. Make the removal scripts executable 
+
+    ```bash
+    sudo chmod +x plugins/opendistro_performance_analyer/install/deb/postrm sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
+
+
+1. Run the appropriate removal script for your distribution
+
+    ```bash
+    # Debian distribution
+    ./plugins/opendistro_performance_analyer/install/deb/postrm
+    
+    # Redhat distribution
+    ./plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
+   
+1. Proceed with the normal removal process `bin/elasticsearch-plugin remove opendistro_performance_analyzer`

@@ -338,26 +338,32 @@ sudo bin/elasticsearch-plugin list
 Performance Analyzer relies on certain config files to run. If you want to delete these files, run one of the 
 scripts we've provided based on your Linux distribution
 
-```bash
-# Debian distribution
-sudo sh plugins/opendistro_performance_analyer/install/deb/postrm
+1. Make the removal scripts executable 
 
-# Redhat distribution
-sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
-```
+    ```bash
+    sudo chmod +x plugins/opendistro_performance_analyer/install/deb/postrm sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
 
-Then you can proceed with the normal removal procedure.
+1. Run the appropriate removal script for your distribution
+    ```bash
+    # Debian distribution
+    sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/deb/postrm
+    
+    # Redhat distribution
+    sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
 
-### Removal Command
+1. Then you can proceed with the normal removal procedure.
 
-```bash
-sudo bin/elasticsearch-plugin remove <plugin-name>
-```
+    ```bash
+    sudo bin/elasticsearch-plugin remove <plugin-name>
+    ```
 
-Then restart Elasticsearch on the node.
+1. Finally,  restart Elasticsearch on the node.
 
-
-
+    ```bash
+    sudo systemctl restart elasticsearch.service
+    ```
 
 ## Update plugins
 
