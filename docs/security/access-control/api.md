@@ -1,7 +1,8 @@
 ---
 layout: default
 title: API
-parent: Security - Access Control
+parent: Access Control
+grand_parent: Security
 nav_order: 90
 ---
 
@@ -1097,6 +1098,103 @@ PATCH _opendistro/_security/api/securityconfig
 }
 ```
 
+
+---
+
+## Certificates
+
+### Get certificates
+
+Retrieves the current security plugin configuration in JSON format.
+
+#### Request
+
+```
+GET _opendistro/_security/api/securityconfig
+```
+
+
+### Update configuration
+
+Creates or updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PUT _opendistro/_security/api/securityconfig/config
+{
+  "dynamic": {
+    "filtered_alias_mode": "warn",
+    "disable_rest_auth": false,
+    "disable_intertransport_auth": false,
+    "respect_request_indices_options": false,
+    "kibana": {
+      "multitenancy_enabled": true,
+      "server_username": "kibanaserver",
+      "index": ".kibana"
+    },
+    "http": {
+      "anonymous_auth_enabled": false
+    },
+    "authc": {
+      "basic_internal_auth_domain": {
+        "http_enabled": true,
+        "transport_enabled": true,
+        "order": 0,
+        "http_authenticator": {
+          "challenge": true,
+          "type": "basic",
+          "config": {}
+        },
+        "authentication_backend": {
+          "type": "intern",
+          "config": {}
+        },
+        "description": "Authenticate via HTTP Basic against internal users database"
+      }
+    },
+    "auth_failure_listeners": {},
+    "do_not_fail_on_forbidden": false,
+    "multi_rolespan_enabled": true,
+    "hosts_resolver_mode": "ip-only",
+    "do_not_fail_on_forbidden_empty": false
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "'config' updated."
+}
+```
+
+
+### Patch configuration
+
+Updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+
+#### Request
+
+```json
+PATCH _opendistro/_security/api/securityconfig
+[
+  {
+    "op": "replace", "path": "/config/dynamic/authc/basic_internal_auth_domain/transport_enabled", "value": "true"
+  }
+]
+```
+
+#### Sample response
+
+```json
+{
+  "status": "OK",
+  "message": "Resource updated."
+}
+```
 
 ---
 

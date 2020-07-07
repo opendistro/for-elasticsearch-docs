@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Kibana Multi-Tenancy
-parent: Security - Access Control
-nav_order: 10
+parent: Access Control
+grand_parent: Security
+nav_order: 30
 ---
 
 # Kibana multi-tenancy

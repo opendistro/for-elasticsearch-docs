@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Apply Changes with securityadmin.sh
-parent: Security - Configuration
-nav_order: 6
+parent: Configuration
+grand_parent: Security
+nav_order: 20
 ---
 
 # Apply configuration changes using securityadmin.sh

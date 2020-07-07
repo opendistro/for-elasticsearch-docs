@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Users and Roles
-parent: Security - Access Control
+parent: Access Control
+grand_parent: Security
 nav_order: 1
 ---
 
@@ -42,7 +43,7 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
 
 ### internal_users.yml
 
-See [YAML files](../../security-configuration/yaml/#internal_usersyml).
+See [YAML files](../../configuration/yaml/#internal_usersyml).
 
 
 ### REST API
@@ -68,7 +69,7 @@ Just like users, you can create roles using Kibana, `roles.yml`, or the REST API
 
 ### roles.yml
 
-See [YAML files](../../security-configuration/yaml/#rolesyml).
+See [YAML files](../../configuration/yaml/#rolesyml).
 
 
 ### REST API
@@ -93,7 +94,7 @@ Just like users and roles, you create role mappings using Kibana, `roles_mapping
 
 ### roles_mapping.yml
 
-See [YAML files](../../security-configuration/yaml/#roles_mappingyml).
+See [YAML files](../../configuration/yaml/#roles_mappingyml).
 
 
 ### REST API

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Field-Level Security
-parent: Security - Access Control
-nav_order: 3
+parent: Access Control
+grand_parent: Security
+nav_order: 11
 ---
 
 # Field-level security

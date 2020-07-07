@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Backend Configuration
-parent: Security - Configuration
+parent: Configuration
+grand_parent: Security
 nav_order: 2
 ---
 

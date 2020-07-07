@@ -1,8 +1,9 @@
 ---
 layout: default
 title: User Impersonation
-parent: Security - Access Control
-nav_order: 5
+parent: Access Control
+grand_parent: Security
+nav_order: 20
 ---
 
 # User impersonation

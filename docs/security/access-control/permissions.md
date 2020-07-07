@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Permissions
-parent: Security - Access Control
-nav_order: 70
+parent: Access Control
+grand_parent: Security
+nav_order: 50
 ---
 
 # Permissions

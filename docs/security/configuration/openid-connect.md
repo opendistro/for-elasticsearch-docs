@@ -1,8 +1,9 @@
 ---
 layout: default
 title: OpenID Connect
-parent: Security - Configuration
-nav_order: 12
+parent: Configuration
+grand_parent: Security
+nav_order: 32
 ---
 
 # OpenID Connect

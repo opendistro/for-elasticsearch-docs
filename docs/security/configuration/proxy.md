@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Proxy-based authentication
-parent: Security - Configuration
-nav_order: 20
+parent: Configuration
+grand_parent: Security
+nav_order: 40
 ---
 
 # Proxy-based authentication

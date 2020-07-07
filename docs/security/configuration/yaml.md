@@ -1,7 +1,8 @@
 ---
 layout: default
 title: YAML Files
-parent: Security - Configuration
+parent: Configuration
+grand_parent: Security
 nav_order: 3
 ---
 
@@ -9,7 +10,7 @@ nav_order: 3
 
 Before running `securityadmin.sh` to load the settings into the `.opendistro_security` index, configure the YAML files in `plugins/opendistro_security/securityconfig`. You might want to back up these files so that you can reuse them on other clusters.
 
-The best use of these YAML files is to configure [reserved and hidden resources](../../security-access-control/api/#reserved-and-hidden-resources), such as the `admin` and `kibanaserver` users. You might find it easier to create other users, roles, mappings, action groups, and tenants using Kibana or the REST API.
+The best use of these YAML files is to configure [reserved and hidden resources](../../access-control/api/#reserved-and-hidden-resources), such as the `admin` and `kibanaserver` users. You might find it easier to create other users, roles, mappings, action groups, and tenants using Kibana or the REST API.
 
 
 ## internal_users.yml

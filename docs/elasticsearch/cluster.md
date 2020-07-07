@@ -338,4 +338,4 @@ If you are using the security plugin, the previous request to `_cat/nodes?v` mig
 sudo ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert /etc/elasticsearch/root-ca.pem -cert /etc/elasticsearch/kirk.pem -key /etc/elasticsearch/kirk-key.pem -h <private-ip>
 ```
 
-For full guidance around configuration options, see [Security - Configuration](../../security-configuration).
+For full guidance around configuration options, see [Security configuration](../../security/configuration).

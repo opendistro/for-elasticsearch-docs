@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Generate Certificates
-parent: Security - Configuration
-nav_order: 6
+parent: Configuration
+grand_parent: Security
+nav_order: 11
 ---
 
 # Generate certificates
@@ -85,7 +86,7 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
 
-If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a common name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set the hostname verification to `false`. For more information, see [Configure TLS certificates](../../security-configuration/tls/#advanced-hostname-verification-and-dns-lookup).
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a common name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set the hostname verification to `false`. For more information, see [Configure TLS certificates](../../security/configuration/tls/#advanced-hostname-verification-and-dns-lookup).
 
 
 ### Sample script

@@ -107,7 +107,7 @@ networks:
   odfe-net:
 ```
 
-Then make your changes to `elasticsearch.yml`. For a full list of settings, see [Security](../../security-configuration/). This example adds (extremely) verbose audit logging:
+Then make your changes to `elasticsearch.yml`. For a full list of settings, see [Security](../../security/configuration/). This example adds (extremely) verbose audit logging:
 
 ```yml
 opendistro_security.ssl.transport.pemcert_filepath: node.pem
@@ -132,11 +132,11 @@ opendistro_security.audit.config.disabled_rest_categories: NONE
 opendistro_security.audit.config.disabled_transport_categories: NONE
 ```
 
-Use this same override process to specify new [authentication settings](../../security-configuration/configuration/) in `/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml`, as well as new [internal users, roles, mappings, action groups, and tenants](../../security-configuration/yaml/).
+Use this same override process to specify new [authentication settings](../../security/configuration/configuration/) in `/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/config.yml`, as well as new [internal users, roles, mappings, action groups, and tenants](../../security/configuration/yaml/).
 
 To start the cluster, run `docker-compose up`.
 
 If you encounter any `File /usr/share/elasticsearch/config/elasticsearch.yml has insecure file permissions (should be 0600)` messages, you can use `chmod` to set file permissions before running `docker-compose up`. Docker Compose passes files to the container as-is.
 {: .note }
 
-Finally, you can open Kibana at [http://localhost:5601](http://localhost:5601), sign in, and use the **Security** panel to perform other management tasks.
+Finally, you can open Kibana at http://localhost:5601, sign in, and use the **Security** panel to perform other management tasks.

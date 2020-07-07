@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Disable Security
-parent: Security - Configuration
+parent: Configuration
+grand_parent: Security
 nav_order: 99
 ---
 
@@ -15,7 +16,7 @@ opendistro_security.disabled: true
 
 A more permanent option is to remove the security plugin entirely. Delete the `plugins/opendistro_security` folder on all nodes, and delete the `opendistro_security` configuration entries from `elasticsearch.yml`.
 
-To perform these steps on the Docker image, see [Customize the Docker image](../../install/docker/#customize-the-docker-image).
+To perform these steps on the Docker image, see [Customize the Docker image](../../../install/docker/#customize-the-docker-image).
 
 Disabling or removing the plugin exposes the configuration index for the security plugin. If the index contains sensitive information, be sure to protect it through some other means. If you no longer need the index, delete it.
 {: .warning }
@@ -25,7 +26,7 @@ Disabling or removing the plugin exposes the configuration index for the securit
 
 The security plugin is actually two plugins: one for Elasticsearch and one for Kibana. You can use the Elasticsearch plugin independently, but the Kibana plugin depends on a secured Elasticsearch cluster.
 
-If you disable the security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. For more information, see [Standalone Kibana plugin install](../../kibana/plugins/).
+If you disable the security plugin in `elasticsearch.yml` (or delete the plugin entirely) and still want to use Kibana, you must remove the corresponding Kibana plugin. For more information, see [Standalone Kibana plugin install](../../../kibana/plugins/).
 
 
 ### RPM or DEB

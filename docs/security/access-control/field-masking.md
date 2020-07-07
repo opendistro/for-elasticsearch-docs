@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Field Masking
-parent: Security - Access Control
-nav_order: 4
+parent: Access Control
+grand_parent: Security
+nav_order: 12
 ---
 
 # Field masking

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Audit Log Field Reference
-parent: Security - Audit Logs
-nav_order: 97
+parent: Audit Logs
+grand_parent: Security
+nav_order: 1
 ---
 
 # Audit log field reference

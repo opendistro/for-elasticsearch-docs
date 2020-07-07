@@ -8,7 +8,7 @@ has_toc: false
 
 # Kibana
 
-Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro for Elasticsearch [Security](../security-configuration/) and [Alerting](../alerting/) plugins.
+Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro for Elasticsearch [security](../security/configuration/) and [alerting](../alerting/) plugins.
 
 
 ## Run Kibana using Docker
@@ -113,7 +113,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
 ## Run Kibana on Windows (EXE)
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_Kibana_1.6.0.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_Kibana_1.8.0.exe), run it, and click through the steps.
 
 1. Open the command prompt.
 
@@ -130,7 +130,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
 ## Get started with Kibana
 
-1. After starting Kibana, you can access it at port 5601. For example, [http://localhost:5601](http://localhost:5601){:target='\_blank'}
+1. After starting Kibana, you can access it at port 5601. For example, http://localhost:5601.
 1. Log in with the default username `admin` and password `admin`.
 1. Choose **Try our sample data** and add the sample flight data.
 1. Choose **Discover** and search for a few flights.

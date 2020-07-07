@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Security - Audit Logs
-nav_order: 22
+title: Audit Logs
+nav_order: 90
+parent: Security
 has_children: true
 has_toc: false
 ---

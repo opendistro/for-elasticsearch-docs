@@ -1,8 +1,9 @@
 ---
 layout: default
 title: TLS Certificates
-parent: Security - Configuration
-nav_order: 5
+parent: Configuration
+grand_parent: Security
+nav_order: 10
 ---
 
 # Configure TLS certificates

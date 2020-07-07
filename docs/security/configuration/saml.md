@@ -1,8 +1,9 @@
 ---
 layout: default
 title: SAML
-parent: Security - Configuration
-nav_order: 11
+parent: Configuration
+grand_parent: Security
+nav_order: 31
 ---
 
 # SAML

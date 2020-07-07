@@ -1,14 +1,15 @@
 ---
 layout: default
-title: Security - Access Control
-nav_order: 21
+title: Access Control
+nav_order: 10
+parent: Security
 has_children: true
 has_toc: false
 ---
 
 # Access control
 
-After you [configure the security plugin](../security-configuration/) to use your own certificates and preferred authentication backend, you can start adding users, creating roles, and mapping roles to users.
+After you [configure the security plugin](../configuration/) to use your own certificates and preferred authentication backend, you can start adding users, creating roles, and mapping roles to users.
 
 This section of the documentation covers what a user is allowed to see and do after successfully authenticating.
 
