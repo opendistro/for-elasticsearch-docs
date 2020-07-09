@@ -63,6 +63,7 @@ This table lists the parameters that you can define for an action.
 Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |
 `timeout` |  The timeout period for the action. Accepts time units for minutes, hours, and days. | `time unit` | No | -
+`priority` |  Set the priority for the index in a certain state. Unallocated shards of indices are recovered in order of priority, whenever possible. | `number` | Yes | -
 `retry` | The retry configuration for the action. | `object` | No | Specific to action
 
 The `retry` operation has the following parameters:
@@ -84,6 +85,18 @@ The following example action has a timeout period of one hour. The policy retrie
     "delay": "10m"
   }
 }
+```
+
+The following example sets the priority of the index as soon as it enters a state:
+
+```json
+"actions": [
+  {
+    "index_priority": {
+      "priority": 50
+    }
+  }
+]
 ```
 
 For a list of available unit types, see [Supported units](../../elasticsearch/units/).
