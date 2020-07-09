@@ -324,13 +324,13 @@ Parameter | Description | Type | Required | Default
 
 ### index_priority
 
-Set the priority for the index in a specific state. Unallocated shards of indices are recovered in the order of their priority, whenever possible.
+Set the priority for the index in a specific state. Unallocated shards of indices are recovered in the order of their priority, whenever possible. The indices with higher priority values are recovered first followed by the indices with lower priority values.
 
 The `index_priority` operation has the following parameter:
 
 Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |:---
-`priority` | The priority for the index as soon as it enters a state. | `number` | Yes | -
+`priority` | The priority for the index as soon as it enters a state. | `number` | Yes | 1
 
 ```json
 "actions": [
