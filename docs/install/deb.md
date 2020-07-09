@@ -109,6 +109,63 @@ sudo /bin/systemctl enable elasticsearch.service
 
 You can also modify the values in `/etc/default/elasticsearch` (`JAVA_HOME`, most notably), `/etc/elasticsearch/elasticsearch.yml`, and `/etc/elasticsearch/jvm.options` (to set the heap size, most notably). To learn more, see [Elasticsearch configuration](../../elasticsearch/configuration/) and [Important Settings](../docker#important-settings) on the Docker page.
 
+### Setup Performance Analyzer
+
+By default, Performance Analyzer's endpoints will not be accessible from outside the host machine.
+
+To edit this behavior you'll need to modify the plugin configuration. First navigate to your `ES_HOME` which is `/usr/share/elasticsearch` for a standard installation.
+
+```bash
+cd $ES_HOME # navigate to the Elasticsearch home directory
+cd plugins/opendistro_performance_analyzer/pa_config/
+vi performance-analyzer.properties
+```
+
+Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`. An example is provided below.
+```bash
+# ======================== Elasticsearch performance analyzer plugin config =========================
+
+# NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
+
+# WebService bind host; default to all interfaces
+webservice-bind-host = 0.0.0.0
+
+# Metrics data location
+metrics-location = /dev/shm/performanceanalyzer/
+
+# Metrics deletion interval (minutes) for metrics data.
+# Interval should be between 1 to 60.
+metrics-deletion-interval = 1
+
+# If set to true, the system cleans up the files behind it. So at any point, we should expect only 2
+# metrics-db-file-prefix-path files. If set to false, no files are cleaned up. This can be useful, if you are archiving
+# the files and wouldn't like for them to be cleaned up.
+cleanup-metrics-db-files = true
+
+# WebService exposed by App's port
+webservice-listener-port = 9600
+
+# Metric DB File Prefix Path location
+metrics-db-file-prefix-path = /tmp/metricsdb_
+
+https-enabled = false
+
+#Setup the correct path for certificates
+certificate-file-path = specify_path
+
+private-key-file-path = specify_path
+
+# Plugin Stats Metadata file name, expected to be in the same location
+plugin-stats-metadata = plugin-stats-metadata
+
+# Agent Stats Metadata file name, expected to be in the same location
+agent-stats-metadata = agent-stats-metadata
+```
+
+Finally, restart the Elasticsearch service and PerformanceAnalyzer will be accessible from outside the machine.
+```bash
+sudo systemctl restart elasticsearch.service
+```
 
 ## Where are the files?
 

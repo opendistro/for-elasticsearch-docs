@@ -258,21 +258,70 @@ Performance Analyzer requires some manual configuration after installing the plu
 
 1. Create `/usr/lib/systemd/system/opendistro-performance-analyzer.service` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/opendistro-performance-analyzer.service).
 
-1. Create `/usr/share/elasticsearch/bin/performance-analyzer-agent-cli` based on [this file](https://github.com/opendistro-for-elasticsearch/performance-analyzer/blob/master/packaging/performance-analyzer-agent-cli).
-
 1. Make the CLI executable:
 
    ```bash
    sudo chmod +x /usr/share/elasticsearch/bin/performance-analyzer-agent-cli
    ```
 
-1. Create the `postinit` script for [RPM-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/rpm) or [Debian-based](https://github.com/opendistro-for-elasticsearch/performance-analyzer/tree/master/packaging/deb) distributions in your home directory.
+1. Run the appropriate postinst script for your Linux distro
 
-1. Run the script:
+    ```bash
+   # DEB distros
+   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/deb/postinst.sh 1
+   
+   # RPM distros
+   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/rpm/postinst.sh 1
+    ```
 
-   ```bash
-   sudo sh postinit 1
-   ```
+1. Make Performance Analyzer accessible outside of the host machine
+
+    ```bash
+    cd /usr/share/elasticsearch # navigate to the Elasticsearch home directory
+    cd plugins/opendistro_performance_analyzer/pa_config/
+    vi performance-analyzer.properties
+    ```
+    
+    Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`. An example is provided below.
+    ```bash
+    # ======================== Elasticsearch performance analyzer plugin config =========================
+    
+    # NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
+    
+    # WebService bind host; default to all interfaces
+    webservice-bind-host = 0.0.0.0
+    
+    # Metrics data location
+    metrics-location = /dev/shm/performanceanalyzer/
+    
+    # Metrics deletion interval (minutes) for metrics data.
+    # Interval should be between 1 to 60.
+    metrics-deletion-interval = 1
+    
+    # If set to true, the system cleans up the files behind it. So at any point, we should expect only 2
+    # metrics-db-file-prefix-path files. If set to false, no files are cleaned up. This can be useful, if you are archiving
+    # the files and wouldn't like for them to be cleaned up.
+    cleanup-metrics-db-files = true
+    
+    # WebService exposed by App's port
+    webservice-listener-port = 9600
+    
+    # Metric DB File Prefix Path location
+    metrics-db-file-prefix-path = /tmp/metricsdb_
+    
+    https-enabled = false
+    
+    #Setup the correct path for certificates
+    certificate-file-path = specify_path
+    
+    private-key-file-path = specify_path
+    
+    # Plugin Stats Metadata file name, expected to be in the same location
+    plugin-stats-metadata = plugin-stats-metadata
+    
+    # Agent Stats Metadata file name, expected to be in the same location
+    agent-stats-metadata = agent-stats-metadata
+    ```
 
 1. Start the Elasticsearch service:
 
@@ -298,12 +347,37 @@ sudo bin/elasticsearch-plugin list
 
 ## Remove plugins
 
-```bash
-sudo bin/elasticsearch-plugin remove <plugin-name>
-```
+### (Optional) Cleanup Performance Analyzer files
 
-Then restart Elasticsearch on the node.
+Performance Analyzer relies on certain config files to run. If you want to delete these files, run one of the 
+scripts we've provided based on your Linux distribution
 
+1. Make the removal scripts executable 
+
+    ```bash
+    sudo chmod +x plugins/opendistro_performance_analyer/install/deb/postrm sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
+
+1. Run the appropriate removal script for your distribution
+    ```bash
+    # Debian distribution
+    sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/deb/postrm
+    
+    # Redhat distribution
+    sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/rpm/postrm
+    ```
+
+1. Then you can proceed with the normal removal procedure.
+
+    ```bash
+    sudo bin/elasticsearch-plugin remove <plugin-name>
+    ```
+
+1. Finally,  restart Elasticsearch on the node.
+
+    ```bash
+    sudo systemctl restart elasticsearch.service
+    ```
 
 ## Update plugins
 
