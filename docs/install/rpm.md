@@ -99,11 +99,12 @@ sudo /bin/systemctl enable elasticsearch.service
 
 You can also modify the values in `/etc/sysconfig/elasticsearch` (`JAVA_HOME`, most notably), `/etc/elasticsearch/elasticsearch.yml`, and `/etc/elasticsearch/jvm.options` (to set the heap size, most notably). To learn more, see [Elasticsearch configuration](../../elasticsearch/configuration/) and [Important Settings](../docker#important-settings) on the Docker page.
 
-### Setup Performance Analyzer
 
-By default, Performance Analyzer's endpoints will not be accessible from outside the host machine.
+### (Optional) Set up Performance Analyzer
 
-To edit this behavior you'll need to modify the plugin configuration. First navigate to your `ES_HOME` which is `/usr/share/elasticsearch` for a standard installation.
+By default, Performance Analyzer's endpoints are not accessible from outside the host machine.
+
+To edit this behavior, modify the plugin configuration. First navigate to `ES_HOME`, which is `/usr/share/elasticsearch` for a standard installation.
 
 ```bash
 cd $ES_HOME # navigate to the Elasticsearch home directory
@@ -111,8 +112,9 @@ cd plugins/opendistro_performance_analyzer/pa_config/
 vi performance-analyzer.properties
 ```
 
-Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`. An example is provided below.
-```bash
+Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`:
+
+```
 # ======================== Elasticsearch performance analyzer plugin config =========================
 
 # NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
@@ -152,7 +154,8 @@ plugin-stats-metadata = plugin-stats-metadata
 agent-stats-metadata = agent-stats-metadata
 ```
 
-Finally, restart the Elasticsearch service and PerformanceAnalyzer will be accessible from outside the machine.
+Finally, restart the Elasticsearch service. After the restart, Performance Analyzer is accessible from outside the machine:
+
 ```bash
 sudo systemctl restart elasticsearch.service
 ```

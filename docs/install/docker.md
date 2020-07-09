@@ -187,49 +187,23 @@ services:
 You can use this same method to [pass your own certificates](../docker-security/) for use with the [Security](../../security/configuration/) plugin.
 
 
-## Bash access to containers
+### (Optional) Set up Performance Analyzer
 
-To create an interactive Bash session in a container, run `docker ps` to find the container ID. Then run:
+By default, Performance Analyzer's endpoints are not accessible from outside the Docker container.
 
-```bash
-docker exec -it <container-id> /bin/bash
-```
-
-
-## Important settings
-
-For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. On the Open Distro for Elasticsearch Docker image, this setting is the default. To verify, start a Bash session in the container and run:
+To edit this behavior, open a shell session in the container and modify the configuration:
 
 ```bash
-cat /proc/sys/vm/max_map_count
-```
-
-To increase this value, you have to modify the Docker image. On the RPM install, you can add this setting to the host machine's `/etc/sysctl.conf` file by adding the following line:
-
-```
-vm.max_map_count=262144
-```
-
-Then run `sudo sysctl -p` to reload.
-
-The `docker-compose.yml` file above also contains several key settings: `bootstrap.memory_lock=true`, `ES_JAVA_OPTS=-Xms512m -Xmx512m`, `nofile 65536` and `port 9600`. Respectively, these settings disable memory swapping (along with `memlock`), set the size of the Java heap (we recommend half of system RAM), set a limit of 65536 open files for the Elasticsearch user, and allow you to access Performance Analyzer on port 9600.
-
-### Setup Performance Analyzer
-
-By default, Performance Analyzer's endpoints will not be accessible from outside the Docker container.
-
-To edit this behavior you'll need to open up a shell session in the container and modify the configuration.
-
-```bash
-docker ps # Lookup the container id
+docker ps # Look up the container id
 docker exec -it <container-id> /bin/bash
 # Inside container
 cd plugins/opendistro_performance_analyzer/pa_config/
 vi performance-analyzer.properties
 ```
 
-Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`. An example is provided below.
-```bash
+Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`:
+
+```
 # ======================== Elasticsearch performance analyzer plugin config =========================
 
 # NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
@@ -269,10 +243,41 @@ plugin-stats-metadata = plugin-stats-metadata
 agent-stats-metadata = agent-stats-metadata
 ```
 
-Finally, restart the Performance Analyzer agent and it will become accessible.
+Then restart the Performance Analyzer agent:
+
 ```bash
 kill $(ps aux | grep -i 'PerformanceAnalyzerApp' | grep -v grep | awk '{print $2}')
 ```
+
+
+## Bash access to containers
+
+To create an interactive Bash session in a container, run `docker ps` to find the container ID. Then run:
+
+```bash
+docker exec -it <container-id> /bin/bash
+```
+
+
+## Important settings
+
+For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. On the Open Distro for Elasticsearch Docker image, this setting is the default. To verify, start a Bash session in the container and run:
+
+```bash
+cat /proc/sys/vm/max_map_count
+```
+
+To increase this value, you have to modify the Docker image. On the RPM install, you can add this setting to the host machine's `/etc/sysctl.conf` file by adding the following line:
+
+```
+vm.max_map_count=262144
+```
+
+Then run `sudo sysctl -p` to reload.
+
+The `docker-compose.yml` file above also contains several key settings: `bootstrap.memory_lock=true`, `ES_JAVA_OPTS=-Xms512m -Xmx512m`, `nofile 65536` and `port 9600`. Respectively, these settings disable memory swapping (along with `memlock`), set the size of the Java heap (we recommend half of system RAM), set a limit of 65536 open files for the Elasticsearch user, and allow you to access Performance Analyzer on port 9600.
+
+
 ## Customize the Docker image
 
 To run the image with a custom plugin, first create a [`Dockerfile`](https://docs.docker.com/engine/reference/builder/):

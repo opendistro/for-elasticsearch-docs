@@ -70,30 +70,28 @@ Docker, however, has a default `/dev/shm` size of 64 MB. To change this value, y
 
 If you're not using Docker, check the size of `/dev/shm` using `df -h`. The default value is probably plenty, but if you need to change its size, add the following line to `/etc/fstab`:
 
-```
+```bash
 tmpfs /dev/shm tmpfs defaults,noexec,nosuid,size=1G 0 0
 ```
 
 Then remount the file system:
 
-```
+```bash
 mount -o remount /dev/shm
 ```
 
+
 ### Security
 
-Performance Analyzer supports encryption in transit for requests. It currently does NOT support client or server 
-authentication for requests, though this is a planned feature. To enable encryption in transit, you'll need to
-edit the performance-analyzer.properties file in your `ES_HOME` directory.
+Performance Analyzer supports encryption in transit for requests. It currently does *not* support client or server authentication for requests. To enable encryption in transit, edit `performance-analyzer.properties` in your `$ES_HOME` directory:
 
 ```bash
 vi $ES_HOME/plugins/opendistro_performance_analyzer/pa_config/performance-analyzer.properties
 ```
-   
-Then edit the following lines to setup encryption in transit. Note that certificate-file-path should 
-be a certificate for the server, not a root CA cert:
 
-```bash
+Change the following lines to configure encryption in transit. Note that `certificate-file-path` must be a certificate for the server, not a root CA:
+
+```
 https-enabled = true
 
 #Setup the correct path for certificates
@@ -101,4 +99,3 @@ certificate-file-path = specify_path
 
 private-key-file-path = specify_path
 ```
-    
