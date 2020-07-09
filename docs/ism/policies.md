@@ -63,7 +63,6 @@ This table lists the parameters that you can define for an action.
 Parameter | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |
 `timeout` |  The timeout period for the action. Accepts time units for minutes, hours, and days. | `time unit` | No | -
-`priority` |  Set the priority for the index in a certain state. Unallocated shards of indices are recovered in order of priority, whenever possible. | `number` | Yes | -
 `retry` | The retry configuration for the action. | `object` | No | Specific to action
 
 The `retry` operation has the following parameters:
@@ -87,18 +86,6 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
-The following example sets the priority of the index as soon as it enters a state:
-
-```json
-"actions": [
-  {
-    "index_priority": {
-      "priority": 50
-    }
-  }
-]
-```
-
 For a list of available unit types, see [Supported units](../../elasticsearch/units/).
 
 ## ISM supported operations
@@ -114,6 +101,7 @@ ISM supports the following operations:
 - [rollover](#rollover)
 - [notification](#notification)
 - [snapshot](#snapshot)
+- [priority](#priority)
 
 ### force_merge
 
@@ -332,6 +320,26 @@ Parameter | Description | Type | Required | Default
     "snapshot": "my_snapshot"
   }
 }
+```
+
+### index_priority
+
+Set the priority for the index in a specific state. Unallocated shards of indices are recovered in the order of their priority, whenever possible.
+
+The `index_priority` operation has the following parameter:
+
+Parameter | Description | Type | Required | Default
+:--- | :--- |:--- |:--- |
+`priority` | The priority for the index as soon as it enters a state. | `number` | Yes | -
+
+```json
+"actions": [
+  {
+    "index_priority": {
+      "priority": 50
+    }
+  }
+]
 ```
 
 ---
