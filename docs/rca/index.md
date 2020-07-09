@@ -1,13 +1,11 @@
 ---
 layout: default
-title: Root Cause Analysis (Alpha)
+title: Root Cause Analysis
 nav_order: 39
 has_children: true
 ---
 
 # Root Cause Analysis
-Alpha
-{: .label .label-red :}
 
 The Open Distro for Elasticsearch Performance Analyzer plugin (PA) captures Elasticsearch and JVM activity, plus their lower-level resource usage (e.g. disk, network, CPU, and memory). Based on this instrumentation, Performance Analyzer computes and exposes diagnostic metrics so that administrators can measure and understand the bottlenecks in their Elasticsearch clusters.
 

@@ -62,6 +62,8 @@ PerfTop has no interactivity. Start the application, monitor the dashboard, and 
 
 ## Performance Analyzer configuration
 
+### Storage
+
 Performance Analyzer uses `/dev/shm` for temporary storage. During heavy workloads on a cluster, Performance Analyzer can use up to 1 GB of space.
 
 Docker, however, has a default `/dev/shm` size of 64 MB. To change this value, you can use the `docker run --shm-size 1gb` flag or [a similar setting in Docker Compose](https://docs.docker.com/compose/compose-file/#shm_size).
@@ -77,3 +79,26 @@ Then remount the file system:
 ```
 mount -o remount /dev/shm
 ```
+
+### Security
+
+Performance Analyzer supports encryption in transit for requests. It currently does NOT support client or server 
+authentication for requests, though this is a planned feature. To enable encryption in transit, you'll need to
+edit the performance-analyzer.properties file in your `ES_HOME` directory.
+
+```bash
+vi $ES_HOME/plugins/opendistro_performance_analyzer/pa_config/performance-analyzer.properties
+```
+   
+Then edit the following lines to setup encryption in transit. Note that certificate-file-path should 
+be a certificate for the server, not a root CA cert:
+
+```bash
+https-enabled = true
+
+#Setup the correct path for certificates
+certificate-file-path = specify_path
+
+private-key-file-path = specify_path
+```
+    

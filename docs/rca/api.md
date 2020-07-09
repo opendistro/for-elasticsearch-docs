@@ -1,7 +1,7 @@
 ---
 layout: default
 title: API
-parent: Performance Analyzer
+parent: Root Cause Analysis
 nav_order: 1
 ---
 
