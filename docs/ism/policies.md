@@ -329,7 +329,7 @@ Set the priority for the index in a specific state. Unallocated shards of indice
 The `index_priority` operation has the following parameter:
 
 Parameter | Description | Type | Required | Default
-:--- | :--- |:--- |:--- |
+:--- | :--- |:--- |:--- |:---
 `priority` | The priority for the index as soon as it enters a state. | `number` | Yes | -
 
 ```json
