@@ -37,7 +37,7 @@ opendistro-job-scheduler        1.9.0.0
 opendistro-knn                  1.9.0.0
 opendistro_alerting             1.9.0.0
 opendistro_index_management     1.9.0.0
-opendistro_performance_analyzer 1.9.0.0
+opendistro_performance_analyzer 1.9.0.1
 opendistro_security             1.9.0.0
 opendistro_sql                  1.9.0.0
 </pre>
