@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Settings
+title: Settings and Statistics
 parent: KNN
 nav_order: 10
 ---
 
-# KNN Settings
+# KNN Settings and Statistics
 
 The KNN plugin adds several new index settings, cluster settings, and statistics.
 

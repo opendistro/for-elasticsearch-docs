@@ -29,7 +29,7 @@ Component | Purpose
 :--- | :---
 [Elasticsearch](docs/elasticsearch) | Data store and search engine
 [Kibana](docs/kibana) | Search frontend and visualizations
-[Security](docs/security-configuration/) | Authentication and access control for your cluster
+[Security](docs/security/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
 [SQL](docs/sql/) | Use SQL to query your data
 [Index State Management](docs/ism/) | Automate index operations

@@ -184,7 +184,7 @@ services:
       - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
 ```
 
-You can use this same method to [pass your own certificates](../docker-security/) for use with the [Security](../../security-configuration/) plugin.
+You can use this same method to [pass your own certificates](../docker-security/) for use with the [Security](../../security/configuration/) plugin.
 
 
 ## Bash access to containers
@@ -231,7 +231,7 @@ docker build --tag=odfe-custom-plugin .
 docker run -p 9200:9200 -p 9600:9600 -v /usr/share/elasticsearch/data odfe-custom-plugin
 ```
 
-You can also use a `Dockerfile` to pass your own certificates for use with the [Security](../../security-configuration/) plugin, similar to the `-v` argument in [Configure Elasticsearch](#configure-elasticsearch):
+You can also use a `Dockerfile` to pass your own certificates for use with the [Security](../../security/) plugin, similar to the `-v` argument in [Configure Elasticsearch](#configure-elasticsearch):
 
 ```
 FROM amazon/opendistro-for-elasticsearch:1.9.0

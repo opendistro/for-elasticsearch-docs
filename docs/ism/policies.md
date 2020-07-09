@@ -86,6 +86,8 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
+For a list of available unit types, see [Supported units](../../elasticsearch/units/).
+
 ## ISM supported operations
 ISM supports the following operations:
 
@@ -98,7 +100,6 @@ ISM supports the following operations:
 - [delete](#delete)
 - [rollover](#rollover)
 - [notification](#notification)
-- [error_notification](#error_notification)
 - [snapshot](#snapshot)
 
 ### force_merge
@@ -300,70 +301,6 @@ Parameter | Description | Type
 `index_uuid` | The uuid of the index. | `string`
 `policy_id` | The name of the policy. | `string`
 
-### error_notification
-
-Sends you a notification if your managed index fails.
-
-Parameter | Description | Type | Required
-:--- | :--- |:--- |:--- |
-`destination` | The destination URL. | `Slack, Amazon Chime, or webhook URL` | Yes
-`message_template` |  The text of the message. You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). | `object` | Yes
-
-The destination system **must** return a response otherwise the notification operation throws an error.
-
-#### Example 1: Chime notification
-
-```json
-{
-  "error_notification": {
-    "destination": {
-      "chime": {
-        "url": "<url>"
-      }
-    },
-    "message_template": {
-      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
-    }
-  }
-}
-```
-
-#### Example 2: Custom webhook notification
-
-```json
-{
-  "error_notification": {
-    "destination": {
-      "custom_webhook": {
-        "url": "https://<your_webhook>"
-      }
-    },
-    "message_template": {
-      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
-    }
-  }
-}
-```
-
-#### Example 3: Slack notification
-
-```json
-{
-  "error_notification": {
-    "destination": {
-      "slack": {
-        "url": "https://hooks.slack.com/services/xxx/xxxxxx"
-      }
-    },
-    "message_template": {
-      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
-    }
-  }
-}
-```
-
-You can use the same options for `ctx` variables as the `notification` operation.
-
 ### snapshot
 
 Backup your cluster’s indices and state. For more information about snapshots, see [Take and restore snapshots](../../elasticsearch/snapshot-restore/).
@@ -426,6 +363,87 @@ The following example transitions the index to a `cold` state after a period of 
 ```
 
 ISM checks the conditions on every execution of the policy based on the set interval.
+
+---
+
+## Error notifications
+
+The `error_notification` operation sends you a notification if your managed index fails.
+It notifies a single destination with a custom message.
+
+Set up error notifications at the policy level:
+
+```json
+{
+  "policy": {
+    "description": "hot warm delete workflow",
+    "default_state": "hot",
+    "schema_version": 1,
+    "error_notification": { },
+    "states": [ ]
+  }
+}
+```
+
+Parameter | Description | Type | Required
+:--- | :--- |:--- |:--- |
+`destination` | The destination URL. | `Slack, Amazon Chime, or webhook URL` | Yes
+`message_template` |  The text of the message. You can add variables to your messages using [Mustache templates](https://mustache.github.io/mustache.5.html). | `object` | Yes
+
+The destination system **must** return a response otherwise the `error_notification` operation throws an error.
+
+#### Example 1: Chime notification
+
+```json
+{
+  "error_notification": {
+    "destination": {
+      "chime": {
+        "url": "<url>"
+      }
+    },
+    "message_template": {
+      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
+    }
+  }
+}
+```
+
+#### Example 2: Custom webhook notification
+
+```json
+{
+  "error_notification": {
+    "destination": {
+      "custom_webhook": {
+        "url": "https://<your_webhook>"
+      }
+    },
+    "message_template": {
+      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
+    }
+  }
+}
+```
+
+#### Example 3: Slack notification
+
+```json
+{
+  "error_notification": {
+    "destination": {
+      "slack": {
+        "url": "https://hooks.slack.com/services/xxx/xxxxxx"
+      }
+    },
+    "message_template": {
+      "source": "The index {% raw %}{{ctx.index}}{% endraw %} failed during policy execution."
+    }
+  }
+}
+```
+
+You can use the same options for `ctx` variables as the [notification](#notification) operation.
 
 ## Example policy
 

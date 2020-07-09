@@ -199,7 +199,7 @@ Navigate to the Elasticsearch home directory (most likely, it is `/usr/share/ela
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-1.9.0.0.zip
 ```
 
-After installing the security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security-configuration/security-admin/).
+After installing the security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security/configuration/security-admin/).
 
 The security plugin has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
@@ -233,7 +233,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-1.9.0.0.zip
 ```
 
-To install Index State Management, you must first install the Job Scheduler plugin.
+To install Index State Management, you must first install the Job Scheduler plugin. ISM has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
 ### KNN
