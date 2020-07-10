@@ -251,7 +251,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.9.0.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-1.9.0.1.zip
 ```
 
 Performance Analyzer requires some manual configuration after installing the plugin:
