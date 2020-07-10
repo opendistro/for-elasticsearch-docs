@@ -136,7 +136,7 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
     <tr>
       <td>Indexing_ThrottleTime
       </td>
-      <td rowspan="29">ShardID, IndexName
+      <td rowspan="30">ShardID, IndexName
       </td>
       <td>Time (milliseconds) that the index has been under merge throttling control in the past five seconds.
       </td>
@@ -307,6 +307,12 @@ This list is extensive. We recommend Ctrl + F to find what you're looking for.
       <td>VersionMap_Memory
       </td>
       <td>Estimated memory usage of the version map in bytes.
+      </td>
+    </tr>
+    <tr>
+      <td>Shard_Size_In_Bytes
+      </td>
+      <td>Estimated disk usage of the shard in bytes.
       </td>
     </tr>
     <tr>
