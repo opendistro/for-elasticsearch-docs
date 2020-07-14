@@ -101,7 +101,7 @@ ISM supports the following operations:
 - [rollover](#rollover)
 - [notification](#notification)
 - [snapshot](#snapshot)
-- [priority](#priority)
+- [index_priority](#index_priority)
 
 ### force_merge
 
