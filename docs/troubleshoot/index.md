@@ -61,6 +61,13 @@ output.elasticsearch:
   ssl.key: "/full/path/to/client-key.pem"
 ```
 
+Even if you use the OSS version, Beats might check for a proprietary plugin on the Elasticsearch server and throw an error during setup. To disable the check, try adding these settings:
+
+```yml
+  setup.ilm.enabled: false
+  setup.ilm.check_exists: false
+```
+
 
 ## Logstash
 
@@ -75,6 +82,7 @@ output {
     password => "admin"
     ssl => true
     cacert => "/full/path/to/root-ca.pem"
+    ilm_enabled => false
   }
 }
 ```
