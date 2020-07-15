@@ -348,13 +348,13 @@ sudo bin/elasticsearch-plugin list
 
 ## Remove plugins
 
-If you are removing Performance Analyzer, see below.
+If you are removing Performance Analyzer, see below. Otherwise, you can remove the plugin with a single command:
 
 ```bash
 sudo bin/elasticsearch-plugin remove <plugin-name>
 ```
 
-Then restart Elasticsearch on the node.
+Then restart Elasticsearch on the node:
 
 ```bash
 sudo systemctl restart elasticsearch.service
