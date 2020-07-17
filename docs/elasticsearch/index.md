@@ -10,7 +10,7 @@ has_toc: false
 
 Elasticsearch is a distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). After adding your data to Elasticsearch, you can perform full-text searches on it with all these features: search by field, search multiple indices, boost fields, rank results by score, sort results by field, and aggregate results.
 
-People often use Elasticsearch as the backend for a search application such as [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:FAQ/Technical#What_software_is_used_to_run_Wikipedia?) or an online store. It offers excellent performance and can scale up or down depending on the needs of the application.
+People often use Elasticsearch as the backend for a search application, such as [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:FAQ/Technical#What_software_is_used_to_run_Wikipedia?) or an online store. It offers excellent performance and can scale up or down depending on the needs of the application.
 
 An equally popular, but less obvious use case is log analytics. Here, you take the logs from an application, feed them into Elasticsearch, and use the rich search and visualization functionality to identify issues. For example, a malfunctioning web server might throw a 500 error 0.5% of the time, which can be hard to notice unless you have a real-time graph of all HTTP status codes that the server has thrown in the past four hours. You can use [Kibana](../kibana/) to build these sorts of visualizations from data in Elasticsearch.
 
@@ -70,7 +70,7 @@ Despite being a piece of an Elasticsearch index, each shard is actually a full L
 
 ## REST API
 
-You interact with Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can use clients like [curl](https://curl.haxx.se/) or any programming language that can send HTTP requests. To add a JSON document to an Elasticsearch index (i.e. index a document), send an HTTP request such as the following:
+You can interact with Elasticsearch clusters using the REST API, which offers a lot of flexibility. You can use clients like [curl](https://curl.haxx.se/) or any programming language that can send HTTP requests. To add a JSON document to an Elasticsearch index (i.e. index a document), send an HTTP request:
 
 ```json
 PUT https://<host>:<port>/<index-name>/_doc/<document-id>
@@ -92,4 +92,4 @@ To delete the document:
 DELETE https://<host>:<port>/<index-name>/_doc/<document-id>
 ```
 
-Using the REST API, you can change Elasticsearch settings, modify indices, check the health of the cluster, and get statistics.
+Using the REST API, you can change Elasticsearch settings, modify indices, check the health of the cluster, and get all required statistics.
