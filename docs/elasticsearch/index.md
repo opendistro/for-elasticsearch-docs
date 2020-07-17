@@ -17,7 +17,7 @@ An equally popular, but less obvious use case is log analytics. Here, you take t
 
 ## Clusters and nodes
 
-The distributed design of Elasticsearch allows you interact with *clusters*. A cluster is a collection of one or more *nodes*, servers that store your data and process search requests.
+The distributed design of Elasticsearch allows you to interact with *clusters*. A cluster is a collection of one or more *nodes*, servers that store your data and process search requests.
 
 You can run Elasticsearch locally on a laptop with minimum system requirements. You can also scale a single cluster to hundreds of powerful machines in a data center.
 
