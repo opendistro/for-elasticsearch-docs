@@ -9,6 +9,10 @@ nav_order: 4
 
 The Open Database Connectivity (ODBC) driver is a read-only ODBC driver for Windows and macOS that lets you connect business intelligence (BI) applications to the SQL plugin.
 
+For information on downloading and using the JAR file, see [the GitHub repository](https://github.com/opendistro-for-elasticsearch/sql-odbc).
+
+{% comment %}
+
 ## Specifications
 
 The ODBC driver is compatible with ODBC version 3.51.
@@ -210,3 +214,5 @@ Unable to connect to server. A error window after signing in as below.
 This is most likely due to Elasticsearch server not running on **host** and **post** configured in DSN.
 Confirm **host** and **post** are correct and Elasticsearch server is running with ODFE SQL plugin.
 Also make sure `.tdc` that was downloaded with the installer is copied correctly to `<user_home_directory>/Documents/My Tableau Repository/Datasources` directory.
+
+{% endcomment %}
