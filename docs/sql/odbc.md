@@ -2,14 +2,14 @@
 layout: default
 title: ODBC Driver
 parent: SQL
-nav_order: 4
+nav_order: 72
 ---
 
 # ODBC driver
 
 The Open Database Connectivity (ODBC) driver is a read-only ODBC driver for Windows and macOS that lets you connect business intelligence (BI) applications to the SQL plugin.
 
-For information on downloading and using the JAR file, see [the GitHub repository](https://github.com/opendistro-for-elasticsearch/sql-odbc).
+For information on downloading and using the JAR file, see [the SQL repository on GitHub](https://github.com/opendistro-for-elasticsearch/sql/tree/master/sql-odbc).
 
 {% comment %}
 
