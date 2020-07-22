@@ -23,7 +23,6 @@ For information about the default configuration, steps to configure security, an
 [README](https://github.com/opendistro-for-elasticsearch/community/tree/master/open-distro-elasticsearch-kubernetes/helm).
 
 The instructions here assume you have a Kubernetes cluster with Helm preinstalled. See the [Kubernetes documentation](https://kubernetes.io/docs/setup/) for steps to configure a Kubernetes cluster and the [Helm documentation](https://helm.sh/docs/intro/install/) to install Helm.
-Run the `helm init` command to make sure you also have the Tiller server installed. For more information about Tiller, see the [Tiller documentation](https://tiller.readthedocs.io/en/latest/).
 {: .note }
 
 ## Install using Helm
@@ -51,18 +50,8 @@ Run the `helm init` command to make sure you also have the Tiller server install
 1. Deploy Elasticsearch:
 
    ```bash
-   helm install opendistro-es opendistro-es-1.9.0.tgz
+   helm install —generate-name opendistro-es-1.9.0.tgz
    ```
-
-If you see a `namespaces "default" is forbidden` error, create a Tiller service account and deploy with a cluster binding role, as shown in the following example. See the [Tiller documentation](https://tiller.readthedocs.io/en/latest/) for more information.
-
-
-```bash
-$ kubectl create serviceaccount --namespace kube-system tiller
-$ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-$ kubectl patch deploy --namespace kube-system tiller-deploy -p'{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-```
-
 
 The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
@@ -87,14 +76,10 @@ To make sure your Elasticsearch pod is up and running, run the following command
 ```bash
 $ kubectl get pods
 NAME                                    READY   STATUS    RESTARTS   AGE
-opendistro-es-client-988fb9fbf-ph8fd    1/1     Running   0          111m
-opendistro-es-client-988fb9fbf-xsz8n    1/1     Running   0          111m
-opendistro-es-data-0                    1/1     Running   0          111m
-opendistro-es-data-1                    1/1     Running   0          110m
-opendistro-es-data-2                    1/1     Running   0          110m
-opendistro-es-kibana-786f547486-75gw4   1/1     Running   0          111m
-opendistro-es-master-0                  1/1     Running   0          111m
-opendistro-es-master-1                  1/1     Running   0          106m
+opendistro-es-client-988fb9fbf-ph8f     1/1     Running   0          3m30s
+opendistro-es-data-0                    1/1     Running   0          3m30s
+opendistro-es-kibana-786f547486-75gw4   1/1     Running   0          3m31s
+opendistro-es-master-0                  1/1     Running   0          3m30s
 ```
 
 To access the Elasticsearch shell:
