@@ -7,7 +7,7 @@ nav_order: 5
 
 # Tarball
 
-The tarball installation works on Linux systems and provides a self-contained directory with everything you need to run Open Distro for Elasticsearch, including an integrated Java Development Kit (JDK). The tarball is a good option for testing, but we recommend Docker or a package manager for production deployments.
+The tarball installation works on Linux systems and provides a self-contained directory with everything you need to run Open Distro for Elasticsearch, including an integrated Java Development Kit (JDK). The tarball is a good option for testing and development, but we recommend Docker or a package manager for production deployments.
 
 The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linux distributions. If you have your own Java installation and you set `JAVA_HOME` in the terminal, macOS works as well.
 
