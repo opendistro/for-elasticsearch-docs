@@ -33,7 +33,7 @@ Setting | Default | Description
 If you don't want to disable ISM audit history or shorten the retention period, you can create an [index template](../../elasticsearch/index-templates/) to reduce the shard count of the history indices:
 
 ```json
-PUT _template/ism_history_indices
+PUT _index_template/ism_history_indices
 {
   "index_patterns": [
     ".opendistro-ism-managed-index-history-*"
