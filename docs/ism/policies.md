@@ -408,6 +408,7 @@ Note that this condition does not execute at exactly 5:00 PM; the job still exec
 
 A window of an hour, which this example uses, is generally sufficient, but you might increase it to 2--3 hours to avoid missing the window and having to wait a week for the transition to occur. Alternately, you could use a broader expression such as `* * * * SAT,SUN` to have the transition occur at any time during the weekend.
 
+For information on writing cron expressions, see [Cron expression reference](../../alerting/cron/).
 
 ---
 
