@@ -395,7 +395,7 @@ This example uses the `cron` condition to transition indices every Saturday at 5
     "conditions": {
       "cron": {
         "cron": {
-          "expression": "0 17 * * SAT",
+          "expression": "* 17 * * SAT",
           "timezone": "America/Los_Angeles"
         }
       }
