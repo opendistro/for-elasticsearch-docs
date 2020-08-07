@@ -406,7 +406,7 @@ This example uses the `cron` condition to transition indices every Saturday at 5
 
 Note that this condition does not execute at exactly 5:00 PM; the job still executes based off the `job_interval` setting. Due to this variance in start time and the amount of time that it can take for actions to complete prior to checking transition conditions, we recommend against overly narrow cron expressoins. For example, don't use `15 17 * * SAT` (5:15 PM on Saturday).
 
-A period of an hour, which this example uses, is generally sufficient, but you might increase it to 2--3 hours to avoid missing the transition check and having to wait a week for the transition to occur. Alternately, you could use an expression such as `* * * * SAT,SUN` to have the transition occur at any time during the weekend.
+A window of an hour, which this example uses, is generally sufficient, but you might increase it to 2--3 hours to avoid missing the window and having to wait a week for the transition to occur. Alternately, you could use a broader expression such as `* * * * SAT,SUN` to have the transition occur at any time during the weekend.
 
 
 ---
