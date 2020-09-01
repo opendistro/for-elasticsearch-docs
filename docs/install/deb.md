@@ -43,8 +43,8 @@ These steps assume you're using Ubuntu 18.04.
 1. Install Elasticsearch OSS:
 
    ```bash
-   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.8.0-amd64.deb
-   sudo dpkg -i elasticsearch-oss-7.8.0-amd64.deb
+   wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.9.0-amd64.deb
+   sudo dpkg -i elasticsearch-oss-7.9.0-amd64.deb
    ```
 
 1. Install the latest version of Open Distro for Elasticsearch:

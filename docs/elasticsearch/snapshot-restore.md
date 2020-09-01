@@ -101,7 +101,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    If you're using the Docker installation, see [Customize the Docker image](../../install/docker/#customize-the-docker-image). Your `Dockerfile` should look something like this:
 
    ```
-   FROM amazon/opendistro-for-elasticsearch:1.9.0
+   FROM amazon/opendistro-for-elasticsearch:1.10.0
 
    ENV AWS_ACCESS_KEY_ID <access-key>
    ENV AWS_SECRET_ACCESS_KEY <secret-key>

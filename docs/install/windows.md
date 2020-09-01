@@ -15,7 +15,7 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 ## ZIP install
 
-1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.9.0.zip).
+1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-1.10.0.zip).
 
 1. Extract the file to a directory, and open that directory at the command prompt.
 
@@ -30,7 +30,7 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 1. Install Java 11.
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_1.9.0.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_1.10.0.exe), run it, and click through the steps.
 
 1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory.
 
