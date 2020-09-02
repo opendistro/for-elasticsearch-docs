@@ -186,7 +186,10 @@ Shard data | `/var/lib/elasticsearch`
 
 ## Notes on Debian
 
-If you are using Debian rather than Ubuntu, you likely need to make some modifications to the install process.
+If you are using Debian Buster rather than Ubuntu, skip the `sudo add-apt-repository ppa:openjdk-r/ppa` since `openjdk-11-jdk` 
+is available see https://packages.debian.org/buster/openjdk-11-jdk
+
+If you are using Debian Strech rather than Ubuntu, you likely need to make some modifications to the install process.
 
 1. When installing Java 11, rather than `sudo add-apt-repository ppa:openjdk-r/ppa`, run:
 
@@ -194,8 +197,8 @@ If you are using Debian rather than Ubuntu, you likely need to make some modific
    sudo echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
    ```
 
-1. Before installing Open Distro for Elasticsearch, run:
+2. Before installing Open Distro for Elasticsearch, run:
 
    ```bash
-   apt install apt-transport-https
+   apt install apt-transport-https 
    ```
