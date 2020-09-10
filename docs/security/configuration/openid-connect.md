@@ -309,7 +309,7 @@ elasticsearch.requestHeadersWhitelist: ["Authorization", "security_tenant"]
 
 Because Kibana requires that the internal Kibana server user can authenticate through HTTP basic authentication, you must configure two authentication domains. For OpenID Connect, the HTTP basic domain has to be placed first in the chain. Make sure you set the challenge flag to `false`.
 
-Make sure to modify and apply the following example settings in your security `config.yml`
+Modify and apply the following example settings in `config.yml`:
 
 ```yml
 basic_internal_auth_domain:

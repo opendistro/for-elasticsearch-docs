@@ -9,7 +9,7 @@ nav_order: 7
 
 Before deploying to a production environment, you should replace the demo security certificates and configuration YAML files with your own. With the RPM and Debian installations, you have direct access to the file system, but the Docker image requires modifying the Docker Compose file to include the replacement files.
 
-Additionally you may set the docker environment variable `DISABLE_INSTALL_DEMO_CONFIG` to `true`. This will completely disable all changes that are made by the demo installer.
+Additionally you can set the Docker environment variable `DISABLE_INSTALL_DEMO_CONFIG` to `true`. This change completely disables the demo installer.
 
 #### Sample Docker Compose file
 

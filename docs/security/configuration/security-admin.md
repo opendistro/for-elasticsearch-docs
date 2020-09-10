@@ -24,7 +24,7 @@ opendistro_security.authcz.admin_dn:
   - CN=kirk,OU=client,O=client,L=test,C=DE
 ```
 
-It is not possible to use node certificates as admin certificates. The best practice is to keep these certificates separate. Also, do not use any whitespace between the parts of the DN.
+You can't use node certificates as admin certificates. The two must be separate. Also, do not use any whitespace between the parts of the DN.
 {: .warning }
 
 
