@@ -43,7 +43,7 @@ The steps on this page are most applicable if you installed Open Distro for Elas
    Alternately, `yum` lets you upgrade to a specific version of Open Distro for Elasticsearch:
 
    ```bash
-   sudo yum install opendistro-for-elasticsearch-1.10.0
+   sudo yum install opendistro-for-elasticsearch-{{site.odfe_version}}
    ```
 
    Unfortunately, `apt` upgrades dependencies to their latest versions and thus only supports upgrades to the newest version of Open Distro for Elasticsearch.
