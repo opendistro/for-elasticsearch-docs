@@ -9,7 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-[1.10.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.10.0.md) | TBD | TBD | 7.9.1
+[1.10.1](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.10.0.md) | TBD | TBD | 7.9.1
 [1.9.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.9.0.md) | Adds Root Cause Analysis, new Anomaly Detection actions, and a new Index State Management action. | 9 July 2020 | 7.8.0
 [1.8.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.8.0.md) | Adds snapshot operation to Index State Management, a new `count` aggregation to Anomaly Detection, and cosine similarity to KNN. Also bumps Elasticsearch version. | 2 June 2020 | 7.7.0
 [1.7.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.7.0.md) | Adds numerous new SQL operations, SQL user interface for Kibana, SQL CLI, Anomaly Detection plugin, and Anomaly Detection user interface for Kibana. | 13 May 2020 | 7.6.1

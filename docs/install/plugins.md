@@ -32,14 +32,14 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.9.1</td>
     <td>
-      <pre>opendistro-anomaly-detection    1.10.0.0
-opendistro-job-scheduler        1.10.0.0
-opendistro-knn                  1.10.0.0
-opendistro_alerting             1.10.0.0
-opendistro_index_management     1.10.0.0
-opendistro_performance_analyzer 1.10.0.0
-opendistro_security             1.10.0.0
-opendistro_sql                  1.10.0.0
+      <pre>opendistro-anomaly-detection    1.10.1.0
+opendistro-job-scheduler        1.10.1.0
+opendistro-knn                  1.10.1.0
+opendistro_alerting             1.10.1.0
+opendistro_index_management     1.10.1.0
+opendistro_performance_analyzer 1.10.1.0
+opendistro_security             1.10.1.0
+opendistro_sql                  1.10.1.0
 </pre>
     </td>
   </tr>
@@ -379,7 +379,7 @@ sudo systemctl restart elasticsearch.service
 
 Performance Analyzer requires certain configuration files to run. If you want to delete these files, run one of the scripts we provide based on your Linux distribution *before* performing the normal plugin removal process.
 
-1. Make the removal scripts executable
+1. Make the removal scripts executable:
 
    ```bash
    sudo chmod +x plugins/opendistro_performance_analyer/install/deb/postrm sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
