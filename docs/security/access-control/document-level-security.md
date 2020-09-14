@@ -87,7 +87,7 @@ Term | Replaced with
 :--- | :---
 `${user.name}` | Username.
 `${user.roles}` | A comma-separated, quoted list of user roles.
-`${attr.<TYPE>.<NAME>}` | An attribute with name `<NAME>` defined for a user. `<TYPE>` is `internal`, `jwt` or `ldap`
+`${attr.<TYPE>.<NAME>}` | An attribute with name `<NAME>` defined for a user. `<TYPE>` is `internal`, `jwt`, `proxy` or `ldap`
 
 
 ## Attribute-based security
