@@ -64,7 +64,7 @@ sin | `sin(number T) -> double` | `SELECT sin(0.5) FROM my-index LIMIT 1`
 sinh | `sinh(number T) -> double` | `SELECT sinh(0.5) FROM my-index LIMIT 1`
 tan | `tan(number T) -> double` | `SELECT tan(0.5) FROM my-index LIMIT 1`
 
-## Date and Time
+## Date and time
 
 Function | Specification | Example
 :--- | :--- | :---
