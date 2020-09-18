@@ -43,7 +43,7 @@ This plugin provides a user interface for creating monitors and managing alerts.
 #### Index State Management
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistro_index_management_kibana-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistro_index_management_kibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for managing policies.
