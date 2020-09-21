@@ -102,6 +102,7 @@ ISM supports the following operations:
 - [notification](#notification)
 - [snapshot](#snapshot)
 - [index_priority](#index_priority)
+- [allocation](#allocation)
 
 ### force_merge
 
@@ -337,6 +338,30 @@ Parameter | Description | Type | Required | Default
   {
     "index_priority": {
       "priority": 50
+    }
+  }
+]
+```
+
+### allocation
+
+Allocate the index to a node with a specific attribute.
+For example, setting `require` to `warm` moves your data only to "warm" nodes.
+
+The `allocation` operation has the following parameters:
+
+Parameter | Description | Type | Required
+:--- | :--- |:--- |:---
+`require` | Allocate the index to a node with a specified attribute. | `string` | Yes
+`include` | Allocate the index to a node with any of the specified attributes. | `string` | Yes
+`exclude` | Don’t allocate the index to a node with any of the specified attributes. | `string` | Yes
+`wait_for` | Wait for the policy to execute before allocating the index to a node with a specified attribute. | `string` | Yes
+
+```json
+"actions": [
+  {
+    "allocation": {
+      "require": { "box_type": "warm" }
     }
   }
 ]
