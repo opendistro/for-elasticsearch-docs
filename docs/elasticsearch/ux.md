@@ -1,26 +1,25 @@
 ---
 layout: default
-title: Search UX
+title: Search Experience
 parent: Elasticsearch
 nav_order: 12
 ---
 
-# Search UX
+# Search Experience
 
-Expectations from search engines have evolved over the years. Just returning relevant results quickly is no longer enough for most users.
-Elasticsearch includes many features that enhance the user's search experience.
+Expectations from search engines have evolved over the years. Just returning relevant results quickly is no longer enough for most users. Elasticsearch includes many features that enhance the user’s search experience as follows:
 
 Feature | Description
 :--- | :---
-Autocomplete | Suggest phrases as the user types.
-Pagination |  Rather than a single, long list, break search results into pages.
-Scroll | Return a large number of results in batches.
-Sort | Allow sorting results by different criteria.
-Highlight | Highlight the search term in the results.
+Autocomplete queries | Suggest phrases as the user types.
+Paginate results |  Rather than a single, long list, break search results into pages.
+Scroll search | Return a large number of results in batches.
+Sort results | Allow sorting results by different criteria.
+Highlight query matches | Highlight the search term in the results.
 
 ---
 
-## Autocomplete
+## Autocomplete queries
 
 Autocomplete shows suggestions to users while they type.
 
@@ -32,15 +31,22 @@ Elasticsearch allows you to design autocomplete that’s:
 - Relevant: Serves a few but relevant suggestions.
 - Forgiving: Tolerates typos.
 
-Implement autocomplete in one of three ways: prefixes, edge N-grams, and completion suggesters.
-Use these same methods to implement instant search. Instant search is where you show search results as your user types.
+Implement autocomplete in one of three methods:
 
-### Prefixes (query time)
+- Prefix matching
+- Edge N-gram matching
+- Completion suggesters
 
-Prefix matching doesn't require any special mappings. It works with your data as-is.
+These methods are described below.
+
+### Prefix matching
+
+Prefix matching finds documents that matches the last term in the query string.
 
 For example, assume that the user types “qui” into a search UI. To autocomplete this phrase, use the `match_phrase_prefix` query to search all `text_entry` fields that begin with the prefix "qui."
 To make the word order and relative positions flexible, specify a `slop` value. To learn about the `slop` option, see [Options](../full-text/#options).
+
+#### Sample Request
 
 ```json
 GET shakespeare/_search
@@ -56,8 +62,11 @@ GET shakespeare/_search
 }
 ```
 
-Prefix matching is a fairly resource intensive operation. A prefix of `a` could match hundreds of thousands of terms and not be useful to your user.
+Prefix matching doesn’t require any special mappings. It works with your data as-is.
+However, it’s a fairly resource-intensive operation. A prefix of `a` could match hundreds of thousands of terms and not be useful to your user.
 To limit the impact of prefix expansion, set `max_expansions` to a reasonable number. To learn about the `max_expansions` option, see [Options](../full-text/#options).
+
+#### Sample Request
 
 ```json
 GET shakespeare/_search
@@ -77,11 +86,10 @@ GET shakespeare/_search
 The ease of implementing query-time autocomplete comes at the cost of performance.
 When implementing this feature on a large scale, we recommend an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
 
-### Edge N-grams (index time)
+### Edge N-gram matching
 
-Use edge N-grams to implement autocomplete at index time to improve its performance.
+During indexing, edge N-grams chop up a word into a sequence of N characters to support a faster lookup of partial search terms.
 
-Think of an N-gram as a sequence of N characters.
 If you N-gram the word "quick," the results depend on the value of N.
 
 N | Type | N-gram
@@ -105,6 +113,8 @@ Edge N-gramming the word "quick" results in the following:
 This follows the same sequence the user types.
 
 To configure a field to use edge N-grams, create an autocomplete analyzer with an `edge_ngram` filter:
+
+#### Sample Request
 
 ```json
 PUT shakespeare
@@ -167,6 +177,8 @@ It returns edge N-grams as tokens:
 
 Use the `standard` analyzer at search time. Otherwise, the search query splits into edge N-grams and you get results for everything that matches `q`, `u`, and `i`.
 This is one of the few occasions where you use a different analyzer on the index and query side.
+
+#### Sample Request
 
 ```json
 GET shakespeare/_search
@@ -250,11 +262,13 @@ Alternatively, specify the `search_analyzer` in the mapping itself:
 }
 ```
 
-### Completion suggester (index time)
+### Completion suggester
 
-Use the completion suggester to make your autocomplete solution as efficient as possible and to have explicit control over its suggestions. The completion suggester accepts a list of suggestions and builds them into a finite-state transducer (FST), an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about FSTs, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
+The completion suggester accepts a list of suggestions and builds them into a finite-state transducer (FST), an optimized data structure that’s essentially a graph. This data structure lives in memory and is optimized for fast prefix lookups. To learn more about FSTs, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer).
 
 As the user types, the completion suggester moves through the FST graph one character at a time along a matching path. After it runs out of user input, it examines the remaining endings to produce a list of suggestions.
+
+The completion suggester makes your autocomplete solution as efficient as possible and lets you have explicit control over its suggestions.
 
 Use a dedicated field type called `completion`, which stores the FST-like data structures in the index:
 
@@ -722,9 +736,9 @@ You get back the corrected phrase:
 ```
 
 
-## Pagination
+## Paginate results
 
-Use the `from` and `size` parameters to return results to your users one page at a time.
+The `from` and `size` parameters return results to your users one page at a time.
 
 The `from` parameter is the document number that you want to start showing the results from. The `size` parameter is the number of results that you want to show. Together, they let you return a subset of the search results.
 
@@ -767,7 +781,7 @@ For example, assume a user stays on the first page of the results for a minute a
 
 Use the `scroll` operation for consistent pagination. The `scroll` operation keeps a search context open for a certain period of time. Any data changes do not affect the results during this time.
 
-## Scroll
+## Scroll search
 
 The `from` and `size` parameters allow you to paginate your search results, but with a limit of 10,000 results at a time.
 
@@ -860,9 +874,9 @@ The `scroll` operation corresponds to a specific timestamp. It does not consider
 
 Because open search contexts consume a lot of memory, we suggest you do not use the `scroll` operation for frequent user queries that don't need the search context open. Instead, use the `sort` parameter with the `search_after` parameter to scroll responses for user queries.
 
-## Sort
+## Sort results
 
-For any site search, it’s important for your users to sort the results in a way that’s most meaningful to them.
+Sorting allows your users to sort the results in a way that’s most meaningful to them.
 
 By default, full-text queries sort results by the relevance score.
 You can choose to sort the results by any field value in either ascending or descending order.
@@ -1006,9 +1020,9 @@ GET shakespeare/_search
 }
 ```
 
-## Highlight
+## Highlight query matches
 
-Highlighting the search term(s) in the results is a useful feature that a lot of users expect.
+Highlighting emphasizes the search term(s) in the results.
 
 To highlight the search terms, add a `highlight` parameter outside of the query block:
 
