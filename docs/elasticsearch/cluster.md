@@ -327,7 +327,7 @@ In this case, all primary shards are allocated to `odfe-d2`. Again, all replica 
 
 A popular approach is to configure your [index templates](../index-templates/) to set the `index.routing.allocation.require.temp` value to `hot`. This way, Elasticsearch stores your most recent data on your hot nodes.
 
-{% comment %}You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and specify actions to take on it. For example, when the index reaches a specific age, change the `index.routing.allocation.require.temp` setting to `warm` to automatically move your data from hot nodes to warm nodes.{% endcomment %}
+You can then use the [Index State Management (ISM)](../../ism/index/) plugin to periodically check the age of an index and specify actions to take on it. For example, when the index reaches a specific age, change the `index.routing.allocation.require.temp` setting to `warm` to automatically move your data from hot nodes to warm nodes.
 
 
 ## Next steps
