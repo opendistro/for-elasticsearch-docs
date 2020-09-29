@@ -9,6 +9,49 @@ nav_order: 1
 
 If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the security, alerting, and Index State Management plugins for Kibana individually.
 
+---
+
+#### Table of contents
+1. TOC
+{:toc}
+
+
+---
+
+## Plugin compatibility
+
+<table>
+  <thead style="text-align: left">
+    <tr>
+      <th>Kibana version</th>
+      <th>Plugin versions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>7.9.1</td>
+    <td>
+      <pre>opendistro-anomaly-detection-kibana    1.10.1.0
+opendistro_alerting-kibana             1.10.1.1
+opendistro_index_management-kibana     1.10.1.0
+opendistro_security_kibana             1.10.1.1
+opendistro_sql_workbench               1.10.1.1
+</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>7.8.0</td>
+    <td>
+      <pre>opendistro-anomaly-detection-kibana    1.9.0.0
+opendistro_alerting-kibana             1.9.0.0
+opendistro_index_management-kibana     1.9.0.0
+opendistro_security_kibana             1.9.0.0
+opendistro_sql_workbench               1.9.0.0
+</pre>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 ## Prerequisites
 
