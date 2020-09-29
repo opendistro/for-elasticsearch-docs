@@ -10,7 +10,7 @@ nav_order: 10
 
 Document-level security lets you restrict a role to a subset of documents in an index. The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and review the **Index permissions** section.
 
-![Document- and field-level security screen in Kibana](../../images/security-dls.png)
+![Document- and field-level security screen in Kibana](../../../images/security-dls.png)
 
 
 ## Simple roles

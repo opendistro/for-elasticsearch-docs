@@ -56,7 +56,7 @@ humanresources:
 
 #### Sample role in Kibana
 
-![Kibana UI for creating a cross-cluster search role](../../images/security-ccs.png)
+![Kibana UI for creating a cross-cluster search role](../../../images/security-ccs.png)
 
 
 ## Walkthrough
