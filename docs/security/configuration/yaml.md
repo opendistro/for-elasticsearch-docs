@@ -238,3 +238,16 @@ admin_tenant:
   reserved: false
   description: "Demo tenant for admin user"
 ```
+
+## nodes_dn.yml
+```yml
+---
+_meta:
+  type: "nodesdn"
+  config_version: 2
+
+# Define nodesdn mapping name and corresponding values
+# cluster1:
+#   nodes_dn:
+#       - CN=*.example.com
+```
