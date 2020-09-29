@@ -8,14 +8,14 @@ nav_order: 10
 
 # Document-level security
 
-Document-level security lets you restrict a role to a subset of documents in an index. The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and choose **Index Permissions**.
+Document-level security lets you restrict a role to a subset of documents in an index. The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and review the **Index permissions** section.
 
 ![Document- and field-level security screen in Kibana](../../images/security-dls.png)
 
 
 ## Simple roles
 
-Document-level security uses the Elasticsearch query DSL to define which documents a role grants access to. In Kibana, choose an index pattern and provide a query in the **Document Level Security Query** section:
+Document-level security uses the Elasticsearch query DSL to define which documents a role grants access to. In Kibana, choose an index pattern and provide a query in the **Document level security** section:
 
 ```json
 {

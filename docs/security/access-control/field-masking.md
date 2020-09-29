@@ -48,9 +48,9 @@ You configure field masking using Kibana, `roles.yml`, or the REST API.
 
 ### Kibana
 
-1. Choose a role and **DLS/FLS**.
-1. Choose an index.
-1. Under **Anonymize fields**, specify one or more fields and **Save Role Definition**.
+1. Choose a role.
+1. Choose an index permission.
+1. For **Anonymization**, specify one or more fields and press Enter.
 
 
 ### roles.yml

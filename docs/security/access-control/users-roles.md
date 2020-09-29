@@ -30,11 +30,9 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
 
 ### Kibana
 
-1. Choose **Security**, **Internal User Database**, and **Add a new internal user**.
+1. Choose **Security**, **Internal Users**, and **Create internal user**.
 1. Provide a username and password. The security plugin automatically hashes the password and stores it in the `.opendistro_security` index.
-1. If desired, specify backend roles and attributes.
-
-   Backend roles differ from security roles. Backend roles are arbitrary strings that you specify *or* that come from an external authentication system (e.g. LDAP/Active Directory). Backend roles can help simplify the [role mapping](#map-users-to-roles) process. Rather than mapping a security role to 100 individual users, you can map the security role to a single backend role that all 100 users share.
+1. If desired, specify user attributes.
 
    Attributes are optional user properties that you can use for variable substitution in index permissions or document-level security.
 
@@ -58,9 +56,9 @@ Just like users, you can create roles using Kibana, `roles.yml`, or the REST API
 
 ### Kibana
 
-1. Choose **Security**, **Roles**, and **Add a new role**.
+1. Choose **Security**, **Roles**, and **Create role**.
 1. Provide a name for the role.
-1. Then add permissions as desired.
+1. Add permissions as desired.
 
    For example, you might give a role no cluster permissions, `read` permissions to two indices, `unlimited` permissions to a third index, and read permissions to the `analysts` tenant.
 
@@ -86,10 +84,10 @@ Just like users and roles, you create role mappings using Kibana, `roles_mapping
 
 ### Kibana
 
-1. Choose **Security**, **Role Mappings**, and **Add a new role mapping**.
-1. Select the role. If a role is greyed-out, a mapping for it already exists. Return to the **Role Mappings** screen and edit the existing mapping.
-1. Specify users, backend roles, or hosts (e.g. `*.devops.my-organization.org`) as desired.
-1. Choose **Submit**.
+1. Choose **Security**, **Roles**, and a role.
+1. Choose the **Mapped users** tab and **Manage mapping**.
+1. Specify users or external identities (also known as backend roles).
+1. Choose **Map**.
 
 
 ### roles_mapping.yml
@@ -119,9 +117,11 @@ Role | Description
 
 For more detailed summaries of the permissions for each role, reference their action groups against the descriptions in [Default action groups](../default-action-groups/).
 
+
 ## Sample roles
 
 The following examples show how you might set up a read-only and a bulk access role.
+
 
 ### Set up a read-only user in Kibana
 
@@ -130,20 +130,17 @@ Create a new `read_only_index` role:
 1. Open Kibana.
 1. Choose **Security**, **Roles**.
 1. Create a new role named `read_only_index`.
-1. In the **Cluster Permissions** tab, choose **Add Action Group** and `cluster_composite_ops_ro`.
-1. In the **Index Permissions** tab, choose **Add index permissions** and then add your index pattern. For example, you might specify `my-index-*`.
-1. Choose **Add Action Group** and `read`.
-1. Choose **Save Role Definition**.
+1. For **Cluster permissions**, add the `cluster_composite_ops_ro` action group.
+1. For **Index Permissions**, add an index pattern. For example, you might specify `my-index-*`.
+1. For index permissions, add the `read` action group.
+1. Choose **Create**.
 
 Map three roles to the read-only user:
 
-1. Choose **Security**, **Role Mappings**.
-1. Next to `kibana_user`, choose the **Edit** button.
-
-   If you don't see `kibana_user`, choose the *+* button to add the role mapping.
-
-1. Choose **Add User**, add your user, and then **Submit**.
-1. Perform steps 1--3 with the `kibana_read_only` role and the new `read_only_index` role.
+1. Choose the **Mapped users** tab and **Manage mapping**.
+1. For **Internal users**, add your read-only user.
+1. Choose **Map**.
+1. Repeat these steps for the `kibana_user` and `kibana_read_only` roles.
 
 
 ### Set up a bulk access role in Kibana
@@ -153,14 +150,13 @@ Create a new `bulk_access` role:
 1. Open Kibana.
 1. Choose **Security**, **Roles**.
 1. Create a new role named `bulk_access`.
-1. In the **Cluster Permissions** tab, choose **Add Action Group**.
-1. In the **Cluster Permissions** tab, choose **Add Action Group** and `cluster_composite_ops`.
-1. In the **Index Permissions** tab, choose **Add index permissions** and then add your index pattern. For example, you might specify `my-index-*`.
-1. Choose **Add Action Group** and `write`.
-1. Choose **Save Role Definition**.
+1. For **Cluster permissions**, add the `cluster_composite_ops` action group.
+1. For **Index Permissions**, add an index pattern. For example, you might specify `my-index-*`.
+1. For index permissions, add the `write` action group.
+1. Choose **Create**.
 
 Map the role to your user:
 
-1. Choose **Security**, **Role Mappings**.
-1. Choose the *+* button, and then select the `bulk_access` role.
-1. Choose **Add User**, add your user, and then **Submit**.
+1. Choose the **Mapped users** tab and **Manage mapping**.
+1. For **Internal users**, add your bulk access user.
+1. Choose **Map**.
