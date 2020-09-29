@@ -228,7 +228,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-{{site.odfe_version}}.1.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-{{site.odfe_version}}.2.zip
 ```
 
 To install Alerting, you must first install the Job Scheduler plugin. Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -237,7 +237,7 @@ To install Alerting, you must first install the Job Scheduler plugin. Alerting h
 ### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-{{site.odfe_version}}.1.zip
 ```
 
 
