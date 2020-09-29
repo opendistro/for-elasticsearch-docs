@@ -35,11 +35,11 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
       <pre>opendistro-anomaly-detection    1.10.1.0
 opendistro-job-scheduler        1.10.1.0
 opendistro-knn                  1.10.1.0
-opendistro_alerting             1.10.1.1
+opendistro_alerting             1.10.1.2
 opendistro_index_management     1.10.1.1
 opendistro_performance_analyzer 1.10.1.0
 opendistro_security             1.10.1.0
-opendistro_sql                  1.10.1.0
+opendistro_sql                  1.10.1.1
 </pre>
     </td>
   </tr>
