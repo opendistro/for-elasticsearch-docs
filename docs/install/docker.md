@@ -16,7 +16,7 @@ docker pull amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}
 
 To check available versions, see [Docker Hub](https://hub.docker.com/r/amazon/opendistro-for-elasticsearch/tags).
 
-Open Distro for Elasticsearch images use `centos:7` as the base image. If you run Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Advanced**.
+Open Distro for Elasticsearch images use `centos:7` as the base image. If you run Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Resources**.
 
 
 ---
