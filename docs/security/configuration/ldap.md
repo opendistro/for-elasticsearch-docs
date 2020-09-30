@@ -103,7 +103,7 @@ You can configure more than one server here. If the security plugin cannot conne
 
 ### Timeouts
 
-To configure connection and response timeouts to your Active Directory server, use the following (values are expressed as milliseconds):
+To configure connection and response timeouts to your Active Directory server, use the following (values are in milliseconds):
 
 ```yml
 config:
@@ -111,7 +111,7 @@ config:
   response_timeout: 0
 ```
 
-If your server supports 2FA, the default timeout settings may result in some error during login. The `connect_timeout` can be increased to accommodate the 2FA process. Setting the `response_timeout` to 0 (the default) indicates an indefinite waiting period.
+If your server supports two-factor authentication (2FA), the default timeout settings might result in login errors. You can increase `connect_timeout` to accommodate the 2FA process. Setting `response_timeout` to 0 (the default) indicates an indefinite waiting period.
 
 
 ### Bind DN and password
