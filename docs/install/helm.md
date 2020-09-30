@@ -50,7 +50,7 @@ The instructions here assume you have a Kubernetes cluster with Helm preinstalle
 1. Deploy Elasticsearch:
 
    ```bash
-   helm install —generate-name opendistro-es-1.9.0.tgz
+   helm install --generate-name opendistro-es-1.9.0.tgz
    ```
 
 The output shows you the specifications instantiated from the install.

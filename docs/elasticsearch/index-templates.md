@@ -23,13 +23,13 @@ Index templates let you initialize new indices with predefined mappings and sett
 To create an index template, use a POST request:
 
 ```json
-POST _template
+POST _index_template
 ```
 
 This command creates a template named `daily_logs` and applies it to any new index whose name matches the regular expression `logs-2020-01-*` and also adds it to the `my_logs` alias:
 
 ```json
-PUT _template/daily_logs
+PUT _index_template/daily_logs
 {
   "aliases": {
     "my_logs": {}
@@ -116,25 +116,25 @@ GET _cat/templates
 To find a template by its name:
 
 ```json
-GET _template/daily_logs
+GET _index_template/daily_logs
 ```
 
 To get a list of all your templates:
 
 ```json
-GET _template/daily_logs
+GET _index_template/daily_logs
 ```
 
 To get a list of all templates that match a pattern:
 
 ```json
-GET _template/daily*
+GET _index_template/daily*
 ```
 
 To check if a specific template exists:
 
 ```json
-HEAD _template/<name>
+HEAD _index_template/<name>
 ```
 
 ## Configure multiple templates
@@ -150,7 +150,7 @@ For example, say you have the following two templates that both match the `logs-
 #### Template 1
 
 ```json
-PUT _template/template-01
+PUT _index_template/template-01
 {
   "index_patterns": [
     "logs*"
@@ -165,7 +165,7 @@ PUT _template/template-01
 #### Template 2
 
 ```json
-PUT _template/template-02
+PUT _index_template/template-02
 {
   "index_patterns": [
     "logs-2020-01-*"
@@ -184,7 +184,7 @@ Because `template-02` has a higher `order` value, it takes precedence over `temp
 You can delete an index template using its name, as shown in the following command:
 
 ```json
-DELETE _template/daily_logs
+DELETE _index_template/daily_logs
 ```
 
 ## Index template options

@@ -35,7 +35,17 @@ A policy is a set of rules that describes how an index should be managed. For in
 5. Choose **Create**.
 
 After you create a policy, your next step is to attach this policy to an index or indices.
-You can also include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it.
+You can also include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it:
+
+```json
+PUT _index_template/<template_name>
+{
+  "index_patterns": ["index_name-*"],                 
+  "settings": {      
+    "opendistro.index_state_management.policy_id": "policy_id"    
+  }
+}
+```
 
 ### Step 2: Attach policies to indices
 

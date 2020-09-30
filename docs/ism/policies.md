@@ -89,6 +89,7 @@ The following example action has a timeout period of one hour. The policy retrie
 For a list of available unit types, see [Supported units](../../elasticsearch/units/).
 
 ## ISM supported operations
+
 ISM supports the following operations:
 
 - [force_merge](#forcemerge)
@@ -102,6 +103,7 @@ ISM supports the following operations:
 - [notification](#notification)
 - [snapshot](#snapshot)
 - [index_priority](#index_priority)
+- [allocation](#allocation)
 
 ### force_merge
 
@@ -342,6 +344,30 @@ Parameter | Description | Type | Required | Default
 ]
 ```
 
+### allocation
+
+Allocate the index to a node with a specific attribute.
+For example, setting `require` to `warm` moves your data only to "warm" nodes.
+
+The `allocation` operation has the following parameters:
+
+Parameter | Description | Type | Required
+:--- | :--- |:--- |:---
+`require` | Allocate the index to a node with a specified attribute. | `string` | Yes
+`include` | Allocate the index to a node with any of the specified attributes. | `string` | Yes
+`exclude` | Don’t allocate the index to a node with any of the specified attributes. | `string` | Yes
+`wait_for` | Wait for the policy to execute before allocating the index to a node with a specified attribute. | `string` | Yes
+
+```json
+"actions": [
+  {
+    "allocation": {
+      "require": { "box_type": "warm" }
+    }
+  }
+]
+```
+
 ---
 
 ## Transitions
@@ -367,8 +393,8 @@ Parameter | Description | Type | Required
 `min_doc_count` | The minimum document count of the index required to transition. | `number` | No
 `min_size` | The minimum size of the index required to transition. | `string` | No
 `cron` | The `cron` job that triggers the transition if no other transition happens first. | `object` | No
-`cron.expression` | The `cron` expression that triggers the transition. | `string` | Yes
-`cron.timezone` | The timezone that triggers the transition. | `string` | Yes
+`cron.cron.expression` | The `cron` expression that triggers the transition. | `string` | Yes
+`cron.cron.timezone` | The timezone that triggers the transition. | `string` | Yes
 
 The following example transitions the index to a `cold` state after a period of 30 days:
 
@@ -384,6 +410,30 @@ The following example transitions the index to a `cold` state after a period of 
 ```
 
 ISM checks the conditions on every execution of the policy based on the set interval.
+
+This example uses the `cron` condition to transition indices every Saturday at 5:00 PT:
+
+```json
+"transitions": [
+  {
+    "state_name": "cold",
+    "conditions": {
+      "cron": {
+        "cron": {
+          "expression": "* 17 * * SAT",
+          "timezone": "America/Los_Angeles"
+        }
+      }
+    }
+  }
+]
+```
+
+Note that this condition does not execute at exactly 5:00 PM; the job still executes based off the `job_interval` setting. Due to this variance in start time and the amount of time that it can take for actions to complete prior to checking transition conditions, we recommend against overly narrow cron expressions. For example, don't use `15 17 * * SAT` (5:15 PM on Saturday).
+
+A window of an hour, which this example uses, is generally sufficient, but you might increase it to 2--3 hours to avoid missing the window and having to wait a week for the transition to occur. Alternately, you could use a broader expression such as `* * * * SAT,SUN` to have the transition occur at any time during the weekend.
+
+For information on writing cron expressions, see [Cron expression reference](../../alerting/cron/).
 
 ---
 

@@ -836,7 +836,7 @@ PUT _opendistro/_alerting/destinations/<destination-id>
 #### Request
 
 ```
-_opendistro/_alerting/destinations/<destination-id>
+DELETE _opendistro/_alerting/destinations/<destination-id>
 ```
 
 #### Sample response

@@ -16,7 +16,7 @@ Minute | 0-59
 Hour | 0-23
 Day of month | 1-31
 Month | 1-12
-Day of week | 0-7 (0 and 7 are both Sunday)
+Day of week | 0-7 (0 and 7 are both Sunday) or SUN, MON, TUE, WED, THU, FRI, SAT
 
 For example, the following expression translates to "every Monday through Friday at 11:30 AM":
 
