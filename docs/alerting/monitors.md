@@ -32,7 +32,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose Slack, Amazon Chime, or custom webhook.
+1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](https://opendistro.github.io/for-elasticsearch-docs/docs/alerting/email-destination.html).
 1. Specify the webhook URL. These requests use the HTTP POST method.
 
    For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
