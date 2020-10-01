@@ -101,6 +101,19 @@ config:
 You can configure more than one server here. If the security plugin cannot connect to the first server, it tries to connect to the remaining servers sequentially.
 
 
+### Timeouts
+
+To configure connection and response timeouts to your Active Directory server, use the following (values are in milliseconds):
+
+```yml
+config:
+  connect_timeout: 5000
+  response_timeout: 0
+```
+
+If your server supports two-factor authentication (2FA), the default timeout settings might result in login errors. You can increase `connect_timeout` to accommodate the 2FA process. Setting `response_timeout` to 0 (the default) indicates an indefinite waiting period.
+
+
 ### Bind DN and password
 
 To configure the `bind_dn` and `password` that the security plugin uses when issuing queries to your server, use the following:

@@ -47,8 +47,7 @@ To run this search on a specific index, add the index name to the request:
 GET shakespeare/_search/template
 ```
 
-You can implement pagination using the `from` and `size` parameters.
-The `from` parameter indicates the document number that you want to start showing the results from. The `size` parameter refers to the number of results that you want to show. For example, if the value of `size` is 10 and the value of `from` is 0, you see the first 10 results. If you change the value of `from` to 10, you will see the next 10 results (because the results are zero-indexed). Each time the user clicks the next page for search results, your application must make the same search query with an incremented `from` value.
+Specify the `from` and `size` parameters:
 
 ```json
 GET _search/template
