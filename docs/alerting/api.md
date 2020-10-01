@@ -858,63 +858,64 @@ _opendistro/_alerting/destinations/<destination-id>
   "_primary_term": 1
 }
 ```
-
+---
 
 ## Create email account
 
 #### Request
-
-```
-POST _opendistro/_alerting/destinations/email_accounts
-```
-
-#### Sample response
 ```json
+POST _opendistro/_alerting/destinations/email_accounts
 {
   "name": "test_account",
   "email": "test@email.com",
   "host": "smtp.test.com",
   "port": 465,
   "method": "ssl"
+}
+```
+
+#### Sample response
+```json
+{
+  "_id" : "RAau5XQBBF7ehDf33O3G",
+  "_version" : 1,
+  "_seq_no" : 7,
+  "_primary_term" : 2,
+  "email_account" : {
+    "schema_version" : 2,
+    "name" : "test_account",
+    "email" : "test@email.com",
+    "host" : "smtp.test.com",
+    "port" : 465,
+    "method" : "ssl"
+  }
 }
 ```
 
 ## Update email account
 
 #### Request
-
 ```
 PUT _opendistro/_alerting/destinations/email_accounts/<email_account_id>
-```
-#### Sample response
-```json
-{
-  "name": "test_account",
-  "email": "test@email.com",
-  "host": "smtp.test.com",
-  "port": 465,
-  "method": "ssl"
-}
-```
- 
+``` 
+
 ## Get email account
 #### Request
 ```
 GET _opendistro/_alerting/destinations/email_accounts/<email_account_id>
 ```
- 
+
 ## Delete email account
 #### Request
 ```
 DELETE _opendistro/_alerting/destinations/email_accounts/<email_account_id>
- ```
+```
+
 ## Search email account
 #### Request
 ```
 POST _opendistro/_alerting/destinations/email_accounts/_search
-```
-#### Sample response
-```json
+json
 {
   "from": 0,
   "size": 20,
@@ -927,16 +928,15 @@ POST _opendistro/_alerting/destinations/email_accounts/_search
     }
   }
 }
- ```
+```
 ---
  
 ## Create email group
+
 #### Request
-```
+
+```json
 POST _opendistro/_alerting/destinations/email_groups
-```
-#### Sample response
-```json
 {
   "name": "test_email_group",
   "emails": [{
@@ -944,14 +944,33 @@ POST _opendistro/_alerting/destinations/email_groups
   }]	
 }
 ```
- 
+
+#### Sample response
+
+```json
+{
+  "_id" : "EQbQ5XQBBF7ehDf3CO7_",
+  "_version" : 1,
+  "_seq_no" : 9,
+  "_primary_term" : 2,
+  "email_group" : {
+    "schema_version" : 2,
+    "name" : "test_email_group",
+    "emails" : [
+      {
+        "email" : "test@email.com"
+      }
+    ]
+  }
+}
+```
+
 ## Update email group
+
 #### Request
-```
-PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
-```
-#### Sample response
+
 ```json
+PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
 {
   "name": "test_email_group",
   "emails": [{
@@ -960,26 +979,26 @@ PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
 }
 ```
  
-# Get email group
+## Get email group
+
 #### Request
 ```
 GET _opendistro/_alerting/destinations/email_groups/<email_group_id>
 ```
  
-# Delete email group
+## Delete email group
+
 #### Request
 ```
 DELETE _opendistro/_alerting/destinations/email_groups/<email_group_id>
 ```
  
-# Search email group
+## Search email group
+
 #### Request
-```
-POST _opendistro/_alerting/destinations/email_groups/_search
-```
-#### Sample response
 
 ```json
+POST _opendistro/_alerting/destinations/email_groups/_search
 {
   "from": 0,
   "size": 20,

@@ -2,7 +2,7 @@
 layout: default
 title: Alerts by email
 nav_order: 1
-parent: monitors
+parent: alerting
 has_children: false
 ---
 
