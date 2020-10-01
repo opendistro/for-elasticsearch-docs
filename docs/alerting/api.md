@@ -979,7 +979,8 @@ POST _opendistro/_alerting/destinations/email_groups/_search
 ```
 #### Sample response
 
-```json{
+```json
+{
   "from": 0,
   "size": 20,
   "sort": { "email_group.name.keyword": "desc" },
