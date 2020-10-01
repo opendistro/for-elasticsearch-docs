@@ -10,7 +10,7 @@ nav_order: 11
 
 Field-level security lets you control which document fields a user can see. Just like [document-level security](../document-level-security/), you control access by index within a role.
 
-The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and choose **Index Permissions**.
+The easiest way to get started with document- and field-level security is open Kibana and choose **Security**. Then choose **Roles**, create a new role, and review the **Index permissions** section.
 
 ---
 
@@ -74,9 +74,9 @@ You can specify field-level security settings using Kibana, `roles.yml`, and the
 
 ### Kibana
 
-1. Choose a role and **Index Permissions**.
+1. Choose a role and **Add index permission**.
 1. Choose an index pattern.
-1. Under **Include or exclude fields**, use the drop-down to select your preferred option. Then specify one or more fields and **Save Role Definition**.
+1. Under **Field level security**, use the drop-down to select your preferred option. Then specify one or more fields and press Enter.
 
 
 ### roles.yml

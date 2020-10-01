@@ -23,6 +23,8 @@ To enable audit logging:
 
 2. Restart each node.
 
+After this initial setup, you can use Kibana to manage your audit log categories and other settings. In Kibana, choose **Security**, **Audit logs**.
+
 
 ---
 
