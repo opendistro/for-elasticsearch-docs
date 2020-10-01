@@ -858,3 +858,137 @@ _opendistro/_alerting/destinations/<destination-id>
   "_primary_term": 1
 }
 ```
+
+
+## Create email account
+
+#### Request
+
+```
+POST _opendistro/_alerting/destinations/email_accounts
+```
+
+#### Sample response
+```json
+{
+  "name": "test_account",
+  "email": "test@email.com",
+  "host": "smtp.test.com",
+  "port": 465,
+  "method": "ssl"
+}
+```
+
+## Update email account
+
+#### Request
+
+```
+PUT _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+```
+#### Sample response
+```json
+{
+  "name": "test_account",
+  "email": "test@email.com",
+  "host": "smtp.test.com",
+  "port": 465,
+  "method": "ssl"
+}
+```
+ 
+## Get email account
+#### Request
+```
+GET _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+```
+ 
+## Delete email account
+#### Request
+```
+DELETE _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+ ```
+## Search email account
+#### Request
+```
+POST _opendistro/_alerting/destinations/email_accounts/_search
+```
+#### Sample response
+```json
+{
+  "from": 0,
+  "size": 20,
+  "sort": { "email_account.name.keyword": "desc" },
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }
+    }
+  }
+}
+ ```
+---
+ 
+## Create email group
+#### Request
+```
+POST _opendistro/_alerting/destinations/email_groups
+```
+#### Sample response
+```json
+{
+  "name": "test_email_group",
+  "emails": [{
+    "email": "test@email.com"
+  }]	
+}
+```
+ 
+## Update email group
+#### Request
+```
+PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
+```
+#### Sample response
+```json
+{
+  "name": "test_email_group",
+  "emails": [{
+    "email": "test@email.com"
+  }]	
+}
+```
+ 
+# Get email group
+#### Request
+```
+GET _opendistro/_alerting/destinations/email_groups/<email_group_id>
+```
+ 
+# Delete email group
+#### Request
+```
+DELETE _opendistro/_alerting/destinations/email_groups/<email_group_id>
+```
+ 
+# Search email group
+#### Request
+```
+POST _opendistro/_alerting/destinations/email_groups/_search
+```
+#### Sample response
+
+```json{
+  "from": 0,
+  "size": 20,
+  "sort": { "email_group.name.keyword": "desc" },
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }
+    }
+  }
+}
+```
