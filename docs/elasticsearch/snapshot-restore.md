@@ -37,6 +37,9 @@ Elasticsearch snapshots are incremental, meaning that they only store data that 
 
 In other words, taking hourly snapshots for a week (for a total of 168 snapshots) might not use much more disk space than taking a single snapshot at the end of the week. Also, the more frequently you take snapshots, the less time they take to complete. Some Elasticsearch users take snapshots as often as every half hour.
 
+If you need to delete a snapshot, be sure to use the Elasticsearch API rather than navigating to the storage location and purging files. Incremental snapshots from a cluster often share a lot of the same data; when you use the API, Elasticsearch only removes data that no other snapshot is using.
+{: .tip }
+
 
 ## Register repository
 
