@@ -968,7 +968,7 @@ DELETE _opendistro/_alerting/destinations/email_accounts/<email_account_id>
   "_type" : "_doc",
   "_id" : "email_account_id",
   "_version" : 1,
-  "result" : "not_found",
+  "result" : "deleted",
   "forced_refresh" : true,
   "_shards" : {
     "total" : 2,
@@ -1155,7 +1155,7 @@ DELETE _opendistro/_alerting/destinations/email_groups/<email_group_id>
   "_type" : "_doc",
   "_id" : "email_group_id",
   "_version" : 1,
-  "result" : "not_found",
+  "result" : "deleted",
   "forced_refresh" : true,
   "_shards" : {
     "total" : 2,
