@@ -983,9 +983,9 @@ DELETE _opendistro/_alerting/destinations/email_accounts/<email_account_id>
 ## Search email account
 
 #### Request
+
 ```json
 POST _opendistro/_alerting/destinations/email_accounts/_search
-
 {
   "from": 0,
   "size": 20,

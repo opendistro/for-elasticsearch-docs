@@ -32,14 +32,13 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination).
-1. Specify the webhook URL. These requests use the HTTP POST method.
+1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination). 
 
-   For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For the Email type, refer to the [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
-   For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
+For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
-   This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
+This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
 
 ###  Email as a destination
 To send or receive an alert notification as an email, first select **Email** as the destination **Type** for the alert. Next, you must add at least one sender and a recipient. We also recommend adding email groups if you want to notify more than a few people of an alert. You can configure senders and recipients using **Manage senders** and **Manage email groups**. 
@@ -70,7 +69,6 @@ To create and manage email groups, do the following:
 1. Enter a unique **Email group name**. Duplicates are not allowed.  
 1. For recipient emails, enter any number of email addresses. 
 1. Choose **Save**.
-1. To remove an email group, choose the **Remove email group** red button beside the name of the email group in the list. Then choose **Save**, to confirm the removal.  
 
 You can view the list of all email destinations you created on the **Destinations** landing page.  The **Actions** button on the top right of the **Destinations** page allows you to mange email senders and email groups from this page.
 
