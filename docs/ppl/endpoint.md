@@ -1,0 +1,21 @@
+---
+layout: default
+title: Endpoint
+parent: PPL
+nav_order: 1
+---
+
+# Endpoint
+
+To send a query request to PPL plugin, use the HTTP POST request.
+We recommend a POST request because it doesn't have any length limit and it allows for other parameters to be passed to the plugin for other functionality.
+
+Use the explain endpoint for query translation and troubleshooting.
+
+## Request Format
+
+To use the PPL plugin with your own applications, send requests to `_opendistro/_ppl`, with your query in the request body:
+
+```json
+curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_ppl -d '{"query" : "source=accounts | fields firstname, lastname"}'
+```
