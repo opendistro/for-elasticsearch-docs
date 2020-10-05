@@ -57,6 +57,7 @@ To configure a sender email, do the following:
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username` 
 
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password`
+   
    **Note**: The keystore settings are node-specific. You must add the same settings for credentials on every node.
 
 1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. 
