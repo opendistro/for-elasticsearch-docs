@@ -1037,7 +1037,11 @@ POST _opendistro/_alerting/destinations/email_accounts/_search
         "sort" : [
           "example_account"
         ]
-      }
+      },
+      ...
+    ]
+  }
+}
 ```
 
 ---
@@ -1225,6 +1229,10 @@ POST _opendistro/_alerting/destinations/email_groups/_search
         "sort" : [
           "example_email_group"
         ]
-      }
+      },
+      ...
+    ]
+  }
+}
 ```
 ---
