@@ -7,43 +7,62 @@ nav_order: 2
 
 # Notebooks
 
-Kibana Notebooks enable data-driven, interactive data analytics and collaborative documents to be created and used as live notes in Kibana. They allow devops, support specialists, solution and presales specialists, customer success experts and engineers to create and share stories. They facilitate combining visualizations, timelines and text, code and adding annotations. Here are a few Kibana Notebooks use-cases:
+Kibana Notebooks is a Jupyter Notebook-like user interface that lets you run code interactively in the browser with visualizations and markdown text  to explain the process.
 
-- Create post-mortem documents
-- Design runbooks
-- Build Live infrastructure reports
-- Foster data driven explorative collaborations
+Kibana Notebooks allows you to run Jupyter notebooks in Kibana with very little setup.
 
-Notebooks are browser-based REPL built upon a number of popular open-source libraries
+Kibana notebooks is a web-based notebook that enables data-driven, interactive data analytics and collaborative documents with DSL and SQL.
 
-Notebooks are stored as Elasticsearch indices in the default backend. If backend adaptors are used by user, the storage is switched to storage options provided by the external backend service.
+Kibana notebooks is a web-based notebook which brings data exploration, visualization, sharing and collaboration features to Elasticsearch.
+
+Zeppelin provides the following benefits for your data engineering and data science use cases:
+
+An interactive development environment for writing, testing, and sharing data processing code snippets
+The ability to run the notebooks in a local client environment, such as on a laptop
+Support for a variety of interpreters for integrating with different backend components
+Support for extensible visualization libraries
+
+It provides an environment for notebook documents that contain live code you can run and immediately look at the output and visualize the data without ever leaving the notebook.
+
+This makes it a handy tool for end-to-end monitoring.
+
+With Kibana Notebooks you can examine data, create reports, document what you're thinking and what steps you've taken and you can do all this in DSL or SQL. Write code in DSL or SQL and text in markdown in a cell and when you run the cell, it will execute the code and render markdown.
+The notebook is interactive, you can change the code and see what changed in the graph in real time. Notebook supports DSL and SQL. You can also share your notebooks, they can't interact with it but they can load it up and see the notebook. It's designed to work with log data.
+
+It's a great platform for you share what you think and what you're thinking about as you analyzed log data. and get their point across to others.
+
+to create and share stories that have on-the-go coding and execution, embed visualizations and graphs with contextual explanations in markdown, and multi-timeline support to compare and contrast visualizations.
+
+supports markdown, SQL and DSL.Backend Adaptor: An add-on to the existing default backend that provides additional interpreters and storage options.
 For example: Apache Zeppelin backend service supports files, Git, Amazon S3, mongo and other storage options.
 
+Apache Zeppelin is the answer of the Apache Foundation to Jupyter notebooks.
 
-Motivation
+notebook that you can use to run queries and code.
+the contents of an EMR notebook itself—the equations, queries, models, code, and narrative text within notebook cells—run in a client.
 
-Existing Solution: Kibana Dashboards offer a solution for a few selected use cases, and are a great tool if you’re focused on monitoring a known set of metrics over time. Current issues include:
-Dashboards are static in nature and are not user-friendly to make quick changes in iterations
-Dashboards lack context for visualizations
-Dashboards do not have multi-timeline support which are needed for post-mortem and cause analysis
-Dashboards are restricted to data sources within the Elasticsearch environment
+to prepare and visualize data, collaborate with peers, build applications, and perform interactive analysis
 
-Our Solution: Kibana Notebooks provide:
-Familiar notebooks user-interface for faster iterations as live notes
-Markdown/Code interpreters for contextual use of data with detailed explanations by allowing a user to combine saved visualizations, text and graphs
-Adaptors to embellish existing data in Elasticsearch with other reference data sources.
-Support multiple timelines to compare and contrast visualizations
+EMR Notebooks is a Jupyter Notebook environment built in to the Amazon EMR console that allows you to quickly create Jupyter notebooks, attach them to Spark clusters, and then open the Jupyter Notebook editor in the console to remotely run queries and code.
 
-Glossary
+EMR Notebooks is designed to make it easy for you to experiment and build applications with Apache Spark.
 
-Notebooks: An interface for on-the-go code writing and execution
-Paragraphs: Each notebook consists on multiple paragraphs with allows users to input code or embed a visualization
-Input Cell: Each paragraph consists an input cell that contains code for execution in supported interpreters such as markdown, SQL and DSL.
-Output Cell: Each paragraph consists an output cell that contains execution result of code or an embeded visualization with its time-range
-Backend Adaptor: An add-on to the existing default backend that provides additional interpreters and storage options.
+Creating a Notebook
 
+To create an EMR notebook
 
-Dashboards offer a solution for a few selected use cases, and are a great tool if you’re focused on monitoring a known set of metrics over time. Notebooks enables contextual use of data with detailed explanations by allowing a user to combine saved visualizations, text, graphs and decorate data in elastic with other reference data sources.
+Open the Amazon EMR console at https://console.aws.amazon.com/elasticmapreduce/.
+
+Choose Notebooks, Create notebook.
+
+Enter a Notebook name and an optional Notebook description.
+
+If you have an active cluster running Hadoop, Spark, and Livy to which you want to attach the notebook, leave the default Choose an existing cluster selected, click Choose, select a cluster from the list, and then click Choose cluster. Only clusters that meet the requirements appear. For more information, see Considerations When Using EMR Notebooks.
+
+In a notebook, you can inject some data, execute snippets of code to perform analysis on the data, and then visualize it.
+
+Accessing and Creating Notebooks in Kibana.
+Sharing Kibana Notebook Content
 
 ![Notebook UI](../../images/kibana-notebooks.gif)
 
