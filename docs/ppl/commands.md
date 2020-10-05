@@ -2,7 +2,7 @@
 layout: default
 title: Commands
 parent: PPL
-nav_order: 5
+nav_order: 4
 ---
 
 
@@ -43,7 +43,8 @@ Field | Description | Type | Required | Default
 To remove duplicate documents with the same gender:
 
 ```sql
-od> source=accounts | dedup gender | fields account_number, gender;
+source=accounts | dedup gender | fields account_number, gender;
+
 fetched rows / total rows = 2/2
 +------------------+----------+
 | account_number   | gender   |
@@ -58,7 +59,8 @@ fetched rows / total rows = 2/2
 To keep two duplicate documents with the same gender:
 
 ```sql
-od> source=accounts | dedup 2 gender | fields account_number, gender;
+source=accounts | dedup 2 gender | fields account_number, gender;
+
 fetched rows / total rows = 3/3
 +------------------+----------+
 | account_number   | gender   |
@@ -74,7 +76,8 @@ fetched rows / total rows = 3/3
 To keep two duplicate documents with a `null` field value:
 
 ```sql
-od> source=accounts | dedup email keepempty=true | fields account_number, email;
+source=accounts | dedup email keepempty=true | fields account_number, email;
+
 fetched rows / total rows = 4/4
 +------------------+-----------------------+
 | account_number   | email                 |
@@ -89,7 +92,8 @@ fetched rows / total rows = 4/4
 To remove duplicate documents after ignoring the empty field value:
 
 ```sql
-od> source=accounts | dedup email | fields account_number, email;
+source=accounts | dedup email | fields account_number, email;
+
 fetched rows / total rows = 3/3
 +------------------+-----------------------+
 | account_number   | email                 |
@@ -105,7 +109,8 @@ fetched rows / total rows = 3/3
 To remove duplicates of consecutive documents:
 
 ```sql
-od> source=accounts | dedup gender consecutive=true | fields account_number, gender;
+source=accounts | dedup gender consecutive=true | fields account_number, gender;
+
 fetched rows / total rows = 3/3
 +------------------+----------+
 | account_number   | gender   |
@@ -136,7 +141,8 @@ Field | Description | Required
 To create a new `doubleAge` field for each document. `doubleAge` is the result of `age` multiplied by 2.
 
 ```sql
-od> source=accounts | eval doubleAge = age * 2 | fields age, doubleAge ;
+source=accounts | eval doubleAge = age * 2 | fields age, doubleAge;
+
 fetched rows / total rows = 4/4
 +-------+-------------+
 | age   | doubleAge   |
@@ -153,7 +159,8 @@ fetched rows / total rows = 4/4
 To overwrite the `age` field with `age` plus 1.
 
 ```sql
-od> source=accounts | eval age = age + 1 | fields age ;
+source=accounts | eval age = age + 1 | fields age;
+
 fetched rows / total rows = 4/4
 +-------+
 | age   |
@@ -170,7 +177,8 @@ fetched rows / total rows = 4/4
 To create a new field `ddAge` with the field defined in the `eval` command. `ddAge` is the result of `doubleAge` multiplied by 2, where `doubleAge` is defined in the `eval` command.
 
 ```sql
-od> source=accounts | eval doubleAge = age * 2, ddAge = doubleAge * 2 | fields age, doubleAge, ddAge ;
+source=accounts | eval doubleAge = age * 2, ddAge = doubleAge * 2 | fields age, doubleAge, ddAge;
+
 fetched rows / total rows = 4/4
 +-------+-------------+---------+
 | age   | doubleAge   | ddAge   |
@@ -202,7 +210,8 @@ Field | Description | Required | Default
 To fetch `account_number`, `firstname`, and `lastname` fields from a search result.
 
 ```sql
-od> source=accounts | fields account_number, firstname, lastname;
+source=accounts | fields account_number, firstname, lastname;
+
 fetched rows / total rows = 4/4
 +------------------+-------------+------------+
 | account_number   | firstname   | lastname   |
@@ -219,7 +228,8 @@ fetched rows / total rows = 4/4
 To remove the `account_number` field from the search results:
 
 ```sql
-od> source=accounts | fields account_number, firstname, lastname | fields - account_number ;
+source=accounts | fields account_number, firstname, lastname | fields - account_number;
+
 fetched rows / total rows = 4/4
 +-------------+------------+
 | firstname   | lastname   |
@@ -251,7 +261,8 @@ Field | Description | Required
 Rename the `account_number` field as `an`:
 
 ```sql
-od> source=accounts | rename account_number as an | fields an;
+source=accounts | rename account_number as an | fields an;
+
 fetched rows / total rows = 4/4
 +------+
 | an   |
@@ -268,7 +279,8 @@ fetched rows / total rows = 4/4
 Rename the `account_number` field as `an` and `employer` as `emp`:
 
 ```sql
-od> source=accounts | rename account_number as an, employer as emp | fields an, emp;
+source=accounts | rename account_number as an, employer as emp | fields an, emp;
+
 fetched rows / total rows = 4/4
 +------+---------+
 | an   | emp     |
@@ -301,7 +313,8 @@ Field | Description | Required
 To fetch all documents from the `accounts` index:
 
 ```sql
-od> source=accounts;
+source=accounts;
+
 fetched rows / total rows = 4/4
 +------------------+-------------+----------------------+-----------+----------+--------+------------+---------+-------+-----------------------+------------+
 | account_number   | firstname   | address              | balance   | gender   | city   | employer   | state   | age   | email                 | lastname   |
@@ -318,7 +331,8 @@ fetched rows / total rows = 4/4
 To fetch all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
 
 ```sql
-od> source=accounts account_number=1 or gender="F";
+source=accounts account_number=1 or gender="F";
+
 fetched rows / total rows = 2/2
 +------------------+-------------+--------------------+-----------+----------+--------+------------+---------+-------+----------------------+------------+
 | account_number   | firstname   | address            | balance   | gender   | city   | employer   | state   | age   | email                | lastname   |
@@ -349,7 +363,8 @@ Field | Description | Required | Default
 To sort all documents by the `age` field in ascending order:
 
 ```sql
-od> source=accounts | sort age | fields account_number, age;
+source=accounts | sort age | fields account_number, age;
+
 fetched rows / total rows = 4/4
 +------------------+-------+
 | account_number   | age   |
@@ -366,7 +381,8 @@ fetched rows / total rows = 4/4
 To sort all documents by the `age` field in ascending order and specify count as 0 to get back all results:
 
 ```sql
-od> source=accounts | sort 0 age | fields account_number, age;
+source=accounts | sort 0 age | fields account_number, age;
+
 fetched rows / total rows = 4/4
 +------------------+-------+
 | account_number   | age   |
@@ -383,7 +399,8 @@ fetched rows / total rows = 4/4
 To sort all documents by the `age` field in descending order:
 
 ```sql
-od> source=accounts | sort - age | fields account_number, age;
+source=accounts | sort - age | fields account_number, age;
+
 fetched rows / total rows = 4/4
 +------------------+-------+
 | account_number   | age   |
@@ -400,7 +417,8 @@ fetched rows / total rows = 4/4
 To sort all documents by the `age` field in ascending order and specify count as 2 to get back two results:
 
 ```sql
-od> source=accounts | sort 2 age | fields account_number, age;
+source=accounts | sort 2 age | fields account_number, age;
+
 fetched rows / total rows = 2/2
 +------------------+-------+
 | account_number   | age   |
@@ -415,7 +433,8 @@ fetched rows / total rows = 2/2
 To sort all documents by the `gender` field in ascending order and `age` field in descending order:
 
 ```sql
-od> source=accounts | sort + gender, - age | fields account_number, gender, age;
+source=accounts | sort + gender, - age | fields account_number, gender, age;
+
 fetched rows / total rows = 4/4
 +------------------+----------+-------+
 | account_number   | gender   | age   |
@@ -458,7 +477,8 @@ Field | Description | Required | Default
 To calculate the average `age` of all documents:
 
 ```sql
-od> source=accounts | stats avg(age);
+source=accounts | stats avg(age);
+
 fetched rows / total rows = 1/1
 +------------+
 | avg(age)   |
@@ -472,7 +492,8 @@ fetched rows / total rows = 1/1
 To calculate the average age grouped by the gender:
 
 ```sql
-od> source=accounts | stats avg(age) by gender;
+source=accounts | stats avg(age) by gender;
+
 fetched rows / total rows = 2/2
 +----------+--------------------+
 | gender   | avg(age)           |
@@ -487,7 +508,8 @@ fetched rows / total rows = 2/2
 To calculate the average and sum of age grouped by gender:
 
 ```sql
-od> source=accounts | stats avg(age), sum(age) by gender;
+source=accounts | stats avg(age), sum(age) by gender;
+
 fetched rows / total rows = 2/2
 +----------+--------------------+------------+
 | gender   | avg(age)           | sum(age)   |
@@ -502,7 +524,8 @@ fetched rows / total rows = 2/2
 To calculate the maximum age:
 
 ```sql
-od> source=accounts | stats max(age);
+source=accounts | stats max(age);
+
 fetched rows / total rows = 1/1
 +------------+
 | max(age)   |
@@ -516,7 +539,8 @@ fetched rows / total rows = 1/1
 To calculate the maximum and minimum age values grouped by gender:
 
 ```sql
-od> source=accounts | stats max(age), min(age) by gender;
+source=accounts | stats max(age), min(age) by gender;
+
 fetched rows / total rows = 2/2
 +----------+------------+------------+
 | gender   | min(age)   | max(age)   |
@@ -545,7 +569,8 @@ Field | Description | Required
 To fetch all documents from the `accounts` index that matches a bool expression:
 
 ```sql
-od> source=accounts | where account_number=1 or gender="F" | fields account_number, gender;
+source=accounts | where account_number=1 or gender="F" | fields account_number, gender;
+
 fetched rows / total rows = 2/2
 +------------------+----------+
 | account_number   | gender   |
@@ -576,7 +601,8 @@ Field | Description | Required | Default
 To get the first 10 results:
 
 ```sql
-od> source=accounts | fields firstname, age | head;
+source=accounts | fields firstname, age | head;
+
 fetched rows / total rows = 10/10
 +---------------+-----------+
 | firstname     | age       |
@@ -599,7 +625,8 @@ fetched rows / total rows = 10/10
 To get the first three results:
 
 ```sql
-od> source=accounts | fields firstname, age | head 3;
+source=accounts | fields firstname, age | head 3;
+
 fetched rows / total rows = 3/3
 +---------------+-----------+
 | firstname     | age       |
@@ -615,7 +642,8 @@ fetched rows / total rows = 3/3
 To get the first N results from all accounts that match a while condition:
 
 ```sql
-od> source=accounts | fields firstname, age | sort age | head while(age < 21) 7;
+source=accounts | fields firstname, age | sort age | head while(age < 21) 7;
+
 fetched rows / total rows = 4/4
 +---------------+-----------+
 | firstname     | age       |
@@ -633,7 +661,8 @@ fetched rows / total rows = 4/4
 To get the first N results from all accounts that match a while condition and includes the last failed condition:
 
 ```sql
-od> source=accounts | fields firstname, age | sort age | head keeplast=false while(age < 21) 7;
+source=accounts | fields firstname, age | sort age | head keeplast=false while(age < 21) 7;
+
 fetched rows / total rows = 4/4
 +---------------+-----------+
 | firstname     | age       |
@@ -666,7 +695,8 @@ Field | Description | Required
 To find the least common value of gender:
 
 ```sql
-od> source=accounts | rare gender;
+source=accounts | rare gender;
+
 fetched rows / total rows = 2/2
 +------------+
 | gender     |
@@ -682,7 +712,8 @@ fetched rows / total rows = 2/2
 To find the least common age grouped by gender:
 
 ```sql
-od> source=accounts | rare age by gender;
+source=accounts | rare age by gender;
+
 fetched rows / total rows = 20/20
 +----------+----------+
 | gender   | age      |
@@ -731,7 +762,8 @@ Field | Description | Default
 To find the most common gender:
 
 ```sql
-od> source=accounts | top gender;
+source=accounts | top gender;
+
 fetched rows / total rows = 2/2
 +------------+
 | gender     |
@@ -747,7 +779,8 @@ fetched rows / total rows = 2/2
 To find the most common gender:
 
 ```sql
-od> source=accounts | top 1 gender;
+source=accounts | top 1 gender;
+
 fetched rows / total rows = 1/1
 +------------+
 | gender     |
@@ -761,7 +794,8 @@ fetched rows / total rows = 1/1
 To find the most common age grouped by the gender:
 
 ```sql
-od> source=accounts | top 1 age by gender;
+source=accounts | top 1 age by gender;
+
 fetched rows / total rows = 2/2
 +----------+----------+
 | gender   | age      |
