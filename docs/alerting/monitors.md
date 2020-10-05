@@ -52,13 +52,22 @@ To configure a sender email, do the following:
 1. In the **Manage email senders** modal window, choose **Add sender**, **New sender**. Multiple senders can be added one at a time.
 1. Enter a unique **Sender name**.
 1. Enter the **Email address**, SMTP **Host** (e.g. `smtp.gmail.com` for a Gmail account), and the **Port** number.
-1. You can choose to use an **Encryption method** or leave it as **None**. However, most email providers require SSL or TLS and thus require you to add a username and password to the Elasticsearch keystore. You can enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender**.
+1. You can choose to use an **Encryption method** or leave it as **None**. However, most email providers require SSL or TLS and this requires you to add a username and password to the Elasticsearch keystore. You can enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender**.
 
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username` 
 
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password`
-    
-1. Choose **Save** to save the configuration and create the sender.
+
+1. Choose **Save** to save the configuration and create the sender. You can create a sender (by choosing **Save**) even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert.
+
+To update your credentials in the keystore for another sender after Elasticsearch is up and running, you can call the reload API to ensure your new changes are reflected:
+```
+POST _nodes/reload_secure_settings 
+{
+  "secure_settings_password": "1234" 
+}
+```
+{: .tip }
 
 Once the sender is created, the sender account is available to be selected when creating an email destination. You can reuse senders across many different destinations, but each destination only supports one sender. 
 
