@@ -58,8 +58,8 @@ To configure a sender email, do the following:
 
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password`
 
-1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. The keystore settings are node-specific, so the settings added for credentials will need to have the same value on every node.
-1. To change or update your credentials in the keystore after Elasticsearch is up and running (if you've chosen an encryption method), you can call the reload API to ensure your new changes are updated on every node:
+1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. The keystore settings are node-specific, so you must add the same settings for credentials on every node.
+1. To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure your new changes are automatically updated on every node. Run this command to call the reload API:
 ```
 POST _nodes/reload_secure_settings 
 {
