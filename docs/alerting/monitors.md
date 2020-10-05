@@ -61,7 +61,7 @@ To configure a sender email, do the following:
    **Note**: The keystore settings are node-specific. You must add the same settings for credentials on every node.
 
 1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. 
-1. To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure your new changes are automatically updated on every node. Run this command to call the reload API:
+1. To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure that your new changes are automatically updated on every node. Run this command to call the reload API:
 ```
 POST _nodes/reload_secure_settings 
 {
