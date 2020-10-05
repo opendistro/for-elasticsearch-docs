@@ -34,7 +34,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 1. Specify a name for the destination so that you can identify it later.
 1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination). 
 
-For the Email type, refer to the [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For Email type, refer to [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
 For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
@@ -58,14 +58,15 @@ To configure a sender email, do the following:
 
     `./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password`
 
-1. Choose **Save** to save the configuration and create the sender. You can create a sender (by choosing **Save**) even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. 
-1. To change or update your credentials in the keystore after Elasticsearch is up and running (if you've chosen an encryption method), you can call the reload API to ensure your new changes are reflected:
+1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must authentcate each sender account with credentials before you use the destination to send your alert. The keystore settings are node-specific, so the settings added for credentials will need to have the same value on every node.
+1. To change or update your credentials in the keystore after Elasticsearch is up and running (if you've chosen an encryption method), you can call the reload API to ensure your new changes are updated on every node:
 ```
 POST _nodes/reload_secure_settings 
 {
   "secure_settings_password": "1234" 
 }
 ```
+
 Once the sender is created, the sender account is available to be selected when creating an email destination. You can reuse senders across many different destinations, but each destination only supports one sender. 
 
 #### Manage email groups or recipients 
