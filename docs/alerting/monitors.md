@@ -73,11 +73,13 @@ You can view the list of all email destinations you created on the **Destination
 #### Authenticate sender account
 
 You must authentcate each sender account with credentials before you send your alert from that account to recipients or email groups. You can enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender**.
+
     ```
     ./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username 
     ./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password
     ```
-   **Note**: The keystore settings are node-specific. You must run these commands on each node.
+
+**Note**: The keystore settings are node-specific. You must run these commands on each node.
 
 To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure that your new changes are automatically updated on every node. Run this command to call the reload API:
 ```
