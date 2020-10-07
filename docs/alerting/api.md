@@ -858,3 +858,381 @@ DELETE _opendistro/_alerting/destinations/<destination-id>
   "_primary_term": 1
 }
 ```
+---
+
+## Create email account
+
+#### Request
+```json
+POST _opendistro/_alerting/destinations/email_accounts
+{
+  "name": "example_account",
+  "email": "example@email.com",
+  "host": "smtp.email.com",
+  "port": 465,
+  "method": "ssl"
+}
+```
+
+#### Sample response
+```json
+{
+  "_id" : "email_account_id",
+  "_version" : 1,
+  "_seq_no" : 7,
+  "_primary_term" : 2,
+  "email_account" : {
+    "schema_version" : 2,
+    "name" : "example_account",
+    "email" : "example@email.com",
+    "host" : "smtp.email.com",
+    "port" : 465,
+    "method" : "ssl"
+  }
+}
+```
+
+## Update email account
+
+#### Request
+```json
+PUT _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+{
+  "name": "example_account",
+  "email": "example@email.com",
+  "host": "smtp.email.com",
+  "port": 465,
+  "method": "ssl"
+}
+``` 
+#### Sample response
+```json
+{
+  "_id" : "email_account_id",
+  "_version" : 3,
+  "_seq_no" : 19,
+  "_primary_term" : 2,
+  "email_account" : {
+    "schema_version" : 2,
+    "name" : "example_account",
+    "email" : "example@email.com",
+    "host" : "smtp.email.com",
+    "port" : 465,
+    "method" : "ssl"
+  }
+}
+```
+
+## Get email account
+
+#### Request
+```json
+GET _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+{
+  "name": "example_account",
+  "email": "example@email.com",
+  "host": "smtp.email.com",
+  "port": 465,
+  "method": "ssl"
+}
+```
+#### Sample response
+```json
+{
+  "_id" : "email_account_id",
+  "_version" : 2,
+  "_seq_no" : 8,
+  "_primary_term" : 2,
+  "email_account" : {
+    "schema_version" : 2,
+    "name" : "test_account",
+    "email" : "test@email.com",
+    "host" : "smtp.test.com",
+    "port" : 465,
+    "method" : "ssl"
+  }
+}
+```
+
+## Delete email account
+
+#### Request
+```
+DELETE _opendistro/_alerting/destinations/email_accounts/<email_account_id>
+```
+#### Sample response
+
+```json
+{
+  "_index" : ".opendistro-alerting-config",
+  "_type" : "_doc",
+  "_id" : "email_account_id",
+  "_version" : 1,
+  "result" : "deleted",
+  "forced_refresh" : true,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 2,
+    "failed" : 0
+  },
+  "_seq_no" : 12,
+  "_primary_term" : 2
+}
+```
+
+## Search email account
+
+#### Request
+
+```json
+POST _opendistro/_alerting/destinations/email_accounts/_search
+{
+  "from": 0,
+  "size": 20,
+  "sort": { "email_account.name.keyword": "desc" },
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "took" : 8,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : ".opendistro-alerting-config",
+        "_type" : "_doc",
+        "_id" : "email_account_id",
+        "_seq_no" : 8,
+        "_primary_term" : 2,
+        "_score" : null,
+        "_source" : {
+          "schema_version" : 2,
+          "name" : "example_account",
+          "email" : "example@email.com",
+          "host" : "smtp.email.com",
+          "port" : 465,
+          "method" : "ssl"
+        },
+        "sort" : [
+          "example_account"
+        ]
+      },
+      ...
+    ]
+  }
+}
+```
+
+---
+ 
+## Create email group
+
+#### Request
+
+```json
+POST _opendistro/_alerting/destinations/email_groups
+{
+  "name": "example_email_group",
+  "emails": [{
+    "email": "example@email.com"
+  }]	
+}
+```
+
+#### Sample response
+
+```json
+{
+  "_id" : "email_group_id",
+  "_version" : 1,
+  "_seq_no" : 9,
+  "_primary_term" : 2,
+  "email_group" : {
+    "schema_version" : 2,
+    "name" : "example_email_group",
+    "emails" : [
+      {
+        "email" : "example@email.com"
+      }
+    ]
+  }
+}
+```
+
+## Update email group
+
+#### Request
+
+```json
+PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
+{
+  "name": "example_email_group",
+  "emails": [{
+    "email": "example@email.com"
+  }]	
+}
+```
+#### Sample response
+
+```json
+{
+  "_id" : "email_group_id",
+  "_version" : 4,
+  "_seq_no" : 17,
+  "_primary_term" : 2,
+  "email_group" : {
+    "schema_version" : 2,
+    "name" : "example_email_group",
+    "emails" : [
+      {
+        "email" : "example@email.com"
+      }
+    ]
+  }
+}
+```
+ 
+## Get email group
+
+#### Request
+```json
+GET _opendistro/_alerting/destinations/email_groups/<email_group_id>
+{
+  "name": "example_email_group",
+  "emails": [{
+    "email": "example@email.com"
+  }]	
+}
+```
+#### Sample response
+
+```json
+{
+  "_id" : "email_group_id",
+  "_version" : 4,
+  "_seq_no" : 17,
+  "_primary_term" : 2,
+  "email_group" : {
+    "schema_version" : 2,
+    "name" : "example_email_group",
+    "emails" : [
+      {
+        "email" : "example@email.com"
+      }
+    ]
+  }
+}
+```
+ 
+## Delete email group
+
+#### Request
+```
+DELETE _opendistro/_alerting/destinations/email_groups/<email_group_id>
+```
+#### Sample response
+
+```json
+{
+  "_index" : ".opendistro-alerting-config",
+  "_type" : "_doc",
+  "_id" : "email_group_id",
+  "_version" : 1,
+  "result" : "deleted",
+  "forced_refresh" : true,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 2,
+    "failed" : 0
+  },
+  "_seq_no" : 11,
+  "_primary_term" : 2
+}
+```
+ 
+## Search email group
+
+#### Request
+
+```json
+POST _opendistro/_alerting/destinations/email_groups/_search
+{
+  "from": 0,
+  "size": 20,
+  "sort": { "email_group.name.keyword": "desc" },
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+{
+  "took" : 7,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 5,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : ".opendistro-alerting-config",
+        "_type" : "_doc",
+        "_id" : "email_group_id",
+        "_seq_no" : 10,
+        "_primary_term" : 2,
+        "_score" : null,
+        "_source" : {
+          "schema_version" : 2,
+          "name" : "example_email_group",
+          "emails" : [
+            {
+              "email" : "example@email.com"
+            }
+          ]
+        },
+        "sort" : [
+          "example_email_group"
+        ]
+      },
+      ...
+    ]
+  }
+}
+```
+---

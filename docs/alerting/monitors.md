@@ -32,15 +32,63 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose Slack, Amazon Chime, or custom webhook.
-1. Specify the webhook URL. These requests use the HTTP POST method.
+1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination). 
 
-   For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For Email type, refer to [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
-   For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
+For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
-   This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
+This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
 
+### Email as a destination
+To send or receive an alert notification as an email, first select **Email** as the destination **Type** for the alert. Next, you must add at least one sender and a recipient. We also recommend adding email groups if you want to notify more than a few people of an alert. You can configure senders and recipients using **Manage senders** and **Manage email groups**. 
+
+#### Manage senders
+Manage senders allows you to configure and manage **Sender** email addresses. Senders are email accounts from where the alert notification is sent to different recipients or email groups. 
+
+To configure a sender email, do the following:
+
+1. Once you choose **Email** as the destination **Type**, Choose **Manage senders**, under settings. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. In the **Manage email senders** modal window, choose **Add sender**, **New sender**. Multiple senders can be added one at a time.
+1. Enter a unique **Sender name**.
+1. Enter the **Email address**, SMTP **Host** (e.g. `smtp.gmail.com` for a Gmail account), and the **Port** number.
+1. You can choose to use an **Encryption method** or leave it as **None**. However, most email providers require SSL or TLS and this requires you to add a username and password to the Elasticsearch keystore. Refer to [Authenticate sender account](#authenticate-sender-account) to learn more.
+1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must [authenticate each sender account](#authenticate-sender-account) with credentials before you use the destination to send your alert. 
+
+Once the sender is created, the sender account is available to be selected when creating an email destination. You can reuse senders across many different destinations, but each destination only supports one sender. 
+
+#### Manage email groups or recipients 
+Use email groups to create and manage reusable lists of email addresses. For example, one alert might email the DevOps team, whereas another might email the DevOps team and the engineering team.
+
+You can enter individual email addresses, or an email group in the **Recipients** field. For email groups, you can pre-create a group using **Manage email groups**.
+
+To create and manage email groups, do the following:
+1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, under **Settings**. And then choose **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. Enter a unique **Email group name**.   
+1. For recipient emails, enter any number of email addresses. 
+1. Choose **Save**.
+
+You can view the list of all email destinations you created on the **Destinations** landing page.  The **Actions** button on the top right of the **Destinations** page allows you to mange email senders and email groups from this page.
+
+#### Authenticate sender account
+
+You must authenticate each sender account with credentials before you send an alert notification from that account to recipients or email groups. You can enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender**.
+
+```bash
+./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username 
+./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password
+```
+
+**Note**: The keystore settings are node-specific. You must run these commands on each node.
+{: .note}
+
+To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure that your new changes are automatically updated on every node. Run this command to call the reload API:
+```json
+POST _nodes/reload_secure_settings 
+{
+  "secure_settings_password": "1234" 
+}
+```
 
 ---
 
