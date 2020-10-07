@@ -48,7 +48,7 @@ Manage senders allows you to configure and manage **Sender** email addresses. Se
 
 To configure a sender email, do the following:
 
-1. Once you choose **Email** as the destination **Type**, Choose **Manage senders**, under **Settings**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. Once you choose **Email** as the destination **Type**, choose **Manage senders**, under **Settings**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
 1. In the **Manage email senders** modal window, choose **Add sender**, **New sender**. Multiple senders can be added one at a time.
 1. Enter a unique **Sender name**.
 1. Enter the **Email address**, SMTP **Host** (e.g. `smtp.gmail.com` for a Gmail account), and the **Port** number.
