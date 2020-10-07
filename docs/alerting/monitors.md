@@ -63,7 +63,7 @@ Use email groups to create and manage reusable lists of email addresses. For exa
 You can enter individual email addresses, or an email group in the **Recipients** field. For email groups, you can pre-create a group using **Manage email groups**.
 
 To create and manage email groups, do the following:
-1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, and then **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, under **Settings**. And then choose **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
 1. Enter a unique **Email group name**.   
 1. For recipient emails, enter any number of email addresses. 
 1. Choose **Save**.
@@ -79,7 +79,8 @@ You must authenticate each sender account with credentials before you send an al
 ./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password
 ```
 
-{: .note}The keystore settings are node-specific. You must run these commands on each node.
+**Note**: The keystore settings are node-specific. You must run these commands on each node.
+{: .note}
 
 To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure that your new changes are automatically updated on every node. Run this command to call the reload API:
 ```json
