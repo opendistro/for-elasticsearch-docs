@@ -48,7 +48,7 @@ Manage senders allows you to configure and manage **Sender** email addresses. Se
 
 To configure a sender email, do the following:
 
-1. Once you choose **Email** as the destination **Type**, Choose **Manage senders**, under settings. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. Once you choose **Email** as the destination **Type**, Choose **Manage senders**, under **Settings**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
 1. In the **Manage email senders** modal window, choose **Add sender**, **New sender**. Multiple senders can be added one at a time.
 1. Enter a unique **Sender name**.
 1. Enter the **Email address**, SMTP **Host** (e.g. `smtp.gmail.com` for a Gmail account), and the **Port** number.
@@ -63,7 +63,7 @@ Use email groups to create and manage reusable lists of email addresses. For exa
 You can enter individual email addresses, or an email group in the **Recipients** field. For email groups, you can pre-create a group using **Manage email groups**.
 
 To create and manage email groups, do the following:
-1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, under **Settings**. And then choose **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
+1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, under **Settings**. Then choose **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
 1. Enter a unique **Email group name**.   
 1. For recipient emails, enter any number of email addresses. 
 1. Choose **Save**.
