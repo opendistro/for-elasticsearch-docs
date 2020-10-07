@@ -55,9 +55,9 @@ opendistro_sql_workbench               1.9.0.0
 
 ## Prerequisites
 
-1. An Elasticsearch cluster that uses a [compatible version](../../../version-history)
-1. The corresponding Elasticsearch plugins [installed on the cluster](../../install/plugins)
-1. The corresponding version of [Kibana](../) (e.g. Kibana 6.7.1 works with Elasticsearch 6.7.1)
+- An Elasticsearch cluster that uses a [compatible version](../../../version-history)
+- The corresponding Elasticsearch plugins [installed on the cluster](../../install/plugins)
+- The corresponding version of [Kibana](../) (e.g. Kibana 6.7.1 works with Elasticsearch 6.7.1)
 
 
 ## Install
@@ -90,6 +90,24 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 ```
 
 This plugin provides a user interface for managing policies.
+
+
+#### Anomaly Detection Kibana
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-kibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin provides a user interface for adding detectors.
+
+
+#### SQL Workbench
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-sql-workbench/opendistro-sql-workbench-{{site.odfe_version}}.1.zip
+```
+
+This plugin provides a user interface for using SQL queries to explore your data.
 
 
 ## List installed plugins
