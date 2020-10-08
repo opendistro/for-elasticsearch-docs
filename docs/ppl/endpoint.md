@@ -17,5 +17,6 @@ Use the explain endpoint for query translation and troubleshooting.
 To use the PPL plugin with your own applications, send requests to `_opendistro/_ppl`, with your query in the request body:
 
 ```json
-curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_ppl -d '{"query" : "source=accounts | fields firstname, lastname"}'
+curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_ppl \
+... -d '{"query" : "source=accounts | fields firstname, lastname"}'
 ```

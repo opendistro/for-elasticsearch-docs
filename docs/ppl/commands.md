@@ -33,7 +33,7 @@ dedup [int] <field-list> [keepempty=<bool>] [consecutive=<bool>]
 
 Field | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |:---
-`int` |  Retain the specified number of multiple events for each combination. The number must be greater than 0. If you do not specify a number, only the first occurring event is kept. All other duplicates are removed from the results. | `string` | No | 1
+`int` |  Retain the specified number of duplicate events for each combination. The number must be greater than 0. If you do not specify a number, only the first occurring event is kept and all other duplicates are removed from the results. | `string` | No | 1
 `keepempty` | If true, keep the document if any field in the field list has a null value or a field missing. | `nested list of objects` | No | False
 `consecutive` | If true, remove only consecutive events with duplicate combinations of values. | No | False | -
 `field-list` | Specify a comma-delimited field list. At least one field is required. | Yes | - | -
@@ -81,7 +81,7 @@ search source=accounts | dedup email keepempty=true | fields account_number, ema
 13 | null
 18 | daleadams@boink.com
 
-To remove duplicate documents after ignoring the empty field value:
+To remove duplicate documents with the `null` field value:
 
 ```sql
 search source=accounts | dedup email | fields account_number, email;
@@ -184,7 +184,7 @@ Field | Description | Required | Default
 
 *Example 1*: Select specified fields from result
 
-To fetch `account_number`, `firstname`, and `lastname` fields from a search result:
+To get `account_number`, `firstname`, and `lastname` fields from a search result:
 
 ```sql
 search source=accounts | fields account_number, firstname, lastname;
@@ -271,11 +271,11 @@ Field | Description | Required
 :--- | :--- |:---
 `search` | Specify search keywords. | Yes
 `index` | Specify which index to query from. | No
-`bool-expression` | Any expression which could be evaluated to a boolean value. | No
+`bool-expression` | Specify an expression that evaluates to a boolean value. | No
 
-*Example 1*: Fetch all the data
+*Example 1*: Get all documents
 
-To fetch all documents from the `accounts` index:
+To get all documents from the `accounts` index:
 
 ```sql
 search source=accounts;
@@ -288,9 +288,9 @@ search source=accounts;
 | 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates
 | 18 | Dale  | 467 Hutchinson Court | 4180 | M | Orick | null | MD | 33 | daleadams@boink.com | Adams
 
-*Example 2*: Fetch data with condition
+*Example 2*: Get documents that match a condition
 
-To fetch all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
+To get all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
 
 ```sql
 search source=accounts account_number=1 or gender="F";
@@ -416,7 +416,7 @@ Field | Description | Required | Default
 `aggregation` | Specify a statistical aggregation function. The argument of this function must be a field. | Yes | 1000
 `by-clause` | Specify one or more fields to group the results by. If not specified, the `stats` command returns only one row, which is the aggregation over the entire result set. | No | -
 
-*Example 1*: Calculate the average of a field
+*Example 1*: Calculate the average value of a field
 
 To calculate the average `age` of all documents:
 
@@ -428,7 +428,7 @@ search source=accounts | stats avg(age);
 :--- |
 | 32.25
 
-*Example 2*: Calculate the average of a field by group
+*Example 2*: Calculate the average value of a field by group
 
 To calculate the average age grouped by gender:
 
@@ -454,7 +454,7 @@ search source=accounts | stats avg(age), sum(age) by gender;
 | F  | 28   | 28         
 | M  | 33.666666666666664 | 101
 
-*Example 4*: Calculate the maximum of a field
+*Example 4*: Calculate the maximum value of a field
 
 To calculate the maximum age:
 
@@ -466,7 +466,7 @@ search source=accounts | stats max(age);
 :--- |
 | 36  
 
-*Example 5*: Calculate the maximum and minimum of a field by group
+*Example 5*: Calculate the maximum and minimum value of a field by group
 
 To calculate the maximum and minimum age values grouped by gender:
 
@@ -491,11 +491,11 @@ where <boolean-expression>
 
 Field | Description | Required
 :--- | :--- |:---
-`bool-expression` | Any expression that evaluates to a boolean value. | No
+`bool-expression` | An expression that evaluates to a boolean value. | No
 
-*Example 1*: Filter result set with condition
+*Example 1*: Filter result set with a condition
 
-To fetch all documents from the `accounts` index that matches a bool expression:
+To get all documents from the `accounts` index where `account_number` is 1 or gender is `F`:
 
 ```sql
 search source=accounts | where account_number=1 or gender="F" | fields account_number, gender;
@@ -518,8 +518,8 @@ head [keeplast = (true | false)] [while "("<boolean-expression>")"] [N]
 
 Field | Description | Required | Default
 :--- | :--- |:---
-`keeplast` | Use in conjunction with the `while` argument to determine whether the last result in the result set is retained. The last result returned is the result that caused the boolean expression to evaluate to false or NULL. Set "keeplast=true" to retain the last result in the result set. Set "keeplast=false" to discard the last result. | No | True
-`while` | An expression that evaluates to either true or false. You cannot use statistical functions in the expression. | No | False
+`keeplast` | Use along with the `while` argument to check if the last result in the result set is retained. The last result is what caused the `while` condition to evaluate to false or NULL. Set `keeplast` to true to retain the last result and false to discard it. | No | True
+`while` | An expression that evaluates to either true or false. You cannot use statistical functions in this expression. | No | False
 `N` | Specify the number of results to return. | No | 10
 
 *Example 1*: Get the first 10 results
@@ -536,7 +536,7 @@ search source=accounts | fields firstname, age | head;
 | Hattie | 36
 | Nanette | 28
 
-*Example 2*: Get first N results
+*Example 2*: Get the first N results
 
 To get the first two results:
 
@@ -549,7 +549,7 @@ search source=accounts | fields firstname, age | head 2;
 | Amber  | 32
 | Hattie | 36
 
-*Example 3*: Get first N results with a while condition
+*Example 3*: Get the first N results that match a while condition
 
 To get the first 3 results from all accounts with age less than 30:
 
@@ -562,9 +562,9 @@ search source=accounts | fields firstname, age | sort age | head while(age < 30)
 | Nanette  | 28
 | Amber  | 32
 
-*Example 4*: Get first N results with a while condition with the last result that failed the condition
+*Example 4*: Get the first N results with a while condition with the last result that failed the condition
 
-To get the first 3 results from all accounts that match a while condition and include the last failed condition:
+To get the first 3 results from all accounts with age less than 30 and include the last failed condition:
 
 ```sql
 search source=accounts | fields firstname, age | sort age | head keeplast=false while(age < 30) 3;
@@ -576,8 +576,8 @@ search source=accounts | fields firstname, age | sort age | head keeplast=false 
 
 ## rare
 
-Use the `rare` command to find the least common tuple of values of all fields in a field list.
-A maximum of 10 results are returned for each distinct tuple of values of the group-by fields.
+Use the `rare` command to find the least common values of all fields in a field list.
+A maximum of 10 results are returned for each distinct set of values of the group-by fields.
 
 ### Syntax
 
@@ -592,7 +592,7 @@ Field | Description | Required
 
 *Example 1*: Find the least common values in a field
 
-To find the least common value of gender:
+To find the least common values of gender:
 
 ```sql
 search source=accounts | rare gender;
@@ -619,7 +619,7 @@ search source=accounts | rare age by gender;
 
 ## top {#top-command}
 
-Use the `top` command to find the most common tuple of values of all fields in the field list.
+Use the `top` command to find the most common values of all fields in the field list.
 
 ### Syntax
 
@@ -658,7 +658,7 @@ search source=accounts | top 1 gender;
 :--- |
 | M          
 
-*Example 2*: Find the most common values organized by gender
+*Example 2*: Find the most common values grouped by gender
 
 To find the most common age grouped by gender:
 
