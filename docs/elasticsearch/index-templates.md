@@ -31,24 +31,26 @@ This command creates a template named `daily_logs` and applies it to any new ind
 ```json
 PUT _index_template/daily_logs
 {
-  "aliases": {
-    "my_logs": {}
-  },
   "index_patterns": [
     "logs-2020-01-*"
   ],
-  "settings": {
-    "number_of_shards": 2,
-    "number_of_replicas": 1
-  },
-  "mappings": {
-    "properties": {
-      "timestamp": {
-        "type": "date",
-        "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
-      },
-      "value": {
-        "type": "double"
+  "template": {
+    "aliases": {
+      "my_logs": {}
+    },
+    "settings": {
+      "number_of_shards": 2,
+      "number_of_replicas": 1
+    },
+    "mappings": {
+      "properties": {
+        "timestamp": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+        },
+        "value": {
+          "type": "double"
+        }
       }
     }
   }
