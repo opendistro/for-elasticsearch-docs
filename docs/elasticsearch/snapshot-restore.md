@@ -165,7 +165,23 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    POST _nodes/reload_secure_settings
    ```
 
-1. Create an S3 bucket if you don't already have one.
+1. Create an S3 bucket if you don't already have one. To take snapshots, you must have permissions to access the bucket. The following IAM policy is an example of those permissions:
+
+   ```json
+   {
+	   "Version": "2012-10-17",
+	   "Statement": [{
+		   "Action": [
+			   "s3:*"
+		   ],
+		   "Effect": "Allow",
+		   "Resource": [
+			   "arn:aws:s3:::your-bucket",
+			   "arn:aws:s3:::your-bucket/*"
+		   ]
+	   }]
+   }
+   ```
 
 1. Register the repository using the REST API:
 
