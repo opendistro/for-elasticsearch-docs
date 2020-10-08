@@ -145,7 +145,7 @@ You can create multiple index templates for your indices. If the index name matc
 
 The settings from the more recently created index templates override the settings of older index templates. So, you can first define a few common settings in a generic template that can act as a catch-all and then add more specialized settings as required.
 
-An even better approach is to explicitly specify template priority using the `order` parameter. Elasticsearch applies templates with lower order numbers first and then overrides them with templates that have higher order numbers.
+An even better approach is to explicitly specify template priority using the `order` parameter. Elasticsearch applies templates with lower priority numbers first and then overrides them with templates that have higher priority numbers.
 
 For example, say you have the following two templates that both match the `logs-2020-01-02` index and there’s a conflict in the `number_of_shards` field:
 
@@ -157,9 +157,11 @@ PUT _index_template/template-01
   "index_patterns": [
     "logs*"
   ],
-  "order": 0,
-  "settings": {
-    "number_of_shards": 2
+  "priority": 0,
+  "template": {
+    "settings": {
+      "number_of_shards": 2
+    }
   }
 }
 ```
@@ -172,14 +174,16 @@ PUT _index_template/template-02
   "index_patterns": [
     "logs-2020-01-*"
   ],
-  "order": 1,
-  "settings": {
-    "number_of_shards": 3
+  "priority": 1,
+  "template": {
+    "settings": {
+      "number_of_shards": 3
+    }
   }
 }
 ```
 
-Because `template-02` has a higher `order` value, it takes precedence over `template-01` . The `logs-2020-01-02` index would have the `number_of_shards` value as 3.
+Because `template-02` has a higher `priority` value, it takes precedence over `template-01` . The `logs-2020-01-02` index would have the `number_of_shards` value as 3.
 
 ## Delete template
 
@@ -195,5 +199,5 @@ You can specify the options shown in the following table:
 
 Option | Type | Description | Required
 :--- | :--- | :--- | :---
-`order` | `Number` | Specify the priority of the index template.  | No
+`priority` | `Number` | Specify the priority of the index template.  | No
 `create` | `Boolean` | Specify whether this index template should replace an existing one. | No
