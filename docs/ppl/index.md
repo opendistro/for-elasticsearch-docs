@@ -10,13 +10,31 @@ has_toc: false
 
 Piped Processing Language (PPL) offers an easier way to query log data than Query DSL or SQL.
 
-To quickly get up and running with PPL, use **SQL Workbench** in Kibana. To learn more, see [Workbench](../sql/workbench/).
+To quickly get up and running with PPL, use **Query Workbench** in Kibana. To learn more, see [Workbench](../sql/workbench/).
 
 The PPL syntax consists of commands delimited by the pipe character (`|`) where data flows from left to right through each pipeline.
 
 ```sql
 search command | command 1 | command 2 ...
 ```
+
+## Quick start
+
+To get started with PPL, choose **Dev Tools** in Kibana and use the `bulk` operation to index some sample data:
+
+```json
+PUT accounts/_bulk?refresh
+{"index":{"_id":"1"}}
+{"account_number":1,"balance":39225,"firstname":"Amber","lastname":"Duke","age":32,"gender":"M","address":"880 Holmes Lane","employer":"Pyrami","email":"amberduke@pyrami.com","city":"Brogan","state":"IL"}
+{"index":{"_id":"6"}}
+{"account_number":6,"balance":5686,"firstname":"Hattie","lastname":"Bond","age":36,"gender":"M","address":"671 Bristol Street","employer":"Netagy","email":"hattiebond@netagy.com","city":"Dante","state":"TN"}
+{"index":{"_id":"13"}}
+{"account_number":13,"balance":32838,"firstname":"Nanette","lastname":"Bates","age":28,"gender":"F","address":"789 Madison Street","employer":"Quility","city":"Nogal","state":"VA"}
+{"index":{"_id":"18"}}
+{"account_number":18,"balance":4180,"firstname":"Dale","lastname":"Adams","age":33,"gender":"M","address":"467 Hutchinson Court","email":"daleadams@boink.com","city":"Orick","state":"MD"}
+```
+
+Return to **Query Workbench** and select **PPL**.
 
 The following example returns `firstname` and `lastname` fields for documents in an `accounts` index with `age` greater than 18:
 
@@ -28,13 +46,9 @@ search source=accounts
 
 #### Sample Response
 
-```sql
-+-------+-------------+---------+
-| id   | firstname   | lastname |
-|-------+-------------+---------|
-| 0    | Amber       | Duke     |
-| 1    | Hattie      | Bond     |
-| 2    | Nanette     | Bates    |
-| 3    | Dale        | Adams    |
-+-------+-------------+---------+
-```
+| id | firstname | lastname |
+:--- | :--- | :--- |
+| 0    | Amber       | Duke     
+| 1    | Hattie      | Bond     
+| 2    | Nanette     | Bates    
+| 3    | Dale        | Adams    

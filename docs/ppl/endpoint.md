@@ -8,7 +8,7 @@ nav_order: 1
 # Endpoint
 
 To send a query request to PPL plugin, use the HTTP POST request.
-We recommend a POST request because it doesn't have any length limit and it allows for other parameters to be passed to the plugin for other functionality.
+We recommend a POST request because it doesn't have any length limit and it allows you to pass other parameters to the plugin for other functionality.
 
 Use the explain endpoint for query translation and troubleshooting.
 

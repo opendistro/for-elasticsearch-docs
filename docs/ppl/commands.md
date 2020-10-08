@@ -18,7 +18,7 @@ search source=accounts
 | fields firstname, lastname
 ```
 
-In the below examples, required arguments are in angle brackets `< >` and optional arguments in square brackets `[ ]`.
+In the below examples, we represent required arguments in angle brackets `< >` and optional arguments in square brackets `[ ]`.
 {: .note }
 
 ## dedup
@@ -33,9 +33,9 @@ dedup [int] <field-list> [keepempty=<bool>] [consecutive=<bool>]
 
 Field | Description | Type | Required | Default
 :--- | :--- |:--- |:--- |:---
-`int` |  Retains the specified number of multiple events for each combination. The number must be greater than 0. If you do not specify a number, only the first occurring event is kept. All other duplicates are removed from the results. | `string` | No | 1
-`keepempty` | If true, keep the document if any field in the field-list has a NULL value or a field missing. | `nested list of objects` | No | false
-`consecutive` | If set to true, removes only events with duplicate combinations of values that are consecutive. | No | false | -
+`int` |  Retain the specified number of multiple events for each combination. The number must be greater than 0. If you do not specify a number, only the first occurring event is kept. All other duplicates are removed from the results. | `string` | No | 1
+`keepempty` | If true, keep the document if any field in the field list has a null value or a field missing. | `nested list of objects` | No | False
+`consecutive` | If true, remove only consecutive events with duplicate combinations of values. | No | False | -
 `field-list` | Specify a comma-delimited field list. At least one field is required. | Yes | - | -
 
 *Example 1*: Dedup by one field
@@ -43,83 +43,69 @@ Field | Description | Type | Required | Default
 To remove duplicate documents with the same gender:
 
 ```sql
-source=accounts | dedup gender | fields account_number, gender;
-
-fetched rows / total rows = 2/2
-+------------------+----------+
-| account_number   | gender   |
-|------------------+----------|
-| 1                | M        |
-| 13               | F        |
-+------------------+----------+
+search source=accounts | dedup gender | fields account_number, gender;
 ```
+
+| account_number | gender  
+:--- | :--- |
+1 | M
+13 | F
+
 
 *Example 2*: Keep two duplicate documents
 
 To keep two duplicate documents with the same gender:
 
 ```sql
-source=accounts | dedup 2 gender | fields account_number, gender;
-
-fetched rows / total rows = 3/3
-+------------------+----------+
-| account_number   | gender   |
-|------------------+----------|
-| 1                | M        |
-| 6                | M        |
-| 13               | F        |
-+------------------+----------+
+search source=accounts | dedup 2 gender | fields account_number, gender;
 ```
+
+| account_number | gender  
+:--- | :--- |
+1 | M
+6 | M
+13 | F
 
 *Example 3*: Keep or ignore an empty field by default
 
 To keep two duplicate documents with a `null` field value:
 
 ```sql
-source=accounts | dedup email keepempty=true | fields account_number, email;
-
-fetched rows / total rows = 4/4
-+------------------+-----------------------+
-| account_number   | email                 |
-|------------------+-----------------------|
-| 1                | amberduke@pyrami.com  |
-| 6                | hattiebond@netagy.com |
-| 13               | null                  |
-| 18               | daleadams@boink.com   |
-+------------------+-----------------------+
+search source=accounts | dedup email keepempty=true | fields account_number, email;
 ```
+
+| account_number | email
+:--- | :--- |
+1 | amberduke@pyrami.com
+6 | hattiebond@netagy.com
+13 | null
+18 | daleadams@boink.com
 
 To remove duplicate documents after ignoring the empty field value:
 
 ```sql
-source=accounts | dedup email | fields account_number, email;
-
-fetched rows / total rows = 3/3
-+------------------+-----------------------+
-| account_number   | email                 |
-|------------------+-----------------------|
-| 1                | amberduke@pyrami.com  |
-| 6                | hattiebond@netagy.com |
-| 18               | daleadams@boink.com   |
-+------------------+-----------------------+
+search source=accounts | dedup email | fields account_number, email;
 ```
+
+| account_number | email
+:--- | :--- |
+1 | amberduke@pyrami.com
+6 | hattiebond@netagy.com
+18 | daleadams@boink.com
 
 *Example 4*: Dedup of consecutive documents
 
 To remove duplicates of consecutive documents:
 
 ```sql
-source=accounts | dedup gender consecutive=true | fields account_number, gender;
-
-fetched rows / total rows = 3/3
-+------------------+----------+
-| account_number   | gender   |
-|------------------+----------|
-| 1                | M        |
-| 13               | F        |
-| 18               | M        |
-+------------------+----------+
+search source=accounts | dedup gender consecutive=true | fields account_number, gender;
 ```
+
+| account_number | gender  
+:--- | :--- |
+1 | M
+13 | F
+18 | M
 
 ## eval
 
@@ -138,57 +124,48 @@ Field | Description | Required
 
 *Example 1*: Create a new field
 
-To create a new `doubleAge` field for each document. `doubleAge` is the result of `age` multiplied by 2.
+To create a new `doubleAge` field for each document. `doubleAge` is the result of `age` multiplied by 2:
 
 ```sql
-source=accounts | eval doubleAge = age * 2 | fields age, doubleAge;
-
-fetched rows / total rows = 4/4
-+-------+-------------+
-| age   | doubleAge   |
-|-------+-------------|
-| 32    | 64          |
-| 36    | 72          |
-| 28    | 56          |
-| 33    | 66          |
-+-------+-------------+
+search source=accounts | eval doubleAge = age * 2 | fields age, doubleAge;
 ```
+
+| age | doubleAge
+:--- | :--- |
+32    | 64          
+36    | 72          
+28    | 56          
+33    | 66
 
 *Example 2*: Overwrite the existing field
 
-To overwrite the `age` field with `age` plus 1.
+To overwrite the `age` field with `age` plus 1:
 
 ```sql
-source=accounts | eval age = age + 1 | fields age;
-
-fetched rows / total rows = 4/4
-+-------+
-| age   |
-|-------|
-| 33    |
-| 37    |
-| 29    |
-| 34    |
-+-------+
+search source=accounts | eval age = age + 1 | fields age;
 ```
+
+| age
+:--- |
+| 33          
+| 37            
+| 29           
+| 34   
 
 *Example 3*: Create a new field with a field defined with the `eval` command
 
-To create a new field `ddAge` with the field defined in the `eval` command. `ddAge` is the result of `doubleAge` multiplied by 2, where `doubleAge` is defined in the `eval` command.
+To create a new field `ddAge`. `ddAge` is the result of `doubleAge` multiplied by 2, where `doubleAge` is defined in the `eval` command:
 
 ```sql
-source=accounts | eval doubleAge = age * 2, ddAge = doubleAge * 2 | fields age, doubleAge, ddAge;
-
-fetched rows / total rows = 4/4
-+-------+-------------+---------+
-| age   | doubleAge   | ddAge   |
-|-------+-------------+---------|
-| 32    | 64          | 128     |
-| 36    | 72          | 144     |
-| 28    | 56          | 112     |
-| 33    | 66          | 132     |
-+-------+-------------+---------+
+search source=accounts | eval doubleAge = age * 2, ddAge = doubleAge * 2 | fields age, doubleAge, ddAge;
 ```
+
+| age | doubleAge | ddAge
+:--- | :--- |
+| 32    | 64   | 128     
+| 36    | 72   | 144     
+| 28    | 56   | 112     
+| 33    | 66   | 132     
 
 ## fields
 
@@ -207,39 +184,33 @@ Field | Description | Required | Default
 
 *Example 1*: Select specified fields from result
 
-To fetch `account_number`, `firstname`, and `lastname` fields from a search result.
+To fetch `account_number`, `firstname`, and `lastname` fields from a search result:
 
 ```sql
-source=accounts | fields account_number, firstname, lastname;
-
-fetched rows / total rows = 4/4
-+------------------+-------------+------------+
-| account_number   | firstname   | lastname   |
-|------------------+-------------+------------|
-| 1                | Amber       | Duke       |
-| 6                | Hattie      | Bond       |
-| 13               | Nanette     | Bates      |
-| 18               | Dale        | Adams      |
-+------------------+-------------+------------+
+search source=accounts | fields account_number, firstname, lastname;
 ```
+
+| account_number | firstname  | lastname  
+:--- | :--- |
+| 1   | Amber       | Duke       
+| 6   | Hattie      | Bond       
+| 13  | Nanette     | Bates      
+| 18  | Dale        | Adams
 
 *Example 2*: Remove specified fields from a search result
 
 To remove the `account_number` field from the search results:
 
 ```sql
-source=accounts | fields account_number, firstname, lastname | fields - account_number;
-
-fetched rows / total rows = 4/4
-+-------------+------------+
-| firstname   | lastname   |
-|-------------+------------|
-| Amber       | Duke       |
-| Hattie      | Bond       |
-| Nanette     | Bates      |
-| Dale        | Adams      |
-+-------------+------------+
+search source=accounts | fields account_number, firstname, lastname | fields - account_number;
 ```
+
+| firstname | lastname
+:--- | :--- |
+| Amber   | Duke       
+| Hattie  | Bond       
+| Nanette | Bates      
+| Dale    | Adams         
 
 ## rename
 
@@ -261,36 +232,30 @@ Field | Description | Required
 Rename the `account_number` field as `an`:
 
 ```sql
-source=accounts | rename account_number as an | fields an;
-
-fetched rows / total rows = 4/4
-+------+
-| an   |
-|------|
-| 1    |
-| 6    |
-| 13   |
-| 18   |
-+------+
+search source=accounts | rename account_number as an | fields an;
 ```
+
+| an
+:--- |
+| 1    
+| 6    
+| 13   
+| 18
 
 *Example 2*: Rename multiple fields
 
 Rename the `account_number` field as `an` and `employer` as `emp`:
 
 ```sql
-source=accounts | rename account_number as an, employer as emp | fields an, emp;
-
-fetched rows / total rows = 4/4
-+------+---------+
-| an   | emp     |
-|------+---------|
-| 1    | Pyrami  |
-| 6    | Netagy  |
-| 13   | Quility |
-| 18   | null    |
-+------+---------+
+search source=accounts | rename account_number as an, employer as emp | fields an, emp;
 ```
+
+| an   | emp
+:--- | :--- |
+| 1    | Pyrami  
+| 6    | Netagy  
+| 13   | Quility
+| 18   | null    
 
 ## search
 
@@ -313,34 +278,28 @@ Field | Description | Required
 To fetch all documents from the `accounts` index:
 
 ```sql
-source=accounts;
-
-fetched rows / total rows = 4/4
-+------------------+-------------+----------------------+-----------+----------+--------+------------+---------+-------+-----------------------+------------+
-| account_number   | firstname   | address              | balance   | gender   | city   | employer   | state   | age   | email                 | lastname   |
-|------------------+-------------+----------------------+-----------+----------+--------+------------+---------+-------+-----------------------+------------|
-| 1                | Amber       | 880 Holmes Lane      | 39225     | M        | Brogan | Pyrami     | IL      | 32    | amberduke@pyrami.com  | Duke       |
-| 6                | Hattie      | 671 Bristol Street   | 5686      | M        | Dante  | Netagy     | TN      | 36    | hattiebond@netagy.com | Bond       |
-| 13               | Nanette     | 789 Madison Street   | 32838     | F        | Nogal  | Quility    | VA      | 28    | null                  | Bates      |
-| 18               | Dale        | 467 Hutchinson Court | 4180      | M        | Orick  | null       | MD      | 33    | daleadams@boink.com   | Adams      |
-+------------------+-------------+----------------------+-----------+----------+--------+------------+---------+-------+-----------------------+------------+
+search source=accounts;
 ```
+
+| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
+:--- | :--- |
+| 1  | Amber  | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com  | Duke       
+| 6  | Hattie | 671 Bristol Street | 5686 | M | Dante | Netagy | TN | 36  | hattiebond@netagy.com | Bond
+| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates
+| 18 | Dale  | 467 Hutchinson Court | 4180 | M | Orick | null | MD | 33 | daleadams@boink.com | Adams
 
 *Example 2*: Fetch data with condition
 
 To fetch all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
 
 ```sql
-source=accounts account_number=1 or gender="F";
-
-fetched rows / total rows = 2/2
-+------------------+-------------+--------------------+-----------+----------+--------+------------+---------+-------+----------------------+------------+
-| account_number   | firstname   | address            | balance   | gender   | city   | employer   | state   | age   | email                | lastname   |
-|------------------+-------------+--------------------+-----------+----------+--------+------------+---------+-------+----------------------+------------|
-| 1                | Amber       | 880 Holmes Lane    | 39225     | M        | Brogan | Pyrami     | IL      | 32    | amberduke@pyrami.com | Duke       |
-| 13               | Nanette     | 789 Madison Street | 32838     | F        | Nogal  | Quility    | VA      | 28    | null                 | Bates      |
-+------------------+-------------+--------------------+-----------+----------+--------+------------+---------+-------+----------------------+------------+
+search source=accounts account_number=1 or gender="F";
 ```
+
+| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
+:--- | :--- |
+| 1 | Amber | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com | Duke |
+| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates |
 
 ## sort
 
@@ -355,7 +314,7 @@ sort [count] <[+|-] sort-field>...
 Field | Description | Required | Default
 :--- | :--- |:---
 `count` | The maximum number results to return from the sorted result. If count=0, all results are returned. | No | 1000
-`[+|-]` | Use plus [+] to sort by ascending order and minus [-] by descending order. | No | Ascending order
+`[+|-]` | Use plus [+] to sort by ascending order and minus [-] to sort by descending order. | No | Ascending order
 `sort-field` | Specify the field that you want to sort by. | Yes | -
 
 *Example 1*: Sort by one field
@@ -363,94 +322,79 @@ Field | Description | Required | Default
 To sort all documents by the `age` field in ascending order:
 
 ```sql
-source=accounts | sort age | fields account_number, age;
-
-fetched rows / total rows = 4/4
-+------------------+-------+
-| account_number   | age   |
-|------------------+-------|
-| 13               | 28    |
-| 1                | 32    |
-| 18               | 33    |
-| 6                | 36    |
-+------------------+-------+
+search source=accounts | sort age | fields account_number, age;
 ```
+
+| account_number | age |
+:--- | :--- |
+| 13 | 28    
+| 1  | 32    
+| 18 | 33    
+| 6  | 36
 
 *Example 2*: Sort by one field and return all results
 
 To sort all documents by the `age` field in ascending order and specify count as 0 to get back all results:
 
 ```sql
-source=accounts | sort 0 age | fields account_number, age;
-
-fetched rows / total rows = 4/4
-+------------------+-------+
-| account_number   | age   |
-|------------------+-------|
-| 13               | 28    |
-| 1                | 32    |
-| 18               | 33    |
-| 6                | 36    |
-+------------------+-------+
+search source=accounts | sort 0 age | fields account_number, age;
 ```
+
+| account_number | age |
+:--- | :--- |
+| 13 | 28    
+| 1  | 32    
+| 18 | 33    
+| 6  | 36
 
 *Example 3*: Sort by one field in descending order
 
 To sort all documents by the `age` field in descending order:
 
 ```sql
-source=accounts | sort - age | fields account_number, age;
-
-fetched rows / total rows = 4/4
-+------------------+-------+
-| account_number   | age   |
-|------------------+-------|
-| 6                | 36    |
-| 18               | 33    |
-| 1                | 32    |
-| 13               | 28    |
-+------------------+-------+
+search source=accounts | sort - age | fields account_number, age;
 ```
+
+| account_number | age |
+:--- | :--- |
+| 6 | 36    
+| 18  | 33    
+| 1 | 32    
+| 13  | 28
 
 *Example 4*: Specify the number of sorted documents to return
 
 To sort all documents by the `age` field in ascending order and specify count as 2 to get back two results:
 
 ```sql
-source=accounts | sort 2 age | fields account_number, age;
-
-fetched rows / total rows = 2/2
-+------------------+-------+
-| account_number   | age   |
-|------------------+-------|
-| 13               | 28    |
-| 1                | 32    |
-+------------------+-------+
+search source=accounts | sort 2 age | fields account_number, age;
 ```
+
+| account_number | age |
+:--- | :--- |
+| 13 | 28    
+| 1  | 32    
 
 *Example 5*: Sort by multiple fields
 
 To sort all documents by the `gender` field in ascending order and `age` field in descending order:
 
 ```sql
-source=accounts | sort + gender, - age | fields account_number, gender, age;
-
-fetched rows / total rows = 4/4
-+------------------+----------+-------+
-| account_number   | gender   | age   |
-|------------------+----------+-------|
-| 13               | F        | 28    |
-| 6                | M        | 36    |
-| 18               | M        | 33    |
-| 1                | M        | 32    |
-+------------------+----------+-------+
+search source=accounts | sort + gender, - age | fields account_number, gender, age;
 ```
+
+| account_number | gender | age |
+:--- | :--- | :--- |
+| 13 | F | 28    
+| 6  | M | 36    
+| 18 | M | 33    
+| 1  | M | 32
 
 ## stats
 
 Use the `stats` command to aggregate from search results.
 
-The following table catalogs the aggregation functions and also indicates how each one handles null or missing values:
+The following table lists the aggregation functions and also indicates how each one handles null or missing values:
 
 Function | NULL | MISSING
 :--- | :--- |:---
@@ -477,78 +421,63 @@ Field | Description | Required | Default
 To calculate the average `age` of all documents:
 
 ```sql
-source=accounts | stats avg(age);
-
-fetched rows / total rows = 1/1
-+------------+
-| avg(age)   |
-|------------|
-| 32.25      |
-+------------+
+search source=accounts | stats avg(age);
 ```
+
+| avg(age)
+:--- |
+| 32.25
 
 *Example 2*: Calculate the average of a field by group
 
-To calculate the average age grouped by the gender:
+To calculate the average age grouped by gender:
 
 ```sql
-source=accounts | stats avg(age) by gender;
-
-fetched rows / total rows = 2/2
-+----------+--------------------+
-| gender   | avg(age)           |
-|----------+--------------------|
-| F        | 28.0               |
-| M        | 33.666666666666664 |
-+----------+--------------------+
+search source=accounts | stats avg(age) by gender;
 ```
+
+| gender | avg(age)
+:--- | :--- |
+| F  | 28.0         
+| M  | 33.666666666666664
 
 *Example 3*: Calculate the average and sum of a field by group
 
 To calculate the average and sum of age grouped by gender:
 
 ```sql
-source=accounts | stats avg(age), sum(age) by gender;
-
-fetched rows / total rows = 2/2
-+----------+--------------------+------------+
-| gender   | avg(age)           | sum(age)   |
-|----------+--------------------+------------|
-| F        | 28.0               | 28         |
-| M        | 33.666666666666664 | 101        |
-+----------+--------------------+------------+
+search source=accounts | stats avg(age), sum(age) by gender;
 ```
+
+| gender | avg(age) | sum(age)
+:--- | :--- |
+| F  | 28   | 28         
+| M  | 33.666666666666664 | 101
 
 *Example 4*: Calculate the maximum of a field
 
 To calculate the maximum age:
 
 ```sql
-source=accounts | stats max(age);
-
-fetched rows / total rows = 1/1
-+------------+
-| max(age)   |
-|------------|
-| 36         |
-+------------+
+search source=accounts | stats max(age);
 ```
+
+| max(age)
+:--- |
+| 36  
 
 *Example 5*: Calculate the maximum and minimum of a field by group
 
 To calculate the maximum and minimum age values grouped by gender:
 
 ```sql
-source=accounts | stats max(age), min(age) by gender;
-
-fetched rows / total rows = 2/2
-+----------+------------+------------+
-| gender   | min(age)   | max(age)   |
-|----------+------------+------------|
-| F        | 28         | 28         |
-| M        | 32         | 36         |
-+----------+------------+------------+
+search source=accounts | stats max(age), min(age) by gender;
 ```
+
+| gender | min(age) | max(age)
+:--- | :--- | :--- |
+| F  | 28 | 28         
+| M  | 32 | 36
 
 ## where
 
@@ -569,16 +498,13 @@ Field | Description | Required
 To fetch all documents from the `accounts` index that matches a bool expression:
 
 ```sql
-source=accounts | where account_number=1 or gender="F" | fields account_number, gender;
-
-fetched rows / total rows = 2/2
-+------------------+----------+
-| account_number   | gender   |
-|------------------+----------|
-| 1                | M        |
-| 13               | F        |
-+------------------+----------+
+search source=accounts | where account_number=1 or gender="F" | fields account_number, gender;
 ```
+
+| account_number | gender
+:--- | :--- |
+| 1  | M        
+| 13 | F
 
 ## head
 
@@ -592,7 +518,7 @@ head [keeplast = (true | false)] [while "("<boolean-expression>")"] [N]
 
 Field | Description | Required | Default
 :--- | :--- |:---
-`keeplast` | Use in conjunction with the `while` argument to determine whether the last result in the result set is retained. The last result returned is the result that caused the <boolean-expression> to evaluate to false or NULL. Set `keeplast=true` to retain the last result in the result set. Set `keeplast=false` to discard the last result. | No | True
+`keeplast` | Use in conjunction with the `while` argument to determine whether the last result in the result set is retained. The last result returned is the result that caused the boolean expression to evaluate to false or NULL. Set "keeplast=true" to retain the last result in the result set. Set "keeplast=false" to discard the last result. | No | True
 `while` | An expression that evaluates to either true or false. You cannot use statistical functions in the expression. | No | False
 `N` | Specify the number of results to return. | No | 10
 
@@ -601,78 +527,52 @@ Field | Description | Required | Default
 To get the first 10 results:
 
 ```sql
-source=accounts | fields firstname, age | head;
-
-fetched rows / total rows = 10/10
-+---------------+-----------+
-| firstname     | age       |
-|---------------+-----------|
-| Amber         | 32        |
-| Hattie        | 36        |
-| Nanette       | 28        |
-| Dale          | 33        |
-| Elinor        | 36        |
-| Virginia      | 39        |
-| Dillard       | 34        |
-| Mcgee         | 39        |
-| Aurelia       | 37        |
-| Fulton        | 23        |
-+---------------+-----------+
+search source=accounts | fields firstname, age | head;
 ```
 
-*Example 2*: Get first three results
+| firstname | age
+:--- | :--- |
+| Amber  | 32
+| Hattie | 36
+| Nanette | 28
 
-To get the first three results:
+*Example 2*: Get first N results
+
+To get the first two results:
 
 ```sql
-source=accounts | fields firstname, age | head 3;
-
-fetched rows / total rows = 3/3
-+---------------+-----------+
-| firstname     | age       |
-|---------------+-----------|
-| Amber         | 32        |
-| Hattie        | 36        |
-| Nanette       | 28        |
-+---------------+-----------+
+search source=accounts | fields firstname, age | head 2;
 ```
+
+| firstname | age
+:--- | :--- |
+| Amber  | 32
+| Hattie | 36
 
 *Example 3*: Get first N results with a while condition
 
-To get the first N results from all accounts that match a while condition:
+To get the first 3 results from all accounts with age less than 30:
 
 ```sql
-source=accounts | fields firstname, age | sort age | head while(age < 21) 7;
-
-fetched rows / total rows = 4/4
-+---------------+-----------+
-| firstname     | age       |
-|---------------+-----------|
-| Claudia       | 20        |
-| Copeland      | 20        |
-| Cornelia      | 20        |
-| Schultz       | 20        |
-| Simpson       | 21        |
-+---------------+-----------+
+search source=accounts | fields firstname, age | sort age | head while(age < 30) 3;
 ```
+
+| firstname | age
+:--- | :--- |
+| Nanette  | 28
+| Amber  | 32
 
 *Example 4*: Get first N results with a while condition with the last result that failed the condition
 
-To get the first N results from all accounts that match a while condition and includes the last failed condition:
+To get the first 3 results from all accounts that match a while condition and include the last failed condition:
 
 ```sql
-source=accounts | fields firstname, age | sort age | head keeplast=false while(age < 21) 7;
-
-fetched rows / total rows = 4/4
-+---------------+-----------+
-| firstname     | age       |
-|---------------+-----------|
-| Claudia       | 20        |
-| Copeland      | 20        |
-| Cornelia      | 20        |
-| Schultz       | 20        |
-+---------------+-----------+
+search source=accounts | fields firstname, age | sort age | head keeplast=false while(age < 30) 3;
 ```
+
+| firstname | age
+:--- | :--- |
+| Nanette  | 28  
 
 ## rare
 
@@ -695,53 +595,29 @@ Field | Description | Required
 To find the least common value of gender:
 
 ```sql
-source=accounts | rare gender;
-
-fetched rows / total rows = 2/2
-+------------+
-| gender     |
-|------------|
-| F          |
-|------------|
-| M          |
-+------------+
+search source=accounts | rare gender;
 ```
 
-*Example 2*: Find the least common values organized by gender
+| gender
+:--- |
+| F  
+| M
+
+*Example 2*: Find the least common values grouped by gender
 
 To find the least common age grouped by gender:
 
 ```sql
-source=accounts | rare age by gender;
-
-fetched rows / total rows = 20/20
-+----------+----------+
-| gender   | age      |
-|----------+----------|
-| F        | 29       |
-| F        | 20       |
-| F        | 23       |
-| F        | 25       |
-| F        | 37       |
-| F        | 38       |
-| F        | 40       |
-| F        | 27       |
-| F        | 36       |
-| F        | 24       |
-| M        | 27       |
-| M        | 24       |
-| M        | 34       |
-| M        | 38       |
-| M        | 28       |
-| M        | 39       |
-| M        | 21       |
-| M        | 30       |
-| M        | 25       |
-| M        | 29       |
-+----------+----------+
+search source=accounts | rare age by gender;
 ```
 
-## top
+| gender | age
+:--- | :--- |
+| F  | 28  
+| M  | 32
+| M  | 33
+
+## top {#top-command}
 
 Use the `top` command to find the most common tuple of values of all fields in the field list.
 
@@ -759,48 +635,38 @@ Field | Description | Default
 
 *Example 1*: Find the most common values in a field
 
-To find the most common gender:
+To find the most common genders:
 
 ```sql
-source=accounts | top gender;
-
-fetched rows / total rows = 2/2
-+------------+
-| gender     |
-|------------|
-| M          |
-|------------|
-| F          |
-+------------+
+search source=accounts | top gender;
 ```
+
+| gender
+:--- |
+| M  
+| F
 
 *Example 2*: Find the most common value in a field
 
 To find the most common gender:
 
 ```sql
-source=accounts | top 1 gender;
-
-fetched rows / total rows = 1/1
-+------------+
-| gender     |
-|------------|
-| M          |
-+------------+
+search source=accounts | top 1 gender;
 ```
+
+| gender
+:--- |
+| M          
 
 *Example 2*: Find the most common values organized by gender
 
-To find the most common age grouped by the gender:
+To find the most common age grouped by gender:
 
 ```sql
-source=accounts | top 1 age by gender;
-
-fetched rows / total rows = 2/2
-+----------+----------+
-| gender   | age      |
-|----------+----------|
-| F        | 39       |
-| M        | 31       |
-+----------+----------+
+search source=accounts | top 1 age by gender;
 ```
+
+| gender | age
+:--- | :--- |
+| F  | 28  
+| M  | 32

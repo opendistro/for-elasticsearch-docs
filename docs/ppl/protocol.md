@@ -55,7 +55,7 @@ The following example shows a normal response where the schema includes a field 
 }
 ```
 
-If any error occurred, an error message and its cause are returned instead:
+If any error occurred, error message and the cause will be returned instead:
 
 ```json
 curl -H 'Content-Type: application/json' -X POST localhost:9200/_opendistro/_ppl \
