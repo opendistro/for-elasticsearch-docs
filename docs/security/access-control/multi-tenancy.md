@@ -58,11 +58,11 @@ opendistro_security.multitenancy.enable_filter: false
 Setting | Description
 :--- | :---
 `elasticsearch.requestHeadersWhitelist` | Kibana requires that you whitelist all HTTP headers that it passes to Elasticsearch. Multi-tenancy uses a specific header, `securitytenant`, that must be present with the standard `Authorization` header. If the `securitytenant` header is not whitelisted, Kibana starts with a red status.
-`multitenancy.enabled` | Enables or disables multi-tenancy in Kibana. Default is true.
-`multitenancy.tenants.enable_global` | Enables or disables the global tenant. Default is true.
-`multitenancy.tenants.enable_private` | Enables or disables the private tenant. Default is true.
-`multitenancy.tenants.preferred` | Lets you change ordering in the **Tenants** tab of Kibana. By default, the list starts with global and private (if enabled) and then proceeds alphabetically. You can add tenants here to move them to the top of the list.
-`multitenancy.enable_filter` | If you have many tenants, you can add a search bar to the top of the list. Default is false.
+`opendistro_security.multitenancy.enabled` | Enables or disables multi-tenancy in Kibana. Default is true.
+`opendistro_security.multitenancy.tenants.enable_global` | Enables or disables the global tenant. Default is true.
+`opendistro_security.multitenancy.tenants.enable_private` | Enables or disables the private tenant. Default is true.
+`opendistro_security.multitenancy.tenants.preferred` | Lets you change ordering in the **Tenants** tab of Kibana. By default, the list starts with global and private (if enabled) and then proceeds alphabetically. You can add tenants here to move them to the top of the list.
+`opendistro_security.multitenancy.enable_filter` | If you have many tenants, you can add a search bar to the top of the list. Default is false.
 
 
 ## Add tenants
