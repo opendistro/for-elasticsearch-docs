@@ -57,6 +57,7 @@ proxy_auth_domain:
   order: 0
   http_authenticator:
     type: proxy
+    challenge: false
     config:
       user_header: "x-proxy-user"
       roles_header: "x-proxy-roles"
@@ -82,6 +83,7 @@ proxy_auth_domain:
   order: 0
   http_authenticator:
     type: extended-proxy
+    challenge: false
     config:
       user_header: "x-proxy-user"
       roles_header: "x-proxy-roles"
