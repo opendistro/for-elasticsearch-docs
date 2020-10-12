@@ -58,11 +58,11 @@ opendistro_security.multitenancy.enable_filter: false
 Setting | Description
 :--- | :---
 `elasticsearch.requestHeadersWhitelist` | Kibana requires that you whitelist all HTTP headers that it passes to Elasticsearch. Multi-tenancy uses a specific header, `securitytenant`, that must be present with the standard `Authorization` header. If the `securitytenant` header is not whitelisted, Kibana starts with a red status.
-`multitenancy.enabled` | Enables or disables multi-tenancy in Kibana. Default is true.
-`multitenancy.tenants.enable_global` | Enables or disables the global tenant. Default is true.
-`multitenancy.tenants.enable_private` | Enables or disables the private tenant. Default is true.
-`multitenancy.tenants.preferred` | Lets you change ordering in the **Tenants** tab of Kibana. By default, the list starts with global and private (if enabled) and then proceeds alphabetically. You can add tenants here to move them to the top of the list.
-`multitenancy.enable_filter` | If you have many tenants, you can add a search bar to the top of the list. Default is false.
+`opendistro_security.multitenancy.enabled` | Enables or disables multi-tenancy in Kibana. Default is true.
+`opendistro_security.multitenancy.tenants.enable_global` | Enables or disables the global tenant. Default is true.
+`opendistro_security.multitenancy.tenants.enable_private` | Enables or disables the private tenant. Default is true.
+`opendistro_security.multitenancy.tenants.preferred` | Lets you change ordering in the **Tenants** tab of Kibana. By default, the list starts with global and private (if enabled) and then proceeds alphabetically. You can add tenants here to move them to the top of the list.
+`opendistro_security.multitenancy.enable_filter` | If you have many tenants, you can add a search bar to the top of the list. Default is false.
 
 
 ## Add tenants
@@ -73,9 +73,9 @@ To create tenants, use Kibana, the REST API, or `tenants.yml`.
 #### Kibana
 
 1. Open Kibana.
-1. Choose **Security**, **Tenants**, and add a new tenant.
+1. Choose **Security**, **Tenants**, and **Create tenant**.
 1. Give the tenant a name and description.
-1. Choose **Submit**.
+1. Choose **Create**.
 
 
 #### REST API
@@ -108,8 +108,8 @@ After creating a tenant, give a role access to it using Kibana, the REST API, or
 #### Kibana
 
 1. Open Kibana.
-1. Choose **Security**, **Roles**, and **Tenant Permissions**.
-1. Choose a tenant, and give the role read or write permissions to it.
+1. Choose **Security**, **Roles**, and a role.
+1. For **Tenant permissions**, add tenants, press Enter, and give the role read and/or write permissions to it.
 
 
 #### REST API

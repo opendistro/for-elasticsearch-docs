@@ -203,4 +203,6 @@ You must also enable the authentication type in `kibana.yml`:
 
 ```yml
 opendistro_security.auth.type: "proxy"
+opendistro_security.proxycache.user_header: "x-proxy-user"
+opendistro_security.proxycache.roles_header: "x-proxy-roles"
 ```

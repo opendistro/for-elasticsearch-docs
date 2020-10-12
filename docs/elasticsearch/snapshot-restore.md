@@ -37,6 +37,9 @@ Elasticsearch snapshots are incremental, meaning that they only store data that 
 
 In other words, taking hourly snapshots for a week (for a total of 168 snapshots) might not use much more disk space than taking a single snapshot at the end of the week. Also, the more frequently you take snapshots, the less time they take to complete. Some Elasticsearch users take snapshots as often as every half hour.
 
+If you need to delete a snapshot, be sure to use the Elasticsearch API rather than navigating to the storage location and purging files. Incremental snapshots from a cluster often share a lot of the same data; when you use the API, Elasticsearch only removes data that no other snapshot is using.
+{: .tip }
+
 
 ## Register repository
 
@@ -101,7 +104,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    If you're using the Docker installation, see [Customize the Docker image](../../install/docker/#customize-the-docker-image). Your `Dockerfile` should look something like this:
 
    ```
-   FROM amazon/opendistro-for-elasticsearch:1.9.0
+   FROM amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
 
    ENV AWS_ACCESS_KEY_ID <access-key>
    ENV AWS_SECRET_ACCESS_KEY <secret-key>
@@ -162,7 +165,23 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    POST _nodes/reload_secure_settings
    ```
 
-1. Create an S3 bucket if you don't already have one.
+1. Create an S3 bucket if you don't already have one. To take snapshots, you must have permissions to access the bucket. The following IAM policy is an example of those permissions:
+
+   ```json
+   {
+	   "Version": "2012-10-17",
+	   "Statement": [{
+		   "Action": [
+			   "s3:*"
+		   ],
+		   "Effect": "Allow",
+		   "Resource": [
+			   "arn:aws:s3:::your-bucket",
+			   "arn:aws:s3:::your-bucket/*"
+		   ]
+	   }]
+   }
+   ```
 
 1. Register the repository using the REST API:
 

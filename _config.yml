@@ -20,6 +20,9 @@ baseurl: "/for-elasticsearch-docs" # the subpath of your site, e.g. /blog
 url: "https://opendistro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
 
+odfe_version: 1.10.1
+es_version: 7.9.1
+
 # Build settings
 markdown: kramdown
 remote_theme: pmarsceill/just-the-docs@v0.3.0
@@ -75,7 +78,7 @@ heading_anchors: false
 # Adds on-hover anchor links to h2-h6
 anchor_links: true
 
-footer_content: 
+footer_content:
 
 plugins:
   - jekyll-remote-theme

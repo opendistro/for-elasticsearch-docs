@@ -17,7 +17,7 @@ Additionally you can set the Docker environment variable `DISABLE_INSTALL_DEMO_C
 version: '3'
 services:
   odfe-node1:
-    image: amazon/opendistro-for-elasticsearch:1.9.0
+    image: amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
     container_name: odfe-node1
     environment:
       - cluster.name=odfe-cluster
@@ -53,7 +53,7 @@ services:
     networks:
       - odfe-net
   odfe-node2:
-    image: amazon/opendistro-for-elasticsearch:1.9.0
+    image: amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
     container_name: odfe-node2
     environment:
       - cluster.name=odfe-cluster
@@ -86,7 +86,7 @@ services:
     networks:
       - odfe-net
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:1.9.0
+    image: amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}
     container_name: odfe-kibana
     ports:
       - 5601:5601
