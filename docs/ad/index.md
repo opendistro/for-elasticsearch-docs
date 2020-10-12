@@ -21,7 +21,7 @@ To use the anomaly detection plugin, your computer needs to have more than one C
 ## Get started with Anomaly Detection
 
 To get started, choose **Anomaly Detection** in Kibana.
-To first test with sample streaming data, choose **Sample Detectors** and try out one of the pre-configured detectors.
+To first test with sample streaming data, choose **Sample Detectors** and try out one of the preconfigured detectors.
 
 ### Step 1: Create a detector
 
