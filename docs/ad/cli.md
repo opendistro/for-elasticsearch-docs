@@ -7,7 +7,7 @@ nav_order: 3
 
 # Anomaly Detection CLI
 
-Anomaly detection CLI lets you implement anomaly detection APIs with the `esad` command.
+Anomaly detection CLI lets you call anomaly detection APIs with the `esad` command.
 
 You can use the CLI to:
 
@@ -15,7 +15,7 @@ You can use the CLI to:
 * Start, stop, and delete detectors
 * Create named profiles to connect to your cluster
 
-Install the anomaly detection plugin to your Elasticsearch instance, run the CLI using MacOS or Linux, and connect to any valid Elasticsearch end-point.
+Install the anomaly detection plugin to your Elasticsearch instance, run the CLI using macOS or Linux, and connect to any valid Elasticsearch end-point.
 
 ## Install
 
@@ -23,27 +23,24 @@ Launch your local Elasticsearch instance and make sure you have the anomaly dete
 
 To install the anomaly detection CLI:
 
-1. Download and extract `esad` binaries from:
-```
-https://github.com/opendistro-for-elasticsearch/anomaly-detection/actions/runs/224422434
-```
+1. Download and extract [esad binaries](https://github.com/opendistro-for-elasticsearch/anomaly-detection/actions/runs/224422434).
 
 2. Make the `esad` file executable:
-```
+```bash
 chmod +x ./esad
 ```
 
 3. Move the binaries to your path for root users:
-```
+```bash
 sudo mv ./esad /usr/local/bin/esad
 ```
-Or, add it to your the current path:
-```
+Or add it to the current path:
+```bash
 export PATH=$PATH:$(pwd)
 ```
 
 4. Check if the CLI is installed:
-```
+```bash
 esad --version
 ```
 You should see the command prints of the `esad` version you installed.
@@ -51,7 +48,7 @@ You should see the command prints of the `esad` version you installed.
 
 ## Configure
 
-Before using the CLI, you need to configure your credentials.
+Before using the CLI, you must configure your credentials.
 
 To quickly get started, run the `esad profile create` command:
 ```
@@ -63,7 +60,7 @@ ES Anomaly Detection User: admin
 ES Anomaly Detection Password:
 ```
 
-Specify a unique profile name because the `create` command doesn’t allow you to create a duplicate profile.
+Specify a unique profile name. The `create` command doesn’t allow duplicate profiles.
 
 Alternatively, you can also use a configuration file:
 ```yaml
