@@ -25,13 +25,9 @@ Autocomplete shows suggestions to users while they type.
 
 For example, if a user types "pop," Elasticsearch provides suggestions like "popcorn" or "popsicles." These suggestions preempt your user's intention and lead them to a possible search term more quickly.
 
-Elasticsearch allows you to design autocomplete that’s:
+Elasticsearch allows you to design autocomplete that updates with each keystroke, provides a few relevant suggestions, and tolerates typos.
 
-- Responsive: Updates suggestions with each keystroke.
-- Relevant: Serves a few but relevant suggestions.
-- Forgiving: Tolerates typos.
-
-Implement autocomplete in one of three methods:
+Implement autocomplete using one of three methods:
 
 - Prefix matching
 - Edge N-gram matching
@@ -84,7 +80,7 @@ GET shakespeare/_search
 ```
 
 The ease of implementing query-time autocomplete comes at the cost of performance.
-When implementing this feature on a large scale, we recommend an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query.
+When implementing this feature on a large scale, we recommend an index-time solution. With an index-time solution, you might experience slower indexing, but it’s a price you pay only once and not for every query. The edge N-gram and completion suggester methods are index time.
 
 ### Edge N-gram matching
 
@@ -153,7 +149,7 @@ PUT shakespeare
 
 This example creates the index and instantiates the edge N-gram filter and analyzer.
 
-The `edge_ngram_filter` produces edge N-grams with a minimum N-gram length of 1 (a single letter) and a maximum length of 20. So, it can offer suggestions for words of up to 20 letters.
+The `edge_ngram_filter` produces edge N-grams with a minimum N-gram length of 1 (a single letter) and a maximum length of 20. So it offers suggestions for words of up to 20 letters.
 
 The `autocomplete` analyzer tokenizes a string into individual terms, lowercases the terms, and then produces edge N-grams for each term using the `edge_ngram_filter`.
 
@@ -557,7 +553,7 @@ You see the indexed document as the first result:
 Use the `term` suggester to suggest corrected spellings for individual words.
 The `term` suggester uses an edit distance to compute suggestions. Edit distance is the number of characters that need to be changed for a term to match.
 
-If a user misspells a search term:
+In this example, the user misspells a search term:
 
 ```json
 GET shakespeare/_search
@@ -573,7 +569,7 @@ GET shakespeare/_search
 }
 ```
 
-Use the `term` suggester to return a list of corrections:
+The `term` suggester returns a list of corrections:
 
 ```json
 {
@@ -681,7 +677,7 @@ PUT shakespeare
 }
 ```
 
-If you run a query with an incorrect phrase:
+This example includes as incorrect phrase:
 
 ```json
 POST shakespeare/_search
