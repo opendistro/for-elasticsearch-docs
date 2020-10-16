@@ -1793,8 +1793,8 @@ master_timeout | time | Specify timeout for connection to master
 Updates the index mappings.
 
 ```
-PUT index}/_mapping
-POST index}/_mapping
+PUT {index}/_mapping
+POST {index}/_mapping
 ```
 
 ```
