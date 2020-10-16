@@ -44,7 +44,7 @@ The operation definition and data (action-data pairs), separated by newlines
 Parameter | Type | Description
 :--- | :--- | :---
 wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-refresh | enum | If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
+refresh | enum | If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
 routing | string | Specific routing value
 timeout | time | Explicit operation timeout
 type | string | Default document type for items which don't provide one
@@ -77,6 +77,7 @@ h | list | Comma-separated list of column names to display
 help | boolean | Return help information
 s | list | Comma-separated list of column names or column aliases to sort by
 v | boolean | Verbose mode. Display column headers
+expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
 
 
 ## cat.allocation
@@ -224,6 +225,7 @@ s | list | Comma-separated list of column names or column aliases to sort by
 time | enum | The unit in which to display time values
 v | boolean | Verbose mode. Display column headers
 include_unloaded_segments | boolean | If set to true segment stats will include stats for segments that are not currently loaded into memory
+expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
 
 
 ## cat.master
@@ -286,7 +288,7 @@ Parameter | Type | Description
 bytes | enum | The unit in which to display byte values
 format | string | a short version of the Accept header, e.g. json, yaml
 full_id | boolean | Return the full node ID instead of the shortened version (default: false)
-local | boolean | Return local information, do not retrieve the state from master node (default: false)
+local | boolean | Calculate the selected nodes using the local cluster state rather than the state from master node (default: false)
 master_timeout | time | Explicit operation timeout for connection to master node
 h | list | Comma-separated list of column names to display
 help | boolean | Return help information
@@ -591,6 +593,77 @@ include_yes_decisions | boolean | Return 'YES' decisions in explanation (default
 include_disk_info | boolean | Return information about disk usage and shard sizes (default: false)
 
 
+## cluster.delete_component_template
+
+Deletes a component template
+
+```
+DELETE _component_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+timeout | time | Explicit operation timeout
+master_timeout | time | Specify timeout for connection to master
+
+
+## cluster.delete_voting_config_exclusions
+
+Clears cluster voting config exclusions.
+
+```
+DELETE _cluster/voting_config_exclusions
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+wait_for_removal | boolean | Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list.
+
+
+## cluster.exists_component_template
+
+Returns information about whether a particular component template exist
+
+```
+HEAD _component_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+master_timeout | time | Explicit operation timeout for connection to master node
+local | boolean | Return local information, do not retrieve the state from master node (default: false)
+
+
+## cluster.get_component_template
+
+Returns one or more component templates
+
+```
+GET _component_template
+```
+
+```
+GET _component_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+master_timeout | time | Explicit operation timeout for connection to master node
+local | boolean | Return local information, do not retrieve the state from master node (default: false)
+
+
 ## cluster.get_settings
 
 Returns cluster settings.
@@ -655,6 +728,49 @@ GET _cluster/pending_tasks
 Parameter | Type | Description
 :--- | :--- | :---
 local | boolean | Return local information, do not retrieve the state from master node (default: false)
+master_timeout | time | Specify timeout for connection to master
+
+
+## cluster.post_voting_config_exclusions
+
+Updates the cluster voting config exclusions by node ids or node names.
+
+```
+POST _cluster/voting_config_exclusions
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+node_ids | string | A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify ?node_names.
+node_names | string | A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify ?node_ids.
+timeout | time | Explicit operation timeout
+
+
+## cluster.put_component_template
+
+Creates or updates a component template
+
+```
+PUT _component_template/{name}
+POST _component_template/{name}
+```
+
+#### HTTP request body
+
+The template definition
+
+**Required**: True
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+create | boolean | Whether the index template should only be added if new or can also replace an existing one
+timeout | time | Explicit operation timeout
 master_timeout | time | Specify timeout for connection to master
 
 
@@ -850,6 +966,53 @@ version_type | enum | Specific version type
 pipeline | string | The pipeline id to preprocess incoming documents with
 
 
+## dangling_indices.delete_dangling_index
+
+Deletes the specified dangling index
+
+```
+DELETE _dangling/{index_uuid}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+accept_data_loss | boolean | Must be set to true in order to delete the dangling index
+timeout | time | Explicit operation timeout
+master_timeout | time | Specify timeout for connection to master
+
+
+## dangling_indices.import_dangling_index
+
+Imports the specified dangling index
+
+```
+POST _dangling/{index_uuid}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+accept_data_loss | boolean | Must be set to true in order to import the dangling index
+timeout | time | Explicit operation timeout
+master_timeout | time | Specify timeout for connection to master
+
+
+## dangling_indices.list_dangling_indices
+
+Returns all dangling indices.
+
+```
+GET _dangling
+```
+
+
+
+
 ## delete
 
 Removes a document from the index.
@@ -868,7 +1031,7 @@ DELETE {index}/{type}/{id}
 Parameter | Type | Description
 :--- | :--- | :---
 wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-refresh | enum | If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
+refresh | enum | If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
 routing | string | Specific routing value
 timeout | time | Explicit operation timeout
 if_seq_no | number | only perform the delete operation if the last operation that has changed the document has the specified sequence number
@@ -900,6 +1063,7 @@ The search definition using the Query DSL
 
 Parameter | Type | Description
 :--- | :--- | :---
+analyzer | string | The analyzer to use for the query string
 analyze_wildcard | boolean | Specify whether wildcard and prefix queries should be analyzed (default: false)
 default_operator | enum | The default operator for query string query (AND or OR)
 df | string | The field to use as default where no field prefix is given in the query string
@@ -931,7 +1095,7 @@ wait_for_active_shards | string | Sets the number of shard copies that must be a
 scroll_size | number | Size on the scroll request powering the delete by query
 wait_for_completion | boolean | Should the request should block until the delete by query is complete.
 requests_per_second | number | The throttle for this request in sub-requests per second. -1 means no throttle.
-slices | number | The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.
+slices | number|string | The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.
 
 
 ## delete_by_query_rethrottle
@@ -1075,6 +1239,10 @@ GET {index}/_field_caps
 POST {index}/_field_caps
 ```
 
+#### HTTP request body
+
+An index filter specified with the Query DSL
+
 
 #### URL parameters
 
@@ -1132,6 +1300,28 @@ Parameter | Type | Description
 master_timeout | time | Specify timeout for connection to master
 
 
+## get_script_context
+
+Returns all script contexts.
+
+```
+GET _script_context
+```
+
+
+
+
+## get_script_languages
+
+Returns available script types, languages and contexts
+
+```
+GET _script_language
+```
+
+
+
+
 ## get_source
 
 Returns the source of a document.
@@ -1165,8 +1355,8 @@ version_type | enum | Specific version type
 Creates or updates a document in an index.
 
 ```
-POST {index}/_doc/{id}
 PUT {index}/_doc/{id}
+POST {index}/_doc/{id}
 ```
 
 ```
@@ -1178,8 +1368,8 @@ POST {index}/{type}
 ```
 
 ```
-POST {index}/{type}/{id}
 PUT {index}/{type}/{id}
+POST {index}/{type}/{id}
 ```
 
 #### HTTP request body
@@ -1194,7 +1384,7 @@ The document
 Parameter | Type | Description
 :--- | :--- | :---
 wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-op_type | enum | Explicit operation type
+op_type | enum | Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID
 refresh | enum | If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
 routing | string | Specific routing value
 timeout | time | Explicit operation timeout
@@ -1203,6 +1393,26 @@ version_type | enum | Specific version type
 if_seq_no | number | only perform the index operation if the last operation that has changed the document has the specified sequence number
 if_primary_term | number | only perform the index operation if the last operation that has changed the document has the specified primary term
 pipeline | string | The pipeline id to preprocess incoming documents with
+
+
+## indices.add_block
+
+Adds a block to an index.
+
+```
+PUT {index}/_block/{block}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+timeout | time | Explicit operation timeout
+master_timeout | time | Specify timeout for connection to master
+ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
+allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
+expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
 
 
 ## indices.analyze
@@ -1366,6 +1576,23 @@ timeout | time | Explicit timestamp for the document
 master_timeout | time | Specify timeout for connection to master
 
 
+## indices.delete_index_template
+
+Deletes an index template.
+
+```
+DELETE _index_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+timeout | time | Explicit operation timeout
+master_timeout | time | Specify timeout for connection to master
+
+
 ## indices.delete_template
 
 Deletes an index template.
@@ -1424,6 +1651,24 @@ Parameter | Type | Description
 ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
 allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
+local | boolean | Return local information, do not retrieve the state from master node (default: false)
+
+
+## indices.exists_index_template
+
+Returns information about whether a particular index template exists.
+
+```
+HEAD _index_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+flat_settings | boolean | Return settings in flat format (default: false)
+master_timeout | time | Explicit operation timeout for connection to master node
 local | boolean | Return local information, do not retrieve the state from master node (default: false)
 
 
@@ -1492,7 +1737,7 @@ expand_wildcards | enum | Whether to expand wildcard expression to concrete indi
 
 ## indices.flush_synced
 
-Performs a synced flush operation on one or more indices.
+Performs a synced flush operation on one or more indices. Synced flush is deprecated and will be removed in 8.0. Use flush instead
 
 ```
 POST _flush/synced
@@ -1623,6 +1868,28 @@ include_defaults | boolean | Whether the default mapping values should be return
 ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
 allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
+local | boolean | Return local information, do not retrieve the state from master node (default: false)
+
+
+## indices.get_index_template
+
+Returns an index template.
+
+```
+GET _index_template
+```
+
+```
+GET _index_template/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+flat_settings | boolean | Return settings in flat format (default: false)
+master_timeout | time | Explicit operation timeout for connection to master node
 local | boolean | Return local information, do not retrieve the state from master node (default: false)
 
 
@@ -1788,13 +2055,38 @@ timeout | time | Explicit timestamp for the document
 master_timeout | time | Specify timeout for connection to master
 
 
+## indices.put_index_template
+
+Creates or updates an index template.
+
+```
+PUT _index_template/{name}
+POST _index_template/{name}
+```
+
+#### HTTP request body
+
+The template definition
+
+**Required**: True
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+create | boolean | Whether the index template should only be added if new or can also replace an existing one
+cause | string | User defined reason for creating/updating the index template
+master_timeout | time | Specify timeout for connection to master
+
+
 ## indices.put_mapping
 
 Updates the index mappings.
 
 ```
-PUT index}/_mapping
-POST index}/_mapping
+PUT {index}/_mapping
+POST {index}/_mapping
 ```
 
 ```
@@ -1823,8 +2115,8 @@ POST _mappings/{type}
 ```
 
 ```
-PUT index}/_mappings
-POST index}/_mappings
+PUT {index}/_mappings
+POST {index}/_mappings
 ```
 
 ```
@@ -1849,6 +2141,7 @@ master_timeout | time | Specify timeout for connection to master
 ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
 allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
+write_index_only | boolean | When true, applies mappings only to the write index of an alias or data stream
 
 
 ## indices.put_settings
@@ -1906,9 +2199,7 @@ Parameter | Type | Description
 include_type_name | boolean | Whether a type should be returned in the body of the mappings.
 order | number | The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)
 create | boolean | Whether the index template should only be added if new or can also replace an existing one
-timeout | time | Explicit operation timeout
 master_timeout | time | Specify timeout for connection to master
-flat_settings | boolean | Return settings in flat format (default: false)
 
 
 ## indices.recovery
@@ -1954,6 +2245,22 @@ Parameter | Type | Description
 ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
 allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
+
+
+## indices.resolve_index
+
+Returns information about any matching indices, aliases, and data streams
+
+```
+GET _resolve/index/{name}
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+expand_wildcards | enum | Whether wildcard expressions should get expanded to open or closed indices (default: open)
 
 
 ## indices.rollover
@@ -2053,6 +2360,58 @@ copy_settings | boolean | whether or not to copy settings from the source index 
 timeout | time | Explicit operation timeout
 master_timeout | time | Specify timeout for connection to master
 wait_for_active_shards | string | Set the number of active shards to wait for on the shrunken index before the operation returns.
+
+
+## indices.simulate_index_template
+
+Simulate matching the given index name against the index templates in the system
+
+```
+POST _index_template/_simulate_index/{name}
+```
+
+#### HTTP request body
+
+New index template definition, which will be included in the simulation, as if it already exists in the system
+
+**Required**: False
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+create | boolean | Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+cause | string | User defined reason for dry-run creating the new template for simulation purposes
+master_timeout | time | Specify timeout for connection to master
+
+
+## indices.simulate_template
+
+Simulate resolving the given template name or body
+
+```
+POST _index_template/_simulate
+```
+
+```
+POST _index_template/_simulate/{name}
+```
+
+#### HTTP request body
+
+New index template definition to be simulated, if no index template name is specified
+
+**Required**: False
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+create | boolean | Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+cause | string | User defined reason for dry-run creating the new template for simulation purposes
+master_timeout | time | Specify timeout for connection to master
 
 
 ## indices.split
@@ -2388,7 +2747,7 @@ Parameter | Type | Description
 search_type | enum | Search operation type
 max_concurrent_searches | number | Controls the maximum number of concurrent searches the multi search api will execute
 typed_keys | boolean | Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-pre_filter_shard_size | number | A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
+pre_filter_shard_size | number | A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
 max_concurrent_shard_requests | number | The number of concurrent shard requests each sub search executes concurrently per node. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 rest_total_hits_as_int | boolean | Indicates whether hits.total should be rendered as an integer or an object in the rest search response
 ccs_minimize_roundtrips | boolean | Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
@@ -2428,6 +2787,7 @@ search_type | enum | Search operation type
 typed_keys | boolean | Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 max_concurrent_searches | number | Controls the maximum number of concurrent searches the multi search api will execute
 rest_total_hits_as_int | boolean | Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+ccs_minimize_roundtrips | boolean | Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
 
 
 ## mtermvectors
@@ -2563,6 +2923,12 @@ POST _nodes/reload_secure_settings
 ```
 POST _nodes/{node_id}/reload_secure_settings
 ```
+
+#### HTTP request body
+
+An object containing the password for the elasticsearch keystore
+
+**Required**: False
 
 
 #### URL parameters
@@ -2712,6 +3078,7 @@ Parameter | Type | Description
 ignore_unavailable | boolean | Whether specified concrete indices should be ignored when unavailable (missing or closed)
 allow_no_indices | boolean | Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 expand_wildcards | enum | Whether to expand wildcard expression to concrete indices that are open, closed or both.
+search_type | enum | Search operation type
 
 
 ## reindex
@@ -2735,13 +3102,13 @@ The search definition using the Query DSL and the prototype for the index reques
 
 Parameter | Type | Description
 :--- | :--- | :---
-refresh | boolean | Should the effected indexes be refreshed?
+refresh | boolean | Should the affected indexes be refreshed?
 timeout | time | Time each individual bulk request should wait for shards that are unavailable.
 wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
 wait_for_completion | boolean | Should the request should block until the reindex is complete.
 requests_per_second | number | The throttle to set on this request in sub-requests per second. -1 means no throttle.
 scroll | time | Control how long to keep the search context alive
-slices | number | The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.
+slices | number|string | The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.
 max_docs | number | Maximum number of documents to process (default: all documents)
 
 
@@ -2894,7 +3261,7 @@ seq_no_primary_term | boolean | Specify whether to return sequence number and pr
 request_cache | boolean | Specify if request cache should be used for this request or not, defaults to index level setting
 batched_reduce_size | number | The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.
 max_concurrent_shard_requests | number | The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-pre_filter_shard_size | number | A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
+pre_filter_shard_size | number | A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
 rest_total_hits_as_int | boolean | Indicates whether hits.total should be rendered as an integer or an object in the rest search response
 
 
@@ -2967,6 +3334,7 @@ explain | boolean | Specify whether to return detailed information about score c
 profile | boolean | Specify whether to profile the query execution
 typed_keys | boolean | Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 rest_total_hits_as_int | boolean | Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+ccs_minimize_roundtrips | boolean | Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
 
 
 ## snapshot.cleanup_repository
@@ -3192,6 +3560,7 @@ Parameter | Type | Description
 nodes | list | A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
 actions | list | A comma-separated list of actions that should be cancelled. Leave empty to cancel all.
 parent_task_id | string | Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.
+wait_for_completion | boolean | Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
 
 
 ## tasks.get
@@ -3309,7 +3678,7 @@ _source | list | True or false to return the _source field or not, or a list of 
 _source_excludes | list | A list of fields to exclude from the returned _source field
 _source_includes | list | A list of fields to extract and return from the _source field
 lang | string | The script language (default: painless)
-refresh | enum | If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
+refresh | enum | If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
 retry_on_conflict | number | Specify how many times should the operation be retried when a conflict occurs (default: 0)
 routing | string | Specific routing value
 timeout | time | Explicit operation timeout
@@ -3367,13 +3736,13 @@ stats | list | Specific 'tag' of the request for logging and statistical purpose
 version | boolean | Specify whether to return document version as part of a hit
 version_type | boolean | Should the document increment the version number (internal) on hit or not (reindex)
 request_cache | boolean | Specify if request cache should be used for this request or not, defaults to index level setting
-refresh | boolean | Should the effected indexes be refreshed?
+refresh | boolean | Should the affected indexes be refreshed?
 timeout | time | Time each individual bulk request should wait for shards that are unavailable.
 wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
 scroll_size | number | Size on the scroll request powering the update by query
 wait_for_completion | boolean | Should the request should block until the update by query operation is complete.
 requests_per_second | number | The throttle to set on this request in sub-requests per second. -1 means no throttle.
-slices | number | The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.
+slices | number|string | The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.
 
 
 ## update_by_query_rethrottle
