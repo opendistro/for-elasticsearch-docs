@@ -8,7 +8,7 @@ has_toc: false
 
 # Reporting
 
-The Kibana **Reporting** feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats and shared with stakeholders while schedule-based reports can be configured and set up for automated periodic delivery. You can do this either from the **Reporting** tab in the Kibana main menu or within the **Dashboard**, **Visualization** and **Discover** tabs. Reports can be either downloaded instantly (on-demand) or delivered via email, as an attachment or as an embedded file. To download, schedule and share reports, you must have the required role permissions which are configured using the security plugin in Kibana.
+The Kibana **Reporting** feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats, while schedule-based reports can be configured and set up for automated periodic delivery to stakeholders. You can do this either from the **Reporting** tab in the Kibana left sidebar or within the **Dashboard**, **Visualization** and **Discover** tabs. To download, schedule and share reports, you must have the required role permissions configured using the security plugin in Kibana.
 
 ## Create Report
 
@@ -34,10 +34,10 @@ Report definition allows you to define various settings, triggers, and delivery 
 8. Under **Report trigger**, choose the **Trigger type** as **On demand** or **Schedule based**. On demand reports are one-time and downloaded to your machine almost instantly. While schedule based reports can be set to generate periodically.  
     1. Under **Schedule based**, choose **Recurring** or **Cron based**.
     2. For **Recurring**, choose the **Frequency** as Daily, By interval, Weekly, or Monthly. Enter the **Request time** and **Timezone** (time at which to send the report).
-    3. For **Cron based**, enter a custom **Cron expression**. Refer (Cron expressions reference)[https://opendistro.github.io/for-elasticsearch-docs/docs/alerting/cron/] for more info.
+    3. For **Cron based**, enter a custom **Cron expression**. Refer [Cron expressions reference](https://opendistro.github.io/for-elasticsearch-docs/docs/alerting/cron/) for more info.
 9. For **Delivery settings**, choose **Email recipients**. 
 10. For **Email configuration** select or add email recipients. 
-11. Select an **Email format**.  It can be either be sent as an embedded HTML report, or an attachment. Also add an **Email subject** and an optional message for the email.
+11. Select an **Email format**.  It can be sent either as an embedded HTML report, or as an attachment. Also add an **Email subject** and an optional message for the email.
 12. Choose **Create**. You will be navigated to the **Reporting** landing page where you can view your report. 
 
 ## View Report
