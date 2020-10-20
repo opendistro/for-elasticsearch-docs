@@ -8,7 +8,7 @@ has_toc: false
 
 # Reporting
 
-The Kibana **Reporting** feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats, while schedule-based reports can be configured and set up for automated periodic delivery to stakeholders. You can do this either from the **Reporting** tab in the Kibana left sidebar or within the **Dashboard**, **Visualization** and **Discover** tabs. To download, schedule and share reports, you must have the required role permissions configured using the security plugin in Kibana.
+The Kibana **Reporting** feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats, while schedule-based reports can be configured and set up for automated periodic delivery to stakeholders. You can do this either from the **Reporting** tab in the Kibana left sidebar or from within the **Dashboard**, **Visualization** and **Discover** tabs. To download, schedule and share reports, you must have the required role permissions. 
 
 ## Create Report
 
