@@ -18,6 +18,8 @@ The PPL syntax consists of commands delimited by the pipe character (`|`) where 
 search command | command 1 | command 2 ...
 ```
 
+You can only use read-only commands like `search`, `where`, `fields`, `rename`, `dedup`, `stats`, `sort`, `eval`, `head`, `top`, and `rare`.
+
 ## Quick start
 
 To get started with PPL, choose **Dev Tools** in Kibana and use the `bulk` operation to index some sample data:
