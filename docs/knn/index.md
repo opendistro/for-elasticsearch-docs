@@ -91,7 +91,7 @@ In this case, `k` is the number of neighbors you want the query to return, but y
 
 ## Mixing queries
 
-If you mix the `knn` query with filters or other queries, you might receive fewer than `k` results. In this example, `post_filter` reduces the number of results from 2 to 1:
+If you use the `knn` query alongside filters, you might receive fewer than `k` results. In this example, `post_filter` reduces the number of results from 2 to 1:
 
 ```json
 GET my-knn-index-1/_search
@@ -207,6 +207,6 @@ All options are required.
 
 ## Performance considerations
 
-The standard KNN query and custom scoring option have performance tradeoffs. You should test both using a representative set of documents to see if the search results and latencies match your expectations.
+The standard KNN query and custom scoring option perform differently. Test using a representative set of documents to see if the search results and latencies match your expectations.
 
-In general, larger `k` values benefit from the standard KNN query. If you have a smaller `k` value and expect the initial pre-filter to reduce the number of documents to the thousands (not millions), custom scoring can work well.
+Custom scoring works best if the initial filter reduces the number of documents to no more than 20,000. Increasing shard count can improve latencies, but be sure to keep shard size within [the recommended guidelines](../elasticsearch/#primary-and-replica-shards).
