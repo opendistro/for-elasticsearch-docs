@@ -54,6 +54,6 @@ You can perform the following actions on paragraphs:
 - Clear the outputs of all paragraphs.
 - Delete all the paragraphs.
 
-## Import Example Notebooks
+## Import Sample Notebooks
 
 You can import sample notebooks from [example notebooks](https://github.com/opendistro-for-elasticsearch/kibana-notebooks/tree/dev/example_notebooks).
