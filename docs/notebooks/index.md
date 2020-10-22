@@ -22,8 +22,7 @@ To get started, choose **Kibana Notebooks** in Kibana.
 
 A notebook is an interface for creating reports.
 
-1. Choose **Create notebook**.
-- In the pop-up, enter a descriptive name.
+1. Choose **Create notebook** and enter a descriptive name.
 1. Choose **Create**.
 
 Choose **Notebook actions** to rename, duplicate, or delete a notebook.
@@ -53,3 +52,4 @@ You can perform the following actions on paragraphs:
 - Run all the paragraphs at the same time.
 - Clear the outputs of all paragraphs.
 - Delete all the paragraphs.
+- Move paragraphs up and down.
