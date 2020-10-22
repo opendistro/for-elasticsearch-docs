@@ -21,6 +21,50 @@ search source=accounts
 In the below examples, we represent required arguments in angle brackets `< >` and optional arguments in square brackets `[ ]`.
 {: .note }
 
+## search
+
+Use the `search` command to retrieve a document from an index. You can only use the `search` command as the first command in the PPL query.
+
+### Syntax
+
+```sql
+search source=<index> [boolean-expression]
+```
+
+Field | Description | Required
+:--- | :--- |:---
+`search` | Specify search keywords. | Yes
+`index` | Specify which index to query from. | No
+`bool-expression` | Specify an expression that evaluates to a boolean value. | No
+
+*Example 1*: Get all documents
+
+To get all documents from the `accounts` index:
+
+```sql
+search source=accounts;
+```
+
+| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
+:--- | :--- |
+| 1  | Amber  | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com  | Duke       
+| 6  | Hattie | 671 Bristol Street | 5686 | M | Dante | Netagy | TN | 36  | hattiebond@netagy.com | Bond
+| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates
+| 18 | Dale  | 467 Hutchinson Court | 4180 | M | Orick | null | MD | 33 | daleadams@boink.com | Adams
+
+*Example 2*: Get documents that match a condition
+
+To get all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
+
+```sql
+search source=accounts account_number=1 or gender="F";
+```
+
+| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
+:--- | :--- |
+| 1 | Amber | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com | Duke |
+| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates |
+
 ## dedup
 
 The `dedup` (data deduplication) command removes duplicate documents defined by a field from the search result.
@@ -256,50 +300,6 @@ search source=accounts | rename account_number as an, employer as emp | fields a
 | 6    | Netagy  
 | 13   | Quility
 | 18   | null    
-
-## search
-
-Use the `search` command to retrieve a document from an index. You can only use the `search` command as the first command in the PPL query.
-
-### Syntax
-
-```sql
-search source=<index> [boolean-expression]
-```
-
-Field | Description | Required
-:--- | :--- |:---
-`search` | Specify search keywords. | Yes
-`index` | Specify which index to query from. | No
-`bool-expression` | Specify an expression that evaluates to a boolean value. | No
-
-*Example 1*: Get all documents
-
-To get all documents from the `accounts` index:
-
-```sql
-search source=accounts;
-```
-
-| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
-:--- | :--- |
-| 1  | Amber  | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com  | Duke       
-| 6  | Hattie | 671 Bristol Street | 5686 | M | Dante | Netagy | TN | 36  | hattiebond@netagy.com | Bond
-| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates
-| 18 | Dale  | 467 Hutchinson Court | 4180 | M | Orick | null | MD | 33 | daleadams@boink.com | Adams
-
-*Example 2*: Get documents that match a condition
-
-To get all documents from the `accounts` index that have either `account_number` equal to 1 or have `gender` as `F`:
-
-```sql
-search source=accounts account_number=1 or gender="F";
-```
-
-| account_number | firstname | address | balance | gender | city | employer | state | age | email | lastname |
-:--- | :--- |
-| 1 | Amber | 880 Holmes Lane | 39225 | M | Brogan | Pyrami | IL | 32 | amberduke@pyrami.com | Duke |
-| 13 | Nanette | 789 Madison Street | 32838 | F | Nogal | Quility | VA | 28 | null | Bates |
 
 ## sort
 
