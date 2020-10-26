@@ -8,7 +8,7 @@ has_toc: false
 
 # PPL
 
-Piped Processing Language (PPL) offers an easier way to query log data than Query DSL or SQL.
+Piped Processing Language (PPL) is a query language that makes it easier to query data stored in Elasticsearch as compared to the standard domain-specific language (DSL).
 
 To quickly get up and running with PPL, use **Query Workbench** in Kibana. To learn more, see [Workbench](../sql/workbench/).
 
@@ -36,7 +36,7 @@ PUT accounts/_bulk?refresh
 {"account_number":18,"balance":4180,"firstname":"Dale","lastname":"Adams","age":33,"gender":"M","address":"467 Hutchinson Court","email":"daleadams@boink.com","city":"Orick","state":"MD"}
 ```
 
-Return to **Query Workbench** and select **PPL**.
+Go to **Query Workbench** and select **PPL**.
 
 The following example returns `firstname` and `lastname` fields for documents in an `accounts` index with `age` greater than 18:
 
@@ -54,3 +54,5 @@ search source=accounts
 | 1    | Hattie      | Bond     
 | 2    | Nanette     | Bates    
 | 3    | Dale        | Adams    
+
+![PPL query workbench](../images/ppl.png)
