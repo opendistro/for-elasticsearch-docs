@@ -17,7 +17,13 @@ One of the many ways to ingest data into Elasticsearch and view it in Kibana is 
 
 Before you start, make sure to first *Install and configure Open Distro for Elasticsearch*. The sample python script used here, assumes Elasticsearch is running at https://localhost:9200, but you can also modify it to use a remote cluster. This script pulls live weather forecasting data in JSON format from a public API ([7timer public API](http://www.7timer.info/doc.php?lang=en#api)) and ingests it into Elasticsearch. 
 
-The API has four parameters - lat: Latitude of the forecast); lon: Longitude of the forecast; output: Format of the response[json|xml]; product: Which information to retrieve [astro|civil|civillight|meteo|two]. The URL is  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml. To make it a little more interesting, the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
+The *Weather Forecast* API has four parameters - 
+* lat: Latitude of the forecast
+* lon: Longitude of the forecast
+* output: Format of the response[json|xml]
+* product: What information to retrieve [astro|civil|civillight|meteo|two].
+
+The URL is  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml. And the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a script similar to the one shown below to get a sample dataset from any public API:
 
