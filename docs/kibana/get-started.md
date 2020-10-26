@@ -17,7 +17,9 @@ One of the many ways to ingest data into Elasticsearch and view it in Kibana is 
 
 Before you start, make sure to first *Install and configure Open Distro for Elasticsearch*. The sample python script used here, assumes Elasticsearch is running at https://localhost:9200, but you can also modify it to use a remote cluster. This script pulls live weather forecasting data in JSON format from a public API ([7timer public API](http://www.7timer.info/doc.php?lang=en#api)) and ingests it into Elasticsearch. 
 
-Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a similar script as shown below to get a sample dataset from any public API:
+The API has four parameters - lat: Latitude of the forecast); lon: Longitude of the forecast; output: Format of the response[json|xml]; product: Which information to retrieve [astro|civil|civillight|meteo|two]. The URL is  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml. To make it a little more interesting, the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
+
+Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a script similar to the one shown below to get a sample dataset from any public API:
 
 ```json
 import json
@@ -88,7 +90,7 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
       }
     }
     ```
-4. Send the request by choosing the play button on the top right of the console (next to the wrench icon). You will see your index with all its fields displayed on the right console as a result of running the GET Request. This confirms that your data has been ingested into Elasticsearch. Your Response should look something like this - 
+4. Send the request by choosing the play button on the top right of the console (next to the wrench icon). You see your index with all its fields displayed on the right console as a result of running the GET Request. This confirms that your data has been ingested into Elasticsearch. Your Response should look something like this - 
 
   ```json
 
@@ -151,12 +153,12 @@ Before you explore your data or create visualizations, you must create an index 
 To create an index pattern for this data,  do the following.
 
 1. Choose **Stack Management** from the left navigation panel.
-2. Choose **Index patterns**.
-3. Choose the **Create index pattern** button to start creating a new index pattern.
-4. Enter your index name (for example, *weather-forecast*).  The name you entered should be in the list of index names on the page. You can also use ` * ` as a wildcard to specify the index pattern.
-5. If your index name is on the list, you will get a success message saying that it matches the name(s) on the list. If not, make sure you’ve entered the right index name for *Index pattern*.  
+2. Choose **Index patterns**, and then **Create index pattern** to start creating a new index pattern.
+4. Enter your index name (for example, *weather-forecast*).  The name you entered should be in the list of index names on the page. You can also use `*` as a wildcard to specify the index pattern.
+5. If your index name is on the list, you get a success message saying that it matches the name(s) on the list. If not, make sure you’ve entered the right index name for *Index pattern*.  
 6. Before you create the index pattern make sure to **Configure settings**. In the *weather-forecast* example, the script adds a *Timestamp* as one of the fields in the index. Select this *Timestamp* as your *time filter field name* in the **Configure settings** step. 
 7. Choose **Create index pattern** to confirm the creation process. You are navigated to the **Index Patterns** page that lists every field in the index pattern, with the field *Type* (i.e. number, string, date etc.) for each field as recorded by Elasticsearch. 
+
 ![Index Patterns](../for-elasticsearch-docs/docs/images/kibana-index-patterns.png)
 
 ## Step 4: Search, Discover, and Get Insights
@@ -172,7 +174,7 @@ You also see all the data points from the source data. If you have *Timestamp* a
 
 ![Discover](../for-elasticsearch-docs/docs/images/kibana-discover-tab.png)
 
-To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields will be displayed on the right panel in a tabular form for easy understanding, searching, and filtering.
+To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields are displayed on the right panel in a tabular form for easy understanding, searching, and filtering.
 
 ![Discover-include fields](../for-elasticsearch-docs/docs/images/kibana-discover-tab-add-file.png)
 
@@ -181,15 +183,14 @@ To understand and organize these fields for your visualizations you can add thes
 
 When you perform a search, in the *Discover* tab, Elasticsearch retrieves documents from its index with field values that match the fields you specify in the query. The result of this retrieval is called a match set. Elasticsearch then creates an aggregation by iterating over the match set. It creates buckets according to the aggregation (e.g., time slices) or a numeric value (e.g., a count) placing each value from the document's field into the appropriate bucket. For example, a search for documents with a *Timestamp* in the range of 15 minutes ago to now might yield 60 matches. An aggregation for those values with 1 minute buckets would increment the count in the newest bucket (1 minute ago to now) for each document with a *Timestamp* in that range.
 
-*Aggregations nest*:  Elasticsearch can take all of the documents in a bucket and create sub-buckets based on a second field. For example, if the top-level bucket is time slices, a useful sub-bucket is the response. Continuing the example, Elasticsearch will create sub-buckets for each value of the response field present in one of the documents in that bucket. It increments a counter in the sub-bucket for each document with that sub-bucket's value. This analysis of the data can be displayed as a stacked, bar chart with one bar per time slice and height of the sub-bars proportional to the count.
-Count is not the only function that Elasticsearch can perform. It can compute sums, averages, mins, maxes, standard deviations and more. 
+*Aggregations nest*:  Elasticsearch can take all of the documents in a bucket and create sub-buckets based on a second field. For example, if the top-level bucket is time slices, a useful sub-bucket is the response field present in one of the documents in that bucket. It increments a counter in the sub-bucket for each document with that sub-bucket's value. This analysis of the data can be displayed as a stacked, bar chart with one bar per time slice and height of the sub-bars proportional to the count. Count is just one of the functions. Elasticsearch also computes sums, averages, mins, maxes, standard deviations and more. 
 
-Once you’ve taken a deep dive into this data and have a plan for the type of visualizations you want to create, you can move to the next step to *Visualize* your data with graphs and charts.
+Once you’ve taken a deep dive into this data and have a plan the type of visualizations you want to create, you can move to the next step.
 
 
 ## Step 5: Visualize your Data 
 
-Visualization helps you view your data graphically so it’s quick and easy to understand. For example, it might be hard to notice something in your data unless you see a giant spike on a bar graph. That's what visualizations provide. To get started with your visualization:
+Visualization helps you view your data graphically so it’s quick and easy to understand. For example, it might be hard to notice an anomaly in your data unless you see a giant spike on a bar graph. That's what visualizations provide. To get started with your visualization, do the following:
 
 1. Select the **Visualize** tab from the left navigation panel. 
 2. Choose **Create Visualization** to create a new visualization. 
@@ -200,22 +201,18 @@ Visualization helps you view your data graphically so it’s quick and easy to u
 7. Once you’re satisfied with your visualization, choose *Save* to save it for future use. Every time you make changes to your visualization you can either save it as a new visualization with a new name, or overwrite the previous visualization. The advantage with Kibana and live streaming data is that your visualizations are updated in real-time.
 
 With the *weather-forecast* index pattern example, you can create sample visualizations such as the following:
-
-This vertical bar graph shows the maximum temperature in four cities for a specific time range. 
-
 ![Bar Chart](../for-elasticsearch-docs/docs/images/kibana-bar chart.png)
-
-
+This vertical bar graph shows the maximum temperature in four cities for a specific time range. 
 
 ## Step 6: Create Dashboards
 
-The Kibana Dashboard is information-dense and customizable. It allows you to choose the graphs and charts that you’ve created in the *Visualize* tab, or create new ones for a new dashboard. You can also create multiple dashboards, each tailored to a view that you care about.
+The Kibana Dashboard is information-dense and customizable. It lets you to select graphs and charts that you’ve already created and lay them out for easy analysis. And also create multiple dashboards, each tailored to a view that you care about.
 
 To create a new dashboard, do the following.
 
 1. Choose **Dashboard** from the left navigation panel.
 2. Choose **Add an existing** to import your visualizations to the new dashboard. Or choose **Create New** to create and add a new visualization to the dashboard.
-3. Once you’re done adding all the visualizations you need, **Save** the dashboard.
+3. Once you’re done adding all the visualizations you need, **Save** the dashboard. You can create as many dashboards as you want and share them with any number of stakeholders.
 
 ![Dashboard](../for-elasticsearch-docs/docs/images/kibana-dashboard.png)
 
