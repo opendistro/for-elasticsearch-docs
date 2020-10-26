@@ -28,6 +28,7 @@ Before you start, make sure to first *Install and configure Open Distro for Elas
         * Oakland, CA
         * San Diego, CA
         * Malad, ID
+  {: .tip }
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a similar script as shown below to get a sample dataset from any public API:
 
@@ -68,7 +69,8 @@ while True:
   time.sleep(10800) # Wait 3 hours before updating
   ```
 
-  > **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want, depending on the type of data you use.
+  **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want, depending on the type of data you use.
+  {: .tip }
 
 ## Step 1: Download, install and access Kibana
 
