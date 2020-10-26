@@ -15,15 +15,15 @@ This starter guide provides a quick introduction and walkthrough of Kibana with 
 
 One of the many ways to ingest data into Elasticsearch and view it in Kibana is by using a Python script. This is not typically how you would do it but it provides an easy simulation of the process especially when working with live streaming data. The other ways of ingestion include using [Beats](https://www.elastic.co/blog/using-beats-with-elasticsearch-on-aws) or [Logstash](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains-logstash.html).
 
-Before you start, make sure to first *Install and configure Open Distro for Elasticsearch*. The sample python script used here, assumes Elasticsearch is running at https://localhost:9200, but you can also modify it to use a remote cluster. This script pulls live weather forecasting data in JSON format from a public API ([7timer public API](http://www.7timer.info/doc.php?lang=en#api)) and ingests it into Elasticsearch. 
+Before you start, make sure to first *Install and configure Open Distro for Elasticsearch*. The sample python script used here, assumes Elasticsearch is running at https://localhost:9200, but you can also modify it to use a remote cluster. This script pulls live weather forecasting data in JSON format from a public API (e.g. the [7timer public API](http://www.7timer.info/doc.php?lang=en#api)) and ingests it into Elasticsearch. 
 
-The *Weather Forecast* API has four parameters - 
+This example *Weather Forecast* API has four parameters - 
 * lat: Latitude of the forecast
 * lon: Longitude of the forecast
 * output: Format of the response (JSON or XML)
 * product: What information to retrieve.
 
-The URL is http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml . And the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
+The URL is `http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml`. And the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a script similar to the one shown below to get a sample dataset from any public API:
 
@@ -187,16 +187,16 @@ To understand and organize these fields for your visualizations you can add thes
 
 ### Aggregations
 
-When you perform a search, in the *Discover* tab, Elasticsearch retrieves documents from its index with field values that match the fields you specify in the query. The result of this retrieval is called a match set. Elasticsearch then creates an aggregation by iterating over the match set. It creates buckets according to the aggregation (e.g., time slices) or a numeric value (e.g., a count) placing each value from the document's field into the appropriate bucket. For example, a search for documents with a *Timestamp* in the range of 15 minutes ago to now might yield 60 matches. An aggregation for those values with 1 minute buckets would increment the count in the newest bucket (1 minute ago to now) for each document with a *Timestamp* in that range.
+When you perform a search in the *Discover* tab, Elasticsearch retrieves documents from its index with field values that match the fields you specify in the query. The result of this retrieval is called a match set. Elasticsearch then creates an aggregation by iterating over the match set. It creates buckets according to the aggregation (e.g., time slices) or a numeric value (e.g., a count) placing each value from the document's field into the appropriate bucket. For example, a search for documents with a *Timestamp* in the range of 15 minutes ago to now might yield 60 matches. An aggregation for those values with 1 minute buckets would increment the count in the newest bucket (1 minute ago to now) for each document with a *Timestamp* in that range.
 
 *Aggregations nest*:  Elasticsearch can take all of the documents in a bucket and create sub-buckets based on a second field. For example, if the top-level bucket is time slices, a useful sub-bucket is the response field present in one of the documents in that bucket. It increments a counter in the sub-bucket for each document with that sub-bucket's value. This analysis of the data can be displayed as a stacked, bar chart with one bar per time slice and height of the sub-bars proportional to the count. Count is just one of the functions. Elasticsearch also computes sums, averages, mins, maxes, standard deviations and more. 
 
-Once you’ve taken a deep dive into this data and have a plan the type of visualizations you want to create, you can move to the next step.
+Once you’ve taken a deep dive into this data and have a plan for the type of visualizations you want to create, you can move to the next step.
 
 
 ## Step 5: Visualize your Data 
 
-Visualization helps you view your data graphically so it’s quick and easy to understand. For example, it might be hard to notice an anomaly in your data unless you see a giant spike on a bar graph. That's what visualizations provide. To get started with your visualization, do the following:
+Visualization helps you view your data graphically for quick and easy to understanding. For example, it might be hard to notice an anomaly in your data unless you see a giant spike on a bar graph. To get started with your visualization, do the following:
 
 1. Select the **Visualize** tab from the left navigation panel. 
 2. Choose **Create Visualization** to create a new visualization. 
@@ -207,12 +207,16 @@ Visualization helps you view your data graphically so it’s quick and easy to u
 7. Once you’re satisfied with your visualization, choose *Save* to save it for future use. Every time you make changes to your visualization you can either save it as a new visualization with a new name, or overwrite the previous visualization. The advantage with Kibana and live streaming data is that your visualizations are updated in real-time.
 
 With the *weather-forecast* index pattern example, you can create sample visualizations such as the following:
+
+### Bar Chart
+
 ![Bar Chart](../for-elasticsearch-docs/docs/images/kibana-bar chart.png)
+
 This vertical bar graph shows the maximum temperature in four cities for a specific time range. 
 
 ## Step 6: Create Dashboards
 
-The Kibana Dashboard is information-dense and customizable. It lets you to select graphs and charts that you’ve already created and lay them out for easy analysis. And also create multiple dashboards, each tailored to a view that you care about.
+The Kibana Dashboard is information-dense and customizable. It lets you to select graphs and charts that you’ve already created and lay them out for easy analysis. You can also create multiple dashboards, each tailored to a view that you care about.
 
 To create a new dashboard, do the following.
 
@@ -224,6 +228,6 @@ To create a new dashboard, do the following.
 
 ## Step 7: Download and Share Reports
 
-The Kibana [Reporting](https://opendistro.github.io/for-elasticsearch-docs/docs/reporting/) feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats and shared with stakeholders while schedule-based reports can be configured and set up for automated periodic delivery. You can do this either from the *Reporting* tab in the Kibana main menu or within the *Dashboard*, *Visualization* and *Discover* tabs. Reports can be either downloaded instantly (on-demand) or delivered via email, as an attachment or as an embedded file. To download, schedule and share reports, you must have the required role permissions which can be configured within Kibana security. Refer to the [Reporting](https://opendistro.github.io/for-elasticsearch-docs/docs/reporting/) guide to learn more.
+The final step is to download and share the above dashboards, visulaizations, and saved searches using the Kibana [Reporting](https://opendistro.github.io/for-elasticsearch-docs/docs/reporting/) feature. This feature allows you to generate, schedule and share reports on-demand or based on an automated schedule. On-demand reports can be instantly downloaded in PNG, PDF and CSV formats and shared with stakeholders while schedule-based reports can be configured and set up for automated periodic delivery. You can do this either from the *Reporting* tab in the Kibana main menu or within the *Dashboard*, *Visualization* and *Discover* tabs. Reports can be either downloaded instantly (on-demand) or delivered via email, as an attachment or as an embedded file. To download, schedule and share reports, you must have the required role permissions which can be configured within Kibana security. Refer to the [Reporting](https://opendistro.github.io/for-elasticsearch-docs/docs/reporting/) guide to learn more.
 
 
