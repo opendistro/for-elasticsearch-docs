@@ -159,7 +159,7 @@ To create an index pattern for this data,  do the following.
 5. If your index name is on the list, you will get a success message saying that it matches the name(s) on the list. If not, make sure you’ve entered the right index name for *Index pattern*.  
 6. Before you create the index pattern make sure to **Configure settings**. In the *weather-forecast* example, the script adds a *Timestamp* as one of the fields in the index. Select this *Timestamp* as your *time filter field name* in the **Configure settings** step. 
 7. Choose **Create index pattern** to confirm the creation process. You are navigated to the **Index Patterns** page that lists every field in the index pattern, with the field *Type* (i.e. number, string, date etc.) for each field as recorded by Elasticsearch. 
-![Index Patterns](../images/kibana-index-patterns.png)
+![Index Patterns](../for-elasticsearch-docs/docs/images/kibana-index-patterns.png)
 
 ## Step 4: Search, Discover, and Get Insights
 
@@ -172,11 +172,11 @@ The Discover page includes all available fields, with the most popular fields ba
 
 You also see all the data points from the source data. If you have *Timestamp* as one your fields, the data is segregated based on date and time with the date and time range for your data. You can either manually refresh the data or set it to a time based refresh for your search. This means that you can set the time range for resetting your search to *Auto*, *Hourly, Weekly, Monthly* etc. 
 
-![Discover](../images/kibana-discover-tab.png)
+![Discover](../for-elasticsearch-docs/docs/images/kibana-discover-tab.png)
 
 To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields will be displayed on the right panel in a tabular form for easy understanding, searching, and filtering.
 
-![Discover-include fields](../images/kibana-discover-tab-add-file.png)
+![Discover-include fields](../for-elasticsearch-docs/docs/images/kibana-discover-tab-add-file.png)
 
 
 ### Aggregations
@@ -205,7 +205,7 @@ With the *weather-forecast* index pattern example, you can create sample visuali
 
 This vertical bar graph shows the maximum temperature in four cities for a specific time range. 
 
-![Bar Chart](../images/kibana-bar chart.png)
+![Bar Chart](../for-elasticsearch-docs/docs/images/kibana-bar chart.png)
 
 
 
@@ -219,7 +219,7 @@ To create a new dashboard, do the following.
 2. Choose **Add an existing** to import your visualizations to the new dashboard. Or choose **Create New** to create and add a new visualization to the dashboard.
 3. Once you’re done adding all the visualizations you need, **Save** the dashboard.
 
-![Dashboard](../images/kibana-dashboard.png)
+![Dashboard](../for-elasticsearch-docs/docs/images/kibana-dashboard.png)
 
 ## Step 7: Download and Share Reports
 
