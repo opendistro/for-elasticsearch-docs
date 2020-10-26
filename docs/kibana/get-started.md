@@ -31,7 +31,7 @@ Before you start, make sure to first *Install and configure Open Distro for Elas
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a similar script as shown below to get a sample dataset from any public API:
 
-```
+```json
 import json
 import requests
 import time
@@ -67,6 +67,7 @@ while True:
     # print('Here is the json document to import into Elasticsearch:\n{}'.format(json.dumps(result_data, indent = 2)))
   time.sleep(10800) # Wait 3 hours before updating
   ```
+  
   > **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want, depending on the type of data you use.
 
 ## Step 1: Download, install and access Kibana
@@ -79,7 +80,8 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
 
 1. Choose **Dev Tools** from the left navigation menu.
 2. On the left side of the *Console*, enter a GET request to search and view your data using the following command - 
-    ```
+
+    ```json
     GET <index_name>/_search
     {
       "query": {
@@ -88,7 +90,8 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
     }
     ```
 3. For *index_name*, enter the same index name that you specified in your Python script. Your index name would be `<weather-forecast>` in the *weather-forecast* example. Your GET Request for this example would look something like this -
-    ```
+
+    ```json
     GET <weather-forecast>/_search
     {
       "query": {
@@ -97,7 +100,8 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
     }
     ```
 4. Send the request by choosing the play button on the top right of the console (next to the wrench icon). You will see your index with all its fields displayed on the right console as a result of running the GET Request. This confirms that your data has been ingested into Elasticsearch. Your Response should look something like this - 
-  ```
+
+  ```json
     {
       "took" : 2581,
       "timed_out" : false,
