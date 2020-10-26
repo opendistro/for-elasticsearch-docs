@@ -13,22 +13,11 @@ This starter guide provides a quick introduction and walkthrough of Kibana with 
 
 ## Before you start: Ingest Data into Elasticsearch
 
-One of the many ways to ingest data into Elasticsearch and view it in Kibana is by using a Python script. This is not typically how you would do it but it provides an easy simulation of the process especially when working with live streaming data. The other ways of ingestion include using [Beats](https://www.elastic.co/blog/using-beats-with-elasticsearch-on-aws)or [Logstash](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains-logstash.html).
+One of the many ways to ingest data into Elasticsearch and view it in Kibana is by using a Python script. This is not typically how you would do it but it provides an easy simulation of the process especially when working with live streaming data. The other ways of ingestion include using [Beats](https://www.elastic.co/blog/using-beats-with-elasticsearch-on-aws) or [Logstash](https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains-logstash.html).
 
 Before you start, make sure to first *Install and configure Open Distro for Elasticsearch*. The sample python script used here, assumes Elasticsearch is running at https://localhost:9200, but you can also modify it to use a remote cluster. This script pulls live weather forecasting data in JSON format from a public API ([7timer public API](http://www.7timer.info/doc.php?lang=en#api)) and ingests it into Elasticsearch. 
 
-    * The API has four parameters:
-        * lat: The latitude of the forecast (ex: 23.09)
-        * lon: The longitude of the forecast (ex: 113.17)
-        * output: The format of the response [json|xml]
-        * product: Which information to retrieve [astro|civil|civillight|meteo|two]
-    * URL:  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml
-    * To make it a little more interesting, the script pulls data for a few cities:
-        * Portland, OR
-        * Oakland, CA
-        * San Diego, CA
-        * Malad, ID
-  {: .tip }
+The API has four parameters - lat: Latitude of the forecast); lon: Longitude of the forecast; output: Format of the response[json|xml]; product: Which information to retrieve [astro|civil|civillight|meteo|two]. The URL is  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml. To make it a little more interesting, the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a similar script as shown below to get a sample dataset from any public API:
 
