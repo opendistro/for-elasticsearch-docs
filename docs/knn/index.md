@@ -13,7 +13,7 @@ Short for its associated *k-nearest neighbors* algorithm, the KNN plugin lets yo
 
 ## Get started
 
-To use the KNN query type, you must create an index with the `index.knn` setting and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` with `l2` or `cosinesimil` to use, respectively, either Euclidean distance or cosine similarity for calculations. By default, `index.knn.space_type` is `l2`. Here is an example that creates an index with two knn_vector fields and uses cosine similarity:
+To use the KNN query type, you must create an index with `index.knn: true` and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` parameter with `l2` or `cosinesimil` to use, respectively, either Euclidean distance or cosine similarity for calculations. By default, `index.knn.space_type` is `l2`. Here is an example that creates an index with two `knn_vector` fields and uses cosine similarity:
 
 ```json
 PUT my-knn-index-1
@@ -89,9 +89,9 @@ GET my-knn-index-1/_search
 In this case, `k` is the number of neighbors you want the query to return, but you must also include the `size` option. Otherwise, you get `k` results for each shard (and each segment) rather than `k` results for the entire query. The plugin supports a maximum `k` value of 10,000.
 
 
-## Mixing queries
+## Compound queries with KNN
 
-If you use the `knn` query alongside filters, you might receive fewer than `k` results. In this example, `post_filter` reduces the number of results from 2 to 1:
+If you use the `knn` query alongside filters or other clauses (e.g. `bool`, `must`, `match`), you might receive fewer than `k` results. In this example, `post_filter` reduces the number of results from 2 to 1:
 
 ```json
 GET my-knn-index-1/_search
@@ -143,7 +143,7 @@ PUT my-knn-index-2
 }
 ```
 
-If you *only* want to use KNN's custom scoring, you can omit `"index.knn": true`, but you lose the ability to perform standard KNN queries on the index. The benefit of this approach is faster indexing speed and lower memory usage.
+If you *only* want to use KNN's custom scoring, you can omit `"index.knn": true`. The benefit of this approach is faster indexing speed and lower memory usage, but you lose the ability to perform standard KNN queries on the index.
 {: .tip}
 
 Then add some documents:
@@ -196,7 +196,7 @@ GET my-knn-index-2/_search
 }
 ```
 
-All options are required.
+All parameters are required.
 
 - `lang` is the script type. This value is usually `painless`, but here you must specify `knn`.
 - `source` is the name of the stored script, `knn_store`.
