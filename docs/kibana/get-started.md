@@ -67,7 +67,7 @@ while True:
     # print('Here is the json document to import into Elasticsearch:\n{}'.format(json.dumps(result_data, indent = 2)))
   time.sleep(10800) # Wait 3 hours before updating
   ```
-  
+
   > **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want, depending on the type of data you use.
 
 ## Step 1: Download, install and access Kibana
@@ -102,6 +102,7 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
 4. Send the request by choosing the play button on the top right of the console (next to the wrench icon). You will see your index with all its fields displayed on the right console as a result of running the GET Request. This confirms that your data has been ingested into Elasticsearch. Your Response should look something like this - 
 
   ```json
+
     {
       "took" : 2581,
       "timed_out" : false,
@@ -143,9 +144,13 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
                     "wind10m" : {
                       "direction" : "N",
                       "speed" : 2
-                    },
-                    "weather" : "clearday"
-                    ```
+      },
+      ...
+    ]
+  }
+}
+
+  ```
 
 
 The *Dev Tools* feature provides a convenient way for testing calls to Elasticsearch. You can add data, search, reindex, update settings, and do much more with the *Dev Tools* option. 
