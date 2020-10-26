@@ -20,10 +20,10 @@ Before you start, make sure to first *Install and configure Open Distro for Elas
 The *Weather Forecast* API has four parameters - 
 * lat: Latitude of the forecast
 * lon: Longitude of the forecast
-* output: Format of the response[json|xml]
-* product: What information to retrieve [astro|civil|civillight|meteo|two].
+* output: Format of the response (JSON or XML)
+* product: What information to retrieve.
 
-The URL is  http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml. And the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
+The URL is http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=xml . And the script pulls data for four cities: Portland, OR; Oakland, CA; San Diego, CA; and Malad, ID.
 
 Assuming that you have already set up Elasticsearch and have a Python environment ready, you can run a script similar to the one shown below to get a sample dataset from any public API:
 
@@ -86,7 +86,7 @@ You can view the indexed data in Elasticsearch through the Kibana *Dev Tools* co
       }
     }
     ```
-3. For *index_name*, enter the same index name that you specified in your Python script. Your index name would be `<weather-forecast>` in the *weather-forecast* example. Your GET Request for this example would look something like this -
+3. For *index_name*, enter the same index name that you specified in your Python script. Your index name would be `<weather-forecast>` for the *weather-forecast* example. Your GET Request for this example would look something like this -
 
     ```json
     GET <weather-forecast>/_search
