@@ -2,7 +2,7 @@
 layout: default
 title: Rolling Upgrade
 parent: Upgrade
-nav_order: 10
+nav_order: 50
 ---
 
 # Rolling upgrade

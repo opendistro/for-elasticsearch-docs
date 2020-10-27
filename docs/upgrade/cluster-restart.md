@@ -2,7 +2,7 @@
 layout: default
 title: Cluster Restart Upgrade
 parent: Upgrade
-nav_order: 11
+nav_order: 51
 ---
 
 # Cluster restart upgrade
