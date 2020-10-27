@@ -31,12 +31,12 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.9.1</td>
     <td>
-      <pre>opendistro-anomaly-detection-kibana    1.10.1.0  1.11.0.0
-opendistro_alerting-kibana             1.10.1.1  1.11.0.2
-opendistro_index_management-kibana     1.10.1.0  1.11.0.0
-opendistro_security_kibana             1.10.1.1  1.11.0.0
-opendistro_sql_workbench (opendistro-query-workbench in 1.11.0+)               1.10.1.1  1.11.0.0
-opendistro-notebooks-kibana (introduced in 1.11.0+)               1.11.0.0
+      <pre>opendistro-anomaly-detection-kibana                                    1.10.1.0  1.11.0.0
+opendistro_alerting-kibana                                             1.10.1.1  1.11.0.2
+opendistro_index_management-kibana                                     1.10.1.0  1.11.0.0
+opendistro_security_kibana                                             1.10.1.1  1.11.0.0
+opendistro_sql_workbench (opendistro-query-workbench in 1.11.0+)       1.10.1.1  1.11.0.0
+opendistro-notebooks-kibana (introduced in 1.11.0+)                    N/A       1.11.0.0
 </pre>
     </td>
   </tr>
