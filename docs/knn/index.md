@@ -13,7 +13,7 @@ Short for its associated *k-nearest neighbors* algorithm, the KNN plugin lets yo
 
 ## Get started
 
-To use the KNN query type, you must create an index with `index.knn: true` and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` parameter with `l2` or `cosinesimil` to use, respectively, either Euclidean distance or cosine similarity for calculations. By default, `index.knn.space_type` is `l2`. Here is an example that creates an index with two `knn_vector` fields and uses cosine similarity:
+To use the KNN query type, you must create an index with `index.knn: true` and add one or more fields of the `knn_vector` data type. Additionally, you can specify the `index.knn.space_type` parameter with `l2` to use Euclidean distance or `cosinesimil` to use cosine similarity for calculations. By default, `index.knn.space_type` is `l2`. Here is an example that creates an index with two `knn_vector` fields and uses cosine similarity:
 
 ```json
 PUT my-knn-index-1
