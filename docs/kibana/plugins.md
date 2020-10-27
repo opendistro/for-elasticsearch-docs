@@ -31,12 +31,12 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.9.1</td>
     <td>
-      <pre>opendistro-anomaly-detection-kibana                                    1.10.1.0  1.11.0.0
-opendistro_alerting-kibana                                             1.10.1.1  1.11.0.2
-opendistro_index_management-kibana                                     1.10.1.0  1.11.0.0
-opendistro_security_kibana                                             1.10.1.1  1.11.0.0
-opendistro_sql_workbench (opendistro-query-workbench in 1.11.0+)       1.10.1.1  1.11.0.0
-opendistro-notebooks-kibana (introduced in 1.11.0+)                    N/A       1.11.0.0
+      <pre>opendistro-anomaly-detection-kibana                                  1.10.1.0  1.11.0.0
+opendistro_alerting-kibana                                           1.10.1.1  1.11.0.2
+opendistro_index_management-kibana                                   1.10.1.0  1.11.0.0
+opendistro_security_kibana                                           1.10.1.1  1.11.0.0
+opendistro_sql_workbench (opendistro-query-workbench in 1.11.0+)     1.10.1.1  1.11.0.0
+opendistro-notebooks-kibana (introduced in 1.11.0+)                  N/A       1.11.0.0
 </pre>
     </td>
   </tr>
@@ -69,7 +69,7 @@ Navigate to the Kibana home directory (likely `/usr/share/kibana`) and run the i
 #### Security Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistro_security_kibana_plugin-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistro_security_kibana_plugin-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for managing users, roles, mappings, action groups, and tenants.
@@ -78,7 +78,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.2.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
@@ -102,10 +102,18 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 This plugin provides a user interface for adding detectors.
 
 
-#### SQL Workbench
+#### SQL Workbench (up to ODFE 1.10.1)
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-sql-workbench/opendistro-sql-workbench-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-sql-workbench/opendistro-sql-workbench-{{site.odfe_version}}.0.zip
+```
+This plugin provides a user interface for using SQL queries to explore your data.
+
+
+#### Query Workbench (introduced in 1.11.0, to replace SQL Workbench)
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistro-query-workbench-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for using SQL queries to explore your data.
