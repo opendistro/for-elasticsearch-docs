@@ -7,7 +7,7 @@ nav_order: 1
 
 # Get Started with Kibana
 
-Kibana is an open source platform for visualization, exploration, and analysis of data in Elasticsearch. One of the most popular use cases for Elasticsearch and Kibana is log analytics. Typical users are, SaaS and IoT service providers (using multiple servers and data centers) relying heavily on server logs and log analytics. Other users include but are not limited to, road traffic or web traffic management solutions that generate billions of real user measurements; weather forecasting applications using log data from non-computing devices such as satellites, weather balloons, buoys etc. All of this data (billions of data points or measurements) can be fed into Elasticsearch and viewed in Kibana for searching, analyzing, and forecasting or to resolve issues and outages. Dynamic or live dashboards and reports in Kibana also enable using live data to manage resources in real time. 
+Kibana is an open source platform for visualization, exploration, and analysis of data in Elasticsearch. One of the most popular use cases for Elasticsearch and Kibana is log analytics. Typical users are, SaaS and IoT service providers (using multiple servers and data centers) relying heavily on server logs and log analytics. Other users include but are not limited to, road traffic or web traffic management solutions that generate billions of real user measurements; weather forecasting applications using log data from non-computing devices such as satellites, weather balloons, buoys etc. You can feed all of this data into Elasticsearch and view it in Kibana to perform searches, analysis, forecasting or find anomalies to resolve issues and outages. Dynamic or live dashboards and reports in Kibana also enable using live data to manage resources in real time. 
 
 This starter guide provides a quick introduction and walkthrough of Kibana with real-time sample data and assorted visualizations.
 
@@ -64,7 +64,7 @@ while True:
   time.sleep(10800) # Wait 3 hours before updating
   ```
 
-  **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want, depending on the type of data you use.
+  **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want updates, depending on the type of data you use.
   {: .tip }
 
 ## Step 1: Download, install and access Kibana
@@ -165,7 +165,7 @@ To create an index pattern for this data,  do the following.
 6. Before you create the index pattern make sure to **Configure settings**. In the *weather-forecast* example, the script adds a *Timestamp* as one of the fields in the index. Select this *Timestamp* as your *time filter field name* in the **Configure settings** step. 
 7. Choose **Create index pattern** to confirm the creation process. You are navigated to the **Index Patterns** page that lists every field in the index pattern, with the field *Type* (i.e. number, string, date etc.) for each field as recorded by Elasticsearch. 
 
-![Index Patterns](../for-elasticsearch-docs/docs/images/kibana-index-patterns.png)
+![Index Patterns](../../images/kibana-index-patterns.png)
 
 ## Step 4: Search, Discover, and Get Insights
 
@@ -178,11 +178,11 @@ The Discover page includes all available fields, with the most popular fields ba
 
 You also see all the data points from the source data. If you have *Timestamp* as one your fields, the data is segregated based on date and time with the date and time range for your data. You can either manually refresh the data or set it to a time based refresh for your search. This means that you can set the time range for resetting your search to *Auto*, *Hourly, Weekly, Monthly* etc. 
 
-![Discover](../for-elasticsearch-docs/docs/images/kibana-discover-tab.png)
+![Discover](../../images/kibana-discover-tab.png)
 
-To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields are displayed on the right panel in a tabular form for easy understanding, searching, and filtering.
+To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields are displayed on the right panel in a tabular form for easy searching and filtering.
 
-![Discover-include fields](../for-elasticsearch-docs/docs/images/kibana-discover-tab-add-file.png)
+![Discover-include fields](../../images/kibana-discover-tab-add-fields.png)
 
 
 ### Aggregations
@@ -196,7 +196,7 @@ Once you’ve taken a deep dive into this data and have a plan for the type of v
 
 ## Step 5: Visualize your Data 
 
-Visualization helps you view your data graphically for quick and easy to understanding. For example, it might be hard to notice an anomaly in your data unless you see a giant spike on a bar graph. To get started with your visualization, do the following:
+Visualization helps you view your data graphically for quick understanding. For example, it might be hard to notice an anomaly in your data unless you see a giant spike on a bar graph. To get started with your visualization, do the following:
 
 1. Select the **Visualize** tab from the left navigation panel. 
 2. Choose **Create Visualization** to create a new visualization. 
@@ -206,13 +206,41 @@ Visualization helps you view your data graphically for quick and easy to underst
 6. Each visualization type has slightly different **Metrics** or **Buckets** for your data, and within these you can select required *Aggregations* and *Fields*. For *X-axis and Y-axis* in the bar graphs, select the fields you require from the dropdown. For pie charts, select *Count*. 
 7. Once you’re satisfied with your visualization, choose *Save* to save it for future use. Every time you make changes to your visualization you can either save it as a new visualization with a new name, or overwrite the previous visualization. The advantage with Kibana and live streaming data is that your visualizations are updated in real-time.
 
-With the *weather-forecast* index pattern example, you can create sample visualizations such as the following:
+The folowing visualizations use the live-streaming weather data as well as static audit logs that were ingested into Elasticsearch:
 
-### Bar Chart
+### Bar Chart 
 
-![Bar Chart](../for-elasticsearch-docs/docs/images/kibana-bar chart.png)
+This vertical bar graph using the live streaming weather data shows the maximum temperature in four cities for a specific time range. 
 
-This vertical bar graph shows the maximum temperature in four cities for a specific time range. 
+![Bar Chart](../../images/kibana-bar-chart.png)
+
+ 
+
+
+### Gantt Chart 
+
+The Gantt chart in Kibana depicts the start, end, and duration of unique events in a sequence (for a given data set). Gantt charts are useful in trace analytics, telemetry, and anomaly detection use cases, where users for example need to understand interactions and dependencies between various events in a schedule. 
+
+To start using a Gantt chart, you must first ingest your data into Elasticsearch. For example, you can use static log data in a JSON file to ingest into Elasticsearch. On the Kibana *Dev Tools* console you can then view this data using an API request such as `PUT <index_name>/_bulkrequest`. You can then create index patterns and use appropriate fields to create the chart. 
+
+The fields in a typical log data set, especially in audit logs, represent a sequence of activities for a specific operation, procedure, or event, based on a schedule (start time and duration). The available fields in our sample audit log index pattern look like this -  
+
+![Index Pattern for Audit Logs](../../images/kibana-index-pattern-audit-logs.png)
+
+To create a Gantt chart, do the following:
+1. Under **New Visualization**, select the type of visualization as **Gantt Chart**.
+2. Choose a source for your new Gantt Chart i.e. select the index that you created for the log data you plan to use for the Gantt chart.
+3. On the *Create* page, select the **Data** for the Gantt chart. Data includes fields for **Metrics** and **Results**.
+4. Under Metrics, choose **Event**. For log data, each log would be an event. So you can choose the Log ID or Span ID here to represent that log.
+5. Select the **Start Time** and the **Duration** fields from your data set. The start time is the timestamp that represents the begining of an event. The duration is the time interval that can be added to the start time. 
+6. For **Results** choose the number of events that you want to display on the chart. These resuts will be sequenced based on the earliest to latest start time. 
+7. Chose **Update**. You will see the Gantt chart displayed as shown in the figure. If you don't see any data displayed, try changing the date range for the data, and **Refresh** the chart.
+
+![Gantt Chart](../../images/kibana-gantt-chart.png)
+
+This Gantt chart has log IDs displayed on the Y-axis. These are the unique events that you choose under **Metrics** (as log IDs) and represent each horizontal bar on the chart. The start time defines the left edge of each horizontal bar. The duration defines the length of each bar. 
+
+
 
 ## Step 6: Create Dashboards
 
@@ -224,7 +252,7 @@ To create a new dashboard, do the following.
 2. Choose **Add an existing** to import your visualizations to the new dashboard. Or choose **Create New** to create and add a new visualization to the dashboard.
 3. Once you’re done adding all the visualizations you need, **Save** the dashboard. You can create as many dashboards as you want and share them with any number of stakeholders.
 
-![Dashboard](../for-elasticsearch-docs/docs/images/kibana-dashboard.png)
+![Dashboard](../../images/kibana-dashboard.png)
 
 ## Step 7: Download and Share Reports
 
