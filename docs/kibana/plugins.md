@@ -135,7 +135,13 @@ sudo bin/kibana-plugin list
 sudo bin/kibana-plugin remove <plugin-name>
 ```
 
-Then restart Kibana. After the removal of any plugin, Kibana performs an "optimize" operation the next time you start it. This operation takes several minutes even on fast machines, so be patient.
+For certain plugins, you must also remove the "optimze" bundle. Here is a sample command for the Anomaly Detection plugin:
+
+```bash
+sudo rm /usr/share/kibana/optimize/bundles/opendistro-anomaly-detection-kibana.*
+```
+
+Then restart Kibana. After the removal of any plugin, Kibana performs an optimize operation the next time you start it. This operation takes several minutes even on fast machines, so be patient.
 
 
 ## Update plugins
