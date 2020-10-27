@@ -102,7 +102,7 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 This plugin provides a user interface for adding detectors.
 
 
-#### SQL Workbench (up to ODFE 1.10.1)
+#### SQL Workbench (up to Open Distro version 1.10.1)
 
 ```bash
 sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-sql-workbench/opendistro-sql-workbench-{{site.odfe_version}}.0.zip
@@ -110,7 +110,7 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 This plugin provides a user interface for using SQL queries to explore your data.
 
 
-#### Query Workbench (introduced in 1.11.0, to replace SQL Workbench)
+#### Query Workbench (introduced in Open Distro 1.11.0, to replace SQL Workbench)
 
 ```bash
 sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistro-query-workbench-{{site.odfe_version}}.0.zip
