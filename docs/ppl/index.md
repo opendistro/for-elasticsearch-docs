@@ -9,7 +9,7 @@ has_toc: false
 # PPL
 
 Piped Processing Language (PPL) is a query language that makes it easier to query data stored in Elasticsearch as compared to the standard domain-specific language (DSL).
-PPL lets you use pipe (I) syntax to explore, discover, and query data stored in Elasticsearch.
+PPL lets you use pipe (`|`) syntax to explore, discover, and query data stored in Elasticsearch.
 
 To quickly get up and running with PPL, use **Query Workbench** in Kibana. To learn more, see [Workbench](../sql/workbench/).
 
