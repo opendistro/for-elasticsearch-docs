@@ -58,11 +58,11 @@ You can add a maximum of five features for a detector.
 1. On the **Model configuration** page, enter the **Feature name**.
 1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the **field** and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
 
-#### (Optional) Set a category field
+#### (Optional) Set a category field for high cardinality
 
 You can categorize anomalies based on a keyword or IP field type.
 
-If you specify a category in the same time series but sliced with a different dimension like IP addresses, product IDs, country codes, and so on, you’ll see a granular view of anomalies within each entity of that field. This helps to dive deeper into anomalies of a unique entity or ID and isolate and debug issues.
+The category field categorizes or slices the source time series with a dimension like IP addresses, product IDs, country codes, and so on. This helps to see a granular view of anomalies within each entity of the category field to isolate and debug issues.
 
 To set a category field, choose **Enable a category field** and select a field.
 
@@ -78,7 +78,7 @@ For example, for a cluster with 3 data nodes, each with 8G of JVM heap size, the
 
 Set the number of aggregation intervals from your data stream to consider in a detection window. We recommend you choose this value based on your actual data to see which one leads to the best results for your use case.
 
-Based on experiments performed on a wide variety of one-dimensional data streams, we recommend using a window size between 1 and 16. The default window size is 8.
+Based on experiments performed on a wide variety of one-dimensional data streams, we recommend using a window size between 1 and 16. The default window size is 8. If you have set the category field for high cardinality, the default window size is 1.
 
 If you expect missing values in your data or if you want the anomalies based on the current interval, choose 1. If your data is continuously ingested and you want the anomalies based on multiple intervals, choose a larger window size.
 
@@ -113,7 +113,7 @@ If you see the detector pending in "initialization" for longer than a day, aggre
 
 Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score is an estimate of the probability that the reported anomaly grade matches the expected anomaly grade. Confidence increases as the model observes more data and learns the data behavior and trends. Note that confidence is distinct from model accuracy.
 
-If you set the category field, you see an additional **Heat map** chart. The heat map correlates results for anomalous entities.
+If you set the category field, you see an additional **Heat map** chart. The heat map correlates results for anomalous entities. This chart is empty until you select an anomalous entity. You also see the anomaly and feature line chart for the time period of the anomaly (`anomaly_grade` > 0).
 
 Choose a filled rectangle to see a more detailed view of the anomaly.
 {: .note }
