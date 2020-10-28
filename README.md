@@ -56,7 +56,7 @@ This repository contains the documentation for Open Distro for Elasticsearch, a 
 
    Use `curl -XGET https://localhost:9200 -u admin:admin -k` to verify the Elasticsearch version.
 
-1. Update the plugin compatibility table in `docs/install/plugin.md`.
+1. Update the plugin compatibility table in `docs/install/plugin.md` and `docs/kibana/plugins.md`.
 
    Use `curl -XGET https://localhost:9200/_cat/plugins -u admin:admin -k` to get the correct version strings.
 

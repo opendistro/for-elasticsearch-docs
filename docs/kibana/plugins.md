@@ -31,11 +31,12 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.9.1</td>
     <td>
-      <pre>opendistro-anomaly-detection-kibana    1.10.1.0
-opendistro_alerting-kibana             1.10.1.1
-opendistro_index_management-kibana     1.10.1.0
-opendistro_security_kibana             1.10.1.1
-opendistro_sql_workbench               1.10.1.1
+      <pre>opendistro-anomaly-detection-kibana    1.10.1.0, 1.11.0.0
+opendistro_alerting-kibana             1.10.1.1, 1.11.0.2
+opendistro_index_management-kibana     1.10.1.0, 1.11.0.0
+opendistro_security_kibana             1.10.1.1, 1.11.0.0
+opendistro-query-workbench             1.11.0.0
+opendistro-notebooks-kibana            1.11.0.0
 </pre>
     </td>
   </tr>
@@ -68,7 +69,7 @@ Navigate to the Kibana home directory (likely `/usr/share/kibana`) and run the i
 #### Security Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistro_security_kibana_plugin-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistro_security_kibana_plugin-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for managing users, roles, mappings, action groups, and tenants.
@@ -77,7 +78,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.2.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
@@ -101,13 +102,22 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 This plugin provides a user interface for adding detectors.
 
 
-#### SQL Workbench
+#### Query Workbench
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-sql-workbench/opendistro-sql-workbench-{{site.odfe_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistro-query-workbench-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for using SQL queries to explore your data.
+
+
+#### Kibana Notebooks
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistro-notebooks-kibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin lets you combine Kibana visualizations and narrative text in a single interface.
 
 
 ## List installed plugins
@@ -125,14 +135,44 @@ sudo bin/kibana-plugin list
 sudo bin/kibana-plugin remove <plugin-name>
 ```
 
-Then restart Kibana. After the removal of any plugin, Kibana performs an "optimize" operation the next time you start it. This operation takes several minutes even on fast machines, so be patient.
+For certain plugins, you must also remove the "optimze" bundle. Here is a sample command for the Anomaly Detection plugin:
+
+```bash
+sudo rm /usr/share/kibana/optimize/bundles/opendistro-anomaly-detection-kibana.*
+```
+
+Then restart Kibana. After the removal of any plugin, Kibana performs an optimize operation the next time you start it. This operation takes several minutes even on fast machines, so be patient.
 
 
 ## Update plugins
 
-Kibana doesn't update plugins. Instead, you have to remove and reinstall them:
+Kibana doesn’t update plugins. Instead, you have to remove the old version and its optimized bundle, reinstall them, and restart Kibana:
+
+1. Remove the old version:
 
 ```bash
 sudo bin/kibana-plugin remove <plugin-name>
+```
+
+1. Remove the optimized bundle:
+
+```bash
+sudo rm /usr/share/kibana/optimize/bundles/<bundle-name>
+```
+
+1. Reinstall the new version:
+
+```bash
 sudo bin/kibana-plugin install <plugin-name>
+```
+
+1. Restart Kibana.
+
+For example, to remove and reinstall the anomaly detection plugin:
+
+```bash
+sudo bin/elasticsearch-plugin remove opendistro-anomaly-detection
+sudo rm /usr/share/kibana/optimize/bundles/opendistro-anomaly-detection-kibana.*
+sudo bin/kibana-plugin install <AD Kibana plugin artifact URL>
+Restart Kibana.
 ```

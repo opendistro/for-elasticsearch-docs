@@ -2,7 +2,7 @@
 layout: default
 title: Docker Upgrade
 parent: Upgrade
-nav_order: 20
+nav_order: 60
 ---
 
 # Docker upgrade

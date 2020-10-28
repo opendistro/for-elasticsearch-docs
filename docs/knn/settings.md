@@ -5,7 +5,7 @@ parent: KNN
 nav_order: 10
 ---
 
-# KNN Settings and Statistics
+# KNN Settings and statistics
 
 The KNN plugin adds several new index settings, cluster settings, and statistics.
 
@@ -60,3 +60,7 @@ Statistic |  Description
 `graphMemoryUsage` | Current cache size (total size of all graphs in memory) in kilobytes.
 `missCount` | The number of cache misses. A cache miss occurs when a user queries a graph and it has not yet been loaded into memory.
 `loadExceptionCount` | The number of times an exception occurred when trying to load a graph into the cache.
+`script_compilations` | The number of times the KNN script has been compiled. This value should usually be 1 or 0, but if the cache containing the compiled scripts is filled, the KNN script might be recompiled.
+`script_compilation_errors` | The number of errors during script compilation.
+`script_query_requests` | The number of query requests that use [the KNN script](../#custom-scoring).
+`script_query_errors` | The number of errors during script queries.

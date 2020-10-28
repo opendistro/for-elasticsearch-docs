@@ -55,12 +55,39 @@ For example, if you choose `min()`, the detector focuses on finding anomalies ba
 You can add a maximum of five features for a detector.
 {: .note }
 
-1. On the **Features** page, select **Add features**.
-1. Enter the **Name** of the feature.
+1. On the **Model configuration** page, enter the **Feature name**.
 1. For **Find anomalies based on**, choose the method to find anomalies. For **Field Value** menu, choose the **field** and the **aggregation method**. Or choose **Custom expression**, and add in your own JSON aggregation query.
-1. Preview sample anomalies and adjust the feature settings if needed.
-- For sample previews, the anomaly detection plugin selects a small number of data samples---for example, one data point every 30 minutes---and uses interpolation to estimate the remaining data points to approximate the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
+
+#### (Optional) Set a category field
+
+You can categorize anomalies based on a keyword or IP field type.
+
+If you specify a category in the same time series but sliced with a different dimension like IP addresses, product IDs, country codes, and so on, you’ll see a granular view of anomalies within each entity of that field. This helps to dive deeper into anomalies of a unique entity or ID and isolate and debug issues.
+
+To set a category field, choose **Enable a category field** and select a field.
+
+Only a certain number of unique entities are supported in the category field. Use the following equation to calculate the recommended total number of entities number supported in a cluster:
+
+```
+(JvmHeapSizeInMb / 20) * (DataNodesCount)
+```
+
+For example, for a cluster with 3 data nodes, each with 8G of JVM heap size, the total number of unique entities supported is (8096 / 20 ) * 3 = 1200.  
+
+#### Set a window size
+
+Set the number of aggregation intervals from your data stream to consider in a detection window. We recommend you choose this value based on your actual data to see which one leads to the best results for your use case.
+
+Based on experiments performed on a wide variety of one-dimensional data streams, we recommend using a window size between 1 and 16. The default window size is 8.
+
+If you expect missing values in your data or if you want the anomalies based on the current interval, choose 1. If your data is continuously ingested and you want the anomalies based on multiple intervals, choose a larger window size.
+
+#### Preview sample anomalies
+
+Preview sample anomalies and adjust the feature settings if needed.
+For sample previews, the anomaly detection plugin selects a small number of data samples---for example, one data point every 30 minutes---and uses interpolation to estimate the remaining data points to approximate the actual feature data. It loads this sample dataset into the detector. The detector uses this sample dataset to generate a sample preview of anomaly results.
 Examine the sample preview and use it to fine-tune your feature configurations, for example, enable or disable features, to get more accurate results.
+
 1. Choose **Save and start detector**.
 1. Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
 
@@ -85,6 +112,11 @@ If you see the detector pending in "initialization" for longer than a day, aggre
 - The **Anomaly occurrence** table shows the `Start time`, `End time`, `Data confidence`, and `Anomaly grade` for each anomaly detected.
 
 Anomaly grade is a number between 0 and 1 that indicates the level of severity of how anomalous a data point is. An anomaly grade of 0 represents “not an anomaly,” and a non-zero value represents the relative severity of the anomaly. The confidence score is an estimate of the probability that the reported anomaly grade matches the expected anomaly grade. Confidence increases as the model observes more data and learns the data behavior and trends. Note that confidence is distinct from model accuracy.
+
+If you set the category field, you see an additional **Heat map** chart. The heat map correlates results for anomalous entities.
+
+Choose a filled rectangle to see a more detailed view of the anomaly.
+{: .note }
 
 ### Step 4: Set up alerts
 
