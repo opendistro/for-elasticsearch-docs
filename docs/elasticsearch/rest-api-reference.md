@@ -3342,13 +3342,26 @@ ccs_minimize_roundtrips | boolean | Indicates whether network round-trips should
 List all repositories.
 
 ```
+GET _snapshot/
+GET _snapshot/*
 GET _snapshot/_all
 ```
 
-List all  snapshots including detailed data in a repository.
+List all snapshots including detailed data in a repository.
 
 ```
+GET _snapshot/{repository}/*
 GET _snapshot/{repository}/_all
+```
+
+List snapshots based on a wildcard
+```
+GET _snapshot/{repository}/SomePrefix*
+```
+
+List currently running snapshots
+```
+GET _snapshot/{repository}/_current
 ```
 
 
@@ -3358,6 +3371,7 @@ Parameter | Type | Description
 :--- | :--- | :---
 master_timeout | time | Explicit operation timeout for connection to master node
 timeout | time | Explicit operation timeout
+verbose | bool | (only on snapshots) Adds metadata, start/end-time, errors etc. to response, defaults to true
 
 Further information about the returned fields etc. is available at https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-api.html
 
