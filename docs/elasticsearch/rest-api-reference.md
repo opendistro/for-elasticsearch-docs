@@ -3359,6 +3359,8 @@ Parameter | Type | Description
 master_timeout | time | Explicit operation timeout for connection to master node
 timeout | time | Explicit operation timeout
 
+Further information about the returned fields etc. is available at https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-api.html
+
 ## snapshot.cleanup_repository
 
 Removes stale data from repository.
