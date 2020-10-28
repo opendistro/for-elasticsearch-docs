@@ -69,10 +69,13 @@ To set a category field, choose **Enable a category field** and select a field.
 Only a certain number of unique entities are supported in the category field. Use the following equation to calculate the recommended total number of entities number supported in a cluster:
 
 ```
-(JvmHeapSizeInMb / 20) * (DataNodesCount)
+(data nodes * heap size * anomaly detection maximum memory percentage) / (entity size of a detector)
 ```
 
-For example, for a cluster with 3 data nodes, each with 8G of JVM heap size, the total number of unique entities supported is (8096 / 20 ) * 3 = 1200.  
+This formula doesn't take into account the query size limit.
+{: .note }
+
+For example, for a cluster with 3 data nodes, each with 8G of JVM heap size, a maximum memory percentage of 10% (default), and the entity size of the detector as 1MB: the total number of unique entities supported is (8.096 * 10^9 * 0.1 / 1M ) * 3 = 2429.
 
 #### Set a window size
 
