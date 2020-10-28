@@ -180,7 +180,7 @@ You also see all the data points from the source data. If you have *Timestamp* a
 
 ![Discover](../../images/kibana-discover-tab.png)
 
-To understand and organize these fields for your visualizations you can add these fields one by one. Choose **Add** (next to the field name) to include the fields that you need. Added fields are displayed on the right panel in a tabular form for easy searching and filtering.
+To understand and organize these fields for your visualizations, add them one at a time. Choose **Add** (next to the field name) to include the fields that you need. Added fields are displayed on the right panel in a tabular form for easy searching and filtering.
 
 ![Discover-include fields](../../images/kibana-discover-tab-add-fields.png)
 
@@ -210,7 +210,7 @@ The folowing visualizations use the live-streaming weather data as well as stati
 
 ### Bar Chart 
 
-This vertical bar graph using the live streaming weather data shows the maximum temperature in four cities for a specific time range. 
+This vertical bar chart created using the live streaming weather data shows the maximum temperature in four cities for a specific time range. 
 
 ![Bar Chart](../../images/kibana-bar-chart.png)
 
@@ -233,18 +233,19 @@ To create a Gantt chart, do the following:
 3. On the *Create* page, select the **Data** for the Gantt chart. Data includes fields for **Metrics** and **Results**.
 4. Under Metrics, choose **Event**. For log data, each log would be an event. So you can choose the Log ID or Span ID here to represent that log.
 5. Select the **Start Time** and the **Duration** fields from your data set. The start time is the timestamp that represents the begining of an event. The duration is the time interval that can be added to the start time. 
-6. For **Results** choose the number of events that you want to display on the chart. These resuts will be sequenced based on the earliest to latest start time. 
-7. Chose **Update**. You will see the Gantt chart displayed as shown in the figure. If you don't see any data displayed, try changing the date range for the data, and **Refresh** the chart.
+6. For **Results** choose the number of events that you want to display on the chart. These resuts will be sequenced based on the earliest to latest based on start time. 
+7. **Panel settings** allows you to select the position and labels for your X and Y axis. It also gives you the option to set the time format and color for the chart.
+8. Choose **Update**. You will see the Gantt chart displayed as shown in the figure. If you don't see any data displayed, try changing the date range for the data, and **Refresh** the chart.
 
 ![Gantt Chart](../../images/kibana-gantt-chart.png)
 
-This Gantt chart has log IDs displayed on the Y-axis. These are the unique events that you choose under **Metrics** (as log IDs) and represent each horizontal bar on the chart. The start time defines the left edge of each horizontal bar. The duration defines the length of each bar. 
+This Gantt chart has log IDs displayed on the Y-axis. These are the unique events that you choose under **Metrics** (as log IDs) and represent each horizontal bar on the chart. The start time defines the left edge of each horizontal bar. The duration defines the length of each bar. If you hover over the horizontal bars you will see the duration of that event in the time format avaiable in your data.
 
 
 
 ## Step 6: Create Dashboards
 
-The Kibana Dashboard is information-dense and customizable. It lets you to select graphs and charts that you’ve already created and lay them out for easy analysis. You can also create multiple dashboards, each tailored to a view that you care about.
+The Kibana Dashboard lets you to select graphs and charts that you’ve already created or create new ones on the fly and lay them out for easy analysis. You can also create multiple dashboards, each tailored to a view that you care about.
 
 To create a new dashboard, do the following.
 
