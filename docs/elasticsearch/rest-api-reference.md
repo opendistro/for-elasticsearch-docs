@@ -3337,6 +3337,28 @@ rest_total_hits_as_int | boolean | Indicates whether hits.total should be render
 ccs_minimize_roundtrips | boolean | Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
 
 
+## snapshot.all
+
+List all repositories.
+
+```
+GET _snapshot/_all
+```
+
+List all  snapshots including detailed data in a repository.
+
+```
+GET _snapshot/{repository}/_all
+```
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+master_timeout | time | Explicit operation timeout for connection to master node
+timeout | time | Explicit operation timeout
+
 ## snapshot.cleanup_repository
 
 Removes stale data from repository.
