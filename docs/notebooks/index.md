@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Notebook
+title: Notebooks
 nav_order: 38
 has_children: false
 ---
 
-# Kibana Notebook
+# Kibana Notebooks
 
 A Kibana notebook is an interface that lets you easily combine live visualizations and narrative text in a single notebook interface.
 
