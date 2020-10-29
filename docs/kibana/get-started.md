@@ -65,7 +65,7 @@ while True:
   ```
 
   **Note**: The time for refreshing data in the above script is specified as three hours. This means that every three hours, new data is made available in Kibana. You can change this to to every 10 seconds or however often you want updates, depending on the type of data you use.
-  {: .tip }
+  {: .note }
 
 ## Step 1: Download, install and access Kibana
 
@@ -206,16 +206,23 @@ Visualization helps you view your data graphically for quick understanding. For 
 6. Each visualization type has slightly different **Metrics** or **Buckets** for your data, and within these you can select required *Aggregations* and *Fields*. For *X-axis and Y-axis* in the bar graphs, select the fields you require from the dropdown. For pie charts, select *Count*. 
 7. Once you’re satisfied with your visualization, choose *Save* to save it for future use. Every time you make changes to your visualization you can either save it as a new visualization with a new name, or overwrite the previous visualization. The advantage with Kibana and live streaming data is that your visualizations are updated in real-time.
 
-The folowing visualizations use the live-streaming weather data as well as static audit logs that were ingested into Elasticsearch:
+The following visualizations use the live-streaming weather data as well as static audit logs that were ingested into Elasticsearch:
 
 ### Bar Chart 
 
-This vertical bar chart created using the live streaming weather data shows the maximum temperature in four cities for a specific time range. 
+To create a simple bar chart, do the following:
+1. Under **New Visualization**, select the type of visualization as **Bar Chart**. 
+2. On the *Visualize* page, select your **Data** for the bar chart.
+3. Under **Metrics**, select the *Aggregation* as Count (actual value for each data point), or Average (average value), Max, Min, Median, etc. In the *weather-forecast* example we've slected **Max** to show the maximum temerature for the four cities.
+4. For **Field** choose an appropriate field from your data set. In this example we've selected the `data.dataseries.temp` field which represents the *Temperature*. You can add more data points to your Y-axis. We've added two more Y-axis events - *Cloud Cover* and *Precipitation*, to make it more interesting.
+5. Add a custom label for each event. For example, enter *Temperature* as your custom field for the `data.dataseries.temp` field.
+6. Under **Buckets**, choose X-axis. Buckets are created according to aggregations (e.g., time slices) or numeric values (e.g., a count, a significant term etc.) in your data set. 
+7. Then select the required *Aggregations* and *Fields* for the X-axis. In the *weather-forecast* example we have chosen *Terms* as the aggregation and `location.keyword` as the field. This is so that we can display three separate events (temperature, cloud cover, and precipiation) for four different cities - San Diego, Portland, Malad, and Oakland, as defined in the `location.keyword` field. You can also add a custom label such as *Location* or *Cities* for the X-axis.
+8. You can also *Spilt series* by adding a Sub aggregation such as a date range or a time range for this data.  
+9. Choose the **Refresh** button on the top right, to refresh the data manually or set it on Auto Refresh. For auto refresh, choose the clock icon, enter a time value for **Refresh every**, and click **start** to view live changes on the graph. 
 
 ![Bar Chart](../../images/kibana-bar-chart.png)
-
- 
-
+This vertical bar chart created using the live streaming weather data shows the maximum temperature, Cloud Cover, and Precipitation data in four cities for a specific time range. 
 
 ### Gantt Chart 
 
@@ -234,14 +241,12 @@ To create a Gantt chart, do the following:
 4. Under Metrics, choose **Event**. For log data, each log would be an event. So you can choose the Log ID or Span ID here to represent that log.
 5. Select the **Start Time** and the **Duration** fields from your data set. The start time is the timestamp that represents the begining of an event. The duration is the time interval that can be added to the start time. 
 6. For **Results** choose the number of events that you want to display on the chart. These resuts will be sequenced based on the earliest to latest based on start time. 
-7. **Panel settings** allows you to select the position and labels for your X and Y axis. It also gives you the option to set the time format and color for the chart.
+7. **Panel settings** allows you to select the position and labels for your X and Y-axis. It also gives you the option to set the time format and color for the chart.
 8. Choose **Update**. You will see the Gantt chart displayed as shown in the figure. If you don't see any data displayed, try changing the date range for the data, and **Refresh** the chart.
 
 ![Gantt Chart](../../images/kibana-gantt-chart.png)
 
-This Gantt chart has log IDs displayed on the Y-axis. These are the unique events that you choose under **Metrics** (as log IDs) and represent each horizontal bar on the chart. The start time defines the left edge of each horizontal bar. The duration defines the length of each bar. If you hover over the horizontal bars you will see the duration of that event in the time format avaiable in your data.
-
-
+This Gantt chart has log IDs displayed on the Y-axis. Each bar on the chart is ana unique event (`logid` in this example) that you choose under **Metrics**. The start time is the left edge of each horizontal bar. The duration is the length of each bar. If you hover over a horizontal bar you see the duration of that event in the time format avaiable in your data (for example milliseconds).
 
 ## Step 6: Create Dashboards
 
