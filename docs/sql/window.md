@@ -11,7 +11,7 @@ A window function performs a calculation across a frame of data rows around the 
 
 `PARTITION` and `ORDER` define the frame of data over which the calculations are made.
 
-You can use window functions in following three categories:
+You can use window functions in the following three categories:
 
 1. Aggregate Functions: `COUNT()`, `MIN()`, `MAX()`, `AVG()`, and `SUM()`.
 2. Ranking Functions: `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `PERCENT_RANK()`, and `NTILE()`.
@@ -28,24 +28,35 @@ function_name (expression [, expression...])
 ```
 
 The `PARTITION BY` and `ORDER BY` clauses are optional.
-{.. note}
+{: .note }
 
+To use window functions, enable the new SQL engine:
 
-## Ranking Functions
+```json
+PUT _cluster/settings
+{
+ "transient": {
+    "opendistro.sql.engine.new.enabled" : "true"
+  }
+}
+```
+
+## Ranking functions
 
 Ranking functions assign an incremental rank to each row in the frame.
-The increase in rank number is based on the ranking function implementation, though the rank is mostly determined by field values in the `ORDER BY` list. If the `PARTITION BY` clause is present, the state of ranking functions (incremental rank number maintained) is reset.
 
-If the ranking functions is not used with the window definition that defines the order of data rows, the result is undetermined.
-
-In this case, `ROW_NUMBER` assigns row number to data rows in random order. `RANK` and `DENSE_RANK` always assign a rank of 1 to each row.
+If the ranking function is not used with the order of the data rows, the result is undetermined.
 
 ### ROW_NUMBER
 
-The row number function assigns a row number to each row. As a special case, the row number is always increased by 1 regardless of the fields specified in the `ORDER BY` list.
+`ROW_NUMBER` assigns a number to each data row in a random order. As a special case, the row number is always increased by 1 regardless of the fields specified in the `ORDER BY` list.
 
 ```sql
-od> SELECT gender, balance, ROW_NUMBER() OVER(PARTITION BY gender ORDER BY balance) AS num FROM accounts;
+SELECT gender, balance, ROW_NUMBER()
+OVER (
+  PARTITION BY gender ORDER BY balance
+   )
+AS num FROM accounts;
 ```
 
 | gender | balance | num
@@ -57,10 +68,14 @@ od> SELECT gender, balance, ROW_NUMBER() OVER(PARTITION BY gender ORDER BY balan
 
 ### RANK
 
-The `RANK` function assigns a rank to each row. For rows that have the same values for fields specified in the `ORDER BY` list, the same rank is assigned. If this is the case, the next few ranks is skipped depending on the number of ties.
+The `RANK` function assigns a rank to each row. For rows that have the same values for fields specified in the `ORDER BY` list, the same rank is assigned. If this is the case, the next few ranks are skipped depending on the number of ties.
 
 ```sql
-od> SELECT gender, RANK() OVER(ORDER BY gender DESC) AS rnk FROM accounts;
+SELECT gender, RANK()
+OVER (
+  ORDER BY gender DESC
+  )
+AS rank FROM accounts;
 ```
 
 | gender | rank
@@ -75,7 +90,11 @@ od> SELECT gender, RANK() OVER(ORDER BY gender DESC) AS rnk FROM accounts;
 Similar to the `RANK` function, `DENSE_RANK` also assigns a rank to each row. The difference is there is no gap between the ranks.
 
 ```sql
-SELECT gender, DENSE_RANK() OVER(ORDER BY gender DESC) AS rnk FROM accounts;
+SELECT gender, DENSE_RANK()
+OVER (
+  ORDER BY gender DESC
+  )
+AS rank FROM accounts;
 ```
 
 | gender | rank
