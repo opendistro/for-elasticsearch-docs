@@ -52,7 +52,7 @@ If you use the ranking function without the `ORDER BY` clause, the result is und
 ### RANK
 
 The `RANK` function assigns a ranking value to each row of a result set.
-It assigns the same ranking value for the same field values specified in the `ORDER BY` list. In this case, the next few ranks are skipped depending on the number of ties that occur.
+It assigns the same ranking value for the same field values specified in the `ORDER BY` list.
 
 ```sql
 SELECT gender, RANK()
@@ -67,7 +67,9 @@ AS rnk FROM accounts;
 | M        | 1     
 | M        | 1     
 | M        | 1     
-| F        | 4     
+| F        | 4  
+
+In this case, the next few ranks are skipped depending on the number of ties that occur.   
 
 ### ROW_NUMBER
 
