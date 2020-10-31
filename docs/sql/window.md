@@ -9,7 +9,7 @@ nav_order: 11
 
 A window function performs a calculation across a frame of data rows around the current row and finds a result for each row.
 
-`PARTITION` and `ORDER` define the frame of data over which the calculations are made.
+`PARTITION BY` and `ORDER BY` define the frame of data over which the calculation is made.
 
 You can use window functions in the following three categories:
 
@@ -43,13 +43,35 @@ PUT _cluster/settings
 
 ## Ranking functions
 
-Ranking functions assign an incremental rank to each row in the frame.
+Ranking functions assign an incremental ranking value to each row in the frame.
 
-If the ranking function is not used with the order of the data rows, the result is undetermined.
+The increase in the ranking value depends on how the ranking function is implemented. The ranking value is mostly determined by the field values in the `ORDER BY` clause. If the `PARTITION BY` clause is also present, the ranking function resets its state, while maintaining the incremental ranking value.
+
+If you use the ranking function without the `ORDER BY` clause, the result is undetermined. Without the `ORDER BY` clause, `ROW_NUMBER` assigns a random number to each data row while `RANK` and `DENSE_RANK` assign a ranking value of 1 to each data row.
+
+### RANK
+
+The `RANK` function assigns a ranking value to each row of a result set.
+It assigns the same ranking value for the same field values specified in the `ORDER BY` list. In this case, the next few ranks are skipped depending on the number of ties that occur.
+
+```sql
+SELECT gender, RANK()
+OVER (
+  ORDER BY gender DESC
+  )
+AS rnk FROM accounts;
+```
+
+| gender | rank
+:--- | :---
+| M        | 1     
+| M        | 1     
+| M        | 1     
+| F        | 4     
 
 ### ROW_NUMBER
 
-`ROW_NUMBER` assigns a number to each data row in a random order. As a special case, the row number is always increased by 1 regardless of the fields specified in the `ORDER BY` list.
+`ROW_NUMBER` assigns a number to each data row of the result set sequentially. The row number is increases by 1 regardless of the fields specified in the `ORDER BY` list.
 
 ```sql
 SELECT gender, balance, ROW_NUMBER()
@@ -66,35 +88,17 @@ AS num FROM accounts;
 | M        | 5686      | 2     
 | M        | 39225     | 3     
 
-### RANK
-
-The `RANK` function assigns a rank to each row. For rows that have the same values for fields specified in the `ORDER BY` list, the same rank is assigned. If this is the case, the next few ranks are skipped depending on the number of ties.
-
-```sql
-SELECT gender, RANK()
-OVER (
-  ORDER BY gender DESC
-  )
-AS rank FROM accounts;
-```
-
-| gender | rank
-:--- | :---
-| M        | 1     
-| M        | 1     
-| M        | 1     
-| F        | 4     
 
 ### DENSE_RANK
 
-Similar to the `RANK` function, `DENSE_RANK` also assigns a rank to each row. The difference is there is no gap between the ranks.
+Similar to the `RANK` function, `DENSE_RANK` also assigns a ranking value to each row but without any gaps between the ranking values.
 
 ```sql
 SELECT gender, DENSE_RANK()
 OVER (
   ORDER BY gender DESC
   )
-AS rank FROM accounts;
+AS rnk FROM accounts;
 ```
 
 | gender | rank
