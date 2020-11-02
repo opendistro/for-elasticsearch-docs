@@ -150,21 +150,21 @@ Kibana doesn’t update plugins. Instead, you have to remove the old version and
 
 1. Remove the old version:
 
-```bash
-sudo bin/kibana-plugin remove <plugin-name>
-```
+   ```bash
+   sudo bin/kibana-plugin remove <plugin-name>
+   ```
 
 1. Remove the optimized bundle:
 
-```bash
-sudo rm /usr/share/kibana/optimize/bundles/<bundle-name>
-```
+   ```bash
+   sudo rm /usr/share/kibana/optimize/bundles/<bundle-name>
+   ```
 
 1. Reinstall the new version:
 
-```bash
-sudo bin/kibana-plugin install <plugin-name>
-```
+   ```bash
+   sudo bin/kibana-plugin install <plugin-name>
+   ```
 
 1. Restart Kibana.
 
@@ -174,5 +174,4 @@ For example, to remove and reinstall the anomaly detection plugin:
 sudo bin/elasticsearch-plugin remove opendistro-anomaly-detection
 sudo rm /usr/share/kibana/optimize/bundles/opendistro-anomaly-detection-kibana.*
 sudo bin/kibana-plugin install <AD Kibana plugin artifact URL>
-Restart Kibana.
 ```
