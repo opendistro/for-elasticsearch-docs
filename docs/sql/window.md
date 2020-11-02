@@ -73,7 +73,7 @@ In this case, the next few ranks are skipped depending on the number of ties tha
 
 ### ROW_NUMBER
 
-`ROW_NUMBER` assigns a number to each data row of the result set sequentially. The row number is increases by 1 regardless of the fields specified in the `ORDER BY` list.
+`ROW_NUMBER` assigns a number to each data row of the result set sequentially. The row number increases by 1 regardless of the fields specified in the `ORDER BY` list.
 
 ```sql
 SELECT gender, balance, ROW_NUMBER()
