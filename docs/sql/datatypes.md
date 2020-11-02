@@ -7,7 +7,7 @@ nav_order: 73
 
 # Data Types
 
-The following table lists the data types supported by the SQL plugin and how it maps to SQL and Elasticsearch data types.
+The following table shows the data types supported by the SQL plugin and how it maps to SQL and Elasticsearch data types:
 
 | ODFE SQL Type | Elasticsearch Type | SQL Type
 :--- | :--- | :---
@@ -29,61 +29,62 @@ binary | binary | VARBINARY
 object | struct | STRUCT
 nested | array | STRUCT
 
-In addition to this list, the SQL plugin also supports `datetime`, though it doesn't have a corresponding mapping with Elasticsearch or SQL.
-To use a function without a corresponding mapping, you must explicitly convert the data type.
+In addition to this list, the SQL plugin also supports the `datetime` type, though it doesn't have a corresponding mapping with Elasticsearch or SQL.
+To use a function without a corresponding mapping, you must explicitly convert the data type to one that does.
 
 
-## Date and time data types
+## Date and time types
 
-The date and time types represent a time period: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `INTERVAL`. By default, the Elasticsearch DSL uses the `date` type as the only date and time related type that contains all information of an absolute time point.
+The date and time types represent a time period: `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `INTERVAL`. By default, the Elasticsearch DSL uses the `date` type as the only date-time related type that contains all information of an absolute time point.
 
-To integrate with SQL, each type other than timestamp holds part of the time period information. To use date and time types, see `datetime` functions. Some functions might have restrictions for the input argument type.
+To integrate with SQL, each type other than the `timestamp` type holds part of the time period information. To use date-time functions, see [datetime](../functions#date-and-time). Some functions might have restrictions for the input argument type.
+
 
 ### Date
 
-Date represents the calendar date regardless of the time zone. A given date value is a 24-hour period, or say a day, but this period varies in different timezones and might have flexible hours during daylight saving programs. The `date` type does not contain time information. Date supports a range of `1000-01-01` to `9999-12-31`.
+The `date` type represents the calendar date regardless of the time zone. A given date value is a 24-hour period, but this period varies in different timezones and might have flexible hours during daylight saving programs. The `date` type doesn't contain time information and it only supports a range of `1000-01-01` to `9999-12-31`.
 
 | Type | Syntax | Range
 :--- | :--- | :---
-Date | `yyyy-MM-dd` | `0001-01-01` to `9999-12-31`
+date | `yyyy-MM-dd` | `0001-01-01` to `9999-12-31`
 
 ### Time
 
-Time represents the time of a clock without any regard to its timezone. The `time` type does not contain date information.
+The `time` type represents the time of a clock regardless of its timezone. The `time` type doesn't contain date information.
 
 | Type | Syntax | Range
 :--- | :--- | :---
-Time | `hh:mm:ss[.fraction]` | `00:00:00.000000` to `23:59:59.999999`
+time | `hh:mm:ss[.fraction]` | `00:00:00.000000` to `23:59:59.999999`
 
 ### Datetime
 
-Datetime type is a combination of date and time. Datetime type does not contain timezone information. For an absolute time point that contains both date, time, and timezone information, see Timestamp.
+The `datetime` type is a combination of date and time. It doesn't contain timezone information. For an absolute time point that contains date, time, and timezone information, see [Timestamp](#timestamp).
 
 | Type | Syntax | Range
 :--- | :--- | :---
-Datetime | `yyyy-MM-dd hh:mm:ss[.fraction]` | `0001-01-01 00:00:00.000000` to `9999-12-31 23:59:59.999999`
+datetime | `yyyy-MM-dd hh:mm:ss[.fraction]` | `0001-01-01 00:00:00.000000` to `9999-12-31 23:59:59.999999`
 
 ### Timestamp
 
-A timestamp instance is an absolute instant independent of timezone or convention. For example, for a given point of time, if you change the timestamp of a time point to another timezone, its value differs accordingly.
+The `timestamp` type is an absolute instance independent of timezone or convention. For example, for a given point of time, if you change the timestamp to a different timezone, its value changes accordingly.
 
-The timestamp type is stored differently from the other types. It's converted from its current timezone to UTC for storage and converted back to the set timezone from UTC when it's retrieved.
+The `timestamp` type is stored differently from the other types. It's converted from its current timezone to UTC for storage and converted back to its set timezone from UTC when it's retrieved.
 
 | Type | Syntax | Range
 :--- | :--- | :---
-Timestamp | `yyyy-MM-dd hh:mm:ss[.fraction]` | `0001-01-01 00:00:01.000000` UTC to `9999-12-31 23:59:59.999999`
+timestamp | `yyyy-MM-dd hh:mm:ss[.fraction]` | `0001-01-01 00:00:01.000000` UTC to `9999-12-31 23:59:59.999999`
 
 ### Interval
 
-Interval data type represents a temporal duration or a period. The syntax is as follows:
+The `interval` type represents a temporal duration or a period.
 
 | Type | Syntax
 :--- | :--- | :---
-Interval | INTERVAL expr unit
+interval | `INTERVAL expr unit`
 
-The `expr` is any expression that is iterated to a quantity value eventually, see Expressions for details. The unit represents the unit for interpreting the quantity, including `MICROSECOND`, `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `MONTH`, `QUARTER`, and `YEAR`. The `INTERVAL` keyword and the unit specifier are not case sensitive.
+The `expr` unit is any expression that eventually iterates to a quantity value. It represents a unit for interpreting the quantity, including `MICROSECOND`, `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `MONTH`, `QUARTER`, and `YEAR`. The `INTERVAL` keyword and the unit specifier are not case sensitive.
 
-There are two classes of intervals: year-week intervals and day-time intervals.
+The `interval` type has two classes of intervals: year-week intervals and day-time intervals.
 
 - Year-week intervals store years, quarters, months, and weeks.
 - Day-time intervals store days, hours, minutes, seconds, and microseconds.
@@ -91,24 +92,26 @@ There are two classes of intervals: year-week intervals and day-time intervals.
 
 ### Convert between date and time types
 
-Basically the date and time types except interval can be converted to each other, but might suffer some alteration of the value or some information loss, for example extracting the time value from a datetime value, or convert a date value to a datetime value and so forth. Here lists the summary of the conversion rules that SQL plugin supports for each of the types:
+The date and time types apart from the `interval` type can be converted to each other. The conversion might alter the value or cause some information loss. For example, when extracting the `time` value from a `datetime` value, or converting a `date` value to a `datetime` value, and so on.
 
-**Conversion from DATE**
+The SQL plugin supports the following conversion rules for each of the types:
 
-- Since the date value does not have any time information, conversion to Time type is not useful, and will always return a zero time value '00:00:00'.
-- Conversion from date to datetime has a data fill-up due to the lack of time information, and it attaches the time '00:00:00' to the original date by default and forms a datetime instance. For example, the result to covert date '2020-08-17' to datetime type is datetime '2020-08-17 00:00:00'.
-- Conversion to timestamp is to alternate both the time value and the timezone information, and it attaches the zero time value '00:00:00' and the session timezone (UTC by default) to the date. For example, the result to covert date '2020-08-17' to datetime type with session timezone UTC is datetime '2020-08-17 00:00:00' UTC.
+**Convert from date**
 
-**Conversion from TIME**
+- Because the `date` value doesn't have any time information, conversion to the `time` type isn't useful and always returns a zero time value of `00:00:00`.
+- Converting from `date` to `datetime` has a data fill-up due to the lack of time information. It attaches the time `00:00:00` to the original date by default and forms a `datetime` instance. For example, conversion of `2020-08-17` to a `datetime` type is `2020-08-17 00:00:00`.
+- Converting to `timestamp` type alternates both the `time` value and the `timezone` information. It attaches the zero time value `00:00:00` and the session timezone (UTC by default) to the date. For example, conversion of `2020-08-17` to a `datetime` type with a session timezone UTC is `2020-08-17 00:00:00 UTC`.
 
-- Time value cannot be converted to any other date and time types since it does not contain any date information, so it is not meaningful to give no date info to a date/datetime/timestamp instance.
+**Convert from time**
 
-**Conversion from DATETIME**
+- You cannot convert the `time` value to any other date and time types because it doesn't contain any date information.
 
-- Conversion from datetime to date is to extract the date part from the datetime value. For example, the result to convert datetime '2020-08-17 14:09:00' to date is date '2020-08-08'.
-- Conversion to time is to extract the time part from the datetime value. For example, the result to convert datetime '2020-08-17 14:09:00' to time is time '14:09:00'.
-- Since the datetime type does not contain timezone information, the conversion to timestamp needs to fill up the timezone part with the session timezone. For example, the result to convert datetime '2020-08-17 14:09:00' with system timezone of UTC, to timestamp is timestamp '2020-08-17 14:09:00' UTC.
+**Convert from datetime**
 
-**Conversion from TIMESTAMP**
+- Converting `datetime` to `date` extracts the date part from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `date` type is `2020-08-08`.
+- Converting `datetime` to `time` extracts the time part from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `time` type is `14:09:00`.
+- Because the `datetime` type doesn't contain timezone information, converting to `timestamp` type fills up the timezone part with the session timezone. For example, conversion of `2020-08-17 14:09:00` with system timezone of UTC, to a `timestamp` type is `2020-08-17 14:09:00 UTC`.
 
-- Conversion from timestamp is much more straightforward. To convert it to date is to extract the date value, and conversion to time is to extract the time value. Conversion to datetime, it will extracts the datetime value and leave the timezone information over. For example, the result to convert datetime '2020-08-17 14:09:00' UTC to date is date '2020-08-17', to time is '14:09:00' and to datetime is datetime '2020-08-17 14:09:00'.
+**Convert from timestamp**
+
+- Convert from a `timestamp` type to a `date` type extracts the date value and to a `time` type extracts the time value. Converting to `datetime` extracts only the `datetime` value and leaves out the timezone value. For example, conversion of `2020-08-17 14:09:00` UTC to a `date` type is `2020-08-17` and to a `time` type is `14:09:00`, and to a `datetime` type is `2020-08-17 14:09:00`.
