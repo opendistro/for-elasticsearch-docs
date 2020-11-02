@@ -92,7 +92,7 @@ The `interval` type has two classes of intervals: year-week intervals and day-ti
 
 ### Convert between date and time types
 
-The date and time types apart from the `interval` type can be converted to each other. The conversion might alter the value or cause some information loss. For example, when extracting the `time` value from a `datetime` value, or converting a `date` value to a `datetime` value, and so on.
+Apart from the `interval` type, all date and time types can be converted to each other. The conversion might alter the value or cause some information loss. For example, when extracting the `time` value from a `datetime` value, or converting a `date` value to a `datetime` value, and so on.
 
 The SQL plugin supports the following conversion rules for each of the types:
 
@@ -104,14 +104,14 @@ The SQL plugin supports the following conversion rules for each of the types:
 
 **Convert from time**
 
-- You cannot convert the `time` value to any other date and time types because it doesn't contain any date information.
+- You cannot convert the `time` type to any other date and time types because it doesn't contain any date information.
 
 **Convert from datetime**
 
-- Converting `datetime` to `date` extracts the date part from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `date` type is `2020-08-08`.
-- Converting `datetime` to `time` extracts the time part from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `time` type is `14:09:00`.
-- Because the `datetime` type doesn't contain timezone information, converting to `timestamp` type fills up the timezone part with the session timezone. For example, conversion of `2020-08-17 14:09:00` with system timezone of UTC, to a `timestamp` type is `2020-08-17 14:09:00 UTC`.
+- Converting `datetime` to `date` extracts the date value from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `date` type is `2020-08-08`.
+- Converting `datetime` to `time` extracts the time value from the `datetime` value. For example, conversion of `2020-08-17 14:09:00` to a `time` type is `14:09:00`.
+- Because the `datetime` type doesn't contain timezone information, converting to `timestamp` type fills up the timezone value with the session timezone. For example, conversion of `2020-08-17 14:09:00` (UTC) to a `timestamp` type is `2020-08-17 14:09:00 UTC`.
 
 **Convert from timestamp**
 
-- Convert from a `timestamp` type to a `date` type extracts the date value and to a `time` type extracts the time value. Converting to `datetime` extracts only the `datetime` value and leaves out the timezone value. For example, conversion of `2020-08-17 14:09:00` UTC to a `date` type is `2020-08-17` and to a `time` type is `14:09:00`, and to a `datetime` type is `2020-08-17 14:09:00`.
+- Converting from a `timestamp` type to a `date` type extracts the date value and converting to a `time` type extracts the time value. Converting from a `timestamp` type to `datetime` type extracts only the `datetime` value and leaves out the timezone value. For example, conversion of `2020-08-17 14:09:00` UTC to a `date` type is `2020-08-17`, to a `time` type is `14:09:00`, and to a `datetime` type is `2020-08-17 14:09:00`.
