@@ -52,10 +52,12 @@ Possible values for `method` are:
 - DELETE
 - PATCH
 
-For example, the following line grants the `my-role` role access to the `PUT`, `POST`, and `DELETE` methods of the `ROLES` URIs.
+For example, the following configuration grants three roles access to the REST API, but then prevents `test-role` from making PUT, POST, DELETE, or PATCH requests to `_opendistro/_security/api/roles` or `_opendistro/_security/api/internalusers`:
 
 ```yml
-opendistro_security.restapi.endpoints_disabled.my-role.ROLES: ["PUT", "POST", "DELETE"]
+opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access", "test-role"]
+opendistro_security.restapi.endpoints_disabled.test-role.ROLES: ["PUT", "POST", "DELETE", "PATCH"]
+opendistro_security.restapi.endpoints_disabled.test-role.INTERNALUSERS: ["PUT", "POST", "DELETE", "PATCH"]
 ```
 
 To use the PUT and PATCH methods for the [configuration APIs](#configuration), add the following line to `elasticsearch.yml`:
