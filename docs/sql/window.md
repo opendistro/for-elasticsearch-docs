@@ -35,7 +35,7 @@ To use window functions, enable the new SQL engine:
 ```json
 PUT _cluster/settings
 {
- "transient": {
+ "persistent": {
     "opendistro.sql.engine.new.enabled" : "true"
   }
 }
