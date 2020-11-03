@@ -11,7 +11,7 @@ A Kibana notebook is an interface that lets you easily combine live visualizatio
 
 With Kibana notebooks, you can interactively explore data by running different visualizations and share your work with team members to collaborate on a project.
 
-You can add visualization paragraphs for creating graphs and markdown paragraphs for writing descriptions. You can choose multiple timelines to compare and contrast visualizations.
+A notebook is a document composed of two elements: Kibana visualizations and paragraphs (Markdown). Choose multiple timelines to compare and contrast visualizations.
 
 Common use cases include creating postmortem reports, designing runbooks, building live infrastructure reports, and writing documentation.
 

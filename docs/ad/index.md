@@ -72,7 +72,7 @@ Only a certain number of unique entities are supported in the category field. Us
 (data nodes * heap size * anomaly detection maximum memory percentage) / (entity size of a detector)
 ```
 
-This formula doesn't take into account the query size limit.
+This formula provides a good starting point, test with a representative workload and see how it goes.
 {: .note }
 
 For example, for a cluster with 3 data nodes, each with 8G of JVM heap size, a maximum memory percentage of 10% (default), and the entity size of the detector as 1MB: the total number of unique entities supported is (8.096 * 10^9 * 0.1 / 1M ) * 3 = 2429.
