@@ -165,7 +165,7 @@ POST _bulk
 
 ```
 
-Finally, use the `script_store` query to pre-filter your documents before identifying nearest neighbors:
+Finally, use the `script_score` query to pre-filter your documents before identifying nearest neighbors:
 
 ```json
 GET my-knn-index-2/_search
@@ -199,7 +199,10 @@ GET my-knn-index-2/_search
 All parameters are required.
 
 - `lang` is the script type. This value is usually `painless`, but here you must specify `knn`.
-- `source` is the name of the stored script, `knn_store`.
+- `source` is the name of the script, `knn_store`.
+
+  This script is part of the KNN plugin and isn't available at the standard `_scripts` path. A GET request to  `_cluster/state/metadata` doesn't return it, either.
+  
 - `field` is the field that contains your vector data.
 - `vector` is the point you want to find the nearest neighbors for.
 - `space_type` is either `l2` or `cosinesimil`.
