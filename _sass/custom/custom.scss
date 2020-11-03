@@ -216,3 +216,13 @@ h6 + p.label {
   padding-top: .25rem;
   padding-bottom: .25rem;
 }
+
+.snippet-control-bar {
+  text-align: right;
+}
+.snippet-control-bar .curl-rest-control {
+  cursor: pointer;
+}
+.snippet-control-bar .curl-rest-control.active {
+  font-weight: bold;
+}
