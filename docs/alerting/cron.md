@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Cron
-nav_order: 5
+nav_order: 20
 parent: Alerting
 has_children: false
 ---
