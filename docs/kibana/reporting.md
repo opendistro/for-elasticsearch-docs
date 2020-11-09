@@ -8,7 +8,7 @@ nav_order: 20
 
 # Reporting
 
-The Kibana reporting feature allows you to generate, schedule, and share reports. You can download reports on-demand in PNG, PDF, and CSV formats and schedule reports for periodic email delivery. To get started, choose **Reporting**. To use reporting, you must have the correct permissions.
+The Open Distro for Elasticsearch Kibana reporting feature allows you to generate, schedule, and share reports. You can download reports on-demand in PNG, PDF, and CSV formats and schedule reports for periodic email delivery. To get started, choose **Reporting**. To use reporting, you must have the correct permissions.
 
 ## Create reports from Discovery, Visualize, or Dashboard
 
