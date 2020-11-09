@@ -2,7 +2,7 @@
 layout: default
 title: WMS Map Server
 parent: Kibana
-nav_order: 3
+nav_order: 5
 ---
 
 # Configure WMS map server
