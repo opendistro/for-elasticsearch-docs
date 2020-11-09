@@ -1,7 +1,7 @@
 ---
 layout: default
 title: KNN
-nav_order: 35
+nav_order: 34
 has_children: true
 has_toc: false
 ---
