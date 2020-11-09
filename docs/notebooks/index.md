@@ -62,3 +62,7 @@ You can perform the following actions on paragraphs:
 - Clear the outputs of all paragraphs.
 - Delete all the paragraphs.
 - Move paragraphs up and down.
+
+## Sample Notebook
+
+![sample notebook](../images/sample-notebook.png)
