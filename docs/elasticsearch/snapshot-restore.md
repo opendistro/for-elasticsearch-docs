@@ -381,5 +381,5 @@ POST _snapshot/my-repository/3/_restore
 The `.opendistro_security` index contains sensitive data, so we recommend excluding it when you take a snapshot. If you do need to restore the index from a snapshot, you must include an admin certificate in the request:
 
 ```bash
-curl -k --cert chain.pem --key kirk.key.pem -XPOST 'https://localhost:9200/_snapshot/my-repository/3/_restore?pretty'
+curl -k --cert ./kirk.pem --key ./kirk-key.pem -XPOST 'https://localhost:9200/_snapshot/my-repository/3/_restore?pretty'
 ```
