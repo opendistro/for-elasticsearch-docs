@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Commands
-parent: PPL
+parent: Pipe Processing Language
 nav_order: 4
 ---
 

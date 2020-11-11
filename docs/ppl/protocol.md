@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Protocol
-parent: PPL
+parent: Pipe Processing Language
 nav_order: 2
 ---
 
