@@ -56,7 +56,7 @@ Now when users view alerting resources in Kibana (or make REST API calls), they 
 If `jdoe` creates a monitor, `jroe` can see and modify it. `psantos` can't. If that monitor generates an alert, the situation is the same: `jroe` can see and acknowledge it, but `psantos` can't. If `psantos` creates a destination---you guessed it---neither `jdoe` nor `jroe` can see or modify it.
 
 
-## (Advanced) Limit access by individual
+<!-- ## (Advanced) Limit access by individual
 
 If you only want users to be able to see and modify their own monitors and destinations, duplicate the `alerting_full_access` role and add the following [DLS query](../../security/access-control/document-level-security/) to it:
 
@@ -76,4 +76,4 @@ If you only want users to be able to see and modify their own monitors and desti
 }
 ```
 
-Then use this new role for all alerting users.
+Then use this new role for all alerting users. -->

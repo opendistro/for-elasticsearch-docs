@@ -46,8 +46,8 @@ Setting | Default | Description
 `opendistro.alerting.move_alerts_backoff_millis` | 250 | The amount of time to wait between retries---increases exponentially after each failed retry.
 `opendistro.alerting.move_alerts_backoff_count` | 3 | The number of retries for moving alerts to a deleted state after their monitor or trigger has been deleted.
 `opendistro.alerting.monitor.max_monitors` | 1000 | The maximum number of monitors users can create.
-`opendistro.alerting.alert_history_max_age` | 30d | The oldest document the `.opendistro-alert-history-<date>` index should keep.
-`opendistro.alerting.alert_history_max_docs` | 1000 | The maximum number of documents the `.opendistro-alert-history-<date>` index should keep.
+`opendistro.alerting.alert_history_max_age` | 30d | The oldest document to store in the `.opendistro-alert-history-<date>` index before creating a new index. If the number of alerts in this time period does not exceed `alert_history_max_docs`, alerting creates one history index per period (e.g. one index every 30 days).
+`opendistro.alerting.alert_history_max_docs` | 1000 | The maximum number of alerts to store in the `.opendistro-alert-history-<date>` index before creating a new index.
 `opendistro.alerting.alert_history_enabled` | true | Whether to create `.opendistro-alerting-alert-history-<date>` indices.
 `opendistro.alerting.alert_history_retention_period` | 60d | The amount of time to keep history indices before automatically deleting them.
 `opendistro.alerting.destination.allow_list` | ["chime", "slack", "custom_webhook", "email", "test_action"] | The list of allowed destinations. If you don't want to allow users to a certain type of destination, you can remove it from this list, but we recommend leaving this setting as-is.
