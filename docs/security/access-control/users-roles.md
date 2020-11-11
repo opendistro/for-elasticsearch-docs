@@ -106,6 +106,9 @@ The security plugin includes several predefined roles that serve as useful defau
 
 Role | Description
 :--- | :---
+`alerting_ack_alerts` | Grants permissions to view and acknowledge alerts, but not modify destinations or monitors.
+`alerting_full_access` | Grants full permissions to all alerting actions.
+`alerting_read_access` | Grants permissions to view alerts, destinations, and monitors, but not acknowledge alerts or modify destinations or monitors.
 `all_access` | Grants full access to the cluster: all cluster-wide operations, write to all indices, write to all tenants.
 `kibana_read_only` | A special role that prevents users from making changes to visualizations, dashboards, and other Kibana objects. See `opendistro_security.readonly_mode.roles` in `kibana.yml`. Pair with the `kibana_user` role.
 `kibana_user` | Grants permissions to use Kibana: cluster-wide searches, index monitoring, and write to various Kibana indices.
