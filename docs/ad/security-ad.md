@@ -64,19 +64,3 @@ PUT _cluster/settings
   }
 }
 ```
-
-
-## Upgrade considerations
-
-If you’re upgrading from older ODFE versions, make sure you’re aware of the following glitches:
-
-### Previously created detectors
-
-For detectors created prior to the upgrade, only admin users can assign permissions.
-If an admin user uses a backend role, the detectors are not visible to any user, including that admin user.
-
-Workaround: After upgrading to the new ODFE version, all admin users must update their existing detectors using the [Update API](../api/#update-detector). You only need to do this once and don’t have to repeat it for future upgrades.
-
-### Users with no backend roles
-
-All users must have an assigned backend role. If a user doesn’t have any backend role, the user cannot create detectors even with the correct permissions. This is because users are first filtered by the backend role.
