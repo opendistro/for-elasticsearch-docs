@@ -16,7 +16,7 @@ You can see other system indices in `elasticsearch.yml`:
 
 ```yml
 opendistro_security.system_indices.enabled: true
-opendistro_security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*"]
+opendistro_security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state"]
 ```
 
 To access these indices, you must authenticate with an [admin certificate](../tls/#configure-admin-certificates):
