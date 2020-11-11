@@ -2,7 +2,7 @@
 layout: default
 title: API
 parent: Alerting
-nav_order: 3
+nav_order: 15
 ---
 
 # Alerting API
@@ -831,6 +831,96 @@ PUT _opendistro/_alerting/destinations/<destination-id>
 
 ---
 
+## Get destination
+
+Retrieve one destination.
+
+#### Requests
+
+```json
+GET _opendistro/_alerting/destinations/<destination-id>
+```
+
+#### Sample response
+
+```json
+{
+  "totalDestinations": 1,
+  "destinations": [{
+      "id": "1a2a3a4a5a6a7a",
+      "type": "slack",
+      "name": "sample-destination",
+      "user": {
+        "name": "psantos",
+        "backend_roles": [
+          "human-resources"
+        ],
+        "roles": [
+          "alerting_full_access",
+          "hr-role"
+        ],
+        "custom_attribute_names": []
+      },
+      "schema_version": 3,
+      "seq_no": 0,
+      "primary_term": 6,
+      "last_update_time": 1603943261722,
+      "slack": {
+        "url": "https://example.com"
+      }
+    }
+  ]
+}
+```
+
+
+---
+
+## Get destinations
+
+Retrieve all destinations.
+
+#### Requests
+
+```json
+GET _opendistro/_alerting/destinations
+```
+
+#### Sample response
+
+```json
+{
+  "totalDestinations": 1,
+  "destinations": [{
+      "id": "1a2a3a4a5a6a7a",
+      "type": "slack",
+      "name": "sample-destination",
+      "user": {
+        "name": "psantos",
+        "backend_roles": [
+          "human-resources"
+        ],
+        "roles": [
+          "alerting_full_access",
+          "hr-role"
+        ],
+        "custom_attribute_names": []
+      },
+      "schema_version": 3,
+      "seq_no": 0,
+      "primary_term": 6,
+      "last_update_time": 1603943261722,
+      "slack": {
+        "url": "https://example.com"
+      }
+    }
+  ]
+}
+```
+
+
+---
+
 ## Delete destination
 
 #### Request
@@ -904,7 +994,7 @@ PUT _opendistro/_alerting/destinations/email_accounts/<email_account_id>
   "port": 465,
   "method": "ssl"
 }
-``` 
+```
 #### Sample response
 ```json
 {
@@ -1045,7 +1135,7 @@ POST _opendistro/_alerting/destinations/email_accounts/_search
 ```
 
 ---
- 
+
 ## Create email group
 
 #### Request
@@ -1056,7 +1146,7 @@ POST _opendistro/_alerting/destinations/email_groups
   "name": "example_email_group",
   "emails": [{
     "email": "example@email.com"
-  }]	
+  }]
 }
 ```
 
@@ -1090,7 +1180,7 @@ PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
   "name": "example_email_group",
   "emails": [{
     "email": "example@email.com"
-  }]	
+  }]
 }
 ```
 #### Sample response
@@ -1112,7 +1202,7 @@ PUT _opendistro/_alerting/destinations/email_groups/<email_group_id>
   }
 }
 ```
- 
+
 ## Get email group
 
 #### Request
@@ -1122,7 +1212,7 @@ GET _opendistro/_alerting/destinations/email_groups/<email_group_id>
   "name": "example_email_group",
   "emails": [{
     "email": "example@email.com"
-  }]	
+  }]
 }
 ```
 #### Sample response
@@ -1144,7 +1234,7 @@ GET _opendistro/_alerting/destinations/email_groups/<email_group_id>
   }
 }
 ```
- 
+
 ## Delete email group
 
 #### Request
@@ -1170,7 +1260,7 @@ DELETE _opendistro/_alerting/destinations/email_groups/<email_group_id>
   "_primary_term" : 2
 }
 ```
- 
+
 ## Search email group
 
 #### Request
