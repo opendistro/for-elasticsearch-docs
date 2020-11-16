@@ -199,7 +199,7 @@ GET my-knn-index-2/_search
 All parameters are required.
 
 - `lang` is the script type. This value is usually `painless`, but here you must specify `knn`.
-- `source` is the name of the script, `knn_store`.
+- `source` is the name of the script, `knn_score`.
 
   This script is part of the KNN plugin and isn't available at the standard `_scripts` path. A GET request to  `_cluster/state/metadata` doesn't return it, either.
   

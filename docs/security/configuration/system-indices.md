@@ -8,11 +8,9 @@ nav_order: 15
 
 # System indices
 
-By default, Open Distro for Elasticsearch has several protected system indices. Even if your user account has read permissions for all indices, you can't directly access the data in these system indices.
+By default, Open Distro for Elasticsearch has a protected system index, `.opendistro_security`, which you create using [securityadmin.sh](../security-admin/). Even if your user account has read permissions for all indices, you can't directly access the data in this system index.
 
-The first and most critical index is `.opendistro_security`, which stores the security configuration for your cluster. The demo configuration creates this index automatically, but when you configure the plugin manually, you create it when you first run [securityadmin.sh](../security-admin/).
-
-You can see other system indices in `elasticsearch.yml`:
+You can add additional system indices in in `elasticsearch.yml`. In addition to automatically creating `.opendistro_security`, the demo configuration adds several indices for the various Open Distro for Elasticsearch plugins that integrate with the security plugin:
 
 ```yml
 opendistro_security.system_indices.enabled: true
