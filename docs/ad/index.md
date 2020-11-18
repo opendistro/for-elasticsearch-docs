@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Anomaly Detection
-nav_order: 36
+nav_order: 46
 has_children: true
 ---
 
