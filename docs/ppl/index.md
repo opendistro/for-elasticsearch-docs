@@ -1,12 +1,12 @@
 ---
 layout: default
-title: PPL
-nav_order: 36
+title: Piped Processing Language
+nav_order: 42
 has_children: true
 has_toc: false
 ---
 
-# PPL
+# Piped Processing Language
 
 Piped Processing Language (PPL) is a query language that lets you use pipe (`|`) syntax to explore, discover, and query data stored in Elasticsearch.
 

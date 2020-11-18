@@ -32,7 +32,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination). 
+1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination).
 
 For Email type, refer to [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
@@ -40,55 +40,60 @@ For custom webhooks, you must specify more information: parameters and headers. 
 
 This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
 
+
 ### Email as a destination
-To send or receive an alert notification as an email, first select **Email** as the destination **Type** for the alert. Next, you must add at least one sender and a recipient. We also recommend adding email groups if you want to notify more than a few people of an alert. You can configure senders and recipients using **Manage senders** and **Manage email groups**. 
+
+To send or receive an alert notification as an email, choose **Email** as the destination type. Next, add at least one sender and recipient. We recommend adding email groups if you want to notify more than a few people of an alert. You can configure senders and recipients using **Manage senders** and **Manage email groups**.
+
 
 #### Manage senders
-Manage senders allows you to configure and manage **Sender** email addresses. Senders are email accounts from where the alert notification is sent to different recipients or email groups. 
+
+Senders are email accounts from which the alerting plugin sends notifications.
 
 To configure a sender email, do the following:
 
-1. Once you choose **Email** as the destination **Type**, choose **Manage senders**, under **Settings**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
-1. In the **Manage email senders** modal window, choose **Add sender**, **New sender**. Multiple senders can be added one at a time.
-1. Enter a unique **Sender name**.
-1. Enter the **Email address**, SMTP **Host** (e.g. `smtp.gmail.com` for a Gmail account), and the **Port** number.
-1. You can choose to use an **Encryption method** or leave it as **None**. However, most email providers require SSL or TLS and this requires you to add a username and password to the Elasticsearch keystore. Refer to [Authenticate sender account](#authenticate-sender-account) to learn more.
-1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you enter your credentials for SSL or TLS. However, you must [authenticate each sender account](#authenticate-sender-account) with credentials before you use the destination to send your alert. 
+1. After you choose **Email** as the destination type, choose **Manage senders**.
+1. Choose **Add sender**, **New sender** and enter a unique name.
+1. Enter the email address, SMTP host (e.g. `smtp.gmail.com` for a Gmail account), and the port.
+1. Choose an encryption method, or use the default value of **None**. However, most email providers require SSL or TLS, which requires a username and password in Elasticsearch keystore. Refer to [Authenticate sender account](#authenticate-sender-account) to learn more.
+1. Choose **Save** to save the configuration and create the sender. You can create a sender even before you add your credentials to the Elasticsearch keystore. However, you must [authenticate each sender account](#authenticate-sender-account) before you use the destination to send your alert.
 
-Once the sender is created, the sender account is available to be selected when creating an email destination. You can reuse senders across many different destinations, but each destination only supports one sender. 
+You can reuse senders across many different destinations, but each destination only supports one sender.
 
-#### Manage email groups or recipients 
-Use email groups to create and manage reusable lists of email addresses. For example, one alert might email the DevOps team, whereas another might email the DevOps team and the engineering team.
 
-You can enter individual email addresses, or an email group in the **Recipients** field. For email groups, you can pre-create a group using **Manage email groups**.
+#### Manage email groups or recipients
 
-To create and manage email groups, do the following:
-1. Once you select **Email** as the destination **Type**, choose **Manage email groups**, under **Settings**. Then choose **Add email group**, **New email group**. You can also do this using the **Actions** button on the top right of the **Destinations** page.
-1. Enter a unique **Email group name**.   
-1. For recipient emails, enter any number of email addresses. 
+Use email groups to create and manage reusable lists of email addresses. For example, one alert might email the DevOps team, whereas another might email the executive team and the engineering team.
+
+You can enter individual email addresses or an email group in the **Recipients** field.
+
+1. After you choose **Email** as the destination type, choose **Manage email groups**. Then choose **Add email group**, **New email group**.
+1. Enter a unique name.   
+1. For recipient emails, enter any number of email addresses.
 1. Choose **Save**.
 
-You can view the list of all email destinations you created on the **Destinations** landing page.  The **Actions** button on the top right of the **Destinations** page allows you to mange email senders and email groups from this page.
 
 #### Authenticate sender account
 
-You must authenticate each sender account with credentials before you send an alert notification from that account to recipients or email groups. You can enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender**.
+If your email provider requires SSL or TLS, you must authenticate each sender account before you can send an email. Enter these credentials in the Elasticsearch keystore using the CLI. Run the following commands (in your Elasticsearch directory) to enter your username and password. The `<sender_name>` is the name you entered for **Sender** earlier.
 
 ```bash
-./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username 
+./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.username
 ./bin/elasticsearch-keystore add opendistro.alerting.destination.email.<sender_name>.password
 ```
 
-**Note**: The keystore settings are node-specific. You must run these commands on each node.
+**Note**: Keystore settings are node-specific. You must run these commands on each node.
 {: .note}
 
-To change or update your credentials (once you've added them in the keystore settings for every node), you can call the reload API to ensure that your new changes are automatically updated on every node. Run this command to call the reload API:
+To change or update your credentials (after you've added them to the keystore on every node), call the reload API to automatically update those credentials without restarting Elasticsearch:
+
 ```json
-POST _nodes/reload_secure_settings 
+POST _nodes/reload_secure_settings
 {
-  "secure_settings_password": "1234" 
+  "secure_settings_password": "1234"
 }
 ```
+
 
 ---
 
@@ -98,7 +103,7 @@ POST _nodes/reload_secure_settings
 1. Specify a name and schedule for the monitor.
 
 The anomaly detection option is for pairing with the anomaly detection plugin. See [Anomaly Detection](../../ad/).
-For anomaly detector, choose an appropriate schedule for the monitor based on the detector interval. Otherwise, the alerting monitor may miss reading the results.
+For anomaly detector, choose an appropriate schedule for the monitor based on the detector interval. Otherwise, the alerting monitor might miss reading the results.
 
 For example, assume you set the monitor interval and the detector interval as 5 minutes, and you start the detector at 12:00. If an anomaly is detected at 12:05, it might be available at 12:06 because of the delay between writing the anomaly and it being available for queries. The monitor reads the anomaly results between 12:00 and 12:05, so it does not get the anomaly results available at 12:06.
 
@@ -108,6 +113,9 @@ When you create a monitor using Kibana, the anomaly detector plugin generates a 
 Whenever you update a detector’s interval, make sure to update the associated monitor interval as well, as the anomaly detection plugin does not do this automatically.
 
 1. Choose one or more indices. You can also use `*` as a wildcard to specify an index pattern.
+
+   If you use the security plugin, you can only choose indices that you have permission to access. For details, see [Alerting security](../security/).
+
 1. Define the monitor in one of three ways: visually, using a query, or using an anomaly detector.
 
    - Visual definition works well for monitors that you can define as "some value is above or below some threshold for some amount of time."
@@ -199,6 +207,7 @@ A return value of true means the trigger condition has been met, and the trigger
 
 The **Info** link next to **Trigger condition** contains a useful summary of the variables and results available to your query.
 {: .tip }
+
 
 ### Anomaly detector
 

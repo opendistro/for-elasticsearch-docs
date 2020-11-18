@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Endpoint
-parent: PPL
+parent: Piped Processing Language
 nav_order: 1
 ---
 

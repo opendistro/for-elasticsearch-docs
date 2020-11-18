@@ -2,7 +2,7 @@
 layout: default
 title: Settings
 parent: SQL
-nav_order: 15
+nav_order: 16
 ---
 
 # Settings

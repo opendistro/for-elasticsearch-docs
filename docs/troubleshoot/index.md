@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Troubleshoot
-nav_order: 70
+nav_order: 62
 has_children: true
 has_toc: false
 ---

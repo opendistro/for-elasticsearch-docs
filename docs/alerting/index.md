@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Alerting
-nav_order: 30
+nav_order: 34
 has_children: true
 ---
 

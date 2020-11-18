@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Functions
-parent: PPL
+parent: Piped Processing Language
 nav_order: 10
 ---
 

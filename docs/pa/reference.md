@@ -11,7 +11,7 @@ This page contains all Performance Analyzer metrics. All metrics support the `av
 
 For information on dimensions, see the [dimensions reference](#dimensions-reference).
 
-This list is extensive. We recommend Ctrl + F to find what you're looking for.
+This list is extensive. We recommend using Ctrl/Cmd + F to find what you're looking for.
 {: .tip }
 
 <table>
