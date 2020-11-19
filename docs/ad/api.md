@@ -145,7 +145,7 @@ To set a category field for high cardinality:
 ```json
 POST _opendistro/_anomaly_detection/detectors
 {
-  "name": "Second Test Detector 2",
+  "name": "Host OK Rate Detector",
   "description": "ok rate",
   "time_field": "@timestamp",
   "indices": [
@@ -156,10 +156,8 @@ POST _opendistro/_anomaly_detection/detectors
   ],
   "feature_attributes": [
     {
-      "feature_id": "latency_max",
       "feature_name": "latency_max",
       "feature_enabled": true,
-      "importance": 1,
       "aggregation_query": {
         "latency_max": {
           "max": {
@@ -172,7 +170,7 @@ POST _opendistro/_anomaly_detection/detectors
   "window_delay": {
     "period": {
       "interval": 10,
-      "unit": "SECONDS"
+      "unit": "MINUTES"
     }
   },
   "detection_interval": {
@@ -180,13 +178,7 @@ POST _opendistro/_anomaly_detection/detectors
       "interval": 1,
       "unit": "MINUTES"
     }
-  },
-  "ui_metadata": {
-    "aabb": {
-      "ab": "bb"
-    }
-  },
-  "schema_version": 2
+  }
 }
 ```
 
@@ -198,7 +190,7 @@ POST _opendistro/_anomaly_detection/detectors
   "_version": 1,
   "_seq_no": 0,
   "anomaly_detector": {
-    "name": "Second Test Detector 2",
+    "name": "Host OK Rate Detector",
     "description": "ok rate",
     "time_field": "@timestamp",
     "indices": [
@@ -550,7 +542,10 @@ POST _opendistro/_anomaly_detection/detectors/results/_search
 }
 ```
 
-To find an ordered set of anomaly records for an entity with an anomaly within a certain time range for a specific feature value:
+From this description, the example below is to find anomaly of an entity, but the request query doesn't contain entity name filter.
+
+In high cardinality detectors, the result contains entities’ information. 
+To see an ordered set of anomaly records for an entity with an anomaly within a certain time range for a specific feature value:
 
 #### Request
 
