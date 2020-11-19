@@ -250,7 +250,7 @@ Options | Description | Type | Required
 `filter_query` |  Provide an optional filter query for your feature. | `object` | No
 `detection_interval` | The time interval for your anomaly detector. | `object` | Yes
 `window_delay` | Add extra processing time for data collection. | `object` | No
-`category_field` | Categorizes or slices data with a dimension. Similar to `GROUP BY` in SQL. | `object` | No
+`category_field` | Categorizes or slices data with a dimension. Similar to `GROUP BY` in SQL. | `list` | No
 
 ---
 
@@ -343,7 +343,7 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_preview
 }
 ```
 
-If you specify a category field, each result associates with an entity:
+If you specify a category field, each result is associated with an entity:
 
 #### Sample response
 
@@ -1510,7 +1510,7 @@ GET _opendistro/_anomaly_detection/detectors/<detectorId>/_profile/total_size_in
 
 If you have configured the category field, you can see the number of unique values in the field and also all the active entities with models running in memory.
 You can use this data to estimate the memory required for anomaly detection to help decide the size of your cluster.
-For example, if a detector has one million entities and only 10 of them are active in memory, then you need to scale up your cluster.
+For example, if a detector has one million entities and only 10 of them are active in memory, then you need to scale up or scale out your cluster.
 
 #### Request
 
@@ -1565,9 +1565,11 @@ GET /_opendistro/_anomaly_detection/detectors/<detectorId>/_profile?_all=true&pr
 }
 ```
 
+The `profile` operation also provides information about each entity, such as the entity’s `last_sample_timestamp` and `last_active_timestamp`. 
+
 No anomaly results for an entity indicates that either the entity doesn't have any sample data or its model is removed from the model cache.
 
- `last_sample_timestamp` shows the last document containing the entity, while `last_active_timestamp` shows the timestamp when the entity’s model was last seen in the model cache.
+ `last_sample_timestamp` shows the last document in the input data source index containing the entity, while `last_active_timestamp` shows the timestamp when the entity’s model was last seen in the model cache.
 
 #### Request
 
