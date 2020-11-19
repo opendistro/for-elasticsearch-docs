@@ -210,14 +210,14 @@ POST _opendistro/_anomaly_detection/detectors
     "window_delay": {
       "period": {
         "interval": 10,
-        "unit": "Seconds"
+        "unit": "MINUTES"
       }
     },
     "shingle_size": 1,
     "schema_version": 2,
     "feature_attributes": [
       {
-        "feature_id": "latency_max",
+        "feature_id": "0Kld3HUBhpHMyt2e_UHn",
         "feature_name": "latency_max",
         "feature_enabled": true,
         "aggregation_query": {
@@ -229,11 +229,6 @@ POST _opendistro/_anomaly_detection/detectors
         }
       }
     ],
-    "ui_metadata": {
-      "aabb": {
-        "ab": "bb"
-      }
-    },
     "last_update_time": 1604707601438,
     "category_field": [
       "host"
@@ -319,13 +314,13 @@ POST _opendistro/_anomaly_detection/detectors/<detectorId>/_preview
     "detection_interval": {
       "period": {
         "interval": 10,
-        "unit": "Minutes"
+        "unit": "MINUTES"
       }
     },
     "window_delay": {
       "period": {
         "interval": 1,
-        "unit": "Minutes"
+        "unit": "MINUTES"
       }
     },
     "schema_version": 0,
@@ -378,7 +373,7 @@ If you specify a category field, each result associates with an entity:
   "schema_version": 0,
   "feature_data": [
     {
-      "feature_id": "latency_max",
+      "feature_id": "0Kld3HUBhpHMyt2e_UHn",
       "feature_name": "latency_max",
       "data": -17
     }
@@ -548,7 +543,7 @@ To see an ordered set of anomaly records for an entity with an anomaly within a 
 #### Request
 
 ```json
-POST /_opendistro/_anomaly_detection/detectors/results/_search
+POST _opendistro/_anomaly_detection/detectors/results/_search
 {
   "query": {
     "bool": {
@@ -562,6 +557,22 @@ POST /_opendistro/_anomaly_detection/detectors/results/_search
           "range": {
             "anomaly_grade": {
               "gt": 0
+            }
+          }
+        },
+        {
+          "nested": {
+            "path": "entity",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "entity.value": "i-00f28ec1eb8997685"
+                    }
+                  }
+                ]
+              }
             }
           }
         }
@@ -617,7 +628,7 @@ POST /_opendistro/_anomaly_detection/detectors/results/_search
           "data_start_time": 1604710034516,
           "feature_data": [
             {
-              "feature_id": "latency_max",
+              "feature_id": "0Kld3HUBhpHMyt2e_UHn",
               "feature_name": "latency_max",
               "data": 3526
             }
@@ -653,7 +664,7 @@ POST /_opendistro/_anomaly_detection/detectors/results/_search
           "data_start_time": 1604709614522,
           "feature_data": [
             {
-              "feature_id": "latency_max",
+              "feature_id": "0Kld3HUBhpHMyt2e_UHn",
               "feature_name": "latency_max",
               "data": 5709
             }
@@ -689,7 +700,7 @@ POST /_opendistro/_anomaly_detection/detectors/results/_search
           "data_start_time": 1604708954520,
           "feature_data": [
             {
-              "feature_id": "latency_max",
+              "feature_id": "0Kld3HUBhpHMyt2e_UHn",
               "feature_name": "latency_max",
               "data": 441
             }
@@ -794,13 +805,13 @@ PUT _opendistro/_anomaly_detection/detectors/<detectorId>
   "detection_interval": {
     "period": {
       "interval": 10,
-      "unit": "Minutes"
+      "unit": "MINUTES"
     }
   },
   "window_delay": {
     "period": {
       "interval": 1,
-      "unit": "Minutes"
+      "unit": "MINUTES"
     }
   }
 }
@@ -1105,13 +1116,13 @@ Sample Input:
           "detection_interval": {
             "period": {
               "interval": 10,
-              "unit": "Minutes"
+              "unit": "MINUTES"
             }
           },
           "window_delay": {
             "period": {
               "interval": 1,
-              "unit": "Minutes"
+              "unit": "MINUTES"
             }
           },
           "schema_version": 0,
