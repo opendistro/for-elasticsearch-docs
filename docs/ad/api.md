@@ -542,9 +542,7 @@ POST _opendistro/_anomaly_detection/detectors/results/_search
 }
 ```
 
-From this description, the example below is to find anomaly of an entity, but the request query doesn't contain entity name filter.
-
-In high cardinality detectors, the result contains entities’ information. 
+In high cardinality detectors, the result contains entities’ information.
 To see an ordered set of anomaly records for an entity with an anomaly within a certain time range for a specific feature value:
 
 #### Request
