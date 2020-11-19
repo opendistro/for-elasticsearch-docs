@@ -674,7 +674,7 @@ POST _opendistro/_anomaly_detection/detectors/results/_search
           "entity": [
             {
               "name": "host",
-              "value": "i-00f28ec1eb8997680"
+              "value": "i-00f28ec1eb8997685"
             }
           ]
         },
@@ -710,7 +710,7 @@ POST _opendistro/_anomaly_detection/detectors/results/_search
           "entity": [
             {
               "name": "host",
-              "value": "i-00f28ec1eb8997680"
+              "value": "i-00f28ec1eb8997685"
             }
           ]
         },
