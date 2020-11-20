@@ -1,7 +1,7 @@
 ---
 layout: default
 title: KNN
-nav_order: 34
+nav_order: 50
 has_children: true
 has_toc: false
 ---
@@ -202,7 +202,7 @@ All parameters are required.
 - `source` is the name of the script, `knn_score`.
 
   This script is part of the KNN plugin and isn't available at the standard `_scripts` path. A GET request to  `_cluster/state/metadata` doesn't return it, either.
-  
+
 - `field` is the field that contains your vector data.
 - `vector` is the point you want to find the nearest neighbors for.
 - `space_type` is either `l2` or `cosinesimil`.

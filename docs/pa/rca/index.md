@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Root Cause Analysis
-nav_order: 39
+nav_order: 50
+parent: Performance Analyzer
 has_children: true
 ---
 
