@@ -2,6 +2,7 @@
 layout: default
 title: About
 nav_order: 1
+redirect_from: /404.html
 permalink: /
 ---
 
