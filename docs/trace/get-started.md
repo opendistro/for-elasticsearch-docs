@@ -16,9 +16,9 @@ Some introduction.
 
 1. Trace Analytics relies on you using the adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
 
-1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data for use with Data Piper.
+1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data for use with Data Prepper.
 
-1. [Data Piper](../data-piper/), an Open Distro for Elasticsearch component, aggregates the data, transforms it for use in Open Distro for Elasticsearch, and indexes it.
+1. [Data Prepper](../data-prepper/), an Open Distro for Elasticsearch component, aggregates the data, transforms it for use in Open Distro for Elasticsearch, and indexes it.
 
 1. The Trace Analytics Kibana plugin displays the data in near real-time as a series of charts and tables, with an emphasis on service architecture, latency, error rate, and throughput.
 
@@ -37,7 +37,7 @@ This file contains containers for each element from [Basic flow of data](#basic-
 
 - A distributed application (`jaeger-hot-rod`)
 - The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) (`otel-collector`)
-- Data Piper (`data-piper`)
+- Data Prepper (`data-prepper`)
 - An Open Distro for Elasticsearch node (`opendistro-for-elasticsearch`)
 - Kibana (`kibana`).
 
@@ -62,7 +62,7 @@ otel-collector  | 2020-11-19T16:29:53.781Z	INFO	loggingexporter/logging_exporter
 otel-collector  | 2020-11-19T16:29:53.787Z	INFO	loggingexporter/logging_exporter.go:296	TraceExporter	{"#spans": 3}
 ```
 
-Then Data Piper processes the data from the OpenTelemetry Collector and indexes it:
+Then Data Prepper processes the data from the OpenTelemetry Collector and indexes it:
 
 ```
 situp  | 1031918 [service-map-pipeline-process-worker-2-thread-1] INFO  com.amazon.situp.pipeline.ProcessWorker  –  service-map-pipeline Worker: Processing 3 records from buffer
