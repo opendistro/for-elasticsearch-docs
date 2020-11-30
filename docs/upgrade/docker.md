@@ -23,13 +23,13 @@ The most important step is to leave your data volumes intact. **Don't** run `doc
 1. Wait for the cluster to start, and verify that your cluster returns the new version:
 
    ```bash
-   curl -XGET https://localhost:9200 -u admin:admin -k
+   curl -XGET https://localhost:9200 -u 'admin:admin' -k
    ```
 
 1. Verify cluster health and the expected number of containers and nodes:
 
    ```bash
-   curl -XGET https://localhost:9200/_cat/health?v -u admin:admin -k
+   curl -XGET https://localhost:9200/_cat/health?v -u 'admin:admin' -k
    docker ps
    ```
 

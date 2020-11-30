@@ -91,7 +91,7 @@ $ kubectl exec -it opendistro-es-master-1 -- /bin/bash
 You can send requests to the pod to verify that Elasticsearch is up and running:
 
 ```bash
-$ curl -XGET https://localhost:9200 -u admin:admin --insecure
+$ curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
 ```
 
 To set up port forwarding to access Kibana, exit the Elasticsearch shell and run the following command:

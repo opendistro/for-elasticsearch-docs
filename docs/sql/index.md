@@ -54,7 +54,7 @@ POST _opendistro/_sql
 For a sample [curl](https://curl.haxx.se/) command, try:
 
 ```bash
-curl -XPOST https://localhost:9200/_opendistro/_sql -u admin:admin -k -H 'Content-Type: application/json' -d '{"query": "SELECT * FROM kibana_sample_data_flights LIMIT 10"}'
+curl -XPOST https://localhost:9200/_opendistro/_sql -u 'admin:admin' -k -H 'Content-Type: application/json' -d '{"query": "SELECT * FROM kibana_sample_data_flights LIMIT 10"}'
 ```
 
 By default, queries return data in JDBC format, but you can also return data in standard Elasticsearch JSON, CSV, or raw formats:
