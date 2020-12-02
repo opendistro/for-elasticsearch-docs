@@ -1,51 +1,45 @@
 ---
 layout: default
-title: Get started
+title: Get Started
 parent: Trace Analytics
 nav_order: 1
 ---
 
 # Get started with Trace Analytics
 
-Some introduction.
+Trace Analytics consists of multiple components that fit into the OpenTelemetry and Elasticsearch ecosystems, so the easiest way to get started with it is through its [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples).
 
 
 ## Basic flow of data
 
 ![Data flow diagram from a distributed application to Open Distro for Elasticsearch](../../images/ta.svg)
 
-1. Trace Analytics relies on you using the adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
+1. Trace Analytics relies on you adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
 
-1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data for use with Data Prepper.
+1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data.
 
-1. [Data Prepper](../data-prepper/), an Open Distro for Elasticsearch component, aggregates the data, transforms it for use in Open Distro for Elasticsearch, and indexes it.
+1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro for Elasticsearch, and indexes on a cluster.
 
-1. The Trace Analytics Kibana plugin displays the data in near real-time as a series of charts and tables, with an emphasis on service architecture, latency, error rate, and throughput.
+1. The [Trace Analytics Kibana plugin](../ta-kibana/) displays the data in near real-time as a series of charts and tables, with an emphasis on service architecture, latency, error rate, and throughput.
 
 
 ## Jaeger HotROD
 
 The easiest way to get started with Trace Analytics is the Jaeger HotROD demo, which mimics the flow of data through a distributed application.
 
-Create the following [docker-compose.yml](https://docs.docker.com/compose/compose-file/) file on your computer:
-
-```yml
-asdf
-```
-
-This file contains containers for each element from [Basic flow of data](#basic-flow-of-data):
+Download or clone the [Data Prepper repository](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples). Then navigate to `examples/jaeger-hotrod/` and open `docker-compose.yml` in a text editor. This file contains a container for each element from [Basic flow of data](#basic-flow-of-data):
 
 - A distributed application (`jaeger-hot-rod`)
 - The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) (`otel-collector`)
 - Data Prepper (`data-prepper`)
-- An Open Distro for Elasticsearch node (`opendistro-for-elasticsearch`)
+- A single-node Open Distro for Elasticsearch cluster (`opendistro-for-elasticsearch`)
 - Kibana (`kibana`).
 
-After you create the file, run `docker-compose up` and navigate to `http://localhost:8080` in a web browser.
+Close the file and run `docker-compose up --build`. After the containers start, navigate to `http://localhost:8080` in a web browser.
 
 ![HotROD web interface](../../images/hot-rod.png)
 
-Click one of the buttons in the web interface to start a series of operations across the many services. From the console logs, you can see that these operations share the same `trace-id`:
+Click one of the buttons in the web interface to send a request to the application. Each request starts a series of operations across the services that make up the application. From the console logs, you can see that these operations share the same `trace-id`, which lets you track all of the operations in the request as a single *trace*:
 
 ```
 jaeger-hot-rod  | http://0.0.0.0:8081/customer?customer=392
@@ -55,7 +49,7 @@ jaeger-hot-rod  | 2020-11-19T16:29:53.430Z	INFO	customer/server.go:67	HTTP reque
 jaeger-hot-rod  | 2020-11-19T16:29:53.430Z	INFO	customer/database.go:73	Loading customer{"service": "customer", "component": "mysql", "trace_id": "12091bd60f45ea2c", "span_id": "252ff7d0e1ac533b", "customer_id": "392"}
 ```
 
-These operations also have `span_id`. Spans are units of work from a single service. Shortly after the application starts processing the request, you can see the OpenTelemetry Collector starts exporting the spans:
+These operations also have a `span_id`. *Spans* are units of work from a single service. Each trace contains some number of spans. Shortly after the application starts processing the request, you can see the OpenTelemetry Collector starts exporting the spans:
 
 ```
 otel-collector  | 2020-11-19T16:29:53.781Z	INFO	loggingexporter/logging_exporter.go:296	TraceExporter	{"#spans": 1}
@@ -76,4 +70,12 @@ node-0.example.com  | [2020-11-19T16:29:55,064][INFO ][o.e.c.m.MetadataMappingSe
 node-0.example.com  | [2020-11-19T16:29:55,267][INFO ][o.e.c.m.MetadataMappingService] [9fb4fb37a516] [otel-v1-apm-span-000001/NGYbmVD9RmmqnxjfTzBQsQ] update_mapping [_doc]
 ```
 
-Navigate to `http://localhost:5601` and choose **Trace Analytics**. You can see the results of your single click from the Jaeger HotROD web interface: the number of traces per API and HTTP method, latency trends, a color-coded map of the service architecture, and a list of trace IDs that you can use to drill-down on individual operations. For more information on using the plugin, see [Kibana plugin](../ta-kibana/).
+In a new terminal window, run the following command to see one of the raw documents in the Elasticsearch cluster:
+
+```bash
+curl -XGET -u 'admin:admin' -k 'https://localhost:9200/otel-v1-apm-span-000001/_search?pretty&size=1'
+```
+
+Navigate to `http://localhost:5601` in a web browser and choose **Trace Analytics**. You can see the results of your single click in the Jaeger HotROD web interface: the number of traces per API and HTTP method, latency trends, a color-coded map of the service architecture, and a list of trace IDs that you can use to drill-down on individual operations.
+
+If you don't see your trace, adjust the For more information on using the plugin, see [Kibana plugin](../ta-kibana/).
