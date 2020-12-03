@@ -7,7 +7,7 @@ nav_order: 1
 
 # Get started with Trace Analytics
 
-Trace Analytics consists of multiple components that fit into the OpenTelemetry and Elasticsearch ecosystems, so the easiest way to get started with it is through its [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples).
+Open Distro for Elasticsearch Trace Analytics consists of two components---Data Prepper and the Trace Analytics Kibana plugin---that fit into the OpenTelemetry and Elasticsearch ecosystems. The Data Prepper repository has several [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples) to help you get started.
 
 
 ## Basic flow of data
@@ -18,14 +18,14 @@ Trace Analytics consists of multiple components that fit into the OpenTelemetry 
 
 1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data.
 
-1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro for Elasticsearch, and indexes on a cluster.
+1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro for Elasticsearch, and indexes it on an Elasticsearch cluster.
 
 1. The [Trace Analytics Kibana plugin](../ta-kibana/) displays the data in near real-time as a series of charts and tables, with an emphasis on service architecture, latency, error rate, and throughput.
 
 
 ## Jaeger HotROD
 
-The easiest way to get started with Trace Analytics is the Jaeger HotROD demo, which mimics the flow of data through a distributed application.
+One Trace Analytics sample application is the Jaeger HotROD demo, which mimics the flow of data through a distributed application.
 
 Download or clone the [Data Prepper repository](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples). Then navigate to `examples/jaeger-hotrod/` and open `docker-compose.yml` in a text editor. This file contains a container for each element from [Basic flow of data](#basic-flow-of-data):
 
@@ -59,8 +59,8 @@ otel-collector  | 2020-11-19T16:29:53.787Z	INFO	loggingexporter/logging_exporter
 Then Data Prepper processes the data from the OpenTelemetry Collector and indexes it:
 
 ```
-situp  | 1031918 [service-map-pipeline-process-worker-2-thread-1] INFO  com.amazon.situp.pipeline.ProcessWorker  –  service-map-pipeline Worker: Processing 3 records from buffer
-situp  | 1031923 [entry-pipeline-process-worker-1-thread-1] INFO  com.amazon.situp.pipeline.ProcessWorker  –  entry-pipeline Worker: Processing 1 records from buffer
+data-prepper  | 1031918 [service-map-pipeline-process-worker-2-thread-1] INFO  com.amazon.dataprepper.pipeline.ProcessWorker  –  service-map-pipeline Worker: Processing 3 records from buffer
+data-prepper  | 1031923 [entry-pipeline-process-worker-1-thread-1] INFO  com.amazon.dataprepper.pipeline.ProcessWorker  –  entry-pipeline Worker: Processing 1 records from buffer
 ```
 
 Finally, you can see the Open Distro for Elasticsearch node responding to the indexing request.
@@ -73,9 +73,9 @@ node-0.example.com  | [2020-11-19T16:29:55,267][INFO ][o.e.c.m.MetadataMappingSe
 In a new terminal window, run the following command to see one of the raw documents in the Elasticsearch cluster:
 
 ```bash
-curl -XGET -u 'admin:admin' -k 'https://localhost:9200/otel-v1-apm-span-000001/_search?pretty&size=1'
+curl -X GET -u 'admin:admin' -k 'https://localhost:9200/otel-v1-apm-span-000001/_search?pretty&size=1'
 ```
 
 Navigate to `http://localhost:5601` in a web browser and choose **Trace Analytics**. You can see the results of your single click in the Jaeger HotROD web interface: the number of traces per API and HTTP method, latency trends, a color-coded map of the service architecture, and a list of trace IDs that you can use to drill-down on individual operations.
 
-If you don't see your trace, adjust the For more information on using the plugin, see [Kibana plugin](../ta-kibana/).
+If you don't see your trace, adjust the timeframe in Kibana. For more information on using the plugin, see [Kibana plugin](../ta-kibana/).

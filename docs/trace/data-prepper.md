@@ -7,7 +7,7 @@ nav_order: 20
 
 # Data Prepper
 
-Data Prepper is an independent component (not an Elasticsearch plugin) that converts data for use with Elasticsearch.
+Data Prepper is an independent component, not an Elasticsearch plugin, that converts data for use with Elasticsearch.
 
 
 ## Install Data Prepper
@@ -18,7 +18,7 @@ To use the Docker image, pull it like any other image:
 docker pull <>
 ```
 
-Otherwise, download the appropriate TAR file for your operating system and unzip.
+Otherwise, [download](https://opendistro.github.io/for-elasticsearch/downloads.html) the appropriate TAR file for your operating system and unzip it.
 
 
 ## Configure pipelines
