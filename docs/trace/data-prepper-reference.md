@@ -60,8 +60,8 @@ The default buffer. Memory-based.
 
 Option | Required | Description
 :--- | :--- | :---
-buffer_size | No | Integer, the maximum number of records the buffer accepts.
-batch_size | No | Integer, the maximum number of records the buffer drains after each read.
+buffer_size | No | Integer, default 512. The maximum number of records the buffer accepts.
+batch_size | No | Integer, default 8. The maximum number of records the buffer drains after each read.
 
 
 ## Processors
@@ -132,6 +132,4 @@ name | Yes | String, name of the pipeline to write to.
 
 ### stdout
 
-Sink for console output. Can be useful for testing.
-
-No options.
+Sink for console output. Can be useful for testing. No options.
