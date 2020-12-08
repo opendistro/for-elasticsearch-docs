@@ -75,7 +75,7 @@ For a list of all available configurations, see [clirc](https://github.com/opend
 
 1. Index the sample data.
 ```
-curl -H "Content-Type: application/x-ndjson" -POST https://localhost:9200/data/_bulk -u admin:admin --insecure --data-binary "@accounts.json"
+curl -H "Content-Type: application/x-ndjson" -POST https://localhost:9200/data/_bulk -u 'admin:admin' --insecure --data-binary "@accounts.json"
 ```
 
 1. Run a sample SQL command:

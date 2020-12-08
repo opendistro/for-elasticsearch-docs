@@ -41,7 +41,7 @@ GET _search
 For an example that uses [curl](https://curl.haxx.se/), try:
 
 ```bash
-curl --insecure -XGET -u admin:admin https://<host>:<port>/<index>/_search \
+curl --insecure -XGET -u 'admin:admin' https://<host>:<port>/<index>/_search \
   -H "content-type: application/json" \
   -d '{
     "query": {

@@ -53,8 +53,8 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 1. Open a second terminal session, and send requests to the server to verify that Open Distro for Elasticsearch is up and running:
 
    ```bash
-   curl -XGET https://localhost:9200 -u admin:admin --insecure
-   curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+   curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
+   curl -XGET https://localhost:9200/_cat/plugins?v -u 'admin:admin' --insecure
    ```
 
 
