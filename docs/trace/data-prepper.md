@@ -7,7 +7,7 @@ nav_order: 20
 
 # Data Prepper
 
-Data Prepper is an independent component, not an Elasticsearch plugin, that converts data for use with Elasticsearch.
+Data Prepper is an independent component, not an Elasticsearch plugin, that converts data for use with Elasticsearch. It's not bundled with the all-in-one Open Distro for Elasticsearch installation packages.
 
 
 ## Install Data Prepper
