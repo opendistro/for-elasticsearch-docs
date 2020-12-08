@@ -28,7 +28,7 @@ To use Data Prepper, you define pipelines in a configuration YAML file. Each pip
 ```yml
 sample-pipeline:
   workers: 4 # the number of workers
-  delay: 100 # in milliseconds, how often the workers should run
+  delay: 100 # in milliseconds, how long workers wait between read attempts
   source:
     otel_trace_source:
       ssl: true
@@ -36,8 +36,8 @@ sample-pipeline:
       sslKeyFile: "config/demo-data-prepper.key"
   buffer:
     bounded_blocking:
-      buffer_size: 1024 # max number of records the buffer will accept
-      batch_size: 256 # max number of records the buffer will drain for each read
+      buffer_size: 1024 # max number of records the buffer accepts
+      batch_size: 256 # max number of records the buffer drains after each read
   processor:
     - otel_trace_raw_processor:
   sink:

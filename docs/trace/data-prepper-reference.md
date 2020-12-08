@@ -7,7 +7,15 @@ nav_order: 25
 
 # Data Prepper configuration reference
 
-This page lists all supported Data Prepper sources, buffers, processors, and sinks, along with their associated options.
+This page lists all supported Data Prepper sources, buffers, processors, and sinks, along with their associated options. For example configuration files, see [Data Prepper](../data-prepper/).
+
+
+## General pipeline options
+
+Option | Required | Description
+:--- | :--- | :---
+workers | No | Integer, default 1. Essentially the number of application threads. As a starting point for your use case, try setting this value to the number of CPU cores on the machine.
+delay | No | Integer (milliseconds), default 3,000. How long workers wait between buffer read attempts.
 
 
 ## Sources
