@@ -76,6 +76,6 @@ In a new terminal window, run the following command to see one of the raw docume
 curl -X GET -u 'admin:admin' -k 'https://localhost:9200/otel-v1-apm-span-000001/_search?pretty&size=1'
 ```
 
-Navigate to `http://localhost:5601` in a web browser and choose **Trace Analytics**. You can see the results of your single click in the Jaeger HotROD web interface: the number of traces per API and HTTP method, latency trends, a color-coded map of the service architecture, and a list of trace IDs that you can use to drill-down on individual operations.
+Navigate to `http://localhost:5601` in a web browser and choose **Trace Analytics**. You can see the results of your single click in the Jaeger HotROD web interface: the number of traces per API and HTTP method, latency trends, a color-coded map of the service architecture, and a list of trace IDs that you can use to drill down on individual operations.
 
 If you don't see your trace, adjust the timeframe in Kibana. For more information on using the plugin, see [Kibana plugin](../ta-kibana/).
