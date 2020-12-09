@@ -29,6 +29,20 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.10.0</td>
+    <td>
+      <pre>opendistroAlertingKibana          1.12.0.0
+opendistroAnomalyDetectionKibana  1.12.0.0
+opendistroGanttChartKibana        1.12.0.0
+opendistroIndexManagementKibana   1.12.0.0
+opendistroNotebooksKibana         1.12.0.0
+opendistroQueryWorkbenchKibana    1.12.0.0
+opendistroReportsKibana           1.12.0.0
+opendistroSecurityKibana          1.12.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.9.1</td>
     <td>
       <pre>opendistro-anomaly-detection-kibana    1.10.1.0, 1.11.0.0
@@ -78,7 +92,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.2.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
