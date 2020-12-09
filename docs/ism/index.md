@@ -40,9 +40,11 @@ You can also include the `policy_id` in an index template so when an index is cr
 ```json
 PUT _index_template/<template_name>
 {
-  "index_patterns": ["index_name-*"],                 
-  "settings": {      
-    "opendistro.index_state_management.policy_id": "policy_id"    
+  "index_patterns": ["index_name-*"],
+  "template": {
+    "settings": {      
+      "opendistro.index_state_management.policy_id": "policy_id"    
+    }
   }
 }
 ```

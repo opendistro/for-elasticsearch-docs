@@ -47,9 +47,9 @@ To print all available command line options, run the script with no arguments:
 To load configuration changes to the security plugin, you must provide your admin certificate to the tool:
 
 ```bash
-./securityadmin.sh -cd ../securityconfig/ -icl -nhnv  
-   -cacert ../../../config/root-ca.pem
-   -cert ../../../config/kirk.pem
+./securityadmin.sh -cd ../securityconfig/ -icl -nhnv \
+   -cacert ../../../config/root-ca.pem \
+   -cert ../../../config/kirk.pem \
    -key ../../../config/kirk-key.pem
 ```
 

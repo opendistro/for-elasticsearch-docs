@@ -59,7 +59,7 @@ The steps on this page are most applicable if you installed Open Distro for Elas
 1. Wait for the node to join your cluster, and verify that the node is using the new version:
 
    ```bash
-   curl -XGET https://localhost:9200/_nodes/_all?pretty=true -u admin:admin -k
+   curl -XGET https://localhost:9200/_nodes/_all?pretty=true -u 'admin:admin' -k
    ```
 
 1. Enable shard allocation:
@@ -76,7 +76,7 @@ The steps on this page are most applicable if you installed Open Distro for Elas
 1. Wait for cluster health to return to green:
 
    ```bash
-   curl -XGET https://localhost:9200/_cat/health?v -u admin:admin -k
+   curl -XGET https://localhost:9200/_cat/health?v -u 'admin:admin' -k
    ```
 
 1. Repeat steps 1-8 for each node.
