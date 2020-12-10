@@ -31,14 +31,14 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.10.0</td>
     <td>
-      <pre>opendistroAlertingKibana          1.12.0.0
-opendistroAnomalyDetectionKibana  1.12.0.0
-opendistroGanttChartKibana        1.12.0.0
+      <pre>opendistroAnomalyDetectionKibana  1.12.0.0
+opendistroAlertingKibana          1.12.0.2
 opendistroIndexManagementKibana   1.12.0.0
-opendistroNotebooksKibana         1.12.0.0
-opendistroQueryWorkbenchKibana    1.12.0.0
-opendistroReportsKibana           1.12.0.0
 opendistroSecurityKibana          1.12.0.0
+opendistroQueryWorkbenchKibana    1.12.0.0
+opendistroNotebooksKibana         1.12.0.0
+opendistroReportsKibana           1.12.0.0
+opendistroGanttChartKibana        1.12.0.0
 </pre>
     </td>
   </tr>
