@@ -92,14 +92,6 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 
 This plugin provides a user interface for managing policies.
 
-#### Index Rollups
-
-```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistro-index-rollups-{{site.odfe_version}}.0.zip
-```
-
-This plugin provides a user interface for scheduling index rollups.
-
 
 #### Anomaly Detection Kibana
 
