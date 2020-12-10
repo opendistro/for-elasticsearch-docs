@@ -16,6 +16,8 @@ Open Distro for Elasticsearch Trace Analytics consists of two components---Data 
 
 1. Trace Analytics relies on you adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
 
+   (In the [Jaeger HotROD](#jaeger-hotrod) example below, an extra component, the Jaeger agent, runs alongside the application and sends the data to the OpenTelemetry Collector, but the concept is similar.)
+
 1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data.
 
 1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro for Elasticsearch, and indexes it on an Elasticsearch cluster.
@@ -29,7 +31,7 @@ One Trace Analytics sample application is the Jaeger HotROD demo, which mimics t
 
 Download or clone the [Data Prepper repository](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples). Then navigate to `examples/jaeger-hotrod/` and open `docker-compose.yml` in a text editor. This file contains a container for each element from [Basic flow of data](#basic-flow-of-data):
 
-- A distributed application (`jaeger-hot-rod`)
+- A distributed application (`jaeger-hot-rod`) with the Jaeger agent (`jaeger-agent`)
 - The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) (`otel-collector`)
 - Data Prepper (`data-prepper`)
 - A single-node Open Distro for Elasticsearch cluster (`opendistro-for-elasticsearch`)

@@ -114,10 +114,10 @@ This plugin provides a user interface for using SQL queries to explore your data
 #### Trace Analytics
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistro-notebooks-kibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://github.com/opendistro-for-elasticsearch/trace-analytics/releases/download/v1.12.0.0-alpha/trace-analytics-v1.12.0.0-alpha.zip
 ```
 
-This plugin uses distributed trace data to display latency trends, error rates, and more.
+This plugin uses distributed trace data (indexed in Elasticsearch using Data Prepper) to display latency trends, error rates, and more.
 
 
 #### Kibana Notebooks
