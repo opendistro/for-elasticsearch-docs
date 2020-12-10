@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>Backend Configuration - Open Distro for Elasticsearch Documentation</title>
+  <link rel="stylesheet" href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/css/just-the-docs.css">
+  <link rel="shortcut icon" href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/images/favicon.ico">
+
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135423944-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-135423944-1');
+    </script>
+  
+
+  
+    <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/js/search-data.js"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+  
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+  
+
+  <!-- SiteCatalyst code version: H.25.1. Copyright 1996-2012 Adobe, Inc. All Rights Reserved -->
+  <script><!--
+  /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+  var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+  <script language="JavaScript" type="text/javascript"><!--
+  if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+  //--></script>
+  <noscript>
+  <img src="//amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazonalldev2/1/H.25.1--NS/0" height="1" width="1" border="0" alt="" />
+  </noscript>
+  <!--/DO NOT REMOVE/-->
+  <!-- End SiteCatalyst code version: H.25.1. -->
+
+  <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/" class="site-title"><img src="/for-elasticsearch-docs/old/0.9.0/assets/images/logo.svg"></a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/" class="navigation-list-link">About</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/" class="navigation-list-link">Install and Configure</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/docker/" class="navigation-list-link">Docker</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/rpm/" class="navigation-list-link">RPM</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/deb/" class="navigation-list-link">Debian Package</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/docker-security/" class="navigation-list-link">Docker Security Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/plugins/" class="navigation-list-link">Standalone Elasticsearch Plugin Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/other-components/" class="navigation-list-link">Other Components</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/install/encryption-at-rest/" class="navigation-list-link">Encryption at Rest</a>
+                      
+                    </li>
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/" class="navigation-list-link">Elasticsearch</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/configuration/" class="navigation-list-link">Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/index-data/" class="navigation-list-link">Index Data</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/full-text/" class="navigation-list-link">Full-Text Queries</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/elasticsearch/snapshot-restore/" class="navigation-list-link">Take and Restore Snapshots</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/" class="navigation-list-link">Kibana</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/plugins/" class="navigation-list-link">Standalone Kibana Plugin Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/kibana/maptiles/" class="navigation-list-link">WMS Map Server</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/" class="navigation-list-link">Security</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/concepts/" class="navigation-list-link">Basics</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/configuration/" class="navigation-list-link active">Backend Configuration</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/security-admin/" class="navigation-list-link">Apply Configuration Changes</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/tls-configuration/" class="navigation-list-link">TLS Certificates</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/generate-certificates/" class="navigation-list-link">Generate Certificates</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/ldap/" class="navigation-list-link">Active Directory and LDAP</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/saml/" class="navigation-list-link">SAML</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/openid-connect/" class="navigation-list-link">OpenID Connect</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/default-action-groups/" class="navigation-list-link">Default Action Groups</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/permissions/" class="navigation-list-link">Permissions</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/document-level-security/" class="navigation-list-link">Document-Level Security</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/cross-cluster-search/" class="navigation-list-link">Cross-Cluster Search</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-logs/" class="navigation-list-link">Audit Logs</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-log-storage-types/" class="navigation-list-link">Audit Log Storage Types</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/audit-logs-field-reference/" class="navigation-list-link">Audit Log Field Reference</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/disable/" class="navigation-list-link">Disable Security</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/" class="navigation-list-link">Alerting</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/monitors/" class="navigation-list-link">Monitors</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/settings/" class="navigation-list-link">Management</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/security-roles/" class="navigation-list-link">Security Roles</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/alerting/cron/" class="navigation-list-link">Cron</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/" class="navigation-list-link">SQL</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/operations/" class="navigation-list-link">Supported Operations</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/jdbc/" class="navigation-list-link">JDBC Driver</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/sql/joins/" class="navigation-list-link">Joins</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/" class="navigation-list-link">Performance Analyzer</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/api/" class="navigation-list-link">API</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/dashboards/" class="navigation-list-link">Create Dashboards</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/pa/reference/" class="navigation-list-link">Metrics Reference</a>
+                      
+                    </li>
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/troubleshoot/" class="navigation-list-link">Troubleshoot</a>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-100">See a problem? Submit <a href="https://github.com/opendistro/for-elasticsearch-docs/issues">issues</a> or <a href="https://github.com/opendistro/for-elasticsearch-docs/pulls">pull requests</a> on <a href="https://github.com/opendistro/for-elasticsearch-docs">GitHub</a>.</p>
+        <p class="text-small text-grey-dk-100 mb-0">© 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          <div class="search js-search">
+            <div class="search-input-wrap">
+              <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search..." aria-label="Search" autocomplete="off">
+              <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg>
+            </div>
+            <div class="js-search-results search-results-wrap"></div>
+          </div>
+          
+          
+            <ul class="list-style-none text-small mt-md-1 mb-md-1 pb-4 pb-md-0 js-aux-nav aux-nav">
+              
+                <li class="d-inline-block my-0"><a href="https://opendistro.github.io/for-elasticsearch/">Back to the Open Distro for Elasticsearch home page</a></li>
+              
+            </ul>
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/docs/security/">Security</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>Backend Configuration</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <h1 id="backend-configuration">Backend configuration</h1>
+
+<p>One of the first steps to using the Security plugin is to decide on an authentication backend, which handles <a href="../concepts/#authentication-flow">steps 2-3 of the authentication flow</a>. The plugin has an internal user database, but many people prefer to use an existing authentication backend, such as an LDAP server, or some combination of the two.</p>
+
+<p>The main configuration file for authentication and authorization modules  is <code class="highlighter-rouge">plugins/opendistro_security/securityconfig/config.yml</code>. It defines how the Security plugin retrieves the user credentials, how it verifies these credentials, and how additional user roles are fetched from backend systems (optional).</p>
+
+<p><code class="highlighter-rouge">config.yml</code> has three main parts:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">opendistro_security</span><span class="pi">:</span>
+  <span class="na">dynamic</span><span class="pi">:</span>
+    <span class="na">http</span><span class="pi">:</span>
+      <span class="s">...</span>
+    <span class="na">authc</span><span class="pi">:</span>
+      <span class="s">...</span>
+    <span class="na">authz</span><span class="pi">:</span>
+      <span class="s">...</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="table-of-contents">Table of contents</h4>
+<ol id="markdown-toc">
+  <li><a href="#http" id="markdown-toc-http">HTTP</a></li>
+  <li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
+  <li><a href="#authorization" id="markdown-toc-authorization">Authorization</a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+  <li><a href="#http-basic" id="markdown-toc-http-basic">HTTP basic</a></li>
+  <li><a href="#kerberos" id="markdown-toc-kerberos">Kerberos</a>    <ol>
+      <li><a href="#dynamic-configuration" id="markdown-toc-dynamic-configuration">Dynamic configuration</a></li>
+      <li><a href="#authentication-backend" id="markdown-toc-authentication-backend">Authentication backend</a></li>
+    </ol>
+  </li>
+  <li><a href="#json-web-token" id="markdown-toc-json-web-token">JSON web token</a>    <ol>
+      <li><a href="#header" id="markdown-toc-header">Header</a></li>
+      <li><a href="#payload" id="markdown-toc-payload">Payload</a></li>
+      <li><a href="#signature" id="markdown-toc-signature">Signature</a></li>
+      <li><a href="#configure-json-web-tokens" id="markdown-toc-configure-json-web-tokens">Configure JSON web tokens</a></li>
+      <li><a href="#symmetric-key-algorithms-hmac" id="markdown-toc-symmetric-key-algorithms-hmac">Symmetric key algorithms: HMAC</a></li>
+      <li><a href="#asymmetric-key-algorithms-rsa-and-ecdsa" id="markdown-toc-asymmetric-key-algorithms-rsa-and-ecdsa">Asymmetric key algorithms: RSA and ECDSA</a></li>
+      <li><a href="#bearer-authentication-for-http-requests" id="markdown-toc-bearer-authentication-for-http-requests">Bearer authentication for HTTP requests</a></li>
+      <li><a href="#url-parameters-for-http-requests" id="markdown-toc-url-parameters-for-http-requests">URL parameters for HTTP requests</a></li>
+      <li><a href="#validated-registered-claims" id="markdown-toc-validated-registered-claims">Validated registered claims</a></li>
+      <li><a href="#supported-formats-and-algorithms" id="markdown-toc-supported-formats-and-algorithms">Supported formats and algorithms</a></li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="http">HTTP</h2>
+
+<p>The <code class="highlighter-rouge">http</code> section has the following format:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">anonymous_auth_enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+<span class="na">xff</span><span class="pi">:</span> <span class="c1"># optional section</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+  <span class="na">internalProxies</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span> <span class="c1"># Regex pattern</span>
+  <span class="na">remoteIpHeader</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span> <span class="c1"># Name of the header in which to look. Typically: x-forwarded-for</span>
+  <span class="na">proxiesHeader</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span>
+  <span class="na">trustedProxies</span><span class="pi">:</span> <span class="s">&lt;string&gt;</span> <span class="c1"># Regex pattern</span>
+</code></pre></div></div>
+
+<p>If you disable anonymous authentication, the Security plugin won’t initialize if you have not provided at least one <code class="highlighter-rouge">authc</code>.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>The <code class="highlighter-rouge">authc</code> section has the following format:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">&lt;name&gt;</span><span class="pi">:</span>
+  <span class="na">http_enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+  <span class="na">transport_enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+  <span class="na">order</span><span class="pi">:</span> <span class="s">&lt;integer&gt;</span>
+    <span class="s">http_authenticator</span><span class="pi">:</span>
+      <span class="s">...</span>
+    <span class="s">authentication_backend</span><span class="pi">:</span>
+      <span class="s">...</span>
+</code></pre></div></div>
+
+<p>An entry in the <code class="highlighter-rouge">authc</code> section is called an <strong>authentication domain</strong>. It specifies where to get the user credentials and against which backend they should be authenticated.</p>
+
+<p>You can use more than one authentication domain. Each authentication domain has a name (e.g. <code class="highlighter-rouge">basic_auth_internal</code>), <code class="highlighter-rouge">enabled</code> flags, and an <code class="highlighter-rouge">order</code>. The order makes it possible to chain authentication domains together. The Security plugin uses them in the order you provide. If the user successfully authenticates with one domain, the Security plugin skips the remaining domains.</p>
+
+<p><code class="highlighter-rouge">http_authenticator</code> specifies which authentication method you want to use on the HTTP layer.</p>
+
+<p>The syntax for defining an authenticator on the HTTP layer is:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">http_authenticator</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">&lt;type&gt;</span>
+  <span class="na">challenge</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+  <span class="na">config</span><span class="pi">:</span>
+    <span class="s">...</span>
+</code></pre></div></div>
+
+<p>Allowed values for <code class="highlighter-rouge">type</code> are:</p>
+
+<ul>
+  <li>basic: HTTP basic authentication. No additional configuration is needed.</li>
+  <li>kerberos: Kerberos authentication. Additional, <a href="#kerberos">Kerberos-specific configuration</a> is needed.</li>
+  <li>jwt: JSON web token authentication. Additional, <a href="#json-web-token">JWT-specific configuration</a> is needed.</li>
+  <li>clientcert: Authentication via a client TLS certificate. This certificate must be trusted by one of the root CAs in the truststore of your nodes.</li>
+</ul>
+
+<p>After setting an HTTP authenticator, you need to specify against which backend system you want to authenticate the user:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">authentication_backend</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">&lt;type&gt;</span>
+  <span class="na">config</span><span class="pi">:</span>
+    <span class="s">...</span>
+</code></pre></div></div>
+
+<p>Possible vales for <code class="highlighter-rouge">type</code> are:</p>
+
+<ul>
+  <li>noop: This setting means that no further authentication against any backend system is performed. Use <code class="highlighter-rouge">noop</code> if the HTTP authenticator has already authenticated the user completely, as in the case of JWT, Kerberos, or client certificate authentication.</li>
+  <li>internal: Use the users and roles defined in <code class="highlighter-rouge">internal_users.yml</code> for authentication.</li>
+  <li>ldap: Authenticate users against an LDAP server. This setting requires <a href="../ldap/">additional, LDAP-specific configuration settings</a>.</li>
+</ul>
+
+<h2 id="authorization">Authorization</h2>
+
+<p>After the user has been authenticated, the Security plugin can optionally collect additional user roles from backend systems. The authorization configuration has the following format:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">authz</span><span class="pi">:</span>
+  <span class="s">&lt;name&gt;</span><span class="pi">:</span>
+    <span class="na">http_enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+    <span class="na">transport_enabled</span><span class="pi">:</span> <span class="s">&lt;true|false&gt;</span>
+    <span class="na">authorization_backend</span><span class="pi">:</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">&lt;type&gt;</span>
+      <span class="na">config</span><span class="pi">:</span>
+        <span class="s">...</span>
+</code></pre></div></div>
+
+<p>You can define multiple entries in this section the same way as you can for authentication entries. In this case, execution order is not relevant, so there is no <code class="highlighter-rouge">order</code> field.</p>
+
+<p>Possible vales for <code class="highlighter-rouge">type</code> are:</p>
+
+<ul>
+  <li>noop: Used to skip this step altogether</li>
+  <li>ldap: Fetch additional roles from an LDAP server. This setting requires <a href="#ldap">additional, LDAP-specific configuration settings</a>.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<p>The default <code class="highlighter-rouge">plugins/opendistro_security/securityconfig/config.yml</code> that ships with Open Distro for Elasticsearch contains many configuration examples. Use these examples as a starting point, and customize them to your needs.</p>
+
+<h2 id="http-basic">HTTP basic</h2>
+
+<p>In order to set up HTTP basic authentication, you just need to enable it in the <code class="highlighter-rouge">http_authenticator</code> section of the configuration:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">http_authenticator</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">basic</span>
+  <span class="na">challenge</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>In most cases, you want to set the <code class="highlighter-rouge">challenge</code> flag to <code class="highlighter-rouge">true</code>. The flag defines the behavior of the Security plugin if the <code class="highlighter-rouge">Authorization</code> field in the HTTP header is not set.</p>
+
+<p>If <code class="highlighter-rouge">challenge</code> is set to <code class="highlighter-rouge">true</code>, the Security plugin sends a response with status <code class="highlighter-rouge">UNAUTHORIZED</code> (401) back to the client. If the client is accessing the cluster with a browser, this triggers the authentication dialog, and the user is prompted to enter username and password.</p>
+
+<p>If <code class="highlighter-rouge">challenge</code> is set to <code class="highlighter-rouge">false</code> and no <code class="highlighter-rouge">Authorization</code> header field is set, the Security plugin does not send a <code class="highlighter-rouge">WWW-Authenticate</code> response back to the client, and authentication fails. You may want to use this setting if you have another challenge <code class="highlighter-rouge">http_authenticator</code> in your configured authentication domains. One such scenario is when you plan to use basic authentication and Kerberos together.</p>
+
+<h2 id="kerberos">Kerberos</h2>
+
+<p>Due to the nature of Kerberos, you need to define some settings in <code class="highlighter-rouge">elasticsearch.yml</code> and some in <code class="highlighter-rouge">config.yml</code>.</p>
+
+<p>In <code class="highlighter-rouge">elasticsearch.yml</code>, you need to define:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">opendistro_security.kerberos.krb5_filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/etc/krb5.conf'</span>
+<span class="s">opendistro_security.kerberos.acceptor_keytab_filepath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">eskeytab.tab'</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">opendistro_security.kerberos.krb5_filepath</code> defines the path to your Kerberos configuration file. This file contains various settings regarding your Kerberos installation, for example, the realm name(s), hostname(s), and port(s) of the Kerberos key distribution center (KDC).</p>
+
+<p><code class="highlighter-rouge">opendistro_security.kerberos.acceptor_keytab_filepath</code> defines the path to the keytab file, which contains the principal that the Security plugin uses to issue requests against Kerberos.</p>
+
+<p><code class="highlighter-rouge">acceptor_principal: 'HTTP/localhost'</code> defines the principal that the Security plugin will use to issue requests against Kerberos.</p>
+
+<p>The <code class="highlighter-rouge">acceptor_principal</code> defines the acceptor/server principal name the Security plugin uses to issue requests against Kerberos. This value must be present in the keytab file.</p>
+
+<p class="warning">Due to security restrictions, the keytab file must be placed in the <code class="highlighter-rouge">&lt;open-distro-install-dir&gt;/conf</code> or a subdirectory, and the path in <code class="highlighter-rouge">elasticsearch.yml</code> must be relative, not absolute.</p>
+
+<h3 id="dynamic-configuration">Dynamic configuration</h3>
+
+<p>A typical Kerberos authentication domain in <code class="highlighter-rouge">config.yml</code> looks like this:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">authc</span><span class="pi">:</span>
+      <span class="na">kerberos_auth_domain</span><span class="pi">:</span>
+        <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">order</span><span class="pi">:</span> <span class="m">1</span>
+        <span class="na">http_authenticator</span><span class="pi">:</span>
+          <span class="na">type</span><span class="pi">:</span> <span class="s">kerberos</span>
+          <span class="na">challenge</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">config</span><span class="pi">:</span>
+            <span class="na">krb_debug</span><span class="pi">:</span> <span class="no">false</span>
+            <span class="na">strip_realm_from_principal</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">authentication_backend</span><span class="pi">:</span>
+          <span class="na">type</span><span class="pi">:</span> <span class="s">noop</span>
+</code></pre></div></div>
+
+<p>Authentication against Kerberos via a browser on HTTP level is achieved using SPNEGO. Kerberos/SPNEGO implementations vary, depending on your browser and operating system. This is important when deciding if you need to set the <code class="highlighter-rouge">challenge</code> flag to true or false.</p>
+
+<p>As with <a href="#http-basic">HTTP Basic Authentication</a>, this flag determines how the Security plugin should react when no <code class="highlighter-rouge">Authorization</code> header is found in the HTTP request or if this header does not equal <code class="highlighter-rouge">negotiate</code>.</p>
+
+<p>If set to true, the Security plugin sends a response with status code 401 and a <code class="highlighter-rouge">WWW-Authenticate</code> header set to <code class="highlighter-rouge">negotiate</code>. This tells the client (browser) to resend the request with the <code class="highlighter-rouge">Authorization</code> header set. If set to false, the Security plugin cannot extract the credentials from the request, and authentication fails. Setting <code class="highlighter-rouge">challenge</code> to false thus only makes sense if the Kerberos credentials are sent in the initial request.</p>
+
+<p>As the name implies, setting <code class="highlighter-rouge">krb_debug</code> to true will output Kerberos-specific debugging messages to stdout. Use this setting if you encounter problems with your Kerberos integration.</p>
+
+<p>If you set <code class="highlighter-rouge">strip_realm_from_principal</code> to true, the Security plugin strips the realm from the user name.</p>
+
+<h3 id="authentication-backend">Authentication backend</h3>
+
+<p>Since Kerberos/SPNEGO authenticates users on HTTP level, no additional <code class="highlighter-rouge">authentication_backend</code> is needed. Set this value to <code class="highlighter-rouge">noop</code>.</p>
+
+<h2 id="json-web-token">JSON web token</h2>
+
+<p>JSON web tokens (JWT) are JSON-based access tokens that assert one or more claims. They are commonly used to implement single sign-on (SSO) solutions and fall in the category of token-based authentication systems.</p>
+
+<ol>
+  <li>A user logs in to an authentication server by providing credentials (e.g. username and password).</li>
+  <li>The authentication server validates the credentials.</li>
+  <li>The authentication server creates an access token and signs it.</li>
+  <li>The authentication server returns the token to the user.</li>
+  <li>The user stores the access token.</li>
+  <li>The user sends the access token alongside every request to the service it wants to use.</li>
+  <li>The service verifies the token and grants or denies access.</li>
+</ol>
+
+<p>A JSON web token is self-contained in the sense that it carries all necessary information to verify a user within itself. The tokens are Base64-encoded, signed JSON objects.</p>
+
+<p>JSON web tokens consist of three parts:</p>
+
+<ol>
+  <li>Header</li>
+  <li>Payload</li>
+  <li>Signature</li>
+</ol>
+
+<h3 id="header">Header</h3>
+
+<p>The header contains information about the used signing mechanism, for example:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HS256"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In this case, the header states that the message was signed using HMAC-SHA256.</p>
+
+<h3 id="payload">Payload</h3>
+
+<p>The payload of a JSON web token contains the so-called <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#RegisteredClaimName">JWT Claims</a>. A claim can be any piece of information about the user that the application that created the token has verified.</p>
+
+<p>The specification defines a set of standard claims with reserved names (“registered claims”). These include, for example, the token issuer, the expiration date, or the creation date.</p>
+
+<p>Public claims, on the other hand, can be created freely by the token issuer. They can contain arbitrary information, such as the user name and the roles of the user.</p>
+
+<p>Example:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1300819380</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin, devops"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="signature">Signature</h3>
+
+<p>The issuer of the token calculates the signature of the token by applying a cryptographic hash function on the Base64-encoded header and payload. These three parts are then concatenated using periods to form a complete JSON web token:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encoded = base64UrlEncode(header) + "." + base64UrlEncode(payload)
+signature = HMACSHA256(encoded, 'secretkey');
+jwt = encoded + "." + base64UrlEncode(signature)
+</code></pre></div></div>
+
+<p>For example:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+</code></pre></div></div>
+
+<h3 id="configure-json-web-tokens">Configure JSON web tokens</h3>
+
+<p class="warning">If JSON web tokens are the only authentication method you use, disable the user cache by setting <code class="highlighter-rouge">opendistro_security.cache.ttl_minutes: 0</code>.</p>
+
+<p>Set up an authentication domain and choose <code class="highlighter-rouge">jwt</code> as HTTP authentication type. Since the tokens already contain all required information to verify the request, <code class="highlighter-rouge">challenge</code> must be set to <code class="highlighter-rouge">false</code> and <code class="highlighter-rouge">authentication_backend</code> to <code class="highlighter-rouge">noop</code>.</p>
+
+<p>Example:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jwt_auth_domain</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">order</span><span class="pi">:</span> <span class="m">0</span>
+  <span class="na">http_authenticator</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">jwt</span>
+    <span class="na">challenge</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">signing_key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">base64</span><span class="nv"> </span><span class="s">encoded</span><span class="nv"> </span><span class="s">key"</span>
+      <span class="na">jwt_header</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Authorization"</span>
+      <span class="na">jwt_url_parameter</span><span class="pi">:</span> <span class="no">null</span>
+      <span class="na">subject_key</span><span class="pi">:</span> <span class="no">null</span>
+      <span class="na">roles_key</span><span class="pi">:</span> <span class="no">null</span>
+  <span class="na">authentication_backend</span><span class="pi">:</span>
+<span class="na">I    type</span><span class="pi">:</span> <span class="s">noop</span>
+</code></pre></div></div>
+
+<p>Configuration parameter:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">signing_key</td>
+      <td style="text-align: left">The signing key to use when verifying the token. If you use a symmetric key algorithm, it is the Base64-encoded shared secret. If you use an asymmetric algorithm, it contains the public key.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jwt_header</td>
+      <td style="text-align: left">The HTTP header in which the token is transmitted. Typically the <code class="highlighter-rouge">Authorization</code> header with the <code class="highlighter-rouge">Bearer</code> schema: <code class="highlighter-rouge">Authorization: Bearer &lt;token&gt;</code>. Default is <code class="highlighter-rouge">Authorization</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jwt_url_parameter</td>
+      <td style="text-align: left">If the token is not transmitted in the HTTP header, but as an URL parameter, define the name of this parameter here.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">subject_key</td>
+      <td style="text-align: left">The key in the JSON payload that stores the username. If not set, the <a href="https://tools.ietf.org/html/rfc7519#section-4.1.2">subject</a> registered claim is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">roles_key</td>
+      <td style="text-align: left">The key in the JSON payload that stores the user’s roles. The value of this key must be a comma-separated list of roles.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Since JSON web tokens are self-contained and the user is authenticated on HTTP level, no additional <code class="highlighter-rouge">authentication_backend</code> is needed. Set this value to <code class="highlighter-rouge">noop</code>.</p>
+
+<h3 id="symmetric-key-algorithms-hmac">Symmetric key algorithms: HMAC</h3>
+
+<p>Hash-based message authentication codes (HMACs) are a group of algorithms that provide a way of signing messages by means of a shared key. The key is shared between the authentication server and the Security plugin. It must be configured as a Base64-encoded value in the <code class="highlighter-rouge">signing_key</code> setting:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jwt_auth_domain</span><span class="pi">:</span>
+  <span class="s">...</span>
+    <span class="s">config</span><span class="pi">:</span>
+      <span class="na">signing_key</span><span class="pi">:</span> <span class="s2">"</span><span class="s">a3M5MjEwamRqOTAxOTJqZDE="</span>
+      <span class="s">...</span>
+</code></pre></div></div>
+
+<h3 id="asymmetric-key-algorithms-rsa-and-ecdsa">Asymmetric key algorithms: RSA and ECDSA</h3>
+
+<p>RSA and ECDSA are asymmetric encryption and digital signature algorithms and use a public/private key pair to sign and verify tokens. This means that they use a private key for signing the token, while the Security plugin only needs to know the public key to verify it.</p>
+
+<p>Since you cannot issue new tokens with the public key—and because you can make valid assumptions about the creator of the token—RSA and ECDSA are considered more secure than using HMAC.</p>
+
+<p>In order to use RS256, you only need to configure the (non-Base64-encoded) public RSA key as <code class="highlighter-rouge">signing_key</code> in the JWT configuration:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jwt_auth_domain</span><span class="pi">:</span>
+  <span class="s">...</span>
+    <span class="s">config</span><span class="pi">:</span>
+      <span class="na">signing_key</span><span class="pi">:</span> <span class="pi">|-</span>
+        <span class="s">-----BEGIN PUBLIC KEY-----</span>
+        <span class="s">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK...</span>
+        <span class="s">-----END PUBLIC KEY-----</span>
+      <span class="s">...</span>
+</code></pre></div></div>
+
+<p>The Security plugin automatically detects the algorithm (RSA/ECDSA), and if necessary, you can break the key into multiple lines.</p>
+
+<h3 id="bearer-authentication-for-http-requests">Bearer authentication for HTTP requests</h3>
+
+<p>The most common way of transmitting a JSON web token in an HTTP request is to add it as an HTTP header with the bearer authentication schema.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer &lt;JWT&gt;
+</code></pre></div></div>
+
+<p>The default name of the header is <code class="highlighter-rouge">Authorization</code>. If required by your authentication server or proxy, you can also use a different HTTP header name using the <code class="highlighter-rouge">jwt_header</code> configuration key.</p>
+
+<p>As with HTTP basic authentication, you should use HTTPS instead of HTTP when transmitting JSON web tokens in HTTP requests.</p>
+
+<h3 id="url-parameters-for-http-requests">URL parameters for HTTP requests</h3>
+
+<p>While the most common way to transmit JWTs in HTTP requests is to use a header field, the Security plugin also supports parameters. Configure the name of the GET parameter using the following key:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">signing_key</span><span class="pi">:</span> <span class="s">...</span>
+      <span class="na">jwt_url_parameter</span><span class="pi">:</span> <span class="s2">"</span><span class="s">parameter_name"</span>
+      <span class="na">subject_key</span><span class="pi">:</span> <span class="s">...</span>
+      <span class="na">roles_key</span><span class="pi">:</span> <span class="s">...</span>
+</code></pre></div></div>
+
+<p>As with HTTP basic authentication, you should use HTTPS instead of HTTP.</p>
+
+<h3 id="validated-registered-claims">Validated registered claims</h3>
+
+<p>The following registered claims are validated automatically:</p>
+
+<ul>
+  <li>“iat” (Issued At) Claim</li>
+  <li>“nbf” (Not Before) Claim</li>
+  <li>“exp” (Expiration Time) Claim</li>
+</ul>
+
+<h3 id="supported-formats-and-algorithms">Supported formats and algorithms</h3>
+
+<p>The Security plugin supports digitally-signed compact JSON web tokens with all standard algorithms:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HS256: HMAC using SHA-256
+HS384: HMAC using SHA-384
+HS512: HMAC using SHA-512
+RS256: RSASSA-PKCS-v1_5 using SHA-256
+RS384: RSASSA-PKCS-v1_5 using SHA-384
+RS512: RSASSA-PKCS-v1_5 using SHA-512
+PS256: RSASSA-PSS using SHA-256 and MGF1 with SHA-256
+PS384: RSASSA-PSS using SHA-384 and MGF1 with SHA-384
+PS512: RSASSA-PSS using SHA-512 and MGF1 with SHA-512
+ES256: ECDSA using P-256 and SHA-256
+ES384: ECDSA using P-384 and SHA-384
+ES512: ECDSA using P-521 and SHA-512
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+      anchors.add();
+    </script>
+  
+</body>
+</html>

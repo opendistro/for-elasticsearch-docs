@@ -1,0 +1,933 @@
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <title>API - Open Distro for Elasticsearch Documentation</title> <link rel="shortcut icon" href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/assets/css/just-the-docs-default.css"> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135423944-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-135423944-1'); </script> <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.6.1 --> <title>API | Open Distro for Elasticsearch Documentation</title> <meta name="generator" content="Jekyll v3.8.6" /> <meta property="og:title" content="API" /> <meta property="og:locale" content="en_US" /> <meta name="description" content="Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more." /> <meta property="og:description" content="Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more." /> <link rel="canonical" href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/api/" /> <meta property="og:url" content="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/api/" /> <meta property="og:site_name" content="Open Distro for Elasticsearch Documentation" /> <script type="application/ld+json"> {"description":"Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.","@type":"WebPage","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/assets/images/logo.svg"}},"url":"https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/api/","headline":"API","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script> <!-- SiteCatalyst code version: H.25.1. Copyright 1996-2012 Adobe, Inc. All Rights Reserved --> <script><!-- /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/ var s_code=s.t();if(s_code)document.write(s_code)//--></script> <script language="JavaScript" type="text/javascript"><!-- if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-') //--></script> <noscript> <img src="//amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazonalldev2/1/H.25.1--NS/0" height="1" width="1" border="0" alt="" /> </noscript> <!--/DO NOT REMOVE/--> <!-- End SiteCatalyst code version: H.25.1. --> </head> <body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"> <title>Link</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"> <title>Search</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"> <title>Menu</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"> <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"> <title>Expand</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"> <polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"> <title>Document</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"> <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg> <div class="side-bar"> <div class="site-header"> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/" class="site-title lh-tight"> <div class="site-logo"></div> </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a> </div> <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"> <ul class="nav-list"><li class="nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/" class="nav-list-link">About</a></li><li class="nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/version-history/" class="nav-list-link">Version History</a></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/" class="nav-list-link">Install and Configure</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/docker/" class="nav-list-link">Docker</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/rpm/" class="nav-list-link">RPM</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/deb/" class="nav-list-link">Debian Package</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/helm/" class="nav-list-link">Helm</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/tar/" class="nav-list-link">Tarball</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/windows/" class="nav-list-link">Windows</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/docker-security/" class="nav-list-link">Docker Security Configuration</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/plugins/" class="nav-list-link">Standalone Elasticsearch Plugin Install</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/ami/" class="nav-list-link">Amazon Machine Image</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/other-components/" class="nav-list-link">Other Components</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/install/encryption-at-rest/" class="nav-list-link">Encryption at Rest</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/" class="nav-list-link">Upgrade</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/1-0-0/" class="nav-list-link">Upgrade to 1.x.x</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/1-11.0/" class="nav-list-link">Upgrade to 1.11.0</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/1-10-1/" class="nav-list-link">Upgrade to 1.10.1</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/1-8-0/" class="nav-list-link">Upgrade to 1.8.0</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/rolling/" class="nav-list-link">Rolling Upgrade</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/cluster-restart/" class="nav-list-link">Cluster Restart Upgrade</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/upgrade/docker/" class="nav-list-link">Docker Upgrade</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/" class="nav-list-link">Elasticsearch</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/configuration/" class="nav-list-link">Configuration</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/cluster/" class="nav-list-link">Cluster Formation</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/index-data/" class="nav-list-link">Index Data</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/index-alias/" class="nav-list-link">Index Aliases</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/index-templates/" class="nav-list-link">Index Templates</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/reindex-data/" class="nav-list-link">Reindex Data</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/catapis/" class="nav-list-link">CAT API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/term/" class="nav-list-link">Term-Level Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/full-text/" class="nav-list-link">Full-Text Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/search-template/" class="nav-list-link">Search Templates</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/bool/" class="nav-list-link">Boolean Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/ux/" class="nav-list-link">Search Experience</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/logs/" class="nav-list-link">Logs</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/snapshot-restore/" class="nav-list-link">Take and Restore Snapshots</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/units/" class="nav-list-link">Supported Units</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/common-parameters/" class="nav-list-link">Common REST Parameters</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/popular-api/" class="nav-list-link">Popular APIs</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/elasticsearch/rest-api-reference/" class="nav-list-link">REST API Reference</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/kibana/" class="nav-list-link">Kibana</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/kibana/plugins/" class="nav-list-link">Standalone Kibana Plugin Install</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/kibana/maptiles/" class="nav-list-link">WMS Map Server</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/" class="nav-list-link">Security</a><ul class="nav-list "><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/" class="nav-list-link">Configuration</a><ul class="nav-list"><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/concepts/" class="nav-list-link">Authentication flow</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/configuration/" class="nav-list-link">Backend Configuration</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/yaml/" class="nav-list-link">YAML Files</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/tls/" class="nav-list-link">TLS Certificates</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/generate-certificates/" class="nav-list-link">Generate Certificates</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/security-admin/" class="nav-list-link">Apply Changes with securityadmin.sh</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/ldap/" class="nav-list-link">Active Directory and LDAP</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/saml/" class="nav-list-link">SAML</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/openid-connect/" class="nav-list-link">OpenID Connect</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/proxy/" class="nav-list-link">Proxy-based authentication</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/configuration/disable/" class="nav-list-link">Disable Security</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/" class="nav-list-link">Access Control</a><ul class="nav-list"><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/users-roles/" class="nav-list-link">Users and Roles</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/document-level-security/" class="nav-list-link">Document-Level Security</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/field-level-security/" class="nav-list-link">Field-Level Security</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/field-masking/" class="nav-list-link">Field Masking</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/impersonation/" class="nav-list-link">User Impersonation</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/multi-tenancy/" class="nav-list-link">Kibana Multi-Tenancy</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/cross-cluster-search/" class="nav-list-link">Cross-Cluster Search</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/permissions/" class="nav-list-link">Permissions</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/default-action-groups/" class="nav-list-link">Default Action Groups</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/access-control/api/" class="nav-list-link">API</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/audit-logs/" class="nav-list-link">Audit Logs</a><ul class="nav-list"><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/audit-logs/field-reference/" class="nav-list-link">Audit Log Field Reference</a> </li><li class="nav-list-item "> <a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/security/audit-logs/storage-types/" class="nav-list-link">Audit Log Storage Types</a> </li></ul></li></ul></li><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/" class="nav-list-link">Alerting</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/monitors/" class="nav-list-link">Monitors</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/settings/" class="nav-list-link">Management</a></li><li class="nav-list-item active"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/api/" class="nav-list-link active">API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/security-roles/" class="nav-list-link">Security Roles</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/cron/" class="nav-list-link">Cron</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/" class="nav-list-link">SQL</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/workbench/" class="nav-list-link">Workbench</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/cli/" class="nav-list-link">SQL CLI</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/basic/" class="nav-list-link">Basic Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/complex/" class="nav-list-link">Complex Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/partiql/" class="nav-list-link">JSON Support</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/sql-full-text/" class="nav-list-link">Full-Text Search</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/metadata/" class="nav-list-link">Metadata Queries</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/functions/" class="nav-list-link">Functions</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/window/" class="nav-list-link">Window Functions</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/delete/" class="nav-list-link">Delete</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/endpoints/" class="nav-list-link">Endpoint</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/protocol/" class="nav-list-link">Protocol</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/monitoring/" class="nav-list-link">Monitoring</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/settings/" class="nav-list-link">Settings</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/troubleshoot/" class="nav-list-link">Troubleshooting</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/limitation/" class="nav-list-link">Limitations</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/jdbc/" class="nav-list-link">JDBC Driver</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/sql/odbc/" class="nav-list-link">ODBC Driver</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/" class="nav-list-link">PPL</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/endpoint/" class="nav-list-link">Endpoint</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/protocol/" class="nav-list-link">Protocol</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/settings/" class="nav-list-link">Settings</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/commands/" class="nav-list-link">Commands</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ppl/functions/" class="nav-list-link">Functions</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/" class="nav-list-link">Index State Management</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/policies/" class="nav-list-link">Policies</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/managedindices/" class="nav-list-link">Managed Indices</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/settings/" class="nav-list-link">Settings</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/api/" class="nav-list-link">ISM API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ism/refresh-analyzer/" class="nav-list-link">Refresh Search Analyzer</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/knn/" class="nav-list-link">KNN</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/knn/settings/" class="nav-list-link">Settings and Statistics</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ad/" class="nav-list-link">Anomaly Detection</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ad/api/" class="nav-list-link">Anomaly Detection API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/ad/cli/" class="nav-list-link">Anomaly Detection CLI</a></li></ul></li><li class="nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/notebooks/" class="nav-list-link">Notebooks</a></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/pa/" class="nav-list-link">Performance Analyzer</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/pa/api/" class="nav-list-link">API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/pa/dashboards/" class="nav-list-link">Create Dashboards</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/pa/reference/" class="nav-list-link">Metrics Reference</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/rca/" class="nav-list-link">Root Cause Analysis</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/rca/api/" class="nav-list-link">API</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/rca/reference/" class="nav-list-link">RCA Reference</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/troubleshoot/" class="nav-list-link">Troubleshoot</a><ul class="nav-list "><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/troubleshoot/tls/" class="nav-list-link">Troubleshoot TLS</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/troubleshoot/saml/" class="nav-list-link">Troubleshoot SAML</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/troubleshoot/openid-connect/" class="nav-list-link">Troubleshoot OpenID Connect</a></li><li class="nav-list-item "><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/troubleshoot/security-admin/" class="nav-list-link">Troubleshoot securityadmin.sh</a></li></ul></li><li class="nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/other/" class="nav-list-link">Other Resources</a></li></ul> </nav> <footer class="site-footer"> <p class="text-small text-grey-dk-100">See a problem? Submit <a href="https://github.com/opendistro/for-elasticsearch-docs/issues">issues</a> or <a href="https://github.com/opendistro/for-elasticsearch-docs/edit/master/docs/alerting/api.md">edit this page</a> on <a href="https://github.com/opendistro/for-elasticsearch-docs">GitHub</a>.</p> <p class="text-small text-grey-dk-100 mb-0">© 2020 Amazon Web Services, Inc. or its affiliates. All rights reserved.</p> </footer> </div> <div class="main" id="top"> <div id="main-header" class="main-header"> <div class="search"> <div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search..." aria-label="Search Open Distro for Elasticsearch Documentation" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label> </div> <div id="search-results" class="search-results"></div> </div> <nav aria-label="Auxiliary" class="aux-nav"> <ul class="aux-nav-list"> <li class="aux-nav-list-item"> <a href="https://opendistro.github.io/for-elasticsearch/" class="site-button" > Open Distro for Elasticsearch home </a> </li> </ul> </nav> </div> <div id="main-content-wrap" class="main-content-wrap"> <nav aria-label="Breadcrumb" class="breadcrumb-nav"> <ol class="breadcrumb-nav-list"> <li class="breadcrumb-nav-list-item"><a href="https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/docs/alerting/">Alerting</a></li> <li class="breadcrumb-nav-list-item"><span>API</span></li> </ol> </nav> <div id="main-content" class="main-content" role="main"> <h1 id="alerting-api">Alerting API</h1> <p>Use the alerting API to programmatically manage monitors and alerts.</p> <hr /> <h4 id="table-of-contents">Table of contents</h4> <ul id="markdown-toc"> <li><a href="#create-monitor" id="markdown-toc-create-monitor">Create monitor</a></li> <li><a href="#update-monitor" id="markdown-toc-update-monitor">Update monitor</a></li> <li><a href="#get-monitor" id="markdown-toc-get-monitor">Get monitor</a></li> <li><a href="#monitor-stats" id="markdown-toc-monitor-stats">Monitor stats</a></li> <li><a href="#delete-monitor" id="markdown-toc-delete-monitor">Delete monitor</a></li> <li><a href="#search-monitors" id="markdown-toc-search-monitors">Search monitors</a></li> <li><a href="#run-monitor" id="markdown-toc-run-monitor">Run monitor</a></li> <li><a href="#acknowledge-alert" id="markdown-toc-acknowledge-alert">Acknowledge alert</a></li> <li><a href="#create-destination" id="markdown-toc-create-destination">Create destination</a></li> <li><a href="#update-destination" id="markdown-toc-update-destination">Update destination</a></li> <li><a href="#delete-destination" id="markdown-toc-delete-destination">Delete destination</a></li> <li><a href="#create-email-account" id="markdown-toc-create-email-account">Create email account</a></li> <li><a href="#update-email-account" id="markdown-toc-update-email-account">Update email account</a></li> <li><a href="#get-email-account" id="markdown-toc-get-email-account">Get email account</a></li> <li><a href="#delete-email-account" id="markdown-toc-delete-email-account">Delete email account</a></li> <li><a href="#search-email-account" id="markdown-toc-search-email-account">Search email account</a></li> <li><a href="#create-email-group" id="markdown-toc-create-email-group">Create email group</a></li> <li><a href="#update-email-group" id="markdown-toc-update-email-group">Update email group</a></li> <li><a href="#get-email-group" id="markdown-toc-get-email-group">Get email group</a></li> <li><a href="#delete-email-group" id="markdown-toc-delete-email-group">Delete email group</a></li> <li><a href="#search-email-group" id="markdown-toc-search-email-group">Search email group</a></li> </ul> <hr /> <h2 id="create-monitor">Create monitor</h2> <h4 id="request">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/monitors</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-monitor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"movies"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nl">"gte"</span><span class="p">:</span><span class="w"> </span><span class="s2">"||-1h"</span><span class="p">,</span><span class="w">
+                  </span><span class="nl">"lte"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                  </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epoch_millis"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-trigger"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctx.results[0].hits.total.value &gt; 0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-action"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ld7912sBlQ5JUWWFThoW"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my message body."</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"throttle_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"subject_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TheSubject"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>If you use a custom webhook for your destination and need to embed JSON in the message body, be sure to escape your quotes:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="nl">"{ \"text\"</span><span class="p">:</span><span class="w"> </span><span class="err">\</span><span class="s2">"Monitor {{ctx.monitor.name}} just entered alert status. Please investigate the issue. - Trigger: {{ctx.trigger.name}} - Severity: {{ctx.trigger.severity}} - Period start: {{ctx.periodStart}} - Period end: {{ctx.periodEnd}}</span><span class="se">\"</span><span class="s2"> }"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vd5k2GsBlQ5JUWWFxhsP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monitor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562703611363</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"movies"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                </span><span class="nl">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nl">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"||-1h"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"include_lower"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"include_upper"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epoch_millis"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">}],</span><span class="w">
+              </span><span class="nl">"adjust_pure_negative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ud5k2GsBlQ5JUWWFxRvi"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-trigger"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctx.results[0].hits.total.value &gt; 0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ut5k2GsBlQ5JUWWFxRvj"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-action"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"destination_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ld7912sBlQ5JUWWFThoW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my message body."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"throttle_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subject_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TheSubject"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1562703611363</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="update-monitor">Update monitor</h2> <p>When you update a monitor, include the current version number as a parameter. Open Distro for Elasticsearch increments the version number automatically (see the sample response).</p> <h4 id="request-1">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PUT</span><span class="w"> </span><span class="err">_opendistro/_alerting/monitors/&lt;monitor_id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-monitor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"enabled_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466220455</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"*"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StaeOmkBC25HCRGmL_y-"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-trigger"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"return true"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-action"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RtaaOmkBC25HCRGm0fxi"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"subject_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Message Subject"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my message body."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466639295</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-1">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q9aXOmkBC25HCRGmzfw-"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monitor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466220455</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"*"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StaeOmkBC25HCRGmL_y-"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-trigger"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"return true"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-action"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"destination_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RtaaOmkBC25HCRGm0fxi"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subject_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Message Subject"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my message body."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466761596</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="get-monitor">Get monitor</h2> <h4 id="request-2">Request</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET _opendistro/_alerting/monitors/&lt;monitor_id&gt;
+</code></pre></div></div> <h4 id="sample-response-2">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q9aXOmkBC25HCRGmzfw-"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"monitor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-monitor"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enabled_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466220455</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"*"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StaeOmkBC25HCRGmL_y-"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-trigger"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"return true"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-action"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"destination_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RtaaOmkBC25HCRGm0fxi"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"subject_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Message Subject"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"message_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my message body."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mustache"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1551466639295</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="monitor-stats">Monitor stats</h2> <p>Returns statistics about the alerting feature. Use <code class="highlighter-rouge">_opendistro/_alerting/stats</code> to find node IDs and metrics. Then you can drill down using those values.</p> <h4 id="request-3">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/stats</span><span class="w">
+</span><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/stats/&lt;metric&gt;</span><span class="w">
+</span><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/&lt;node-id&gt;/stats</span><span class="w">
+</span><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/&lt;node-id&gt;/stats/&lt;metric&gt;</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-3">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_nodes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"cluster_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"475300751431:alerting65-dont-delete"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"opendistro.scheduled_jobs.enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scheduled_job_index_exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scheduled_job_index_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nodes_on_schedule"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nodes_not_on_schedule"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nodes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"qWcbKbb-TVyyI-Q7VSeOqA"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qWcbKbb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"MASTER"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">207017</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"Do-DX9ZcS06Y9w1XbSJo1A"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do-DX9Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">230516</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"n5phkBiYQfS5I0FDzcqjZQ"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"n5phkBi"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"MASTER"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">228406</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"Tazzo8cQSY-g3vOjgYYLzA"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tazzo8c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">211722</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"i-wsFmkB8NzS6aXjQSk0"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550864912882</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"Nyf7F8brTOSJuFPXw6CnpA"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nyf7F8b"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">223300</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"NbpoFmkBeSe-hD59AKgE"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550864928354</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"-LlLFmkBeSe-hD59Ydtb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550864732727</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"pBFxFmkBNXkgNmTBaFj1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550863325024</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"hfasEmkBNXkgNmTBrvIW"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550862000001</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"oOdJDIBVT5qbbO3d8VLeEw"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oOdJDIB"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">227570</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"4hKRFmkBNXkgNmTBKjYX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550864806101</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"NRDG6JYgR8m0GOZYQ9QGjQ"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NRDG6JY"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"MASTER"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">227652</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"URMrXRz3Tm-CB72hlsl93Q"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URMrXRz"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">231048</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"m7uKFmkBeSe-hD59jplP"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"eXgt1k9oTRCLmx2HBGElUw"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eXgt1k9"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schedule_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"DATA"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"INGEST"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"job_scheduling_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"last_full_sweep_time_millis"</span><span class="p">:</span><span class="w"> </span><span class="mi">229234</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"full_sweep_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"jobs_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"wWkFFmkBc2NG-PeLntxk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"3usNFmkB8NzS6aXjO1Gs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"last_execution_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550863959848</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"running_on_time"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="delete-monitor">Delete monitor</h2> <h4 id="request-4">Request</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE _opendistro/_alerting/monitors/&lt;monitor_id&gt;
+</code></pre></div></div> <h4 id="sample-response-4">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-scheduled-jobs"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OYAHOmgBl3cmwnqZl_yH"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"forced_refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="search-monitors">Search monitors</h2> <h4 id="request-5">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/monitors/_search</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"match"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"monitor.name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-monitor-name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-5">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timed_out"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipped"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"max_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6931472</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-scheduled-jobs"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eGQi7GcBRS7-AJEqfAnr"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6931472</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monitor"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-monitor-name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enabled_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1545854942426</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"schedule"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MINUTES"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="nl">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"indices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"*"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                    </span><span class="nl">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                      </span><span class="nl">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"||-1h"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"include_lower"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"include_upper"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epoch_millis"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                      </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                  </span><span class="p">}],</span><span class="w">
+                  </span><span class="nl">"adjust_pure_negative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                  </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="nl">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="nl">"triggers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sooi7GcB53a0ewuj_6MH"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Over"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"script"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_ctx.results[0].hits.total &gt; 400000"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"painless"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1545854975758</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="run-monitor">Run monitor</h2> <p>You can add the optional <code class="highlighter-rouge">?dryrun=true</code> parameter to the URL to show the results of a run without actions sending any message.</p> <h4 id="request-6">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/monitors/&lt;monitor_id&gt;/_execute</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-6">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"monitor_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"logs"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"period_start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1547161872322</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="mi">1547161932322</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trigger_results"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Sooi7GcB53a0ewuj_6MH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Over"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action_results"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="acknowledge-alert">Acknowledge alert</h2> <p>To get the alert ID, query the <code class="highlighter-rouge">.opendistro-alerts</code> index. See <a href="../settings#alerting-indices">Alerting indices</a>. You can acknowledge any number of alerts in one call. If the alert is already in an ERROR, COMPLETED, or ACKNOWLEDGED state, it will appear in the <code class="highlighter-rouge">failed</code> array.</p> <h4 id="request-7">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/monitors/&lt;monitor-id&gt;/_acknowledge/alerts</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"alerts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"bn0_PmgBoCvkhulGF2K8"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-7">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"bn0_PmgBoCvkhulGF2K8"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="create-destination">Create destination</h2> <h4 id="requests">Requests</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-destination"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slack"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"slack"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom_webhook"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-custom-destination"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"custom_webhook"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incomingwebhooks/123456-123456-XXXXXX"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"header_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Content-Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"scheme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTPS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"query_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R2x1UlN4ZHF8MXxxVFJpelJNVDgzdGNwXXXXXXXXX"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hooks.chime.aws"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-8">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nO-yFmkB8NzS6aXjJdiI"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slack"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-destination"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550863967624</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"slack"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="update-destination">Update destination</h2> <h4 id="request-8">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PUT</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/&lt;destination-id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-updated-destination"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slack"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"slack"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-9">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pe-1FmkB8NzS6aXjqvVY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slack"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-updated-destination"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_update_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1550864289375</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"slack"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="delete-destination">Delete destination</h2> <h4 id="request-9">Request</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE _opendistro/_alerting/destinations/&lt;destination-id&gt;
+</code></pre></div></div> <h4 id="sample-response-10">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-alerting-config"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zu-zFmkB8NzS6aXjLeBI"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"forced_refresh"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="create-email-account">Create email account</h2> <h4 id="request-10">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_accounts</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-11">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_account_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_account"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"host"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="update-email-account">Update email account</h2> <h4 id="request-11">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PUT</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_accounts/&lt;email_account_id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-12">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_account_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_account"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"host"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="get-email-account">Get email account</h2> <h4 id="request-12">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_accounts/&lt;email_account_id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-13">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_account_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_account"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test_account"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"test@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"host"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.test.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="delete-email-account">Delete email account</h2> <h4 id="request-13">Request</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE _opendistro/_alerting/destinations/email_accounts/&lt;email_account_id&gt;
+</code></pre></div></div> <h4 id="sample-response-14">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-alerting-config"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_account_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"forced_refresh"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="search-email-account">Search email account</h2> <h4 id="request-14">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_accounts/_search</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"email_account.name.keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"desc"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-15">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"took"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timed_out"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipped"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"hits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relation"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eq"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"max_score"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"_index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-alerting-config"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_account_id"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_score"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_source"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_account"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"host"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.email.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ssl"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"sort"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"example_account"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> <h2 id="create-email-group">Create email group</h2> <h4 id="request-15">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_groups</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">	
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-16">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_group_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_group"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"emails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="update-email-group">Update email group</h2> <h4 id="request-16">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PUT</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_groups/&lt;email_group_id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">	
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-17">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_group_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_group"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"emails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="get-email-group">Get email group</h2> <h4 id="request-17">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_groups/&lt;email_group_id&gt;</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">	
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-18">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_group_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email_group"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"emails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="delete-email-group">Delete email group</h2> <h4 id="request-18">Request</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE _opendistro/_alerting/destinations/email_groups/&lt;email_group_id&gt;
+</code></pre></div></div> <h4 id="sample-response-19">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-alerting-config"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_group_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"forced_refresh"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="search-email-group">Search email group</h2> <h4 id="request-19">Request</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST</span><span class="w"> </span><span class="err">_opendistro/_alerting/destinations/email_groups/_search</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"email_group.name.keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"desc"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"match_all"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h4 id="sample-response-20">Sample response</h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"took"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timed_out"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"successful"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"skipped"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"failed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"hits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relation"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eq"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"max_score"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"_index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">".opendistro-alerting-config"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"email_group_id"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_seq_no"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_primary_term"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_score"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"_source"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"schema_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example_email_group"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"emails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"example@email.com"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"sort"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"example_email_group"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <hr /> </div> </div> <div class="toc"> <ul class="toc-list"> <li class="toc-item"><a href="#create-monitor">Create monitor</a></li> <li class="toc-item"><a href="#update-monitor">Update monitor</a></li> <li class="toc-item"><a href="#get-monitor">Get monitor</a></li> <li class="toc-item"><a href="#monitor-stats">Monitor stats</a></li> <li class="toc-item"><a href="#delete-monitor">Delete monitor</a></li> <li class="toc-item"><a href="#search-monitors">Search monitors</a></li> <li class="toc-item"><a href="#run-monitor">Run monitor</a></li> <li class="toc-item"><a href="#acknowledge-alert">Acknowledge alert</a></li> <li class="toc-item"><a href="#create-destination">Create destination</a></li> <li class="toc-item"><a href="#update-destination">Update destination</a></li> <li class="toc-item"><a href="#delete-destination">Delete destination</a></li> <li class="toc-item"><a href="#create-email-account">Create email account</a></li> <li class="toc-item"><a href="#update-email-account">Update email account</a></li> <li class="toc-item"><a href="#get-email-account">Get email account</a></li> <li class="toc-item"><a href="#delete-email-account">Delete email account</a></li> <li class="toc-item"><a href="#search-email-account">Search email account</a></li> <li class="toc-item"><a href="#create-email-group">Create email group</a></li> <li class="toc-item"><a href="#update-email-group">Update email group</a></li> <li class="toc-item"><a href="#get-email-group">Get email group</a></li> <li class="toc-item"><a href="#delete-email-group">Delete email group</a></li> <li class="toc-item"><a href="#search-email-group">Search email group</a></li> </ul> </div> <div class="search-overlay"></div> </div> <script> anchors.add(); </script> </body> </html>
