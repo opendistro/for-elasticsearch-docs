@@ -17,8 +17,8 @@ We host certain old versions of the documentation---typically the final minor re
 
 We do *not* backport bug fixes to old versions of the documentation, so even if you use a prior version of ODFE, the current version of the documentation might be the most useful, accurate resource.
 
-- [ODFE 0.9.0 documentation](https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/){:target='\_blank'}
 - [ODFE 1.11.0 documentation](https://opendistro.github.io/for-elasticsearch-docs/old/1.11.0/){:target='\_blank'}
+- [ODFE 0.9.0 documentation](https://opendistro.github.io/for-elasticsearch-docs/old/0.9.0/){:target='\_blank'}
 
 
 ## External content
