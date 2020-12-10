@@ -112,7 +112,7 @@ To learn more, see the [Data Prepper configuration reference](../data-prepper-re
 **Docker**
 
 ```bash
-docker run --name data-prepper --expose 21890 --read-only -v /full/path/to/my-data-prepper-config.yml:/usr/share/data-prepper/data-prepper.yml data-prepper/data-prepper:0.1.0
+docker run --name data-prepper --expose 21890 --read-only -v /full/path/to/my-data-prepper-config.yml:/usr/share/data-prepper/data-prepper.yml data-prepper/data-prepper:0.7.0-alpha
 ```
 
 **macOS and Linux**
