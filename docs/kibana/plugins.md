@@ -149,7 +149,7 @@ This plugin lets you export and share reports from Kibana dashboards, saved sear
 sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-gantt-chart/opendistroGanttChartKibana-{{site.odfe_version}}.0.zip
 ```
 
-This plugin lets you use additional types of visualizations inside Kibana Visualize and integrate them in Kibana Dashboard in the form of Gantt Chart.
+This plugin lets you use additional types of visualizations inside Kibana Visualize and integrate them in Kibana Dashboard.
 
 
 ## List installed plugins
