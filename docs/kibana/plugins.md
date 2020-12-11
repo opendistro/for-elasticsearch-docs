@@ -140,7 +140,7 @@ This plugin lets you combine Kibana visualizations and narrative text in a singl
 sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugin/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_version}}.0.zip
 ```
 
-This plugin lets you export and share reports from Kibana dashboards, saved search, alerts and visualizations.
+This plugin lets you export and share reports from Kibana dashboards, visualizations, and saved searches.
 
 
 #### Gantt Chart Kibana
@@ -149,7 +149,7 @@ This plugin lets you export and share reports from Kibana dashboards, saved sear
 sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-gantt-chart/opendistroGanttChartKibana-{{site.odfe_version}}.0.zip
 ```
 
-This plugin lets you use additional types of visualizations inside Kibana Visualize and integrate them in Kibana Dashboard.
+This plugin adds a new Gantt chart visualization.
 
 
 ## List installed plugins
