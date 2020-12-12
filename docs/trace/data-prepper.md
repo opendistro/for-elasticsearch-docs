@@ -15,10 +15,10 @@ Data Prepper is an independent component, not an Elasticsearch plugin, that conv
 To use the Docker image, pull it like any other image:
 
 ```bash
-docker pull <>
+docker pull amazon/opendistro-for-elasticsearch-data-prepper:latest
 ```
 
-Otherwise, [download](https://opendistro.github.io/for-elasticsearch/downloads.html) the appropriate TAR file for your operating system and unzip it.
+Otherwise, [download](https://opendistro.github.io/for-elasticsearch/downloads.html) the appropriate archive for your operating system and unzip it.
 
 
 ## Configure pipelines
@@ -112,7 +112,7 @@ To learn more, see the [Data Prepper configuration reference](../data-prepper-re
 **Docker**
 
 ```bash
-docker run --name data-prepper --expose 21890 --read-only -v /full/path/to/my-data-prepper-config.yml:/usr/share/data-prepper/data-prepper.yml data-prepper/data-prepper:0.7.0-alpha
+docker run --name data-prepper --expose 21890 --read-only -v /full/path/to/my-data-prepper-config.yml:/usr/share/data-prepper/data-prepper.yml amazon/opendistro-for-elasticsearch-data-prepper:latest
 ```
 
 **macOS and Linux**
