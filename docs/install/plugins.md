@@ -256,11 +256,12 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ```
 
 
-### Report Schedular
+### Reports Scheduler
 
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-reports-scheduler/opendistro-reports-scheduler-{{site.odfe_version}}.0.zip
 ```
+
 
 
 ### Index State Management
