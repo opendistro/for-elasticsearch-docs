@@ -9,7 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
-[1.12.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.12.0.md) | Adds Kibana reports, index rollups, and Hamming distance for KNN. | 10 December 2020 | 7.10.0
+[1.12.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.12.0.md) | Adds Kibana reports, index rollups, and Hamming distance for KNN. | 14 December 2020 | 7.10.0
 [1.11.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.11.0.md) | Adds Piped Processing Language (PPL) for exploring data, high cardinality support to Anomaly Detection, custom scoring for KNN, and security supporting to the alerting plugin. Query Workbench replaces SQL Workbench in this version. | 27 October 2020 | 7.9.1
 [1.10.1](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.10.1.md) | Completely revamps the security user interface in Kibana, adds new email destination to the alerting plugin, adds sample detectors to Anomaly Detection, bumps Elasticsearch version. | 30 September 2020 | 7.9.1
 [1.9.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/master/release-notes/opendistro-for-elasticsearch-release-notes-1.9.0.md) | Adds Root Cause Analysis, new Anomaly Detection actions, and a new Index State Management action. | 9 July 2020 | 7.8.0
