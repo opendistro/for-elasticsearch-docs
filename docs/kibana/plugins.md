@@ -137,7 +137,7 @@ This plugin lets you combine Kibana visualizations and narrative text in a singl
 #### Reports Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugin/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin lets you export and share reports from Kibana dashboards, visualizations, and saved searches.
