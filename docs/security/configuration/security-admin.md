@@ -79,7 +79,7 @@ Apply configuration in `securityconfig` using PEM certificates:
 Apply configuration from a single file (`config.yml`) using PEM certificates:
 
 ```bash
-./securityadmin.sh -f ../securityconfig/config.yml -icl -nhnv -cert /etc/elasticsearch/kirk.pem -cacert /etc/elasticsearch/root-ca.pem -h -key /etc/elasticsearch/kirk-key.pem -t config
+./securityadmin.sh -f ../securityconfig/config.yml -icl -nhnv -cert /etc/elasticsearch/kirk.pem -cacert /etc/elasticsearch/root-ca.pem -key /etc/elasticsearch/kirk-key.pem -t config
 ```
 
 Apply configuration in `securityconfig` with keystore and truststore files:

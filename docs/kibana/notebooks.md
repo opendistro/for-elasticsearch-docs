@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Notebooks (experimental)
-nav_order: 54
+parent: Kibana
+nav_order: 50
+redirect_from: /docs/notebooks/
 has_children: false
 ---
 
@@ -30,7 +32,7 @@ A notebook is an interface for creating reports.
 1. Choose **Create notebook** and enter a descriptive name.
 1. Choose **Create**.
 
-![Notebook UI](../images/notebook.png)
+![Notebook UI](../../images/notebook.png)
 
 Choose **Notebook actions** to rename, duplicate, or delete a notebook.
 
@@ -43,20 +45,20 @@ Paragraphs combine text and visualizations for describing data.
 1. To add text, choose **Add markdown paragraph**.
 1. Add rich text with markdown syntax.
 
-![Markdown paragraph](../images/markdown-notebook.png)
+![Markdown paragraph](../../images/markdown-notebook.png)
 
 #### Add a visualization paragraph
 
 1. To add a visualization, choose **Add Kibana visualization paragraph**.
 1. In **Title**, select your visualization and choose a date range.
 
-![Markdown paragraph](../images/visualization-notebook.png)
+![Markdown paragraph](../../images/visualization-notebook.png)
 
 - You can choose multiple timelines to compare and contrast visualizations.
 
 To run and save a paragraph, choose **Run**.
 
-![Output](../images/output-notebook.png)
+![Output](../../images/output-notebook.png)
 
 You can perform the following actions on paragraphs:
 
@@ -69,4 +71,4 @@ You can perform the following actions on paragraphs:
 
 ## Sample Notebook
 
-![sample notebook](../images/sample-notebook.png)
+![sample notebook](../../images/sample-notebook.png)
