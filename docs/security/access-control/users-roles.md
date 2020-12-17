@@ -119,6 +119,10 @@ Role | Description
 `readall` | Grants permissions for cluster-wide searches like `msearch` and search permissions for all indices.
 `readall_and_monitor` | Same as `readall`, but with added cluster monitoring permissions.
 `security_rest_api_access` | A special role that allows access to the REST API. See `opendistro_security.restapi.roles_enabled` in `elasticsearch.yml` and [Access control for the API](../api/#access-control-for-the-api).
+`reports_read_access` | Grants permissions to generate on-demand reports, download existing reports, and view report definitions, but not to create report definitions.
+`reports_instances_read_access` | Grants permissions to generate on-demand reports and download existing reports, but not to view or create report definitions.
+`reports_full_access` | Grants full permissions to reports.
+
 
 For more detailed summaries of the permissions for each role, reference their action groups against the descriptions in [Default action groups](../default-action-groups/).
 
