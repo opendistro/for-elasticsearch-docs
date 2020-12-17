@@ -125,6 +125,15 @@ sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/k
 This plugin provides a user interface for using SQL queries to explore your data.
 
 
+#### Trace Analytics (experimental)
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin uses distributed trace data (indexed in Elasticsearch using Data Prepper) to display latency trends, error rates, and more.
+
+
 #### Notebooks Kibana
 
 ```bash
