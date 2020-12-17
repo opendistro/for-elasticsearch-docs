@@ -39,6 +39,7 @@ opendistroQueryWorkbenchKibana    1.12.0.0
 opendistroNotebooksKibana         1.12.0.0
 opendistroReportsKibana           1.12.0.0
 opendistroGanttChartKibana        1.12.0.0
+opendistroTraceAnalyticsKibana    1.12.0.0
 </pre>
     </td>
   </tr>
