@@ -247,3 +247,92 @@ All parameters are required.
 The standard KNN query and custom scoring option perform differently. Test using a representative set of documents to see if the search results and latencies match your expectations.
 
 Custom scoring works best if the initial filter reduces the number of documents to no more than 20,000. Increasing shard count can improve latencies, but be sure to keep shard size within [the recommended guidelines](../elasticsearch/#primary-and-replica-shards).
+
+
+## Use Similarity methods in painless scripting
+
+Sometimes users would like to go beyond Elasticsearch’s built-in features for scoring and might want to customize the search scores in more complex ways.
+Elasticsearch provides script_score, the ability to provide custom scores for returned documents.
+Elasticsearch Painless, a simple, secure scripting language designed specifically for this purpose.
+
+A Painless script is evaluated within a context. Painless has a strict list of allowed methods and classes per context to ensure all Painless scripts are secure.
+Now, opendistro users can use following specialized methods within Score context to customize their scores.
+
+### Cosine Similarity
+This function calculates the measure of cosine similarity between a given query vector and document vectors.
+Optionally accepts normQueryVector, to avoid repeated calculation of normalization for query vector for every filtered documents.  
+#### Definition
+```
+float cosineSimilarity (float[] queryVector, doc['vector field']) 
+float cosineSimilarity (float[] queryVector, doc['vector field'], float normQueryVector) 
+```
+
+#### Usage
+```
+GET my-knn-index-2/_search
+{
+  "size": 2,
+  "query": {
+    "script_score": {
+      "query": {
+        "bool": {
+          "filter": {
+            "term": {
+              "color": "BLUE"
+            }
+          }
+        }
+      },
+      "script": {
+        "source": "1.0 + cosineSimilarity(params.query_value, doc[params.field])", 
+        "params": {
+          "field": "my_vector",
+          "query_value": [9.9, 9.9],
+        }
+      }
+    }
+  }
+}
+```
+The above script adds 1.0 to the cosine similarity to keep score positive.
+### L2 Squared
+This function calculates L2 distance (Euclidean distance) between a given query vector and document vectors.
+
+#### Definition
+```
+float l2Squared (float[] queryVector, doc['vector field'])
+```
+#### Usage
+```
+GET my-knn-index-2/_search
+{
+  "size": 2,
+  "query": {
+    "script_score": {
+      "query": {
+        "bool": {
+          "filter": {
+            "term": {
+              "color": "BLUE"
+            }
+          }
+        }
+      },
+      "script": {
+        "source": "1 / (1 + l2Squared(params.query_value, doc[params.field]))", 
+        "params": {
+          "field": "my_vector",
+          "query_value": [9.9, 9.9],
+        }
+      }
+    }
+  }
+}
+
+```
+Since l2Squared function is a distance function, unlike cosine function, we need to reverse the output.
+Suppose when a document vector matches the query vector, we needed to add 1 in the denominator to avoid divide by zero error.
+
+####Constraints
+1. If a document’s knn vector field has different dimensions from the query, an error(IllegalArgumentException) will be returned.
+2. If similarity function is executed on knn vector field which doesn't have a value or if field is missed, an error(IllegalStateException) will be returned.
