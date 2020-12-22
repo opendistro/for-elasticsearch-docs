@@ -334,5 +334,10 @@ Since l2Squared function is a distance function, unlike cosine function, we need
 Suppose when a document vector matches the query vector, we needed to add 1 in the denominator to avoid divide by zero error.
 
 ####Constraints
-1. If a document’s knn vector field has different dimensions from the query, an error(IllegalArgumentException) will be returned.
-2. If similarity function is executed on knn vector field which doesn't have a value or if field is missed, an error(IllegalStateException) will be returned.
+1. If a document’s knn vector field has different dimensions from the query, an error(IllegalArgumentException) will be thrown.
+2. If similarity function is executed on vector field which doesn't have a value, an error(IllegalStateException) will be thrown.
+This can be avoided by checking if a document has a value for the field my_vector by doc['my_vector'].size() == 0. You can re-write the source as below:
+```
+ "source": "doc[params.field].size() == 0 ? 0 : 1 / (1 + l2Squared(params.query_value, doc[params.field]))",
+```
+Since the score can only be positive, the above script will rank non-vector field documents lower than others.
