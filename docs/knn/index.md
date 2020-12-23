@@ -252,7 +252,7 @@ Custom scoring works best if the initial filter reduces the number of documents 
 ## Use Similarity methods in painless scripting
 
 Sometimes users would like to go beyond Elasticsearch’s built-in features for scoring and might want to customize the search scores in more complex ways.
-Elasticsearch provides script_score, the ability to provide custom scores for returned documents.
+Elasticsearch provides script_score, the ability to provide custom scores for desired documents.
 Elasticsearch Painless, a simple, secure scripting language designed specifically for this purpose.
 
 A Painless script is evaluated within a context. Painless has a strict list of allowed methods and classes per context to ensure all Painless scripts are secure.
@@ -330,8 +330,9 @@ GET my-knn-index-2/_search
 }
 
 ```
-Since l2Squared function is a distance function, unlike cosine function, we need to reverse the output.
-Suppose when a document vector matches the query vector, we needed to add 1 in the denominator to avoid divide by zero error.
+The lesser the distance the more the relevance of the document to the query vector. In order to bring the lesser 
+distances documents to the top of the scores, we invert the distance from l2Squared function.
+Also, when a document vector matches the query vector, we needed to add 1 in the denominator to avoid divide by zero error.
 
 ####Constraints
 1. If a document’s knn vector field has different dimensions from the query, an error(IllegalArgumentException) will be thrown.
@@ -340,4 +341,4 @@ This can be avoided by checking if a document has a value for the field my_vecto
 ```
  "source": "doc[params.field].size() == 0 ? 0 : 1 / (1 + l2Squared(params.query_value, doc[params.field]))",
 ```
-Since the score can only be positive, the above script will rank non-vector field documents lower than others.
+Since the score can only be positive, the above script will rank non-vector field documents lower than others
