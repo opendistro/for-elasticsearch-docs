@@ -59,7 +59,7 @@ docker stop <container-id>
 
 ## Start a cluster
 
-To deploy the image across multiple nodes and simulate a more realistic deployment, create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
+To deploy the image across multiple nodes and simulate a more realistic deployment, create a [docker-compose.yml](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
 
 ```bash
 docker-compose up

@@ -44,15 +44,18 @@ By default, `securityadmin.sh` uses `9300`. If your cluster runs on a different 
 
 ## None of the configured nodes are available
 
-If `securityadmin.sh` can reach the cluster, but can't update the configuration, it outputs:
+If `securityadmin.sh` can reach the cluster, but can't update the configuration, it outputs this error:
 
 ```
 Contacting elasticsearch cluster 'elasticsearch' and wait for YELLOW clusterstate ...
 Cannot retrieve cluster state due to: None of the configured nodes are available: [{#transport#-1}{mr2NlX3XQ3WvtVG0Dv5eHw}{localhost}{127.0.0.1:9300}]. This is not an error, will keep on trying ...
-   * Try running securityadmin.sh.sh with -icl and -nhnv (If thats works you need to check your clustername as well as hostnames in your SSL certificates)
-   * If this is not working, try running securityadmin.sh.sh with --diagnose and see diagnose trace log file)
-   * Add --accept-red-cluster to allow securityadmin.sh to operate on a red cluster.
 ```
+
+* Try running `securityadmin.sh` with `-icl` and `-nhnv`.
+
+  If this works, check your cluster name as well as the hostnames in your SSL certificates. If this does not work, try running `securityadmin.sh` with `--diagnose` and see diagnose trace log file.
+
+* Add `--accept-red-cluster` to allow `securityadmin.sh` to operate on a red cluster.
 
 
 ### Check cluster name
