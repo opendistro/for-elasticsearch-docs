@@ -120,13 +120,19 @@ has_toc: false
 
 ## Math
 
-If you want to use the sorts of pretty formulas that [MathJax](https://www.mathjax.org) allows, add `has_math: true` to the Jekyll page metadata. Then insert LaTeX math into HTML tags:
+If you want to use the sorts of pretty formulas that [MathJax](https://www.mathjax.org) allows, add `has_math: true` to the Jekyll page metadata. Then insert LaTeX math into HTML tags with the rest of your Markdown content:
 
 ```
+## Math
+
+Some Markdown paragraph. Here's a formula:
+
 <p>
   When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
   \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
 </p>
+
+And back to Markdown.
 ```
 
 
