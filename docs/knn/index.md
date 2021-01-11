@@ -4,6 +4,7 @@ title: KNN
 nav_order: 50
 has_children: true
 has_toc: false
+has_math: true
 ---
 
 # k-NN
