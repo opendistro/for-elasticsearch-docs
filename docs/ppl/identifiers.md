@@ -11,7 +11,7 @@ nav_order: 7
 An identifier is an ID to name your database objects, such as index names, field names, aliases, and so on.
 Elasticsearch supports two types of identifiers: regular identifiers and delimited identifiers.
 
-## Regular Identifiers
+## Regular identifiers
 
 A regular identifier is a string of characters that starts with an ASCII letter (lower or upper case).
 The next character can either be a letter, digit, or underscore (_). It can't be a reserved keyword.
@@ -39,12 +39,12 @@ source=accounts | fields account_number, firstname, lastname;
 | 18 | Dale | Adams
 
 
-## Delimited Identifiers
+## Delimited identifiers
 
 A delimited identifier can contain special characters not allowed by a regular identifier.
-You must enclose delimited identifiers with back ticks `\`. Back ticks differentiate the identifier from special characters.
+You must enclose delimited identifiers with back ticks (\`\`). Back ticks differentiate the identifier from special characters.
 
-If the index name includes a dot (`.`), for example, `log-2021.01.11`, use delimited identifiers with back ticks to escape it `\``log-2021.01.11``\`.
+If the index name includes a dot (`.`), for example, `log-2021.01.11`, use delimited identifiers with back ticks to escape it \``log-2021.01.11`\`.
 
 Typical examples of using delimited identifiers:
 
@@ -65,7 +65,7 @@ source=`accounts` | fields `account_number`;
 | 13 |
 | 18 |
 
-## Case Sensitivity
+## Case sensitivity
 
 Identifiers are case sensitive. They must be exactly the same as what's stored in Elasticsearch.
 
