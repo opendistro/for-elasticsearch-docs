@@ -249,21 +249,22 @@ The standard KNN query and custom scoring option perform differently. Test using
 Custom scoring works best if the initial filter reduces the number of documents to no more than 20,000. Increasing shard count can improve latencies, but be sure to keep shard size within [the recommended guidelines](../elasticsearch/#primary-and-replica-shards).
 
 
-## Use Similarity methods in painless scripting
+## Use Similarity functions in painless scripting
 
-Sometimes users would like to go beyond Elasticsearch’s built-in features for scoring and might want to customize the search scores in more complex ways.
-Elasticsearch provides script_score, the ability to provide custom scores for desired documents.
-Elasticsearch Painless, a simple, secure scripting language designed specifically for this purpose.
-
-A Painless script is evaluated within a context. Painless has a strict list of allowed methods and classes per context to ensure all Painless scripts are secure.
-Now, opendistro users can use following specialized methods within Score context to customize their scores.
-
-### Cosine Similarity
+If you want to go beyond Elasticsearch's built-in scoring features, you can use KNN similarity functions in Painless scripts.
+Painless has a strict list of allowed functions and classes per context to ensure its scripts are secure.
+The KNN plugin lets you use the following functions within the score context.
+### Cosine similarity
 This function calculates the measure of cosine similarity between a given query vector and document vectors.
-Optionally accepts normQueryVector, to avoid repeated calculation of normalization for query vector for every filtered documents.  
 #### Definition
 ```
 float cosineSimilarity (float[] queryVector, doc['vector field']) 
+```
+Cosine similarity is inner product of the query vector and doccument verctor normalized to both have length 1. If magnitude of the 
+query vector does not change throughout the query, users can pass magnitude of query vector optionally to 
+improve the performance instead of calculating the magnitude every time for every filtered document. 
+#### Definition
+```
 float cosineSimilarity (float[] queryVector, doc['vector field'], float normQueryVector) 
 ```
 
@@ -294,7 +295,9 @@ GET my-knn-index-2/_search
   }
 }
 ```
-The above script adds 1.0 to the cosine similarity to keep score positive.
+In general, range of cosine similarity is [-1, 1], but in case of information retrieval, the cosine similarity of
+two documents will range from 0 to 1, since tf-idf cannot be negative. Hence, we add 1.0 to the cosine similarity to 
+keep score always positive.
 ### L2 Squared
 This function calculates L2 distance (Euclidean distance) between a given query vector and document vectors.
 
@@ -330,15 +333,14 @@ GET my-knn-index-2/_search
 }
 
 ```
-The lesser the distance the more the relevance of the document to the query vector. In order to bring the lesser 
-distances documents to the top of the scores, we invert the distance from l2Squared function.
-Also, when a document vector matches the query vector, we needed to add 1 in the denominator to avoid divide by zero error.
-
+The shorter the distance, the more relevant the document is, so this example inverts the return value of the l2Squared function.
+If the document vector matches the query vector, the result is 0, so this example also adds 1 to the distance to
+avoid divide by zero errors.
 ####Constraints
-1. If a document’s knn vector field has different dimensions from the query, an error(IllegalArgumentException) will be thrown.
-2. If similarity function is executed on vector field which doesn't have a value, an error(IllegalStateException) will be thrown.
-This can be avoided by checking if a document has a value for the field my_vector by doc['my_vector'].size() == 0. You can re-write the source as below:
+1. If a document’s knn_vector field has different dimensions than the query, the function throws an IllegalArgumentException.
+2. If a vector field doesn't have a value, the function throws an IllegalStateException.
+   You can avoid this situation by first checking if a document has a value for the field:
 ```
  "source": "doc[params.field].size() == 0 ? 0 : 1 / (1 + l2Squared(params.query_value, doc[params.field]))",
 ```
-Since the score can only be positive, the above script will rank non-vector field documents lower than others
+Since scores can only be positive, this script ranks documents with vector fields higher than those without.
