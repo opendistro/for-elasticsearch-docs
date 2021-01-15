@@ -57,7 +57,7 @@ The output shows you the specifications instantiated from the install.
 To customize the deployment, pass in the values that you want to override with a custom YAML file:
 
 ```bash
-helm install --values=customevalues.yaml opendistro-es-{{site.odfe_version}}.tgz
+helm install --values=customvalues.yaml opendistro-es-{{site.odfe_version}}.tgz
 ```
 
 #### Sample output
@@ -91,7 +91,7 @@ $ kubectl exec -it opendistro-es-master-1 -- /bin/bash
 You can send requests to the pod to verify that Elasticsearch is up and running:
 
 ```bash
-$ curl -XGET https://localhost:9200 -u admin:admin --insecure
+$ curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
 ```
 
 To set up port forwarding to access Kibana, exit the Elasticsearch shell and run the following command:
@@ -104,8 +104,14 @@ You can now access Kibana from your browser at: http://localhost:5601.
 
 ## Uninstall using Helm
 
+To identify the opendistro-es deployment to be deleted:
+
+```bash
+helm list
+```
+
 To delete or uninstall this deployment, run the following command:
 
 ```bash
-helm delete opendistro-es
+helm delete <opendistro-es deployment>
 ```

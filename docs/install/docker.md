@@ -39,9 +39,9 @@ docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/open
 Then send requests to the server to verify that Elasticsearch is up and running:
 
 ```bash
-curl -XGET https://localhost:9200 -u admin:admin --insecure
-curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
-curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
+curl -XGET https://localhost:9200/_cat/nodes?v -u 'admin:admin' --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u 'admin:admin' --insecure
 ```
 
 To find the container ID:
@@ -59,7 +59,7 @@ docker stop <container-id>
 
 ## Start a cluster
 
-To deploy the image across multiple nodes and simulate a more realistic deployment, create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
+To deploy the image across multiple nodes and simulate a more realistic deployment, create a [docker-compose.yml](https://docs.docker.com/compose/compose-file/) file appropriate for your environment and run:
 
 ```bash
 docker-compose up

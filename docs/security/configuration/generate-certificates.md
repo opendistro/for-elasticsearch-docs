@@ -84,9 +84,9 @@ openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreate
 
 ## (Optional) Generate node and client certificates
 
-Follow the steps in [Generate admin certificates](#generate-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
+Follow the steps in [Generate an admin certificate](#generate-an-admin-certificate) with new file names to generate a new certificate for each node and as many client certificates as you need. Each certificate should use its own private key.
 
-If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a common name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set the hostname verification to `false`. For more information, see [Configure TLS certificates](../../security/configuration/tls/#advanced-hostname-verification-and-dns-lookup).
+If you generate node certificates and have `opendistro_security.ssl.transport.enforce_hostname_verification` set to `true` (default), be sure to specify a common name (CN) for the certificate that matches the hostname of the intended node. If you want to use the same node certificate on all nodes (not recommended), set the hostname verification to `false`. For more information, see [Configure TLS certificates](../tls/#advanced-hostname-verification-and-dns-lookup).
 
 
 ### Sample script
@@ -154,7 +154,7 @@ This process generates many files, but these are the ones you need to add to you
 - (Optional) `each-node-cert.pem`
 - (Optional) `each-node-key.pem`
 
-For information about adding and configuring these certificates, see [Docker security configuration](../../install/docker-security/) and [Configure TLS certificates](../tls/).
+For information about adding and configuring these certificates, see [Docker security configuration](../../../install/docker-security/) and [Configure TLS certificates](../tls/).
 
 
 ## Run securityadmin.sh
@@ -165,10 +165,10 @@ After configuring your certificates and starting Elasticsearch, run `securityadm
 ./securityadmin.sh -cd ../securityconfig/ -icl -nhnv -cacert ../../../config/root-ca.pem -cert ../../../config/admin.pem -key ../../../config/admin-key.pem
 ```
 
-For more information about what this command does, see [Apply configuration changes](../security-admin/) and [Change passwords for read-only users](../../install/docker-security/#change-passwords-for-read-only-users).
+For more information about what this command does, see [Apply configuration changes](../security-admin/).
 {: .tip }
 
-If you use Docker, see [Bash access to containers](../../install/docker/#bash-access-to-containers).
+If you use Docker, see [Bash access to containers](../../../install/docker/#bash-access-to-containers).
 
 
 ## Kibana

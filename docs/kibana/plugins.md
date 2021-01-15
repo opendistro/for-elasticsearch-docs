@@ -29,6 +29,21 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.10.0</td>
+    <td>
+      <pre>opendistroAnomalyDetectionKibana  1.12.0.0
+opendistroAlertingKibana          1.12.0.2
+opendistroIndexManagementKibana   1.12.0.0
+opendistroSecurityKibana          1.12.0.0
+opendistroQueryWorkbenchKibana    1.12.0.0
+opendistroNotebooksKibana         1.12.0.0
+opendistroReportsKibana           1.12.0.0
+opendistroGanttChartKibana        1.12.0.0
+opendistroTraceAnalyticsKibana    1.12.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.9.1</td>
     <td>
       <pre>opendistro-anomaly-detection-kibana    1.10.1.0, 1.11.0.0
@@ -69,7 +84,7 @@ Navigate to the Kibana home directory (likely `/usr/share/kibana`) and run the i
 #### Security Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistro_security_kibana_plugin-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistroSecurityKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for managing users, roles, mappings, action groups, and tenants.
@@ -78,7 +93,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.2.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistroAlertingKibana-{{site.odfe_version}}.2.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
@@ -87,7 +102,7 @@ This plugin provides a user interface for creating monitors and managing alerts.
 #### Index State Management Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistro_index_management_kibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistroIndexManagementKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for managing policies.
@@ -96,28 +111,55 @@ This plugin provides a user interface for managing policies.
 #### Anomaly Detection Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-kibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-anomaly-detection/opendistroAnomalyDetectionKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for adding detectors.
 
 
-#### Query Workbench
+#### Query Workbench Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistro-query-workbench-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistroQueryWorkbenchKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for using SQL queries to explore your data.
 
 
-#### Kibana Notebooks
+#### Trace Analytics (experimental)
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistro-notebooks-kibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin uses distributed trace data (indexed in Elasticsearch using Data Prepper) to display latency trends, error rates, and more.
+
+
+#### Notebooks Kibana
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistroNotebooksKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin lets you combine Kibana visualizations and narrative text in a single interface.
+
+
+#### Reports Kibana
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin lets you export and share reports from Kibana dashboards, visualizations, and saved searches.
+
+
+#### Gantt Chart Kibana
+
+```bash
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-gantt-chart/opendistroGanttChartKibana-{{site.odfe_version}}.0.zip
+```
+
+This plugin adds a new Gantt chart visualization.
 
 
 ## List installed plugins

@@ -20,12 +20,12 @@ baseurl: "/for-elasticsearch-docs" # the subpath of your site, e.g. /blog
 url: "https://opendistro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
 
-odfe_version: 1.11.0
-es_version: 7.9.1
+odfe_version: 1.12.0
+es_version: 7.10.0
 
 # Build settings
 markdown: kramdown
-remote_theme: pmarsceill/just-the-docs@v0.3.0
+remote_theme: pmarsceill/just-the-docs@v0.3.3
 
 # Kramdown settings
 kramdown:
@@ -82,6 +82,7 @@ footer_content:
 
 plugins:
   - jekyll-remote-theme
+  - jekyll-redirect-from
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

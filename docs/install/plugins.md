@@ -30,6 +30,21 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.10.0</td>
+    <td>
+      <pre>opendistro-anomaly-detection    1.12.0.0
+opendistro-job-scheduler        1.12.0.0
+opendistro-knn                  1.12.0.0
+opendistro_alerting             1.12.0.2
+opendistro_index_management     1.12.0.1
+opendistro_performance_analyzer 1.12.0.0
+opendistro_security             1.12.0.0
+opendistro_sql                  1.12.0.0
+opendistro-reports-scheduler    1.12.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.9.1</td>
     <td>
       <pre>opendistro-anomaly-detection    1.10.1.0, 1.11.0.0
@@ -228,7 +243,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-{{site.odfe_version}}.1.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-{{site.odfe_version}}.2.zip
 ```
 
 To install Alerting, you must first install the Job Scheduler plugin. Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -241,10 +256,18 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ```
 
 
+### Reports Scheduler
+
+```bash
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-reports-scheduler/opendistro-reports-scheduler-{{site.odfe_version}}.0.zip
+```
+
+
+
 ### Index State Management
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-{{site.odfe_version}}.1.zip
 ```
 
 To install Index State Management, you must first install the Job Scheduler plugin. ISM has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.

@@ -2,6 +2,7 @@
 layout: default
 title: About
 nav_order: 1
+redirect_from: /404.html
 permalink: /
 ---
 
@@ -23,7 +24,7 @@ Open Distro for Elasticsearch is well-suited to the following use cases:
 * Clickstream analytics
 * Search backend
 
-Compared to the open source distribution of Elasticsearch, Open Distro for Elasticsearch offers many extra features:
+Open Distro for Elasticsearch combines the OSS distributions of Elasticsearch and Kibana with a large number of [open source](#get-involved) plugins. These plugins fill important feature gaps in the OSS distributions.
 
 Component | Purpose
 :--- | :---
@@ -31,11 +32,13 @@ Component | Purpose
 [Kibana](docs/kibana) | Search frontend and visualizations
 [Security](docs/security/) | Authentication and access control for your cluster
 [Alerting](docs/alerting/) | Receive notifications when your data meets certain conditions
-[SQL](docs/sql/) | Use SQL to query your data
+[SQL](docs/sql/) | Use SQL or a piped processing language to query your data
 [Index State Management](docs/ism/) | Automate index operations
 [KNN](docs/knn/) | Find “nearest neighbors” in your vector data
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
 [Anomaly Detection](docs/ad/) | Identify atypical data and receive automatic notifications
+
+You can install Elasticsearch plugins [individually](docs/install/plugins/) on existing OSS clusters or use the [all-in-one packages](docs/install/) for new clusters. Most of these Elasticsearch plugins have corresponding Kibana plugins that provide a convenient, unified user interface.
 
 
 ---
@@ -70,7 +73,7 @@ If you want to modify the Open Distro for Elasticsearch code and build from sour
 
 ---
 
-## About Open Distro for Elasticsearch
+## Get involved
 
 [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
 

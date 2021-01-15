@@ -1,11 +1,16 @@
 ---
 layout: default
-title: Notebooks
-nav_order: 54
+title: Notebooks (experimental)
+parent: Kibana
+nav_order: 50
+redirect_from: /docs/notebooks/
 has_children: false
 ---
 
-# Kibana Notebooks
+# Kibana notebooks (experimental)
+
+Kibana notebooks have a known issue with [tenants](../security/access-control/multi-tenancy/). If you open a notebook and can't see its visualizations, you might be under the wrong tenant, or you might not have access to the tenant at all.
+{: .warning }
 
 A Kibana notebook is an interface that lets you easily combine live visualizations and narrative text in a single notebook interface.
 
@@ -14,6 +19,7 @@ With Kibana notebooks, you can interactively explore data by running different v
 A notebook is a document composed of two elements: Kibana visualizations and paragraphs (Markdown). Choose multiple timelines to compare and contrast visualizations.
 
 Common use cases include creating postmortem reports, designing runbooks, building live infrastructure reports, and writing documentation.
+
 
 ## Get Started with Notebooks
 
@@ -26,7 +32,7 @@ A notebook is an interface for creating reports.
 1. Choose **Create notebook** and enter a descriptive name.
 1. Choose **Create**.
 
-![Notebook UI](../images/notebook.png)
+![Notebook UI](../../images/notebook.png)
 
 Choose **Notebook actions** to rename, duplicate, or delete a notebook.
 
@@ -39,20 +45,20 @@ Paragraphs combine text and visualizations for describing data.
 1. To add text, choose **Add markdown paragraph**.
 1. Add rich text with markdown syntax.
 
-![Markdown paragraph](../images/markdown-notebook.png)
+![Markdown paragraph](../../images/markdown-notebook.png)
 
 #### Add a visualization paragraph
 
 1. To add a visualization, choose **Add Kibana visualization paragraph**.
 1. In **Title**, select your visualization and choose a date range.
 
-![Markdown paragraph](../images/visualization-notebook.png)
+![Markdown paragraph](../../images/visualization-notebook.png)
 
 - You can choose multiple timelines to compare and contrast visualizations.
 
 To run and save a paragraph, choose **Run**.
 
-![Output](../images/output-notebook.png)
+![Output](../../images/output-notebook.png)
 
 You can perform the following actions on paragraphs:
 
@@ -65,4 +71,4 @@ You can perform the following actions on paragraphs:
 
 ## Sample Notebook
 
-![sample notebook](../images/sample-notebook.png)
+![sample notebook](../../images/sample-notebook.png)
