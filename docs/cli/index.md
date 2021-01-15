@@ -24,7 +24,7 @@ odfe-cli ad delete ecommerce-count-quantity --profile staging
 
 ## Install
 
-1. Download and extract the installation package.
+1. [Download](https://opendistro.github.io/for-elasticsearch/downloads.html){:target='\_blank'} and extract the appropriate installation package for your computer.
 
 1. Make the `odfe-cli` file executable:
 
