@@ -102,6 +102,7 @@ GET my-knn-index-1/_search
 In this case, `k` is the number of neighbors you want the query to return, but you must also include the `size` option. Otherwise, you get `k` results for each shard (and each segment) rather than `k` results for the entire query. The plugin supports a maximum `k` value of 10,000.
 
 Additionally, you can execute an exact nearest neighbor search on the data using the `knn` script:
+
 ```json
 GET my-knn-index-1/_search
 {
@@ -125,32 +126,35 @@ GET my-knn-index-1/_search
 }
 ```
 
-Euclidian Distance:
+Euclidian distance formula:
+
 <p>
-
-\[ Distance(X, Y) = \sqrt{\sum_{i=1}^n (X_i - Y_i)^2} \]
-
+  \[ Distance(X, Y) = \sqrt{\sum_{i=1}^n (X_i - Y_i)^2} \]
 </p>
 
-Cosine similarity:
+Cosine similarity formula:
+
 <p>
   \[ {A &middot; B \over \|A\| &middot; \|B\|} =
 
   {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
- where \(\|A\|\) and \(\|B\|\) represent normalized vectors.
-
+  where \(\|A\|\) and \(\|B\|\) represent normalized vectors.
 </p>
 
 After calculations, the k-NN plugin performs the following conversions to get the final Elasticsearch score. Note that these conversions are how the k-NN plugin calculates approximate k-NN scores. For custom scoring conversions, see the [custom scoring](#Pre-filtering-with-custom-scoring) section.
 
-[Euclidian Distance Conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/index/KNNWeight.java#L113):
+[Euclidian distance conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/index/KNNWeight.java#L113):
+
 ```
 Elasticsearch score = 1 / (1 + Euclidian distance)
 ```
-[Cosine Similarity Conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/index/KNNWeight.java#L113):
+
+[Cosine similarity conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/index/KNNWeight.java#L113):
+
 ```
 Elasticsearch score = 1 / (1 + Cosine similarity)
 ```
+
 
 ## Compound queries with KNN
 
@@ -267,15 +271,19 @@ All parameters are required.
 - `query_value` is the point you want to find the nearest neighbors for. For the Euclidean and cosine similarity spaces, the value must be an array of floats that matches the dimension set in the field's mapping. For Hamming bit distance, this value can be either of type signed long or a base64-encoded string (for the long and binary field types, respectively).
 - `space_type` is either `l2`, `cosinesimil`, or `hammingbit`.
 
-[Euclidian Distance Conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/plugin/script/KNNScoringSpace.java#L71):
+[Euclidian distance conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/0da03b29f1367b7f555e14b4ea4002626160bb35/src/main/java/com/amazon/opendistroforelasticsearch/knn/plugin/script/KNNScoringSpace.java#L71):
+
 ```
 Elasticsearch score = 1 / (1 + Euclidian distance)
 ```
-[Cosine Similarity Conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/3595be5b044205fbf5c02b2ecb68ff1df2a85b53/src/main/java/com/amazon/opendistroforelasticsearch/knn/plugin/script/KNNScoringSpace.java#L102):
+
+[Cosine similarity conversion](https://github.com/opendistro-for-elasticsearch/k-NN/blob/3595be5b044205fbf5c02b2ecb68ff1df2a85b53/src/main/java/com/amazon/opendistroforelasticsearch/knn/plugin/script/KNNScoringSpace.java#L102):
+
 ```
 Elasticsearch score = 1 + Cosine similarity
 ```
-Cosine similarity returns a number between -1 and 1, and because Elasticsearch scores cannot be below 0, the k-NN plugin adds 1 to get the final score.
+
+Cosine similarity returns a number between -1 and 1, and because Elasticsearch relevance scores can't be below 0, the k-NN plugin adds 1 to get the final score.
 
 
 ## Performance considerations
