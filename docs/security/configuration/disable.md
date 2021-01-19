@@ -33,7 +33,7 @@ If you disable the security plugin in `elasticsearch.yml` (or delete the plugin 
 
 1. Remove all `opendistro_security` lines from `kibana.yml`.
 1. Change `elasticsearch.url` in `kibana.yml` to `http://` rather than `https://`.
-1. Enter `sudo /usr/share/kibana/bin/kibana-plugin remove opendistro_security`.
+1. Enter `sudo /usr/share/kibana/bin/kibana-plugin remove opendistroSecurityKibana`.
 1. Enter `sudo systemctl restart kibana.service`.
 
 
@@ -43,7 +43,7 @@ If you disable the security plugin in `elasticsearch.yml` (or delete the plugin 
 
    ```
    FROM amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}
-   RUN /usr/share/kibana/bin/kibana-plugin remove opendistro_security
+   RUN /usr/share/kibana/bin/kibana-plugin remove opendistroSecurityKibana
    COPY --chown=kibana:kibana kibana.yml /usr/share/kibana/config/
    ```
 
