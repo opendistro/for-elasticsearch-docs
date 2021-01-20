@@ -17,7 +17,7 @@ The best use of these YAML files is to configure [reserved and hidden resources]
 
 This file contains any initial users that you want to add to the security plugin's internal user database.
 
-The file format requires a hashed password. To generate one, run `plugins/opendistro_security/tools/hash.sh -p <new-password>`. If you decide to keep any of the demo users, *change their passwords*. After changing the password in the internal_users.yml file run the securityadmin.sh in the same folder otherwise you changes will not be applied!
+The file format requires a hashed password. To generate one, run `plugins/opendistro_security/tools/hash.sh -p <new-password>`. If you decide to keep any of the demo users, *change their passwords* and re-run [securityadmin.sh](../security-admin/) to apply the new passwords.
 
 ```yml
 ---
