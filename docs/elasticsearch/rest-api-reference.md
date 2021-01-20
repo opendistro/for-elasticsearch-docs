@@ -52,6 +52,7 @@ _source | list | True or false to return the _source field or not, or default li
 _source_excludes | list | Default list of fields to exclude from the returned _source field, can be overridden on each sub-request
 _source_includes | list | Default list of fields to extract and return from the _source field, can be overridden on each sub-request
 pipeline | string | The pipeline id to preprocess incoming documents with
+require_alias | boolean | Sets require_alias for all incoming documents. Defaults to unset (false)
 
 
 ## cat.aliases
@@ -487,10 +488,10 @@ GET _cat/tasks
 Parameter | Type | Description
 :--- | :--- | :---
 format | string | a short version of the Accept header, e.g. json, yaml
-node_id | list | A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
+nodes | list | A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
 actions | list | A comma-separated list of actions that should be returned. Leave empty to return all.
 detailed | boolean | Return detailed task information (default: false)
-parent_task | number | Return tasks with specified parent task id. Set to -1 to return all.
+parent_task_id | string | Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.
 h | list | Comma-separated list of column names to display
 help | boolean | Return help information
 s | list | Comma-separated list of column names or column aliases to sort by
@@ -1393,6 +1394,7 @@ version_type | enum | Specific version type
 if_seq_no | number | only perform the index operation if the last operation that has changed the document has the specified sequence number
 if_primary_term | number | only perform the index operation if the last operation that has changed the document has the specified primary term
 pipeline | string | The pipeline id to preprocess incoming documents with
+require_alias | boolean | When true, requires destination to be an alias. Default is false
 
 
 ## indices.add_block
@@ -3354,6 +3356,28 @@ master_timeout | time | Explicit operation timeout for connection to master node
 timeout | time | Explicit operation timeout
 
 
+## snapshot.clone
+
+Clones indices from one snapshot into another snapshot in the same repository.
+
+```
+PUT _snapshot/{repository}/{snapshot}/_clone/{target_snapshot}
+```
+
+#### HTTP request body
+
+The snapshot clone definition
+
+**Required**: True
+
+
+#### URL parameters
+
+Parameter | Type | Description
+:--- | :--- | :---
+master_timeout | time | Explicit operation timeout for connection to master node
+
+
 ## snapshot.create
 
 Creates a snapshot in a repository.
@@ -3684,6 +3708,7 @@ routing | string | Specific routing value
 timeout | time | Explicit operation timeout
 if_seq_no | number | only perform the update operation if the last operation that has changed the document has the specified sequence number
 if_primary_term | number | only perform the update operation if the last operation that has changed the document has the specified primary term
+require_alias | boolean | When true, requires destination is an alias. Default is false
 
 
 ## update_by_query
