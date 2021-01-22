@@ -20,9 +20,9 @@ If these roles don't meet your needs, mix and match individual alerting [permiss
 
 ## How monitors access data
 
-Monitors run with the permissions of the user who created or last modified them. For example, consider the user `jdoe`, who works at a chain of retail stores. `jdoe` has two roles. Together, these two roles allow read access to three indices: `store1-returns`, `store2-returns`, `store3-returns`.
+Monitors run with the permissions of the user who created or last modified them. For example, consider the user `jdoe`, who works at a chain of retail stores. `jdoe` has two roles. Together, these two roles allow read access to three indices: `store1-returns`, `store2-returns`, and `store3-returns`.
 
-`jdoe` creates a monitor that sends an email to management whenever the number of returns across across all three indices exceeds 40 per hour.
+`jdoe` creates a monitor that sends an email to management whenever the number of returns across all three indices exceeds 40 per hour.
 
 Later, the user `psantos` wants to edit the monitor to run every two hours, but `psantos` only has access to `store1-returns`. To make the change, `psantos` has two options:
 
@@ -34,9 +34,9 @@ After making the change, the monitor now runs with the same permissions as `psan
 
 ## (Advanced) Limit access by backend role
 
-Out of the box, the alerting plugin has no concept of ownership. For example, if you have the `cluster:admin/opendistro/alerting/monitor/write` permission, you can edit *all* monitors, regardless of whether or not you created them. If a small number of trusted users manage your monitors and destinations, this lack of ownership generally isn't a problem. A larger organization might need to segment access by backend role.
+Out of the box, the alerting plugin has no concept of ownership. For example, if you have the `cluster:admin/opendistro/alerting/monitor/write` permission, you can edit *all* monitors, regardless of whether you created them. If a small number of trusted users manage your monitors and destinations, this lack of ownership generally isn't a problem. A larger organization might need to segment access by backend role.
 
-First, make sure that your users have the appropriate [backend roles](../../security/access-control/). Backend roles usually come from an [LDAP server](../../security/configuration/ldap/) or [SAML provider](../../security/configuration/saml/), but if you use the internal user database, you can use the REST API to [add them manually](../../security/access-control/api/#create-user).
+First, make sure that your users have the appropriate [backend roles](../../security/access-control/). Backend roles usually come from an [LDAP server](../../security/configuration/ldap/) or [SAML provider](../../security/configuration/saml/). However, if you use the internal user database, you can use the REST API to [add them manually](../../security/access-control/api/#create-user).
 
 Next, enable the following setting:
 
@@ -49,11 +49,11 @@ PUT _cluster/settings
 }
 ```
 
-Now when users view alerting resources in Kibana (or make REST API calls), they only see monitors and destinations created by users who share *at least one* backend role. For example, consider three users: `jdoe`, `jroe`, and `psantos`, all of whom have full access to alerting.
+Now when users view alerting resources in Kibana (or make REST API calls), they only see monitors and destinations that are created by users who share *at least one* backend role. For example, consider three users who all have full access to alerting: `jdoe`, `jroe`, and `psantos`.
 
 `jdoe` and `jroe` are on the same team at work and both have the `analyst` backend role. `psantos` has the `human-resources` backend role.
 
-If `jdoe` creates a monitor, `jroe` can see and modify it. `psantos` can't. If that monitor generates an alert, the situation is the same: `jroe` can see and acknowledge it, but `psantos` can't. If `psantos` creates a destination---you guessed it---neither `jdoe` nor `jroe` can see or modify it.
+If `jdoe` creates a monitor, `jroe` can see and modify it, but `psantos` can't. If that monitor generates an alert, the situation is the same: `jroe` can see and acknowledge it, but `psantos` can't. If `psantos` creates a destination, `jdoe` and `jroe` can't see or modify it.
 
 
 <!-- ## (Advanced) Limit access by individual
@@ -76,4 +76,4 @@ If you only want users to be able to see and modify their own monitors and desti
 }
 ```
 
-Then use this new role for all alerting users. -->
+Then, use this new role for all alerting users. -->
