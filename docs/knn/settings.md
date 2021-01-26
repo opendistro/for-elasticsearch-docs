@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Settings and Statistics
+title: Settings
 parent: KNN
-nav_order: 10
+nav_order: 6
 ---
 
-# KNN Settings and statistics
+# KNN Settings
 
-The KNN plugin adds several new index settings, cluster settings, and statistics.
+The KNN plugin adds several new index and cluster settings.
 
 
 ## Index settings
@@ -34,33 +34,3 @@ Setting | Default | Description
 `knn.memory.circuit_breaker.limit` | 60% | The native memory limit for graphs. At the default value, if a machine has 100 GB of memory and the JVM uses 32 GB, KNN uses 60% of the remaining 68 GB (40.8 GB). If memory usage exceeds this value, KNN removes the least recently used graphs.
 `knn.memory.circuit_breaker.enabled` | true | Whether to enable the KNN memory circuit breaker.
 `knn.plugin.enabled`| true | Enables or disables the KNN plugin.
-
-
-## Statistics
-
-KNN includes statistics that can give you a sense for how the plugin is performing:
-
-```
-GET _opendistro/_knn/stats
-```
-
-You can also filter by node and/or statistic:
-
-```
-GET /_opendistro/_knn/nodeId1,nodeId2/stats/statName1,statName2
-```
-
-Statistic |  Description
-:--- | :---
-`totalLoadTime` | The time in nanoseconds that KNN has taken to load graphs into the cache.
-`evictionCount` | The number of graphs that have been evicted from the cache due to memory constraints or idle time.
-`hitCount` | The number of cache hits. A cache hit occurs when a user queries a graph and it is already loaded into memory.
-`cacheCapacityReached` | Whether `knn.memory.circuit_breaker.limit` has been reached.
-`loadSuccessCount` | The number of times KNN successfully loaded a graph into the cache.
-`graphMemoryUsage` | Current cache size (total size of all graphs in memory) in kilobytes.
-`missCount` | The number of cache misses. A cache miss occurs when a user queries a graph and it has not yet been loaded into memory.
-`loadExceptionCount` | The number of times an exception occurred when trying to load a graph into the cache.
-`script_compilations` | The number of times the KNN script has been compiled. This value should usually be 1 or 0, but if the cache containing the compiled scripts is filled, the KNN script might be recompiled.
-`script_compilation_errors` | The number of errors during script compilation.
-`script_query_requests` | The number of query requests that use [the KNN script](../#custom-scoring).
-`script_query_errors` | The number of errors during script queries.
