@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Settings and Statistics
+title: Settings, Statistics, and Tasks
 parent: KNN
 nav_order: 10
 ---
@@ -64,3 +64,56 @@ Statistic |  Description
 `script_compilation_errors` | The number of errors during script compilation.
 `script_query_requests` | The number of query requests that use [the KNN script](../#custom-scoring).
 `script_query_errors` | The number of errors during script queries.
+
+## Tasks
+
+You can use the `_tasks` API to see what tasks are currently executing on your indices.
+
+```json
+GET /_tasks
+```
+
+This sample request returns the tasks currently running on a node named `odfe-node1`.
+
+```json
+GET /_tasks?nodes=odfe-node1
+{
+  "nodes": {
+      "Mgqdm0r9SEGClWxp_RbnaQ": {
+          "name": "odfe-node1",
+          "transport_address": "sample_address",
+          "host": "sample_host",
+          "ip": "sample_ip",
+          "roles": [
+              "data",
+              "ingest",
+              "master",
+              "remote_cluster_client"
+          ],
+          "tasks": {
+              "Mgqdm0r9SEGClWxp_RbnaQ:24578": {
+                  "node": "Mgqdm0r9SEGClWxp_RbnaQ",
+                  "id": 24578,
+                  "type": "transport",
+                  "action": "cluster:monitor/tasks/lists",
+                  "start_time_in_millis": 1611612517044,
+                  "running_time_in_nanos": 638700,
+                  "cancellable": false,
+                  "headers": {}
+              },
+              "Mgqdm0r9SEGClWxp_RbnaQ:24579": {
+                  "node": "Mgqdm0r9SEGClWxp_RbnaQ",
+                  "id": 24579,
+                  "type": "direct",
+                  "action": "cluster:monitor/tasks/lists[n]",
+                  "start_time_in_millis": 1611612517044,
+                  "running_time_in_nanos": 222200,
+                  "cancellable": false,
+                  "parent_task_id": "Mgqdm0r9SEGClWxp_RbnaQ:24578",
+                  "headers": {}
+              }
+          }
+      }
+  }
+}
+```
