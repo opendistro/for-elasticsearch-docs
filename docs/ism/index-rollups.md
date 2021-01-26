@@ -62,7 +62,8 @@ Review your configuration and select **Create**.
 
 You can use the standard `_search` API to search the target index. Make sure that the query matches the constraints of the target index. For example, if don’t set up terms aggregations on a field, you don’t receive results for terms aggregations. If you don’t set up the maximum aggregations, you don’t receive results for maximum aggregations.
 
-You can’t access the internal structure of the data in the target index.
+You can’t access the internal structure of the data in the target index because the plugin automatically rewrites the query to suit the target index. This is to make sure you can use the same query for the source and target index. 
+
 To query the target index, set `size` to 0:
 
 ```json
