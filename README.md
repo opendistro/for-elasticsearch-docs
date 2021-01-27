@@ -74,9 +74,7 @@ If you just need to fix a typo or add a sentence, this method works well:
 
 1. In your web browser, navigate to the appropriate Markdown file. For example, [cluster.md](https://github.com/opendistro/for-elasticsearch-docs/blob/master/docs/elasticsearch/cluster.md).
 
-1. Click the **Edit this file** button.
-
-   ![Location of the Edit button on GitHub](github1.png)
+1. Click the **Edit this file** button (the pencil).
 
 1. Make your changes.
 
@@ -87,7 +85,7 @@ If you just need to fix a typo or add a sentence, this method works well:
 
 If you want to add a few paragraphs across multiple files and are comfortable with Git, try this approach:
 
-1. Fork the [documentation repository on GitHub](https://github.com/opendistro/for-elasticsearch-docs).
+1. Fork this repository.
 
 1. Download [GitHub Desktop](https://desktop.github.com), install it, and clone your fork.
 
@@ -104,7 +102,7 @@ If you want to add a few paragraphs across multiple files and are comfortable wi
 
 If you're making major changes to the documentation and need to see the rendered HTML before submitting a pull request, here's how to build locally:
 
-1. Fork the [documentation repository on GitHub](https://github.com/opendistro/for-elasticsearch-docs).
+1. Fork this repository.
 
 1. Download [GitHub Desktop](https://desktop.github.com), install it, and clone your fork.
 
