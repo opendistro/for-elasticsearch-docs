@@ -163,7 +163,7 @@ If you're making major changes to the documentation and need to see the rendered
 
    **Better**: After you click the button, the process starts.
 
-1. "You" refers to the person reading the page. "We" refers to ODFE contributors.
+1. "You" refers to the person reading the page. "We" refers to the ODFE contributors.
 
    **Bad**: Now that we've finished the configuration, we have a working cluster.
 
