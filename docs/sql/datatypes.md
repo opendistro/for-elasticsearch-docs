@@ -5,9 +5,9 @@ parent: SQL
 nav_order: 73
 ---
 
-# Data Types
+# Data types
 
-The following table shows the data types supported by the SQL plugin and how it maps to SQL and Elasticsearch data types:
+The following table shows the data types supported by the SQL plugin and how each one maps to SQL and Elasticsearch data types:
 
 | ODFE SQL Type | Elasticsearch Type | SQL Type
 :--- | :--- | :---

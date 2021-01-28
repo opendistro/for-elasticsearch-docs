@@ -717,7 +717,7 @@ POST _opendistro/_alerting/monitors/<monitor_id>/_execute
 
 ## Acknowledge alert
 
-To get the alert ID, query the `.opendistro-alerts` index. See [Alerting indices](../settings#alerting-indices). You can acknowledge any number of alerts in one call. If the alert is already in an ERROR, COMPLETED, or ACKNOWLEDGED state, it will appear in the `failed` array.
+To get the alert ID, query the `.opendistro-alerts` index. See [Alerting indices](../settings#alerting-indices). You can acknowledge any number of alerts in one call. If the alert is already in an ERROR, COMPLETED, or ACKNOWLEDGED state, it appears in the `failed` array.
 
 
 #### Request

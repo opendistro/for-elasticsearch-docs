@@ -25,7 +25,7 @@ es_version: 7.10.0
 
 # Build settings
 markdown: kramdown
-remote_theme: pmarsceill/just-the-docs@v0.3.0
+remote_theme: pmarsceill/just-the-docs@v0.3.3
 
 # Kramdown settings
 kramdown:
