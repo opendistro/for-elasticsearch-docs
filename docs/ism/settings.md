@@ -38,9 +38,11 @@ PUT _index_template/ism_history_indices
   "index_patterns": [
     ".opendistro-ism-managed-index-history-*"
   ],
-  "settings": {
-    "number_of_shards": 1,
-    "number_of_replicas": 0
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
   }
 }
 ```
