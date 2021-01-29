@@ -8,7 +8,7 @@ has_math: true
 ---
 
 # Exact k-NN with Scoring Script
-The k-NN plugin implements the Elasticsearch score script plugin that can be used to find the exact k-nearest neighbors to a given query point. Using the k-NN score script, a filter can be applied on an index before executing the nearest neighbor search. This is useful for dynamic search cases where the index body may vary based on other conditions. Because this approach executes a brute force search, it will not scale as well as the [Approximate approach](../approximate-knn). In some cases, it may be better to think about refactoring your workflow or index structure to use the Approximate approach instead of this approach. 
+The k-NN plugin implements the Elasticsearch score script plugin that can be used to find the exact k-nearest neighbors to a given query point. Using the k-NN score script, a filter can be applied on an index before executing the nearest neighbor search. This is useful for dynamic search cases where the index body may vary based on other conditions. Because this approach executes a brute force search, it will not scale as well as the [Approximate approach](../approximate-knn). In some cases, it may be better to think about refactoring your workflow or index structure to use the Approximate approach instead of this approach.
 
 ## Getting started with the score script
 
@@ -176,11 +176,32 @@ GET my-knn-index-2/_search
 
 A space corresponds to the function used to measure the distance between 2 points in order to determine the k-nearest neighbors. From the k-NN perspective, a lower score equates to a closer and better result. This is the opposite of how Elasticsearch scores results, where a greater score equates to a better result. We include the conversion to Elasticsearch scores in the table below::
 
-spaceType | Distance Function | Elasticsearch Score
-:--- | :--- | :---
-l2 | \[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i)^2 \] | 1 / (1 + Distance Function)
-cosinesimil | \[ Distance(X, Y) = {A &middot; B \over \|A\| &middot; \|B\|} \] | 1 + Distance Function)
-hammingbit | Distance = ones(X xor Y) | 1/(1 + Distance Function)
+<table>
+  <thead style="text-align: left">
+  <tr>
+    <th>spaceType</th>
+    <th>Distance Function</th>
+    <th>Elasticsearch Score</th>
+  </tr>
+  </thead>
+  <tr>
+    <td>l2</td>
+    <td>\[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i)^2 \]</td>
+    <td>1 / (1 + Distance Function)</td>
+  </tr>
+  <tr>
+    <td>cosinesimil</td>
+    <td>\[ {A &middot; B \over \|A\| &middot; \|B\|} =
+    {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
+    where \(\|A\|\) and \(\|B\|\) represent normalized vectors.</td>
+    <td>1 + Distance Function</td>
+  </tr>
+  <tr>
+    <td>hammingbit</td>
+    <td style="text-align:center">Distance = countSetBits(X \(\oplus\) Y)</td>
+    <td> 1 / (1 + Distance Function)</td>
+  </tr>
+</table>
 
 
 Cosine similarity returns a number between -1 and 1, and because Elasticsearch relevance scores can't be below 0, the k-NN plugin adds 1 to get the final score.
