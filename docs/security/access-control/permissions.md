@@ -56,6 +56,10 @@ Rather than creating new action groups from individual permissions, you can ofte
 - cluster:admin/opendistro/reports/instance/get
 - cluster:admin/opendistro/reports/instance/list
 - cluster:admin/opendistro/reports/menu/download
+- cluster:admin/opendistro/asynchronous_search/stats
+- cluster:admin/opendistro/asynchronous_search/delete
+- cluster:admin/opendistro/asynchronous_search/get
+- cluster:admin/opendistro/asynchronous_search/submit
 - cluster:admin/reindex/rethrottle
 - cluster:admin/repository/delete
 - cluster:admin/repository/get

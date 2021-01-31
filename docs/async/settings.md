@@ -1,0 +1,29 @@
+---
+layout: default
+title: Settings
+parent: Asynchronous Search
+nav_order: 4
+---
+
+# Settings
+
+The asynchronous search plugin adds several settings to the standard Elasticsearch cluster settings. They are dynamic, so you can change the default behavior of the plugin without restarting your cluster.
+You can mark them `persistent` or `transient`.
+
+For example, to update the retention period of the result index:
+
+```json
+PUT _cluster/settings
+{
+  "transient": {
+    "opendistro_asynchronous_search.max_wait_for_completion_timeout": "5m"
+  }
+}
+```
+
+Setting | Default | Description
+:--- | :--- | :---
+`opendistro_asynchronous_search.max_search_running_time` | 12 hours | Maximum running time for the search beyond which the search is terminated.
+`opendistro_asynchronous_search.max_running_searches` | 20 | Concurrent searches running per coordinator node.
+`opendistro_asynchronous_search.max_keep_alive` | 5 days | The maximum amount of time search results can be stored in the cluster.
+`opendistro_asynchronous_search.max_wait_for_completion_timeout` | 1 minute | The maximum value for the `wait_for_completion_timeout` parameter.
