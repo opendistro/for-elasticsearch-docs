@@ -94,28 +94,31 @@ If you generate node certificates and have `opendistro_security.ssl.transport.en
 ```bash
 # Root CA
 openssl genrsa -out root-ca-key.pem 2048
-openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
+openssl req -new -x509 -sha256 -key root-ca-key.pem -subj "/DC=com/DC=example/O=Example Com Inc./OU=Example Com Inc. Root CA/CN=Example Com Inc. Root CA" -out root-ca.pem
 # Admin cert
 openssl genrsa -out admin-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
-openssl req -new -key admin-key.pem -out admin.csr
+openssl req -new -key admin-key.pem -subj "/C=de/L=test/O=client/OU=client/CN=kirk" -out admin.csr
 openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
 # Node cert
-openssl genrsa -out node-key-temp.pem 2048
-openssl pkcs8 -inform PEM -outform PEM -in node-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out node-key.pem
-openssl req -new -key node-key.pem -out node.csr
-openssl x509 -req -in node.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node.pem
+openssl genrsa -out esnode-key-temp.pem 2048
+openssl pkcs8 -inform PEM -outform PEM -in esnode-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out esnode-key.pem
+openssl req -new -key esnode-key.pem -subj "/DC=de/L=test/O=node/OU=node/CN=node-0.example.com" -out esnode.csr
+openssl x509 -req -in esnode.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out esnode.pem
 # Cleanup
 rm admin-key-temp.pem
 rm admin.csr
-rm node-key-temp.pem
-rm node.csr
+rm esnode-key-temp.pem
+rm esnode.csr
+rm root-ca.srl
 ```
 
 
 ## Get distinguished names
+To get from current distinguished names (DNs) from certificates:
+openssl x509 -noout -subject -in admin.pem
 
-If you created admin and node certificates, you must specify their distinguished names (DNs) in `elasticsearch.yml` on all nodes:
+If you created admin and node certificates with different DN's, you must specify their DN's in `elasticsearch.yml` on all nodes:
 
 ```yml
 opendistro_security.authcz.admin_dn:
