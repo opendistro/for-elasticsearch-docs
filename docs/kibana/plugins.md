@@ -49,7 +49,7 @@ opendistroTraceAnalyticsKibana    1.12.0.0
       <pre>opendistro-anomaly-detection-kibana  1.10.1.0, 1.11.0.0
 opendistro-alerting                  1.10.1.1, 1.11.0.2
 opendistro_index_management_kibana   1.10.1.0, 1.11.0.0
-opendistro_security_kibana           1.10.1.1, 1.11.0.0
+opendistro_security_kibana_plugin    1.10.1.1, 1.11.0.0
 opendistro-query-workbench           1.11.0.0
 opendistro-notebooks-kibana          1.11.0.0
 </pre>
