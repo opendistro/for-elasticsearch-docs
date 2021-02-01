@@ -9,7 +9,7 @@ has_math: true
 
 # Approximate k-NN Search
 
-The approximate k-NN method uses [nmslib's](https://github.com/nmslib/nmslib/) implementation of the HNSW algorithm to power k-NN search. In this case, approximate means that for a given search, the neighbors returned are an estimate of the true k-nearest neighbors. Of the three methods, this method offers the best search scalability for large data sets. Generally speaking, once the data set gets into the hundreds of thousands of vectors, this approach should be preferred. 
+The approximate k-NN method uses [nmslib's](https://github.com/nmslib/nmslib/) implementation of the HNSW algorithm to power k-NN search. In this case, approximate means that for a given search, the neighbors returned are an estimate of the true k-nearest neighbors. Of the three methods, this method offers the best search scalability for large data sets. Generally speaking, once the data set gets into the hundreds of thousands of vectors, this approach should be preferred.
 
 This plugin builds an HNSW graph of the vectors for each "knn-vector field"/"Lucene segment" pair during indexing that can be used to efficiently find the k-nearest neighbors to a query vector during search. These graphs are loaded into native memory during search and managed by a cache. To pre-load the graphs into memory, please refer to the [warmup API](../api#Warmup). In order to see what graphs are loaded in memory as well as other stats, please refer to the [stats API](../api#Stats). To learn more about segments, please refer to [Apache Lucene's documentation](https://lucene.apache.org/core/8_7_0/core/org/apache/lucene/codecs/lucene87/package-summary.html#package.description). Because the graphs are constructed during indexing, it is not possible to apply a filter on an index and then use this search method. All filters will be applied on the results produced by the approximate nearest neighbor search.
 
@@ -124,7 +124,24 @@ GET my-knn-index-1/_search
 
 A space corresponds to the function used to measure the distance between 2 points in order to determine the k-nearest neighbors. From the k-NN perspective, a lower score equates to a closer and better result. This is the opposite of how Elasticsearch scores results, where a greater score equates to a better result. To convert distances to Elasticsearch scores, we take 1/(1 + distance). Currently, the k-NN plugin supports the following spaces:
 
-spaceType | Distance Function | Elasticsearch Score
-:--- | :--- | :---
-l2 | \[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i)^2 \] | 1 / (1 + Distance Function)
-cosinesimil | \[ Distance(X, Y) = 1 - {A &middot; B \over \|A\| &middot; \|B\|} \] | 1 / (1 + Distance Function)
+<table>
+  <thead style="text-align: left">
+  <tr>
+    <th>spaceType</th>
+    <th>Distance Function</th>
+    <th>Elasticsearch Score</th>
+  </tr>
+  </thead>
+  <tr>
+    <td>l2</td>
+    <td>\[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i)^2 \]</td>
+    <td>1 / (1 + Distance Function)</td>
+  </tr>
+  <tr>
+    <td>cosinesimil</td>
+    <td>\[ {A &middot; B \over \|A\| &middot; \|B\|} =
+    {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
+    where \(\|A\|\) and \(\|B\|\) represent normalized vectors.</td>
+    <td>1 / (1 + Distance Function)</td>
+  </tr>
+</table>
