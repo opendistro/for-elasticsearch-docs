@@ -139,7 +139,23 @@ To see all the configuration settings, choose the **Detector configuration** tab
 1. To enable or disable features, in the **Features** section, choose **Edit** and adjust the feature settings as needed. After you make your changes, choose **Save and start detector**.
 - Choose between automatically starting the detector (recommended) or manually starting the detector at a later time.
 
-### Step 6: Manage your detectors
+### Step 6: Analyze historical data
+
+Analyzing historical data helps you get familiar with the anomaly detection plugin. You can also evaluate the performance of a detector with historical data to further fine-tune it.
+
+To use a historical detector, the date range that you specify must have data present in at least 1,000 detection intervals.
+{: .note }
+
+1. Choose **Historical detectors** and **Create historical detector**.
+1. Enter the **Name** of the detector and a brief **Description**.
+1. For **Data source**, choose the index that you want to use as the data source. You can optionally use index patterns to choose multiple indices.
+1. For **Time range**, select a time range for historical analysis.
+1. For **Detector settings**, you can choose to use settings of an existing detector. Or, choose the **Timestamp field** in your index, add individual features to the detector, and set the detector interval.
+1. You can choose to run the historical detector automatically after creating.
+1. Choose **Create**.
+- You can stop the historical detector even before it completes.
+
+### Step 7: Manage your detectors
 
 Go to the **Detector details** page to change or delete your detectors.
 
