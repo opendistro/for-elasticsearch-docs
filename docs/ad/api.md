@@ -249,7 +249,7 @@ POST _opendistro/_anomaly_detection/detectors
   "description": "test historical detector",
   "time_field": "timestamp",
   "indices": [
-    "nab_art_daily_jumpsdown"
+    "host-cloudwatch"
   ],
   "filter_query": {
     "match_all": {
@@ -775,7 +775,16 @@ POST _opendistro/_anomaly_detection/detectors/results/_search
 }
 ```
 
-In historical detectors, specify the `detector_id`:
+In historical detectors, specify the `detector_id`.
+To get the latest task:
+
+#### Request
+
+```json
+GET _opendistro/_anomaly_detection/detectors/<detector_id>?task=true
+```
+
+To query the anomaly results with `task_id`:
 
 #### Request
 
@@ -784,8 +793,8 @@ GET _opendistro/_anomaly_detection/detectors/results/_search
 {
   "query": {
     "term": {
-      "detector_id": {
-        "value": "dZc8WncBgO2zoQoFWVBA"
+      "task_id": {
+        "value": "NnlV9HUBQxqfQ7vBJNzy"
       }
     }
   }
@@ -925,7 +934,7 @@ GET _opendistro/_anomaly_detection/detectors/results/_search
 ## Delete detector
 
 Deletes a detector based on the `detector_id`.
-To delete a historical detector, you need to first stop the detector.
+To delete a detector, you need to first stop the detector.
 
 #### Request
 
@@ -959,7 +968,8 @@ DELETE _opendistro/_anomaly_detection/detectors/<detectorId>
 
 ## Update detector
 
-Updates a detector with any changes, including the description or adding or removing of features. You can't update a real-time detector to a historical detector or vice versa.
+Updates a detector with any changes, including the description or adding or removing of features.
+To update a detector, you need to first stop the detector.
 
 #### Request
 
@@ -1075,7 +1085,7 @@ PUT _opendistro/_anomaly_detection/detectors/<detectorId>
 }
 ```
 
-To update a historical detector, you need to first stop the detector.
+To update a historical detector:
 
 #### Request
 
