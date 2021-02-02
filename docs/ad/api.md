@@ -1648,7 +1648,7 @@ GET _opendistro/_anomaly_detection/stats/<stat>
 }
 ```
 
-You see additional fields for a historical detector:
+Historical detectors contain additional fields:
 
 #### Sample response
 

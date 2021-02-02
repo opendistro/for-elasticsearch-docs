@@ -150,10 +150,10 @@ To use a historical detector, the date range that you specify must have data pre
 1. Enter the **Name** of the detector and a brief **Description**.
 1. For **Data source**, choose the index that you want to use as the data source. You can optionally use index patterns to choose multiple indices.
 1. For **Time range**, select a time range for historical analysis.
-1. For **Detector settings**, you can choose to use settings of an existing detector. Or, choose the **Timestamp field** in your index, add individual features to the detector, and set the detector interval.
+1. For **Detector settings**, choose to use settings of an existing detector. Or choose the **Timestamp field** in your index, add individual features to the detector, and set the detector interval.
 1. You can choose to run the historical detector automatically after creating.
 1. Choose **Create**.
-- You can stop the historical detector even before it completes.
+   - You can stop the historical detector even before it completes.
 
 ### Step 7: Manage your detectors
 
@@ -161,7 +161,7 @@ Go to the **Detector details** page to change or delete your detectors.
 
 1. To make changes to your detector, choose the detector name to open the detector details page.
 1. Choose **Actions**, and then choose **Edit detector**.
- - You need to stop the detector to change the detector configuration. In the pop-up box, confirm that you want to stop the detector and proceed.
+   - You need to stop the detector to change the detector configuration. In the pop-up box, confirm that you want to stop the detector and proceed.
 1. After making your changes, choose **Save changes**.
 1. To delete your detector, choose **Actions**, and then choose **Delete detector**.
-- In the pop-up box, type `delete` to confirm and choose **Delete**.
+   - In the pop-up box, type `delete` to confirm and choose **Delete**.
