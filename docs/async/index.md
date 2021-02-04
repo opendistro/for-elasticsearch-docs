@@ -7,11 +7,11 @@ has_children: true
 
 # Asynchronous Search
 
-Searching large volumes of data can take a long time, especially if it’s across cold nodes or multiple remote clusters.
+Searching large volumes of data can take a long time, especially if it’s across warm nodes or multiple remote clusters.
 
 Asynchronous search lets you run search requests that execute in the background. You can monitor the progress of these searches and get back partial results as they become available. After the search completes, you can save the results to examine at a later time.
 
-Asynchronous search requires Elasticsearch 7.9 or higher.
+Asynchronous search requires Elasticsearch 7.10.2 or higher.
 
 ## REST API
 
@@ -110,6 +110,20 @@ Options | Description
 `successful` | The number of shard responses the coordinating node received successfully.
 `aggregations` | The partial aggregation results completed by the shards so far.
 
+This table lists the possible states.
+
+Options | Description
+:--- | :---
+`submitted` | The number of asynchronous search requests submitted.
+`initialized` | The number of asynchronous search contexts successfully created in memory.
+`rejected` | The number of asynchronous search requests rejected.
+`search_completed` | The number of asynchronous search requests that completed with a successful response.
+`search_failed` | The number of asynchronous search requests that completed with a failed response.
+`persisted` | The number of asynchronous search requests whose final result successfully persisted in the cluster.
+`persist_failed` | The number of asynchronous search requests whose final result failed to persist in the cluster.
+`running_current` | The number of asynchronous search requests running on a given coordinator node.
+`cancelled` | The number of asynchronous search requests cancelled when running.
+
 ## Get partial results
 
 After you submit an asynchronous search request, you can request partial responses with the ID that you see in the asynchronous search response.
@@ -180,8 +194,6 @@ GET _opendistro/_asynchronous_search/<ID>?pretty
 }
 ```
 
-After the response is successfully persisted, you get back the `STORE_RESIDENT` state in the response. 
-
 You can poll the ID with the `wait_for_completion_timeout` parameter to wait for the results received for the time you specify.
 
 For asynchronous searches with `keep_on_completion` as `true` and a sufficiently long `keep_alive` time, you can keep polling the IDs until the search completes. If you don’t want to periodically poll each ID, you can retain the results in your cluster with the `keep_alive` parameter and come back to it at a later time.
@@ -251,17 +263,3 @@ GET _opendistro/_asynchronous_search/_stats
   }
 }
 ```
-
-#### Response parameters
-
-Options | Description
-:--- | :---
-`submitted` | The number of asynchronous search requests submitted.
-`initialized` | The number of asynchronous search requests initialized.
-`rejected` | The number of asynchronous search requests rejected.
-`search_completed` | The number of asynchronous search requests that completed with a successful response.
-`search_failed` | The number of asynchronous search requests that completed with a failed response.
-`persisted` | The number of asynchronous search requests whose final result successfully persisted in the cluster.
-`persist_failed` | The number of asynchronous search requests whose final result failed to persist in the cluster.
-`running_current` | The number of asynchronous search requests running on a given coordinator node.
-`cancelled` | The number of asynchronous search requests cancelled when running.

@@ -26,17 +26,6 @@ Use backend roles to configure fine-grained access to asynchronous searches base
 
 First, make sure that your users have the appropriate [backend roles](../../security/access-control/). Backend roles usually come from an [LDAP server](../../security/configuration/ldap/) or [SAML provider](../../security/configuration/saml/), but if you use the internal user database, you can use the REST API to [add them manually](../../security/access-control/api/#create-user).
 
-Next, enable the following setting:
-
-```json
-PUT _cluster/settings
-{
-  "transient": {
-    "opendistro.async.filter_by_backend_roles": "true"
-  }
-}
-```
-
 Now when users view asynchronous search resources in Kibana (or make REST API calls), they only see asynchronous searches submitted by users who have a subset of the backend role.
 For example, consider two users: `judy` and `elon`.
 
