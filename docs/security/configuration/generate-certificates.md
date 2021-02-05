@@ -112,6 +112,12 @@ rm node-key-temp.pem
 rm node.csr
 ```
 
+If you already know the certificate details and don't want to specify them as the script runs, use the `-subj` option in your `root-ca.pem` and CSR commands:
+
+```bash
+openssl req -new -key node-key.pem -subj "/C=CA/ST=ONTARIO/L=TORONTO/O=ORG/OU=UNIT/CN=node1.example.com" -out node.csr
+```
+
 
 ## Get distinguished names
 

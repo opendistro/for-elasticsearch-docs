@@ -396,7 +396,11 @@ POST _opendistro/_ism/remove/index_1
 
 ## Update managed index policy
 
-Updates the managed index policy to a new policy (or to a new version of the policy). You can use an index pattern to update multiple indices at once. When updating multiple indices, you might want to include a state filter to only affect certain managed indices.
+Updates the managed index policy to a new policy (or to a new version of the policy). You can use an index pattern to update multiple indices at once. When updating multiple indices, you might want to include a state filter to only affect certain managed indices. The change policy filters out all the existing managed indices and only applies the change to the ones in the state that you specify. You can also explicitly specify the state that the managed index transitions to after the change policy takes effect.
+
+A policy change is an asynchronous background process. The changes are queued and are not executed immediately by the background process. This delay in execution protects the currently running managed indices from being put into a broken state. If the policy you are changing to has only some small configuration changes, then the change takes place immediately. For example, if the policy changes the `min_index_age` parameter in a rollover condition from `1000d` to `100d`, this change takes place immediately in its next execution. If the change modifies the state, actions, or the order of actions of the current state the index is in, then the change happens at the end of its current state before transitioning to a new state.
+
+In this example, the policy applied on the `index_1` index is changed to `policy_1`, which could either be a completely new policy or an updated version of its existing policy. The process only applies the change if the index is currently in the `searches` state. After this change in policy takes place, `index_1` transitions to the `delete` state.
 
 #### Request
 
