@@ -2,7 +2,7 @@
 layout: default
 title: Approximate Search
 nav_order: 1
-parent: KNN
+parent: k-NN
 has_children: false
 has_math: true
 ---
@@ -11,13 +11,13 @@ has_math: true
 
 The approximate k-NN method uses [nmslib's](https://github.com/nmslib/nmslib/) implementation of the HNSW algorithm to power k-NN search. In this case, approximate means that for a given search, the neighbors returned are an estimate of the true k-nearest neighbors. Of the three methods, this method offers the best search scalability for large data sets. Generally speaking, once the data set gets into the hundreds of thousands of vectors, this approach should be preferred.
 
-This plugin builds an HNSW graph of the vectors for each "knn-vector field"/"Lucene segment" pair during indexing that can be used to efficiently find the k-nearest neighbors to a query vector during search. These graphs are loaded into native memory during search and managed by a cache. To pre-load the graphs into memory, please refer to the [warmup API](../api#Warmup). In order to see what graphs are loaded in memory as well as other stats, please refer to the [stats API](../api#Stats). To learn more about segments, please refer to [Apache Lucene's documentation](https://lucene.apache.org/core/8_7_0/core/org/apache/lucene/codecs/lucene87/package-summary.html#package.description). Because the graphs are constructed during indexing, it is not possible to apply a filter on an index and then use this search method. All filters will be applied on the results produced by the approximate nearest neighbor search.
+This plugin builds an HNSW graph of the vectors for each "knn-vector field"/"Lucene segment" pair during indexing that can be used to efficiently find the k-nearest neighbors to a query vector during search. These graphs are loaded into native memory during search and managed by a cache. To pre-load the graphs into memory, please refer to the [warmup API](api#Warmup). In order to see what graphs are loaded in memory as well as other stats, please refer to the [stats API](api#Stats). To learn more about segments, please refer to [Apache Lucene's documentation](https://lucene.apache.org/core/8_7_0/core/org/apache/lucene/codecs/lucene87/package-summary.html#package.description). Because the graphs are constructed during indexing, it is not possible to apply a filter on an index and then use this search method. All filters will be applied on the results produced by the approximate nearest neighbor search.
 
 ## Get started with approximate k-NN
 
 To use the k-NN plugin's approximate search functionality, you must first create a k-NN index with the index setting, `index.knn` to `true`. This setting tells the plugin to create HNSW graphs for the index.
 
-Additionally, if you are using the approximate k-nearest neighbor method, you should specify `knn.space_type` to the space that you are interested in. This setting cannot be changed after it is set. Please refer to the [spaces section](#spaces) to see what spaces we support! By default, `index.knn.space_type` is `l2`. For more information on index settings, such as algorithm parameters that can be tweaked to tune performance, please refer to the [documentation](../settings#IndexSettings).
+Additionally, if you are using the approximate k-nearest neighbor method, you should specify `knn.space_type` to the space that you are interested in. This setting cannot be changed after it is set. Please refer to the [spaces section](#spaces) to see what spaces we support! By default, `index.knn.space_type` is `l2`. For more information on index settings, such as algorithm parameters that can be tweaked to tune performance, please refer to the [documentation](settings#IndexSettings).
 
 Next, you must add one or more fields of the `knn_vector` data type. Here is an example that creates an index with two `knn_vector` fields and uses cosine similarity:
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Performance Tuning
-parent: KNN
+parent: k-NN
 nav_order: 7
 ---
 
@@ -35,7 +35,7 @@ Having replicas set to 0, will avoid duplicate construction of graphs in both pr
 
 3. Increase number of indexing threads
 
-If the hardware we choose has multiple cores, we could allow multiple threads in graph construction and there by speed up the indexing process. You could determine the number of threads to be alloted by using the [knnalgo_paramindex_thread_qty]() setting.
+If the hardware we choose has multiple cores, we could allow multiple threads in graph construction and there by speed up the indexing process. You could determine the number of threads to be alloted by using the [knn.algo_param.index_thread_qty](../settings/#Cluster-settings) setting.
 
 Please keep an eye on CPU utilization and choose right number of threads. Since graph construction is costly, having multiple threads can put additional load on CPU. 
 
@@ -94,4 +94,4 @@ As an example, assume that we have 1 Million vectors with dimension of 256 and M
 
 The standard KNN query and custom scoring option perform differently. Test using a representative set of documents to see if the search results and latencies match your expectations.
 
-Custom scoring works best if the initial filter reduces the number of documents to no more than 20,000. Increasing shard count can improve latencies, but be sure to keep shard size within [the recommended guidelines](../elasticsearch/#primary-and-replica-shards).
+Custom scoring works best if the initial filter reduces the number of documents to no more than 20,000. Increasing shard count can improve latencies, but be sure to keep shard size within [the recommended guidelines](../../elasticsearch/#primary-and-replica-shards).

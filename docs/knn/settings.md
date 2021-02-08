@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Settings
-parent: KNN
+parent: k-NN
 nav_order: 6
 ---
 

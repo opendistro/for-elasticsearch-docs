@@ -1,6 +1,6 @@
 ---
 layout: default
-title: KNN
+title: k-NN
 nav_order: 50
 has_children: true
 has_toc: false
@@ -20,7 +20,7 @@ This plugin supports three different methods for obtaining the k-nearest neighbo
 
     Approximate k-NN is the best choice for searches over large indices (i.e. hundreds of thousands of vectors or more) that require low latency. Approximate k-NN should not be used if a filter will be applied on the index before the k-NN search, greatly reducing the number of vectors to be searched. In this case, either the script scoring method or the painless extensions should be used.
 
-    For more details refer to the [Approximate k-NN section](../approximate-knn).
+    For more details refer to the [Approximate k-NN section](approximate-knn).
 
 2. **Script Score k-NN**
 
@@ -28,7 +28,7 @@ This plugin supports three different methods for obtaining the k-nearest neighbo
 
     This approach should be used for searches over smaller bodies of documents or when a pre-filter is needed. Using this approach on large indices may lead to high latencies.
 
-    For more details refer to the [k-NN Script Score section](../knn-score-script).
+    For more details refer to the [k-NN Script Score section](knn-score-script).
 
 3. **Painless extensions**
 
@@ -36,7 +36,7 @@ This plugin supports three different methods for obtaining the k-nearest neighbo
 
     This approach has slightly slower query performance compared to Script Score k-NN. This approach should be preferred over Script Score k-NN if the use case requires more customization over the final score.
 
-    For more details refer to the [painless functions sectior](../painless-functions).
+    For more details refer to the [painless functions section](painless-functions).
 
 
 Overall, for larger data sets, users should generally choose the approximate nearest neighbor method, because it scales significantly better. For smaller data sets, where a user may want to apply a filter, they should choose the custom scoring approach. If users have a more complex use case where they need to use a distance function as part of their scoring method, they should use the painless scripting approach. 

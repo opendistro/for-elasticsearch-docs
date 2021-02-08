@@ -2,7 +2,7 @@
 layout: default
 title: Exact k-NN with Scoring Script
 nav_order: 2
-parent: KNN
+parent: k-NN
 has_children: false
 has_math: true
 ---
@@ -101,7 +101,7 @@ All parameters are required.
 *Note* -- After ODFE 1.11, `vector` was replaced by `query_value` due to the addition of the `bithamming` space.
 
 
-The [post filter example in the approximate approach](../approximate-knn#UsingApproximatek-NNWithFilters) shows a search that returns fewer than `k` results. If you want to avoid this situation, the score script method lets you essentially invert the order of events. In other words, you can filter down the set of documents you want to execute the k-nearest neighbor search over.
+The [post filter example in the approximate approach](../approximate-knn/#using-approximate-k-nn-with-filters) shows a search that returns fewer than `k` results. If you want to avoid this situation, the score script method lets you essentially invert the order of events. In other words, you can filter down the set of documents you want to execute the k-nearest neighbor search over.
 
 This example shows a pre-filter approach to k-NN search with the score script approach. First, create the index:
 

@@ -2,7 +2,7 @@
 layout: default
 title: API
 nav_order: 4
-parent: KNN
+parent: k-NN
 has_children: false
 ---
 
@@ -38,7 +38,7 @@ Statistic |  Description
 `script_query_requests` | The total number of script queries. This is only relevant to k-NN score script search.
 `script_query_errors` | The number of errors during script queries. This is only relevant to k-NN score script search.
 
-### Examples
+### Usage
 ```
 
 GET /_opendistro/_knn/stats?pretty
