@@ -71,6 +71,5 @@ PUT _opendistro/_security/api/rolesmapping/async_full_access
 
 Because they have different backend roles, an asynchronous search submitted by `judy` will not be visible to `elon` and vice versa.
 
-`judy` needs to have at least the superset of all roles that `elon` has to see `elon`'s asynchronous searches.
-
+`judy` needs to have at least the superset of all roles that `elon` has to see the asynchronous searches that `elon` started.
 For example, if `judy` has 5 backend roles and `elon` one has 1 of these roles, then `judy` can see asynchronous searches submitted by `elon` but `elon` can’t see the asynchronous searches submitted by `judy`. This means that `judy` can perform GET and DELETE operations on asynchronous searches submitted by `elon` but not vice versa.
