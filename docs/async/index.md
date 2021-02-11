@@ -7,9 +7,9 @@ has_children: true
 
 # Asynchronous Search
 
-Searching large volumes of data can take a long time, especially if it’s across warm nodes or multiple remote clusters.
+Searching large volumes of data can take a long time, especially if you're searching across warm nodes or multiple remote clusters.
 
-Asynchronous search lets you run search requests that execute in the background. You can monitor the progress of these searches and get back partial results as they become available. After the search completes, you can save the results to examine at a later time.
+Asynchronous search lets you run search requests that run in the background. You can monitor the progress of these searches and get back partial results as they become available. After the search finishes, you can save the results to examine at a later time.
 
 Asynchronous search requires Elasticsearch 7.10.2 or higher.
 
@@ -25,11 +25,11 @@ You can specify the following options.
 
 Options | Description | Default value | Required
 :--- | :--- |:--- |:--- |
-`wait_for_completion_timeout` |  Specify the amount of time you plan to wait for the results. Whatever results you get within this time, you can see just like a normal search. The remaining results you can poll based on an ID. The maximum value is 300 seconds. | 1 second | No
-`keep_on_completion` |  Whether you want to save the results in the cluster after the search is complete. You can examine the stored results at a later time. | `false` | No
-`keep_alive` |  Specify the amount of time the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. The saved search results are deleted after this period or if the search is cancelled. Note that this includes the query execution time. If the query overruns this time, the process cancels this query automatically. | 12 hours | No
+`wait_for_completion_timeout` |  Specifies the amount of time that you plan to wait for the results. You can see whatever results you get within this time just like in a normal search. You can poll the remaining results based on an ID. The maximum value is 300 seconds. | 1 second | No
+`keep_on_completion` |  Specifies whether you want to save the results in the cluster after the search is complete. You can examine the stored results at a later time. | `false` | No
+`keep_alive` |  Specifies the amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. The saved search results are deleted after this period or if the search is cancelled. Note that this includes the query execution time. If the query overruns this time, the process cancels this query automatically. | 12 hours | No
 
-#### Sample Request
+#### Sample request
 
 ```json
 POST _opendistro/_asynchronous_search/?pretty&size=10&wait_for_completion_timeout=1ms&keep_on_completion=true&request_cache=false
@@ -99,30 +99,16 @@ POST _opendistro/_asynchronous_search/?pretty&size=10&wait_for_completion_timeou
 
 Options | Description
 :--- | :---
-`id` | Use the ID of an asynchronous search to monitor its progress, get its partial results, and/or delete the results. If the asynchronous search completes within the timeout period, the response won’t include the ID as the results are not stored in the cluster.
-`state` | Whether the search is still running or it has completed and if the results persist in the cluster. The possible states are `RUNNING`, `COMPLETED`, or `PERSISTED`.
+`id` | The ID of an asynchronous search. Use this ID to monitor the progress of the search, get its partial results, and/or delete the results. If the asynchronous search finishes within the timeout period, the response doesn't include the ID because the results aren't stored in the cluster.
+`state` | Specifies whether the search is still running or if it has finished, and if the results persist in the cluster. The possible states are `RUNNING`, `COMPLETED`, and `PERSISTED`.
 `start_time_in_millis` | The start time in milliseconds.
 `expiration_time_in_millis` | The expiration time in milliseconds.
 `took` | The total time that the search is running.
 `response` | The actual search response.
-`num_reduce_phases` | The number of times the coordinating node aggregates results from batches of shard responses (5 by default). If this number increases compared to the last retrieved results, you can expect additional results included in the search response
-`total` | The total number of shards that executes the search.
-`successful` | The number of shard responses the coordinating node received successfully.
-`aggregations` | The partial aggregation results completed by the shards so far.
-
-This table lists the possible states.
-
-Options | Description
-:--- | :---
-`submitted` | The number of asynchronous search requests submitted.
-`initialized` | The number of asynchronous search contexts successfully created in memory.
-`rejected` | The number of asynchronous search requests rejected.
-`search_completed` | The number of asynchronous search requests that completed with a successful response.
-`search_failed` | The number of asynchronous search requests that completed with a failed response.
-`persisted` | The number of asynchronous search requests whose final result successfully persisted in the cluster.
-`persist_failed` | The number of asynchronous search requests whose final result failed to persist in the cluster.
-`running_current` | The number of asynchronous search requests running on a given coordinator node.
-`cancelled` | The number of asynchronous search requests cancelled when running.
+`num_reduce_phases` | The number of times that the coordinating node aggregates results from batches of shard responses (5 by default). If this number increases compared to the last retrieved results, you can expect additional results to be included in the search response.
+`total` | The total number of shards that run the search.
+`successful` | The number of shard responses that the coordinating node received successfully.
+`aggregations` | The partial aggregation results that have been completed by the shards so far.
 
 ## Get partial results
 
@@ -194,13 +180,15 @@ GET _opendistro/_asynchronous_search/<ID>?pretty
 }
 ```
 
-You can poll the ID with the `wait_for_completion_timeout` parameter to wait for the results received for the time you specify.
+After the response is successfully persisted, you get back the `STORE_RESIDENT` state in the response.
 
-For asynchronous searches with `keep_on_completion` as `true` and a sufficiently long `keep_alive` time, you can keep polling the IDs until the search completes. If you don’t want to periodically poll each ID, you can retain the results in your cluster with the `keep_alive` parameter and come back to it at a later time.
+You can poll the ID with the `wait_for_completion_timeout` parameter to wait for the results received for the time that you specify.
+
+For asynchronous searches with `keep_on_completion` as `true` and a sufficiently long `keep_alive` time, you can keep polling the IDs until the search finishes. If you don’t want to periodically poll each ID, you can retain the results in your cluster with the `keep_alive` parameter and come back to it at a later time.
 
 ## Delete searches and results
 
-You can use the DELETE API to delete any ongoing asynchronous search by its ID. If the search is still running, it’s cancelled. If the search is complete, the saved search results are deleted.
+You can use the DELETE API operation to delete any ongoing asynchronous search by its ID. If the search is still running, it’s canceled. If the search is complete, the saved search results are deleted.
 
 ```json
 DELETE _opendistro/_asynchronous_search/<ID>?pretty
@@ -216,7 +204,7 @@ DELETE _opendistro/_asynchronous_search/<ID>?pretty
 
 ## Monitor stats
 
-You can use the stats API to monitor running, completed, and/or persisted asynchronous searches.
+You can use the stats API operation to monitor asynchronous searches that are running, completed, and/or persisted.
 
 ```json
 GET _opendistro/_asynchronous_search/_stats
@@ -263,3 +251,17 @@ GET _opendistro/_asynchronous_search/_stats
   }
 }
 ```
+
+#### Response parameters
+
+Options | Description
+:--- | :---
+`submitted` | The number of asynchronous search requests that were submitted.
+`initialized` | The number of asynchronous search requests that were initialized.
+`rejected` | The number of asynchronous search requests that were rejected.
+`search_completed` | The number of asynchronous search requests that completed with a successful response.
+`search_failed` | The number of asynchronous search requests that completed with a failed response.
+`persisted` | The number of asynchronous search requests whose final result successfully persisted in the cluster.
+`persist_failed` | The number of asynchronous search requests whose final result failed to persist in the cluster.
+`running_current` | The number of asynchronous search requests that are running on a given coordinator node.
+`cancelled` | The number of asynchronous search requests that were canceled while the search was running.

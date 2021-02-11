@@ -8,13 +8,13 @@ has_children: false
 
 # Asynchronous search security
 
-You can use the security plugin with asynchronous searches to limit non-admin users to specific actions. For example, you might want some users to only be able to submit or delete asynchronous searches, while others to only view its results.
+You can use the security plugin with asynchronous searches to limit non-admin users to specific actions. For example, you might want some users to only be able to submit or delete asynchronous searches, while you might want others to only view the results.
 
-All asynchronous search indices are protected as system indices. Only a super admin user or an admin user with a TLS certificate can access system indices. For more information, see [System indices](../../security/configuration/system-indices/).
+All asynchronous search indices are protected as system indices. Only a super admin user or an admin user with a Transport Layer Security (TLS) certificate can access system indices. For more information, see [System indices](../../security/configuration/system-indices/).
 
 ## Basic permissions
 
-As an admin user, you can use the security plugin to assign specific permissions to users based on which APIs they need access to. For a list of supported APIs, see [Asynchronous Search](../).
+As an admin user, you can use the security plugin to assign specific permissions to users based on which API operations they need access to. For a list of supported APIs operations, see [Asynchronous search](../).
 
 The security plugin has two built-in roles that cover most asynchronous search use cases: `asynchronous_search_full_access` and `asynchronous_search_read_access`. For descriptions of each, see [Predefined roles](../../security/access-control/users-roles/#predefined-roles).
 
@@ -24,9 +24,9 @@ If these roles don’t meet your needs, mix and match individual asynchronous se
 
 Use backend roles to configure fine-grained access to asynchronous searches based on roles. For example, users of different departments in an organization can view asynchronous searches owned by their own department.
 
-First, make sure that your users have the appropriate [backend roles](../../security/access-control/). Backend roles usually come from an [LDAP server](../../security/configuration/ldap/) or [SAML provider](../../security/configuration/saml/), but if you use the internal user database, you can use the REST API to [add them manually](../../security/access-control/api/#create-user).
+First, make sure that your users have the appropriate [backend roles](../../security/access-control/). Backend roles usually come from an [LDAP server](../../security/configuration/ldap/) or [SAML provider](../../security/configuration/saml/). However, if you use the internal user database, you can use the REST API to [add them manually](../../security/access-control/api/#create-user).
 
-Now when users view asynchronous search resources in Kibana (or make REST API calls), they only see asynchronous searches submitted by users who have a subset of the backend role.
+Now when users view asynchronous search resources in Kibana (or make REST API calls), they only see asynchronous searches that are submitted by users who have a subset of the backend role.
 For example, consider two users: `judy` and `elon`.
 
 `judy` has an IT backend role:
@@ -71,5 +71,6 @@ PUT _opendistro/_security/api/rolesmapping/async_full_access
 
 Because they have different backend roles, an asynchronous search submitted by `judy` will not be visible to `elon` and vice versa.
 
-`judy` needs to have at least the superset of all roles that `elon` has to see the asynchronous searches that `elon` started.
-For example, if `judy` has 5 backend roles and `elon` one has 1 of these roles, then `judy` can see asynchronous searches submitted by `elon` but `elon` can’t see the asynchronous searches submitted by `judy`. This means that `judy` can perform GET and DELETE operations on asynchronous searches submitted by `elon` but not vice versa.
+`judy` needs to have at least the superset of all roles that `elon` has to see `elon`'s asynchronous searches.
+
+For example, if `judy` has five backend roles and `elon` one has one of these roles, then `judy` can see asynchronous searches submitted by `elon`, but `elon` can’t see the asynchronous searches submitted by `judy`. This means that `judy` can perform GET and DELETE operations on asynchronous searches that are submitted by `elon`, but not the reverse.
