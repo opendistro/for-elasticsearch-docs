@@ -9,6 +9,9 @@ nav_order: 5
 
 Index templates let you initialize new indices with predefined mappings and settings. For example, if you continuously index log data, you can define an index template so that all of these indices have the same number of shards and replicas.
 
+Elasticsearch switched from `_template` to `_index_template` in version 7.8. Use `_template` for older versions of Elasticsearch.
+{: .note }
+
 ---
 
 #### Table of contents
