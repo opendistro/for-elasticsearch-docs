@@ -16,7 +16,7 @@ This request returns information about all of your tasks:
 GET _tasks
 ```
 
-By including a task ID, you can get information specific to a particular task. Note that a task's ID consists of the node's identifying string and the task's numerical ID. For example, if your node's identifying string is `nodestring` and the task's numerical ID is `1234`, then your task's ID is `nodestring:1234`.
+By including a task ID, you can get information specific to a particular task. Note that a task's ID consists of a node's identifying string and the task's numerical ID. For example, if your node's identifying string is `nodestring` and the task's numerical ID is `1234`, then your task's ID is `nodestring:1234`. You can find this information by running the `_tasks` API.
 
 ```
 GET _tasks/<task_id>
@@ -102,7 +102,7 @@ POST _tasks/_cancel?nodes=odfe-node1,odfe-node2
 
 ## Attaching Headers to Tasks
 
-To associate requests with tasks for better tracking, you can provide a `X-Opaque-Id:<ID_number>` header as part of the HTTPS request reader of your `curl` command, and the API will attach the specified ID number in the returned result.
+To associate requests with tasks for better tracking, you can provide a `X-Opaque-Id:<ID_number>` header as part of the HTTPS request reader of your `curl` command, and the API will attach the specified header in the returned result.
 
 Usage:
 
@@ -162,9 +162,9 @@ content-length: 768
   }
 }
 ```
-This operation supports the same parameters as the `tasks` API, so you can attach the `X-Opaque-Id` to specific tasks.
+This operation supports the same parameters as the `tasks` API, so you can associate `X-Opaque-Id` with specific tasks.
 
-This command assigns the `X-Opaque-Id: 123456` to tasks in the node `odfe-node1`.
+This command associates `X-Opaque-Id: 123456` with tasks in the node `odfe-node1`.
 
 ```bash
 curl -i -H "X-Opaque-Id: 123456" "https://localhost:9200/_tasks?nodes=odfe-node1" -u 'admin:admin' --insecure
