@@ -39,3 +39,13 @@ Definitions let you schedule reports for periodic creation.
    For scheduled reports, choose either **Recurring** or **Cron based**. You can receive reports daily or at some other time interval. Cron expressions give you even more flexiblity. See [Cron expression reference](../../alerting/cron/) for more information.
 
 1. Choose **Create**.
+
+## Troubleshooting
+
+### Chromium fails to launch
+
+This problem occurs due to two reasons:
+
+1. You don't have the correct version of `headless-chrome` to match the OS on which Kibana is running. Download the correct version of `headless-chrome` from [here](https://github.com/opendistro-for-elasticsearch/kibana-reports/releases/tag/chromium-1.12.0.0).
+
+2. You're missing additional dependencies. Install the required dependencies for your OS from the [additional libraries](https://github.com/opendistro-for-elasticsearch/kibana-reports/tree/dev/kibana-reports/rendering-engine/headless-chrome) section.
