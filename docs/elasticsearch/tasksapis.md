@@ -10,7 +10,7 @@ has_math: false
 
 You can use the `_tasks` API to see what tasks are currently executing in your cluster.
 
-This request returns information about all of your tasks.
+This request returns information about all of your tasks:
 
 ```
 GET _tasks
