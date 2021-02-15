@@ -29,6 +29,21 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.10.2</td>
+    <td>
+      <pre>opendistroAlertingKibana          1.13.0.0
+opendistroAnomalyDetectionKibana  1.13.0.0
+opendistroGanttChartKibana        1.13.0.0
+opendistroIndexManagementKibana   1.13.0.1
+opendistroNotebooksKibana         1.13.0.0
+opendistroQueryWorkbenchKibana    1.13.0.0
+opendistroReportsKibana           1.13.0.0
+opendistroSecurityKibana          1.13.0.1
+opendistroTraceAnalyticsKibana    1.13.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.10.0</td>
     <td>
       <pre>opendistroAnomalyDetectionKibana  1.12.0.0
