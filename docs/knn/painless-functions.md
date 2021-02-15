@@ -61,6 +61,11 @@ The following table contains the available painless functions the k-NN plugin pr
     <td>This function calculates the square of the L2 distance (Euclidean distance) between a given query vector and document vectors. The shorter the distance, the more relevant the document is, so this example inverts the return value of the l2Squared function. If the document vector matches the query vector, the result is 0, so this example also adds 1 to the distance to avoid divide by zero errors.</td>
   </tr>
   <tr>
+    <td>l1Norm</td>
+    <td><code>float l1Norm (float[] queryVector, doc['vector field'])</code></td>
+    <td>This function calculates the L1 Norm distance (Manhattan distance) between a given query vector and document vectors.</td>
+  </tr>
+  <tr>
     <td>cosineSimilarity</td>
     <td><code>float cosineSimilarity (float[] queryVector, doc['vector field'])</code></td>
     <td>Cosine similarity is inner product of the query vector and document vector normalized to both have length 1. If magnitude of the query vector does not change throughout the query, users can pass magnitude of query vector optionally to improve the performance instead of calculating the magnitude every time for every filtered document: <code>float cosineSimilarity (float[] queryVector, doc['vector field'], float normQueryVector)</code>. In general, range of cosine similarity is [-1, 1], but in case of information retrieval, the cosine similarity of two documents will range from 0 to 1, since tf-idf cannot be negative. Hence, we add 1.0 to the cosine similarity to score always positive. </td>
