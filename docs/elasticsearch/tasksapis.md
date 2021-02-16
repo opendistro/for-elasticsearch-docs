@@ -16,7 +16,7 @@ This request returns information about all of your tasks:
 GET _tasks
 ```
 
-By including a task ID, you can get information specific to a particular task. Note that a task's ID consists of a node's identifying string and the task's numerical ID. For example, if your node's identifying string is `nodestring` and the task's numerical ID is `1234`, then your task's ID is `nodestring:1234`. You can find this information by running the `_tasks` API.
+By including a task ID, you can get information specific to a particular task. Note that a task ID consists of a node's identifying string and the task's numerical ID. For example, if your node's identifying string is `nodestring` and the task's numerical ID is `1234`, then your task ID is `nodestring:1234`. You can find this information by running the `_tasks` API.
 
 ```
 GET _tasks/<task_id>
@@ -36,6 +36,8 @@ timeout | time | Explicit operation timeout. (default: 30 seconds)
 master_timeout | time | Time to wait for a connection to the master node. (default: 30 seconds)
 
 For example, this sample request returns tasks currently running on a node named `odfe-node1`.
+
+Sample response:
 
 ```json
 GET /_tasks?nodes=odfe-node1
@@ -80,9 +82,9 @@ GET /_tasks?nodes=odfe-node1
 }
 ```
 
-## Task Cancelling
+## Task canceling
 
-After getting a list of tasks, you can cancel all cancellable tasks with this request:
+After getting a list of tasks, you can cancel all cancelable tasks with this request:
 
 ```
 POST _tasks/_cancel
@@ -94,13 +96,13 @@ You can also cancel a task by including specific task ID.
 POST _tasks/<task_id>/_cancel
 ```
 
-The cancel operation supports the same parameters as the `tasks` API, so you can cancel all cancellable tasks on multiple nodes like in the following example:
+The cancel operation supports the same parameters as the `tasks` API. To all cancelable tasks on multiple nodes:
 
 ```
 POST _tasks/_cancel?nodes=odfe-node1,odfe-node2
 ```
 
-## Attaching Headers to Tasks
+## Attaching headers to tasks
 
 To associate requests with tasks for better tracking, you can provide a `X-Opaque-Id:<ID_number>` header as part of the HTTPS request reader of your `curl` command, and the API will attach the specified header in the returned result.
 
@@ -162,9 +164,7 @@ content-length: 768
   }
 }
 ```
-This operation supports the same parameters as the `tasks` API, so you can associate `X-Opaque-Id` with specific tasks.
-
-This command associates `X-Opaque-Id: 123456` with tasks in the node `odfe-node1`.
+This operation supports the same parameters as the `tasks` API, so you can associate `X-Opaque-Id` with specific tasks:
 
 ```bash
 curl -i -H "X-Opaque-Id: 123456" "https://localhost:9200/_tasks?nodes=odfe-node1" -u 'admin:admin' --insecure
