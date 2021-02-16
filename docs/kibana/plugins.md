@@ -46,23 +46,23 @@ opendistroTraceAnalyticsKibana    1.12.0.0
   <tr>
     <td>7.9.1</td>
     <td>
-      <pre>opendistro-anomaly-detection-kibana    1.10.1.0, 1.11.0.0
-opendistro_alerting-kibana             1.10.1.1, 1.11.0.2
-opendistro_index_management-kibana     1.10.1.0, 1.11.0.0
-opendistro_security_kibana             1.10.1.1, 1.11.0.0
-opendistro-query-workbench             1.11.0.0
-opendistro-notebooks-kibana            1.11.0.0
+      <pre>opendistro-anomaly-detection-kibana  1.10.1.0, 1.11.0.0
+opendistro-alerting                  1.10.1.1, 1.11.0.2
+opendistro_index_management_kibana   1.10.1.0, 1.11.0.0
+opendistro_security_kibana_plugin    1.10.1.1, 1.11.0.0
+opendistro-query-workbench           1.11.0.0
+opendistro-notebooks-kibana          1.11.0.0
 </pre>
     </td>
   </tr>
   <tr>
     <td>7.8.0</td>
     <td>
-      <pre>opendistro-anomaly-detection-kibana    1.9.0.0
-opendistro_alerting-kibana             1.9.0.0
-opendistro_index_management-kibana     1.9.0.0
-opendistro_security_kibana             1.9.0.0
-opendistro_sql_workbench               1.9.0.0
+      <pre>opendistro-anomaly-detection-kibana  1.9.0.0
+opendistro-alerting                  1.9.0.0
+opendistro_index_management_kibana   1.9.0.0
+opendistro_security_kibana_plugin    1.9.0.0
+opendistro-sql-workbench             1.9.0.0
 </pre>
     </td>
   </tr>
