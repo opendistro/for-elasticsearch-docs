@@ -11,8 +11,6 @@ Searching large volumes of data can take a long time, especially if you're searc
 
 Asynchronous search lets you run search requests that run in the background. You can monitor the progress of these searches and get back partial results as they become available. After the search finishes, you can save the results to examine at a later time.
 
-Asynchronous search requires Elasticsearch 7.10.2 or higher.
-
 ## REST API
 
 To perform an asynchronous search, send requests to `_opendistro/_asynchronous_search`, with your query in the request body:
@@ -207,7 +205,7 @@ DELETE _opendistro/_asynchronous_search/<ID>?pretty
 You can use the stats API operation to monitor asynchronous searches that are running, completed, and/or persisted.
 
 ```json
-GET _opendistro/_asynchronous_search/_stats
+GET _opendistro/_asynchronous_search/stats
 ```
 
 #### Sample response
@@ -222,20 +220,6 @@ GET _opendistro/_asynchronous_search/_stats
   "cluster_name": "264071961897:asynchronous-search",
   "nodes": {
     "JKEFl6pdRC-xNkKQauy7Yg": {
-      "name": "40eae75ed3fa9633fec88fd60ec189fb",
-      "transport_address": "10.212.60.202:9300",
-      "host": "10.212.60.202",
-      "ip": "10.212.60.202:9300",
-      "roles": [
-        "data",
-        "ingest",
-        "remote_cluster_client"
-      ],
-      "attributes": {
-        "distributed_snapshot_deletion_enabled": "false",
-        "zone": "us-east-1c",
-        "cross_cluster_transport_address": "2600:1f18:10d4:8802:91e6:5857:5a69:9348",
-      },
       "asynchronous_search_stats": {
         "submitted": 18236,
         "initialized": 112,

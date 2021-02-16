@@ -15,14 +15,14 @@ For example, to update the retention period of the result index:
 PUT _cluster/settings
 {
   "transient": {
-    "opendistro_asynchronous_search.max_wait_for_completion_timeout": "5m"
+    "opendistro.asynchronous_search.max_wait_for_completion_timeout": "5m"
   }
 }
 ```
 
 Setting | Default | Description
 :--- | :--- | :---
-`opendistro_asynchronous_search.max_search_running_time` | 12 hours | The maximum running time for the search beyond which the search is terminated.
-`opendistro_asynchronous_search.max_running_searches` | 20 | The concurrent searches running per coordinator node.
-`opendistro_asynchronous_search.max_keep_alive` | 5 days | The maximum amount of time that search results can be stored in the cluster.
-`opendistro_asynchronous_search.max_wait_for_completion_timeout` | 1 minute | The maximum value for the `wait_for_completion_timeout` parameter.
+`opendistro.asynchronous_search.max_search_running_time` | 12 hours | The maximum running time for the search beyond which the search is terminated.
+`opendistro.asynchronous_search.node_concurrent_running_searches` | 20 | The concurrent searches running per coordinator node.
+`opendistro.asynchronous_search.max_keep_alive` | 5 days | The maximum amount of time that search results can be stored in the cluster.
+`opendistro.asynchronous_search.max_wait_for_completion_timeout` | 1 minute | The maximum value for the `wait_for_completion_timeout` parameter.
