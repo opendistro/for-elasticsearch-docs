@@ -9,13 +9,13 @@ has_math: true
 
 # Painless Scripting Functions
 
-With the k-NN Plugin's Painless Scripting extensions, you can use k-NN distance functions directly in your Painless scripts to perform operations on `knn_vector` fields. Painless has a strict list of allowed functions and classes per context to ensure its scripts are secure. The k-NN plugin has added painless extensions to a few of the distance functions used in [k-NN score script](../knn-score-script) so that you can utilize them when you need more customization with respect to you k-NN workload.
+With the k-NN Plugin's Painless Scripting extensions, you can use k-NN distance functions directly in your Painless scripts to perform operations on `knn_vector` fields. Painless has a strict list of allowed functions and classes per context to ensure its scripts are secure. The k-NN plugin adds Painless Scripting extensions to a few of the distance functions used in [k-NN score script](../knn-score-script), so you can utilize them when you need more customization with respect to your k-NN workload.
 
-## Get started with k-NN's Painless Scripting Functions
+## Get started with k-NN's Painless Scripting functions
 
-To use k-NN's Painless Scripting functions, first, you still need to create an index with `knn_vector` fields as was done in [k-NN score script](../knn-score-script#Getting-started-with-the-score-script). Once the index is created and you have ingested some data, you can use the painless extensions like so:
+To use k-NN's Painless Scripting functions, first, you must create an index with `knn_vector` fields like in [k-NN score script](../knn-score-script#Getting-started-with-the-score-script). Once the index is created and you have ingested some data, you can use the painless extensions:
 
-```
+```json
 GET my-knn-index-2/_search
 {
   "size": 2,
@@ -31,7 +31,7 @@ GET my-knn-index-2/_search
         }
       },
       "script": {
-        "source": "1.0 + cosineSimilarity(params.query_value, doc[params.field])", 
+        "source": "1.0 + cosineSimilarity(params.query_value, doc[params.field])",
         "params": {
           "field": "my_vector",
           "query_value": [9.9, 9.9]
@@ -42,9 +42,9 @@ GET my-knn-index-2/_search
 }
 ```
 
-The `field` needs to map to a `knn_vector` field and the `query_value` needs to be a floating point array with the same dimension as `field`.
+`field` needs to map to a `knn_vector` field, and `query_value` needs to be a floating point array with the same dimension as `field`.
 
-## Function Types
+## Function types
 The following table contains the available painless functions the k-NN plugin provides:
 
 <table>
@@ -63,7 +63,7 @@ The following table contains the available painless functions the k-NN plugin pr
   <tr>
     <td>cosineSimilarity</td>
     <td><code>float cosineSimilarity (float[] queryVector, doc['vector field'])</code></td>
-    <td>Cosine similarity is inner product of the query vector and document vector normalized to both have length 1. If magnitude of the query vector does not change throughout the query, users can pass magnitude of query vector optionally to improve the performance instead of calculating the magnitude every time for every filtered document: <code>float cosineSimilarity (float[] queryVector, doc['vector field'], float normQueryVector)</code>. In general, range of cosine similarity is [-1, 1], but in case of information retrieval, the cosine similarity of two documents will range from 0 to 1, since tf-idf cannot be negative. Hence, we add 1.0 to the cosine similarity to score always positive. </td>
+    <td>Cosine similarity is an inner product of the query vector and document vector normalized to both have length 1. If magnitude of the query vector does not change throughout the query, users can pass the magnitude of the query vector to improve the performance, instead of calculating the magnitude every time for every filtered document: <code>float cosineSimilarity (float[] queryVector, doc['vector field'], float normQueryVector)</code>. In general, range of cosine similarity is [-1, 1], but in the case of information retrieval, the cosine similarity of two documents will range from 0 to 1 because tf-idf cannot be negative. Hence, the k-NN plugin adds 1.0 to always yield a positive cosine similarity score. </td>
   </tr>
 </table>
 
@@ -71,8 +71,8 @@ The following table contains the available painless functions the k-NN plugin pr
 ## Constraints
 1. If a document’s `knn_vector` field has different dimensions than the query, the function throws an `IllegalArgumentException`.
 2. If a vector field doesn't have a value, the function throws an IllegalStateException.
-   You can avoid this situation by first checking if a document has a value for the field:
+   You can avoid this situation by first checking if a document has a value in its field:
 ```
  "source": "doc[params.field].size() == 0 ? 0 : 1 / (1 + l2Squared(params.query_value, doc[params.field]))",
 ```
-Since scores can only be positive, this script ranks documents with vector fields higher than those without.
+Because scores can only be positive, this script ranks documents with vector fields higher than those without.
