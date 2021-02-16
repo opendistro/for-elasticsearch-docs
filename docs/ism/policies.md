@@ -516,9 +516,9 @@ The destination system **must** return a response otherwise the `error_notificat
 
 You can use the same options for `ctx` variables as the [notification](#notification) operation.
 
-## Sample template for rollover
+## Sample policy with ISM template
 
-The following sample template policy implements an index rollover:
+The following sample template policy is for a rollover use case:
 
 1. Create a policy with an `ism_template` field.
 
