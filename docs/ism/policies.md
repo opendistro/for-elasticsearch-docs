@@ -518,9 +518,9 @@ You can use the same options for `ctx` variables as the [notification](#notifica
 
 ## Sample template for rollover
 
-The following sample template policy implements a rollover template:
+The following sample template policy implements an index rollover:
 
-1. Create a policy with an `ism_template` field. You need to specify the `index_patterns` field. If you don't specify a value for `priority`, it defaults to 0.
+1. Create a policy with an `ism_template` field.
 
 ```json
 PUT _opendistro/_ism/policies/rollover_policy
@@ -548,6 +548,8 @@ PUT _opendistro/_ism/policies/rollover_policy
   }
 }
 ```
+
+You need to specify the `index_patterns` field. If you don't specify a value for `priority`, it defaults to 0.
 
 1. Set up a template with the `rollover_alias` as `log` :
 
