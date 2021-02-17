@@ -9,7 +9,7 @@ has_math: true
 
 # Painless Scripting Functions
 
-With the k-NN Plugin's Painless Scripting extensions, you can use k-NN distance functions directly in your Painless scripts to perform operations on `knn_vector` fields. Painless has a strict list of allowed functions and classes per context to ensure its scripts are secure. The k-NN plugin adds Painless Scripting extensions to a few of the distance functions used in [k-NN score script](../knn-score-script), so you can utilize them when you need more customization with respect to your k-NN workload.
+With the k-NN plugin's Painless Scripting extensions, you can use k-NN distance functions directly in your Painless scripts to perform operations on `knn_vector` fields. Painless has a strict list of allowed functions and classes per context to ensure its scripts are secure. The k-NN plugin adds Painless Scripting extensions to a few of the distance functions used in [k-NN score script](../knn-score-script), so you can utilize them when you need more customization with respect to your k-NN workload.
 
 ## Get started with k-NN's Painless Scripting functions
 
