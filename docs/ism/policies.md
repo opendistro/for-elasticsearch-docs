@@ -516,6 +516,75 @@ The destination system **must** return a response otherwise the `error_notificat
 
 You can use the same options for `ctx` variables as the [notification](#notification) operation.
 
+## Sample policy with ISM template
+
+The following sample template policy is for a rollover use case:
+
+1. Create a policy with an `ism_template` field.
+
+```json
+PUT _opendistro/_ism/policies/rollover_policy
+{
+  "policy": {
+    "description": "Example rollover policy.",
+    "default_state": "rollover",
+    "states": [
+      {
+        "name": "rollover",
+        "actions": [
+          {
+            "rollover": {
+              "min_doc_count": 1
+            }
+          }
+        ],
+        "transitions": []
+      }
+    ],
+    "ism_template": {
+      "index_patterns": ["log*"],
+      "priority": 100
+    }
+  }
+}
+```
+
+You need to specify the `index_patterns` field. If you don't specify a value for `priority`, it defaults to 0.
+
+1. Set up a template with the `rollover_alias` as `log` :
+
+```json
+PUT _template/ism_rollover
+{
+  "index_patterns": ["log*"],
+  "settings": {
+    "opendistro.index_state_management.rollover_alias": "log"
+  }
+}
+```
+
+1. Create an index with the `log` alias:
+
+```json
+PUT log-000001
+{
+  "aliases": {
+    "log": {
+      "is_write_index": true
+    }
+  }
+}
+```
+
+1. Index a document to trigger the rollover condition:
+
+```json
+POST log/_doc
+{
+  "message": "dummy"
+}
+```
+
 ## Example policy
 
 The following example policy implements a `hot`, `warm`, and `delete` workflow. You can use this policy as a template to prioritize resources to your indices based on their levels of activity.
