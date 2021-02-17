@@ -201,9 +201,13 @@ If you're making major changes to the documentation and need to see the rendered
 
    Use `curl -XGET https://localhost:9200 -u admin:admin -k` to verify the Elasticsearch version.
 
-1. Update the plugin compatibility table in `docs/install/plugin.md` and `docs/kibana/plugins.md`.
+1. Update the plugin compatibility table in `docs/install/plugin.md`.
 
    Use `curl -XGET https://localhost:9200/_cat/plugins -u admin:admin -k` to get the correct version strings.
+
+1. Update the plugin compatibility table in `docs/kibana/plugins.md`.
+
+   Use `docker ps` to find the ID for the Kibana node. Then use `docker exec -it <kibana-node-id> /bin/bash` to get shell access. Finally, run `./bin/kibana-plugin list` to get the plugins and version strings.
 
 1. Run a build (`build.sh`), and look for any warnings or errors you introduced.
 1. Verify that the individual plugin download links in `docs/install/plugins.md` and `docs/kibana/plugins.md` work.
