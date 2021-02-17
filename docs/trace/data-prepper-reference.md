@@ -111,6 +111,8 @@ hosts | Yes | List of Elasticsearch hosts to write to (e.g. `["https://localhost
 cert | No | String, path to the security certificate (e.g. `"config/root-ca.pem"`) if the cluster uses the Open Distro for Elasticsearch security plugin.
 username | No | String, username for HTTP basic authentication.
 password | No | String, password for HTTP basic authentication.
+aws_sigv4 | No | Boolean, whether to use IAM signing to connect to an Amazon Elasticsearch Service cluster. For your access key, secret key, and optional session token, Data Prepper uses the default credential chain (environment variables, Java system properties, `~/.aws/credential`, etc.).
+aws_region | No | String, AWS region for the cluster (e.g. `"us-east-1"`) if you are connecting to Amazon Elasticsearch Service.
 trace_analytics_raw | No | Boolean, default false. Whether to export as trace data to the `otel-v1-apm-span-*` index pattern (alias `otel-v1-apm-span`) for use with the Trace Analytics Kibana plugin.
 trace_analytics_service_map | No | Boolean, default false. Whether to export as trace data to the `otel-v1-apm-service-map` index for use with the service map component of the Trace Analytics Kibana plugin.
 index | No | String, name of the index to export to. Only required if you don't use the `trace_analytics_raw` or `trace_analytics_service_map` presets.
