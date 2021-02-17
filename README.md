@@ -70,9 +70,11 @@ There are three ways to contribute content, depending on the magnitude of the ch
 
 ### Trivial changes
 
-If you just need to fix a typo or add a sentence, this web-based method works well:
+If you just need to fix a typo or add a sentence, this method works well:
 
-1. On any page in the documentation, click the **Edit this page** link in the lower-left.
+1. In your web browser, navigate to the appropriate Markdown file. For example, [cluster.md](https://github.com/opendistro/for-elasticsearch-docs/blob/master/docs/elasticsearch/cluster.md).
+
+1. Click the **Edit this file** button (the pencil).
 
 1. Make your changes.
 
