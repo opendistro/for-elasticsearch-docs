@@ -190,6 +190,11 @@ A space corresponds to the function used to measure the distance between 2 point
     <td>1 / (1 + Distance Function)</td>
   </tr>
   <tr>
+    <td>l1</td>
+    <td>\[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i) \]</td>
+    <td>1 / (1 + Distance Function)</td>
+  </tr>
+  <tr>
     <td>cosinesimil</td>
     <td>\[ {A &middot; B \over \|A\| &middot; \|B\|} =
     {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
