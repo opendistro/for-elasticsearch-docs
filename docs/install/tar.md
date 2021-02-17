@@ -13,38 +13,32 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 
 1. Download the tarball:
 
-   x64:
    ```bash
+   # x64
    curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz -o opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz
-   ```
-   ARM64:
-   ```bash
+   # ARM64
    curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz -o opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz
    ```
-   
+
 1. Download the checksum:
 
-   x64:
    ```bash
+   # x86
    curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512 -o opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512
-   ```
-   ARM64:
-   ```bash
+   # ARM64
    curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz.sha512 -o opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz.sha512
    ```
 
 1. Verify the tarball against the checksum:
 
-   x64:
-   ```bash
-   shasum -a 512 -c opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512
-   ```
 
-   ARM64:
    ```bash
+   # x64
+   shasum -a 512 -c opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512
+   # ARM64
    shasum -a 512 -c opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz.sha512
    ```
-  
+
    On CentOS, you might not have `shasum`. Install this package:
 
    ```bash
@@ -55,13 +49,11 @@ The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linu
 
 1. Extract the TAR file to a directory and change to that directory:
 
-   x64:
    ```bash
+   # x64
    tar -zxf opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz
    cd opendistroforelasticsearch-{{site.odfe_version}}
-   ```
-   ARM64:
-   ```bash
+   # ARM64
    tar -zxf opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz
    cd opendistroforelasticsearch-{{site.odfe_version}}
    ```
