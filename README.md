@@ -2,8 +2,8 @@
 
 This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads. You can find the rendered documentation at [opendistro.github.io/for-elasticsearch-docs/](https://opendistro.github.io/for-elasticsearch-docs/).
 
-Developer and community contributions remain essential in keeping this documentation comprehensive, useful, organized, and up-to-date.
 
+<<<<<<< HEAD
 
 ## How you can help
 
@@ -105,6 +105,9 @@ If you're making major changes to the documentation and need to see the rendered
 1. Fork this repository.
 
 1. Download [GitHub Desktop](https://desktop.github.com), install it, and clone your fork.
+=======
+## Build
+>>>>>>> parent of 34f8a7d (Merge branch 'master' of https://github.com/opendistro/for-elasticsearch-docs into knn-docs-refactor)
 
 1. Navigate to the repository root.
 
@@ -131,67 +134,21 @@ If you're making major changes to the documentation and need to see the rendered
 1. Build:
 
    ```
-   sh build.sh
+   bundle exec jekyll serve
    ```
 
-1. If the build script doesn't automatically open your web browser (it should), open [http://localhost:4000/for-elasticsearch-docs/](http://localhost:4000/for-elasticsearch-docs/).
+   Alternately, run `build.sh`, which includes some convenience flags, is faster to type, and opens a live preview automatically.
 
-1. Create a new branch.
+1. Open [http://localhost:4000/for-elasticsearch-docs/](http://localhost:4000/for-elasticsearch-docs/).
 
+
+## Contribute
+
+1. Fork this repository.
+1. Clone your fork.
 1. Edit the Markdown files in `/docs`.
-
-   If you're a web developer, you can customize `_layouts/default.html` and `_sass/custom/custom.scss`.
-
-1. When you save a file, marvel as Jekyll automatically rebuilds the site and refreshes your web browser. This process takes roughly 20 seconds.
-
-1. When you're happy with how everything looks, commit, push your changes to your fork, and submit a pull request.
-
-
-## Writing tips
-
-1. Try to stay consistent with existing content and consistent within your new content. Don't call the same plugin KNN, k-nn, and k-NN in three different places.
-
-1. Shorter paragraphs are better than longer paragraphs. Use headers, tables, lists, and images to make your content easier for readers to scan.
-
-1. Use **bold** for user interface elements, *italics* for key terms or emphasis, and `monospace` for Bash commands, file names, REST paths, and code.
-
-1. Markdown file names should be all lowercase, use hyphens to separate words, and end in `.md`.
-
-1. Don't use future tense. Use present tense.
-
-   **Bad**: After you click the button, the process will start.
-
-   **Better**: After you click the button, the process starts.
-
-1. "You" refers to the person reading the page. "We" refers to the ODFE contributors.
-
-   **Bad**: Now that we've finished the configuration, we have a working cluster.
-
-   **Better**: At this point, you have a working cluster, but we recommend adding dedicated master nodes.
-
-1. Don't use "this" and "that" to refer to something without adding a noun.
-
-   **Bad**: This can cause high latencies.
-
-   **Better**: This additional loading time can cause high latencies.
-
-1. Use active voice.
-
-   **Bad**: After the request is sent, the data is added to the index.
-
-   **Better**: After you send the request, the Elasticsearch cluster indexes the data.
-
-1. Introduce acronyms before using them.
-
-   **Bad**: Reducing customer TTV should accelerate our ROIC.
-
-   **Better**: Reducing customer time to value (TTV) should accelerate our return on invested capital (ROIC).
-
-1. Spell out one through nine. Start using numerals at 10. If a number needs a unit (GB, pounds, millimeters, kg, celsius, etc.), use numerals, even if the number if smaller than 10.
-
-   **Bad**: 3 kids looked for thirteen files on a six GB hard drive.
-
-   **Better**: Three kids looked for 13 files on a 6 GB hard drive.
+1. Use Jekyll to build the content, and make sure your changes render the way you expect.
+1. Push your changes, and submit a pull request.
 
 
 ## New releases
@@ -213,7 +170,15 @@ If you're making major changes to the documentation and need to see the rendered
 1. Submit a PR.
 
 
-## Classes within Markdown
+## Content guidelines
+
+1. Try to stay consistent with existing content.
+1. Introduce acronyms before using them.
+1. Use **bold** for user interface elements, *italics* for key terms or emphasis, and `monospace` for Bash commands, file names, URIs, and code.
+1. Markdown file names should be all lowercase, use hyphens to separate words, and end in `.md`.
+
+
+## Markdown guidelines
 
 This documentation uses a modified version of the [just-the-docs](https://github.com/pmarsceill/just-the-docs) Jekyll theme, which has some useful classes for labels and buttons:
 
@@ -233,6 +198,28 @@ New
 These classes can help with readability, but should be used *sparingly*. Each addition of a class damages the portability of the Markdown files and makes moving to a different Jekyll theme (or a different static site generator) more difficult.
 
 Besides, standard Markdown elements suffice for most documentation.
+
+To create an auto-generated table of contents near the top of long pages, use the following snippet:
+
+```
+#### Table of contents
+1. TOC
+{:toc}
+```
+
+By design, only `h2` and `h3` headers are included.
+
+If you create a new directory, name its first file `index.md` and make it a parent so that the links stay pretty:
+
+```
+---
+layout: default
+title: Some New Page
+nav_order: 4
+has_children: true
+has_toc: false
+---
+```
 
 
 ## Math
@@ -270,4 +257,4 @@ See the [LICENSE](./LICENSE) file for our project's licensing. We will ask you t
 
 ## Copyright
 
-Copyright Amazon.com, Inc. or its affiliates. All rights reserved.
+Copyright 2019 Amazon.com, Inc. or its affiliates. All rights reserved.
