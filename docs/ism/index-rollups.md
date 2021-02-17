@@ -62,7 +62,7 @@ Review your configuration and select **Create**.
 
 You can use the standard `_search` API to search the target index. Make sure that the query matches the constraints of the target index. For example, if don’t set up terms aggregations on a field, you don’t receive results for terms aggregations. If you don’t set up the maximum aggregations, you don’t receive results for maximum aggregations.
 
-You can’t access the internal structure of the data in the target index because the plugin automatically rewrites the query in the background to suit the target index. This is to make sure you can use the same query for the source and target index. 
+You can’t access the internal structure of the data in the target index because the plugin automatically rewrites the query in the background to suit the target index. This is to make sure you can use the same query for the source and target index.
 
 To query the target index, set `size` to 0:
 
@@ -71,13 +71,16 @@ GET target_index/_search
 {
   "size": 0,
   "query": {
-    "term": {
-      "timezone": "America/Los_Angeles"
+    "match_all": {}
+  },
+  "aggs": {
+    "avg_cpu": {
+      "avg": {
+        "field": "cpu_usage"
+      }
     }
   }
 }
 ```
-
-You can also search both your source and target indices in the same query.
 
 Consider a scenario where you collect rolled up data from 1 PM to 9 PM in hourly intervals and live data from 7 PM to 11 PM in minutely intervals. If you execute an aggregation over these in the same query, for 7 PM to 9 PM, you see an overlap of both rolled up data and live data because they get counted twice in the aggregations.

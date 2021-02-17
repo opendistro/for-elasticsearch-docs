@@ -34,7 +34,7 @@ GET my-knn-index-2/_search
         "source": "1.0 + cosineSimilarity(params.query_value, doc[params.field])", 
         "params": {
           "field": "my_vector",
-          "query_value": [9.9, 9.9]
+          "query_value": [9.9, 9.9],
         }
       }
     }
