@@ -144,11 +144,11 @@ A space corresponds to the function used to measure the distance between 2 point
     <td>\[ {A &middot; B \over \|A\| &middot; \|B\|} =
     {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
     where \(\|A\|\) and \(\|B\|\) represent normalized vectors.</td>
-    <td>1 + Distance Function</td>
+    <td>1 / (1 + Distance Function)</td>
   </tr>
   <tr>
     <td>hammingbit</td>
     <td style="text-align:center">Distance = countSetBits(X \(\oplus\) Y)</td>
-    <td> 1 / (1 + Distance Function)</td>
+    <td>1 / (1 + Distance Function)</td>
   </tr>
 </table>
