@@ -99,7 +99,7 @@ Navigate to the Kibana home directory (likely `/usr/share/kibana`) and run the i
 #### Security Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistroSecurityKibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistroSecurityKibana-{{site.odfe_version}}.1.zip
 ```
 
 This plugin provides a user interface for managing users, roles, mappings, action groups, and tenants.
@@ -108,7 +108,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistroAlertingKibana-{{site.odfe_version}}.2.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistroAlertingKibana-{{site.odfe_version}}.0.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
@@ -117,7 +117,7 @@ This plugin provides a user interface for creating monitors and managing alerts.
 #### Index State Management Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistroIndexManagementKibana-{{site.odfe_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistroIndexManagementKibana-{{site.odfe_version}}.1.zip
 ```
 
 This plugin provides a user interface for managing policies.
