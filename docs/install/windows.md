@@ -83,8 +83,8 @@ Installing Open Distro for Elasticsearch as a Windows service lets it run in the
 After you start Open Distro for Elasticsearch, open a new command prompt window. Then send requests to the server to verify that it is up and running:
 
 ```
-curl -XGET https://localhost:9200 -u admin:admin --insecure
-curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+curl -XGET https://localhost:9200 -u "admin:admin" --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u "admin:admin" --insecure
 ```
 
 You must have [curl](https://curl.haxx.se/windows/) installed for these commands to work. Alternatives include [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6) (only PowerShell 6 and later support the `-SkipCertificateCheck` flag) and [Postman](https://www.getpostman.com/downloads/).
