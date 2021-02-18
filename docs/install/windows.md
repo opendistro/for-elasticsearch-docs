@@ -15,7 +15,7 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 ## ZIP install
 
-1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-{{site.odfe_version}}.zip).
+1. Download [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/opendistroforelasticsearch-{{site.odfe_version}}-windows-x64.zip).
 
 1. Extract the file to a directory, and open that directory at the command prompt.
 
@@ -30,7 +30,7 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 1. Install Java 11.
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_{{site.odfe_version}}.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/opendistroforelasticsearch-{{site.odfe_version}}-windows-x64.exe), run it, and click through the steps.
 
 1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory.
 
@@ -83,8 +83,8 @@ Installing Open Distro for Elasticsearch as a Windows service lets it run in the
 After you start Open Distro for Elasticsearch, open a new command prompt window. Then send requests to the server to verify that it is up and running:
 
 ```
-curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
-curl -XGET https://localhost:9200/_cat/plugins?v -u 'admin:admin' --insecure
+curl -XGET https://localhost:9200 -u "admin:admin" --insecure
+curl -XGET https://localhost:9200/_cat/plugins?v -u "admin:admin" --insecure
 ```
 
 You must have [curl](https://curl.haxx.se/windows/) installed for these commands to work. Alternatives include [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6) (only PowerShell 6 and later support the `-SkipCertificateCheck` flag) and [Postman](https://www.getpostman.com/downloads/).

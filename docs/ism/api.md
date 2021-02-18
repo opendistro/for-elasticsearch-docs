@@ -18,28 +18,6 @@ Use the index state management operations to programmatically work with policies
 
 ---
 
-## Add policy at index creation
-
-You can attach a policy to an index at the time you’re creating the index.
-
-#### Request
-
-```json
-PUT index_1
-{
-  "settings": {
-    "opendistro.index_state_management.policy_id": "ingest_policy",
-    "opendistro.index_state_management.rollover_alias": "some_alias"
-  },
-  "aliases": {
-    "some_alias": {
-      "is_write_index": true
-    }
-  }
-}
-```
-In this case, the `ingest_policy` is applied to `index_1` with the rollover action defined in `some_alias`.
-
 
 ## Create policy
 

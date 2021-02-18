@@ -10,7 +10,7 @@ has_children: false
 The k-NN plugin adds two APIs in order to allow users to better manage the plugin's functionality.
 
 ## Stats
-The KNN Stats API provides information about the current status of the k-NN Plugin. The plugin keeps track of both cluster level and node level stats. Cluster level stats have a single value for the entire cluster. Node level stats have a single value for each node in the cluster. A user can filter their query by nodeID and statName in the following way:
+The k-NN Stats API provides information about the current status of the k-NN Plugin. The plugin keeps track of both cluster level and node level stats. Cluster level stats have a single value for the entire cluster. Node level stats have a single value for each node in the cluster. You can filter their query by nodeID and statName in the following way:
 ```
 GET /_opendistro/_knn/nodeId1,nodeId2/stats/statName1,statName2
 ```
@@ -39,8 +39,7 @@ Statistic |  Description
 `script_query_errors` | The number of errors during script queries. This is only relevant to k-NN score script search.
 
 ### Usage
-```
-
+```json
 GET /_opendistro/_knn/stats?pretty
 {
     "_nodes" : {
@@ -82,7 +81,7 @@ GET /_opendistro/_knn/stats?pretty
 }
 ```
 
-```
+```json
 GET /_opendistro/_knn/HYMrXXsBSamUkcAjhjeN0w/stats/circuit_breaker_triggered,graph_memory_usage?pretty
 {
     "_nodes" : {
@@ -107,7 +106,7 @@ If the plugin has not loaded the graphs into native memory, it loads them when i
 
 As an alternative, you can avoid this latency issue by running the k-NN plugin warmup API operation on whatever indices you're interested in searching. This operation loads all the graphs for all of the shards (primaries and replicas) of all the indices specified in the request into native memory.
 
-After the process finishes, you can start searching against the indices with no initial latency penalties. The warmup API operation is idempotent, so if a segment's graphs are already loaded into memory, this operation has no impact on those graphs. It only loads graphs that aren't currently in memory. 
+After the process finishes, you can start searching against the indices with no initial latency penalties. The warmup API operation is idempotent, so if a segment's graphs are already loaded into memory, this operation has no impact on those graphs. It only loads graphs that aren't currently in memory.
 
 ### Usage
 This request performs a warmup on three indices:

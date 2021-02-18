@@ -8,11 +8,11 @@ has_math: true
 ---
 
 # Exact k-NN with Scoring Script
-The k-NN plugin implements the Elasticsearch score script plugin that can be used to find the exact k-nearest neighbors to a given query point. Using the k-NN score script, a filter can be applied on an index before executing the nearest neighbor search. This is useful for dynamic search cases where the index body may vary based on other conditions. Because this approach executes a brute force search, it will not scale as well as the [Approximate approach](../approximate-knn). In some cases, it may be better to think about refactoring your workflow or index structure to use the Approximate approach instead of this approach.
+The k-NN plugin implements the Elasticsearch score script plugin that you can use to find the exact k-nearest neighbors to a given query point. Using the k-NN score script, you can apply a filter on an index before executing the nearest neighbor search. This is useful for dynamic search cases where the index body may vary based on other conditions. Because this approach executes a brute force search, it does not scale as well as the [Approximate approach](../approximate-knn). In some cases, it may be better to think about refactoring your workflow or index structure to use the Approximate approach instead of this approach.
 
 ## Getting started with the score script
 
-Similar to approximate nearest neighbor search, in order to use the score script on a body of vectors, you first must create an index with one or more `knn_vector` fields. If you intend to just use the script score approach (and not the approximate approach) `index.knn` can be set to `false` and `index.knn.space_type` does not need to be set. The space type can be chosen during search. See the [spaces section](#spaces) to see what spaces the knn score script suppports. Here is an example that creates an index with two `knn_vector` fields:
+Similar to approximate nearest neighbor search, in order to use the score script on a body of vectors, you must first create an index with one or more `knn_vector` fields. If you intend to just use the script score approach (and not the approximate approach) `index.knn` can be set to `false` and `index.knn.space_type` does not need to be set. The space type can be chosen during search. See the [spaces section](#spaces) to see what spaces the k-NN score script suppports. Here is an example that creates an index with two `knn_vector` fields:
 
 ```json
 PUT my-knn-index-1
@@ -32,7 +32,7 @@ PUT my-knn-index-1
 }
 ```
 
-*Note* -- For binary spaces, such as the Hamming bit space, the type needs to be either `binary` or `long`. The binary data then needs to be encoded either as a base64 string or as a long (if the data is 64 bits or less).   
+*Note* -- For binary spaces, such as the Hamming bit space, `type` needs to be either `binary` or `long`. The binary data then needs to be encoded either as a base64 string or as a long (if the data is 64 bits or less).
 
 If you *only* want to use the score script, you can omit `"index.knn": true`. The benefit of this approach is faster indexing speed and lower memory usage, but you lose the ability to perform standard k-NN queries on the index.
 {: .tip}
@@ -91,11 +91,11 @@ All parameters are required.
 - `lang` is the script type. This value is usually `painless`, but here you must specify `knn`.
 - `source` is the name of the script, `knn_score`.
 
-  This script is part of the KNN plugin and isn't available at the standard `_scripts` path. A GET request to  `_cluster/state/metadata` doesn't return it, either.
+  This script is part of the k-NN plugin and isn't available at the standard `_scripts` path. A GET request to  `_cluster/state/metadata` doesn't return it, either.
 
 - `field` is the field that contains your vector data.
 - `query_value` is the point you want to find the nearest neighbors for. For the Euclidean and cosine similarity spaces, the value must be an array of floats that matches the dimension set in the field's mapping. For Hamming bit distance, this value can be either of type signed long or a base64-encoded string (for the long and binary field types, respectively).
-- `space_type` is corresponds to the distance function. See [the spaces section](#spaces).
+- `space_type` corresponds to the distance function. See the [spaces section](#spaces).
 
 
 *Note* -- After ODFE 1.11, `vector` was replaced by `query_value` due to the addition of the `bithamming` space.
@@ -174,7 +174,7 @@ GET my-knn-index-2/_search
 
 ## Spaces
 
-A space corresponds to the function used to measure the distance between 2 points in order to determine the k-nearest neighbors. From the k-NN perspective, a lower score equates to a closer and better result. This is the opposite of how Elasticsearch scores results, where a greater score equates to a better result. We include the conversion to Elasticsearch scores in the table below::
+A space corresponds to the function used to measure the distance between 2 points in order to determine the k-nearest neighbors. From the k-NN perspective, a lower score equates to a closer and better result. This is the opposite of how Elasticsearch scores results, where a greater score equates to a better result. We include the conversions to Elasticsearch scores in the table below:
 
 <table>
   <thead style="text-align: left">
@@ -187,6 +187,11 @@ A space corresponds to the function used to measure the distance between 2 point
   <tr>
     <td>l2</td>
     <td>\[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i)^2 \]</td>
+    <td>1 / (1 + Distance Function)</td>
+  </tr>
+  <tr>
+    <td>l1</td>
+    <td>\[ Distance(X, Y) = \sum_{i=1}^n (X_i - Y_i) \]</td>
     <td>1 / (1 + Distance Function)</td>
   </tr>
   <tr>

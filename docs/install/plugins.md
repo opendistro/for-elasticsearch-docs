@@ -30,6 +30,22 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   </thead>
   <tbody>
   <tr>
+    <td>7.10.2</td>
+    <td>
+      <pre>opendistro-alerting             1.13.0.0
+opendistro-anomaly-detection    1.13.0.0
+opendistro-asynchronous-search  1.13.0.1
+opendistro-index-management     1.13.0.0
+opendistro-job-scheduler        1.13.0.0
+opendistro-knn                  1.13.0.0
+opendistro-performance-analyzer 1.13.0.0
+opendistro-reports-scheduler    1.13.0.0
+opendistro-sql                  1.13.0.0
+opendistro_security             1.13.0.0
+</pre>
+    </td>
+  </tr>
+  <tr>
     <td>7.10.0</td>
     <td>
       <pre>opendistro-anomaly-detection    1.12.0.0
@@ -225,7 +241,7 @@ Navigate to the Elasticsearch home directory (most likely, it is `/usr/share/ela
 ### Security
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro_security-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro-security-{{site.odfe_version}}.0.zip
 ```
 
 After installing the security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security/configuration/security-admin/).
@@ -233,7 +249,7 @@ After installing the security plugin, you can run `sudo sh /usr/share/elasticsea
 The security plugin has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
-### Job Scheduler
+### Job scheduler
 
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-job-scheduler/opendistro-job-scheduler-{{site.odfe_version}}.0.zip
@@ -243,7 +259,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-{{site.odfe_version}}.2.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.0.zip
 ```
 
 To install Alerting, you must first install the Job Scheduler plugin. Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -252,43 +268,49 @@ To install Alerting, you must first install the Job Scheduler plugin. Alerting h
 ### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro_sql-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro-sql-{{site.odfe_version}}.0.zip
 ```
 
 
-### Reports Scheduler
+### Reports scheduler
 
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-reports-scheduler/opendistro-reports-scheduler-{{site.odfe_version}}.0.zip
 ```
 
 
-
 ### Index State Management
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro_index_management-{{site.odfe_version}}.1.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro-index-management-{{site.odfe_version}}.0.zip
 ```
 
 To install Index State Management, you must first install the Job Scheduler plugin. ISM has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
 
 
-### KNN
+### k-NN
 
-KNN is only available as part of the all-in-one installs: Docker, RPM, and Debian.
+k-NN is only available as part of the all-in-one installs: Docker, RPM, and Debian.
 
 
-### Anomaly Detection
+### Anomaly detection
 
 ```bash
 sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-{{site.odfe_version}}.0.zip
 ```
 
 
+### Asynchronous search
+
+```bash
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-asynchronous-search/opendistro-asynchronous-search-{{site.odfe_version}}.1.zip
+```
+
+
 ### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro_performance_analyzer-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro-performance-analyzer-{{site.odfe_version}}.0.zip
 ```
 
 Performance Analyzer requires some manual configuration after installing the plugin:
