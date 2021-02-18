@@ -100,7 +100,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
 1. Download the ZIP.
 
-1. Extract [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/odfe-{{site.odfe_version}}-kibana.zip) to a directory and open that directory at the command prompt.
+1. Extract [the ZIP file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/opendistroforelasticsearch-kibana-{{site.odfe_version}}-windows-x64.zip) to a directory and open that directory at the command prompt.
 
 1. If desired, modify `config/kibana.yml`.
 
@@ -113,7 +113,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
 ## Run Kibana on Windows (EXE)
 
-1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/Open_Distro_For_Elasticsearch_Kibana_{{site.odfe_version}}.exe), run it, and click through the steps.
+1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/opendistroforelasticsearch-kibana-{{site.odfe_version}}-windows-x64.exe), run it, and click through the steps.
 
 1. Open the command prompt.
 

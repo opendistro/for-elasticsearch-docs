@@ -85,7 +85,7 @@ opendistro-es-master-0                  1/1     Running   0          3m30s
 To access the Elasticsearch shell:
 
 ```bash
-$ kubectl exec -it opendistro-es-master-1 -- /bin/bash
+$ kubectl exec -it opendistro-es-master-0 -- /bin/bash
 ```
 
 You can send requests to the pod to verify that Elasticsearch is up and running:
