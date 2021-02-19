@@ -69,7 +69,7 @@ You can also modify the values in `/etc/kibana/kibana.yml`.
 
    ```bash
    # x64
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-{{site.odfe_version}}}-linux-x64.tar.gz.sha512 -o opendistroforelasticsearch-kibana-{{site.odfe_version}}}-linux-x64.tar.gz.sha512
+   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-{{site.odfe_version}}-linux-x64.tar.gz.sha512 -o opendistroforelasticsearch-kibana-{{site.odfe_version}}-linux-x64.tar.gz.sha512
    # ARM64
    curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-{{site.odfe_version}}-linux-arm64.tar.gz.sha512 -o opendistroforelasticsearch-kibana-{{site.odfe_version}}-linux-arm64.tar.gz.sha512
    ```
