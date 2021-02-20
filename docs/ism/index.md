@@ -54,7 +54,7 @@ PUT _opendistro/_ism/policies/policy_id
 
 For an example ISM template policy, see [Sample policy with ISM template](policies/#sample-policy-with-ism-template).
 
-For ODFE versions prior to 1.13, include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it:
+For ODFE versions prior to 1.13.0, include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it:
 
 ```json
 PUT _index_template/<template_name>
@@ -69,6 +69,9 @@ PUT _index_template/<template_name>
   }
 }
 ```
+
+The `opendistro.index_state_management.policy_id` setting is deprecated starting from version 1.13.0. You can continue to automatically manage newly created indices with the ISM template field.
+{: .note }
 
 ### Step 2: Attach policies to indices
 
