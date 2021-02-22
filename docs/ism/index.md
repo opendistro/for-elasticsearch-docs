@@ -72,7 +72,7 @@ If you want to use an Elasticsearch operation to create an index with a policy a
 ### Step 3: Manage indices
 
 1. Choose **Managed Indices**.
-2. To change your policy, see [Change Policy](managedindices#changepolicy).
+2. To change your policy, see [Change Policy](managedindices/#change-policy).
 3. To attach a rollover alias to your index, select your policy and choose **Add rollover alias**.
 Make sure that the alias that you enter already exists. For more information about the rollover operation, see [rollover](policies/#rollover).
 4. To remove a policy, choose your policy, and then choose **Remove policy**.
