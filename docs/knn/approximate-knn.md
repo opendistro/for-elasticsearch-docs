@@ -146,7 +146,7 @@ A space corresponds to the function used to measure the distance between 2 point
   </tr>
   <tr>
     <td>cosinesimil</td>
-    <td>\[ 1 - {A &middot; B \over \|A\| &middot; \|B\|} = 1 - 
+    <td>\[ 1 - {A &middot; B \over \|A\| &middot; \|B\|} = 1 -
     {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
     where \(\|A\|\) and \(\|B\|\) represent normalized vectors.</td>
     <td>1 / (1 + Distance Function)</td>
@@ -158,4 +158,5 @@ A space corresponds to the function used to measure the distance between 2 point
   </tr>
 </table>
 
-*Note* - the cosine similarity formula does not include the `1 - ` prefix. However, because nmslib equates smaller scores to closer results, they return `1 - cosineSimilarity` for their cosine similarity space; that is why the `1 - ` is included in the distance function.
+The cosine similarity formula does not include the `1 - ` prefix. However, because nmslib equates smaller scores with closer results, they return `1 - cosineSimilarity` for their cosine similarity space---that's why `1 - ` is included in the distance function.
+{: .note }
