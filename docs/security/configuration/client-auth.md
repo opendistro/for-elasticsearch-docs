@@ -8,7 +8,7 @@ nav_order: 50
 
 # Client-based authentication
 
-After obtaining your own certificates either from a certificate authority (CA) or by [generating your own certificates using OpenSSL](/generate-certificates.md), you can start configuring Elasticsearch to authenticate a user using a client certificate.
+After obtaining your own certificates either from a certificate authority (CA) or by [generating your own certificates using OpenSSL](../generate-certificates), you can start configuring Elasticsearch to authenticate a user using a client certificate.
 
 ## Enabling client authentication
 
@@ -37,7 +37,7 @@ clientcert_auth_domain:
 
 ## Assigning roles to your common name
 
-You can now assign your certificate's common name (CN) to a role. For this part, you need to know your certificate's CN, distinguished name (DN), and the role you want to assign to. To get a list of all predefined roles in Elasticsearch, refer to our [list of predefined roles](../../access-control/users-roles#predefined-roles). If you want to first create a role, refer to [how to create a role](../../access-control/users-roles#create-users), and then proceed to mapping your certificate's CN to that role.
+You can now assign your certificate's common name (CN) to a role. For this part, you need to know your certificate's CN, distinguished name (DN), and the role you want to assign to. To get a list of all predefined roles in Elasticsearch, refer to our [list of predefined roles](../../access-control/users-roles#predefined-roles). If you want to first create a role, refer to [how to create a role](../../access-control/users-roles#create-users), and then map your certificate's CN to that role.
 
 After deciding which role you want to map your certificate's CN to, you can use [Kibana](../../access-control/users-roles#map-users-to-roles), [`roles_mapping.yml`](../yaml/#roles_mappingyml), or the [REST API](../../access-control/api/#create-role-mapping) to map your certificate's CN to the role. The following example uses the `REST API` to map the user `CLIENT1` to the role `readall`.
 
