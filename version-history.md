@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+[1.13.1](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.1.md) | Fixes a bug with Performance Analyzer failing to start. | 24 February 2021 | 7.10.2
 [1.13.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.0.md) | Adds ARM64 support, enhancements to SQL, asynchronous search plugin, and Historical Data Workbench for the anomaly detection plugin. Bumps Elasticsearch version. | 17 February 2021 | 7.10.2
 [1.12.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.12.0.md) | Adds Kibana reports, index rollups, and Hamming distance for k-NN. | 14 December 2020 | 7.10.0
 [1.11.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.11.0.md) | Adds Piped Processing Language (PPL) for exploring data, high cardinality support to anomaly detection, custom scoring for k-NN, and security support to the alerting plugin. Query Workbench replaces SQL Workbench in this version. | 27 October 2020 | 7.9.1

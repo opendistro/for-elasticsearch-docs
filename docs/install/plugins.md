@@ -38,7 +38,7 @@ opendistro-asynchronous-search  1.13.0.1
 opendistro-index-management     1.13.0.0
 opendistro-job-scheduler        1.13.0.0
 opendistro-knn                  1.13.0.0
-opendistro-performance-analyzer 1.13.0.0
+opendistro-performance-analyzer 1.13.1.0
 opendistro-reports-scheduler    1.13.0.0
 opendistro-sql                  1.13.0.0
 opendistro_security             1.13.0.0
@@ -241,7 +241,7 @@ Navigate to the Elasticsearch home directory (most likely, it is `/usr/share/ela
 ### Security
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro-security-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-security/opendistro-security-{{site.temp_plugin_version}}.0.zip
 ```
 
 After installing the security plugin, you can run `sudo sh /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh` to quickly get started with demo certificates. Otherwise, you must configure it manually and run [securityadmin.sh](../../security/configuration/security-admin/).
@@ -252,14 +252,14 @@ The security plugin has a corresponding [Kibana plugin](../../kibana/plugins) th
 ### Job scheduler
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-job-scheduler/opendistro-job-scheduler-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-job-scheduler/opendistro-job-scheduler-{{site.temp_plugin_version}}.0.zip
 ```
 
 
 ### Alerting
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro-alerting-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro-alerting-{{site.temp_plugin_version}}.0.zip
 ```
 
 To install Alerting, you must first install the Job Scheduler plugin. Alerting has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -268,21 +268,21 @@ To install Alerting, you must first install the Job Scheduler plugin. Alerting h
 ### SQL
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro-sql-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-sql/opendistro-sql-{{site.temp_plugin_version}}.0.zip
 ```
 
 
 ### Reports scheduler
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-reports-scheduler/opendistro-reports-scheduler-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-reports-scheduler/opendistro-reports-scheduler-{{site.temp_plugin_version}}.0.zip
 ```
 
 
 ### Index State Management
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro-index-management-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-index-management/opendistro-index-management-{{site.temp_plugin_version}}.0.zip
 ```
 
 To install Index State Management, you must first install the Job Scheduler plugin. ISM has a corresponding [Kibana plugin](../../kibana/plugins) that you probably want to install as well.
@@ -296,14 +296,14 @@ k-NN is only available as part of the all-in-one installs: Docker, RPM, and Debi
 ### Anomaly detection
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-anomaly-detection/opendistro-anomaly-detection-{{site.temp_plugin_version}}.0.zip
 ```
 
 
 ### Asynchronous search
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-asynchronous-search/opendistro-asynchronous-search-{{site.odfe_version}}.1.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-asynchronous-search/opendistro-asynchronous-search-{{site.temp_plugin_version}}.1.zip
 ```
 
 

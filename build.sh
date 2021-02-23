@@ -1,1 +1,1 @@
-bundle exec jekyll serve --host localhost --port 4000 --livereload --open-url
+bundle exec jekyll serve --host localhost --port 4000 --incremental --livereload --open-url
