@@ -4,6 +4,7 @@ title: Index Rollups
 nav_order: 35
 parent: Index Management
 has_children: true
+redirect_from: /docs/ism/index-rollups/
 has_toc: false
 ---
 

@@ -3,6 +3,7 @@ layout: default
 title: ISM API
 parent: Index State Management
 grand_parent: Index Management
+redirect_from: /docs/ism/api/
 nav_order: 5
 ---
 

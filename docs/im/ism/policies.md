@@ -4,6 +4,7 @@ title: Policies
 nav_order: 1
 parent: Index State Management
 grand_parent: Index Management
+redirect_from: /docs/ism/policies/
 has_children: false
 ---
 
