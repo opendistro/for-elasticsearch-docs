@@ -293,6 +293,10 @@ If you don't want to receive notifications for alerts, you don't have to add act
 
    In this case, the message content must conform to the `Content-Type` header in the [custom webhook](#create-destinations).
 
+1. (Optional) Use action throttling to limit the number of notifications you receive within a given span of time.
+
+   For example, if a monitor checks a trigger condition every minute, you could receive one notification per minute. If you set action throttling to 60 minutes, you receive no more than one notification per hour, even if the trigger condition is met dozens of times in that hour.
+
 1. Choose **Create**.
 
 After an action sends a message, the content of that message has left the purview of the security plugin. Securing access to the message (e.g. access to the Slack channel) is your responsibility.

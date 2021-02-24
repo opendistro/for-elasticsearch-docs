@@ -7,15 +7,14 @@ nav_order: 99
 
 # Elasticsearch REST API reference
 
-We generate this reference from the Elasticsearch REST API specification. As such, its usefulness depends on the accuracy of the specification.
-
-For language issues, missing information, and inaccuracies, modify the JSON files in `rest-api-spec/src/main/resources/rest-api-spec/api` and submit pull requests to the upstream Elasticsearch repository.
+This reference originates from the Elasticsearch REST API specification. We're extremely grateful to the Elasticsearch community for their numerous contributions to open source software, including this documentation.
+{: .tip}
 
 ---
 
 ## bulk
 
-Allows to perform multiple index/update/delete operations in a single request.
+Perform multiple index, update, and/or delete operations in a single request.
 
 ```
 POST _bulk
@@ -32,9 +31,10 @@ POST {index}/{type}/_bulk
 PUT {index}/{type}/_bulk
 ```
 
+
 #### HTTP request body
 
-The operation definition and data (action-data pairs), separated by newlines
+The operation definition and data (action-data pairs), separated by newlines.
 
 **Required**: True
 
@@ -43,16 +43,16 @@ The operation definition and data (action-data pairs), separated by newlines
 
 Parameter | Type | Description
 :--- | :--- | :---
-wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-refresh | enum | If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
-routing | string | Specific routing value
-timeout | time | Explicit operation timeout
-type | string | Default document type for items which don't provide one
-_source | list | True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request
-_source_excludes | list | Default list of fields to exclude from the returned _source field, can be overridden on each sub-request
-_source_includes | list | Default list of fields to extract and return from the _source field, can be overridden on each sub-request
-pipeline | string | The pipeline id to preprocess incoming documents with
-require_alias | boolean | Sets require_alias for all incoming documents. Defaults to unset (false)
+wait_for_active_shards | string | Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies. Otherwise, set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1).
+refresh | enum | If `true`, refresh the affected shards to make this operation visible to search. If `wait_for`, wait for a refresh to make this operation visible to search. If `false` (the default), do nothing with refreshes.
+routing | string | Specific routing value.
+timeout | time | Explicit operation timeout.
+type | string | Default document type for items that don't provide one.
+_source | list | True or false to return the _source field or not, or the default list of fields to return, can be overridden on each sub-request.
+_source_excludes | list | Default list of fields to exclude from the returned _source field, can be overridden on each sub-request.
+_source_includes | list | Default list of fields to extract and return from the _source field, can be overridden on each sub-request.
+pipeline | string | The pipeline ID to preprocess incoming documents with.
+require_alias | boolean | Sets require_alias for all incoming documents, defaults to false (unset).
 
 
 ## cat.aliases
@@ -2571,7 +2571,7 @@ all_shards | boolean | Execute validation on all shards instead of one random sh
 Returns basic information about the cluster.
 
 ```
-GET 
+GET
 ```
 
 
@@ -3016,7 +3016,7 @@ timeout | time | Explicit operation timeout
 Returns whether the cluster is running.
 
 ```
-HEAD 
+HEAD
 ```
 
 
@@ -3784,5 +3784,3 @@ POST _update_by_query/{task_id}/_rethrottle
 Parameter | Type | Description
 :--- | :--- | :---
 requests_per_second | number | The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.
-
-

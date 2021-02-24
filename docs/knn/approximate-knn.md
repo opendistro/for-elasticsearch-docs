@@ -11,7 +11,7 @@ has_math: true
 
 The approximate k-NN method uses [nmslib's](https://github.com/nmslib/nmslib/) implementation of the HNSW algorithm to power k-NN search. In this case, approximate means that for a given search, the neighbors returned are an estimate of the true k-nearest neighbors. Of the three methods, this method offers the best search scalability for large data sets. Generally speaking, once the data set gets into the hundreds of thousands of vectors, this approach should be preferred.
 
-This plugin builds an HNSW graph of the vectors for each "knn-vector field" / "Lucene segment" pair during indexing that can be used to efficiently find the k-nearest neighbors to a query vector during search. To learn more about Lucene segments, please refer to [Apache Lucene's documentation](https://lucene.apache.org/core/8_7_0/core/org/apache/lucene/codecs/lucene87/package-summary.html#package.description). These graphs are loaded into native memory during search and managed by a cache. To learn more about pre-loading graphs into memory, refer to the [warmup API](../api#warmup). Additionally, you can see what graphs are already loaded in memory, which you can learn more about in the [stats API section](../api#stats).
+This plugin builds an HNSW graph of the vectors for each "knn-vector field"/ "Lucene segment" pair during indexing that can be used to efficiently find the k-nearest neighbors to a query vector during search. To learn more about Lucene segments, please refer to [Apache Lucene's documentation](https://lucene.apache.org/core/8_7_0/core/org/apache/lucene/codecs/lucene87/package-summary.html#package.description). These graphs are loaded into native memory during search and managed by a cache. To learn more about pre-loading graphs into memory, refer to the [warmup API](../api#warmup). Additionally, you can see what graphs are already loaded in memory, which you can learn more about in the [stats API section](../api#stats).
 
 Because the graphs are constructed during indexing, it is not possible to apply a filter on an index and then use this search method. All filters will be applied on the results produced by the approximate nearest neighbor search.
 
@@ -19,7 +19,7 @@ Because the graphs are constructed during indexing, it is not possible to apply 
 
 To use the k-NN plugin's approximate search functionality, you must first create a k-NN index with setting `index.knn` to `true`. This setting tells the plugin to create HNSW graphs for the index.
 
-Additionally, if you are using the approximate k-nearest neighbor method, you should specify `knn.space_type` to the space that you are interested in. This setting cannot be changed after it is set. To see what spaces we support, please refer to the [spaces section](#spaces). By default, `index.knn.space_type` is `l2`. For more information on index settings, such as algorithm parameters that can be tweaked to tune performance, please refer to the [documentation](settings#IndexSettings).
+Additionally, if you are using the approximate k-nearest neighbor method, you should specify `knn.space_type` to the space that you are interested in. This setting cannot be changed after it is set. To see what spaces we support, please refer to the [spaces section](#spaces). By default, `index.knn.space_type` is `l2`. For more information on index settings, such as algorithm parameters that can be tweaked to tune performance, please refer to the [documentation](../settings#index-settings).
 
 Next, you must add one or more fields of the `knn_vector` data type. Here is an example that creates an index with two `knn_vector` fields and uses cosine similarity:
 
@@ -146,7 +146,7 @@ A space corresponds to the function used to measure the distance between 2 point
   </tr>
   <tr>
     <td>cosinesimil</td>
-    <td>\[ {A &middot; B \over \|A\| &middot; \|B\|} =
+    <td>\[ 1 - {A &middot; B \over \|A\| &middot; \|B\|} = 1 -
     {\sum_{i=1}^n (A_i &middot; B_i) \over \sqrt{\sum_{i=1}^n A_i^2} &middot; \sqrt{\sum_{i=1}^n B_i^2}}\]
     where \(\|A\|\) and \(\|B\|\) represent normalized vectors.</td>
     <td>1 / (1 + Distance Function)</td>
@@ -157,3 +157,6 @@ A space corresponds to the function used to measure the distance between 2 point
     <td>1 / (1 + Distance Function)</td>
   </tr>
 </table>
+
+The cosine similarity formula does not include the `1 - ` prefix. However, because nmslib equates smaller scores with closer results, they return `1 - cosineSimilarity` for their cosine similarity space---that's why `1 - ` is included in the distance function.
+{: .note }
