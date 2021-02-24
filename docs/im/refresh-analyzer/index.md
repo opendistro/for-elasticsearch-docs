@@ -3,7 +3,7 @@ layout: default
 title: Refresh Search Analyzer
 nav_order: 40
 parent: Index Management
-has_children: true
+has_children: false
 redirect_from: /docs/ism/refresh-analyzer/
 has_toc: false
 ---
