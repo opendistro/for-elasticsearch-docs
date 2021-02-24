@@ -3,6 +3,7 @@ layout: default
 title: Policies
 nav_order: 1
 parent: Index State Management
+grand_parent: Index Management
 has_children: false
 ---
 

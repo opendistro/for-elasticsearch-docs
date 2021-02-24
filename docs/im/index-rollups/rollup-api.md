@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Index Rollups API
-parent: Index State Management
+parent: Index Rollups
+grand_parent: Index Management
 nav_order: 9
 ---
 

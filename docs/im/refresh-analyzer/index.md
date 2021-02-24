@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Refresh Search Analyzer
-parent: Index State Management
-nav_order: 6
+nav_order: 40
+parent: Index Management
+has_children: true
+has_toc: false
 ---
 
 # Refresh search analyzer

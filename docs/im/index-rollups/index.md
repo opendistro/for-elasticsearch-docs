@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Index Rollups
-parent: Index State Management
-nav_order: 7
+nav_order: 35
+parent: Index Management
+has_children: true
+has_toc: false
 ---
 
 # Index Rollups

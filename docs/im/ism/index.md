@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Index State Management
-nav_order: 30
+nav_order: 3
+parent: Index Management
 has_children: true
+has_toc: false
 ---
 
 # Index State Management
