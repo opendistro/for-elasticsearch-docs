@@ -427,7 +427,7 @@ Performance Analyzer requires certain configuration files to run. If you want to
 1. Make the removal scripts executable:
 
    ```bash
-   # Debain-based distros
+   # Debian-based distros
    sudo chmod +x plugins/opendistro-performance-analyzer/install/deb/postrm
    sudo sh plugins/opendistro-performance-analyzer/install/deb/postrm
 
