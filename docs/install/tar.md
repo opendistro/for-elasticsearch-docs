@@ -91,7 +91,7 @@ In a tarball installation, Performance Analyzer collects data when it is enabled
 
    ```bash
    cd /usr/share/elasticsearch # navigate to the Elasticsearch home directory
-   cd plugins/opendistro_performance_analyzer/pa_config/
+   cd plugins/opendistro-performance-analyzer/pa_config/
    vi performance-analyzer.properties
    ```
 
@@ -152,25 +152,25 @@ In a tarball installation, Performance Analyzer collects data when it is enabled
 1. In a separate window, enable the Performance Analyzer plugin:
 
    ```bash
-   curl localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   curl -XPOST localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
    ```
 
-   If you receive the `curl: (52) Empty reply from server` error, you are likely protecting your cluster with the security plugin and need to provide identity certificates. Modify the following command to use your certificates:
+   If you receive the `curl: (52) Empty reply from server` error, you are likely protecting your cluster with the security plugin and you need to provide credentials. Modify the following command to use your username and password:
 
    ```bash
-   curl -k --cert config/kirk.pem --key config/kirk-key.pem https://localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   curl -XPOST https://localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}' -u 'admin:admin' -k
    ```
 
 1. Finally, enable the Root Cause Analyzer (RCA) framework
 
    ```bash
-   curl localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   curl -XPOST localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
    ```
 
    Similar to step 4, if you run into `curl: (52) Empty reply from server`, run the command below to enable RCA
 
    ```bash
-   curl -k --cert config/kirk.pem --key config/kirk-key.pem https://localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   curl -XPOST https://localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}' -u 'admin:admin' -k
    ```
 
 
