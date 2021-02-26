@@ -41,7 +41,7 @@ opendistro-knn                  1.13.0.0
 opendistro-performance-analyzer 1.13.1.0
 opendistro-reports-scheduler    1.13.0.0
 opendistro-sql                  1.13.0.0
-opendistro_security             1.13.0.0
+opendistro_security             1.13.1.0
 </pre>
     </td>
   </tr>
