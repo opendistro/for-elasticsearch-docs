@@ -7,10 +7,10 @@ has_children: false
 ---
 
 # API
-The k-NN plugin adds two APIs in order to allow users to better manage the plugin's functionality.
+The k-NN plugin adds two API operations in order to allow users to better manage the plugin's functionality.
 
 ## Stats
-The k-NN Stats API provides information about the current status of the k-NN Plugin. The plugin keeps track of both cluster level and node level stats. Cluster level stats have a single value for the entire cluster. Node level stats have a single value for each node in the cluster. You can filter their query by nodeID and statName in the following way:
+The k-NN `stats` API provides information about the current status of the k-NN Plugin. The plugin keeps track of both cluster level and node level stats. Cluster level stats have a single value for the entire cluster. Node level stats have a single value for each node in the cluster. You can filter their query by nodeID and statName in the following way:
 ```
 GET /_opendistro/_knn/nodeId1,nodeId2/stats/statName1,statName2
 ```
@@ -99,7 +99,7 @@ GET /_opendistro/_knn/HYMrXXsBSamUkcAjhjeN0w/stats/circuit_breaker_triggered,gra
 }
 ```
 
-## Warmup
+## Warmup operation
 The Hierarchical Navigable Small World (HNSW) graphs that are used to perform an approximate k-Nearest Neighbor (k-NN) search are stored as `.hnsw` files with other Apache Lucene segment files. In order for you to perform a search on these graphs using the k-NN plugin, these files need to be loaded into native memory.
 
 If the plugin has not loaded the graphs into native memory, it loads them when it receives a search request. This loading time can cause high latency during initial queries. To avoid this situation, users often run random queries during a warmup period. After this warmup period, the graphs are loaded into native memory and their production workloads can begin. This loading process is indirect and requires extra effort.
@@ -133,7 +133,7 @@ GET /_tasks
 After the operation has finished, use the [k-NN `_stats` API operation](#Stats) to see what the k-NN plugin loaded into the graph.
 
 ### Best practices
-For the warmup API to function properly, follow these best practices.
+For the warmup operation to function properly, follow these best practices.
 
 First, don't run merge operations on indices that you want to warm up. During merge, the k-NN plugin creates new segments, and old segments are (sometimes) deleted. For example, you could encounter a situation in which the warmup API operation loads graphs A and B into native memory, but segment C is created from segments A and B being merged. The graphs for A and B would no longer be in memory, and graph C would also not be in memory. In this case, the initial penalty for loading graph C is still present.
 
