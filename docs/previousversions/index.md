@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Previous versions
+title: Previous Versions
 ---
 
 ## Version 1.13.0
 
 ### x64
-[Elasticsearch - Linux (tar.gz)](https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.13.0-linux-x64.tar.gz)  
+[opendistroforelasticsearch-1.13.0-linux-x64.tar.gz](https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.13.0-linux-x64.tar.gz)  
 [Kibana - Linux (tar.gz)](https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistroforelasticsearch-kibana/opendistroforelasticsearch-kibana-1.13.0-linux-x64.tar.gz)  
 [Elasticsearch - Windows (.zip)](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/opendistroforelasticsearch-1.13.0-windows-x64.zip)  
 [Kibana - Windows (.zip)](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/ode-windows-zip/opendistroforelasticsearch-kibana-1.13.0-windows-x64.zip)  
