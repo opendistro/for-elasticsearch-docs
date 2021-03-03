@@ -151,7 +151,7 @@ POST _tasks/_cancel
 
 Note that not all tasks are cancelable. To see if a task is cancelable, refer to the `cancellable` field in the response to your `tasks` API request.
 
-You can also cancel a task by including specific task ID.
+You can also cancel a task by including a specific task ID.
 
 ```
 POST _tasks/<task_id>/_cancel
