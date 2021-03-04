@@ -87,3 +87,371 @@ GET target_index/_search
 ```
 
 Consider a scenario where you collect rolled up data from 1 PM to 9 PM in hourly intervals and live data from 7 PM to 11 PM in minutely intervals. If you execute an aggregation over these in the same query, for 7 PM to 9 PM, you see an overlap of both rolled up data and live data because they get counted twice in the aggregations.
+
+## Sample Walkthrough
+
+This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log in to Kibana, choose **Home** and **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
+
+Then run a search:
+
+```json
+GET kibana_sample_data_ecommerce/_search
+```
+
+#### Sample response
+
+```json
+{
+  "took": 23,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 4675,
+      "relation": "eq"
+    },
+    "max_score": 1,
+    "hits": [
+      {
+        "_index": "kibana_sample_data_ecommerce",
+        "_type": "_doc",
+        "_id": "jlMlwXcBQVLeQPrkC_kQ",
+        "_score": 1,
+        "_source": {
+          "category": [
+            "Women's Clothing",
+            "Women's Accessories"
+          ],
+          "currency": "EUR",
+          "customer_first_name": "Selena",
+          "customer_full_name": "Selena Mullins",
+          "customer_gender": "FEMALE",
+          "customer_id": 42,
+          "customer_last_name": "Mullins",
+          "customer_phone": "",
+          "day_of_week": "Saturday",
+          "day_of_week_i": 5,
+          "email": "selena@mullins-family.zzz",
+          "manufacturer": [
+            "Tigress Enterprises"
+          ],
+          "order_date": "2021-02-27T03:56:10+00:00",
+          "order_id": 581553,
+          "products": [
+            {
+              "base_price": 24.99,
+              "discount_percentage": 0,
+              "quantity": 1,
+              "manufacturer": "Tigress Enterprises",
+              "tax_amount": 0,
+              "product_id": 19240,
+              "category": "Women's Clothing",
+              "sku": "ZO0064500645",
+              "taxless_price": 24.99,
+              "unit_discount_amount": 0,
+              "min_price": 12.99,
+              "_id": "sold_product_581553_19240",
+              "discount_amount": 0,
+              "created_on": "2016-12-24T03:56:10+00:00",
+              "product_name": "Blouse - port royal",
+              "price": 24.99,
+              "taxful_price": 24.99,
+              "base_unit_price": 24.99
+            },
+            {
+              "base_price": 10.99,
+              "discount_percentage": 0,
+              "quantity": 1,
+              "manufacturer": "Tigress Enterprises",
+              "tax_amount": 0,
+              "product_id": 17221,
+              "category": "Women's Accessories",
+              "sku": "ZO0085200852",
+              "taxless_price": 10.99,
+              "unit_discount_amount": 0,
+              "min_price": 5.06,
+              "_id": "sold_product_581553_17221",
+              "discount_amount": 0,
+              "created_on": "2016-12-24T03:56:10+00:00",
+              "product_name": "Snood - rose",
+              "price": 10.99,
+              "taxful_price": 10.99,
+              "base_unit_price": 10.99
+            }
+          ],
+          "sku": [
+            "ZO0064500645",
+            "ZO0085200852"
+          ],
+          "taxful_total_price": 35.98,
+          "taxless_total_price": 35.98,
+          "total_quantity": 2,
+          "total_unique_products": 2,
+          "type": "order",
+          "user": "selena",
+          "geoip": {
+            "country_iso_code": "MA",
+            "location": {
+              "lon": -8,
+              "lat": 31.6
+            },
+            "region_name": "Marrakech-Tensift-Al Haouz",
+            "continent_name": "Africa",
+            "city_name": "Marrakesh"
+          },
+          "event": {
+            "dataset": "sample_ecommerce"
+          }
+        }
+      }
+    ]
+  }
+}
+...
+```
+
+Create an index rollup job.
+This example picks the `order_date`, `customer_gender`, `geoip.city_name`, `geoip.region_name`, and `day_of_week` fields and rolls them into an `example_rollup` target index:
+
+```json
+PUT _opendistro/_rollup/jobs/example
+{
+  "rollup": {
+    "enabled": true,
+    "schedule": {
+      "interval": {
+        "period": 1,
+        "unit": "Minutes",
+        "start_time": 1602100553
+      }
+    },
+    "last_updated_time": 1602100553,
+    "description": "An example policy that rolls up the sample ecommerce data",
+    "source_index": "kibana_sample_data_ecommerce",
+    "target_index": "example_rollup",
+    "page_size": 1000,
+    "delay": 0,
+    "continuous": false,
+    "dimensions": [
+      {
+        "date_histogram": {
+          "source_field": "order_date",
+          "fixed_interval": "60m",
+          "timezone": "America/Los_Angeles"
+        }
+      },
+      {
+        "terms": {
+          "source_field": "customer_gender"
+        }
+      },
+      {
+        "terms": {
+          "source_field": "geoip.city_name"
+        }
+      },
+      {
+        "terms": {
+          "source_field": "geoip.region_name"
+        }
+      },
+      {
+        "terms": {
+          "source_field": "day_of_week"
+        }
+      }
+    ],
+    "metrics": [
+      {
+        "source_field": "taxless_total_price",
+        "metrics": [
+          {
+            "avg": {}
+          },
+          {
+            "sum": {}
+          },
+          {
+            "max": {}
+          },
+          {
+            "min": {}
+          },
+          {
+            "value_count": {}
+          }
+        ]
+      },
+      {
+        "source_field": "total_quantity",
+        "metrics": [
+          {
+            "avg": {}
+          },
+          {
+            "max": {}
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+You can query the `example_rollup` index for the terms aggregations on the fields set up in the rollup job.
+You get back the same response that you would on the original `kibana_sample_data_ecommerce` source index.
+
+```json
+POST example_rollup/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": {"term": { "geoip.region_name": "California" } }
+    }
+  },
+  "aggregations": {
+    "daily_numbers": {
+      "terms": {
+        "field": "day_of_week"
+      },
+      "aggs": {
+        "per_city": {
+          "terms": {
+            "field": "geoip.city_name"
+          },
+          "aggregations": {
+            "average quantity": {
+               "avg": {
+                  "field": "total_quantity"
+                }
+              }
+            }
+          },
+          "total_revenue": {
+            "sum": {
+              "field": "taxless_total_price"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample Response
+
+```json
+{
+  "took": 476,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 281,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": []
+  },
+  "aggregations": {
+    "daily_numbers": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "Friday",
+          "doc_count": 53,
+          "total_revenue": {
+            "value": 4858.84375
+          },
+          "per_city": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+              {
+                "key": "Los Angeles",
+                "doc_count": 53,
+                "average quantity": {
+                  "value": 2.305084745762712
+                }
+              }
+            ]
+          }
+        },
+        {
+          "key": "Saturday",
+          "doc_count": 43,
+          "total_revenue": {
+            "value": 3547.203125
+          },
+          "per_city": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+              {
+                "key": "Los Angeles",
+                "doc_count": 43,
+                "average quantity": {
+                  "value": 2.260869565217391
+                }
+              }
+            ]
+          }
+        },
+        {
+          "key": "Tuesday",
+          "doc_count": 42,
+          "total_revenue": {
+            "value": 3983.28125
+          },
+          "per_city": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+              {
+                "key": "Los Angeles",
+                "doc_count": 42,
+                "average quantity": {
+                  "value": 2.2888888888888888
+                }
+              }
+            ]
+          }
+        },
+        {
+          "key": "Sunday",
+          "doc_count": 40,
+          "total_revenue": {
+            "value": 3308.1640625
+          },
+          "per_city": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+              {
+                "key": "Los Angeles",
+                "doc_count": 40,
+                "average quantity": {
+                  "value": 2.090909090909091
+                }
+              }
+            ]
+          }
+        }
+        ...
+      ]
+    }
+  }
+}
+```
