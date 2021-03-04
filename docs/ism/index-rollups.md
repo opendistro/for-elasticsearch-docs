@@ -87,7 +87,7 @@ Consider a scenario where you collect rolled up data from 1 PM to 9 PM in hourly
 
 ## Sample Walkthrough
 
-This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log in to Kibana, choose **Home** | **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
+This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log in to Kibana, choose **Home** and **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
 
 Then run a search:
 
