@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Index Rollups API
-parent: Index State Management
+parent: Index Rollups
+grand_parent: Index Management
+redirect_from: /docs/ism/rollup-api/
 nav_order: 9
 ---
 

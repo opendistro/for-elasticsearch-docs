@@ -327,17 +327,17 @@ Performance Analyzer requires some manual configuration after installing the plu
 
    ```bash
    # Debian-based distros
-   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/deb/postinst.sh 1
+   sudo sh /usr/share/elasticsearch/plugins/opendistro-performance-analyzer/install/deb/postinst.sh 1
 
    # RPM distros
-   sudo sh /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/install/rpm/postinst.sh 1
+   sudo sh /usr/share/elasticsearch/plugins/opendistro-performance-analyzer/install/rpm/postinst.sh 1
    ```
 
 1. Make Performance Analyzer accessible outside of the host machine
 
    ```bash
    cd /usr/share/elasticsearch # navigate to the Elasticsearch home directory
-   cd plugins/opendistro_performance_analyzer/pa_config/
+   cd plugins/opendistro-performance-analyzer/pa_config/
    vi performance-analyzer.properties
    ```
 
@@ -427,17 +427,23 @@ Performance Analyzer requires certain configuration files to run. If you want to
 1. Make the removal scripts executable:
 
    ```bash
-   sudo chmod +x plugins/opendistro_performance_analyer/install/deb/postrm sudo sh plugins/opendistro_performance_analyer/install/rpm/postrm
+   # Debian-based distros
+   sudo chmod +x plugins/opendistro-performance-analyzer/install/deb/postrm
+   sudo sh plugins/opendistro-performance-analyzer/install/deb/postrm
+
+   # RPM distros
+   sudo chmod +x plugins/opendistro-performance-analyzer/install/rpm/postrm
+   sudo sh plugins/opendistro-performance-analyzer/install/rpm/postrm
    ```
 
 1. Run the appropriate removal script for your distribution:
 
    ```bash
    # Debian-based distros
-   sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/deb/postrm
+   sudo --preserve-env=ES_HOME ./plugins/opendistro-performance-analyzer/install/deb/postrm
 
    # RPM distros
-   sudo --preserve-env=ES_HOME ./plugins/opendistro_performance_analyer/install/rpm/postrm
+   sudo --preserve-env=ES_HOME ./plugins/opendistro-performance-analyzer/install/rpm/postrm
    ```
 
 Then proceed with the normal removal procedure.

@@ -189,65 +189,89 @@ You can use this same method to [pass your own certificates](../docker-security/
 
 ### (Optional) Set up Performance Analyzer
 
-By default, Performance Analyzer's endpoints are not accessible from outside the Docker container.
+1. Enable the Performance Analyzer plugin:
 
-To edit this behavior, open a shell session in the container and modify the configuration:
+   ```bash
+   curl -XPOST localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   ```
 
-```bash
-docker ps # Look up the container id
-docker exec -it <container-id> /bin/bash
-# Inside container
-cd plugins/opendistro_performance_analyzer/pa_config/
-vi performance-analyzer.properties
-```
+   If you receive the `curl: (52) Empty reply from server` error, you are likely protecting your cluster with the security plugin and you need to provide credentials. Modify the following command to use your username and password:
 
-Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`:
+   ```bash
+   curl -XPOST https://localhost:9200/_opendistro/_performanceanalyzer/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}' -u 'admin:admin' -k
+   ```
 
-```
-# ======================== Elasticsearch performance analyzer plugin config =========================
+1. Enable the Root Cause Analyzer (RCA) framework
 
-# NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
+   ```bash
+   curl -XPOST localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}'
+   ```
 
-# WebService bind host; default to all interfaces
-webservice-bind-host = 0.0.0.0
+   Similar to step 1, if you run into `curl: (52) Empty reply from server`, run the command below to enable RCA
 
-# Metrics data location
-metrics-location = /dev/shm/performanceanalyzer/
+   ```bash
+   curl -XPOST https://localhost:9200/_opendistro/_performanceanalyzer/rca/cluster/config -H 'Content-Type: application/json' -d '{"enabled": true}' -u 'admin:admin' -k
+   ```
 
-# Metrics deletion interval (minutes) for metrics data.
-# Interval should be between 1 to 60.
-metrics-deletion-interval = 1
+1. By default, Performance Analyzer's endpoints are not accessible from outside the Docker container.
 
-# If set to true, the system cleans up the files behind it. So at any point, we should expect only 2
-# metrics-db-file-prefix-path files. If set to false, no files are cleaned up. This can be useful, if you are archiving
-# the files and wouldn't like for them to be cleaned up.
-cleanup-metrics-db-files = true
+   To edit this behavior, open a shell session in the container and modify the configuration:
 
-# WebService exposed by App's port
-webservice-listener-port = 9600
+   ```bash
+   docker ps # Look up the container id
+   docker exec -it <container-id> /bin/bash
+   # Inside container
+   cd plugins/opendistro-performance-analyzer/pa_config/
+   vi performance-analyzer.properties
+   ```
 
-# Metric DB File Prefix Path location
-metrics-db-file-prefix-path = /tmp/metricsdb_
+   Uncomment the line `#webservice-bind-host` and set it to `0.0.0.0`:
 
-https-enabled = false
+   ```
+   # ======================== Elasticsearch performance analyzer plugin config =========================
 
-#Setup the correct path for certificates
-certificate-file-path = specify_path
+   # NOTE: this is an example for Linux. Please modify the config accordingly if you are using it under other OS.
 
-private-key-file-path = specify_path
+   # WebService bind host; default to all interfaces
+   webservice-bind-host = 0.0.0.0
 
-# Plugin Stats Metadata file name, expected to be in the same location
-plugin-stats-metadata = plugin-stats-metadata
+   # Metrics data location
+   metrics-location = /dev/shm/performanceanalyzer/
 
-# Agent Stats Metadata file name, expected to be in the same location
-agent-stats-metadata = agent-stats-metadata
-```
+   # Metrics deletion interval (minutes) for metrics data.
+   # Interval should be between 1 to 60.
+   metrics-deletion-interval = 1
 
-Then restart the Performance Analyzer agent:
+   # If set to true, the system cleans up the files behind it. So at any point, we should expect only 2
+   # metrics-db-file-prefix-path files. If set to false, no files are cleaned up. This can be useful, if you are archiving
+   # the files and wouldn't like for them to be cleaned up.
+   cleanup-metrics-db-files = true
 
-```bash
-kill $(ps aux | grep -i 'PerformanceAnalyzerApp' | grep -v grep | awk '{print $2}')
-```
+   # WebService exposed by App's port
+   webservice-listener-port = 9600
+
+   # Metric DB File Prefix Path location
+   metrics-db-file-prefix-path = /tmp/metricsdb_
+
+   https-enabled = false
+
+   #Setup the correct path for certificates
+   certificate-file-path = specify_path
+
+   private-key-file-path = specify_path
+
+   # Plugin Stats Metadata file name, expected to be in the same location
+   plugin-stats-metadata = plugin-stats-metadata
+
+   # Agent Stats Metadata file name, expected to be in the same location
+   agent-stats-metadata = agent-stats-metadata
+   ```
+
+1. Then restart the Performance Analyzer agent:
+
+   ```bash
+   kill $(ps aux | grep -i 'PerformanceAnalyzerApp' | grep -v grep | awk '{print $2}')
+   ```
 
 
 ## Bash access to containers
