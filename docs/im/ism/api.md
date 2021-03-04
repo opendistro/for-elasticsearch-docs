@@ -457,6 +457,9 @@ GET _opendistro/_ism/explain/index_1
 }
 ```
 
+The `opendistro.index_state_management.policy_id` setting is deprecated starting from version 1.13.0.
+We retain this field in the response API for consistency. 
+
 ---
 
 ## Delete policy
