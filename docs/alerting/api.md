@@ -72,7 +72,11 @@ POST _opendistro/_alerting/monitors
       "message_template": {
         "source": "This is my message body."
       },
-      "throttle_enabled": false,
+      "throttle_enabled": true,
+      "throttle": {
+        "value": 27,
+        "unit": "MINUTES"
+      },
       "subject_template": {
         "source": "TheSubject"
       }
