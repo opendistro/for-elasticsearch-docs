@@ -87,7 +87,7 @@ Consider a scenario where you collect rolled up data from 1 PM to 9 PM in hourly
 
 ## Sample Walkthrough
 
-This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log into Kibana, choose **Home** | **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
+This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log in to Kibana, choose **Home** | **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
 
 Then run a search:
 
@@ -300,8 +300,8 @@ PUT _opendistro/_rollup/jobs/example
 }
 ```
 
-You can query `example_rollup` index for the terms aggregations on the fields set up in the rollup job.
-You get back the same response that you do on the original `kibana_sample_data_ecommerce` source index.
+You can query the `example_rollup` index for the terms aggregations on the fields set up in the rollup job.
+You get back the same response that you would on the original `kibana_sample_data_ecommerce` source index.
 
 ```json
 POST example_rollup/_search
