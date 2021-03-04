@@ -87,11 +87,15 @@ Consider a scenario where you collect rolled up data from 1 PM to 9 PM in hourly
 
 ## Sample Walkthrough
 
-Lets use the Kibana sample eCommerce orders data as the source index:
+This walkthrough uses the Kibana sample e-commerce data. To add that sample data, log into Kibana, choose **Home** | **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
+
+Then run a search:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
 ```
+
+#### Sample response
 
 ```json
 {
@@ -208,7 +212,8 @@ GET kibana_sample_data_ecommerce/_search
 ...
 ```
 
-Create an index rollup job:
+Create an index rollup job.
+This example picks the `order_date`, `customer_gender`, `geoip.city_name`, `geoip.region_name`, and `day_of_week` fields and rolls them into an `example_rollup` target index:
 
 ```json
 PUT _opendistro/_rollup/jobs/example
@@ -295,7 +300,8 @@ PUT _opendistro/_rollup/jobs/example
 }
 ```
 
-Query the target index:
+You can query `example_rollup` index for the terms aggregations on the fields set up in the rollup job.
+You get back the same response that you do on the original `kibana_sample_data_ecommerce` source index.
 
 ```json
 POST example_rollup/_search
@@ -446,45 +452,3 @@ POST example_rollup/_search
   }
 }
 ```
-
-Perform same query on the source index:
-
-```json
-POST kibana_sample_data_ecommerce/_search
-{
-  "size": 0,
-  "query": {
-    "bool": {
-      "must": {"term": { "geoip.region_name": "California" } }
-    }
-  },
-  "aggregations": {
-    "daily_numbers": {
-      "terms": {
-        "field": "day_of_week"
-      },
-      "aggs": {
-        "per_city": {
-          "terms": {
-            "field": "geoip.city_name"
-          },
-          "aggregations": {
-            "average quantity": {
-               "avg": {
-                  "field": "total_quantity"
-                }
-              }
-            }
-          },
-          "total_revenue": {
-            "sum": {
-              "field": "taxless_total_price"
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-You get back the same response as the one for the target index.
