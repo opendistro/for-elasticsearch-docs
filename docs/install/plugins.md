@@ -38,7 +38,7 @@ opendistro-asynchronous-search  1.13.0.1
 opendistro-index-management     1.13.0.0
 opendistro-job-scheduler        1.13.0.0
 opendistro-knn                  1.13.0.0
-opendistro-performance-analyzer 1.13.1.0
+opendistro-performance-analyzer 1.13.0.0
 opendistro-reports-scheduler    1.13.0.0
 opendistro-sql                  1.13.0.0
 opendistro_security             1.13.1.0
@@ -310,7 +310,7 @@ sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/down
 ### Performance Analyzer
 
 ```bash
-sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro-performance-analyzer-{{site.odfe_version}}.0.zip
+sudo bin/elasticsearch-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/performance-analyzer/opendistro-performance-analyzer-{{site.temp_plugin_version}}.0.zip
 ```
 
 Performance Analyzer requires some manual configuration after installing the plugin:
