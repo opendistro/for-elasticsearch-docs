@@ -32,10 +32,10 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
   <tr>
     <td>7.10.2</td>
     <td>
-      <pre>opendistro-alerting             1.13.0.0
+      <pre>opendistro-alerting             1.13.1.0
 opendistro-anomaly-detection    1.13.0.0
 opendistro-asynchronous-search  1.13.0.1
-opendistro-index-management     1.13.0.0
+opendistro-index-management     1.13.1.0
 opendistro-job-scheduler        1.13.0.0
 opendistro-knn                  1.13.0.0
 opendistro-performance-analyzer 1.13.0.0
