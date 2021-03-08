@@ -3,26 +3,28 @@ layout: default
 title: Aggregations
 parent: Elasticsearch
 nav_order: 13
+has_children: true
 ---
 
 # Aggregations
 
-Elasticsearch isn’t just for search. Aggregations let you tap into Elasticsearch's powerful analytics engine to analyze your data and extract statistics and build summaries.
+Elasticsearch isn’t just for search. Aggregations let you tap into Elasticsearch's powerful analytics engine to analyze your data and extract statistics from it.
 
 The use cases of aggregations vary from analyzing data in real time to take some action to using Kibana to create a visualization dashboard.
 
 Elasticsearch can perform aggregations on massive datasets in milliseconds. Compared to queries, aggregations consume more CPU cycles and memory.
 
-This section helps to turn the question you want to ask of your data into the appropriate aggregation.
+This section helps to turn the question you want to ask of your data into the correct aggregation operation.
 
 ## Aggregations on text fields
 
-By default, Elasticsearch does not support aggregations on an analyzed text field.
-An aggregation on a text field would have to reverse the tokenization process back to its orginal string and then formulate an aggregation based on that. Such an operation would consume significant memory and degrade cluster performance.
+By default, Elasticsearch does not support aggregations on a text field.
+Because text fields are tokenized, an aggregation on a text field has to reverse the tokenization process back to its original string and then formulate an aggregation based on that. Such an operation consumes significant memory and degrades cluster performance.
 
-It's possible to enable aggregations on text fields by setting `fielddata` parameter to `true` in the mapping. But the aggregation is still based on the tokenized words and not the raw text.
+While you can enable aggregations on text fields by setting the `fielddata` parameter to `true` in the mapping, the aggregations are still based on the tokenized words and not on the raw text.
 
-We recommend keeping a raw version of the text field as a keyword field that you can aggregate on. In this case, you can perform aggregations on the title.raw field, instead of the title field:
+We recommend keeping a raw version of the text field as a keyword field that you can aggregate on.
+In this case, you can perform aggregations on the `title.raw` field, instead of the `title` field:
 
 ```json
 PUT movies
@@ -59,30 +61,30 @@ GET _search
 }
 ```
 
-If you’re only interested in the aggregations and not the results of the query, set `size` to 0.
+If you’re only interested in the aggregation result and not in the results of the query, set `size` to 0.
 
 In the `aggs` property (you can use aggregations if you want), you can define any number of aggregations.
-Each aggregation is defined by its name and one of the types of aggregations that are provided by Elasticsearch.
+Each aggregation is defined by its name and one of the types of aggregations that Elasticsearch supports.
 
-The name of the aggregation helps you distinguish particular aggregations in the response.
+The name of the aggregation helps you to distinguish between different aggregations in the response.
 The `AGG_TYPE` property is where you specify the type of aggregation.
 
-## Quick start
+## Sample aggregation
 
-This section uses the Kibana sample e-commerce data. To add that sample data, log in to Kibana, choose **Home** and **Try our sample data**. For **Sample eCommerce orders**, choose **Add data**.
+This section uses the Kibana sample e-commerce data and web log data. To add the sample data, log in to Kibana, choose **Home** and **Try our sample data**. For **Sample eCommerce orders** and **Sample web logs**, choose **Add data**.
 
 ### avg
 
-To find the average value of a field:
+To find the average value of the `taxful_total_price` field:
 
 ```json
-GET kibana_sample_data_logs/_search
+GET kibana_sample_data_ecommerce/_search
 {
   "size": 0,
   "aggs": {
-    "avg_bytes": {
+    "avg_taxful_total_price": {
       "avg": {
-        "field": "bytes"
+        "field": "taxful_total_price"
       }
     }
   }
@@ -93,7 +95,7 @@ GET kibana_sample_data_logs/_search
 
 ```json
 {
-  "took" : 2,
+  "took" : 1,
   "timed_out" : false,
   "_shards" : {
     "total" : 1,
@@ -103,25 +105,27 @@ GET kibana_sample_data_logs/_search
   },
   "hits" : {
     "total" : {
-      "value" : 10000,
-      "relation" : "gte"
+      "value" : 4675,
+      "relation" : "eq"
     },
     "max_score" : null,
     "hits" : [ ]
   },
   "aggregations" : {
-    "avg_bytes" : {
-      "value" : 5664.749822367487
+    "avg_taxful_total_price" : {
+      "value" : 75.05542864304813
     }
   }
 }
 ```
 
+The aggregation block in the response shows the average value for the `taxful_total_price` field.
+
 ## Types of aggregations
 
 There are three main types of aggregations:
 
-- Metric aggregations - Calculate metrics such as `sum`, `min`, `max`, `avg` on numeric fields.
+- Metric aggregations - Calculate metrics such as `sum`, `min`, `max`, and `avg` on numeric fields.
 - Bucket aggregations - Sort query results into groups based on some criteria.
 - Pipeline aggregations - Pipe the output of one aggregation as an input to another.
 
