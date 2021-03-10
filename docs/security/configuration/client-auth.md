@@ -69,7 +69,7 @@ After mapping a role to your client certificate's CN, you're ready to connect to
 
 The code example below uses the Python `requests` library to connect to a local Elasticsearch cluster and sends a GET request to the `movies` index.
 
-```
+```python
 import requests
 import json
 base_url = 'https://localhost:9200/'
