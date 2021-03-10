@@ -1,28 +1,28 @@
 ---
 layout: default
-title: Client-based authentication
+title: Client certificate authentication
 parent: Configuration
 grand_parent: Security
 nav_order: 50
 ---
 
-# Client-based authentication
+# Client certificate authentication
 
 After obtaining your own certificates either from a certificate authority (CA) or by [generating your own certificates using OpenSSL](../generate-certificates), you can start configuring Elasticsearch to authenticate a user using a client certificate.
 
-Client-based authentication offers more security advantages than just using basic authentication (username and password). Because client-based authentication requires both a client certificate and its private key, which are often in the user's possession, it is less vulnerable to brute force attacks in which malicious individuals try to guess a user's password.
+Client certificate authentication offers more security advantages than just using basic authentication (username and password). Because client certificate authentication requires both a client certificate and its private key, which are often in the user's possession, it is less vulnerable to brute force attacks in which malicious individuals try to guess a user's password.
 
-Another benefit of client-based authentication is you can use it along with basic authentication, providing two layers of security.
+Another benefit of client certificate authentication is you can use it along with basic authentication, providing two layers of security.
 
-## Enabling client authentication
+## Enabling client certificate authentication
 
-To enable client authentication, you must first set `clientauth_mode` in `elasticsearch.yml` to either `OPTIONAL` or `REQUIRE`:
+To enable client certificate authentication, you must first set `clientauth_mode` in `elasticsearch.yml` to either `OPTIONAL` or `REQUIRE`:
 
 ```yml
 opendistro_security.ssl.http.clientauth_mode: OPTIONAL
 ```
 
-Next, enable client-based authentication in the `client_auth_domain` section of `config.yml`.
+Next, enable client certificate authentication in the `client_auth_domain` section of `config.yml`.
 
 ```yml
 clientcert_auth_domain:
@@ -69,7 +69,7 @@ After mapping a role to your client certificate's CN, you're ready to connect to
 
 The code example below uses the Python `requests` library to connect to a local Elasticsearch cluster and sends a GET request to the `movies` index.
 
-```
+```python
 import requests
 import json
 base_url = 'https://localhost:9200/'
