@@ -14,8 +14,6 @@ The use cases of aggregations vary from analyzing data in real time to take some
 
 Elasticsearch can perform aggregations on massive datasets in milliseconds. Compared to queries, aggregations consume more CPU cycles and memory.
 
-This section helps to turn the question you want to ask of your data into the correct aggregation operation.
-
 ## Aggregations on text fields
 
 By default, Elasticsearch does not support aggregations on a text field.

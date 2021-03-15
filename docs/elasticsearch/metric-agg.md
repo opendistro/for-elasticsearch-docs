@@ -19,7 +19,7 @@ Single-value metrics return a single metric. For example, `sum`, `min`, `max`, `
 
 ### sum, min, max, avg
 
-The `sum` metric finds the sum of the numeric values of a field.
+The `sum` metric returns the sum of the numeric values of a field.
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -136,7 +136,7 @@ GET kibana_sample_data_ecommerce/_search
 
 Multi-value metrics return more than one metric. For example, `stats` and `extended_stats`.
 
-### stats
+### stats, extended_stats, matrix_stats
 
 The `stats` aggregation returns all basic metrics such as `min`, `max`, `sum`, `avg`, and `value_count` metrics in one aggregation query.
 
@@ -235,8 +235,6 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-### matrix_stats
-
 The `matrix_stats` aggregation lets you generate advanced stats for multiple fields in a matrix form.
 
 ```json
@@ -309,7 +307,7 @@ Stats measure | Description
 `covariance` | A measure of the joint variability between two fields. A positive value means their values move in the same direction and vice versa.
 `correlation` | A measure of the strength of the relationship between two fields. The valid values are between [-1, 1]. A value of -1 means the value is negatively correlated and a value of 1 means it is positively correlated. A value of 0 means there is no identifiable relationship between them.
 
-### percentile
+### percentile, percentile_ranks
 
 Percentile is the percentage of the data that's at or below certain threshold values. You can use percentiles to find outliers in data or figure out the distribution of data. Like the cardinality aggregation, the percentile aggregation is approximate.
 
@@ -348,8 +346,6 @@ GET kibana_sample_data_ecommerce/_search
  }
 }
 ```
-
-### percentile_ranks
 
 Percentile rank is the percentile of values at or below a threshold grouped by a specified value. For example, if a value is greater than or equal to 80% of the values, it has a percentile rank of 80.
 
@@ -570,7 +566,7 @@ A scripts has four stages: the init stage, the map stage, the combine stage, and
 * `init_script`: (OPTIONAL) Sets the initial state and executes before any collection of documents.
 * `map_script`: Checks the value of the type field and executes the aggregation on the collected documents.
 * `combine_script`: Aggregates the state returned from every shard. The aggregated value is returned to the coordinating node.
-* `reduce_script`: Provides access to the variable states; this variable collects the results from combine_script on each shard into an array.
+* `reduce_script`: Provides access to the variable states; this variable collects the results from `combine_script` on each shard into an array.
 
 For example, to count the different HTTP response types in web log data:
 
