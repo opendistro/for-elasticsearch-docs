@@ -43,7 +43,7 @@ If you need to delete a snapshot, be sure to use the Elasticsearch API rather th
 
 ## Register repository
 
-Before you can take a snapshot, you have to register a snapshot repository. A snapshot repository is just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, and so on.
+Before you can take a snapshot, you have to "register" a snapshot repository. A snapshot repository is just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, etc.
 
 
 ### Shared file system
@@ -87,7 +87,7 @@ Setting | Description
 :--- | :---
 location | The shared file system for snapshots. Required.
 chunk_size | Breaks large files into chunks during snapshot operations (e.g. `64mb`, `1gb`), which is important for cloud storage providers and far less important for shared file systems. Default is `null` (unlimited). Optional.
-compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed depending on your index settings. Default is `false`. Optional.
+compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed, depending on your index settings. Default is `false`. Optional.
 max_restore_bytes_per_sec | The maximum rate at which snapshots restore. Default is 40 MB per second (`40m`). Optional.
 max_snapshot_bytes_per_sec | The maximum rate at which snapshots take. Default is 40 MB per second (`40m`). Optional.
 readonly | Whether the repository is read-only. Useful when migrating from one cluster (`"readonly": false` when registering) to another cluster (`"readonly": true` when registering). Optional.
@@ -206,7 +206,7 @@ buffer_size | The threshold beyond which chunks (of `chunk_size`) should be brok
 canned_acl | S3 has several [canned ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) that the `repository-s3` plugin can add to objects as it creates them in S3. Default is `private`. Optional.
 chunk_size | Breaks files into chunks during snapshot operations (e.g. `64mb`, `1gb`), which is important for cloud storage providers and far less important for shared file systems. Default is `1gb`. Optional.
 client | When specifying client settings (e.g. `s3.client.default.access_key`), you can use a string other than `default` (e.g. `s3.client.backup-role.access_key`). If you used an alternate name, change this value to match. Default and recommended value is `default`. Optional.
-compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed depending on your index settings. Default is `false`. Optional.
+compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed, depending on your index settings. Default is `false`. Optional.
 max_restore_bytes_per_sec | The maximum rate at which snapshots restore. Default is 40 MB per second (`40m`). Optional.
 max_snapshot_bytes_per_sec | The maximum rate at which snapshots take. Default is 40 MB per second (`40m`). Optional.
 readonly | Whether the repository is read-only. Useful when migrating from one cluster (`"readonly": false` when registering) to another cluster (`"readonly": true` when registering). Optional.
@@ -216,7 +216,7 @@ storage_class | Specifies the [S3 storage class](https://docs.aws.amazon.com/Ama
 
 ## Take snapshots
 
-You specify the following information when you create a snapshot:
+You specify two pieces of information when you create a snapshot:
 
 - Name of your snapshot repository
 - Name for the snapshot
@@ -339,7 +339,7 @@ include_global_state | Whether to restore the cluster state. Default is false.
 include_aliases | Whether to restore aliases alongside their associated indices. Default is true.
 partial | Whether to allow the restoration of partial snapshots. Default is false.
 rename_pattern | If you want to rename indices as you restore them, use this option to specify a regular expression that matches all indices you want to restore. Use capture groups (`()`) to reuse portions of the index name.
-rename_replacement | If you want to rename indices as you restore them, use this option to specify the replacement pattern. Use `$0` to include the entire matching index name, `$1` to include the content of the first capture group, and so on.
+rename_replacement | If you want to rename indices as you restore them, use this option to specify the replacement pattern. Use `$0` to include the entire matching index name, `$1` to include the content of the first capture group, etc.
 index_settings | If you want to change index settings on restore, specify them here.
 ignore_index_settings | Rather than explicitly specifying new settings with `index_settings`, you can ignore certain index settings in the snapshot and use the cluster defaults on restore.
 
