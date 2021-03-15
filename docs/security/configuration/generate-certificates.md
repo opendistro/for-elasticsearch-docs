@@ -43,12 +43,13 @@ You can optionally add the `-aes256` option to encrypt the key using the AES-256
 Next, use the key to generate a self-signed certificate for the root CA:
 
 ```bash
-openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
+openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem -days 30
 ```
+
+Change `-days 30` to 3650 (10 years) or some other number to set a non-default expiration date. The default value of 30 days is best for testing purposes.
 
 - The `-x509` option specifies that you want a self-signed certificate rather than a certificate request.
 - The `-sha256` option sets the hash algorithm to SHA-256. SHA-256 is the default in later versions of OpenSSL, but earlier versions might use SHA-1.
-- Optionally, add `-days 3650` (10 years) or some other number of days to set an expiration date.
 
 Follow the prompts to specify details for your organization. Together, these details form the distinguished name (DN) of your CA.
 
@@ -78,8 +79,10 @@ Follow the prompts to fill in the details. You don't need to specify a challenge
 Finally, generate the certificate itself:
 
 ```bash
-openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
+openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem -days 30
 ```
+
+Just like the root certificate, use the `-days` option to specify an expiration date of longer than 30 days.
 
 
 ## (Optional) Generate node and client certificates
@@ -94,22 +97,22 @@ If you generate node certificates and have `opendistro_security.ssl.transport.en
 ```bash
 # Root CA
 openssl genrsa -out root-ca-key.pem 2048
-openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem
+openssl req -new -x509 -sha256 -key root-ca-key.pem -out root-ca.pem -days 30
 # Admin cert
 openssl genrsa -out admin-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in admin-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out admin-key.pem
 openssl req -new -key admin-key.pem -out admin.csr
-openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem
+openssl x509 -req -in admin.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out admin.pem -days 30
 # Node cert
 openssl genrsa -out node-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in node-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out node-key.pem
 openssl req -new -key node-key.pem -out node.csr
-openssl x509 -req -in node.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node.pem
+openssl x509 -req -in node.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node.pem -days 30
 #Client cert
 openssl genrsa -out client-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in client-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out client-key.pem
 openssl req -new -key client-key.pem -out client.csr
-openssl x509 -req -in client.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out client.pem
+openssl x509 -req -in client.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out client.pem -days 30
 # Cleanup
 rm admin-key-temp.pem
 rm admin.csr
