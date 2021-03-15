@@ -94,6 +94,8 @@ Term | Replaced with
 
 You can use roles and parameter substitution with the `terms_set` query to enable attribute-based security.
 
+> Note that the `security_attributes` of the index need to be of type `keyword`.
+
 #### User definition
 
 ```json
@@ -116,7 +118,7 @@ PUT _opendistro/_security/api/roles/abac
     "index_patterns": [
       "*"
     ],
-    "dls": "{\"terms_set\": {\"security_attributes\": {\"terms\": [\"${attr.internal.permissions}\"], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].values.length\"}}}}",
+    "dls": "{\"terms_set\": {\"security_attributes\": {\"terms\": [${attr.internal.permissions}], \"minimum_should_match_script\": {\"source\": \"doc['security_attributes'].length\"}}}}",
     "allowed_actions": [
       "read"
     ]
