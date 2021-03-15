@@ -88,7 +88,7 @@ The following example action has a timeout period of one hour. The policy retrie
 }
 ```
 
-For a list of available unit types, see [Supported units](../../elasticsearch/units/).
+For a list of available unit types, see [Supported units](../../../elasticsearch/units/).
 
 ## ISM supported operations
 
@@ -159,7 +159,7 @@ Parameter | Description | Type | Required
 }
 ```
 
-For information about setting replicas, see [Primary and replica shards](../../elasticsearch/#primary-and-replica-shards).
+For information about setting replicas, see [Primary and replica shards](../../../elasticsearch/#primary-and-replica-shards).
 
 ### close
 
@@ -308,7 +308,7 @@ Parameter | Description | Type
 
 ### snapshot
 
-Backup your cluster’s indices and state. For more information about snapshots, see [Take and restore snapshots](../../elasticsearch/snapshot-restore/).
+Backup your cluster’s indices and state. For more information about snapshots, see [Take and restore snapshots](../../../elasticsearch/snapshot-restore/).
 
 The `snapshot` operation has the following parameters:
 
@@ -435,7 +435,7 @@ Note that this condition does not execute at exactly 5:00 PM; the job still exec
 
 A window of an hour, which this example uses, is generally sufficient, but you might increase it to 2--3 hours to avoid missing the window and having to wait a week for the transition to occur. Alternately, you could use a broader expression such as `* * * * SAT,SUN` to have the transition occur at any time during the weekend.
 
-For information on writing cron expressions, see [Cron expression reference](../../alerting/cron/).
+For information on writing cron expressions, see [Cron expression reference](../../../alerting/cron/).
 
 ---
 
