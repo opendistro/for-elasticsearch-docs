@@ -7,17 +7,17 @@ nav_order: 30
 
 # Take and restore snapshots
 
-Snapshots are backups of a cluster's indices and *state*. State includes cluster settings, node information, index settings, and shard allocation.
+Snapshots are backups of a cluster's indices and state. State includes cluster settings, node information, index settings, and shard allocation.
 
 Snapshots have two main uses:
 
-- Recovering from failure
+- **Recovering from failure**
 
   For example, if cluster health goes red, you might restore the red indices from a snapshot.
 
-- Migrating from one cluster to another
+- **Migrating from one cluster to another**
 
-  For example, if you are moving from a proof-of-concept to a production cluster, you might take a snapshot of the former and restore it on the latter.
+  For example, if you're moving from a proof-of-concept to a production cluster, you might take a snapshot of the former and restore it on the latter.
 
 
 ---
@@ -31,7 +31,7 @@ Snapshots have two main uses:
 
 ## About snapshots
 
-Snapshots are not instantaneous; they take time to complete and do not represent perfect point-in-time views of the cluster. While a snapshot is in-progress, you can still index documents and make other requests to the cluster, but new documents (and updates to existing documents) generally aren't included in the snapshot. The snapshot includes primary shards as they existed when Elasticsearch initiated the snapshot. Depending on the size of your snapshot thread pool, different shards might be included in the snapshot at slightly different times.
+Snapshots aren't instantaneous. They take time to complete and do not represent perfect point-in-time views of the cluster. While a snapshot is in progress, you can still index documents and make other requests to the cluster, but new documents and updates to existing documents generally aren't included in the snapshot. The snapshot includes primary shards as they existed when Elasticsearch initiated the snapshot. Depending on the size of your snapshot thread pool, different shards might be included in the snapshot at slightly different times.
 
 Elasticsearch snapshots are incremental, meaning that they only store data that has changed since the last successful snapshot. The difference in disk usage between frequent and infrequent snapshots is often minimal.
 
@@ -43,7 +43,7 @@ If you need to delete a snapshot, be sure to use the Elasticsearch API rather th
 
 ## Register repository
 
-Before you can take a snapshot, you have to "register" a snapshot repository. A snapshot repository is really just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, etc.
+Before you can take a snapshot, you have to "register" a snapshot repository. A snapshot repository is just a storage location: a shared file system, Amazon S3, Hadoop Distributed File System (HDFS), Azure Storage, etc.
 
 
 ### Shared file system
@@ -81,13 +81,13 @@ Before you can take a snapshot, you have to "register" a snapshot repository. A 
    }
    ```
 
-You probably only need to specify `location`, but to summarize the options:
+You probably only need to specify `location`, but the following table summarizes the options:
 
 Setting | Description
 :--- | :---
 location | The shared file system for snapshots. Required.
 chunk_size | Breaks large files into chunks during snapshot operations (e.g. `64mb`, `1gb`), which is important for cloud storage providers and far less important for shared file systems. Default is `null` (unlimited). Optional.
-compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed (depending on your index settings). Default is `false`. Optional.
+compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed, depending on your index settings. Default is `false`. Optional.
 max_restore_bytes_per_sec | The maximum rate at which snapshots restore. Default is 40 MB per second (`40m`). Optional.
 max_snapshot_bytes_per_sec | The maximum rate at which snapshots take. Default is 40 MB per second (`40m`). Optional.
 readonly | Whether the repository is read-only. Useful when migrating from one cluster (`"readonly": false` when registering) to another cluster (`"readonly": true` when registering). Optional.
@@ -165,7 +165,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    POST _nodes/reload_secure_settings
    ```
 
-1. Create an S3 bucket if you don't already have one. To take snapshots, you must have permissions to access the bucket. The following IAM policy is an example of those permissions:
+1. Create an S3 bucket if you don't already have one. To take snapshots, you need permissions to access the bucket. The following IAM policy is an example of those permissions:
 
    ```json
    {
@@ -196,7 +196,7 @@ readonly | Whether the repository is read-only. Useful when migrating from one c
    }
    ```
 
-You probably don't need to specify anything but `bucket` and `base_path`, but to summarize the options:
+You probably don't need to specify anything but `bucket` and `base_path`, but the following table summarizes the options:
 
 Setting | Description
 :--- | :---
@@ -206,7 +206,7 @@ buffer_size | The threshold beyond which chunks (of `chunk_size`) should be brok
 canned_acl | S3 has several [canned ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) that the `repository-s3` plugin can add to objects as it creates them in S3. Default is `private`. Optional.
 chunk_size | Breaks files into chunks during snapshot operations (e.g. `64mb`, `1gb`), which is important for cloud storage providers and far less important for shared file systems. Default is `1gb`. Optional.
 client | When specifying client settings (e.g. `s3.client.default.access_key`), you can use a string other than `default` (e.g. `s3.client.backup-role.access_key`). If you used an alternate name, change this value to match. Default and recommended value is `default`. Optional.
-compress | Whether to compress metadata files. This setting does not affect data files, which depending on your index settings, might already be compressed. Default is `false`. Optional.
+compress | Whether to compress metadata files. This setting does not affect data files, which might already be compressed, depending on your index settings. Default is `false`. Optional.
 max_restore_bytes_per_sec | The maximum rate at which snapshots restore. Default is 40 MB per second (`40m`). Optional.
 max_snapshot_bytes_per_sec | The maximum rate at which snapshots take. Default is 40 MB per second (`40m`). Optional.
 readonly | Whether the repository is read-only. Useful when migrating from one cluster (`"readonly": false` when registering) to another cluster (`"readonly": true` when registering). Optional.
@@ -227,7 +227,7 @@ The following snapshot includes all indices and the cluster state:
 PUT _snapshot/my-repository/1
 ```
 
-You can also add a request body to include or exclude certain indices or specify some other settings:
+You can also add a request body to include or exclude certain indices or specify other settings:
 
 ```json
 PUT _snapshot/my-repository/2
@@ -241,12 +241,12 @@ PUT _snapshot/my-repository/2
 
 Setting | Description
 :--- | :---
-indices | The indices that you want to include in the snapshot. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
+indices | The indices you want to include in the snapshot. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
 ignore_unavailable | If an index from the `indices` list doesn't exist, whether to ignore it rather than fail the snapshot. Default is false.
 include_global_state | Whether to include cluster state in the snapshot. Default is true.
 partial | Whether to allow partial snapshots. Default is false, which fails the entire snapshot if one or more shards fails to store.
 
-If you request the snapshot immediately after taking it, you might see something like:
+If you request the snapshot immediately after taking it, you might see something like this:
 
 ```json
 GET _snapshot/my-repository/2
@@ -267,7 +267,7 @@ GET _snapshot/my-repository/2
 }
 ```
 
-Note that the snapshot is still in progress. If you want to wait for the snapshot to finish before continuing, add the `wait_for_completion` parameter to your request. Snapshots can take a while to complete, though, so consider whether or not this option fits your use case:
+Note that the snapshot is still in progress. If you want to wait for the snapshot to finish before continuing, add the `wait_for_completion` parameter to your request. Snapshots can take a while to complete, so consider whether or not this option fits your use case:
 
 ```
 PUT _snapshot/my-repository/3?wait_for_completion=true
@@ -283,7 +283,7 @@ PARTIAL | At least one shard failed to store successfully. Can only occur if you
 FAILED | The snapshot encountered an error and stored no data.
 INCOMPATIBLE | The snapshot is incompatible with the version of Elasticsearch running on this cluster. See [Conflicts and compatibility](#conflicts-and-compatibility).
 
-You can't take a snapshot if one is currently in progress. To check:
+You can't take a snapshot if one is currently in progress. To check the status:
 
 ```
 GET _snapshot/_status
@@ -304,7 +304,7 @@ To see all snapshots in a repository:
 GET _snapshot/my-repository/_all
 ```
 
-Then you can restore a snapshot:
+Then restore a snapshot:
 
 ```
 POST _snapshot/my-repository/2/_restore
@@ -333,7 +333,7 @@ POST _snapshot/my-repository/2/_restore
 
 Setting | Description
 :--- | :---
-indices | The indices that you want to restore. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
+indices | The indices you want to restore. You can use `,` to create a list of indices, `*` to specify an index pattern, and `-` to exclude certain indices. Don't put spaces between items. Default is all indices.
 ignore_unavailable | If an index from the `indices` list doesn't exist, whether to ignore it rather than fail the restore operation. Default is false.
 include_global_state | Whether to restore the cluster state. Default is false.
 include_aliases | Whether to restore aliases alongside their associated indices. Default is true.
@@ -356,19 +356,19 @@ We recommend ceasing write requests to a cluster before restoring from a snapsho
 1. A write request to the now-deleted alias creates a new index with the same name as the alias.
 1. The alias from the snapshot fails to restore due to a naming conflict with the new index.
 
-Snapshots are only forward-compatible, and only by one major version. For example, snapshots taken on a 2.x cluster can't be restored on a 1.x cluster or a 6.x cluster, but they *can* be restored on a 2.x or 5.x cluster.
+Snapshots are only forward-compatible by one major version. For example, you can't restore snapshots taken on a 2.x cluster to a 1.x cluster or a 6.x cluster, but you *can* restore them on a 2.x or 5.x cluster.
 
 If you have an old snapshot, you can sometimes restore it into an intermediate cluster, reindex all indices, take a new snapshot, and repeat until you arrive at your desired version, but you might find it easier to just manually index your data on the new cluster.
 
 
 ## Security plugin considerations
 
-If you are using the security plugin, snapshots have some additional restrictions:
+If you're using the security plugin, snapshots have some additional restrictions:
 
-- In order to perform snapshot and restore operations, users must have the built-in `manage_snapshots` role.
+- To perform snapshot and restore operations, users must have the built-in `manage_snapshots` role.
 - You can't restore snapshots that contain global state or the `.opendistro_security` index.
 
-If a snapshot contains global state, you must exclude it when performing the restore. If your snapshot also contains the `.opendistro_security` index, either exclude it or list all the other indices that you want to include:
+If a snapshot contains global state, you must exclude it when performing the restore. If your snapshot also contains the `.opendistro_security` index, either exclude it or list all the other indices you want to include:
 
 ```json
 POST _snapshot/my-repository/3/_restore
