@@ -402,12 +402,15 @@ DELETE _opendistro/_security/api/internalusers/<username>
 
 Creates or replaces the specified user. You must specify either `password` (plain text) or `hash` (the hashed user password). If you specify `password`, the security plugin automatically hashes the password before storing it.
 
+Note that any role you supply in the `opendistro_security_roles` array must already exist for the security plugin to map the user to that role. To see predefined roles, refer to [the list of predefined roles](../users-roles/#predefined-roles). For instructions on how to create a role, refer to [creating a role](./#create-role).
+
 #### Request
 
 ```json
 PUT _opendistro/_security/api/internalusers/<username>
 {
   "password": "kirkpass",
+  "opendistro_security_roles": ["maintenance_staff", "weapons"],
   "backend_roles": ["captains", "starfleet"],
   "attributes": {
     "attribute1": "value1",
@@ -428,7 +431,7 @@ PUT _opendistro/_security/api/internalusers/<username>
 
 ### Patch user
 
-Updates individual attributes of an internal user.
+Updates individual attributes of an internal user. 
 
 #### Request
 
@@ -437,6 +440,9 @@ PATCH _opendistro/_security/api/internalusers/<username>
 [
   {
     "op": "replace", "path": "/backend_roles", "value": ["klingons"]
+  },
+  {
+    "op": "replace", "path": "/opendistro_security_roles", "value": ["ship_manager"]
   },
   {
     "op": "replace", "path": "/attributes", "value": { "newattribute": "newvalue" }

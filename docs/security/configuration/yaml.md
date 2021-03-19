@@ -34,9 +34,9 @@ new-user:
   reserved: false
   hidden: false
   opendistro_security_roles:
-  - "some-security-role"
+  - "specify-some-security-role-here"
   backend_roles:
-  - "some-backend-role"
+  - "specify-some-backend-role-here"
   attributes:
     attribute1: "value1"
   static: false
