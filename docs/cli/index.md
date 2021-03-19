@@ -9,7 +9,9 @@ has_children: false
 
 The Open Distro for Elasticsearch command line interface (odfe-cli) lets you manage your ODFE cluster from the command line and automate tasks.
 
-Currently, odfe-cli supports the [Anomaly Detection](../ad/) and [k-NN](../knn/) plugins. Among other things, you can use odfe-cli create and delete detectors, start and stop them, and check k-NN statistics. Profiles let you easily access different clusters or sign requests with different credentials.
+Currently, odfe-cli supports the [Anomaly Detection](../ad/) and [k-NN](../knn/) plugins, along with arbitrary REST API paths. Among other things, you can use odfe-cli create and delete detectors, start and stop them, and check k-NN statistics.
+
+Profiles let you easily access different clusters or sign requests with different credentials. odfe-cli supports unauthenticated requests, HTTP basic signing, and IAM signing for Amazon Web Services.
 
 This example moves a detector (`ecommerce-count-quantity`) from a staging cluster to a production cluster:
 
@@ -80,7 +82,13 @@ odfe-cli <command> <subcommand> <flags>
 For example, the following command retrieves information about a detector:
 
 ```bash
-odfe-cli ad get my-detector --profile dev
+odfe-cli ad get my-detector --profile docker-local
+```
+
+For a request to the Elasticsearch CAT API, try the following command:
+
+```bash
+odfe-cli curl get --path _cat/plugins --profile aws
 ```
 
 Use the `-h` or `--help` flag to see all supported commands, subcommands, or usage for a specific command:
