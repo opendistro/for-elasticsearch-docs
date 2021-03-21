@@ -84,7 +84,7 @@ GET kibana_sample_data_ecommerce/_search
 The cardinality count is approximate.
 If you had tens of thousands of products in your store, an accurate cardinality calculation requires loading all values into a hash set and returning its size. This approach does not scale well because it requires more memory and causes high latency.
 
-To trade memory for accuracy, you can set the `precision_threshold` setting. This setting defines the threshold below which counts are expected to be close to accurate. Above this value, counts might become a bit less accurate. The default value of `precision_threshold` is 3,000. The maximum supported value is 40,000.
+You can control the trade-off between memory and accuracy with the `precision_threshold` setting. This setting defines the threshold below which counts are expected to be close to accurate. Above this value, counts might become a bit less accurate. The default value of `precision_threshold` is 3,000. The maximum supported value is 40,000.
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -104,7 +104,7 @@ GET kibana_sample_data_ecommerce/_search
 ### value_count
 
 The `value_count` metric calculates the number of values that an aggregation is based on.
-For example, you can use the `value_count` metric with the `avg` metric to see how many numbers the average value is based on.
+For example, you can use the `value_count` metric with the `avg` metric to see how many numbers the aggregation used to calculate the average value.
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -309,7 +309,7 @@ Stats measure | Description
 
 ### percentile, percentile_ranks
 
-Percentile is the percentage of the data that's at or below certain threshold values. You can use percentiles to find outliers in data or figure out the distribution of data. Like the cardinality aggregation, the percentile aggregation is approximate.
+Percentile is the percentage of the data that's at or below a certain threshold value. You can use percentiles to find outliers in your data or figure out the distribution of your data. Like the `cardinality` aggregation, the `percentile` aggregation is approximate.
 
 This example calculates the percentile in relation to the `taxful_total_price` field:
 
@@ -384,7 +384,7 @@ GET kibana_sample_data_ecommerce/_search
 
 ### geo_bound
 
-The geo_bound metric calculates the bounding box in terms of latitude and longitude with respect to a `geo_point` field:
+The `geo_bound` metric calculates the bounding box in terms of latitude and longitude with respect to a `geo_point` field:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -559,7 +559,7 @@ GET kibana_sample_data_ecommerce/_search
 
 ### Scripted metric
 
-This metric aggregation returns metrics calculated from a specified script.
+The `scripted_metric` metric aggregation returns metrics calculated from a specified script.
 
 A scripts has four stages: the init stage, the map stage, the combine stage, and the reduce stage.
 

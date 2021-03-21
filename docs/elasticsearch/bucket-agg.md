@@ -73,68 +73,9 @@ The terms aggregation requests each shard for its top 3 unique terms. The coordi
 
 This is especially true if `size` is set to a low number. Because the default size is 10, an error is unlikely to happen. If you don’t need high accuracy and want to increase the performance, you can reduce the size.
 
-## significant_terms
-
-The `significant_terms` aggregation lets you spot unusual or interesting term occurrences in a filtered subset relative to the rest of the data in the index.
-
-A foreground set is the set of documents that you filter. A background set is a set of all documents in an index.
-The `significant_terms` aggregation examines all documents in the foreground set and finds a score for significant occurrences in contrast to the documents in the background set.
-
-In the sample log data, each document has a field containing the `user-agent` of the visitor. This example searches for all requests from an iOS operating system. A regular terms aggregation on this foreground set returns Firefox because it has the most number of documents within this bucket. A significant terms aggregation returns Internet Explorer (IE) because IE has a significantly higher appearance in the foreground set as compared to the background set.
-
-```json
-GET kibana_sample_data_logs/_search
-{
-  "size": 0,
-  "query": {
-    "terms": {
-      "machine.os.keyword": [
-        "ios"
-      ]
-    }
-  },
-  "aggs": {
-    "significant_response_codes": {
-      "significant_terms": {
-        "field": "agent.keyword"
-      }
-    }
-  }
-}
-```
-
-#### Sample response
-
-```json
-...
-"aggregations" : {
-  "significant_response_codes" : {
-    "doc_count" : 2737,
-    "bg_count" : 14074,
-    "buckets" : [
-      {
-        "key" : "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)",
-        "doc_count" : 818,
-        "score" : 0.01462731514608217,
-        "bg_count" : 4010
-      },
-      {
-        "key" : "Mozilla/5.0 (X11; Linux x86_64; rv:6.0a1) Gecko/20110421 Firefox/6.0a1",
-        "doc_count" : 1067,
-        "score" : 0.009062566630410223,
-        "bg_count" : 5362
-      }
-    ]
-  }
- }
-}
-```
-
-If your significant terms aggregation doesn't get any result, you might have not filtered the results with a query. Alternatively, the distribution of terms in the foreground set might be the same as the background set, implying that there isn't anything unusual in the foreground set.
-
 ## sampler, diversified_sampler
 
-If you're aggregating over millions of documents, you can use a `sampler` aggregation to reduce its scope to a small sample of documents for a faster response. The sampler aggregation selects the samples by top-scoring documents. The results are approximate but closely represent the distribution of the real data. The sampler aggregation significantly improves query performance. But the estimated responses are not entirely reliable.
+If you're aggregating over millions of documents, you can use a `sampler` aggregation to reduce its scope to a small sample of documents for a faster response. The `sampler` aggregation selects the samples by top-scoring documents. The results are approximate but closely represent the distribution of the real data. The sampler aggregation significantly improves query performance. But the estimated responses are not entirely reliable.
 
 The basic syntax is:
 
@@ -254,6 +195,188 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
+## significant_terms, significant_text
+
+The `significant_terms` aggregation lets you spot unusual or interesting term occurrences in a filtered subset relative to the rest of the data in the index.
+
+A foreground set is the set of documents that you filter. A background set is a set of all documents in an index.
+The `significant_terms` aggregation examines all documents in the foreground set and finds a score for significant occurrences in contrast to the documents in the background set.
+
+In the sample log data, each document has a field containing the `user-agent` of the visitor. This example searches for all requests from an iOS operating system. A regular `terms` aggregation on this foreground set returns Firefox because it has the most number of documents within this bucket. A `significant_terms` aggregation returns Internet Explorer (IE) because IE has a significantly higher appearance in the foreground set as compared to the background set.
+
+```json
+GET kibana_sample_data_logs/_search
+{
+  "size": 0,
+  "query": {
+    "terms": {
+      "machine.os.keyword": [
+        "ios"
+      ]
+    }
+  },
+  "aggs": {
+    "significant_response_codes": {
+      "significant_terms": {
+        "field": "agent.keyword"
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "significant_response_codes" : {
+    "doc_count" : 2737,
+    "bg_count" : 14074,
+    "buckets" : [
+      {
+        "key" : "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)",
+        "doc_count" : 818,
+        "score" : 0.01462731514608217,
+        "bg_count" : 4010
+      },
+      {
+        "key" : "Mozilla/5.0 (X11; Linux x86_64; rv:6.0a1) Gecko/20110421 Firefox/6.0a1",
+        "doc_count" : 1067,
+        "score" : 0.009062566630410223,
+        "bg_count" : 5362
+      }
+    ]
+  }
+ }
+}
+```
+
+If the `significant_terms` aggregation doesn't return any result, you might have not filtered the results with a query. Alternatively, the distribution of terms in the foreground set might be the same as the background set, implying that there isn't anything unusual in the foreground set.
+
+The `significant_text` aggregation is similar to the the `significant_terms` aggregation but it's for raw text fields.
+Significant text measures the change in popularity measured between the foreground and background sets using statistical analysis.
+
+For example, it might suggest Tesla when you look for its stock acronym TSLA.
+
+The `significant_text` aggregation re-analyzes the source text on the fly, filtering noisy data like duplicate paragraphs, boilerplate header and footers and so on  that might otherwise skew the results. Re-analyzing high cardinality datasets can be a very CPU-intensive operation. We recommend using the `significant_text` aggregation inside a sampler aggregation to limit the analysis to a small selection of top-matching documents, for example 200.
+
+You can set the following parameters:
+
+- `min_doc_count` - Return results that match more than a configured number of top hits. We recommend not setting min_doc_count to 1 because it tends to return terms that are typos or misspellings. Finding more than one instance of a term helps reinforce that the significance is not the result of a one-off accident. The default value of 3 is used to provide a minimum weight-of-evidence.
+- `shard_size` - Setting a high value increases stability (and accuracy) at the expense of computational performance.
+- `shard_min_doc_count` - If your text contains many low frequency words and you're not interested in these (for example typos), then you can set the `shard_min_doc_count` parameter to filter out candidate terms on a shard level with a reasonable certainty to not reach the required `min_doc_count` even after merging the local significant text frequencies. The default value is 1, which has no impact until you explicitly set it. This value should be set much lower than `min_doc_count`.
+
+Assume that you have the complete works of Shakespeare indexed in an Elasticsearch cluster. You can find significant texts in relation to the word "breathe" in the `text_entry` field:
+
+```json
+GET shakespeare/_search
+{
+  "query": {
+    "match": {
+      "text_entry": "breathe"
+    }
+  },
+  "aggregations": {
+    "my_sample": {
+      "sampler": {
+        "shard_size": 100
+      },
+      "aggregations": {
+        "keywords": {
+          "significant_text": {
+            "field": "text_entry",
+            "min_doc_count": 4
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+"aggregations" : {
+  "my_sample" : {
+    "doc_count" : 59,
+    "keywords" : {
+      "doc_count" : 59,
+      "bg_count" : 111396,
+      "buckets" : [
+        {
+          "key" : "breathe",
+          "doc_count" : 59,
+          "score" : 1887.0677966101694,
+          "bg_count" : 59
+        },
+        {
+          "key" : "air",
+          "doc_count" : 4,
+          "score" : 2.641295376716233,
+          "bg_count" : 189
+        },
+        {
+          "key" : "dead",
+          "doc_count" : 4,
+          "score" : 0.9665839666414213,
+          "bg_count" : 495
+        },
+        {
+          "key" : "life",
+          "doc_count" : 5,
+          "score" : 0.9090787433467572,
+          "bg_count" : 805
+        }
+      ]
+    }
+  }
+ }
+}
+```
+
+The most significant texts in relation to `breathe` are `air`, `dead`, and `life`.
+
+The significant text aggregation has the following limitations:
+
+- Does not support child aggregations. This limitation is intentional because supporting child aggregations comes at a high memory cost. As a workaround, you can make a follow-up query using a terms aggregation with an include clause and child aggregation.
+- Does not support nested objects because it works with the document JSON source.
+- The counts of documents might have some (typically small) inaccuracies as it's based on summing the samples returned from each shard. You can use the shard_size parameter to fine-tune the trade-off between accuracy and performance. By default, the shard_size is set to -1 to automatically estimate the number of shards and the size parameter.
+
+
+For both `significant_terms` and `significant_text` aggregations the default source of statistical information for background term frequencies is the entire index. You can narrow this scope with a background filter to focus in on a narrower context:
+
+```json
+GET shakespeare/_search
+{
+  "query": {
+    "match": {
+      "text_entry": "breathe"
+    }
+  },
+  "aggregations": {
+    "my_sample": {
+      "sampler": {
+        "shard_size": 100
+      },
+      "aggregations": {
+        "keywords": {
+          "significant_text": {
+            "field": "text_entry",
+            "background_filter": {
+              "term": {
+                "speaker": "JOHN OF GAUNT"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 
 ## missing
 
@@ -325,9 +448,9 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-### histogram, date_histogram
+## histogram, date_histogram
 
-The `histogram` aggregation bucket documents based on a specified interval.
+The `histogram` aggregation buckets documents based on a specified interval.
 
 With histogram aggregations, you can visualize the distributions of values in a given range of documents very easily. Now Elasticsearch doesn’t give you back an actual graph of course, that’s what Kibana is for. But it'll give you the JSON response that you can use to construct your own graph.
 Lets say we want to bucket the `number_of_bytes` field by 10,000 intervals:
@@ -417,7 +540,7 @@ GET kibana_sample_data_logs/_search
 
 The response has three months worth of logs. If you graph these values, you can see the peak and valleys of the request traffic to you website month over month.
 
-### range, date_range
+## range, date_range
 
 The `range` aggregation lets you define the range for each bucket.
 
@@ -531,7 +654,7 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-### filter, filters
+## filter, filters
 
 A `filter` aggregation is query clause, exactly like a search query - `match` or `term` or `range`. You can use the filter aggregation to narrow down the entire set of documents to a specific set before creating buckets.
 
@@ -562,7 +685,7 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-Sample Response
+#### Sample response
 
 ```json
 ...
@@ -646,7 +769,7 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-### global
+## global
 
 A `global` aggregations lets you break out of the aggregation context of a filter aggregation. Even if you have included a query that narrows down a set of documents, the global aggregation aggregates on all documents as if the filter query wasn't there. It ignores the filter aggregation and implicitly assumes the `match_all` query.
 
@@ -692,3 +815,309 @@ You can see the average value for the `taxful_total_price` field is 75.05 and no
  }
 }
 ```
+
+## geo_distance, geohash_grid
+
+The `geo_distance` aggregation groups documents into concentric circles based on distances from an origin `geo_point` field.
+It's the same as the range aggregation except that it works on geo locations.
+The geo_distance agg is useful for searches such as to “find all pizza restaurants within 1km of me.” The search results should, indeed, be limited to the 1km radius specified by the user, but we can add “another result found within 2km”:
+
+You can only use the geo_distance aggregation on fields mapped as geo_point.
+
+A point is a single geographical coordinate, such as your current location shown by your smart-phone. A point in Elasticsearch is represented as follows:
+
+```json
+{
+    "location" : {
+        "type" : "point",
+        "coordinates" : { "lat": 83.76, "lon": -81.20 }
+    }
+}
+```
+
+You can also specify the latitude and longitude as an array `[-81.20, 83.76]` or as a string `"83.76, -81.20"`
+
+This table lists the relevant fields of a `geo_distance` aggregation:
+The query parameters are as follows:
+
+Field | Description | Required
+:--- | :--- |:---
+`field` |  Specify the field of the geo point that you want to work on. | Yes
+`origin` |  Specify the geo point that's used to compute the distances from. | Yes
+`ranges`  |  Specify a list of ranges to collect documents based on their distance from the target point. | Yes
+`unit` |  This defaults to m (meters), but accepts other distance units as well, such as km. The default unit of distance is meters, but you can specify the unit parameter as km or mi and others to switch to different units. It defines the units used in the ranges array. The possible values are: km (the default, kilometers), mi (miles), in (inches), yd (yards), m (meters), cm (centimeters), and mm (millimeters). | No
+`distance_type` | Specify how the distance needs to be calculated. The default is `sloppy_arc` (faster but less accurate), but can also be set to `arc` (slower but most accurate) or `plane` (fastest but least accurate). Because of high error margins, use `plane` only for small geographic areas. The last attribute, distance_type, specifies how Elasticsearch calculates the distance. The possible values are (from the fastest but least accurate to the slowest but the most accurate): plane, sloppy_arc (the default), and arc. | No
+
+The syntax is as follows:
+
+```json
+{
+  "aggs": {
+    "aggregation_name": {
+      "geo_distance": {
+        "field": "field_1",
+        "origin": "x, y",
+        "ranges": [
+          {
+            "to": "value_1"
+          },
+          {
+            "from": "value_2",
+            "to": "value_3"
+          },
+          {
+            "from": "value_4"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+For example, aggregate documents based on:
+The following aggregation will form a bucket with all the documents within the given distance from the given geo-point.
+
+- Fewer than 10 kilometers
+- From 10 to 20 kilometers
+- From 20 to 50 kilometers
+- From 50 to 100 kilometers
+- Above 100 kilometers
+
+The count of the news events that happened in 0 to 50 km of range
+The count of the news events that happened in 50 to 200 km of range
+The count of the news events that happened outside the 200 km range
+
+The documents within 5 miles from the origin are placed in the 5 miles bucket and so on. The distance is computed as miles since the unit is specified as mi (miles).
+The preceding aggregation will calculate the number of documents that fall into two buckets: one closer than 1200 km and the second one further than 1200 km from the geographical point defined by the origin property (in the preceding case, the origin is London).
+
+```json
+GET kibana_sample_data_logs/_search
+{
+  "size": 0,
+  "aggs": {
+    "position": {
+      "geo_distance": {
+        "field": "geo.coordinates",
+        "origin": {
+          "lat": 83.76,
+          "lon": -81.2
+        },
+        "ranges": [
+          {
+            "to": 10
+          },
+          {
+            "from": 10,
+            "to": 20
+          },
+          {
+            "from": 20,
+            "to": 50
+          },
+          {
+            "from": 50,
+            "to": 100
+          },
+          {
+            "from": 100
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "position" : {
+    "buckets" : [
+      {
+        "key" : "*-10.0",
+        "from" : 0.0,
+        "to" : 10.0,
+        "doc_count" : 0
+      },
+      {
+        "key" : "10.0-20.0",
+        "from" : 10.0,
+        "to" : 20.0,
+        "doc_count" : 0
+      },
+      {
+        "key" : "20.0-50.0",
+        "from" : 20.0,
+        "to" : 50.0,
+        "doc_count" : 0
+      },
+      {
+        "key" : "50.0-100.0",
+        "from" : 50.0,
+        "to" : 100.0,
+        "doc_count" : 0
+      },
+      {
+        "key" : "100.0-*",
+        "from" : 100.0,
+        "doc_count" : 14074
+      }
+    ]
+  }
+ }
+}
+```
+
+The `geohash_grid` aggregation buckets documents for geographical analysis. It organizes a geographical region into a grid of smaller regions of different sizes or precisions. Lower values of precision represent larger geographical areas and higher values represent smaller, more precise geographical areas.
+
+The number of results returned by a query might be far too many to display each geo-point individually on a map. The `geohash_grid` aggregation buckets nearby geo-points together by calculating the Geohash for each point, at the level of precision that you define (between 1 to 12; the default is 5). To learn more about Geohash, see http://en.wikipedia.org/wiki/Geohash.
+
+The web logs example data is spread over a large geographical area, so you can use a lower precision value. You can zoom in on this map by increasing the precision value.
+
+```json
+GET kibana_sample_data_logs/_search
+{
+  "size": 0,
+  "aggs": {
+    "geo_hash": {
+      "geohash_grid": {
+        "field": "geo.coordinates",
+        "precision": 4
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "geo_hash" : {
+    "buckets" : [
+      {
+        "key" : "c1cg",
+        "doc_count" : 104
+      },
+      {
+        "key" : "dr5r",
+        "doc_count" : 26
+      },
+      {
+        "key" : "9q5b",
+        "doc_count" : 20
+      },
+      {
+        "key" : "c20g",
+        "doc_count" : 19
+      },
+      {
+        "key" : "dr70",
+        "doc_count" : 18
+      }
+      ...
+    ]
+  }
+ }
+}
+```
+
+A high precision value returns a higher number of buckets, by default 10,000 most populous buckets.  However, Elasticsearch generates all the buckets to figure out which are the most populous 10,000. You need to control the number of buckets generated.
+
+You can visualize the aggregated response on a map using Kibana.
+Of course, the more accurate we want the aggregation to be, the more resources Elasticsearch will consume, because of the number of buckets that the aggregation has to calculate. By default, Elasticsearch does not generate more than 10,000 buckets. You can change this behavior by using the size attribute, but keep in mind that the performance may suffer for very wide queries consisting of thousands of buckets.
+
+## adjacency_matrix
+
+The `adjacency_matrix` aggregation lets you define filter expressions and returns a matrix of the intersecting filters where each non-empty cell in the matrix represents a bucket. You can find how many documents fall within any combination of filters.
+
+Use the `adjacency_matrix` aggregation to discover how concepts are related by visualizing the data as graphs.
+
+For example, in the sample eCommerce dataset, to analyze how the different manufacturing companies are related:
+
+```json
+GET kibana_sample_data_ecommerce/_search
+{
+  "size": 0,
+  "aggs": {
+    "interactions": {
+      "adjacency_matrix": {
+        "filters": {
+          "grpA": {
+            "match": {
+              "manufacturer.keyword": "Low Tide Media"
+            }
+          },
+          "grpB": {
+            "match": {
+              "manufacturer.keyword": "Elitelligence"
+            }
+          },
+          "grpC": {
+            "match": {
+              "manufacturer.keyword": "Oceanavigations"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+ ```json
+ {
+   ...
+   "aggregations" : {
+     "interactions" : {
+       "buckets" : [
+         {
+           "key" : "grpA",
+           "doc_count" : 1553
+         },
+         {
+           "key" : "grpA&grpB",
+           "doc_count" : 590
+         },
+         {
+           "key" : "grpA&grpC",
+           "doc_count" : 329
+         },
+         {
+           "key" : "grpB",
+           "doc_count" : 1370
+         },
+         {
+           "key" : "grpB&grpC",
+           "doc_count" : 299
+         },
+         {
+           "key" : "grpC",
+           "doc_count" : 1218
+         }
+       ]
+     }
+   }
+ }
+```
+
+ Let’s take a closer look at the result:
+
+ ```json
+ {
+    "key" : "grpA&grpB",
+    "doc_count" : 590
+ }
+ ```
+
+- `grpA`: Products manufactured by Low Tide Media.
+- `grpB`: Products manufactured by Elitelligence.
+- `590`: Number of products that are manufactured by both.
+
+Use Kibana to represent this data by a network graph.
