@@ -76,7 +76,7 @@ See [Create role](../api/#create-role).
 
 ## Map users to roles
 
-If you didn't specify a role while creating your user, you can map a role to it afterwards.
+If you didn't specify roles when you created your user, you can map roles to it afterwards.
 
 Just like users and roles, you create role mappings using Kibana, `roles_mapping.yml`, or the REST API.
 
