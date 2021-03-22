@@ -26,7 +26,7 @@ Unless you need to create new [read-only or hidden users](../api/#read-only-and-
 
 ## Create users
 
-You can create users using Kibana, `internal_users.yml`, or the REST API.
+You can create users using Kibana, `internal_users.yml`, or the REST API. When creating a user, you can map users to roles using `internal_users.yml` or the REST API, but that feature is not currently available in Kibana.
 
 ### Kibana
 
@@ -37,7 +37,6 @@ You can create users using Kibana, `internal_users.yml`, or the REST API.
    Attributes are optional user properties that you can use for variable substitution in index permissions or document-level security.
 
 1. Choose **Submit**.
-
 
 ### internal_users.yml
 
@@ -77,10 +76,9 @@ See [Create role](../api/#create-role).
 
 ## Map users to roles
 
-After creating roles, you map users (or backend roles) to them. Intuitively, people often think of this process as giving a user one or more roles, but in the security plugin, the process is reversed; you select a role and then map one or more users to it.
+If you didn't specify roles when you created your user, you can map roles to it afterwards.
 
 Just like users and roles, you create role mappings using Kibana, `roles_mapping.yml`, or the REST API.
-
 
 ### Kibana
 
