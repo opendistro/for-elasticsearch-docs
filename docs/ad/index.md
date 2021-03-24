@@ -52,10 +52,7 @@ In this case, a feature is the field in your index that you to check for anomali
 
 For example, if you choose `min()`, the detector focuses on finding anomalies based on the minimum values of your feature. If you choose `average()`, the detector finds anomalies based on the average values of your feature.
 
-A multi-feature model correlates anomalies across all its features. It's difficult for the model to identify anomalies for an individual feature. Adding more features might negatively impact the [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall) of a model.
-A higher proportion of noise in your data might further amplify this negative impact.
-We recommend adding fewer features to your detector for a higher accuracy. By default, the maximum number of features for a detector is 5.
-You can adjust this limit with the `opendistro.anomaly_detection.max_anomaly_features` setting.
+A multi-feature model correlates anomalies across all its features. The [curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality) makes it less likely for multi-feature models to identify smaller anomalies as compared to a single-feature model. Adding more features might negatively impact the [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall) of a model. A higher proportion of noise in your data might further amplify this negative impact. We recommend adding fewer features to your detector for a higher accuracy. By default, the maximum number of features for a detector is 5. You can adjust this limit with the `opendistro.anomaly_detection.max_anomaly_features` setting.
 {: .note }
 
 1. On the **Model configuration** page, enter the **Feature name**.
