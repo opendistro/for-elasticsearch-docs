@@ -117,13 +117,13 @@ networks:
 After the clusters start, verify the names of each:
 
 ```json
-curl -XGET -u 'admin:admin' -k https://localhost:9200
+curl -XGET -u 'admin:admin' -k 'https://localhost:9200'
 {
   "cluster_name" : "odfe-cluster1",
   ...
 }
 
-curl -XGET -u 'admin:admin' -k https://localhost:9250
+curl -XGET -u 'admin:admin' -k 'https://localhost:9250'
 {
   "cluster_name" : "odfe-cluster2",
   ...
@@ -151,7 +151,7 @@ docker inspect --format='{% raw %}{{range .NetworkSettings.Networks}}{{.IPAddres
 On the coordinating cluster, add the remote cluster name and the IP address (with port 9300) for each "seed node." In this case, you only have one seed node:
 
 ```json
-curl -k -XPUT -H 'Content-Type: application/json' -u 'admin:admin' https://localhost:9250/_cluster/settings -d '
+curl -k -XPUT -H 'Content-Type: application/json' -u 'admin:admin' 'https://localhost:9250/_cluster/settings' -d '
 {
   "persistent": {
     "search.remote": {
@@ -166,13 +166,13 @@ curl -k -XPUT -H 'Content-Type: application/json' -u 'admin:admin' https://local
 On the remote cluster, index a document:
 
 ```bash
-curl -XPUT -k -H 'Content-Type: application/json' -u 'admin:admin' https://localhost:9200/books/_doc/1 -d '{"Dracula": "Bram Stoker"}'
+curl -XPUT -k -H 'Content-Type: application/json' -u 'admin:admin' 'https://localhost:9200/books/_doc/1' -d '{"Dracula": "Bram Stoker"}'
 ```
 
 At this point, cross-cluster search works. You can test it using the `admin` user:
 
 ```bash
-curl -XGET -k -u 'admin:admin' https://localhost:9250/odfe-cluster1:books/_search?pretty
+curl -XGET -k -u 'admin:admin' 'https://localhost:9250/odfe-cluster1:books/_search?pretty'
 {
   ...
   "hits": [{
@@ -190,14 +190,14 @@ curl -XGET -k -u 'admin:admin' https://localhost:9250/odfe-cluster1:books/_searc
 To continue testing, create a new user on both clusters:
 
 ```bash
-curl -XPUT -k -u 'admin:admin' https://localhost:9200/_opendistro/_security/api/internalusers/booksuser  -H 'Content-Type: application/json' -d '{"password":"password"}'
-curl -XPUT -k -u 'admin:admin' https://localhost:9250/_opendistro/_security/api/internalusers/booksuser  -H 'Content-Type: application/json' -d '{"password":"password"}'
+curl -XPUT -k -u 'admin:admin' 'https://localhost:9200/_opendistro/_security/api/internalusers/booksuser' -H 'Content-Type: application/json' -d '{"password":"password"}'
+curl -XPUT -k -u 'admin:admin' 'https://localhost:9250/_opendistro/_security/api/internalusers/booksuser' -H 'Content-Type: application/json' -d '{"password":"password"}'
 ```
 
 Then run the same search as before with `booksuser`:
 
 ```json
-curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_search?pretty
+curl -XGET -k -u booksuser:password 'https://localhost:9250/odfe-cluster1:books/_search?pretty'
 {
   "error" : {
     "root_cause" : [
@@ -216,8 +216,8 @@ curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_
 Note the permissions error. On the remote cluster, create a role with the appropriate permissions, and map `booksuser` to that role:
 
 ```bash
-curl -XPUT -k -u 'admin:admin' -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/roles/booksrole -d '{"index_permissions":[{"index_patterns":["books"],"allowed_actions":["indices:admin/shards/search_shards","indices:data/read/search"]}]}'
-curl -XPUT -k -u 'admin:admin' -H 'Content-Type: application/json' https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole -d '{"users" : ["booksuser"]}'
+curl -XPUT -k -u 'admin:admin' -H 'Content-Type: application/json' 'https://localhost:9200/_opendistro/_security/api/roles/booksrole' -d '{"index_permissions":[{"index_patterns":["books"],"allowed_actions":["indices:admin/shards/search_shards","indices:data/read/search"]}]}'
+curl -XPUT -k -u 'admin:admin' -H 'Content-Type: application/json' 'https://localhost:9200/_opendistro/_security/api/rolesmapping/booksrole' -d '{"users" : ["booksuser"]}'
 ```
 
 Both clusters must have the user, but only the remote cluster needs the role and mapping; in this case, the coordinating cluster handles authentication (i.e. "Does this request include valid user credentials?"), and the remote cluster handles authorization (i.e. "Can this user access this data?").
@@ -226,7 +226,7 @@ Both clusters must have the user, but only the remote cluster needs the role and
 Finally, repeat the search:
 
 ```bash
-curl -XGET -k -u booksuser:password https://localhost:9250/odfe-cluster1:books/_search?pretty
+curl -XGET -k -u booksuser:password 'https://localhost:9250/odfe-cluster1:books/_search?pretty'
 {
   ...
   "hits": [{

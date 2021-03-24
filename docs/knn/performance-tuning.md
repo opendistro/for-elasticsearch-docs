@@ -84,6 +84,7 @@ Recall depends on multiple factors like number of vectors, number of dimensions,
 Recall can be configured by adjusting the algorithm parameters of the HNSW algorithm exposed through index settings. Algorithm params that control recall are m, ef_construction, ef_search. For more details on influence of algorithm parameters on the indexing and search recall, please refer to the [HNSW algorithm parameters document](https://github.com/nmslib/hnswlib/blob/master/ALGO_PARAMS.md). Increasing these values could help recall (leading to better search results) but at the cost of higher memory utilization and increased indexing time. Our default values work on a broader set of use cases from our experiments, but we encourage users to run their own experiments on their data sets and choose the appropriate values. For index-level settings, please refer to the [settings page](../settings#index-settings). We will add details on our experiments here shortly.
 
 ## Estimating Memory Usage
+
 Typically, in an Elasticsearch cluster, a certain portion of RAM is set aside for the JVM heap. The k-NN plugin allocates graphs to a portion of the remaining RAM. This portion's size is determined by the circuit_breaker_limit cluster setting. By default, the circuit breaker limit is set at 50%.
 
 The memory required for graphs is estimated to be `1.1 * (4 * dimension + 8 * M)` bytes/vector.

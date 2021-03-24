@@ -26,6 +26,7 @@ Field | Description | Type | Required | Read Only
 :--- | :--- |:--- |:--- |
 `policy_id` |  The name of the policy. | `string` | Yes | Yes
 `description` |  A human-readable description of the policy. | `string` | Yes | No
+`ism_template` | Specify an ISM template pattern that matches the index to apply the policy. | `nested list of objects` | No | No
 `last_updated_time`  |  The time the policy was last updated. | `timestamp` | Yes | Yes
 `error_notification` |  The destination and message template for error notifications. The destination could be Amazon Chime, Slack, or a webhook URL. | `object` | No | No
 `default_state` | The default starting state for each index that uses this policy. | `string` | Yes | No
