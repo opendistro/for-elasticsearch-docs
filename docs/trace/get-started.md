@@ -7,7 +7,7 @@ nav_order: 1
 
 # Get started with Trace Analytics
 
-Open Distro for Elasticsearch Trace Analytics consists of two components---Data Prepper and the Trace Analytics Kibana plugin---that fit into the OpenTelemetry and Elasticsearch ecosystems. The Data Prepper repository has several [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples) to help you get started.
+Open Distro for Elasticsearch Trace Analytics consists of two components---Data Prepper and the Trace Analytics Kibana plugin---that fit into the OpenTelemetry and Elasticsearch ecosystems. The Data Prepper repository has several [sample applications](https://github.com/opendistro-for-elasticsearch/data-prepper/tree/main/examples) to help you get started.
 
 
 ## Basic flow of data
@@ -29,7 +29,7 @@ Open Distro for Elasticsearch Trace Analytics consists of two components---Data 
 
 One Trace Analytics sample application is the Jaeger HotROD demo, which mimics the flow of data through a distributed application.
 
-Download or clone the [Data Prepper repository](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples). Then navigate to `examples/jaeger-hotrod/` and open `docker-compose.yml` in a text editor. This file contains a container for each element from [Basic flow of data](#basic-flow-of-data):
+Download or clone the [Data Prepper repository](https://github.com/opendistro-for-elasticsearch/data-prepper). Then navigate to `examples/jaeger-hotrod/` and open `docker-compose.yml` in a text editor. This file contains a container for each element from [Basic flow of data](#basic-flow-of-data):
 
 - A distributed application (`jaeger-hot-rod`) with the Jaeger agent (`jaeger-agent`)
 - The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) (`otel-collector`)
