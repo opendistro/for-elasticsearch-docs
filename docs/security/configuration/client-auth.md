@@ -78,11 +78,12 @@ headers = {
 }
 cert_file_path = "/full/path/to/client-cert.pem"
 key_file_path = "/full/path/to/client-cert-key.pem"
+root_ca_path = "/full/path/to/root-ca.pem"
 
 # Send the request.
 path = 'movies/_doc/3'
 url = base_url + path
-response = requests.get(url, cert = (cert_file_path, key_file_path), verify=False)
+response = requests.get(url, cert = (cert_file_path, key_file_path), verify=root_ca_path)
 print(response.text)
 ```
 
