@@ -23,7 +23,7 @@ Otherwise, [download](https://opendistro.github.io/for-elasticsearch/downloads.h
 
 ## Configure pipelines
 
-To use Data Prepper, you define pipelines in a configuration YAML file. Each pipeline is a combination of a source, a buffer, zero or more processors, and one or more sinks:
+To use Data Prepper, you define pipelines in a configuration YAML file. Each pipeline is a combination of a source, a buffer, zero or more preppers, and one or more sinks:
 
 ```yml
 sample-pipeline:
@@ -38,8 +38,8 @@ sample-pipeline:
     bounded_blocking:
       buffer_size: 1024 # max number of records the buffer accepts
       batch_size: 256 # max number of records the buffer drains after each read
-  processor:
-    - otel_trace_raw_processor:
+  prepper:
+    - otel_trace_raw_prepper:
   sink:
     - elasticsearch:
         hosts: ["https:localhost:9200"]
@@ -55,9 +55,9 @@ sample-pipeline:
 
   By default, Data Prepper uses its one and only buffer, the `bounded_blocking` buffer, so you can omit this section unless you developed a custom buffer or need to tune the buffer settings.
 
-- Processors perform some action on your data: filter, transform, enrich, etc.
+- Preppers perform some action on your data: filter, transform, enrich, etc.
 
-  You can have multiple processors, which run sequentially from top to bottom, not in parallel. The `otel_trace_raw_processor` processor converts OpenTelemetry data into Elasticsearch-compatible JSON documents.
+  You can have multiple preppers, which run sequentially from top to bottom, not in parallel. The `otel_trace_raw_prepper` prepper converts OpenTelemetry data into Elasticsearch-compatible JSON documents.
 
 - Sinks define where your data goes. In this case, the sink is an Open Distro for Elasticsearch cluster.
 
@@ -68,6 +68,9 @@ entry-pipeline:
   delay: "100"
   source:
     otel_trace_source:
+      ssl: true
+      sslKeyCertChainFile: "config/demo-data-prepper.crt"
+      sslKeyFile: "config/demo-data-prepper.key"
   sink:
     - pipeline:
         name: "raw-pipeline"
@@ -77,10 +80,10 @@ raw-pipeline:
   source:
     pipeline:
       name: "entry-pipeline"
-  processor:
+  prepper:
     - string_converter:
         upper_case: true
-    - otel_trace_raw_processor:
+    - otel_trace_raw_prepper:
   sink:
     - elasticsearch:
         hosts: ["https://localhost:9200" ]
@@ -93,7 +96,7 @@ service-map-pipeline:
   source:
     pipeline:
       name: "entry-pipeline"
-  processor:
+  prepper:
     - service_map_stateful:
   sink:
     - elasticsearch:
@@ -106,19 +109,29 @@ service-map-pipeline:
 
 To learn more, see the [Data Prepper configuration reference](../data-prepper-reference/).
 
+## Configure the Data Prepper server
+Data Prepper itself provides administrative HTTP endpoints such as `/list` to list pipelines and `/metrics/prometheus` to provide Prometheus-compatible metrics data. The port which serves these endpoints, as well as TLS configuration, is specified by a separate YAML file. Example:
+
+```yml
+ssl: true
+keyStoreFilePath: "/usr/share/data-prepper/keystore.jks"
+keyStorePassword: "password"
+privateKeyPassword: "other_password"
+serverPort: 1234
+```
 
 ## Start Data Prepper
 
 **Docker**
 
 ```bash
-docker run --name data-prepper --expose 21890 --read-only -v /full/path/to/my-data-prepper-config.yml:/usr/share/data-prepper/data-prepper.yml amazon/opendistro-for-elasticsearch-data-prepper:latest
+docker run --name data-prepper --expose 21890 -v /full/path/to/pipelines.yaml:/usr/share/data-prepper/pipelines.yaml -v /full/path/to/data-prepper-config.yaml:/usr/share/data-prepper/data-prepper-config.yaml amazon/opendistro-for-elasticsearch-data-prepper:latest
 ```
 
 **macOS and Linux**
 
 ```bash
-./data-prepper-tar-install.sh config/my-data-prepper-config.yml
+./data-prepper-tar-install.sh config/pipelines.yaml config/data-prepper-config.yaml
 ```
 
-For production workloads, you likely want to run Data Prepper on a dedicated machine, which makes connectivity a concern. Data Prepper uses port 21890 and must be able to connect to both the OpenTelemetry Collector and the Elasticsearch cluster. In the [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/master/examples), you can see that all components use the same Docker network and expose the appropriate ports.
+For production workloads, you likely want to run Data Prepper on a dedicated machine, which makes connectivity a concern. Data Prepper uses port 21890 and must be able to connect to both the OpenTelemetry Collector and the Elasticsearch cluster. In the [sample applications](https://github.com/opendistro-for-elasticsearch/Data-Prepper/tree/main/examples), you can see that all components use the same Docker network and expose the appropriate ports.
