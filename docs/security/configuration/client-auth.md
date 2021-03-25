@@ -45,7 +45,7 @@ You can now assign your certificate's common name (CN) to a role. For this step,
 
 After deciding which role you want to map your certificate's CN to, you can use [Kibana](../../access-control/users-roles#map-users-to-roles), [`roles_mapping.yml`](../yaml/#roles_mappingyml), or the [REST API](../../access-control/api/#create-role-mapping) to map your certificate's CN to the role. The following example uses the `REST API` to map the common name `CLIENT1` to the role `readall`.
 
-#### Sample request
+**Sample request**
 
 ```json
 PUT _opendistro/_security/api/rolesmapping/readall
@@ -56,7 +56,7 @@ PUT _opendistro/_security/api/rolesmapping/readall
 }
 ```
 
-#### Sample response
+**Sample response**
 
 ```json
 {
@@ -84,4 +84,23 @@ path = 'movies/_doc/3'
 url = base_url + path
 response = requests.get(url, cert = (cert_file_path, key_file_path), verify=False)
 print(response.text)
+```
+
+## Configuring Beats
+
+You can also configure your Beats so that it uses a client certificate for authentication with Elasticsearch. Afterwards, it can start sending output to Elasticsearch.
+
+This output configuration specifies which settings you need for client certificate authentication:
+
+```yml
+output.elasticsearch:
+  enabled: true
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200"]
+  # Protocol - either `http` (default) or `https`.
+  protocol: "https"
+  ssl.certificate_authorities: ["/full/path/to/CA.pem"]
+  ssl.verification_mode: certificate
+  ssl.certificate: "/full/path/to/client-cert.pem"
+  ssl.key: "/full/path/to/to/client-cert-key.pem"
 ```
