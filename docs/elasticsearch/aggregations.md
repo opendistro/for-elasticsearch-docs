@@ -127,4 +127,34 @@ There are three main types of aggregations:
 - Bucket aggregations - Sort query results into groups based on some criteria.
 - Pipeline aggregations - Pipe the output of one aggregation as an input to another.
 
-You can also combine and nest different types of aggregations to ask more complex questions of the data.
+## Nested aggregations
+
+Metric aggregations produce simple results and cannot contain nested aggregations.
+On the other hand, bucket aggregations produce buckets of documents that you can use for other aggregations.
+You could have bucket aggregations within other bucket aggregations. Also, referred to as nested or sub aggregations.
+You can perform complex analysis on your data by nesting metric and bucket aggregations within bucket aggregations. You can add nested aggregations to any number of levels.
+
+## General nested aggregation syntax
+
+```json
+{
+  "aggs": {
+    "name": {
+      "type": {
+        "data"
+      },
+      "aggs": {
+        "nested": {
+          "type": {
+            "data"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+The inner `aggs` keyword begins a new aggregation known as a nested or sub-aggregation. The syntax of the parent aggregation and the nested-aggregation is the same. Nested-aggregations run in the context of the previous level's aggregations.
+
+You can also pair your aggregations with search queries to narrow down things you’re trying to analyze before aggregating. If you don't add a query, Elasticsearch implicitly uses the `match_all` query.
