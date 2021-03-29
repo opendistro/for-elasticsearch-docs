@@ -9,7 +9,7 @@ has_children: false
 
 # Bucket Aggregations
 
-Bucket aggregations categorize sets of documents as buckets. The type of bucket aggregation determines whether a given document falls into a bucket or not.
+Bucket aggregations categorize sets of documents as buckets. The type of bucket aggregation determines whether a given document falls into a bucket or not. You can use bucket aggregations to implement faceted navigation that's usually placed as a sidebar in search results landing pages to help you narrow the results based on their properties.
 
 ## terms
 
@@ -344,7 +344,6 @@ The significant text aggregation has the following limitations:
 - Does not support nested objects because it works with the document JSON source.
 - The counts of documents might have some (typically small) inaccuracies as it's based on summing the samples returned from each shard. You can use the shard_size parameter to fine-tune the trade-off between accuracy and performance. By default, the shard_size is set to -1 to automatically estimate the number of shards and the size parameter.
 
-
 For both `significant_terms` and `significant_text` aggregations the default source of statistical information for background term frequencies is the entire index. You can narrow this scope with a background filter to focus in on a narrower context:
 
 ```json
@@ -540,7 +539,7 @@ GET kibana_sample_data_logs/_search
 
 The response has three months worth of logs. If you graph these values, you can see the peak and valleys of the request traffic to you website month over month.
 
-## range, date_range
+## range, date_range, ip_range
 
 The `range` aggregation lets you define the range for each bucket.
 
@@ -647,6 +646,57 @@ GET kibana_sample_data_logs/_search
         "to" : 1.615451329043E12,
         "to_as_string" : "03-2021",
         "doc_count" : 0
+      }
+    ]
+  }
+ }
+}
+```
+
+The `ip_range` aggregation is for IP addresses.
+It works on `ip` type fields. You can define IP ranges and mask in the [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation.
+
+```json
+GET kibana_sample_data_logs/_search
+{
+  "size": 0,
+  "aggs": {
+    "access": {
+      "ip_range": {
+        "field": "ip",
+        "ranges": [
+          {
+            "from": "1.0.0.0",
+            "to": "126.158.155.183"
+          },
+          {
+            "mask": "1.0.0.0/8"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "access" : {
+    "buckets" : [
+      {
+        "key" : "1.0.0.0/8",
+        "from" : "1.0.0.0",
+        "to" : "2.0.0.0",
+        "doc_count" : 98
+      },
+      {
+        "key" : "1.0.0.0-126.158.155.183",
+        "from" : "1.0.0.0",
+        "to" : "126.158.155.183",
+        "doc_count" : 7184
       }
     ]
   }
@@ -1121,3 +1171,175 @@ GET kibana_sample_data_ecommerce/_search
 - `590`: Number of products that are manufactured by both.
 
 Use Kibana to represent this data by a network graph.
+
+## nested, reverse_nested
+
+The `nested` aggregation lets you aggregate on fields inside a nested object. The nested type is a specialized version of the object data type that allows arrays of objects to be indexed in a way that they can be queried independently of each other
+
+The problem you may have with the object type is that all the data is stored in the same document, so matches for a search can go across sub documents. For example, imagine a `logs` index with `pages` mapped as an `object` datatype:
+
+```json
+PUT logs/_doc/0
+{
+  "response": "200",
+  "pages": [
+    {
+      "page": "landing",
+      "load_time": 200
+    },
+    {
+      "page": "blog",
+      "load_time": 500
+    }
+  ]
+}
+```
+
+Elasticsearch merges all sub-properties of the entity relations that looks something like this:
+
+```json
+{
+  "logs": {
+    "pages": ["landing", "blog"],
+    "load_time": ["200", "500"]
+  }
+}
+```
+
+So, if you wanted to search this index with `pages=landing` and `load_time=500`, this document matches the criteria even though the load_time for landing is 200.
+
+If you want to make sure such cross-object matches don’t happen, map the field as a `nested` type:
+
+```json
+PUT logs
+{
+  "mappings": {
+    "properties": {
+      "pages": {
+        "type": "nested",
+        "properties": {
+          "page": { "type": "text" },
+          "load_time": { "type": "double" }
+        }
+      }
+    }
+  }
+}
+```
+
+Nested documents allow you to index the same JSON document but will keep your pages in separate Lucene documents, making only searches like `pages=landing` AND `load_time=200` return the expected result. Internally, nested objects index each object in the array as a separate hidden document, meaning that each nested object can be queried independently of the others.
+
+You have to specify a nested path relative to parent that contains the nested documents.where nested-object-path is the navigation path of the desired object in the root document:
+
+
+```json
+GET logs/_search
+{
+  "query": {
+    "match": { "response": "200" }
+  },
+  "aggs": {
+    "pages": {
+      "nested": {
+        "path": "pages"
+      },
+      "aggs": {
+        "min_load_time": { "min": { "field": "pages.load_time" } }
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "pages" : {
+    "doc_count" : 2,
+    "min_price" : {
+      "value" : 200.0
+    }
+  }
+ }
+}
+```
+
+You can also aggregate values from nested documents to their parent; this aggregation is called `reverse_nested`.
+You can use `reverse_nested` to perform aggregation on the field from the parent document after grouping by the field from the nested object. The reverse_nested aggregation "joins back" the root page and gets the load_time for each for your variations. The reverse nested aggregation is always defined as a sub-aggregation inside a nested aggregation. The reverse nested aggregation accepts a single option named path. This options defines how many steps backwards in the document hierarchy we want Elasticsearch to go to calculate the aggregations.
+
+```json
+GET logs/_search
+{
+  "query": {
+    "match": { "response": "200" }
+  },
+  "aggs": {
+    "pages": {
+      "nested": {
+        "path": "pages"
+      },
+      "aggs": {
+        "top_pages_per_load_time": {
+          "terms": {
+            "field": "pages.load_time"
+          },
+          "aggs": {
+            "comment_to_logs": {
+              "reverse_nested": {},
+              "aggs": {
+                "min_load_time": {
+                  "min": {
+                    "field": "pages.load_time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### Sample response
+
+```json
+...
+"aggregations" : {
+  "pages" : {
+    "doc_count" : 2,
+    "top_pages_per_load_time" : {
+      "doc_count_error_upper_bound" : 0,
+      "sum_other_doc_count" : 0,
+      "buckets" : [
+        {
+          "key" : 200.0,
+          "doc_count" : 1,
+          "comment_to_logs" : {
+            "doc_count" : 1,
+            "min_load_time" : {
+              "value" : null
+            }
+          }
+        },
+        {
+          "key" : 500.0,
+          "doc_count" : 1,
+          "comment_to_logs" : {
+            "doc_count" : 1,
+            "min_load_time" : {
+              "value" : null
+            }
+          }
+        }
+      ]
+    }
+  }
+ }
+}
+```
+
+The response shows the logs index has one page with a load_time of 200 and one with a load_time of 500.
