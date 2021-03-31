@@ -32,14 +32,66 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 
 1. Choose **Alerting**, **Destinations**, **Add destination**.
 1. Specify a name for the destination so that you can identify it later.
-1. For **Type**, choose Slack, Amazon Chime, custom webhook, or [email](#email-as-a-destination).
+1. For **Type**, choose Slack, Amazon Chime, Amazon Simple Notification Service (SNS), custom webhook, or [email](#email-as-a-destination).
 
-For Email type, refer to [Email as a destination](#email-as-a-destination) section below. For all other types, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For more information about Amazon SNS or Email Type, refer to their respective sections below. For Amazon Chime, Slack, or custom webhook, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
 For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
 This information is stored in plain text in the Elasticsearch cluster. We will improve this design in the future, but for now, the encoded credentials (which are neither encrypted nor hashed) might be visible to other Elasticsearch users.
 
+### Amazon SNS as a destination
+
+Open Distro for Elasticsearch supports Amazon SNS for notifications. This integration with Amazon SNS means that, in addition to the other destinations, the alerting plugin can send emails, text messages, and even run AWS Lambda functions using SNS topics. For more information about Amazon SNS, see the [Amazon Simple Notification Service Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+
+To use Amazon SNS as a destination:
+
+1. Enter a unique name for your destination.
+1. For **destination type**, choose **Amazon SNS**.
+1. Specify the SNS topic ARN that you want to use.
+
+The alerting plugin currently supports user authentication through ODFE's keystore and IAM in Amazon Web Services. If you run your ODFE cluster on AWS infrastructure (an Amazon EC2 instance), we recommend that you use IAM and supply an IAM role ARN. If you're not running your cluster on Amazon EC2, you must add your IAM user's access key and secret access key to ODFE's keystore.
+
+#### Using an IAM role ARN
+
+In Kibana, enter an IAM role ARN that has the following trust relationship and permissions:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "ec2.amazonaws.com"
+    },
+    "Action": "sts:AssumeRole"
+  }]
+}
+```
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "sns:Publish",
+    "Resource": "sns-topic-arn"
+  }]
+}
+```
+
+Choose **Create**.
+
+#### Adding access key and secret access key
+
+In your terminal, run the following commands and follow the prompts to add your IAM user's access key and secret access key:
+
+```
+./bin/elasticsearch-keystore add opendistro.alerting.destination.sns.access.key
+./bin/elasticsearch-keystore add opendistro.alerting.destination.sns.secret.key
+```
+
+In Kibana, leave the IAM role ARN field blank, and choose **Create**.
 
 ### Email as a destination
 
@@ -68,7 +120,7 @@ Use email groups to create and manage reusable lists of email addresses. For exa
 You can enter individual email addresses or an email group in the **Recipients** field.
 
 1. After you choose **Email** as the destination type, choose **Manage email groups**. Then choose **Add email group**, **New email group**.
-1. Enter a unique name.   
+1. Enter a unique name.
 1. For recipient emails, enter any number of email addresses.
 1. Choose **Save**.
 
