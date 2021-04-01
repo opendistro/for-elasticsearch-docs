@@ -34,7 +34,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 1. Specify a name for the destination so that you can identify it later.
 1. For **Type**, choose Slack, Amazon Chime, Amazon Simple Notification Service (SNS), custom webhook, or [email](#email-as-a-destination).
 
-For more information about Amazon SNS or email Type, refer to their respective sections below. For Amazon Chime, Slack, or custom webhook, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For more information about Amazon SNS or email type, refer to their respective sections below. For Amazon Chime, Slack, or custom webhook, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
 For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
