@@ -34,7 +34,7 @@ Destination | A reusable location for an action, such as Amazon Chime, Slack, or
 1. Specify a name for the destination so that you can identify it later.
 1. For **Type**, choose Slack, Amazon Chime, Amazon Simple Notification Service (SNS), custom webhook, or [email](#email-as-a-destination).
 
-For more information about Amazon SNS or Email Type, refer to their respective sections below. For Amazon Chime, Slack, or custom webhook, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
+For more information about Amazon SNS or email Type, refer to their respective sections below. For Amazon Chime, Slack, or custom webhook, specify the webhook URL. For more information about webhooks, see the documentation for [Slack](https://api.slack.com/incoming-webhooks) and [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html).
 
 For custom webhooks, you must specify more information: parameters and headers. For example, if your endpoint requires basic authentication, you might need to add a header with a key of `Authorization` and a value of `Basic <Base64-encoded-credential-string>`. You might also need to change `Content-Type` to whatever your webhook requires. Popular values are `application/json`, `application/xml`, and `text/plain`.
 
@@ -50,7 +50,9 @@ To use Amazon SNS as a destination:
 1. For **destination type**, choose **Amazon SNS**.
 1. Specify the SNS topic ARN that you want to use.
 
-The alerting plugin currently supports user authentication through ODFE's keystore and IAM in Amazon Web Services. If you run your ODFE cluster on AWS infrastructure (an Amazon EC2 instance), we recommend that you use IAM and supply an IAM role ARN. If you're not running your cluster on Amazon EC2, you must add your IAM user's access key and secret access key to ODFE's keystore.
+The alerting plugin currently supports user authentication through ODFE's keystore and IAM in Amazon Web Services. If you run your ODFE cluster on AWS infrastructure (an Amazon EC2 instance), we recommend that you use IAM and supply an IAM role ARN. If you're not running your cluster on Amazon EC2, you must add your IAM user's access key and secret key to ODFE's keystore.
+
+You can only use an IAM role ARN to authenticate your user if you're running your cluster on AWS infrastructure. If not, you must use an IAM user's access key and secret key to access your SNS topic. In this case, you would leave the IAM role ARN field blank.
 
 #### Using an IAM role ARN
 
@@ -84,7 +86,33 @@ Choose **Create**.
 
 #### Adding access key and secret access key
 
-In your terminal, run the following commands and follow the prompts to add your IAM user's access key and secret access key:
+Before adding your IAM user's access key and secret key to ODFE's keystore, ensure that it has the following permissions:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "es.amazonaws.com"
+    },
+    "Action": "sts:AssumeRole"
+  }]
+}
+```
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "sns:Publish",
+    "Resource": "sns-topic-arn"
+  }]
+}
+```
+
+In your terminal, run these commands and follow the prompts to add your IAM user's access key and secret key.
 
 ```
 ./bin/elasticsearch-keystore add opendistro.alerting.destination.sns.access.key
