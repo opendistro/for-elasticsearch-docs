@@ -81,8 +81,6 @@ raw-pipeline:
     pipeline:
       name: "entry-pipeline"
   prepper:
-    - string_converter:
-        upper_case: true
     - otel_trace_raw_prepper:
   sink:
     - elasticsearch:
