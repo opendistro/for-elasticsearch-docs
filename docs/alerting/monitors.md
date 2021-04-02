@@ -354,7 +354,7 @@ Variable | Description
 
 ## Add actions
 
-The final step in creating a monitor is to add one or more actions. Actions send notifications when trigger conditions are met and support [Slack](https://slack.com/), [Amazon Chime](https://aws.amazon.com/chime/), and webhooks.
+The final step in creating a monitor is to add one or more actions. Actions send notifications when trigger conditions are met and support [Slack](https://slack.com/), [Amazon Chime](https://aws.amazon.com/chime/), [Amazon SNS](https://aws.amazon.com/sns/), and webhooks.
 
 If you don't want to receive notifications for alerts, you don't have to add actions to your triggers. Instead, you can periodically check Kibana.
 {: .tip }
