@@ -117,6 +117,7 @@ Rather than creating new action groups from individual permissions, you can ofte
 - indices:admin/open
 - indices:admin/refresh
 - indices:admin/refresh*
+- indices:admin/resolve/index
 - indices:admin/rollover
 - indices:admin/seq_no/global_checkpoint_sync
 - indices:admin/settings/update
