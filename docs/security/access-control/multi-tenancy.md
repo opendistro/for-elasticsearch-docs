@@ -114,7 +114,7 @@ After creating a tenant, give a role access to it using Kibana, the REST API, or
 
 #### REST API
 
-See [Create role](../API/#create-role).
+See [Create role](../api/#create-role).
 
 
 #### roles.yml

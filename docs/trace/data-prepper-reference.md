@@ -7,7 +7,17 @@ nav_order: 25
 
 # Data Prepper configuration reference
 
-This page lists all supported Data Prepper sources, buffers, processors, and sinks, along with their associated options. For example configuration files, see [Data Prepper](../data-prepper/).
+This page lists all supported Data Prepper sources, buffers, preppers, and sinks, along with their associated options. For example configuration files, see [Data Prepper](../data-prepper/).
+
+
+## Data Prepper server options
+Option | Required | Description
+:--- | :--- | :---
+ssl | No | Boolean, indicating whether TLS should be used for server APIs. Defaults to true.
+keyStoreFilePath | No | String, path to a .jks or .p12 keystore file. Required if ssl is true.
+keyStorePassword | No | String, password for keystore. Optional, defaults to empty string.
+privateKeyPassword | No | String, password for private key within keystore. Optional, defaults to empty string.
+serverPort | No | Integer, port number to use for server APIs. Defaults to 4900
 
 
 ## General pipeline options
@@ -72,12 +82,12 @@ buffer_size | No | Integer, default 512. The maximum number of records the buffe
 batch_size | No | Integer, default 8. The maximum number of records the buffer drains after each read.
 
 
-## Processors
+## Preppers
 
-Processors perform some action on your data: filter, transform, enrich, etc.
+Preppers perform some action on your data: filter, transform, enrich, etc.
 
 
-### otel_trace_raw_processor
+### otel_trace_raw_prepper
 
 Converts OpenTelemetry data to Elasticsearch-compatible JSON documents. No options.
 
@@ -86,10 +96,22 @@ Converts OpenTelemetry data to Elasticsearch-compatible JSON documents. No optio
 
 Uses OpenTelemetry data to create a distributed service map for visualization in Kibana. No options.
 
+### peer_forwarder
+Forwards ExportTraceServiceRequests via gRPC to other Data Prepper instances. Required for operating Data Prepper in a clustered deployment.
+
+Option | Required | Description
+:--- | :--- | :---
+time_out | No | Integer, forwarded request timeout in seconds. Defaults to 3 seconds.
+span_agg_count | No | Integer, batch size for number of spans per request. Defaults to 48.
+discovery_mode | No | String, peer discovery mode to be used. Allowable values are `static` and `dns`. Defaults to `static`.
+static_endpoints | No | List, containing string endpoints of all Data Prepper instances.
+domain_name | No | String, single domain name to query DNS against. Typically used by creating multiple DNS A Records for the same domain.
+ssl | No | Boolean, indicating whether TLS should be used. Default is true.
+sslKeyCertChainFile | No | String, path to the security certificate
 
 ### string_converter
 
-Converts strings to uppercase or lowercase. Mostly useful as an example if you want to develop your own processor.
+Converts strings to uppercase or lowercase. Mostly useful as an example if you want to develop your own prepper.
 
 Option | Required | Description
 :--- | :--- | :---
@@ -116,7 +138,7 @@ aws_region | No | String, AWS region for the cluster (e.g. `"us-east-1"`) if you
 trace_analytics_raw | No | Boolean, default false. Whether to export as trace data to the `otel-v1-apm-span-*` index pattern (alias `otel-v1-apm-span`) for use with the Trace Analytics Kibana plugin.
 trace_analytics_service_map | No | Boolean, default false. Whether to export as trace data to the `otel-v1-apm-service-map` index for use with the service map component of the Trace Analytics Kibana plugin.
 index | No | String, name of the index to export to. Only required if you don't use the `trace_analytics_raw` or `trace_analytics_service_map` presets.
-template_file | No | String, the path to a JSON [index template](https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/index-templates/) file (e.g. `/your/local/template-file.json` if you do not use the `trace_analytics_raw` or `trace_analytics_service_map`. See [otel-v1-apm-span-index-template.json](https://github.com/opendistro-for-elasticsearch/simple-ingest-transformation-utility-pipeline/blob/master/situp-plugins/elasticsearch/src/main/resources/otel-v1-apm-span-index-template.json) for an example.
+template_file | No | String, the path to a JSON [index template](https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/index-templates/) file (e.g. `/your/local/template-file.json` if you do not use the `trace_analytics_raw` or `trace_analytics_service_map`. See [otel-v1-apm-span-index-template.json](https://github.com/opendistro-for-elasticsearch/data-prepper/blob/main/data-prepper-plugins/elasticsearch/src/main/resources/otel-v1-apm-span-index-template.json) for an example.
 document_id_field | No | String, the field from the source data to use for the Elasticsearch document ID (e.g. `"my-field"`) if you don't use the `trace_analytics_raw` or `trace_analytics_service_map` presets.
 dlq_file | No | String, the path to your preferred dead letter queue file (e.g. `/your/local/dlq-file`). Data Prepper writes to this file when it fails to index a document on the Elasticsearch cluster.
 bulk_size | No | Integer (long), default 5. The maximum size (in MiB) of bulk requests to the Elasticsearch cluster. Values below 0 indicate an unlimited size. If a single document exceeds the maximum bulk request size, Data Prepper sends it individually.

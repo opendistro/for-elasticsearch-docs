@@ -9,7 +9,9 @@ has_children: false
 
 The Open Distro for Elasticsearch command line interface (odfe-cli) lets you manage your ODFE cluster from the command line and automate tasks.
 
-Currently, odfe-cli only supports the [Anomaly Detection](../ad/) plugin. You can create and delete detectors, start and stop them, and use profiles to easily access different clusters or sign requests with different credentials.
+Currently, odfe-cli supports the [Anomaly Detection](../ad/) and [k-NN](../knn/) plugins, along with arbitrary REST API paths. Among other things, you can use odfe-cli create and delete detectors, start and stop them, and check k-NN statistics.
+
+Profiles let you easily access different clusters or sign requests with different credentials. odfe-cli supports unauthenticated requests, HTTP basic signing, and IAM signing for Amazon Web Services.
 
 This example moves a detector (`ecommerce-count-quantity`) from a staging cluster to a production cluster:
 
@@ -47,28 +49,25 @@ odfe-cli ad delete ecommerce-count-quantity --profile staging
 
 ## Profiles
 
-Profiles let you easily switch between different clusters and user credentials. To get started, run `odfe-cli profile create` and specify a unique profile name:
+Profiles let you easily switch between different clusters and user credentials. To get started, run `odfe-cli profile create` with the `--auth-type`, `--endpoint`, and `--name` options:
 
-```
-$ odfe-cli profile create
-Enter profile's name: default
-Elasticsearch Endpoint: https://localhost:9200
-User Name: <username>
-Password: <password>
+```bash
+odfe-cli profile create --auth-type basic --endpoint https://localhost:9200 --name docker-local
 ```
 
 Alternatively, save a configuration file to `~/.odfe-cli/config.yaml`:
 
 ```yaml
 profiles:
-- endpoint: https://localhost:9200
-  username: admin
-  password: foobar
-  name: default
-- endpoint: https://odfe-node1:9200
-  username: admin
-  password: foobar
-  name: dev
+    - name: docker-local
+      endpoint: https://localhost:9200
+      user: admin
+      password: foobar
+    - name: aws
+      endpoint: https://some-cluster.us-east-1.es.amazonaws.com
+      aws_iam:
+        profile: ""
+        service: es
 ```
 
 
@@ -83,7 +82,13 @@ odfe-cli <command> <subcommand> <flags>
 For example, the following command retrieves information about a detector:
 
 ```bash
-odfe-cli ad get my-detector --profile dev
+odfe-cli ad get my-detector --profile docker-local
+```
+
+For a request to the Elasticsearch CAT API, try the following command:
+
+```bash
+odfe-cli curl get --path _cat/plugins --profile aws
 ```
 
 Use the `-h` or `--help` flag to see all supported commands, subcommands, or usage for a specific command:
