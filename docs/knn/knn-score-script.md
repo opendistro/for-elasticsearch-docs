@@ -77,7 +77,7 @@ GET my-knn-index-1/_search
        "lang": "knn",
        "params": {
          "field": "my_vector2",
-         "query_value": [2, 3, 5, 6],
+         "query_value": [2.0, 3.0, 5.0, 6.0],
          "space_type": "cosinesimil"
        }
      }
