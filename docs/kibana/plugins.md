@@ -99,7 +99,7 @@ Navigate to the Kibana home directory (likely `/usr/share/kibana`) and run the i
 #### Security Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistroSecurityKibana-{{site.temp_plugin_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-security/opendistroSecurityKibana-{{site.odfe_major_version}}.0.1.zip
 ```
 
 This plugin provides a user interface for managing users, roles, mappings, action groups, and tenants.
@@ -108,7 +108,7 @@ This plugin provides a user interface for managing users, roles, mappings, actio
 #### Alerting Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistroAlertingKibana-{{site.temp_plugin_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistroAlertingKibana-{{site.odfe_major_version}}.0.0.zip
 ```
 
 This plugin provides a user interface for creating monitors and managing alerts.
@@ -117,7 +117,7 @@ This plugin provides a user interface for creating monitors and managing alerts.
 #### Index State Management Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistroIndexManagementKibana-{{site.temp_plugin_version}}.1.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-index-management/opendistroIndexManagementKibana-{{site.odfe_major_version}}.0.1.zip
 ```
 
 This plugin provides a user interface for managing policies.
@@ -126,7 +126,7 @@ This plugin provides a user interface for managing policies.
 #### Anomaly Detection Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-anomaly-detection/opendistroAnomalyDetectionKibana-{{site.temp_plugin_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-anomaly-detection/opendistroAnomalyDetectionKibana-{{site.odfe_major_version}}.0.0.zip
 ```
 
 This plugin provides a user interface for adding detectors.
@@ -135,7 +135,7 @@ This plugin provides a user interface for adding detectors.
 #### Query Workbench Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistroQueryWorkbenchKibana-{{site.temp_plugin_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-query-workbench/opendistroQueryWorkbenchKibana-{{site.odfe_major_version}}.0.0.zip
 ```
 
 This plugin provides a user interface for using SQL queries to explore your data.
@@ -144,7 +144,7 @@ This plugin provides a user interface for using SQL queries to explore your data
 #### Trace Analytics (experimental)
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.temp_plugin_version}}.0-alpha.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.odfe_major_version}}.0.0-alpha.zip
 ```
 
 This plugin uses distributed trace data (indexed in Elasticsearch using Data Prepper) to display latency trends, error rates, and more.
@@ -153,7 +153,7 @@ This plugin uses distributed trace data (indexed in Elasticsearch using Data Pre
 #### Notebooks Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistroNotebooksKibana-{{site.temp_plugin_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistroNotebooksKibana-{{site.odfe_major_version}}.0.0.zip
 ```
 
 This plugin lets you combine Kibana visualizations and narrative text in a single interface.
@@ -163,11 +163,11 @@ This plugin lets you combine Kibana visualizations and narrative text in a singl
 
 ```bash
 # x86 Linux
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.temp_plugin_version}}.0-linux-x64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-linux-x64.zip
 # ARM64 Linux
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/arm64/opendistroReportsKibana-{{site.temp_plugin_version}}.0-linux-arm64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/arm64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-linux-arm64.zip
 # x86 Windows
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/windows/x64/opendistroReportsKibana-{{site.temp_plugin_version}}.0-windows-x64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/windows/x64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-windows-x64.zip
 ```
 
 This plugin lets you export and share reports from Kibana dashboards, visualizations, and saved searches.
@@ -176,7 +176,7 @@ This plugin lets you export and share reports from Kibana dashboards, visualizat
 #### Gantt Chart Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-gantt-chart/opendistroGanttChartKibana-{{site.temp_plugin_version}}.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-gantt-chart/opendistroGanttChartKibana-{{site.odfe_major_version}}.0.0.zip
 ```
 
 This plugin adds a new Gantt chart visualization.
