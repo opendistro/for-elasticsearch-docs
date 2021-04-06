@@ -35,11 +35,11 @@ If you don't want to use the all-in-one Open Distro for Elasticsearch installati
 opendistroAnomalyDetectionKibana  1.13.0.0
 opendistroGanttChartKibana        1.13.0.0
 opendistroIndexManagementKibana   1.13.0.1
-opendistroNotebooksKibana         1.13.0.0
+opendistroNotebooksKibana         1.13.2.0
 opendistroQueryWorkbenchKibana    1.13.0.0
-opendistroReportsKibana           1.13.0.0
+opendistroReportsKibana           1.13.2.0
 opendistroSecurityKibana          1.13.0.1
-opendistroTraceAnalyticsKibana    1.13.0.0
+opendistroTraceAnalyticsKibana    1.13.2.0
 </pre>
     </td>
   </tr>
@@ -144,7 +144,7 @@ This plugin provides a user interface for using SQL queries to explore your data
 #### Trace Analytics (experimental)
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.odfe_major_version}}.0.0-alpha.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-trace-analytics/opendistroTraceAnalyticsKibana-{{site.odfe_major_version}}.2.0.zip
 ```
 
 This plugin uses distributed trace data (indexed in Elasticsearch using Data Prepper) to display latency trends, error rates, and more.
@@ -153,7 +153,7 @@ This plugin uses distributed trace data (indexed in Elasticsearch using Data Pre
 #### Notebooks Kibana
 
 ```bash
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistroNotebooksKibana-{{site.odfe_major_version}}.0.0.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-notebooks/opendistroNotebooksKibana-{{site.odfe_major_version}}.2.0.zip
 ```
 
 This plugin lets you combine Kibana visualizations and narrative text in a single interface.
@@ -163,11 +163,11 @@ This plugin lets you combine Kibana visualizations and narrative text in a singl
 
 ```bash
 # x86 Linux
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-linux-x64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/x64/opendistroReportsKibana-{{site.odfe_major_version}}.2.0-linux-x64.zip
 # ARM64 Linux
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/arm64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-linux-arm64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/linux/arm64/opendistroReportsKibana-{{site.odfe_major_version}}.2.0-linux-arm64.zip
 # x86 Windows
-sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/windows/x64/opendistroReportsKibana-{{site.odfe_major_version}}.0.0-windows-x64.zip
+sudo bin/kibana-plugin install https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-reports/windows/x64/opendistroReportsKibana-{{site.odfe_major_version}}.2.0-windows-x64.zip
 ```
 
 This plugin lets you export and share reports from Kibana dashboards, visualizations, and saved searches.
