@@ -37,7 +37,7 @@ Component | Purpose
 [KNN](docs/knn/) | Find “nearest neighbors” in your vector data
 [Performance Analyzer](docs/pa/) | Monitor and optimize your cluster
 [Anomaly Detection](docs/ad/) | Identify atypical data and receive automatic notifications
-[Asynchronous Search](docs/async/) | Run search requests that run in the background
+[Asynchronous Search](docs/async/) | Run search requests in the background
 
 You can install Elasticsearch plugins [individually](docs/install/plugins/) on existing OSS clusters or use the [all-in-one packages](docs/install/) for new clusters. Most of these Elasticsearch plugins have corresponding Kibana plugins that provide a convenient, unified user interface.
 
