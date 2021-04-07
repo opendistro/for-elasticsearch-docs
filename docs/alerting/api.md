@@ -174,6 +174,74 @@ If you use a custom webhook for your destination and need to embed JSON in the m
 }
 ```
 
+If you want to specify a timezone, you can do so by including a [cron expression](./cron) with a `ZoneId` in the `schedule` section of your request.
+
+The following example creates a monitor for 12:10 PM US Pacific Time for the 1st of every month.
+
+#### Request
+
+```json
+{
+  "type": "monitor",
+  "name": "test-monitor",
+  "enabled": true,
+  "schedule": {
+    "cron" : {
+        "expression": "10 12 1 * *",
+        "timezone": "America/Los_Angeles"
+    }
+  },
+  "inputs": [{
+    "search": {
+      "indices": ["movies"],
+      "query": {
+        "size": 0,
+        "aggregations": {},
+        "query": {
+          "bool": {
+            "filter": {
+              "range": {
+                "@timestamp": {
+                  "gte": "||-1h",
+                  "lte": "",
+                  "format": "epoch_millis"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }],
+  "triggers": [{
+    "name": "test-trigger",
+    "severity": "1",
+    "condition": {
+      "script": {
+        "source": "ctx.results[0].hits.total.value > 0",
+        "lang": "painless"
+      }
+    },
+    "actions": [{
+      "name": "test-action",
+      "destination_id": "ld7912sBlQ5JUWWFThoW",
+      "message_template": {
+        "source": "This is my message body."
+      },
+      "throttle_enabled": true,
+      "throttle": {
+        "value": 27,
+        "unit": "MINUTES"
+      },
+      "subject_template": {
+        "source": "TheSubject"
+      }
+    }]
+  }]
+}
+```
+
+For a full list of `ZoneId`, refer to [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). The alerting plugin uses the Java [TimeZone](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TimeZone.html) class to convert a [`ZoneId`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/ZoneId.html) to a valid timezone.
 
 ---
 

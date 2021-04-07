@@ -68,7 +68,7 @@ Use email groups to create and manage reusable lists of email addresses. For exa
 You can enter individual email addresses or an email group in the **Recipients** field.
 
 1. After you choose **Email** as the destination type, choose **Manage email groups**. Then choose **Add email group**, **New email group**.
-1. Enter a unique name.   
+1. Enter a unique name.
 1. For recipient emails, enter any number of email addresses.
 1. Choose **Save**.
 
@@ -100,7 +100,7 @@ POST _nodes/reload_secure_settings
 ## Create monitors
 
 1. Choose **Alerting**, **Monitors**, **Create monitor**.
-1. Specify a name and schedule for the monitor.
+1. Specify a name for the monitor.
 
 The anomaly detection option is for pairing with the anomaly detection plugin. See [Anomaly Detection](../../ad/).
 For anomaly detector, choose an appropriate schedule for the monitor based on the detector interval. Otherwise, the alerting monitor might miss reading the results.
@@ -177,7 +177,7 @@ Whenever you update a detector’s interval, make sure to update the associated 
    The monitor makes this query to Elasticsearch as often as the schedule dictates; check the **Query Performance** section and make sure you're comfortable with the performance implications.
 
    To use an anomaly detector, choose **Define using Anomaly detector** and select your **Detector**.
-
+1. Choose a frequency and timezone for your monitor. Note that you can only pick a timezone if you choose Daily, Weekly, Monthly, or [custom cron expression](./cron.md) for frequency.
 1. Choose **Create**.
 
 
