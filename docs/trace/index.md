@@ -6,7 +6,7 @@ has_children: true
 has_toc: false
 ---
 
-# Trace Analytics (experimental)
+# Trace Analytics
 
 Trace Analytics provides a way to ingest and visualize [OpenTelemetry](https://opentelemetry.io/) data in Open Distro for Elasticsearch. This data can help you find and fix performance problems in distributed applications.
 

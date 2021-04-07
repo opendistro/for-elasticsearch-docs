@@ -195,7 +195,7 @@ If you're making major changes to the documentation and need to see the rendered
 ## New releases
 
 1. Branch.
-1. Change the `odfe_version` and `es_version` variables in `_config.yml`.
+1. Change the `odfe_version`, `odfe_major_version`, and `es_version` variables in `_config.yml`.
 1. Start up a new cluster using the updated Docker Compose file in `docs/install/docker.md`.
 1. Update the version table in `version-history.md`.
 

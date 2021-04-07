@@ -9,6 +9,7 @@ permalink: /version-history/
 
 Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
+[1.13.2](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.2.md) | Adds Trace Analytics plugin to Kibana. Includes bug fixes for ISM, Kibana reports, Kibana notebooks, and SQL. | 7 April 2021 | 7.10.2
 [1.13.1](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.1.md) | Fixes bugs with Performance Analyzer failing to start and the security plugin blocking requests to `_cat/health`. | 4 March 2021 | 7.10.2
 [1.13.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.0.md) | Adds ARM64 support, enhancements to SQL, asynchronous search plugin, and Historical Data Workbench for the anomaly detection plugin. Bumps Elasticsearch version. | 17 February 2021 | 7.10.2
 [1.12.0](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.12.0.md) | Adds Kibana reports, index rollups, and Hamming distance for k-NN. | 14 December 2020 | 7.10.0
