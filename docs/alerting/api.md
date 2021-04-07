@@ -174,9 +174,9 @@ If you use a custom webhook for your destination and need to embed JSON in the m
 }
 ```
 
-If you want to specify a timezone, you can do so by including a [cron expression](./cron) with a `ZoneId` in the `schedule` section of your request.
+If you want to specify a timezone, you can do so by including a [cron expression](../cron/) with a timezone name in the `schedule` section of your request.
 
-The following example creates a monitor for 12:10 PM US Pacific Time for the 1st of every month.
+The following example creates a monitor that runs at 12:10 PM Pacific Time on the 1st day of every month.
 
 #### Request
 
@@ -241,7 +241,7 @@ The following example creates a monitor for 12:10 PM US Pacific Time for the 1st
 }
 ```
 
-For a full list of `ZoneId`, refer to [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). The alerting plugin uses the Java [TimeZone](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TimeZone.html) class to convert a [`ZoneId`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/ZoneId.html) to a valid timezone.
+For a full list of timezone names, refer to [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). The alerting plugin uses the Java [TimeZone](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TimeZone.html) class to convert a [`ZoneId`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/ZoneId.html) to a valid timezone.
 
 ---
 

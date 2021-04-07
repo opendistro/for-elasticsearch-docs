@@ -172,12 +172,12 @@ Whenever you update a detector’s interval, make sure to update the associated 
 
 1. To define a monitor visually, choose **Define using visual graph**. Then choose an aggregation (for example, `count()` or `average()`), a set of documents, and a timeframe. Visual definition works well for most monitors.
 
-   To use a query, choose **Define using extraction query**, add your query (using [the Elasticsearch query DSL](../../elasticsearch/full-text)), and test it using the **Run** button.
+   To use a query, choose **Define using extraction query**, add your query (using [the Elasticsearch query DSL](../../elasticsearch/full-text/)), and test it using the **Run** button.
 
    The monitor makes this query to Elasticsearch as often as the schedule dictates; check the **Query Performance** section and make sure you're comfortable with the performance implications.
 
    To use an anomaly detector, choose **Define using Anomaly detector** and select your **Detector**.
-1. Choose a frequency and timezone for your monitor. Note that you can only pick a timezone if you choose Daily, Weekly, Monthly, or [custom cron expression](./cron.md) for frequency.
+1. Choose a frequency and timezone for your monitor. Note that you can only pick a timezone if you choose Daily, Weekly, Monthly, or [custom cron expression](../cron/) for frequency.
 1. Choose **Create**.
 
 
