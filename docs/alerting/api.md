@@ -716,12 +716,73 @@ POST _opendistro/_alerting/monitors/<monitor_id>/_execute
 }
 ```
 
+---
+
+## Get alerts
+
+```json
+GET _opendistro/_alerting/monitors/alerts
+```
+
+```json
+{
+  "alerts": [
+    {
+      "id": "eQURa3gBKo1jAh6qUo49",
+      "version": 300,
+      "monitor_id": "awUMa3gBKo1jAh6qu47E",
+      "schema_version": 2,
+      "monitor_version": 2,
+      "monitor_name": "Example_monitor_name",
+      "monitor_user": {
+        "name": "admin",
+        "backend_roles": [
+          "admin"
+        ],
+        "roles": [
+          "all_access",
+          "own_index"
+        ],
+        "custom_attribute_names": [],
+        "user_requested_tenant": null
+      },
+      "trigger_id": "bQUQa3gBKo1jAh6qnY6G",
+      "trigger_name": "Example_trigger_name",
+      "state": "ACTIVE",
+      "error_message": null,
+      "alert_history": [
+        {
+          "timestamp": 1617314504873,
+          "message": "Example error emssage"
+        },
+        {
+          "timestamp": 1617312543925,
+          "message": "Example error message"
+        }
+      ],
+      "severity": "1",
+      "action_execution_results": [
+        {
+          "action_id": "bgUQa3gBKo1jAh6qnY6G",
+          "last_execution_time": 1617317979908,
+          "throttled_count": 0
+        }
+      ],
+      "start_time": 1616704000492,
+      "last_notification_time": 1617317979908,
+      "end_time": null,
+      "acknowledged_time": null
+    }
+  ],
+  "totalAlerts": 1
+}
+```
 
 ---
 
 ## Acknowledge alert
 
-To get the alert ID, query the `.opendistro-alerts` index. See [Alerting indices](../settings#alerting-indices). You can acknowledge any number of alerts in one call. If the alert is already in an ERROR, COMPLETED, or ACKNOWLEDGED state, it appears in the `failed` array.
+[After getting your alerts](#get-alerts/), you can acknowledge any number of active alerts in one call. If the alert is already in an ERROR, COMPLETED, or ACKNOWLEDGED state, it appears in the `failed` array.
 
 
 #### Request
@@ -729,7 +790,7 @@ To get the alert ID, query the `.opendistro-alerts` index. See [Alerting indices
 ```json
 POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 {
-  "alerts": ["bn0_PmgBoCvkhulGF2K8"]
+  "alerts": ["eQURa3gBKo1jAh6qUo49"]
 }
 ```
 
@@ -738,12 +799,11 @@ POST _opendistro/_alerting/monitors/<monitor-id>/_acknowledge/alerts
 ```json
 {
   "success": [
-    "bn0_PmgBoCvkhulGF2K8"
+  "eQURa3gBKo1jAh6qUo49"
   ],
   "failed": []
 }
 ```
-
 
 ---
 
