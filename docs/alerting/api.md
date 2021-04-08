@@ -720,9 +720,15 @@ POST _opendistro/_alerting/monitors/<monitor_id>/_execute
 
 ## Get alerts
 
+Returns an array of all alerts.
+
+#### Request
+
 ```json
 GET _opendistro/_alerting/monitors/alerts
 ```
+
+#### Response
 
 ```json
 {
