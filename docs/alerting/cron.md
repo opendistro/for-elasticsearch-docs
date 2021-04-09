@@ -58,3 +58,7 @@ Every three hours on the first day of every other month:
 ```
 0 0-23/3 1 1-12/2 *
 ```
+
+## API
+
+For an example of how to use a custom cron expression in an API call, see the [create monitor API operation](../api/#request-1).
