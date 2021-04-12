@@ -16,7 +16,7 @@ Elasticsearch can perform aggregations on massive datasets in milliseconds. Comp
 
 ## Aggregations on text fields
 
-By default, Elasticsearch does not support aggregations on a text field.
+By default, Elasticsearch doesn't support aggregations on a text field.
 Because text fields are tokenized, an aggregation on a text field has to reverse the tokenization process back to its original string and then formulate an aggregation based on that. Such an operation consumes significant memory and degrades cluster performance.
 
 While you can enable aggregations on text fields by setting the `fielddata` parameter to `true` in the mapping, the aggregations are still based on the tokenized words and not on the raw text.
@@ -61,7 +61,7 @@ GET _search
 
 If you’re only interested in the aggregation result and not in the results of the query, set `size` to 0.
 
-In the `aggs` property (you can use aggregations if you want), you can define any number of aggregations.
+In the `aggs` property (you can use `aggregations` if you want), you can define any number of aggregations.
 Each aggregation is defined by its name and one of the types of aggregations that Elasticsearch supports.
 
 The name of the aggregation helps you to distinguish between different aggregations in the response.
@@ -130,11 +130,12 @@ There are three main types of aggregations:
 ## Nested aggregations
 
 Metric aggregations produce simple results and cannot contain nested aggregations.
-On the other hand, bucket aggregations produce buckets of documents that you can use for other aggregations.
-You could have bucket aggregations within other bucket aggregations. Also, referred to as nested or sub aggregations.
-You can perform complex analysis on your data by nesting metric and bucket aggregations within bucket aggregations. You can add nested aggregations to any number of levels.
 
-## General nested aggregation syntax
+Bucket aggregations produce buckets of documents that you can use for other aggregations.
+You can have bucket aggregations within other bucket aggregations. Also, referred to as nested or sub aggregations.
+You can perform complex analysis on your data by nesting metric and bucket aggregations within bucket aggregations.
+
+### General nested aggregation syntax
 
 ```json
 {
@@ -155,6 +156,6 @@ You can perform complex analysis on your data by nesting metric and bucket aggre
 }
 ```
 
-The inner `aggs` keyword begins a new aggregation known as a nested or sub-aggregation. The syntax of the parent aggregation and the nested-aggregation is the same. Nested-aggregations run in the context of the previous level's aggregations.
+The inner `aggs` keyword begins a new aggregation known as a nested or sub-aggregation. The syntax of the parent aggregation and the nested-aggregation is the same. Nested-aggregations run in the context of the previous-level's aggregations.
 
 You can also pair your aggregations with search queries to narrow down things you’re trying to analyze before aggregating. If you don't add a query, Elasticsearch implicitly uses the `match_all` query.

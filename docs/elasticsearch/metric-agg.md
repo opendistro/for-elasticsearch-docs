@@ -53,7 +53,7 @@ Similarly, you can use `min`, `max`, and `avg` metrics to find the minimum, maxi
 
 The `cardinality` metric counts the number of unique or distinct values of a field.
 
-For example, you can calculate how many unique products are present in your eCommerce store:
+For example, you can calculate how many unique products are present in an eCommerce store:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -305,7 +305,7 @@ Stats measure | Description
 `skewness` | An asymmetric measure of the distribution of the field's values around the mean.
 `kurtosis` | A measure of the tail heaviness of a distribution. As the tail becomes lighter, kurtosis decreases. As the tail becomes heavier, kurtosis increases.
 `covariance` | A measure of the joint variability between two fields. A positive value means their values move in the same direction and vice versa.
-`correlation` | A measure of the strength of the relationship between two fields. The valid values are between [-1, 1]. A value of -1 means the value is negatively correlated and a value of 1 means it is positively correlated. A value of 0 means there is no identifiable relationship between them.
+`correlation` | A measure of the strength of the relationship between two fields. The valid values are between [-1, 1]. A value of -1 means the value is negatively correlated and a value of 1 means it's positively correlated. A value of 0 means that there's no identifiable relationship between them.
 
 ### percentile, percentile_ranks
 
@@ -559,7 +559,7 @@ GET kibana_sample_data_ecommerce/_search
 
 ### Scripted metric
 
-The `scripted_metric` metric aggregation returns metrics calculated from a specified script.
+The `scripted_metric` aggregation returns metrics calculated from a specified script.
 
 A scripts has four stages: the init stage, the map stage, the combine stage, and the reduce stage.
 

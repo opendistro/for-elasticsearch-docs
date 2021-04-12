@@ -9,7 +9,9 @@ has_children: false
 
 # Bucket Aggregations
 
-Bucket aggregations categorize sets of documents as buckets. The type of bucket aggregation determines whether a given document falls into a bucket or not. You can use bucket aggregations to implement faceted navigation that's usually placed as a sidebar in search results landing pages to help you narrow the results based on their properties.
+Bucket aggregations categorize sets of documents as buckets. The type of bucket aggregation determines whether a given document falls into a bucket or not.
+
+You can use bucket aggregations to implement faceted navigation that's usually placed as a sidebar in search results landing pages to help you narrow the results based on their properties.
 
 ## terms
 
@@ -75,7 +77,9 @@ This is especially true if `size` is set to a low number. Because the default si
 
 ## sampler, diversified_sampler
 
-If you're aggregating over millions of documents, you can use a `sampler` aggregation to reduce its scope to a small sample of documents for a faster response. The `sampler` aggregation selects the samples by top-scoring documents. The results are approximate but closely represent the distribution of the real data. The sampler aggregation significantly improves query performance. But the estimated responses are not entirely reliable.
+If you're aggregating over millions of documents, you can use a `sampler` aggregation to reduce its scope to a small sample of documents for a faster response. The `sampler` aggregation selects the samples by top-scoring documents.
+
+The results are approximate but closely represent the distribution of the real data. The `sampler` aggregation significantly improves query performance. But the estimated responses are not entirely reliable.
 
 The basic syntax is:
 
@@ -92,7 +96,7 @@ The basic syntax is:
 
 The `shard_size` property tells Elasticsearch how many documents (at most) to collect from each shard.
 
-For example, you can limit the number of documents collected on each shard to 1,000 and then bucket the documents by a terms aggregation.
+For example, you can limit the number of documents collected on each shard to 1,000 and then bucket the documents by a `terms` aggregation.
 
 ```json
 GET kibana_sample_data_logs/_search
