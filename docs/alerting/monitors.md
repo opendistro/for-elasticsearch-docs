@@ -50,13 +50,9 @@ To use Amazon SNS as a destination:
 1. For **destination type**, choose **Amazon SNS**.
 1. Specify the SNS topic ARN that you want to use.
 
-The alerting plugin currently supports user authentication through ODFE's keystore and IAM in Amazon Web Services. If you run your ODFE cluster on AWS infrastructure (an Amazon EC2 instance), we recommend that you use IAM and supply an IAM role ARN. If you're not running your cluster on Amazon EC2, you must add your IAM user's access key and secret key to ODFE's keystore.
+The alerting plugin currently supports user authentication through ODFE's keystore and IAM in Amazon Web Services. If you run your ODFE cluster on AWS infrastructure (an Amazon EC2 instance), the alerting plugin automatically retrieves the credentials of an IAM role associated with your EC2 instance. If you're not running your cluster on Amazon EC2, you must add your IAM user's access key and secret key to ODFE's keystore.
 
-You can only use an IAM role ARN to authenticate your user if you're running your cluster on AWS infrastructure. If not, you must use an IAM user's access key and secret key to access your SNS topic. In this case, you would leave the IAM role ARN field blank.
-
-#### Using an IAM role ARN
-
-In Kibana, enter an IAM role ARN that has the following trust relationship and permissions:
+To use either method, first ensure that the IAM role you want to use has the following trust relationship and permissions:
 
 ```json
 {
@@ -82,44 +78,22 @@ In Kibana, enter an IAM role ARN that has the following trust relationship and p
 }
 ```
 
-Choose **Create**.
+#### Using an IAM role's credentials
+
+If you're running your ODFE cluster on AWS infrastructure, Amazon EC2 will automatically retrieve your IAM role's credentials and access the SNS topic, so you don't have to add any user ceredentials.
+
+In Kibana, choose **Create**.
 
 #### Adding access key and secret access key
 
-Before adding your IAM user's access key and secret key to ODFE's keystore, ensure that it has the following permissions:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Principal": {
-      "Service": "es.amazonaws.com"
-    },
-    "Action": "sts:AssumeRole"
-  }]
-}
-```
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": "sns:Publish",
-    "Resource": "sns-topic-arn"
-  }]
-}
-```
-
-In your terminal, run these commands and follow the prompts to add your IAM user's access key and secret key.
+After ensuring that your IAM user has the necessary trust relationship and permissions, run the following commands in your terminal and follow the prompts to add your IAM user's access key and secret key.
 
 ```
 ./bin/elasticsearch-keystore add opendistro.alerting.destination.sns.access.key
 ./bin/elasticsearch-keystore add opendistro.alerting.destination.sns.secret.key
 ```
 
-In Kibana, leave the IAM role ARN field blank, and choose **Create**.
+In Kibana, choose **Create**.
 
 ### Email as a destination
 
