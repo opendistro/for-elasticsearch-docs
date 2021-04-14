@@ -263,7 +263,12 @@ Variable | Description
 :--- | :---
 `ctx.results` | An array with one element (i.e. `ctx.results[0]`). Contains the query results. This variable is empty if the trigger was unable to retrieve results. See `ctx.error`.
 `ctx.monitor` | Includes `ctx.monitor.name`, `ctx.monitor.type`, `ctx.monitor.enabled`, `ctx.monitor.enabled_time`, `ctx.monitor.schedule`, `ctx.monitor.inputs`, `triggers` and `ctx.monitor.last_update_time`.
+`ctx.monitor.schedule` | Contains a schedule of how often or when the monitor should run.
+`ctx.monitor.inputs` | An array that contains the indices and definition used to create the monitor.
 `ctx.trigger` | Includes `ctx.trigger.name`, `ctx.trigger.severity`, `ctx.trigger.condition`, and `ctx.trigger.actions`.
+`ctx.trigger.condition` | Contains the painless script used to define the monitor.
+`ctx.trigger.actions` | The action to occur whenever `ctx.trigger.condition` is triggered. Contains additional information such as `destination_id` and `message_template` used in the alert.
+`ctx.last_update_time` | Unix epoch time of when the monitor was last updated.
 `ctx.periodStart` | Unix timestamp for the beginning of the period during which the alert triggered. For example, if a monitor runs every ten minutes, a period might begin at 10:40 and end at 10:50.
 `ctx.periodEnd` | The end of the period during which the alert triggered.
 `ctx.error` | The error message if the trigger was unable to retrieve results or unable to evaluate the trigger, typically due to a compile error or null pointer exception. Null otherwise.
