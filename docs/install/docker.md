@@ -221,7 +221,7 @@ You can use this same method to [pass your own certificates](../docker-security/
    docker ps # Look up the container id
    docker exec -it <container-id> /bin/bash
    # Inside container
-   cd plugins/opendistro-performance-analyzer/pa_config/
+   cd plugins/opendistro_performance_analyzer/pa_config/
    vi performance-analyzer.properties
    ```
 
