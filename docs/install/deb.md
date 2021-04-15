@@ -122,7 +122,7 @@ To edit this behavior, modify the plugin configuration. First navigate to `ES_HO
 
 ```bash
 cd $ES_HOME # navigate to the Elasticsearch home directory
-cd plugins/opendistro-performance-analyzer/pa_config/
+cd plugins/opendistro_performance_analyzer/pa_config/
 vi performance-analyzer.properties
 ```
 

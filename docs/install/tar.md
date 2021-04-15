@@ -91,7 +91,7 @@ In a tarball installation, Performance Analyzer collects data when it is enabled
 
    ```bash
    cd /usr/share/elasticsearch # navigate to the Elasticsearch home directory
-   cd plugins/opendistro-performance-analyzer/pa_config/
+   cd plugins/opendistro_performance_analyzer/pa_config/
    vi performance-analyzer.properties
    ```
 
