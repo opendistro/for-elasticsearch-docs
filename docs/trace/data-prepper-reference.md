@@ -89,12 +89,21 @@ Preppers perform some action on your data: filter, transform, enrich, etc.
 
 ### otel_trace_raw_prepper
 
-Converts OpenTelemetry data to Elasticsearch-compatible JSON documents. No options.
+Converts OpenTelemetry data to Elasticsearch-compatible JSON documents.
 
+Option | Required | Description
+:--- | :--- | :---
+root_span_flush_delay | No | Integer, representing the time interval in seconds to flush all the root spans in the prepper together with their descendants. Defaults to 30.
+trace_flush_interval | No | Integer, representing the time interval in seconds to flush all the descendant spans without any root span. Defaults to 180.
 
 ### service_map_stateful
 
-Uses OpenTelemetry data to create a distributed service map for visualization in Kibana. No options.
+Uses OpenTelemetry data to create a distributed service map for visualization in Kibana.
+
+Option | Required | Description
+:--- | :--- | :---
+window_duration | No | Integer, representing the fixed time window in seconds to evaluate service-map relationships. Defaults to 180. 
+
 
 ### peer_forwarder
 Forwards ExportTraceServiceRequests via gRPC to other Data Prepper instances. Required for operating Data Prepper in a clustered deployment.
