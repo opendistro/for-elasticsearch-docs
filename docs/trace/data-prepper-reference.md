@@ -11,6 +11,7 @@ This page lists all supported Data Prepper sources, buffers, preppers, and sinks
 
 
 ## Data Prepper server options
+
 Option | Required | Description
 :--- | :--- | :---
 ssl | No | Boolean, indicating whether TLS should be used for server APIs. Defaults to true.
