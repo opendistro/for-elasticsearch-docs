@@ -12,7 +12,7 @@ Open Distro for Elasticsearch Trace Analytics consists of two components---Data 
 
 ## Basic flow of data
 
-![Data flow diagram from a distributed application to Open Distro for Elasticsearch](../../images/ta.svg)
+![Data flow diagram from a distributed application to Open Distro for Elasticsearch](../images/ta.svg)
 
 1. Trace Analytics relies on you adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
 
@@ -39,7 +39,7 @@ Download or clone the [Data Prepper repository](https://github.com/opendistro-fo
 
 Close the file and run `docker-compose up --build`. After the containers start, navigate to `http://localhost:8080` in a web browser.
 
-![HotROD web interface](../../images/hot-rod.png)
+![HotROD web interface](../images/hot-rod.png)
 
 Click one of the buttons in the web interface to send a request to the application. Each request starts a series of operations across the services that make up the application. From the console logs, you can see that these operations share the same `trace-id`, which lets you track all of the operations in the request as a single *trace*:
 
