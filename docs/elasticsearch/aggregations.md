@@ -21,7 +21,7 @@ Because text fields are tokenized, an aggregation on a text field has to reverse
 
 While you can enable aggregations on text fields by setting the `fielddata` parameter to `true` in the mapping, the aggregations are still based on the tokenized words and not on the raw text.
 
-We recommend keeping a raw version of the text field as a keyword field that you can aggregate on.
+We recommend keeping a raw version of the text field as a `keyword` field that you can aggregate on.
 In this case, you can perform aggregations on the `title.raw` field, instead of the `title` field:
 
 ```json
@@ -129,11 +129,11 @@ There are three main types of aggregations:
 
 ## Nested aggregations
 
-Metric aggregations produce simple results and cannot contain nested aggregations.
+Aggregations within aggregations are called nested or sub aggregations.
 
-Bucket aggregations produce buckets of documents that you can use for other aggregations.
-You can have bucket aggregations within other bucket aggregations. Also, referred to as nested or sub aggregations.
-You can perform complex analysis on your data by nesting metric and bucket aggregations within bucket aggregations.
+Metric aggregations produce simple results and can't contain nested aggregations.
+
+Bucket aggregations produce buckets of documents that you can nest in other aggregations. You can perform complex analysis on your data by nesting metric and bucket aggregations within bucket aggregations.
 
 ### General nested aggregation syntax
 
@@ -156,6 +156,6 @@ You can perform complex analysis on your data by nesting metric and bucket aggre
 }
 ```
 
-The inner `aggs` keyword begins a new aggregation known as a nested or sub-aggregation. The syntax of the parent aggregation and the nested-aggregation is the same. Nested-aggregations run in the context of the previous-level's aggregations.
+The inner `aggs` keyword begins a new nested aggregation. The syntax of the parent aggregation and the nested aggregation is the same. Nested aggregations run in the context of the preceding parent aggregations.
 
 You can also pair your aggregations with search queries to narrow down things you’re trying to analyze before aggregating. If you don't add a query, Elasticsearch implicitly uses the `match_all` query.

@@ -11,15 +11,23 @@ has_children: false
 
 Metric aggregations let you perform simple calculations such as finding the minimum, maximum, and average values of a field.
 
-Metric aggregations are of two forms: single-value metrics and multi-value metrics.
+## Types of metric aggregations
 
-## Single-value metrics
+Metric aggregations are of two types: single-value metric aggregations and multi-value metric aggregations.
 
-Single-value metrics return a single metric. For example, `sum`, `min`, `max`, `avg`, `value_count`, and `cardinality`.
+### Single-value metric aggregations
 
-### sum, min, max, avg
+Single-value metric aggregations return a single metric. For example, `sum`, `min`, `max`, `avg`, `cardinality`, and `value_count`.
 
-The `sum` metric returns the sum of the numeric values of a field.
+### Multi-value metric aggregations
+
+Multi-value metric aggregations return more than one metric. For example, `stats`, `extended_stats`, `matrix_stats`, `percentile`, `percentile_ranks`, `geo_bound`, `top_hits`, and `scripted_metric`.
+
+## sum, min, max, avg
+
+The `sum`, `min`, `max`, and `avg` metrics are single-value metric aggregations that return the sum, minimum, maximum, and average values of a field, respectively.
+
+The following example calculates the total sum of the `taxful_total_price` field:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -47,13 +55,13 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-Similarly, you can use `min`, `max`, and `avg` metrics to find the minimum, maximum, and average values of a field, respectively.
+In a similar fashion, you can find the minimum, maximum, and average values of a field.
 
-### cardinality
+## cardinality
 
-The `cardinality` metric counts the number of unique or distinct values of a field.
+The `cardinality` metric is a single-value metric aggregation that counts the number of unique or distinct values of a field.
 
-For example, you can calculate how many unique products are present in an eCommerce store:
+The following example finds the number of unique products in an eCommerce store:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -82,7 +90,7 @@ GET kibana_sample_data_ecommerce/_search
 ```
 
 The cardinality count is approximate.
-If you had tens of thousands of products in your store, an accurate cardinality calculation requires loading all values into a hash set and returning its size. This approach does not scale well because it requires more memory and causes high latency.
+If you had tens of thousands of products in your store, an accurate cardinality calculation requires loading all the values into a hash set and returning its size. This approach doesn't scale well because it requires more memory and causes high latency.
 
 You can control the trade-off between memory and accuracy with the `precision_threshold` setting. This setting defines the threshold below which counts are expected to be close to accurate. Above this value, counts might become a bit less accurate. The default value of `precision_threshold` is 3,000. The maximum supported value is 40,000.
 
@@ -101,10 +109,11 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-### value_count
+## value_count
 
-The `value_count` metric calculates the number of values that an aggregation is based on.
-For example, you can use the `value_count` metric with the `avg` metric to see how many numbers the aggregation used to calculate the average value.
+The `value_count` metric is a single-value metric aggregation that calculates the number of values that an aggregation is based on.
+
+The following example uses the `value_count` metric with the `avg` metric to find how many numbers the aggregation uses to calculate an average value:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -132,13 +141,11 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-## Multi-value metrics
+## stats, extended_stats, matrix_stats
 
-Multi-value metrics return more than one metric. For example, `stats` and `extended_stats`.
+The `stats` metric is a multi-value metric aggregation that returns all basic metrics such as `min`, `max`, `sum`, `avg`, and `value_count` in one aggregation query.
 
-### stats, extended_stats, matrix_stats
-
-The `stats` aggregation returns all basic metrics such as `min`, `max`, `sum`, `avg`, and `value_count` metrics in one aggregation query.
+The following example returns the basic stats for the `taxful_total_price` field:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -170,7 +177,7 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-The `extended_stats` aggregation is an extended version of the `stats` aggregation. Apart from including basic stats, `extended_stats` also provides stats such as `sum_of_squares`, `variance`, and `std_deviation` on the values of a field.
+The `extended_stats` aggregation is an extended version of the `stats` aggregation. Apart from including basic stats, `extended_stats` also returns stats such as `sum_of_squares`, `variance`, and `std_deviation`.
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -218,7 +225,7 @@ GET kibana_sample_data_ecommerce/_search
 ```
 
 The `std_deviation_bounds` object provides a visual variance of the data with an interval of plus/minus two standard deviations from the mean.
-To set the standard deviation to different value, say 3, you can set `sigma` to 3:
+To set the standard deviation to a different value, say 3, set `sigma` to 3:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -235,7 +242,8 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-The `matrix_stats` aggregation lets you generate advanced stats for multiple fields in a matrix form.
+The `matrix_stats` aggregation generates advanced stats for multiple fields in a matrix form.
+The following example returns advanced stats in a matrix form for the `taxful_total_price` and `products.base_price` fields:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -297,21 +305,25 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-Stats measure | Description
+Statistic | Description
 :--- | :---
 `count` | The number of samples measured.
 `mean` | The average value of the field measured from the sample.
 `variance` | How far the values of the field measured are spread out from its mean value. The larger the variance, the more it's spread from its mean value.
 `skewness` | An asymmetric measure of the distribution of the field's values around the mean.
-`kurtosis` | A measure of the tail heaviness of a distribution. As the tail becomes lighter, kurtosis decreases. As the tail becomes heavier, kurtosis increases.
+`kurtosis` | A measure of the tail heaviness of a distribution. As the tail becomes lighter, kurtosis decreases. As the tail becomes heavier, kurtosis increases. To learn about kurtosis, see [Wikipedia](https://en.wikipedia.org/wiki/Kurtosis).
 `covariance` | A measure of the joint variability between two fields. A positive value means their values move in the same direction and vice versa.
-`correlation` | A measure of the strength of the relationship between two fields. The valid values are between [-1, 1]. A value of -1 means the value is negatively correlated and a value of 1 means it's positively correlated. A value of 0 means that there's no identifiable relationship between them.
+`correlation` | A measure of the strength of the relationship between two fields. The valid values are between [-1, 1]. A value of -1 means that the value is negatively correlated and a value of 1 means that it's positively correlated. A value of 0 means that there's no identifiable relationship between them.
 
-### percentile, percentile_ranks
+## percentile, percentile_ranks
 
-Percentile is the percentage of the data that's at or below a certain threshold value. You can use percentiles to find outliers in your data or figure out the distribution of your data. Like the `cardinality` aggregation, the `percentile` aggregation is approximate.
+Percentile is the percentage of the data that's at or below a certain threshold value.
 
-This example calculates the percentile in relation to the `taxful_total_price` field:
+The `percentile` metric is a multi-value metric that lets you find outliers in your data or figure out the distribution of your data.
+
+Like the `cardinality` metric, the `percentile` metric is approximate.
+
+The following example calculates the percentile in relation to the `taxful_total_price` field:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -382,9 +394,11 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-### geo_bound
+## geo_bound
 
-The `geo_bound` metric calculates the bounding box in terms of latitude and longitude with respect to a `geo_point` field:
+The `geo_bound` metric is a multi-value metric aggregation that calculates the bounding box in terms of latitude and longitude around a `geo_point` field.
+
+The following example returns the `geo_bound` metrics for the `geoip.location` field:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -420,9 +434,9 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-### top_hits
+## top_hits
 
-The `top_hits` metric ranks the matching documents based on a relevance score for the field that's being aggregated.
+The `top_hits` metric is a multi-value metric aggregation that ranks the matching documents based on a relevance score for the field that's being aggregated.
 
 You can specify the following options:
 
@@ -430,12 +444,14 @@ You can specify the following options:
 - `size`: The maximum size of hits to return. The default value is 3.
 - `sort`: How the matching hits are sorted. By default, the hits are sorted by the relevance score of the aggregation query.
 
+The following example returns the top 5 products in your eCommerce data:
+
 ```json
 GET kibana_sample_data_ecommerce/_search
 {
   "size": 0,
   "aggs": {
-    "top_hits_taxful_total_price": {
+    "top_hits_products": {
       "top_hits": {
         "size": 5
       }
@@ -449,7 +465,7 @@ GET kibana_sample_data_ecommerce/_search
 ```json
 ...
 "aggregations" : {
-  "top_hits_taxful_total_price" : {
+  "top_hits_products" : {
     "hits" : {
       "total" : {
         "value" : 4675,
@@ -557,18 +573,18 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-### Scripted metric
+## scripted_metric
 
-The `scripted_metric` aggregation returns metrics calculated from a specified script.
+The `scripted_metric` metric is a multi-value metric aggregation that returns metrics calculated from a specified script.
 
-A scripts has four stages: the init stage, the map stage, the combine stage, and the reduce stage.
+A script has four stages: the initial stage, the map stage, the combine stage, and the reduce stage.
 
 * `init_script`: (OPTIONAL) Sets the initial state and executes before any collection of documents.
 * `map_script`: Checks the value of the type field and executes the aggregation on the collected documents.
 * `combine_script`: Aggregates the state returned from every shard. The aggregated value is returned to the coordinating node.
-* `reduce_script`: Provides access to the variable states; this variable collects the results from `combine_script` on each shard into an array.
+* `reduce_script`: Provides access to the variable states; this variable combines the results from the `combine_script` on each shard into an array.
 
-For example, to count the different HTTP response types in web log data:
+The following example aggregates the different HTTP response types in web log data:
 
 ```json
 GET kibana_sample_data_logs/_search

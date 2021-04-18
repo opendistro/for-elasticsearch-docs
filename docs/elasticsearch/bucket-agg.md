@@ -11,13 +11,13 @@ has_children: false
 
 Bucket aggregations categorize sets of documents as buckets. The type of bucket aggregation determines whether a given document falls into a bucket or not.
 
-You can use bucket aggregations to implement faceted navigation that's usually placed as a sidebar in search results landing pages to help you narrow the results based on their properties.
+You can use bucket aggregations to implement faceted navigation (usually placed as a sidebar on a search result landing page) to help you're users narrow down the results.
 
 ## terms
 
 The `terms` aggregation dynamically creates a bucket for each unique term of a field.
 
-For example, in web log data, you can use the terms aggregation to find how many documents you have with each response code:
+The following example uses the `terms` aggregation to find the number of documents per response code in web log data:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -61,7 +61,7 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-The values are returned with the the key `key`.
+The values are returned with the key `key`.
 `doc_count` specifies the number of documents in each bucket. By default, the buckets are sorted in descending order of `doc-count`.
 
 The response also includes two keys named `doc_count_error_upper_bound` and `sum_other_doc_count`.
@@ -71,7 +71,7 @@ The `terms` aggregation returns the top unique terms. So, if the data has many u
 The `doc_count_error_upper_bound` field represents the maximum possible count for a unique value that's left out of the final results. Use this field to estimate the error margin for the count.
 
 The count might not be accurate. A coordinating node that’s responsible for the aggregation prompts each shard for its top unique terms. Imagine a scenario where the `size` parameter is 3.
-The terms aggregation requests each shard for its top 3 unique terms. The coordinating node takes each of the results and aggregates them to compute the final result. If a shard has an object that’s not part of the top 3, then it won't show up in the response.
+The `terms` aggregation requests each shard for its top 3 unique terms. The coordinating node takes each of the results and aggregates them to compute the final result. If a shard has an object that’s not part of the top 3, then it won't show up in the response.
 
 This is especially true if `size` is set to a low number. Because the default size is 10, an error is unlikely to happen. If you don’t need high accuracy and want to increase the performance, you can reduce the size.
 
@@ -79,24 +79,24 @@ This is especially true if `size` is set to a low number. Because the default si
 
 If you're aggregating over millions of documents, you can use a `sampler` aggregation to reduce its scope to a small sample of documents for a faster response. The `sampler` aggregation selects the samples by top-scoring documents.
 
-The results are approximate but closely represent the distribution of the real data. The `sampler` aggregation significantly improves query performance. But the estimated responses are not entirely reliable.
+The results are approximate but closely represent the distribution of the real data. The `sampler` aggregation significantly improves query performance, but the estimated responses are not entirely reliable.
 
 The basic syntax is:
 
 ```json
 “aggs”: {
-     "SAMPLE": {
-         "sampler": {
-             "shard_size": 100
-         },
-         "aggs": {…}
-     }
+  "SAMPLE": {
+    "sampler": {
+      "shard_size": 100
+    },
+    "aggs": {...}
+  }
 }
 ```
 
 The `shard_size` property tells Elasticsearch how many documents (at most) to collect from each shard.
 
-For example, you can limit the number of documents collected on each shard to 1,000 and then bucket the documents by a `terms` aggregation.
+The following example limits the number of documents collected on each shard to 1,000 and then buckets the documents by a `terms` aggregation:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -201,12 +201,12 @@ GET kibana_sample_data_logs/_search
 
 ## significant_terms, significant_text
 
-The `significant_terms` aggregation lets you spot unusual or interesting term occurrences in a filtered subset relative to the rest of the data in the index.
+The `significant_terms` aggregation lets you spot unusual or interesting term occurrences in a filtered subset relative to the rest of the data in an index.
 
 A foreground set is the set of documents that you filter. A background set is a set of all documents in an index.
 The `significant_terms` aggregation examines all documents in the foreground set and finds a score for significant occurrences in contrast to the documents in the background set.
 
-In the sample log data, each document has a field containing the `user-agent` of the visitor. This example searches for all requests from an iOS operating system. A regular `terms` aggregation on this foreground set returns Firefox because it has the most number of documents within this bucket. A `significant_terms` aggregation returns Internet Explorer (IE) because IE has a significantly higher appearance in the foreground set as compared to the background set.
+In the sample web log data, each document has a field containing the `user-agent` of the visitor. This example searches for all requests from an iOS operating system. A regular `terms` aggregation on this foreground set returns Firefox because it has the most number of documents within this bucket. On the other hand, a `significant_terms` aggregation returns Internet Explorer (IE) because IE has a significantly higher appearance in the foreground set as compared to the background set.
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -258,18 +258,18 @@ GET kibana_sample_data_logs/_search
 
 If the `significant_terms` aggregation doesn't return any result, you might have not filtered the results with a query. Alternatively, the distribution of terms in the foreground set might be the same as the background set, implying that there isn't anything unusual in the foreground set.
 
-The `significant_text` aggregation is similar to the the `significant_terms` aggregation but it's for raw text fields.
-Significant text measures the change in popularity measured between the foreground and background sets using statistical analysis.
+The `significant_text` aggregation is similar to the `significant_terms` aggregation but it's for raw text fields.
+Significant text measures the change in popularity measured between the foreground and background sets using statistical analysis. For example, it might suggest Tesla when you look for its stock acronym TSLA.
 
-For example, it might suggest Tesla when you look for its stock acronym TSLA.
+The `significant_text` aggregation re-analyzes the source text on the fly, filtering noisy data like duplicate paragraphs, boilerplate headers and footers, and so on, which might otherwise skew the results.
 
-The `significant_text` aggregation re-analyzes the source text on the fly, filtering noisy data like duplicate paragraphs, boilerplate header and footers and so on  that might otherwise skew the results. Re-analyzing high cardinality datasets can be a very CPU-intensive operation. We recommend using the `significant_text` aggregation inside a sampler aggregation to limit the analysis to a small selection of top-matching documents, for example 200.
+Re-analyzing high-cardinality datasets can be a very CPU-intensive operation. We recommend using the `significant_text` aggregation inside a sampler aggregation to limit the analysis to a small selection of top-matching documents, for example 200.
 
 You can set the following parameters:
 
-- `min_doc_count` - Return results that match more than a configured number of top hits. We recommend not setting min_doc_count to 1 because it tends to return terms that are typos or misspellings. Finding more than one instance of a term helps reinforce that the significance is not the result of a one-off accident. The default value of 3 is used to provide a minimum weight-of-evidence.
+- `min_doc_count` - Return results that match more than a configured number of top hits. We recommend not setting `min_doc_count` to 1 because it tends to return terms that are typos or misspellings. Finding more than one instance of a term helps reinforce that the significance is not the result of a one-off accident. The default value of 3 is used to provide a minimum weight-of-evidence.
 - `shard_size` - Setting a high value increases stability (and accuracy) at the expense of computational performance.
-- `shard_min_doc_count` - If your text contains many low frequency words and you're not interested in these (for example typos), then you can set the `shard_min_doc_count` parameter to filter out candidate terms on a shard level with a reasonable certainty to not reach the required `min_doc_count` even after merging the local significant text frequencies. The default value is 1, which has no impact until you explicitly set it. This value should be set much lower than `min_doc_count`.
+- `shard_min_doc_count` - If your text contains many low frequency words and you're not interested in these (for example typos), then you can set the `shard_min_doc_count` parameter to filter out candidate terms at a shard level with a reasonable certainty to not reach the required `min_doc_count` even after merging the local significant text frequencies. The default value is 1, which has no impact until you explicitly set it. We recommend setting this value much lower than the `min_doc_count` value.
 
 Assume that you have the complete works of Shakespeare indexed in an Elasticsearch cluster. You can find significant texts in relation to the word "breathe" in the `text_entry` field:
 
@@ -342,13 +342,13 @@ GET shakespeare/_search
 
 The most significant texts in relation to `breathe` are `air`, `dead`, and `life`.
 
-The significant text aggregation has the following limitations:
+The `significant_text` aggregation has the following limitations:
 
-- Does not support child aggregations. This limitation is intentional because supporting child aggregations comes at a high memory cost. As a workaround, you can make a follow-up query using a terms aggregation with an include clause and child aggregation.
-- Does not support nested objects because it works with the document JSON source.
-- The counts of documents might have some (typically small) inaccuracies as it's based on summing the samples returned from each shard. You can use the shard_size parameter to fine-tune the trade-off between accuracy and performance. By default, the shard_size is set to -1 to automatically estimate the number of shards and the size parameter.
+- Doesn't support child aggregations because child aggregations come at a high memory cost. As a workaround, you can add a follow-up query using a `terms` aggregation with an include clause and a child aggregation.
+- Doesn't support nested objects because it works with the document JSON source.
+- The counts of documents might have some (typically small) inaccuracies as it's based on summing the samples returned from each shard. You can use the `shard_size` parameter to fine-tune the trade-off between accuracy and performance. By default, the `shard_size` is set to -1 to automatically estimate the number of shards and the `size` parameter.
 
-For both `significant_terms` and `significant_text` aggregations the default source of statistical information for background term frequencies is the entire index. You can narrow this scope with a background filter to focus in on a narrower context:
+For both `significant_terms` and `significant_text` aggregations, the default source of statistical information for background term frequencies is the entire index. You can narrow this scope with a background filter for more focus:
 
 ```json
 GET shakespeare/_search
@@ -383,7 +383,9 @@ GET shakespeare/_search
 
 ## missing
 
-If you have documents in your index that don’t contain the aggregating field at all or have a value of NULL, use the `missing` parameter to specify the name of the bucket such documents should be placed in.
+If you have documents in your index that don’t contain the aggregating field at all or the aggregating field has a value of NULL, use the `missing` parameter to specify the name of the bucket such documents should be placed in.
+
+The following example adds any missing values to a bucket named "N/A":
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -401,7 +403,7 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-You can set a minimum number of documents for a bucket with the `min_doc_count` parameter. The default value is 1, that’s why the missing parameter does not return any buckets in its response. Set its value to 0 to see the bucket in the response.
+Because the default value for the `min_doc_count` parameter is 1, the `missing` parameter doesn't return any buckets in its response. Set `min_doc_count` parameter to 0 to see the "N/A" bucket in the response:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -455,8 +457,9 @@ GET kibana_sample_data_logs/_search
 
 The `histogram` aggregation buckets documents based on a specified interval.
 
-With histogram aggregations, you can visualize the distributions of values in a given range of documents very easily. Now Elasticsearch doesn’t give you back an actual graph of course, that’s what Kibana is for. But it'll give you the JSON response that you can use to construct your own graph.
-Lets say we want to bucket the `number_of_bytes` field by 10,000 intervals:
+With `histogram` aggregations, you can visualize the distributions of values in a given range of documents very easily. Now Elasticsearch doesn’t give you back an actual graph of course, that’s what Kibana is for. But it'll give you the JSON response that you can use to construct your own graph.
+
+The following example buckets the `number_of_bytes` field by 10,000 intervals:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -541,14 +544,14 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-The response has three months worth of logs. If you graph these values, you can see the peak and valleys of the request traffic to you website month over month.
+The response has three months worth of logs. If you graph these values, you can see the peak and valleys of the request traffic to your website month over month.
 
 ## range, date_range, ip_range
 
 The `range` aggregation lets you define the range for each bucket.
 
 For example, you can find the number of bytes between 1000 and 2000, 2000 and 3000, and 3000 and 4000.
-Within the range parameter, you can define ranges as objects of an array.
+Within the `range` parameter, you can define ranges as objects of an array.
 
 
 ```json
@@ -658,7 +661,7 @@ GET kibana_sample_data_logs/_search
 ```
 
 The `ip_range` aggregation is for IP addresses.
-It works on `ip` type fields. You can define IP ranges and mask in the [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation.
+It works on `ip` type fields. You can define the IP ranges and masks in the [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation.
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -710,9 +713,9 @@ GET kibana_sample_data_logs/_search
 
 ## filter, filters
 
-A `filter` aggregation is query clause, exactly like a search query - `match` or `term` or `range`. You can use the filter aggregation to narrow down the entire set of documents to a specific set before creating buckets.
+A `filter` aggregation is a query clause, exactly like a search query — `match` or `term` or `range`. You can use the `filter` aggregation to narrow down the entire set of documents to a specific set before creating buckets.
 
-In this case, the `avg` aggregation runs within the context of a filter. It only aggregates the documents that match the range query:
+The following example shows the `avg` aggregation running within the context of a filter. The `avg` aggregation only aggregates the documents that match the `range` query:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -754,8 +757,8 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-A `filters` aggregation is the same as the filter aggregation except that it lets you use multiple filter aggregations.
-While the filter aggregation results in a single bucket, the filters aggregation returns multiple buckets – one for each of the defined filters.
+A `filters` aggregation is the same as the `filter` aggregation, except that it lets you use multiple filter aggregations.
+While the `filter` aggregation results in a single bucket, the `filters` aggregation returns multiple buckets, one for each of the defined filters.
 
 To create a bucket for all the documents that didn't match the any of the filter queries, set the `other_bucket` property to `true`:
 
@@ -825,7 +828,9 @@ GET kibana_sample_data_logs/_search
 
 ## global
 
-A `global` aggregations lets you break out of the aggregation context of a filter aggregation. Even if you have included a query that narrows down a set of documents, the global aggregation aggregates on all documents as if the filter query wasn't there. It ignores the filter aggregation and implicitly assumes the `match_all` query.
+The `global` aggregations lets you break out of the aggregation context of a filter aggregation. Even if you have included a filter query that narrows down a set of documents, the `global` aggregation aggregates on all documents as if the filter query wasn't there. It ignores the `filter` aggregation and implicitly assumes the `match_all` query.
+
+The following example returns the `avg` value of the `taxful_total_price` field from all documents in the index:
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -853,8 +858,6 @@ GET kibana_sample_data_ecommerce/_search
 }
 ```
 
-You can see the average value for the `taxful_total_price` field is 75.05 and not the 38.36 as seen in the `filter` example when the query matched:
-
 #### Sample response
 
 ```json
@@ -870,37 +873,42 @@ You can see the average value for the `taxful_total_price` field is 75.05 and no
 }
 ```
 
+You can see that the average value for the `taxful_total_price` field is 75.05 and not the 38.36 as seen in the `filter` example when the query matched.
+
 ## geo_distance, geohash_grid
 
 The `geo_distance` aggregation groups documents into concentric circles based on distances from an origin `geo_point` field.
-It's the same as the range aggregation except that it works on geo locations.
-The geo_distance agg is useful for searches such as to “find all pizza restaurants within 1km of me.” The search results should, indeed, be limited to the 1km radius specified by the user, but we can add “another result found within 2km”:
+It's the same as the `range` aggregation, except that it works on geo locations.
 
-You can only use the geo_distance aggregation on fields mapped as geo_point.
+For example, you can use the `geo_distance` aggregation to find all pizza places within 1 km of you. The search results are limited to the 1 km radius specified by you, but you can add another result found within 2 km.
+
+You can only use the `geo_distance` aggregation on fields mapped as `geo_point`.
 
 A point is a single geographical coordinate, such as your current location shown by your smart-phone. A point in Elasticsearch is represented as follows:
 
 ```json
 {
-    "location" : {
-        "type" : "point",
-        "coordinates" : { "lat": 83.76, "lon": -81.20 }
+  "location": {
+    "type": "point",
+    "coordinates": {
+      "lat": 83.76,
+      "lon": -81.2
     }
+  }
 }
 ```
 
 You can also specify the latitude and longitude as an array `[-81.20, 83.76]` or as a string `"83.76, -81.20"`
 
 This table lists the relevant fields of a `geo_distance` aggregation:
-The query parameters are as follows:
 
 Field | Description | Required
 :--- | :--- |:---
-`field` |  Specify the field of the geo point that you want to work on. | Yes
+`field` |  Specify the geo point field that you want to work on. | Yes
 `origin` |  Specify the geo point that's used to compute the distances from. | Yes
 `ranges`  |  Specify a list of ranges to collect documents based on their distance from the target point. | Yes
-`unit` |  This defaults to m (meters), but accepts other distance units as well, such as km. The default unit of distance is meters, but you can specify the unit parameter as km or mi and others to switch to different units. It defines the units used in the ranges array. The possible values are: km (the default, kilometers), mi (miles), in (inches), yd (yards), m (meters), cm (centimeters), and mm (millimeters). | No
-`distance_type` | Specify how the distance needs to be calculated. The default is `sloppy_arc` (faster but less accurate), but can also be set to `arc` (slower but most accurate) or `plane` (fastest but least accurate). Because of high error margins, use `plane` only for small geographic areas. The last attribute, distance_type, specifies how Elasticsearch calculates the distance. The possible values are (from the fastest but least accurate to the slowest but the most accurate): plane, sloppy_arc (the default), and arc. | No
+`unit` |  Define the units used in the `ranges` array. The `unit` defaults to `m` (meters), but you can switch to other units like `km` (kilometers), `mi` (miles), `in` (inches), `yd` (yards), `cm` (centimeters), and `mm` (millimeters).  | No
+`distance_type` | Specify how Elasticsearch calculates the distance. The default is `sloppy_arc` (faster but less accurate), but can also be set to `arc` (slower but most accurate) or `plane` (fastest but least accurate). Because of high error margins, use `plane` only for small geographic areas. | No
 
 The syntax is as follows:
 
@@ -929,21 +937,13 @@ The syntax is as follows:
 }
 ```
 
-For example, aggregate documents based on:
-The following aggregation will form a bucket with all the documents within the given distance from the given geo-point.
+This example forms buckets from the following distances from a `geo-point` field:
 
-- Fewer than 10 kilometers
-- From 10 to 20 kilometers
-- From 20 to 50 kilometers
-- From 50 to 100 kilometers
-- Above 100 kilometers
-
-The count of the news events that happened in 0 to 50 km of range
-The count of the news events that happened in 50 to 200 km of range
-The count of the news events that happened outside the 200 km range
-
-The documents within 5 miles from the origin are placed in the 5 miles bucket and so on. The distance is computed as miles since the unit is specified as mi (miles).
-The preceding aggregation will calculate the number of documents that fall into two buckets: one closer than 1200 km and the second one further than 1200 km from the geographical point defined by the origin property (in the preceding case, the origin is London).
+- Fewer than 10 km
+- From 10 to 20 km
+- From 20 to 50 km
+- From 50 to 100 km
+- Above 100 km
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -1027,9 +1027,9 @@ GET kibana_sample_data_logs/_search
 
 The `geohash_grid` aggregation buckets documents for geographical analysis. It organizes a geographical region into a grid of smaller regions of different sizes or precisions. Lower values of precision represent larger geographical areas and higher values represent smaller, more precise geographical areas.
 
-The number of results returned by a query might be far too many to display each geo-point individually on a map. The `geohash_grid` aggregation buckets nearby geo-points together by calculating the Geohash for each point, at the level of precision that you define (between 1 to 12; the default is 5). To learn more about Geohash, see http://en.wikipedia.org/wiki/Geohash.
+The number of results returned by a query might be far too many to display each geo point individually on a map. The `geohash_grid` aggregation buckets nearby geo points together by calculating the Geohash for each point, at the level of precision that you define (between 1 to 12; the default is 5). To learn more about Geohash, see [Wikipedia](http://en.wikipedia.org/wiki/Geohash).
 
-The web logs example data is spread over a large geographical area, so you can use a lower precision value. You can zoom in on this map by increasing the precision value.
+The web logs example data is spread over a large geographical area, so you can use a lower precision value. You can zoom in on this map by increasing the precision value:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -1080,10 +1080,9 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-A high precision value returns a higher number of buckets, by default 10,000 most populous buckets.  However, Elasticsearch generates all the buckets to figure out which are the most populous 10,000. You need to control the number of buckets generated.
-
 You can visualize the aggregated response on a map using Kibana.
-Of course, the more accurate we want the aggregation to be, the more resources Elasticsearch will consume, because of the number of buckets that the aggregation has to calculate. By default, Elasticsearch does not generate more than 10,000 buckets. You can change this behavior by using the size attribute, but keep in mind that the performance may suffer for very wide queries consisting of thousands of buckets.
+
+The more accurate you want the aggregation to be, the more resources Elasticsearch consumes, because of the number of buckets that the aggregation has to calculate. By default, Elasticsearch does not generate more than 10,000 buckets. You can change this behavior by using the `size` attribute, but keep in mind that the performance might suffer for very wide queries consisting of thousands of buckets.
 
 ## adjacency_matrix
 
@@ -1174,13 +1173,13 @@ GET kibana_sample_data_ecommerce/_search
 - `grpB`: Products manufactured by Elitelligence.
 - `590`: Number of products that are manufactured by both.
 
-Use Kibana to represent this data by a network graph.
+You can use Kibana to represent this data with a network graph.
 
 ## nested, reverse_nested
 
-The `nested` aggregation lets you aggregate on fields inside a nested object. The nested type is a specialized version of the object data type that allows arrays of objects to be indexed in a way that they can be queried independently of each other
+The `nested` aggregation lets you aggregate on fields inside a nested object. The `nested` type is a specialized version of the object data type that allows arrays of objects to be indexed in a way that they can be queried independently of each other
 
-The problem you may have with the object type is that all the data is stored in the same document, so matches for a search can go across sub documents. For example, imagine a `logs` index with `pages` mapped as an `object` datatype:
+With the `object` type, all the data is stored in the same document, so matches for a search can go across sub documents. For example, imagine a `logs` index with `pages` mapped as an `object` datatype:
 
 ```json
 PUT logs/_doc/0
@@ -1210,7 +1209,7 @@ Elasticsearch merges all sub-properties of the entity relations that looks somet
 }
 ```
 
-So, if you wanted to search this index with `pages=landing` and `load_time=500`, this document matches the criteria even though the load_time for landing is 200.
+So, if you wanted to search this index with `pages=landing` and `load_time=500`, this document matches the criteria even though the `load_time` value for landing is 200.
 
 If you want to make sure such cross-object matches don’t happen, map the field as a `nested` type:
 
@@ -1231,9 +1230,9 @@ PUT logs
 }
 ```
 
-Nested documents allow you to index the same JSON document but will keep your pages in separate Lucene documents, making only searches like `pages=landing` AND `load_time=200` return the expected result. Internally, nested objects index each object in the array as a separate hidden document, meaning that each nested object can be queried independently of the others.
+Nested documents allow you to index the same JSON document but will keep your pages in separate Lucene documents, making only searches like `pages=landing` and `load_time=200` return the expected result. Internally, nested objects index each object in the array as a separate hidden document, meaning that each nested object can be queried independently of the others.
 
-You have to specify a nested path relative to parent that contains the nested documents.where nested-object-path is the navigation path of the desired object in the root document:
+You have to specify a nested path relative to parent that contains the nested documents:
 
 
 ```json
@@ -1271,7 +1270,9 @@ GET logs/_search
 ```
 
 You can also aggregate values from nested documents to their parent; this aggregation is called `reverse_nested`.
-You can use `reverse_nested` to perform aggregation on the field from the parent document after grouping by the field from the nested object. The reverse_nested aggregation "joins back" the root page and gets the load_time for each for your variations. The reverse nested aggregation is always defined as a sub-aggregation inside a nested aggregation. The reverse nested aggregation accepts a single option named path. This options defines how many steps backwards in the document hierarchy we want Elasticsearch to go to calculate the aggregations.
+You can use `reverse_nested` to aggregate a field from the parent document after grouping by the field from the nested object. The `reverse_nested` aggregation "joins back" the root page and gets the `load_time` for each for your variations.
+
+The `reverse_nested` aggregation is a sub-aggregation inside a nested aggregation. It accepts a single option named `path`. This option defines how many steps backwards in the document hierarchy Elasticsearch takes to calculate the aggregations.
 
 ```json
 GET logs/_search
@@ -1346,4 +1347,4 @@ GET logs/_search
 }
 ```
 
-The response shows the logs index has one page with a load_time of 200 and one with a load_time of 500.
+The response shows the logs index has one page with a `load_time` of 200 and one with a `load_time` of 500.
