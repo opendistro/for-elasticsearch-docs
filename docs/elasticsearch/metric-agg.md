@@ -113,7 +113,7 @@ GET kibana_sample_data_ecommerce/_search
 
 The `value_count` metric is a single-value metric aggregation that calculates the number of values that an aggregation is based on.
 
-The following example uses the `value_count` metric with the `avg` metric to find how many numbers the aggregation uses to calculate an average value:
+For example, you can use the `value_count` metric with the `avg` metric to find how many numbers the aggregation uses to calculate an average value.
 
 ```json
 GET kibana_sample_data_ecommerce/_search
@@ -319,9 +319,9 @@ Statistic | Description
 
 Percentile is the percentage of the data that's at or below a certain threshold value.
 
-The `percentile` metric is a multi-value metric that lets you find outliers in your data or figure out the distribution of your data.
+The `percentile` metric is a multi-value metric aggregation that lets you find outliers in your data or figure out the distribution of your data.
 
-Like the `cardinality` metric, the `percentile` metric is approximate.
+Like the `cardinality` metric, the `percentile` metric is also approximate.
 
 The following example calculates the percentile in relation to the `taxful_total_price` field:
 
@@ -580,7 +580,7 @@ The `scripted_metric` metric is a multi-value metric aggregation that returns me
 A script has four stages: the initial stage, the map stage, the combine stage, and the reduce stage.
 
 * `init_script`: (OPTIONAL) Sets the initial state and executes before any collection of documents.
-* `map_script`: Checks the value of the type field and executes the aggregation on the collected documents.
+* `map_script`: Checks the value of the `type` field and executes the aggregation on the collected documents.
 * `combine_script`: Aggregates the state returned from every shard. The aggregated value is returned to the coordinating node.
 * `reduce_script`: Provides access to the variable states; this variable combines the results from the `combine_script` on each shard into an array.
 

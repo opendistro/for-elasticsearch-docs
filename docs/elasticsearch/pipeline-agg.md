@@ -29,7 +29,7 @@ where:
 - `METRIC_SEPARATOR` separates aggregations from its metrics. It's represented as `.`.
 - `METRIC` is the name of the metric, in case of multi-value metric aggregations.
 
-For example, `my_sum.sum` selects the `sum` metric of an aggregation called `my_sum`. `popular_tags>my_sum.sum` nests `my_sum.sum` in the `popular_tags` aggregation.
+For example, `my_sum.sum` selects the `sum` metric of an aggregation called `my_sum`. `popular_tags>my_sum.sum` nests `my_sum.sum` into the `popular_tags` aggregation.
 
 You can also specify the following additional parameters:
 
@@ -113,13 +113,13 @@ Sibling aggregations must be a multi-bucket aggregation (have multiple grouped v
 
 Parent aggregations take the output of an outer aggregation and produce new buckets or new aggregations at the same level as the existing buckets.
 
-Parent aggregations must have `min_doc_count` set to 0 (default for `histogram` aggregations) and the specified metric must be numeric value. If `min_doc_count` is greater than `0`, some buckets are omitted, which might lead to incorrect results.
+Parent aggregations must have `min_doc_count` set to 0 (default for `histogram` aggregations) and the specified metric must be a numeric value. If `min_doc_count` is greater than `0`, some buckets are omitted, which might lead to incorrect results.
 
 `derivatives` and `cumulative_sum` are common parent aggregations.
 
 ## avg_bucket, sum_bucket, min_bucket, max_bucket
 
-The `avg_bucket`, `sum_bucket`, `min_bucket`, `max_bucket` aggregation are sibling aggregations that calculate the average, sum, minimum, and maximum value of a metric in each bucket of a previous aggregation.
+The `avg_bucket`, `sum_bucket`, `min_bucket`, and `max_bucket` aggregations are sibling aggregations that calculate the average, sum, minimum, and maximum values of a metric in each bucket of a previous aggregation.
 
 The following example creates a date histogram with a one-month interval. The `sum` sub-aggregation calculates the sum of all bytes for each month. Finally, the `avg_bucket` aggregation uses this sum to calculate the average number of bytes per month:
 
@@ -190,11 +190,13 @@ POST kibana_sample_data_logs/_search
 }
 ```
 
-In a similar fashion, you can calculate the `sum_bucket`, `min_bucket`, `max_bucket` values for the bytes per month.
+In a similar fashion, you can calculate the `sum_bucket`, `min_bucket`, and `max_bucket` values for the bytes per month.
 
 ## stats_bucket, extended_stats_bucket
 
 The `stats_bucket` aggregation is a sibling aggregation that returns a variety of stats (`count`, `min`, `max`, `avg`, and `sum`) for the buckets of a previous aggregation.
+
+The following example returns the basic stats for the buckets returned by the `sum_of_bytes` aggregation nested into the `visits_per_month` aggregation:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -271,11 +273,9 @@ The `extended_stats` aggregation is an extended version of the `stats` aggregati
 
 ## bucket_script, bucket_selector
 
-The `bucket_script` aggregation is a parent aggregation that executes a script to perform per-bucket calculations of a previous aggregation. Make sure the metrics are of numeric type and the returned value is also numeric.
+The `bucket_script` aggregation is a parent aggregation that executes a script to perform per-bucket calculations of a previous aggregation. Make sure the metrics are of numeric type and the returned values are also numeric.
 
-You can add in your script with the `script` parameter. The script can be inline, in a file, or in an index.
-
-To enable inline scripting, add the following line to your `elasticsearch.yml` file in the `config` folder:
+Use the `script` parameter to add your script. The script can be inline, in a file, or in an index. To enable inline scripting, add the following line to your `elasticsearch.yml` file in the `config` folder:
 
 ```yaml
 script.inline: on
@@ -390,7 +390,7 @@ GET kibana_sample_data_logs/_search
 
 The RAM percentage is calculated and appended at the end of each bucket.
 
-The `bucket_selector` aggregation is a script-based aggregation that selects buckets returned by a `histogram` (or `date_histogram`) aggregation. Use it in scenarios where you don’t want certain buckets in the output based on a conditions supplied by you.
+The `bucket_selector` aggregation is a script-based aggregation that selects buckets returned by a `histogram` (or `date_histogram`) aggregation. Use it in scenarios where you don’t want certain buckets in the output based on conditions supplied by you.
 
 The `bucket_selector` aggregation executes a script to decide if a bucket stays in the parent multi-bucket aggregation.
 
@@ -480,7 +480,7 @@ GET kibana_sample_data_logs/_search
 
 The `bucket_sort` aggregation is a parent aggregation that sorts buckets of a previous aggregation.
 
-You can specify several sort fields together with the corresponding sort order. Additionally, you can sort each bucket based on its key, count, or its sub-aggregations. You can also truncate the result buckets by setting `from` and `size` parameters.
+You can specify several sort fields together with the corresponding sort order. Additionally, you can sort each bucket based on its key, count, or its sub-aggregations. You can also truncate the buckets by setting `from` and `size` parameters.
 
 Syntax
 
@@ -498,7 +498,7 @@ Syntax
 }
 ```
 
-The following example sorts the buckets of a `date_histogram` aggregation based on the computed `total_sum` values. The buckets are sorted in the descending order so that the buckets with the highest number of bytes are returned first.
+The following example sorts the buckets of a `date_histogram` aggregation based on the computed `total_sum` values. We sort the buckets in descending order so that the buckets with the highest number of bytes are returned first.
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -566,7 +566,7 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-You can also use this aggregation to truncate the result buckets without sorting. For this, just use the `from` and/or `size` parameters without sort.
+You can also use this aggregation to truncate the resulting buckets without sorting. For this, just use the `from` and/or `size` parameters without `sort`.
 
 ## cumulative_sum
 
@@ -657,7 +657,7 @@ In mathematics, the derivative of a function measures its sensitivity to change.
 
 You can use derivates to calculate the rate of change of numeric values compared to its previous time periods.
 
-The 1st order derivative indicates whether a metric is increasing or decreasing, and by how much it is increasing or decreasing.
+The 1st order derivative indicates whether a metric is increasing or decreasing, and by how much it's increasing or decreasing.
 
 The following example calculates the 1st order derivative for the sum of bytes per month. The 1st order derivative is the difference between the number of bytes in the current month and the previous month:
 
@@ -818,13 +818,13 @@ The first bucket doesn't have a 1st order derivate as a derivate needs at least 
 
 The 1st order derivative for the "2020-11-01" bucket is 2.9480234E7 and the "2020-12-01" bucket is -7435379. So, the 2nd order derivative of the “2020-12-01” bucket is -3.6915613E7 (-7435379-2.9480234E7).
 
-Theoretically, you could continue chaining derivate aggregations to calculate the third, the fourth, and even higher-order derivatives. That would, however, provides little to no value for most datasets.
+Theoretically, you could continue chaining derivate aggregations to calculate the third, the fourth, and even higher-order derivatives. That would, however, provide little to no value for most datasets.
 
 ## moving_avg
 
-The `moving_avg` aggregation is a parent aggregation that calculates the moving average metric.
+A `moving_avg` aggregation is a parent aggregation that calculates the moving average metric.
 
-A moving average or rolling average finds the series of averages of different windows (subsets) of a dataset. A window’s size represents the number of data points covered by the window on each iteration (specified by the window property and set to 5 by default). On each iteration, the algorithm calculates the average for all data points that fit into the window and then slides forward by excluding the first member of the previous window and including the first member from the next window.
+The `moving_avg` aggregation finds the series of averages of different windows (subsets) of a dataset. A window’s size represents the number of data points covered by the window on each iteration (specified by the `window` property and set to 5 by default). On each iteration, the algorithm calculates the average for all data points that fit into the window and then slides forward by excluding the first member of the previous window and including the first member from the next window.
 
 For example, given the data `[1, 5, 8, 23, 34, 28, 7, 23, 20, 19]`, you can calculate a simple moving average with a window’s size of 5 as follows:
 
@@ -837,12 +837,12 @@ so on...
 
 For more information, see [Wikipedia](https://en.wikipedia.org/wiki/Moving_average).
 
-You can use the moving average aggregation to either smoothen out short-term fluctuations or to highlight longer-term trends or cycles in your time-series data.
+You can use the `moving_avg` aggregation to either smoothen out short-term fluctuations or to highlight longer-term trends or cycles in your time-series data.
 
 Specify a small window size (for example, `window`: 10) that closely follows the data to smoothen out small-scale fluctuations.
-Alternatively, specify a larger window size (for example, `window`: 100) that lags behind the actual data by a substantial amount and to smoothen out all higher-frequency fluctuations or random noise, making lower frequency trends more visible.
+Alternatively, specify a larger window size (for example, `window`: 100) that lags behind the actual data by a substantial amount to smoothen out all higher-frequency fluctuations or random noise, making lower frequency trends more visible.
 
-The following example embeds a `moving_avg` aggregation in a `date_histogram` aggregation:
+The following example nests a `moving_avg` aggregation into a `date_histogram` aggregation:
 
 ```json
 GET kibana_sample_data_logs/_search
@@ -911,7 +911,8 @@ GET kibana_sample_data_logs/_search
 ```
 
 You can also use the `moving_avg` aggregation to predict future buckets.
-To predict buckets, add the `predict` property and set it to the number of predictions you want to see.
+To predict buckets, add the `predict` property and set it to the number of predictions that you want to see.
+
 The following example adds five predictions to the preceding query:
 
 ```json
@@ -1024,9 +1025,9 @@ GET kibana_sample_data_logs/_search
 }
 ```
 
-The `moving_avg` aggregation supports five models — `simple`, `linear`, `exponentially weighted`, `holt-linear`, and `holt-winters`. These models differ in how the values of the window are weighted. As data points become "older" (i.e., the window slides away from them), they might be weighted differently. You can specify a model of your choice by setting the model property. The model property holds the name of the model and the settings object, which you can use to provide model properties. For more information on these models, see [Wikipedia](https://en.wikipedia.org/wiki/Moving_average).
+The `moving_avg` aggregation supports five models — `simple`, `linear`, `exponentially weighted`, `holt-linear`, and `holt-winters`. These models differ in how the values of the window are weighted. As data points become "older" (i.e., the window slides away from them), they might be weighted differently. You can specify a model of your choice by setting the `model` property. The `model` property holds the name of the model and the `settings` object, which you can use to provide model properties. For more information on these models, see [Wikipedia](https://en.wikipedia.org/wiki/Moving_average).
 
-A `simple` model first calculates the sum of all data points in the window, and then divides that sum by the size of the window. In other words, a simple model calculates a simple arithmetic mean for each window in your dataset.
+A `simple` model first calculates the sum of all data points in the window, and then divides that sum by the size of the window. In other words, a `simple` model calculates a simple arithmetic mean for each window in your dataset.
 
 The following example uses a simple model with a window size of 30:
 
