@@ -23,6 +23,7 @@ body {
 }
 
 code {
+  font-family: "SFMono-Regular", Menlo, "DejaVu Sans Mono", "Droid Sans Mono", Consolas, Monospace;
   font-size: 0.75rem;
 }
 
@@ -48,6 +49,9 @@ code {
   h1, h2, h3, h4, h5, h6 {
     margin-top: 2.4rem;
     margin-bottom: 0.8rem;
+  }
+  .highlight {
+    line-height: 1.4;
   }
 }
 
