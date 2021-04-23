@@ -172,9 +172,10 @@ GET my-knn-index-2/_search
 
 ## Getting started with the score script for binary data
 The k-NN score script also allows you to run k-NN search on your binary data with the Hamming distance space. 
-In order to use Hamming distance, the field of interest must be a field type of either `binary` or `long`. For binary type, the data should be a base64-encoded string.
+In order to use Hamming distance, the field of interest must have either a `binary` or `long` field type. If you're using `binary` type, the data must be a base64-encoded string.
 
 This example shows how to use the Hamming distance space with a `binary` field type:
+
 ```json
 PUT my-index
 {
@@ -243,6 +244,7 @@ GET my-index/_search
 ```
 
 Similarly, you can encode your data with the `long` field and run a search:
+
 ```json
 GET my-long-index/_search
 {
