@@ -557,7 +557,7 @@ You need to specify the `index_patterns` field. If you don't specify a value for
 1. Set up a template with the `rollover_alias` as `log` :
 
 ```json
-PUT _template/ism_rollover
+PUT _index_template/ism_rollover
 {
   "index_patterns": ["log*"],
   "settings": {
