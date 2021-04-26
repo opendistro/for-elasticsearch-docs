@@ -256,6 +256,7 @@ if (score > 99) {
 }
 ```
 
+Below are some variables you can include in your message using mustache language to see more information about your monitors.
 
 #### Monitor variables
 
