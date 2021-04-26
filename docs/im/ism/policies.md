@@ -554,7 +554,7 @@ PUT _opendistro/_ism/policies/rollover_policy
 
 You need to specify the `index_patterns` field. If you don't specify a value for `priority`, it defaults to 0.
 
-1. Set up a template with the `rollover_alias` as `log` :
+2. Set up a template with the `rollover_alias` as `log` :
 
 ```json
 PUT _index_template/ism_rollover
@@ -566,7 +566,7 @@ PUT _index_template/ism_rollover
 }
 ```
 
-2. Create an index with the `log` alias:
+3. Create an index with the `log` alias:
 
 ```json
 PUT log-000001
@@ -579,7 +579,7 @@ PUT log-000001
 }
 ```
 
-3. Index a document to trigger the rollover condition:
+4. Index a document to trigger the rollover condition:
 
 ```json
 POST log/_doc
