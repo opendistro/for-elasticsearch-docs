@@ -256,7 +256,7 @@ if (score > 99) {
 }
 ```
 
-Below are some variables you can include in your message using mustache language to see more information about your monitors.
+Below are some variables you can include in your message using Mustache templates to see more information about your monitors.
 
 ### Available variables
 
@@ -279,10 +279,10 @@ Variable | Data Type | Description
 
 Variable | Data Type | Description
 :--- | :--- | : ---
-`ctx.trigger.id` | String | The trigger's id.
+`ctx.trigger.id` | String | The trigger's ID.
 `ctx.trigger.name` | String | The trigger's name.
 `ctx.trigger.severity` | String | The trigger's severity.
-`ctx.trigger.condition`| JSON | Contains the painless script used when creating the monitor.
+`ctx.trigger.condition`| JSON | Contains the Painless script used when creating the monitor.
 `ctx.trigger.condition.script.source` | String | The language used to define the script. Must be painless.
 `ctx.trigger.condition.script.lang` | String | The script used to define the trigger.
 `ctx.trigger.actions`| Array | An array with one element that contains information about the action the monitor needs to trigger.
@@ -291,11 +291,11 @@ Variable | Data Type | Description
 
 Variable | Data Type | Description
 :--- | :--- | : ---
-`ctx.trigger.actions.id` | String | The action's id.
+`ctx.trigger.actions.id` | String | The action's ID.
 `ctx.trigger.actions.name` | String | The action's name.
-`ctx.trigger.actions.destination_id`| String | The alert destination's id.
+`ctx.trigger.actions.destination_id`| String | The alert destination's ID.
 `ctx.trigger.actions.message_template.source` | String | The message to send in the alert.
-`ctx.trigger.actions.message_template.lang` | String | The scripting language used to define the message. Must be mustache.
+`ctx.trigger.actions.message_template.lang` | String | The scripting language used to define the message. Must be Mustache.
 `ctx.trigger.actions.throttle_enabled` | Boolean | Whether throttling is enabled for this trigger. See [adding actions](#add-actions/) for more information about throttling.
 `ctx.trigger.actions.subject_template.source` | String | The message's subject in the alert.
 `ctx.trigger.actions.subject_template.lang` | String | The scripting language used to define the subject. Must be mustache.
