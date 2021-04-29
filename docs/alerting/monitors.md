@@ -20,8 +20,8 @@ has_children: false
 Term | Definition
 :--- | :---
 Monitor | A job that runs on a defined schedule and queries Elasticsearch. The results of these queries are then used as input for one or more *triggers*.
-Trigger | Conditions that, if met, generate *alerts* and can perform some *action*.
-Alert | A notification that a monitor's trigger condition has been met.
+Trigger | Conditions that, if met, generate *alerts*.
+Alert | An event associated with a trigger. When an alert is created, the trigger performs *actions*, which can include sending a notification.
 Action | The information that you want the monitor to send out after being triggered. Actions have a *destination*, a message subject, and a message body.
 Destination | A reusable location for an action, such as Amazon Chime, Slack, or a webhook URL.
 
