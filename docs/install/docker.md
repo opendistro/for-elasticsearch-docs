@@ -184,7 +184,7 @@ services:
       - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
 ```
 
-You can use this same method to [pass your own certificates](../docker-security/) for use with the [Security](../../security/configuration/) plugin.
+You can also configure `docker-compose.yml` and `elasticsearch.yml` [to take your own certificates](../docker-security/) for use with the [Security](../../security/configuration/) plugin.
 
 
 ### (Optional) Set up Performance Analyzer

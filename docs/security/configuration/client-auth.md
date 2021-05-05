@@ -105,3 +105,7 @@ output.elasticsearch:
   ssl.certificate: "/full/path/to/client-cert.pem"
   ssl.key: "/full/path/to/to/client-cert-key.pem"
 ```
+
+## Using certificates with Docker
+
+Note that while we recommend that you use the [tarball](../../../install/tar) installation of ODFE for client certificate authentication, you can also configure the Docker version of ODFE to use your own certificates. For instructions on the Docker setup, see [Docker security configuration](../../../install/docker-security).
