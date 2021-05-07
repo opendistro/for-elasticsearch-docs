@@ -154,7 +154,15 @@ volumes:
 #Add other certificates
 ```
 
-Remember that the certificates you specify in your Docker Compose file must be the same as the certificates listed in `elasticsearch.yml`. At a minimum, you should replace the existing certificates with new ones you've created on your own.
+After replacing the demo certificates with your own, you must also include a custom `elasticsearch.yml` in your setup, which you need to specify in the volumes section.
+
+```yml
+volumes:
+#Add certificates here
+- ./custom-elasticsearch.yml: /full/path/to/custom-elasticsearch.yml
+```
+
+Remember that the certificates you specify in your Docker Compose file must be the same as the certificates listed in your custom `elasticsearch.yml` file. At a minimum, you should replace the root, admin, and node certificates with your own. For more information about adding and using certificates, see [Configure TLS certificates](../security/configuration/tls.md).
 
 ```yml
 opendistro_security.ssl.transport.pemcert_filepath: new-node-cert.pem
@@ -163,14 +171,8 @@ opendistro_security.ssl.transport.pemtrustedcas_filepath: new-root-ca.pem
 opendistro_security.ssl.http.pemcert_filepath: new-node-cert.pem
 opendistro_security.ssl.http.pemkey_filepath: new-node-cert-key.pem
 opendistro_security.ssl.http.pemtrustedcas_filepath: new-root-ca.pem
-```
-
-If you want to use a custom `elasticsearch.yml` file, you can specify that in the volumes section as well.
-
-```yml
-volumes:
-#Add certificates here
-- ./custom-elasticsearch.yml: /full/path/to/custom-elasticsearch.yml
+opendistro_security.authcz.admin_dn:
+  - CN=admin,OU=SSL,O=Test,L=Test,C=DE
 ```
 
 To start the cluster, run `docker-compose up` as usual.

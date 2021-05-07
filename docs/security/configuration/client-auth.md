@@ -108,4 +108,4 @@ output.elasticsearch:
 
 ## Using certificates with Docker
 
-Note that while we recommend that you use the [tarball](../../../install/tar) installation of ODFE for client certificate authentication, you can also configure the Docker version of ODFE to use your own certificates. For instructions on the Docker setup, see [Docker security configuration](../../../install/docker-security).
+While we recommend using the [tarball](../../../install/tar) installation of ODFE to test client certificate authentication configurations, you can also use any of the other install types. For instructions on using Docker, for example, see [Docker security configuration](../../../install/docker-security).
