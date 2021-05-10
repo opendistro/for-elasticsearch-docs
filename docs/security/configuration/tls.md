@@ -41,7 +41,7 @@ Name | Description
 
 ## Keystore and truststore files
 
-As an alternative to certificates and private keys in PEM format, you can instead use keystore and truststore files in JKS or PKCS12/PFX format. For security plugin to operate, node-to-node encryption is mandatory.
+As an alternative to certificates and private keys in PEM format, you can instead use keystore and truststore files in JKS or PKCS12/PFX format. For the security plugin to operate, node-to-node encryption is mandatory.
 
 The following settings configure the location and password of your keystore and truststore files. If you want, you can use different keystore and truststore files for the REST and the transport layer.
 
