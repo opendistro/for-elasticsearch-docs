@@ -431,7 +431,7 @@ PUT _opendistro/_security/api/internalusers/<username>
 
 ### Patch user
 
-Updates individual attributes of an internal user. 
+Updates individual attributes of an internal user.
 
 #### Request
 
@@ -1026,7 +1026,7 @@ GET _opendistro/_security/api/securityconfig
 
 ### Update configuration
 
-Creates or updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+Creates or updates the existing configuration using the REST API. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead, which is far safer. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
 
 #### Request
 
@@ -1084,7 +1084,7 @@ PUT _opendistro/_security/api/securityconfig/config
 
 ### Patch configuration
 
-Updates the existing configuration using the REST API rather than `securityadmin.sh`. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
+Updates the existing configuration using the REST API. This operation can easily break your existing configuration, so we recommend using `securityadmin.sh` instead, which is far safer. See [Access control for the API](#access-control-for-the-api) for how to enable this operation.
 
 #### Request
 
