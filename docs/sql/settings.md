@@ -31,3 +31,5 @@ Setting | Default | Description
 `opendistro.sql.cursor.enabled` | False | You can enable or disable pagination for all queries that are supported.
 `opendistro.sql.cursor.fetch_size` | 1,000 | You can set the default `fetch_size` for all queries that are supported by pagination. An explicit `fetch_size` passed in request overrides this value.
 `opendistro.sql.cursor.keep_alive` | 1 minute | This value configures how long the cursor context is kept open. Cursor contexts are resource heavy, so we recommend a low value.
+`opendistro.sql.engine.new.enabled` | True | Enables or disables the new query engine. This setting must be `true` in order to use date and time functions.
+`opendistro.query.size_limit` | 200 | Defines the default index size. Cannot be greater than the maximum result window value (10000 by default).
