@@ -161,6 +161,10 @@ POST _opendistro/_ism/add/index_1
 }
 ```
 
+If you use a wildcard `*` while adding a policy to an index, the ISM plugin interprets `*` as all indices, including the `.opendistro-security` system index that stores user roles and tenants. A delete action in your policy might accidentally delete all user roles and tenants in your cluster.
+We recommend that you avoid using the broad `*` wildcard and instead add some prefix to it while specifying indices with the `_ism/add` API.
+{: .warning }
+
 ---
 
 
@@ -458,7 +462,7 @@ GET _opendistro/_ism/explain/index_1
 ```
 
 The `opendistro.index_state_management.policy_id` setting is deprecated starting from version 1.13.0.
-We retain this field in the response API for consistency. 
+We retain this field in the response API for consistency.
 
 ---
 
