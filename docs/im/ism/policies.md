@@ -557,7 +557,7 @@ The following sample template policy is for a rollover use case.
 2. Set up a template with the `rollover_alias` as `log` :
 
    ```json
-   PUT _index_template/ism_rollover
+   PUT _template/ism_rollover
    {
      "index_patterns": ["log*"],
      "settings": {
