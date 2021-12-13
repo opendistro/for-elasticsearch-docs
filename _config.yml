@@ -20,7 +20,7 @@ baseurl: "/for-elasticsearch-docs" # the subpath of your site, e.g. /blog
 url: "https://opendistro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
 
-odfe_version: 1.13.2
+odfe_version: 1.13.3
 odfe_major_version: 1.13
 es_version: 7.10.2
 
