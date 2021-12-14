@@ -11,7 +11,7 @@ You can pull the Open Distro for Elasticsearch Docker image just like any other 
 
 ```bash
 docker pull amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
-docker pull amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}
+docker pull amazon/opendistro-for-elasticsearch-kibana:latest
 ```
 
 To check available versions, see [Docker Hub](https://hub.docker.com/r/amazon/opendistro-for-elasticsearch/tags).
@@ -131,7 +131,7 @@ services:
     networks:
       - odfe-net
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}
+    image: amazon/opendistro-for-elasticsearch-kibana:latest
     container_name: odfe-kibana
     ports:
       - 5601:5601
