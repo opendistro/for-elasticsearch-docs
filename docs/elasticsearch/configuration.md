@@ -66,4 +66,4 @@ PUT /_cluster/settings
 
 You can find `elasticsearch.yml` in `/usr/share/elasticsearch/config/elasticsearch.yml` (Docker) or `/etc/elasticsearch/elasticsearch.yml` (RPM and DEB) on each node.
 
-The demo configuration includes a number of settings for the security plugin that you should modify before using Open Distro for Elasticsearch for a production workload. To learn more, see [Security](../../security/).
+The demo configuration includes a number of settings for the security plugin that you should modify before using Open Distro for a production workload. To learn more, see [Security](../../security/).
