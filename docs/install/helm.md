@@ -33,7 +33,7 @@ The instructions here assume you have a Kubernetes cluster with Helm preinstalle
    git clone https://github.com/opendistro-for-elasticsearch/opendistro-build
    ```
 
-   You can use the release tag (e.g. `v1.7.0` or `v1.8.0`) to get the specific Open Distro for Elasticsearch version.
+   You can use the release tag (e.g. `v1.7.0` or `v1.8.0`) to get the specific Open Distro version.
 
 1. Change to the `opendistro-es` directory:
 

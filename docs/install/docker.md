@@ -7,7 +7,7 @@ nav_order: 1
 
 # Docker image
 
-You can pull the Open Distro for Elasticsearch Docker image just like any other image:
+You can pull the Open Distro Docker image just like any other image:
 
 ```bash
 docker pull amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
@@ -16,7 +16,7 @@ docker pull amazon/opendistro-for-elasticsearch-kibana:latest
 
 To check available versions, see [Docker Hub](https://hub.docker.com/r/amazon/opendistro-for-elasticsearch/tags).
 
-Open Distro for Elasticsearch images use `centos:7` as the base image. If you run Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Resources**.
+Open Distro images use `centos:7` as the base image. If you run Docker locally, we recommend allowing Docker to use at least 4 GB of RAM in **Preferences** > **Resources**.
 
 
 ---
@@ -285,7 +285,7 @@ docker exec -it <container-id> /bin/bash
 
 ## Important settings
 
-For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. On the Open Distro for Elasticsearch Docker image, this setting is the default. To verify, start a Bash session in the container and run:
+For production workloads, make sure the [Linux setting](https://www.kernel.org/doc/Documentation/sysctl/vm.txt) `vm.max_map_count` is set to at least 262144. On the Open Distro Docker image, this setting is the default. To verify, start a Bash session in the container and run:
 
 ```bash
 cat /proc/sys/vm/max_map_count
@@ -336,7 +336,7 @@ RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
 COPY --chown=elasticsearch:elasticsearch elasticsearch.yml /usr/share/elasticsearch/config/
 ```
 
-In this case, `elasticsearch.yml` is a "vanilla" version of the file with no Open Distro for Elasticsearch entries. It might look like this:
+In this case, `elasticsearch.yml` is a "vanilla" version of the file with no Open Distro entries. It might look like this:
 
 ```yml
 cluster.name: "docker-cluster"

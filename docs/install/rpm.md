@@ -7,7 +7,7 @@ nav_order: 2
 
 # RPM package
 
-Installing and running Open Distro for Elasticsearch from an RPM package is a more manual process than the Docker image. We recommend CentOS 7 and Amazon Linux 2, but any RPM-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work. These steps assume you're using CentOS 7.
+Installing and running Open Distro from an RPM package is a more manual process than the Docker image. We recommend CentOS 7 and Amazon Linux 2, but any RPM-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work. These steps assume you're using CentOS 7.
 
 1. Create the repository file:
 
@@ -32,7 +32,7 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
    sudo yum install wget unzip
    ```
 
-1. List all available Open Distro for Elasticsearch versions:
+1. List all available Open Distro versions:
 
    ```bash
    sudo yum list opendistroforelasticsearch --showduplicates
@@ -52,7 +52,7 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
    sudo ln -s /usr/lib/jvm/java-1.8.0/lib/tools.jar /usr/share/elasticsearch/lib/
    ```
 
-1. To start Open Distro for Elasticsearch:
+1. To start Open Distro:
 
    ```bash
    sudo systemctl start elasticsearch.service
@@ -83,7 +83,7 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
    elasticsearch[3969]: java.net.MalformedURLException: unknown protocol: jrt
    ```
 
-1. To stop Open Distro for Elasticsearch:
+1. To stop Open Distro:
 
    ```bash
    sudo systemctl stop elasticsearch.service
@@ -92,7 +92,7 @@ Installing and running Open Distro for Elasticsearch from an RPM package is a mo
 
 ## Configuration
 
-To run Open Distro for Elasticsearch when the system starts:
+To run Open Distro when the system starts:
 
 ```bash
 sudo /bin/systemctl daemon-reload
