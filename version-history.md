@@ -7,7 +7,7 @@ permalink: /version-history/
 
 # Version history
 
-Open Distro for Elasticsearch version | Release highlights | Release date | Elasticsearch version
+Open Distro version | Release highlights | Release date | Elasticsearch version
 :--- | :--- | :--- | :---
 [1.13.3](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.3.md) | Adds security measures that patch the [CVE-2021-44228 vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-44228), which affects the [log4j library](https://logging.apache.org/log4j/2.x/). | 11 December 2021 | 7.10.2
 [1.13.2](https://github.com/opendistro-for-elasticsearch/opendistro-build/blob/main/release-notes/opendistro-for-elasticsearch-release-notes-1.13.2.md) | Adds Trace Analytics plugin to Kibana. Includes bug fixes for ISM, Kibana reports, Kibana notebooks, and SQL. | 7 April 2021 | 7.10.2
@@ -36,7 +36,7 @@ Open Distro for Elasticsearch version | Release highlights | Release date | Elas
 
 For detailed release notes, see these GitHub repositories:
 
-- [Open Distro for Elasticsearch](https://github.com/opendistro-for-elasticsearch/opendistro-build/tree/main/release-notes)
+- [Open Distro](https://github.com/opendistro-for-elasticsearch/opendistro-build/tree/main/release-notes)
 - [Security](https://github.com/opendistro-for-elasticsearch/security/releases)
 - [Alerting](https://github.com/opendistro-for-elasticsearch/alerting/releases)
 - [SQL](https://github.com/opendistro-for-elasticsearch/sql/releases)
