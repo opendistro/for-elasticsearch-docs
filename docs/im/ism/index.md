@@ -57,7 +57,7 @@ PUT _opendistro/_ism/policies/policy_id
 
 For an example ISM template policy, see [Sample policy with ISM template](policies/#sample-policy-with-ism-template).
 
-For ODFE versions prior to 1.13.0, include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it:
+For Open Distro versions prior to 1.13.0, include the `policy_id` in an index template so when an index is created that matches the index template pattern, the index will have the policy attached to it:
 
 ```json
 PUT _index_template/<template_name>

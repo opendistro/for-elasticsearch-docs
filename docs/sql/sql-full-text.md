@@ -9,7 +9,7 @@ nav_order: 8
 
 Use SQL commands for full-text search. The SQL plugin supports a subset of the full-text queries available in Elasticsearch.
 
-To learn about full-text queries in Elasticsearch, see [Full-text queries](../../elasticsearch/full-text/).
+To learn about full-text queries in Open Distro, see [Full-text queries](../../elasticsearch/full-text/).
 
 ## Match
 

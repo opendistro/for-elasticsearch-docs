@@ -7,7 +7,7 @@ nav_order: 20
 
 # Data Prepper
 
-Data Prepper is an independent component, not an Elasticsearch plugin, that converts data for use with Elasticsearch. It's not bundled with the all-in-one Open Distro for Elasticsearch installation packages.
+Data Prepper is an independent component, not an Elasticsearch plugin, that converts data for use with Elasticsearch. It's not bundled with the all-in-one Open Distro installation packages.
 
 
 ## Install Data Prepper
@@ -59,7 +59,7 @@ sample-pipeline:
 
   You can have multiple preppers, which run sequentially from top to bottom, not in parallel. The `otel_trace_raw_prepper` prepper converts OpenTelemetry data into Elasticsearch-compatible JSON documents.
 
-- Sinks define where your data goes. In this case, the sink is an Open Distro for Elasticsearch cluster.
+- Sinks define where your data goes. In this case, the sink is an Open Distro cluster.
 
 Pipelines can act as the source for other pipelines. In the following example, a pipeline takes data from the OpenTelemetry Collector and uses two other pipelines as sinks:
 

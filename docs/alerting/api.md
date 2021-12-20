@@ -247,7 +247,7 @@ For a full list of timezone names, refer to [Wikipedia](https://en.wikipedia.org
 
 ## Update monitor
 
-When you update a monitor, include the current version number as a parameter. Open Distro for Elasticsearch increments the version number automatically (see the sample response).
+When you update a monitor, include the current version number as a parameter. Open Distro increments the version number automatically (see the sample response).
 
 #### Request
 

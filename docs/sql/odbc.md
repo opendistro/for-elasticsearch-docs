@@ -93,7 +93,7 @@ This command gives the application permissions to save the driver and DSN config
 
 1. Choose **ODBC Drivers** tab.
 1. Choose **Add a Driver** and fill in the following details:
-   - **Description of the Driver**: Enter the driver name that you used for the ODBC connection (for example, ODFE SQL ODBC Driver).
+   - **Description of the Driver**: Enter the driver name that you used for the ODBC connection (for example, Open Distro SQL ODBC Driver).
    - **Driver File Name**: Enter the path to the driver file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
    - **Setup File Name**: Enter the path to the setup file (default: `<driver-install-dir>/bin/libodfesqlodbc.dylib`).
 
@@ -102,7 +102,7 @@ This command gives the application permissions to save the driver and DSN config
 1. Choose the **User DSN** tab.
 1. Select **Add**.
 1. Choose the driver that you added above.
-1. For **Data Source Name (DSN)**, enter the name of the DSN used to store connection options (for example, ODFE SQL ODBC DSN).
+1. For **Data Source Name (DSN)**, enter the name of the DSN used to store connection options (for example, Open Distro SQL ODBC DSN).
 1. For **Comment**, add an optional comment.
 1. Add key-value pairs by using the `+` button. We recommend the following options for a default local Elasticsearch installation:
    - **Host**: `localhost` - Elasticsearch server endpoint
@@ -212,7 +212,7 @@ Unable to connect to server. A error window after signing in as below.
 **Workaround**
 
 This is most likely due to Elasticsearch server not running on **host** and **post** configured in DSN.
-Confirm **host** and **post** are correct and Elasticsearch server is running with ODFE SQL plugin.
+Confirm **host** and **post** are correct and Elasticsearch server is running with Open Distro SQL plugin.
 Also make sure `.tdc` that was downloaded with the installer is copied correctly to `<user_home_directory>/Documents/My Tableau Repository/Datasources` directory.
 
 {% endcomment %}

@@ -8,6 +8,7 @@ has_math: true
 ---
 
 # Exact k-NN with Scoring Script
+
 The k-NN plugin implements the Elasticsearch score script plugin that you can use to find the exact k-nearest neighbors to a given query point. Using the k-NN score script, you can apply a filter on an index before executing the nearest neighbor search. This is useful for dynamic search cases where the index body may vary based on other conditions. Because this approach executes a brute force search, it does not scale as well as the [Approximate approach](../approximate-knn). In some cases, it may be better to think about refactoring your workflow or index structure to use the Approximate approach instead of this approach.
 
 ## Getting started with the score script for vectors
@@ -96,7 +97,7 @@ All parameters are required.
 - `space_type` corresponds to the distance function. See the [spaces section](#spaces).
 
 
-*Note* -- After ODFE 1.11, `vector` was replaced by `query_value` due to the addition of the `bithamming` space.
+*Note* -- After Open Distro 1.11, `vector` was replaced by `query_value` due to the addition of the `bithamming` space.
 
 
 The [post filter example in the approximate approach](../approximate-knn/#using-approximate-k-nn-with-filters) shows a search that returns fewer than `k` results. If you want to avoid this situation, the score script method lets you essentially invert the order of events. In other words, you can filter down the set of documents you want to execute the k-nearest neighbor search over.
@@ -171,7 +172,7 @@ GET my-knn-index-2/_search
 ```
 
 ## Getting started with the score script for binary data
-The k-NN score script also allows you to run k-NN search on your binary data with the Hamming distance space. 
+The k-NN score script also allows you to run k-NN search on your binary data with the Hamming distance space.
 In order to use Hamming distance, the field of interest must have either a `binary` or `long` field type. If you're using `binary` type, the data must be a base64-encoded string.
 
 This example shows how to use the Hamming distance space with a `binary` field type:

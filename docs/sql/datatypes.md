@@ -9,7 +9,7 @@ nav_order: 73
 
 The following table shows the data types supported by the SQL plugin and how each one maps to SQL and Elasticsearch data types:
 
-| ODFE SQL Type | Elasticsearch Type | SQL Type
+| Open Distro SQL Type | Elasticsearch Type | SQL Type
 :--- | :--- | :---
 boolean |	boolean |	BOOLEAN
 byte |	byte |	TINYINT
