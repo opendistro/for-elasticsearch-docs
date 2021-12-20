@@ -7,7 +7,7 @@ nav_order: 51
 
 # Cluster restart upgrade
 
-The steps on this page are most applicable if you installed Open Distro for Elasticsearch using the RPM or Debian packages. If you used a Docker image, see [Docker upgrade](../docker/).
+The steps on this page are most applicable if you installed Open Distro using the RPM or Debian packages. If you used a Docker image, see [Docker upgrade](../docker/).
 
 1. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down each node:
 
@@ -26,7 +26,7 @@ The steps on this page are most applicable if you installed Open Distro for Elas
    sudo systemctl stop elasticsearch.service
    ```
 
-1. If you use the Debian package, upgrade to the underlying Elasticsearch version of the new Open Distro for Elasticsearch release:
+1. If you use the Debian package, upgrade to the underlying Elasticsearch version of the new Open Distro release:
 
    ```bash
    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-x.y.z-amd64.deb
@@ -40,15 +40,15 @@ The steps on this page are most applicable if you installed Open Distro for Elas
    sudo apt install opendistroforelasticsearch
    ```
 
-   Alternately, `yum` lets you upgrade to a specific version of Open Distro for Elasticsearch:
+   Alternately, `yum` lets you upgrade to a specific version of Open Distro:
 
    ```bash
    sudo yum install opendistro-for-elasticsearch-{{site.odfe_version}}
    ```
 
-   Unfortunately, `apt` upgrades dependencies to their latest versions and thus only supports upgrades to the newest version of Open Distro for Elasticsearch.
+   Unfortunately, `apt` upgrades dependencies to their latest versions and thus only supports upgrades to the newest version of Open Distro.
 
-1. (Optional) Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro for Elasticsearch plugins.
+1. (Optional) Upgrade any additional plugins that you installed on the cluster. The package manager automatically upgrades Open Distro plugins.
 
 1. Start Elasticsearch on each node:
 
