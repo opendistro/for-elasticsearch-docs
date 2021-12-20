@@ -8,7 +8,7 @@ nav_order: 20
 
 # Reporting
 
-The Open Distro for Elasticsearch Kibana reports feature lets you create PNG, PDF, and CSV reports. To use reports, you must have the correct permissions. For summaries of the predefined roles and the permissions they grant, see the [security plugin](../../security/access-control/users-roles/#predefined-roles).
+The Open Distro Kibana reports feature lets you create PNG, PDF, and CSV reports. To use reports, you must have the correct permissions. For summaries of the predefined roles and the permissions they grant, see the [security plugin](../../security/access-control/users-roles/#predefined-roles).
 
 
 ## Create reports from Discovery, Visualize, or Dashboard
