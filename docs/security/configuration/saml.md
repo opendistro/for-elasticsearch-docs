@@ -95,7 +95,7 @@ A SAML identity provider (IdP) provides a SAML 2.0 metadata file describing the 
 
 Name | Description
 :--- | :---
-`idp.metadata_file` | The path to the SAML 2.0 metadata file of your IdP. Place the metadata file in the `config` directory of Open Distro for Elasticsearch. The path has to be specified relative to the `config` directory. Required if `idp.metadata_url` is not set.
+`idp.metadata_file` | The path to the SAML 2.0 metadata file of your IdP. Place the metadata file in the `config` directory of Open Distro. The path has to be specified relative to the `config` directory. Required if `idp.metadata_url` is not set.
 `idp.metadata_url` | The SAML 2.0 metadata URL of your IdP. Required if `idp.metadata_file` is not set.
 
 
@@ -156,7 +156,7 @@ Name | Description
 :--- | :---
 `sp.signature_private_key` | The private key used to sign the requests or to decode encrypted assertions. Optional. Cannot be used when `private_key_filepath` is set.
 `sp.signature_private_key_password` | The password of the private key, if any.
-`sp.signature_private_key_filepath` | Path to the private key. The file must be placed under the Open Distro for Elasticsearch `config` directory, and the path must be specified relative to that same directory.
+`sp.signature_private_key_filepath` | Path to the private key. The file must be placed under the Open Distro `config` directory, and the path must be specified relative to that same directory.
 `sp.signature_algorithm` | The algorithm used to sign the requests. See the next table for possible values.
 
 The security plugin supports the following signature algorithms.
@@ -242,7 +242,7 @@ config:
 
 Name | Description
 :--- | :---
-`idp.pemtrustedcas_filepath` | Path to the PEM file containing the root CAs of your IdP. The files must be placed under the Open Distro for Elasticsearch `config` directory, and you must specify the path relative to that same directory.
+`idp.pemtrustedcas_filepath` | Path to the PEM file containing the root CAs of your IdP. The files must be placed under the Open Distro `config` directory, and you must specify the path relative to that same directory.
 `idp.pemtrustedcas_content` | The root CA content of your IdP server. Cannot be used when `pemtrustedcas_filepath` is set.
 
 
@@ -253,9 +253,9 @@ The security plugin can use TLS client authentication when fetching the IdP meta
 Name | Description
 :--- | :---
 `idp.enable_ssl_client_auth` | Whether to send a client certificate to the IdP server. Default is false.
-`idp.pemcert_filepath` | Path to the PEM file containing the client certificate. The file must be placed under the Open Distro for Elasticsearch `config` directory, and the path must be specified relative to the `config` directory.
+`idp.pemcert_filepath` | Path to the PEM file containing the client certificate. The file must be placed under the Open Distro `config` directory, and the path must be specified relative to the `config` directory.
 `idp.pemcert_content` | The content of the client certificate. Cannot be used when `pemcert_filepath` is set.
-`idp.pemkey_filepath` | Path to the private key of the client certificate. The file must be placed under the Open Distro for Elasticsearch `config` directory, and the path must be specified relative to the `config` directory.
+`idp.pemkey_filepath` | Path to the private key of the client certificate. The file must be placed under the Open Distro `config` directory, and the path must be specified relative to the `config` directory.
 `idp.pemkey_content` | The content of the private key of your certificate. Cannot be used when `pemkey_filepath` is set.
 `idp.pemkey_password` | The password of your private key, if any.
 

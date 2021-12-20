@@ -9,7 +9,7 @@ has_toc: false
 
 # Security configuration
 
-The plugin includes demo certificates so that you can get up and running quickly, but before using Open Distro for Elasticsearch in a production environment, you must configure it manually:
+The plugin includes demo certificates so that you can get up and running quickly, but before using Open Distro in a production environment, you must configure it manually:
 
 1. [Replace the demo certificates](../../install/docker-security/)
 1. [Reconfigure elasticsearch.yml to use your certificates](tls/)
