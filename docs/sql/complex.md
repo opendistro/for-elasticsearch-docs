@@ -12,7 +12,7 @@ Besides simple SFW (`SELECT-FROM-WHERE`) queries, the SQL plugin supports comple
 
 ## Joins
 
-Open Distro for Elasticsearch SQL supports inner joins, cross joins, and left outer joins.
+Open Distro SQL supports inner joins, cross joins, and left outer joins.
 
 ### Constraints
 

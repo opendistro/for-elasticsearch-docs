@@ -103,7 +103,7 @@ Uses OpenTelemetry data to create a distributed service map for visualization in
 
 Option | Required | Description
 :--- | :--- | :---
-window_duration | No | Integer, representing the fixed time window in seconds to evaluate service-map relationships. Defaults to 180. 
+window_duration | No | Integer, representing the fixed time window in seconds to evaluate service-map relationships. Defaults to 180.
 
 
 ### peer_forwarder
@@ -140,7 +140,7 @@ Sink for an Elasticsearch cluster.
 Option | Required | Description
 :--- | :--- | :---
 hosts | Yes | List of Elasticsearch hosts to write to (e.g. `["https://localhost:9200", "https://remote-cluster:9200"]`).
-cert | No | String, path to the security certificate (e.g. `"config/root-ca.pem"`) if the cluster uses the Open Distro for Elasticsearch security plugin.
+cert | No | String, path to the security certificate (e.g. `"config/root-ca.pem"`) if the cluster uses the Open Distro security plugin.
 username | No | String, username for HTTP basic authentication.
 password | No | String, password for HTTP basic authentication.
 aws_sigv4 | No | Boolean, whether to use IAM signing to connect to an Amazon Elasticsearch Service cluster. For your access key, secret key, and optional session token, Data Prepper uses the default credential chain (environment variables, Java system properties, `~/.aws/credential`, etc.).

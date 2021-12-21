@@ -13,7 +13,7 @@ We don't recommend changing these settings; the defaults should work well for mo
 
 Index State Management (ISM) stores its configuration in the `.opendistro-ism-config` index. Don't modify this index without using the [ISM API operations](../api/).
 
-All settings are available using the Elasticsearch `_cluster/settings` operation. None require a restart, and all can be marked `persistent` or `transient`.
+All settings are available using the `_cluster/settings` operation. None require a restart, and all can be marked `persistent` or `transient`.
 
 Setting | Default | Description
 :--- | :--- | :---

@@ -7,12 +7,12 @@ nav_order: 1
 
 # Get started with Trace Analytics
 
-Open Distro for Elasticsearch Trace Analytics consists of two components---Data Prepper and the Trace Analytics Kibana plugin---that fit into the OpenTelemetry and Elasticsearch ecosystems. The Data Prepper repository has several [sample applications](https://github.com/opendistro-for-elasticsearch/data-prepper/tree/main/examples) to help you get started.
+Open Distro Trace Analytics consists of two components---Data Prepper and the Trace Analytics Kibana plugin---that fit into the OpenTelemetry and Elasticsearch ecosystems. The Data Prepper repository has several [sample applications](https://github.com/opendistro-for-elasticsearch/data-prepper/tree/main/examples) to help you get started.
 
 
 ## Basic flow of data
 
-![Data flow diagram from a distributed application to Open Distro for Elasticsearch](../images/ta.svg)
+![Data flow diagram from a distributed application to Open Distro](../images/ta.svg)
 
 1. Trace Analytics relies on you adding instrumentation to your application and generating trace data. The [OpenTelemetry documentation](https://opentelemetry.io/docs/) contains example applications for many programming languages that can help you get started, including Java, Python, Go, and JavaScript.
 
@@ -20,7 +20,7 @@ Open Distro for Elasticsearch Trace Analytics consists of two components---Data 
 
 1. The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) receives data from the application and formats it into OpenTelemetry data.
 
-1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro for Elasticsearch, and indexes it on an Elasticsearch cluster.
+1. [Data Prepper](../data-prepper/) processes the OpenTelemetry data, transforms it for use in Open Distro, and indexes it on an Elasticsearch cluster.
 
 1. The [Trace Analytics Kibana plugin](../ta-kibana/) displays the data in near real-time as a series of charts and tables, with an emphasis on service architecture, latency, error rate, and throughput.
 
@@ -34,7 +34,7 @@ Download or clone the [Data Prepper repository](https://github.com/opendistro-fo
 - A distributed application (`jaeger-hot-rod`) with the Jaeger agent (`jaeger-agent`)
 - The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/) (`otel-collector`)
 - Data Prepper (`data-prepper`)
-- A single-node Open Distro for Elasticsearch cluster (`opendistro-for-elasticsearch`)
+- A single-node Open Distro cluster (`opendistro`)
 - Kibana (`kibana`).
 
 Close the file and run `docker-compose up --build`. After the containers start, navigate to `http://localhost:8080` in a web browser.
@@ -65,7 +65,7 @@ data-prepper  | 1031918 [service-map-pipeline-process-worker-2-thread-1] INFO  c
 data-prepper  | 1031923 [entry-pipeline-process-worker-1-thread-1] INFO  com.amazon.dataprepper.pipeline.ProcessWorker  –  entry-pipeline Worker: Processing 1 records from buffer
 ```
 
-Finally, you can see the Open Distro for Elasticsearch node responding to the indexing request.
+Finally, you can see the Open Distro node responding to the indexing request.
 
 ```
 node-0.example.com  | [2020-11-19T16:29:55,064][INFO ][o.e.c.m.MetadataMappingService] [9fb4fb37a516] [otel-v1-apm-span-000001/NGYbmVD9RmmqnxjfTzBQsQ] update_mapping [_doc]

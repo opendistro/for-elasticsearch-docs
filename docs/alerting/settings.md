@@ -30,7 +30,7 @@ GET _cat/indices?expand_wildcards=open,hidden
 
 We don't recommend changing these settings; the defaults should work well for most use cases.
 
-All settings are available using the Elasticsearch `_cluster/settings` API. None require a restart, and all can be marked `persistent` or `transient`.
+All settings are available using the `_cluster/settings` API. None require a restart, and all can be marked `persistent` or `transient`.
 
 Setting | Default | Description
 :--- | :--- | :---
