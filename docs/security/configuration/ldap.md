@@ -21,7 +21,7 @@ We provide a fully functional example that can help you understand how to use an
 1. At the command line, run `docker-compose up`.
 1. Review the files:
 
-   * `docker-compose.yml` defines a single ODFE node, an LDAP server, and a PHP administration tool for the LDAP server.
+   * `docker-compose.yml` defines a single Open Distro node, an LDAP server, and a PHP administration tool for the LDAP server.
 
      You can access the administration tool at https://localhost:6443. Acknowledge the security warning and log in using `cn=admin,dc=example,dc=org` and `changethis`.
 
@@ -441,7 +441,7 @@ Example:
 
 ```yml
 authz:
-  ldap:  
+  ldap:
     http_enabled: true
     transport_enabled: true
     authorization_backend:
