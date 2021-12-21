@@ -1,17 +1,17 @@
-# Open Distro for Elasticsearch Documentation
+# Open Distro Documentation
 
-This repository contains the documentation for Open Distro for Elasticsearch, a full-featured, open source distribution of Elasticsearch for analytics workloads. You can find the rendered documentation at [opendistro.github.io/for-elasticsearch-docs/](https://opendistro.github.io/for-elasticsearch-docs/).
+This repository contains the documentation for Open Distro, a full-featured, open source distribution of Elasticsearch for analytics workloads. You can find the rendered documentation at [opendistro.github.io/for-elasticsearch-docs/](https://opendistro.github.io/for-elasticsearch-docs/).
 
 Developer and community contributions remain essential in keeping this documentation comprehensive, useful, organized, and up-to-date.
 
 
 ## How you can help
 
-- Do you work on one of the various ODFE plugins? Take a look at the documentation for the plugin. Is everything accurate? Will anything change in the near future?
+- Do you work on one of the various Open Distro plugins? Take a look at the documentation for the plugin. Is everything accurate? Will anything change in the near future?
 
   Often, engineering teams can keep existing documentation up-to-date with minimal effort, thus freeing up the documentation team to focus on larger projects.
 
-- Do you have expertise in a particular area of Elasticsearch? Cluster sizing? The query DSL? Painless scripting? Aggregations? JVM settings? Take a look at the [current content](https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/) and see where you can add value. The [documentation team](#points-of-contact) is happy to help you polish and organize your drafts.
+- Do you have expertise in a particular area of Elasticsearch OSS? Cluster sizing? The query DSL? Painless scripting? Aggregations? JVM settings? Take a look at the [current content](https://opendistro.github.io/for-elasticsearch-docs/docs/elasticsearch/) and see where you can add value. The [documentation team](#points-of-contact) is happy to help you polish and organize your drafts.
 
 - Are you a Kibana expert? How did you set up your visualizations? Why is a particular dashboard so valuable to your organization? We have [literally nothing](https://opendistro.github.io/for-elasticsearch-docs/docs/kibana/) on how to use Kibana, only how to install it.
 
@@ -24,9 +24,9 @@ Developer and community contributions remain essential in keeping this documenta
 
 If you encounter problems or have questions when contributing to the documentation, these people can help:
 
-- [aetter](https://github.com/aetter)
 - [ashwinkumar12345](https://github.com/ashwinkumar12345)
 - [keithhc2](https://github.com/keithhc2)
+- [lizsnyder](https://github.com/lizsnyder)
 
 
 ## How we build the website
@@ -161,7 +161,7 @@ If you're making major changes to the documentation and need to see the rendered
 
    **Better**: After you click the button, the process starts.
 
-1. "You" refers to the person reading the page. "We" refers to the ODFE contributors.
+1. "You" refers to the person reading the page. "We" refers to the Open Distro contributors.
 
    **Bad**: Now that we've finished the configuration, we have a working cluster.
 

@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Open Distro for Elasticsearch Documentation
+title: Open Distro Documentation
 description: >- # this means to ignore newlines until "baseurl:"
-  Documentation for Open Distro for Elasticsearch, the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, deep performance analysis, and more.
+  Documentation for Open Distro, the community-driven, 100% open source distribution of Elasticsearch OSS with advanced security, alerting, deep performance analysis, and more.
 baseurl: "/for-elasticsearch-docs" # the subpath of your site, e.g. /blog
 url: "https://opendistro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: pretty
@@ -36,7 +36,7 @@ logo: "/assets/images/logo.svg"
 
 # Aux links for the upper right navigation
 aux_links:
-  "Open Distro for Elasticsearch home":
+  "Open Distro home":
     - "https://opendistro.github.io/for-elasticsearch/"
 color_scheme: odfe
 
