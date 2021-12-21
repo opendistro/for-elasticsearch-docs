@@ -21,7 +21,7 @@ We provide a fully functional example that can help you understand how to use SA
 1. At the command line, run `docker-compose up`.
 1. Review the files:
 
-   * `docker-compose.yml` defines two ODFE nodes, a Kibana server, and a SAML server.
+   * `docker-compose.yml` defines two Open Distro nodes, a Kibana server, and a SAML server.
    * `custom-kibana.yml` add a few SAML settings to the default `kibana.yml` file.
    * `config.yml` configures SAML for authentication.
 
