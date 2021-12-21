@@ -208,7 +208,7 @@ To upload the dumped files to another cluster:
 ./securityadmin.sh -h production.example.com -p 9301 -cd /etc/backup/ -ts ... -tspass ... -ks ... -kspass ...
 ```
 
-To migrate configuration YAML files from the Open Distro for Elasticsearch 0.x.x format to the 1.x.x format:
+To migrate configuration YAML files from the Open Distro 0.x.x format to the 1.x.x format:
 
 ```bash
 ./securityadmin.sh -migrate ../securityconfig -ts ... -tspass ... -ks ... -kspass ...

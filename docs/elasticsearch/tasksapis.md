@@ -8,7 +8,7 @@ has_math: false
 
 # Tasks API operation
 
-A task is any operation you run in a cluster. For example, searching your data collection of books for a title or author name is a task. When you run Open Distro for Elasticsearch, a task is automatically created to monitor your cluster's health and performance. For more information about all of the tasks currently executing in your cluster, you can use the `tasks` API operation.
+A task is any operation you run in a cluster. For example, searching your data collection of books for a title or author name is a task. When you run Open Distro, a task is automatically created to monitor your cluster's health and performance. For more information about all of the tasks currently executing in your cluster, you can use the `tasks` API operation.
 
 The following request returns information about all of your tasks:
 

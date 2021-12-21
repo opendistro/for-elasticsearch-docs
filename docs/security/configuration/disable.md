@@ -47,7 +47,7 @@ If you disable the security plugin in `elasticsearch.yml` (or delete the plugin 
    COPY --chown=kibana:kibana kibana.yml /usr/share/kibana/config/
    ```
 
-   In this case, `kibana.yml` is a "vanilla" version of the file with no Open Distro for Elasticsearch entries. It might look like this:
+   In this case, `kibana.yml` is a "vanilla" version of the file with no Open Distro entries. It might look like this:
 
    ```yml
    ---

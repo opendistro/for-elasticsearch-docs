@@ -7,7 +7,7 @@ nav_order: 1
 
 # Standalone Kibana plugin install
 
-If you don't want to use the all-in-one Open Distro for Elasticsearch installation options, you can install the security, alerting, and Index State Management plugins for Kibana individually.
+If you don't want to use the all-in-one Open Distro installation options, you can install the security, alerting, and Index State Management plugins for Kibana individually.
 
 ---
 

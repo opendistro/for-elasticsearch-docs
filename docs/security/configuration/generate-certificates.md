@@ -8,7 +8,7 @@ nav_order: 11
 
 # Generate certificates
 
-If you don't have access to a certificate authority (CA) for your organization and want to use Open Distro for Elasticsearch for non-demo purposes, you can generate your own self-signed certificates using [OpenSSL](https://www.openssl.org/){:target='\_blank'}.
+If you don't have access to a certificate authority (CA) for your organization and want to use Open Distro for non-demo purposes, you can generate your own self-signed certificates using [OpenSSL](https://www.openssl.org/){:target='\_blank'}.
 
 You can probably find OpenSSL in the package manager for your operating system.
 

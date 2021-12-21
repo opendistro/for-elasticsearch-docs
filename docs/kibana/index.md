@@ -8,7 +8,7 @@ has_toc: false
 
 # Kibana
 
-Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro for Elasticsearch [security](../security/configuration/), [alerting](../alerting/), and [Index State Management](../ism/) plugins.
+Kibana is the default visualization tool for data in Elasticsearch. It also serves as a user interface for the Open Distro [security](../security/configuration/), [alerting](../alerting/), and [Index State Management](../ism/) plugins.
 
 
 ## Run Kibana using Docker
@@ -17,7 +17,7 @@ You *can* start Kibana using `docker run` after [creating a Docker network](http
 
 1. Run `docker pull amazon/opendistro-for-elasticsearch-kibana:{{site.odfe_version}}`.
 
-1. Create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment. A sample file that includes Kibana is available on the Open Distro for Elasticsearch [Docker installation page](../install/docker/#sample-docker-compose-file).
+1. Create a [`docker-compose.yml`](https://docs.docker.com/compose/compose-file/) file appropriate for your environment. A sample file that includes Kibana is available on the Open Distro [Docker installation page](../install/docker/#sample-docker-compose-file).
 
    Just like `elasticsearch.yml`, you can pass a custom `kibana.yml` to the container in the Docker Compose file.
    {: .tip }

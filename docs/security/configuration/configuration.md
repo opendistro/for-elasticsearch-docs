@@ -124,7 +124,7 @@ These are the possible values for `type`:
 
 ## Examples
 
-The default `plugins/opendistro_security/securityconfig/config.yml` that ships with Open Distro for Elasticsearch contains many configuration examples. Use these examples as a starting point, and customize them to your needs.
+The default `plugins/opendistro_security/securityconfig/config.yml` that ships with Open Distro contains many configuration examples. Use these examples as a starting point, and customize them to your needs.
 
 
 ## HTTP basic

@@ -5,12 +5,12 @@ nav_order: 4
 has_children: true
 ---
 
-# Upgrade Open Distro for Elasticsearch
+# Upgrade Open Distro
 
 New major versions of Elasticsearch generally have breaking changes. Before you upgrade any cluster to 1.0.0, see [Upgrade to 1.x.x](1-0-0/) in this section.
 {: .warning }
 
-Regularly upgrading Open Distro for Elasticsearch gives you access to the latest features, fixes, and improvements. Elasticsearch supports two types of upgrades: rolling and cluster restart.
+Regularly upgrading Open Distro gives you access to the latest features, fixes, and improvements. Elasticsearch supports two types of upgrades: rolling and cluster restart.
 
 - Rolling upgrades let you shut down one node at a time for minimal disruption of service.
 

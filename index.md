@@ -6,25 +6,25 @@ redirect_from: /404.html
 permalink: /
 ---
 
-# Open Distro for Elasticsearch Documentation
+# Open Distro Documentation
 
-This site contains the technical documentation for [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, SQL support, automated index management, deep performance analysis, and more.
+This site contains the technical documentation for [Open Distro](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, SQL support, automated index management, deep performance analysis, and more.
 
 [Get started](#get-started){: .btn .btn-purple }
 
 
 ---
 
-## Why use Open Distro for Elasticsearch?
+## Why use Open Distro?
 
-Open Distro for Elasticsearch is well-suited to the following use cases:
+Open Distro is well-suited to the following use cases:
 
 * Log analytics
 * Real-time application monitoring
 * Clickstream analytics
 * Search backend
 
-Open Distro for Elasticsearch combines the OSS distributions of Elasticsearch and Kibana with a large number of [open source](#get-involved) plugins. These plugins fill important feature gaps in the OSS distributions.
+Open Distro combines the OSS distributions of Elasticsearch and Kibana with a large number of [open source](#get-involved) plugins. These plugins fill important feature gaps in the OSS distributions.
 
 Component | Purpose
 :--- | :---
@@ -69,13 +69,13 @@ To learn more, see [Install](docs/install/).
 
 ## Builds
 
-If you want to modify the Open Distro for Elasticsearch code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
+If you want to modify the Open Distro code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
 
 
 ---
 
 ## Get involved
 
-[Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
+[Open Distro](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
 
-The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](https://opendistro.github.io/for-elasticsearch/contribute.html) on the Open Distro for Elasticsearch website.
+The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](https://opendistro.github.io/for-elasticsearch/contribute.html) on the Open Distro website.

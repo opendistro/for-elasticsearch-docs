@@ -7,9 +7,9 @@ nav_order: 3
 
 # Debian package
 
-Installing and running Open Distro for Elasticsearch from an Debian package is a more manual process than the Docker image. We recommend Ubuntu 16.04 or 18.04, but any Debian-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work.
+Installing and running Open Distro from an Debian package is a more manual process than the Docker image. We recommend Ubuntu 16.04 or 18.04, but any Debian-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work.
 
-[RPM](../rpm/) lets you install specific versions of Open Distro for Elasticsearch. You *can* install specific versions using Apt, but you have to manually install each dependency.
+[RPM](../rpm/) lets you install specific versions of Open Distro. You *can* install specific versions using Apt, but you have to manually install each dependency.
 {: .note }
 
 These steps assume you're using Ubuntu 18.04.
@@ -51,7 +51,7 @@ These steps assume you're using Ubuntu 18.04.
    sudo dpkg -i elasticsearch-oss-{{site.es_version}}-arm64.deb
    ```
 
-1. Install the latest version of Open Distro for Elasticsearch:
+1. Install the latest version of Open Distro:
 
    ```bash
    sudo apt-get update
@@ -73,7 +73,7 @@ These steps assume you're using Ubuntu 18.04.
 
    For compatibility by Elasticsearch version, see [Plugin compatibility](../plugins/#plugin-compatibility).
 
-1. To start Open Distro for Elasticsearch:
+1. To start Open Distro:
 
    ```bash
    sudo systemctl start elasticsearch.service
@@ -95,7 +95,7 @@ These steps assume you're using Ubuntu 18.04.
    systemctl status elasticsearch.service
    ```
 
-1. To stop Open Distro for Elasticsearch:
+1. To stop Open Distro:
 
    ```bash
    sudo systemctl stop elasticsearch.service
@@ -104,7 +104,7 @@ These steps assume you're using Ubuntu 18.04.
 
 ## Configuration
 
-To run Open Distro for Elasticsearch when the system starts:
+To run Open Distro when the system starts:
 
 ```bash
 sudo /bin/systemctl daemon-reload
@@ -200,7 +200,7 @@ If you are using Debian 9 (Strech), you likely need to make some modifications t
    sudo echo 'deb http://deb.debian.org/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list
    ```
 
-1. Before installing Open Distro for Elasticsearch, run:
+1. Before installing Open Distro, run:
 
    ```bash
    apt install apt-transport-https

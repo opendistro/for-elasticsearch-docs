@@ -7,7 +7,7 @@ nav_order: 10
 
 # Gantt charts
 
-Open Distro for Elasticsearch includes a new Kibana visualization: Gantt charts. These charts show the start, end, and duration of unique events in a sequence. Gantt charts are useful in trace analytics, telemetry, and anomaly detection use cases, where you want to understand interactions and dependencies between various events in a schedule.
+Open Distro includes a new Kibana visualization: Gantt charts. These charts show the start, end, and duration of unique events in a sequence. Gantt charts are useful in trace analytics, telemetry, and anomaly detection use cases, where you want to understand interactions and dependencies between various events in a schedule.
 
 For example, consider an index of log data. The fields in a typical set of log data, especially audit logs, contain a specific operation or event with a start time and duration.
 

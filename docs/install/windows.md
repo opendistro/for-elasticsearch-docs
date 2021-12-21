@@ -7,7 +7,7 @@ nav_order: 6
 
 # Windows
 
-Like the [tarball installation](../tar/), the Windows installation of Open Distro for Elasticsearch is a good option for testing and development, but we recommend Docker or a package manager for production deployments. We test on Windows 10 and Windows Server 2019, but other versions might work.
+Like the [tarball installation](../tar/), the Windows installation of Open Distro is a good option for testing and development, but we recommend Docker or a package manager for production deployments. We test on Windows 10 and Windows Server 2019, but other versions might work.
 
 As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6), which you can use to install [Debian packages](../deb/).
 {: .tip }
@@ -19,7 +19,7 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 1. Extract the file to a directory, and open that directory at the command prompt.
 
-1. Run Open Distro for Elasticsearch:
+1. Run Open Distro:
 
    ```
    .\bin\elasticsearch.bat
@@ -32,9 +32,9 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 1. Download [the EXE file](https://d3g5vo6xdbdb9a.cloudfront.net/downloads/odfe-windows/odfe-executables/opendistroforelasticsearch-{{site.odfe_version}}-windows-x64.exe), run it, and click through the steps.
 
-1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory.
+1. Open the command prompt and navigate to the Open Distro install directory.
 
-1. Run Open Distro for Elasticsearch:
+1. Run Open Distro:
 
    ```
    .\bin\elasticsearch.bat
@@ -43,9 +43,9 @@ As an alternative, try [Ubuntu for Windows 10](https://www.microsoft.com/en-us/p
 
 ## Install as a Windows service
 
-Installing Open Distro for Elasticsearch as a Windows service lets it run in the background and makes it easier to monitor. You can also configure the service to start automatically after a reboot.
+Installing Open Distro as a Windows service lets it run in the background and makes it easier to monitor. You can also configure the service to start automatically after a reboot.
 
-1. Open the command prompt and navigate to the Open Distro for Elasticsearch install directory.
+1. Open the command prompt and navigate to the Open Distro install directory.
 
 1. Set the JAVA_HOME environment variable:
 
@@ -53,7 +53,7 @@ Installing Open Distro for Elasticsearch as a Windows service lets it run in the
    set JAVA_HOME=C:\path\to\jdk
    ```
 
-1. (Optional) Set the `ES_START_TYPE` environment variable if you want Open Distro for Elasticsearch to start automatically when Windows starts:
+1. (Optional) Set the `ES_START_TYPE` environment variable if you want Open Distro to start automatically when Windows starts:
 
    ```
    set ES_START_TYPE=auto
@@ -80,7 +80,7 @@ Installing Open Distro for Elasticsearch as a Windows service lets it run in the
 
 ## Verify the install
 
-After you start Open Distro for Elasticsearch, open a new command prompt window. Then send requests to the server to verify that it is up and running:
+After you start Open Distro, open a new command prompt window. Then send requests to the server to verify that it is up and running:
 
 ```
 curl -XGET https://localhost:9200 -u "admin:admin" --insecure
