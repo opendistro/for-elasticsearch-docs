@@ -9,7 +9,7 @@ has_children: true
 
 Performance Analyzer is an agent and REST API that allows you to query numerous performance metrics for your cluster, including aggregations of those metrics, independent of the Java Virtual Machine (JVM). PerfTop is the default command line interface (CLI) for displaying those metrics.
 
-To download PerfTop, see [Download](https://opendistro.github.io/for-elasticsearch/downloads.html) on the Open Distro for Elasticsearch website.
+To download PerfTop, see [Download](https://opendistro.github.io/for-elasticsearch/downloads.html) on the Open Distro website.
 
 You can also install it using [npm](https://www.npmjs.com/):
 
@@ -40,7 +40,7 @@ If you're running PerfTop from a node (i.e. locally), specify port 9600:
 ./perf-top-linux --dashboard dashboards/<dashboard>.json --endpoint localhost:9600
 ```
 
-Otherwise, just specify the Elasticsearch endpoint:
+Otherwise, just specify the Elasticsearch OSS endpoint:
 
 ```bash
 ./perf-top-macos --dashboard dashboards/<dashboard>.json --endpoint my-cluster.my-domain.com

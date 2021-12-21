@@ -90,7 +90,7 @@ logger.token.name = com.amazon.dlic.auth.http.saml.Token
 logger.token.level = debug
 ```
 
-This setting prints the SAML response to the Elasticsearch log file so that you can inspect and debug it. Setting this logger to `debug` generates many statements, so we don't recommend using it in production.
+This setting prints the SAML response to the Elasticsearch OSS log file so that you can inspect and debug it. Setting this logger to `debug` generates many statements, so we don't recommend using it in production.
 
 Another way of inspecting the SAML response is to monitor network traffic while logging in to Kibana. The IdP uses HTTP POST requests to send Base64-encoded SAML responses to:
 
@@ -136,4 +136,4 @@ saml:
 
 The security plugin trades the SAML response for a more lightweight JSON web token. The username and backend roles in the JWT are ultimately mapped to roles in the security plugin. If there is a problem with the mapping, you can enable the token debug mode using the same setting as [Inspect the SAML response](#inspect-the-saml-response).
 
-This setting prints the JWT to the Elasticsearch log file so that you can inspect and debug it using a tool like [JWT.io](https://jwt.io/).
+This setting prints the JWT to the Elasticsearch OSS log file so that you can inspect and debug it using a tool like [JWT.io](https://jwt.io/).

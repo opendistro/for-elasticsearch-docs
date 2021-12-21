@@ -162,7 +162,7 @@ This list is extensive. We recommend using Ctrl/Cmd + F to find what you're look
     <tr>
       <td>Cache_FieldData_Eviction
       </td>
-      <td>The number of times Elasticsearch has evicted data from the fielddata heap space (occurs when the heap space is full) in the past five seconds.
+      <td>The number of times Elasticsearch OSS has evicted data from the fielddata heap space (occurs when the heap space is full) in the past five seconds.
       </td>
     </tr>
     <tr>
@@ -186,7 +186,7 @@ This list is extensive. We recommend using Ctrl/Cmd + F to find what you're look
     <tr>
       <td>Cache_Request_Eviction
       </td>
-      <td>The number of times Elasticsearch evicts data from shard request cache (occurs when the request cache is full) in the past five seconds.
+      <td>The number of times Elasticsearch OSS evicts data from shard request cache (occurs when the request cache is full) in the past five seconds.
       </td>
     </tr>
     <tr>
@@ -366,7 +366,7 @@ This list is extensive. We recommend using Ctrl/Cmd + F to find what you're look
       </td>
       <td rowspan="3">DiskName
       </td>
-      <td>Disk utilization rate: percentage of disk time spent reading and writing by the Elasticsearch process in the past five seconds.
+      <td>Disk utilization rate: percentage of disk time spent reading and writing by the Elasticsearch OSS process in the past five seconds.
       </td>
     </tr>
     <tr>
@@ -545,9 +545,9 @@ ShardID | ID for the shard (e.g. `1`).
 IndexName | Name of the index (e.g. `my-index`).
 Operation | Type of operation (e.g. `shardbulk`).
 ShardRole | `primary`, `replica`
-Exception | Elasticsearch exceptions (e.g. `org.elasticsearch.index_not_found_exception`).
+Exception | Elasticsearch OSS exceptions (e.g. `org.elasticsearch.index_not_found_exception`).
 Indices | The list of indices in the request URI.
-HTTPRespCode | Response code from Elasticsearch (e.g. `200`).
+HTTPRespCode | Response code from Elasticsearch OSS (e.g. `200`).
 MemType | `totYoungGC`, `totFullGC`, `Survivor`, `PermGen`, `OldGen`, `Eden`, `NonHeap`, `Heap`
 DiskName | Name of the disk (e.g. `sda1`).
 DestAddr | Destination address (e.g. `010015AC`).
@@ -555,6 +555,6 @@ Direction | `in`, `out`
 ThreadPoolType | The Elasticsearch thread pools (e.g. `index`, `search`,`snapshot`).
 CBType | `accounting`, `fielddata`, `in_flight_requests`, `parent`, `request`
 MasterTaskInsertOrder | The order in which the task was inserted (e.g. `3691`).
-MasterTaskPriority | Priority of the task (e.g. `URGENT`). Elasticsearch executes higher priority tasks before lower priority ones, regardless of `insert_order`.
+MasterTaskPriority | Priority of the task (e.g. `URGENT`). Elasticsearch OSS executes higher priority tasks before lower priority ones, regardless of `insert_order`.
 MasterTaskType | `shard-started`, `create-index`, `delete-index`, `refresh-mapping`, `put-mapping`, `CleanupSnapshotRestoreState`, `Update snapshot state`
 MasterTaskMetadata | Metadata for the task (if any).

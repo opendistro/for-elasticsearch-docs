@@ -21,7 +21,7 @@ This page includes troubleshooting steps for using OpenID Connect with the secur
 
 ## Set log level to debug
 
-To help troubleshoot OpenID Connect, set the log level to `debug` on Elasticsearch. Add the following lines in `config/log4j2.properties` and restart the node:
+To help troubleshoot OpenID Connect, set the log level to `debug` on Elasticsearch OSS. Add the following lines in `config/log4j2.properties` and restart the node:
 
 ```
 logger.opendistro_security.name = com.amazon.dlic.auth.http.jwt
@@ -39,7 +39,7 @@ This error indicates that the security plugin can't reach the metadata endpoint 
 opendistro_security.openid.connect_url: "http://keycloak.example.com:8080/auth/realms/master/.well-known/openid-configuration"
 ```
 
-If this error occurs on Elasticsearch, check the following setting in `config.yml`:
+If this error occurs on Elasticsearch OSS, check the following setting in `config.yml`:
 
 ```yml
 openid_auth_domain:
@@ -87,7 +87,7 @@ opendistro_security.openid.client_secret: "..."
 
 ### "Failed to get subject from JWT claims"
 
-This error is logged on Elasticsearch and means that the username could not be extracted from the ID token. Make sure the following setting matches the claims in the JWT your IdP issues:
+This error is logged on Elasticsearch OSS and means that the username could not be extracted from the ID token. Make sure the following setting matches the claims in the JWT your IdP issues:
 
 ```
 openid_auth_domain:
