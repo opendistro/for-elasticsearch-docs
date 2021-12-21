@@ -74,7 +74,7 @@ opendistro_security.nodes_dn:
 
 Sometimes the IP address in your certificate is not the one communicating with the cluster. This problem can occur if your node has multiple interfaces or is running on a dual stack network (IPv6 and IPv4).
 
-If this problem occurs, you might see the following in the node's Elasticsearch log:
+If this problem occurs, you might see the following in the node's Elasticsearch OSS log:
 
 ```
 SSL Problem Received fatal alert: certificate_unknown javax.net.ssl.SSLException: Received fatal alert: certificate_unknown
