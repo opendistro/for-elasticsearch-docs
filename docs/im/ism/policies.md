@@ -41,7 +41,7 @@ Field | Description | Type | Required | Read Only
 
 ---
 
-## States  
+## States
 
 A state is the description of the status that the managed index is currently in. A managed index can be in only one state at a time. Each state has associated actions that are executed sequentially on entering a state and transitions that are checked after all the actions have been completed.
 
@@ -205,7 +205,7 @@ Set `index.opendistro.index_state_management.rollover_alias` as the alias to rol
 
 Parameter | Description | Type | Example | Required
 :--- | :--- |:--- |:--- |
-`min_size` | The minimum size of the total primary shard storage (not counting replicas) required to roll over the index. For example, if you set `min_size` to 100 GiB and your index has 5 primary shards and 5 replica shards of 20 GiB each, the total size of the primaries is 100 GiB, so the rollover occurs. ISM doesn't check indices continually, so it doesn't roll over indices at exactly 100 GiB. Instead, if an index is continuously growing, ISM might check it at 99 GiB, not perform the rollover, check again when the shards reach 105 GiB, and then perform the operation. | `string` | `20gb` or `5mb` | No
+`min_size` | The minimum size of the total primary shard storage (not counting replicas) required to roll over the index. For example, if you set `min_size` to 100 GiB and your index has 5 primary shards and 5 replica shards of 20 GiB each, the total size of all primary shards is 100 GiB, so the rollover occurs. ISM doesn't check indices continually, so it doesn't roll over indices at exactly 100 GiB. Instead, if an index is continuously growing, ISM might check it at 99 GiB, not perform the rollover, check again when the shards reach 105 GiB, and then perform the operation. | `string` | `20gb` or `5mb` | No
 `min_doc_count` |  The minimum number of documents required to roll over the index. | `number` | `2000000` | No
 `min_index_age` |  The minimum age required to roll over the index. Index age is the time between its creation and the present. | `string` | `5d` or `7h` | No
 
@@ -394,7 +394,7 @@ Parameter | Description | Type | Required
 :--- | :--- |:--- |:--- |
 `min_index_age` | The minimum age of the index required to transition. | `string` | No
 `min_doc_count` | The minimum document count of the index required to transition. | `number` | No
-`min_size` | The minimum size of the index required to transition. | `string` | No
+`min_size` | The minimum size of the total primary shard storage (not counting replicas). For example, if you set `min_size` to 100 GiB and your index has 5 primary shards and 5 replica shards of 20 GiB each, the total size of all primary shards is 100 GiB, so your index is transitioned to the next state. | `string` | No
 `cron` | The `cron` job that triggers the transition if no other transition happens first. | `object` | No
 `cron.cron.expression` | The `cron` expression that triggers the transition. | `string` | Yes
 `cron.cron.timezone` | The timezone that triggers the transition. | `string` | Yes
@@ -661,6 +661,6 @@ After 30 days, the policy moves this index into a `delete` state. The service se
 }
 ```
 
-This diagram shows the `states`, `transitions`, and `actions` of the above policy as a finite-state machine. For more information about finite-state machines, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_machine).  
+This diagram shows the `states`, `transitions`, and `actions` of the above policy as a finite-state machine. For more information about finite-state machines, see [Wikipedia](https://en.wikipedia.org/wiki/Finite-state_machine).
 
 ![Policy State Machine](../../images/ism.png)
