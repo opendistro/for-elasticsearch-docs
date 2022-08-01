@@ -135,7 +135,7 @@ layout: table_wrappers
         {% if site.heading_anchors != false %}
           {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#svg-link\"></use></svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
         {% else %}
-          <p class="warning">Open Distro development has moved to <a href="https://opensearch.org/docs/">OpenSearch</a>. The Open Distro plugins will continue to work with legacy versions of Elasticsearch OSS, but we recommend upgrading to OpenSearch to take advantage of the latest features and improvements.</p>
+          <p class="warning"><strong style="display: block; margin-bottom: 1em">The Open Distro project is archived.</strong> Open Distro development has moved to <a href="https://opensearch.org/docs/">OpenSearch</a>. The Open Distro plugins will continue to work with legacy versions of Elasticsearch OSS, but we recommend upgrading to OpenSearch to take advantage of the latest features and improvements.</p>
           {{ content }}
         {% endif %}
 
