@@ -30,6 +30,9 @@ Open Distro images use `centos:7` as the base image. If you run Docker locally, 
 
 ## Run the image
 
+Open Distro is no longer being developed and exists only as an archive. Please visit the [OpenSearch](https://opensearch.org/) website to get started with OpenSearch. To go directly to information about installation of OpenSearch with Docker, see [Docker image](https://opensearch.org/docs/latest/opensearch/install/docker/).
+{: .warning}
+
 To run the image for local development:
 
 ```bash

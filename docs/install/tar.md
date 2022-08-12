@@ -11,6 +11,9 @@ The tarball installation works on Linux systems and provides a self-contained di
 
 The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linux distributions. If you have your own Java installation and you set `JAVA_HOME` in the terminal, macOS works as well.
 
+Open Distro is no longer being developed and exists only as an archive. Please visit [OpenSearch documentation](https://opensearch.org/docs/latest) to get started with OpenSearch.
+{: .warning}
+
 1. Download the tarball:
 
    ```bash
