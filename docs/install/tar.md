@@ -11,26 +11,14 @@ The tarball installation works on Linux systems and provides a self-contained di
 
 The tarball supports CentOS 7, Amazon Linux 2, Ubuntu 18.04, and most other Linux distributions. If you have your own Java installation and you set `JAVA_HOME` in the terminal, macOS works as well.
 
+1. Download the tarball:
+
 Open Distro is no longer being developed and exists only as an archive. Please visit [OpenSearch documentation](https://opensearch.org/docs/latest) to get started with OpenSearch.
 {: .warning}
 
-1. Download the tarball:
-
-   ```bash
-   # x64
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz -o opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz
-   # ARM64
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz -o opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz
-   ```
-
 1. Download the checksum:
 
-   ```bash
-   # x86
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512 -o opendistroforelasticsearch-{{site.odfe_version}}-linux-x64.tar.gz.sha512
-   # ARM64
-   curl https://d3g5vo6xdbdb9a.cloudfront.net/tarball/opendistro-elasticsearch/opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz.sha512 -o opendistroforelasticsearch-{{site.odfe_version}}-linux-arm64.tar.gz.sha512
-   ```
+(No longer available.)
 
 1. Verify the tarball against the checksum:
 

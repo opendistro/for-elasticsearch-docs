@@ -41,7 +41,7 @@ Open Distro RPM release for 1.13.3 is not available due to the absence of upstre
    sudo yum list opendistroforelasticsearch --showduplicates
    ```
 
-1. Choose the version you'd like and install it: (See [note](#rpm-package) above.)
+1. Choose the version you'd like to install: (See [note](#rpm-package) above.)
 
    ```bash
    sudo yum install opendistroforelasticsearch-1.13.x.
