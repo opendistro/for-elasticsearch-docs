@@ -9,6 +9,9 @@ nav_order: 2
 
 Installing and running Open Distro from an RPM package is a more manual process than the Docker image. We recommend CentOS 7 and Amazon Linux 2, but any RPM-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work. These steps assume you're using CentOS 7.
 
+Open Distro RPM release for 1.13.3 is not available due to the absence of upstream artifacts related to the build. If you are using RPM package management with a previous version of Open Distro and concerned about Apache Log4j security vulnerabilities, please see the [Apache Log4j](https://logging.apache.org/log4j/2.x/) website to learn about steps you can take to mitigate those vulnerabilities.<br>We also recommend migrating to OpenSearch, which is protected against this and other vulnerabilities, and provides a suite of robust security features along with improved search functionality. See [About the process](https://opensearch.org/docs/latest/upgrade-to/index/) to learn more about migrating to OpenSearch.
+{: .warning}
+
 1. Create the repository file:
 
    ```bash
@@ -38,10 +41,10 @@ Installing and running Open Distro from an RPM package is a more manual process 
    sudo yum list opendistroforelasticsearch --showduplicates
    ```
 
-1. Choose the version you'd like and install it:
+1. Choose the version you'd like to install: (See [note](#rpm-package) above.)
 
    ```bash
-   sudo yum install opendistroforelasticsearch-{{site.odfe_version}}
+   sudo yum install opendistroforelasticsearch-1.13.x.
    ```
 
    This command automatically chooses the appropriate architecture (x64 or ARM64) depending on the system you're using.

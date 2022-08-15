@@ -27,6 +27,9 @@ The instructions here assume you have a Kubernetes cluster with Helm preinstalle
 
 ## Install using Helm
 
+Open Distro is no longer being developed and exists only as an archive. Please visit [OpenSearch documentation](https://opensearch.org/docs/latest) to get started with OpenSearch.
+{: .warning}
+
 1. Clone the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository:
 
    ```bash

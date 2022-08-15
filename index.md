@@ -10,8 +10,6 @@ permalink: /
 
 This site contains the technical documentation for [Open Distro](https://opendistro.github.io/for-elasticsearch/), the community-driven, 100% open source distribution of Elasticsearch with advanced security, alerting, SQL support, automated index management, deep performance analysis, and more.
 
-[Get started](#get-started){: .btn .btn-purple }
-
 
 ---
 
@@ -45,42 +43,11 @@ You can install Elasticsearch plugins [individually](docs/install/plugins/) on e
 ---
 
 ## Get started
-Docker
-{: .label .label-green }
 
-1. Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. Run the following commands:
-
-   ```bash
-   docker pull amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
-   docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:{{site.odfe_version}}
-   ```
-
-1. In a new terminal session, run:
-
-   ```bash
-   curl -XGET --insecure https://localhost:9200 -u admin:admin
-   ```
-
-To learn more, see [Install](docs/install/).
-
+Open Distro for Elasticsearch OSS is no longer being developed and no longer available for download. Please visit [OpenSearch documentation](https://opensearch.org/docs/latest/#) to learn about upgrading to OpenSearch and getting started with our improved open source solution.
+{: .warning}
 
 ---
 
-## Builds
-
-If you want to modify the Open Distro code and build from source, instructions are in `elasticsearch/README.md` and `kibana/README.md` of the [opendistro-build](https://github.com/opendistro-for-elasticsearch/opendistro-build) repository. Likewise, you can find build instructions for the various plugins in [their individual repositories](https://github.com/opendistro-for-elasticsearch). If your changes could benefit others, please consider submitting a pull request.
-
-
----
-
-## Get involved
-
-[Open Distro](https://opendistro.github.io/for-elasticsearch/) is supported by Amazon Web Services. All components are available under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) on [GitHub](https://github.com/opendistro-for-elasticsearch/).
-
-The project welcomes GitHub issues, bug fixes, features, plugins, documentation---anything at all. To get involved, see [Contribute](https://opendistro.github.io/for-elasticsearch/contribute.html) on the Open Distro website.
-
-
----
 
 <small>OpenSearch includes certain Apache-licensed Elasticsearch code from Elasticsearch B.V. and other source code. Elasticsearch B.V. is not the source of that other source code. ELASTICSEARCH is a registered trademark of Elasticsearch B.V.</small>

@@ -7,12 +7,15 @@ nav_order: 3
 
 # Debian package
 
-Installing and running Open Distro from an Debian package is a more manual process than the Docker image. We recommend Ubuntu 16.04 or 18.04, but any Debian-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work.
+Installing and running Open Distro from a Debian package is a more manual process than the Docker image. We recommend Ubuntu 16.04 or 18.04, but any Debian-based distribution that uses [systemd](https://en.wikipedia.org/wiki/Systemd) should work.
 
 [RPM](../rpm/) lets you install specific versions of Open Distro. You *can* install specific versions using Apt, but you have to manually install each dependency.
 {: .note }
 
 These steps assume you're using Ubuntu 18.04.
+
+The Open Distro Debian package release for 1.13.3 is not available due to the absence of upstream artifacts related to the build. If you are using Debian package management with a previous version of Open Distro and concerned about Apache Log4j security vulnerabilities, please see the [Apache Log4j](https://logging.apache.org/log4j/2.x/) website to learn about steps you can take to mitigate those vulnerabilities.<br>We also recommend migrating to OpenSearch, which is protected against this and other vulnerabilities, and provides a suite of robust security features along with improved search functionality. See [About the process](https://opensearch.org/docs/latest/upgrade-to/index/) to learn more about migrating to OpenSearch.
+{: .warning}
 
 1. Install Java 11:
 
